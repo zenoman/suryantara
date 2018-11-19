@@ -11,13 +11,13 @@
 			</header>
 			<div class="box-typical box-typical-padding">
 
-				<h5 class="m-t-lg with-border">Tambah tarid udara</h5>
+				
 				<form action="{{url('trfudara') }}" role="form" method="POST">
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Kode</label>
+						<label class="col-sm-2 form-control-label semibold">Kode</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Kode Tujuan" name="kode" ></p>
 							 @if($errors->has('kode'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -26,9 +26,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Tujuan</label>
+						<label class="col-sm-2 form-control-label semibold">Tujuan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tujuan" placeholder="Text Disabled" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tujuan" placeholder="Misal : Kalimantan" ></p>
 							@if($errors->has('tujuan'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tujuan')}}
@@ -37,9 +37,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Airlans</label>
+						<label class="col-sm-2 form-control-label semibold">Airlans</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="airlans" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="airlans" placeholder="Misal : LION PREMIUM(JT 786)"></p>
 							@if($errors->has('airlans'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('airlans')}}
@@ -49,20 +49,20 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Genco KG</label>
+						<label class="col-sm-2 form-control-label semibold">Genco KG</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="gencokg" placeholder="Text Readonly"></p>
-							@if($errors->has('gencokg'))
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="gencoKG" placeholder="Misal : 23613/Kg"></p>
+							@if($errors->has('gencoKG'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('gencokg')}}
+                                        {{ $errors->first('gencoKG ')}}
                                          </div>
                                        @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Minimal</label>
+						<label class="col-sm-2 form-control-label semibold">Minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" placeholder="Misal : 280000"></p>
 							@if($errors->has('minimal'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('minimal')}}
@@ -72,7 +72,10 @@
 					</div>
 
 {{csrf_field()}}
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
+							<small class="text-muted">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+							</small>
 				</form>
 			</div>
         @endsection

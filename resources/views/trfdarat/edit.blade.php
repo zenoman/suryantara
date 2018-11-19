@@ -12,73 +12,70 @@
 			<div class="box-typical box-typical-padding">
 						<form action="{{ url('trfdarat/'.$trf_drt->id) }}" role="form" method="POST">
 
-				<h5 class="m-t-lg with-border">Vertical Inputs</h5>
+				<!--<h5 class="m-t-lg with-border">Vertical Inputs</h5>-->
 
-				<div class="row">
-					<div class="col-lg-4">
-						<fieldset class="form-group">
-							<label class="form-label semibold" for="exampleInput">kode</label>
-							<input type="text" class="form-control" placeholder="First Name" name="kode" value="{{$trf_drt->kode}}">
-							@if($errors->has('kode'))
+				<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold	">Kode</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$trf_drt->kode}}"></p>
+						@if($errors->has('kode'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
                                          </div>
                                         @endif
-						</fieldset>
+						</div>
 					</div>
-					<div class="col-lg-4">
-						<fieldset class="form-group">
-							<label class="form-label" for="exampleInputEmail1">tujuan</label>
-							<input type="text" class="form-control" placeholder="Enter email"  name="tujuan" value="{{$trf_drt->tujuan}}">
-						</fieldset>
+				<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tujuan</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="tujuan" value="{{$trf_drt->tujuan}}"></p>
 						@if($errors->has('tujuan'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('tujuan')}}
                                          </div>
                                         @endif
+						</div>
 					</div>
-					<div class="col-lg-4">
-						<fieldset class="form-group">
-							<label class="form-label" for="exampleInputairlans1">Tarif</label>
-							<input type="text" class="form-control"  name="tarif" value="{{$trf_drt->tarif}}">
-						</fieldset>
+				<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tarif</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="tarif" value="{{$trf_drt->tarif}}"></p>
 						@if($errors->has('tarif'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
                                          </div>
                                         @endif
+						</div>
 					</div>
-
-				</div><!--.row-->
 					<div class="form-group row">
-
-					<div class="col-lg-6">
-						<fieldset class="form-group">
-							<label class="form-label semibold" for="exampleInput">Berat minimal</label>
-							<input type="text" class="form-control" placeholder="First Name" name="berat_minimal" value="{{$trf_drt->berat_min}}">
-							@if($errors->has('berat_minimal'))
-                                       <div class="alert alert-danger">
+						<label class="col-sm-2 form-control-label">Berat Minimal</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="berat_minimal" value="{{$trf_drt->berat_min}}"></p>
+						@if($errors->has('berat_minimal'))
+                                        <div class="alert alert-danger">
                                         {{ $errors->first('berat_minimal')}}
                                          </div>
-                                       @endif
-						</fieldset>
+                                        @endif
+						</div>
 					</div>
-					<div class="col-lg-6">
-						<fieldset class="form-group">
-							<label class="form-label" for="exampleInput">Minimal</label>
-							<input type="text" class="form-control" placeholder="Enter email"  name="estimasi" value="{{$trf_drt->estimasi}}">
-							@if($errors->has('estimasi'))
-                                       <div class="alert alert-danger">
+					
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">Estimasi</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="estimasi" value="{{$trf_drt->estimasi}}"></p>
+						@if($errors->has('estimasi'))
+                                        <div class="alert alert-danger">
                                         {{ $errors->first('estimasi')}}
                                          </div>
-                                       @endif
-						</fieldset>
+                                        @endif
+						</div>
 					</div>
-
-			</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
+							<small class="text-muted">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+							</small>
 				</form>
 			</div>
 

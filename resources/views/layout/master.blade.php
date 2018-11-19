@@ -1,16 +1,20 @@
+<!-- @if(!Session::get('username'))
+<script type="text/javascript">
+    window.location.href = '{{url("/login/validatelogin")}}';
+</script> -->
 <!DOCTYPE html>
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Admin Suryantara Group</title>
+	<title>Suryantara</title>
 
 
-	<link href="{{asset('assets/img/favicon.144x144.png" rel="apple-touch-icon')}}" type="image/png" sizes="144x144">
+	<link href="{{asset('assets/img/favicon.144x144.png')}}" rel="apple-touch-icon" type="image/png" sizes="144x144">
 	<link href="{{asset('assets/img/favicon.114x114.png')}}" rel="apple-touch-icon" type="image/png" sizes="114x114">
 	<link href="{{asset('assets/img/favicon.72x72.png')}}" rel="apple-touch-icon" type="image/png" sizes="72x72">
-	<link href="{{asset('assets/img/favicon.57x57.png" rel="apple-touch-icon')}}" type="image/png">
+	<link href="{{asset('assets/img/favicon.57x57.png')}}" rel="apple-touch-icon" type="image/png">
 	<link href="{{asset('assets/img/favicon.png')}}" rel="icon" type="image/png">
 	<link href="{{asset('assets/img/favicon.ico')}}" rel="shortcut icon">
 
@@ -165,7 +169,7 @@
 	                            <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Settings</a>
 	                            <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Help</a>
 	                            <div class="dropdown-divider"></div>
-	                            <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
 	                        </div>
 	                    </div>
 	
@@ -182,10 +186,12 @@
 	<nav class="side-menu">
 	    <ul class="side-menu-list">
 	        <li class="grey">
+	       	<a href="{{url('dashboard')}}">
 	            <span>
 	                <i class="font-icon font-icon-home"></i>
 	                <span class="lbl">Home</span>
 	            </span>
+	        </a>
 	        </li>
 
 	        <li class="blue">
@@ -200,19 +206,19 @@
 	                <span class="lbl">Tarif Darat</span>
 	            </a>
 	        </li>
-	        <li class="red">
+	        <li class="pink-red">
 	            <a href="{{url('trflaut')}}">
 	                <i class="font-icon font-icon-help"></i>
 	                <span class="lbl">Tarif Laut</span>
 	            </a>
 	        </li>
-	        <li class="red">
+	        <li class="mageta">
 	            <a href="{{url('trfudara')}}">
 	                <i class="fa fa-plane"></i>
 	                <span class="lbl">Tarif Udara</span>
 	            </a>
 	        </li>
-	        <li class="red">
+	        <li class="gold">
 	            <a href="{{url('udrkargo')}}">
 	                <i class="fa fa-cubes"></i>
 	                <span class="lbl">Udara Kargo</span>
@@ -224,8 +230,8 @@
 	                <span class="lbl">Vendor</span>
 	            </a>
 	        </li>
-	        <li class="red">
-	            <a href="{{url('vendor')}}">
+	        <li class="brown">
+	            <a href="{{url('setting')}}">
 	                <i class="font-icon font-icon-cogwheel"></i>
 	                <span class="lbl">Setting</span>
 	            </a>

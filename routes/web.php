@@ -1,17 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Input;
-// use \Illuminate\Session\Store|null getSession()
-//  use void setLaravelSession(\Illuminate\Contracts\Session\Session $session)
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,18 +39,20 @@ Route::get('/trflaut/{id}','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
 Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
 //===============================================vendor
-Route::get('/udrkargo','Udrcargo\Udrcargocontroller@index');
-Route::post('/udrkargo','Udrcargo\Udrcargocontroller@store');
-Route::get('/udrkargo/create','Udrcargo\Udrcargocontroller@create');
-Route::get('/udrkargo/{id}','Udrcargo\Udrcargocontroller@edit');
-Route::put('/udrkargo/{id}','Udrcargo\Udrcargocontroller@update');
-Route::get('/udrkargo/{id}/delete','Udrcargo\Udrcargocontroller@destroy');
-//===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');
 Route::get('/vendor/create','Vendor\Vendorcontroller@create');
 Route::get('/vendor/{id}','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
 Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
-
-
+//================================================udara kargo
+Route::get('/udrkargo','Udrcargo\Udrcargocontroller@index');
+Route::post('/udrkargo','Udrcargo\Udrcargocontroller@store');
+Route::get('/udrkargo/create','Udrcargo\Udrcargocontroller@create');
+Route::get('/udrkargo/{id}','Udrcargo\Udrcargocontroller@edit');
+Route::put('/udrkargo/{id}','Udrcargo\Udrcargocontroller@update');
+Route::get('/udrkargo/{id}/delete','Udrcargo\Udrcargocontroller@destroy');
+//==============================================================Login
+Route::get('/login','Login\Logincontroller@index');
+Route::post('/login/masuk','Login\Logincontroller@masuk');
+Route::get('/login/logout','Login\Logincontroller@logout');

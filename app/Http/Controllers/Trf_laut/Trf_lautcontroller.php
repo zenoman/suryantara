@@ -42,7 +42,11 @@ $rules = [
 'berat_minimal' => 'required|min:1',
 'estimasi' => 'required|min:3'
 ];
-$this->validate($request,$rules);
+$customMessages = [
+        'required'  => 'Maaf, :attribute harus di isi',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
+];
+$this->validate($request,$rules,$customMessages);
 Trf_lautmodel::create([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
@@ -68,14 +72,15 @@ public function show($id)
 public function edit($id)
 {
 $tarif_laut = Trf_lautmodel::find($id);
-return view('trflaut/edit',['trflaut'=>$tarif_laut]); }
+return view('trflaut/edit',['trflaut'=>$tarif_laut]); 
+}
 /**
 * Update the specified resource in storage.
 ** @param \Illuminate\Http\Request $request
 * @param int $id
 * @return \Illuminate\Http\Response
 */
-public function update(Request $request)
+public function update(Request $request,$id)
 {
 $rules = [
 'kode' => 'required|min:3',
@@ -84,8 +89,12 @@ $rules = [
 'berat_minimal' => 'required|min:1',
 'estimasi' => 'required|min:3'
 ];
-$this->validate($request,$rules);
-$id=$request->id_laut;
+$customMessages = [
+        'required'  => 'Maaf, :attribute harus di isi',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
+];
+$this->validate($request,$rules,$customMessages);
+
 Trf_lautmodel::find($id)->update([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
