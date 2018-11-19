@@ -1,8 +1,8 @@
 @if(!Session::get('username'))
 <script type="text/javascript">
-    window.location.href = '{{url("/login")}}';
+    window.location.href = '{{url("login")}}';
 </script>
-@andif
+@endif
 <!DOCTYPE html>
 <html>
 <head lang="en">
