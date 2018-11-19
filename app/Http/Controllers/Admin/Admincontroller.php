@@ -15,7 +15,7 @@ class Admincontroller extends Controller
      */
     public function index()
     {
-        $admins = Adminmodel::get();
+        $admins = Adminmodel::paginate(1);
         return view('admin/index',['admin'=>$admins]);
     }
 

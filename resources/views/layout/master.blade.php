@@ -258,7 +258,10 @@
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
 		$(function() {
-			$('#example').DataTable();
+			$('#example').DataTable({
+            responsive: true,
+            "paging":false
+        });
 		});
 	</script>
 <script src="{{asset('assets/js/app.js')}}"></script>

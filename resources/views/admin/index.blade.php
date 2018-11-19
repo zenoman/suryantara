@@ -55,6 +55,7 @@
 						@endforeach
 						</tbody>
 					</table>
+					 {{ $admin->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->
