@@ -20,6 +20,7 @@
 						<tr>
 							<th>No</th>
 							<th>Kode Admin</th>
+							<th>Nama</th>
 							<th>Username</th>
 							<th>Password</th>
 							<th>Aksi</th>
@@ -28,7 +29,8 @@
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>kodeAmin</th>
+							<th>kode Admin</th>
+							<th>Nama</th>
 							<th>Username</th>
 							<th>Password</th>
 							<th>Aksi</th>
@@ -41,6 +43,7 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
+                            <td>{{$row->nama}}</td>
                             <td>{{$row->username}}</td>
                             <td>{{$row->password}}</td>
                             <td><a href="admin/{{$row->id}}" class="btn btn-warning btn-sm">

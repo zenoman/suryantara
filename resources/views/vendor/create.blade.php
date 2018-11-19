@@ -60,8 +60,8 @@
 					</div>
 
 {{csrf_field()}}
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan">
 							<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan">
 						</small>
 
 				</form>

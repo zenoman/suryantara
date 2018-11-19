@@ -58,9 +58,10 @@
 					</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan">
-							<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
-						</small>
+							<small class="text-muted">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+							</small>
 				</form>
 			</div>
         @endsection

@@ -52,7 +52,7 @@ class Trfudaracontroller extends Controller
         'required'  => 'Maaf, :attribute harus di isi',
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
          ];
-        $this->validate($request,$rules);
+        $this->validate($request,$rules,$customMessages);
         Trfudaramodel::create([
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,

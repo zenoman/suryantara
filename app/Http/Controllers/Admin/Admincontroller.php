@@ -73,18 +73,29 @@ class Admincontroller extends Controller
         $rules = [
                     'kode'      => 'required',
                     'username'  => 'required|min:5',
-                    'password'  => 'required|min:5'
+                    'password'  => 'required|min:5',
+                    'nama'  => 'required',
+                    'email'  => 'required|min:5|email',
+                    'telp'  => 'required|min:5|numeric',
+                    'alamat'  => 'required|min:5'
                     ];
 
     $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+        'numeric'   => 'Maaf, data harus angka',
+        'email'     => 'Maaf, data harus email'
     ];
         $this->validate($request,$rules,$customMessages);
         Adminmodel::create([
             'kode'  => $request->kode,
             'username'  => $request->username,
-            'password'  => md5($request->password)
+            'password'  => md5($request->password),
+            'nama'  => $request->nama,
+            'email'  => $request->email,
+            'telp'  => $request->telp,
+            'alamat'  => $request->alamat
+
         ]);
 
         return redirect('admin')->with('status','Input Data Sukses');
@@ -125,19 +136,29 @@ class Admincontroller extends Controller
         $rules = [
                     'kode'      => 'required',
                     'username'  => 'required|min:5',
-                    'password'  => 'required|min:5'
+                    'password'  => 'required|min:5',
+                    'nama'  => 'required',
+                    'email'  => 'required|min:5|email',
+                    'telp'  => 'required|min:5|numeric',
+                    'alamat'  => 'required|min:5'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
-        //'same'      => 'Maaf, Pastikan :attribute dan :other sama',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+        'numeric'   => 'Maaf, data harus angka',
+        'email'     => 'Maaf, data harus email'
+
          ];
         $this->validate($request,$rules,$customMessages);
         
         Adminmodel::find($id)->update([
-            'kode'=>$request->kode,
-            'username'=>$request->username,
-            'password'=>$request->password
+            'kode'  => $request->kode,
+            'username'  => $request->username,
+            'password'  => md5($request->password),
+            'nama'  => $request->nama,
+            'email'  => $request->email,
+            'telp'  => $request->telp,
+            'alamat'  => $request->alamat
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
     }

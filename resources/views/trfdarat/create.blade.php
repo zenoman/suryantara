@@ -11,13 +11,12 @@
 			</header>
 			<div class="box-typical box-typical-padding">
 
-				<h5 class="m-t-lg with-border">Tambah tarid udara</h5>
 				<form action="{{url('trfdarat') }}" role="form" method="POST">
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Kode</label>
+						<label class="col-sm-2 form-control-label semibold">Kode</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Kode Tujuan" name="kode" ></p>
 							 @if($errors->has('kode'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -26,9 +25,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Tujuan</label>
+						<label class="col-sm-2 form-control-label semibold">Tujuan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tujuan" placeholder="Text Disabled" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tujuan" placeholder="Misal : Gresik" ></p>
 							@if($errors->has('tujuan'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tujuan')}}
@@ -37,9 +36,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Tarif</label>
+						<label class="col-sm-2 form-control-label semibold">Tarif</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tarif" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tarif" placeholder="Data Angka"></p>
 							@if($errors->has('tarif'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
@@ -48,9 +47,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Berat minimal</label>
+						<label class="col-sm-2 form-control-label semibold">Berat minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="berat_minimal" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="berat_minimal" placeholder="Data Angka Satuan Kilo Gram"></p>
 							@if($errors->has('berat_minimal'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('berat_minimal')}}
@@ -59,9 +58,9 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Estimasi</label>
+						<label class="col-sm-2 form-control-label semibold">Estimasi</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="estimasi" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="estimasi" placeholder="Misal : 2-3 Hari"></p>
 							@if($errors->has('estimasi'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('estimasi')}}
@@ -71,7 +70,10 @@
 					</div>
 
 {{csrf_field()}}
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
+							<small class="text-muted">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+							</small>
 				</form>
 			</div>
         @endsection
