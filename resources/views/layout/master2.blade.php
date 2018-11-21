@@ -19,9 +19,6 @@
 	<link href="{{asset('assets/img/favicon.png')}}" rel="icon" type="image/png">
 	<link href="{{asset('assets/img/favicon.ico')}}" rel="shortcut icon">
 
-
-<link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 	
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
@@ -268,16 +265,9 @@
 	<script src="{{asset('assets/js/plugins.js')}}"></script>
 	<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 
-	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	@yield('js')
-	<script>
-		$(function() {
-			$('#example').DataTable({
-            responsive: true,
-            "paging":false
-        });
-		});
-	</script>
+	
 <script src="{{asset('assets/js/app.js')}}"></script>
+
+	@yield('js')
 </body>
 </html>	

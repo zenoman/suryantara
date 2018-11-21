@@ -6,7 +6,7 @@ Route::get('/', function () {
 });
 Route::get('/dashboard','Dashboardcontroller@index');
 
-
+Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');

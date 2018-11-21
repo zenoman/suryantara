@@ -4,6 +4,7 @@ namespace App\Http\Controllers\resipengiriman;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class resipengirimanController extends Controller
 {
@@ -16,7 +17,18 @@ class resipengirimanController extends Controller
     {
        return view('resipengiriman/residarat');
     }
-
+    public function carikota(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('tarif_darat')
+                    ->select('tujuan','kode')
+                    ->where('tujuan','like','%'.$cari.'%')
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
