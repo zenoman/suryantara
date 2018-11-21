@@ -38,11 +38,11 @@ return view('trfdarat/create');
 public function store(Request $request)
 {
 $rules = [
-'kode' => 'required|min:3',
+'kode' => 'required|min:2',
 'tujuan' => 'required|min:3',
-'tarif' => 'required|min:3',
-'berat_minimal' => 'required|min:1',
-'estimasi' => 'required|min:3'
+'tarif' => 'required',
+'berat_minimal' => 'required',
+'estimasi' => 'required'
 ];
 $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',

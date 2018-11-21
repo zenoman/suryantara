@@ -13,15 +13,14 @@
 
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Nama Barang</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama"></p>
-							@if($errors->has('nama'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('nama')}}
-                                         </div>
-                                       @endif
+						<div class="col-md-8 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="exampleInputAmount" focus>
+							</div>
 						</div>
+					</div>
 					
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
@@ -37,6 +36,14 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="exampleInputAmount">
 								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="exampleInputAmount" focus>
 							</div>
 						</div>
 					</div>
@@ -86,10 +93,12 @@
 						</div>
 					</div>
 					</div>
+					<hr>
 					{{csrf_field()}}
 							<small class="text-muted">
-								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								
 							</small>
 				</form>
 			</div>
