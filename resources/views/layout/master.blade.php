@@ -22,7 +22,8 @@
 
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-
+	
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
@@ -201,6 +202,17 @@
 	                <span class="lbl">Admin</span>
 	            </a>
 	        </li>
+	        <li class="magenta with-sub">
+	        	<span>
+	                <i class="font-icon font-icon-pencil"></i>
+	                <span class="lbl">Resi Pengiriman</span>
+	            </span>
+	             <ul>
+                <li><a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a></li>
+	                <li><a href="#"><span class="lbl">Pengiriman Laut</span></a></li>
+	                <li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li>
+	            </ul>
+	        </li>
 	        <li class="red">
 	            <a href="{{url('trfdarat')}}">
 	                <i class="fa fa-truck"></i>
@@ -254,6 +266,7 @@
 	<script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
 	<script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
 	<script src="{{asset('assets/js/plugins.js')}}"></script>
+	<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
