@@ -17,7 +17,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" autofocus>
 							</div>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" >
 							</div>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount">
+								<input type="text" class="form-control" id="berat">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" >
 							</div>
 						</div>
 					</div>
@@ -58,7 +58,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="n_pengirim">
 							</div>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" >
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" >
 							</div>
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="exampleInputAmount" >
 							</div>
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="biaya_kirim" value="0" >
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="biaya_packing" value="0" >
 							</div>
 						</div>
 					</div>
@@ -110,13 +110,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" focus>
+								<input type="text" class="form-control" id="biaya_asuransi" value="0" >
 							</div>
 						</div>
 					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
-							<table class="table table-bordered">
+							<table class="table table-bordered" id="estimasi">
 								<thead>
 									<tr>
 										<th colspan="2" class="text-center">Estimasi Biaya</th>
@@ -125,19 +125,19 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td>Rp. 50000</td>
+										<td id="b_kirim">0</td>
 									</tr>
 									<tr>
-										<td>Biaya Kirim</td>
-										<td>Rp. 30000</td>
+										<td>Biaya Packing</td>
+										<td id="b_packing">0</td>
 									</tr>
 									<tr>
 										<td>Biaya Asuransi</td>
-										<td>Rp. 2000</td>
+										<td id="b_asuransi">0</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="text-center">
-											<h3>Rp. 820000</h3>
+											<h3 id="total">0</h3>
 										</td>
 									</tr>
 								</tbody>
@@ -155,34 +155,5 @@
 			</div>
         @endsection
 @section('js')
-<script type="text/javascript">
-	$(document).ready(function(){
-
-		$('#kota_tujuan').select2({
-		placeholder: 'Cari kota tujuan',
-		ajax:{
-			url:'/carikota',
-			dataType:'json',
-			delay:250,
-			processResults: function (data){
-				return {
-					results : $.map(data, function (item){
-						if(item.kode != null){
-						alert(item.kode);	
-						}
-						return {
-							id: item.kode,
-							text: item.tujuan
-						}
-
-					})
-				}
-			},
-			cache: true
-		}
-	});
-		
-	});
-	
-</script>
+<script src="{{asset('assets/js/resi.js')}}"></script>
 @endsection

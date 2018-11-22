@@ -22,7 +22,7 @@ class resipengirimanController extends Controller
             $cari = $request->q;
             
             $data = DB::table('tarif_darat')
-                    ->select('tujuan','kode')
+                    ->select('tujuan','kode','tarif')
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
