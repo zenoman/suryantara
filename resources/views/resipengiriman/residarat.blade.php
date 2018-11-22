@@ -1,5 +1,15 @@
 @extends('layout.master2')
 @section('content')
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57 || charCode==191))
+            return false;
+
+         return true;
+      }
+</script>
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -13,7 +23,8 @@
 
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-						<div class="col-md-8 col-sm-6">
+
+						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -21,7 +32,25 @@
 							</div>
 						</div>
 					</div>
-					
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dimensi(P, L, T) </label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi" value="0">
+									
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">volume</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume" >
+							</div>
+						</div>
+					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
@@ -143,7 +172,17 @@
 								</tbody>
 							</table>
 						</div>
-
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">
+								<textarea rows="4" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
 					</div>
 					{{csrf_field()}}
 							<small class="text-muted">

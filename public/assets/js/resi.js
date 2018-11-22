@@ -43,6 +43,36 @@ $(document).ready(function(){
 			}
 			
 		})
+		$("#d_panjang").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang = $("#d_panjang").val();
+			var lebar = $("#d_lebar").val();
+			var tinggi = $("#d_tinggi").val();
+			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			$("#volume").val(total);
+			}
+			
+		})
+		$("#d_lebar").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang = $("#d_panjang").val();
+			var lebar = $("#d_lebar").val();
+			var tinggi = $("#d_tinggi").val();
+			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			$("#volume").val(total);
+			}
+			
+		})
+		$("#d_tinggi").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang = $("#d_panjang").val();
+			var lebar = $("#d_lebar").val();
+			var tinggi = $("#d_tinggi").val();
+			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			$("#volume").val(total);
+			}
+			
+		})
 		$("#biaya_asuransi").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi").val();
@@ -58,9 +88,5 @@ $(document).ready(function(){
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#total").html(totalnya);
 		}
-		$("#kota_tujuan").keydown(function(e){
-			if(e.keyCode == 13){
-				alert('enter');
-			}
-		})
+		
 	});
