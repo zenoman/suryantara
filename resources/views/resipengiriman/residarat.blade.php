@@ -4,7 +4,7 @@
      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57 || charCode==191))
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
 
          return true;
@@ -28,7 +28,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" autofocus>
+								<input type="text" class="form-control" id="nama_barang" autofocus>
 							</div>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" >
+								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat">
+								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -72,7 +72,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" >
+								<input type="text" class="form-control" id="kota_asal" >
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" >
+								<input type="text" class="form-control" id="t_pengirim" >
 							</div>
 						</div>
 					</div>
@@ -103,7 +103,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" >
+								<input type="text" class="form-control" id="n_penerima" >
 							</div>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="exampleInputAmount" >
+								<input type="text" class="form-control" id="t_penerima" >
 							</div>
 						</div>
 					</div>
@@ -123,7 +123,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_kirim" value="0" >
+								<input type="text" class="form-control" id="biaya_kirim" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -131,7 +131,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_packing" value="0" >
+								<input type="text" class="form-control" id="biaya_packing" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -139,7 +139,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_asuransi" value="0" >
+								<input type="text" class="form-control" id="biaya_asuransi" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -179,14 +179,15 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
 							<div class="input-group">
-								<textarea rows="4" class="form-control"></textarea>
+								<textarea rows="4" class="form-control" id="keterangan"></textarea>
 							</div>
 						</div>
 					</div>
 					</div>
 					{{csrf_field()}}
 							<small class="text-muted">
-								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								<!-- <input class="btn btn-primary" type="submit" name="submit" value="simpan"> -->
+								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan</button>
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								
 							</small>
@@ -194,5 +195,9 @@
 			</div>
         @endsection
 @section('js')
+
+<script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
+<script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
 <script src="{{asset('assets/js/resi.js')}}"></script>
+
 @endsection
