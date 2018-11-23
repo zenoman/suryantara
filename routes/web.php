@@ -5,7 +5,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard','Dashboardcontroller@index');
-
+//==============================================resi pengiriman
+Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 //===========================================admin
