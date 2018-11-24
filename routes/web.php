@@ -1,9 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/laporan','laporan\laporandarat@index');
+Route::get('/','Login\Logincontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');
 //==============================================resi pengiriman
 Route::resource('/residarat','resipengiriman\resipengirimanController');

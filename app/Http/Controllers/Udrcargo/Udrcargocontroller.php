@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Udrcargomodel;
+use Illuminate\Support\Facades\DB;
 
 class Udrcargocontroller extends Controller
 {
@@ -29,7 +30,8 @@ class Udrcargocontroller extends Controller
     public function create()
     {
         //
-        return view('udaracargo/create');
+        $data= DB::table('tarif_udara')->get();
+        return view('udaracargo/create',['udr_kargo'=>$data]);
     }
 
     /**
@@ -43,8 +45,8 @@ class Udrcargocontroller extends Controller
         //
         $rules = [
             'kode_udara' => 'required|min:0',
-            'tarif' => 'required|min:3',
-            'persentase' => 'required|min:3'
+            'tarif' => 'required',
+            'persentase' => 'required'
                 ];
 
          $customMessages = [
@@ -58,7 +60,7 @@ class Udrcargocontroller extends Controller
             'tarif' => $request->tarif,
             'persentase' => $request->persentase
 ]);
-return redirect('udrkargo');
+return redirect('udrkargo')->with('status','tambah Data Sukses');
 
     }
 
@@ -97,8 +99,8 @@ return redirect('udrkargo');
     {
         $rules = [
             'kode_udara' => 'required|min:0',
-            'tarif' => 'required|min:3',
-            'persentase' => 'required|min:3'
+            'tarif' => 'required',
+            'persentase' => 'required'
         ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',

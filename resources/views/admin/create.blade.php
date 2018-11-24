@@ -4,7 +4,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Input Tarif Darat</h2>
+							<h2>Input Admin</h2>
 						</div>
 					</div>
 				</div>
@@ -95,8 +95,8 @@
 
 {{csrf_field()}}
 							<small class="text-muted">
-								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>
 			</div>

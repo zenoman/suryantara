@@ -16,7 +16,9 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label">Kode Udara</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" class="form-control" name="kode_udara">
-								<option>1</option>
+								@foreach($udr_kargo as $row)
+								<option>{{$row->kode}}</option>
+								@endforeach
 							</select>
 							@if($errors->has('kode_udara'))
                                        <div class="alert alert-danger">
@@ -49,8 +51,8 @@
 					</div>
 
 {{csrf_field()}}
-							<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan">
+							<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 						</small>
 				</form>
 			</div>

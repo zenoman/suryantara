@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Password" name="password" />
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="checkbox float-left">
                             <input type="checkbox" id="signed-in"/>
                             <label for="signed-in">Keep me signed in</label>
@@ -49,9 +49,9 @@
                         <div class="float-right reset">
                             <a href="reset-password.html">Reset Password</a>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-rounded" name="submit" >Sign in</button>
-                    <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p>
+                    </div> -->
+                    <button type="submit" class="btn btn-rounded" name="submit" >Masuk</button>
+                    <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
                     <!--<button type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                     </button>-->

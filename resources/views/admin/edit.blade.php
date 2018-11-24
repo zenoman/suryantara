@@ -47,7 +47,7 @@
                                         @endif
 						</div>
 					</div>
-					<div class="form-group row">
+					<!-- <div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Password</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="password" class="form-control" id="inputPassword" placeholder="password" name="password" value="{{$datadmin->password}}"></p>
@@ -57,7 +57,7 @@
                                          </div>
                                         @endif
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Email</label>
 						<div class="col-sm-10">
@@ -94,8 +94,9 @@
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">
-								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								
 							</small>
 				</form>
 			</div>

@@ -48,7 +48,7 @@ Vendormodel::create([
 'telp' => $request->telp,
 'alamat' => $request->alamat
 ]);
-return redirect('vendor');
+return redirect('vendor')->with('status','tambah Data Sukses');
 }
 /**
 * Display the specified resource.
@@ -90,7 +90,7 @@ Vendormodel::find($id)->update([
         'telp' => $request->telp,
         'alamat' => $request->alamat
 ]);
-return redirect('vendor');
+return redirect('vendor')->with('status','edit Data Sukses');
 }
 /**
 * Remove the specified resource from storage.
@@ -100,6 +100,6 @@ return redirect('vendor');
 public function destroy($id)
 {
 Vendormodel::destroy($id);
-return redirect('vendor');
+return redirect('vendor')->with('status','hapus Data Sukses');
 }
 }

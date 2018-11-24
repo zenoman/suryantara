@@ -39,8 +39,8 @@ $rules = [
 'kode' => 'required|min:3',
 'tujuan' => 'required|min:3',
 'tarif' => 'required|min:3',
-'berat_minimal' => 'required|min:1',
-'estimasi' => 'required|min:3'
+'berat_minimal' => 'required',
+'estimasi' => 'required'
 ];
 $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -53,7 +53,7 @@ Trf_lautmodel::create([
 'tarif' => $request->tarif,
 'berat_min' => $request->berat_minimal,'estimasi' => $request->estimasi
 ]);
-return redirect('trflaut');
+return redirect('trflaut')->with('status','Tambah Data Sukses');
 }
 /**
 * Display the specified resource.
@@ -86,8 +86,8 @@ $rules = [
 'kode' => 'required|min:3',
 'tujuan' => 'required|min:3',
 'tarif' => 'required|min:3',
-'berat_minimal' => 'required|min:1',
-'estimasi' => 'required|min:3'
+'berat_minimal' => 'required',
+'estimasi' => 'required'
 ];
 $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -102,7 +102,7 @@ Trf_lautmodel::find($id)->update([
 'berat_min' => $request->berat_minimal,
 'estimasi' => $request->estimasi
 ]);
-return redirect('trflaut');
+return redirect('trflaut')->with('status','Edit Data Sukses');
 }
 /**
 * Remove the specified resource from storage.
@@ -112,6 +112,6 @@ return redirect('trflaut');
 public function destroy($id)
 {
 Trf_lautmodel::destroy($id);
-return redirect('trflaut');
+return redirect('trflaut')->with('status','Hapus Data Sukses');
 }
 }

@@ -17,7 +17,7 @@ class Trf_daratcontroller extends Controller
 public function index()
 {
 // dd("index");
-$tarif_darat=Trf_daratmodel::paginate(3);
+$tarif_darat=Trf_daratmodel::paginate(30);
 //dd($tarif_darat);
 return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 }
@@ -57,7 +57,7 @@ Trf_daratmodel::create([
 'estimasi' => $request->estimasi
 ]);
 
-return redirect('trfdarat');
+return redirect('trfdarat')->with('status','Input Data Sukses');
 }/**
 * Display the specified resource.
 *
@@ -89,8 +89,8 @@ $rules = [
 'kode' => 'required|min:3',
 'tujuan' => 'required|min:3',
 'tarif' => 'required|min:3',
-'berat_minimal' => 'required|min:1',
-'estimasi' => 'required|min:3'
+'berat_minimal' => 'required',
+'estimasi' => 'required'
 ];
 $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -105,7 +105,7 @@ Trf_daratmodel::find($id)->update([
 'berat_min' => $request->berat_minimal,
 'estimasi' => $request->estimasi
 ]);
-return redirect('trfdarat');
+return redirect('trfdarat')->with('status','Edit Data Sukses');
 }
 /**
 * Remove the specified resource from storage.
@@ -115,6 +115,7 @@ return redirect('trfdarat');
 */
 public function destroy($id)
 {
-Trf_daratmodel::destroy($id);return redirect('trfdarat');
+Trf_daratmodel::destroy($id);
+return redirect('trfdarat')->with('status','Hapus Data Sukses');
 }
 }

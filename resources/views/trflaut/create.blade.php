@@ -37,7 +37,13 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tarif</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tarif" placeholder="Data Angka"></p>
+								<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="tarif" required onkeypress="return isNumberKey(event)">
+								
+							</div>
 							@if($errors->has('tarif'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
@@ -48,7 +54,12 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Berat minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="berat_minimal" placeholder="Data Angka Satuan Kilo Gram""></p>
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="berat_minimal" required onkeypress="return isNumberKey(event)">
+								<div class="input-group-addon">
+									Kg
+								</div>
+							</div>
 							@if($errors->has('berat_minimal'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('berat_minimal')}}
@@ -59,7 +70,12 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Estimasi</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="estimasi" placeholder="Misal : 2-3 Hari"></p>
+								<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="estimasi" required onkeypress="return isNumberKey(event)">
+								<div class="input-group-addon">
+									Hari
+								</div>
+							</div>
 							@if($errors->has('estimasi'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('estimasi')}}
@@ -70,8 +86,9 @@
 
 {{csrf_field()}}
 							<small class="text-muted">
-								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								
 							</small>
 				</form>
 			</div>

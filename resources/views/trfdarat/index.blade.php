@@ -26,6 +26,12 @@
 			</header>
 			<section class="card">
 				<div class="card-block">
+					@if (session('status'))
+                    <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('status') }}
+                    </div>
+                    @endif
 					<a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -55,10 +61,10 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
-                            <td>{{$row->tarif}}</td>
+                            <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
                             <td><a href="trfdarat/{{$row->id}}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-pencil"></i> Edit</a>
-                                <a href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                <a href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
                                         <i class="fa fa-remove"></i>Hapus</a>
                             </td>
 						</tr>

@@ -60,7 +60,7 @@ class Trfudaracontroller extends Controller
             'gencoKG' => $request->gencoKG,
             'minimal' => $request->minimal
 ]);
-return redirect('trfudara');
+return redirect('trfudara')->with('status','tambah Data Sukses');
 
     }
 

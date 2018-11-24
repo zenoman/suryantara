@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\laporan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,11 @@ class laporandarat extends Controller
      */
     public function index()
     {
-        return view('')
+        $data = DB::table('resi_pengiriman')
+                ->join('tarif_darat','tarif_darat.kode','=','resi_pengiriman.kode_tujuan')
+                ->select(DB::raw('resi_pengiriman.*,tarif_darat.tujuan'))
+                ->get();
+        return view('laporan/index',['data'=>$data]);
     }
 
     /**

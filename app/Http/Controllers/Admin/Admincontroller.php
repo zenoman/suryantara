@@ -15,7 +15,7 @@ class Admincontroller extends Controller
      */
     public function index()
     {
-        $admins = Adminmodel::paginate(1);
+        $admins = Adminmodel::paginate(20);
         return view('admin/index',['admin'=>$admins]);
     }
 
@@ -72,7 +72,7 @@ class Admincontroller extends Controller
     {
         $rules = [
                     'kode'      => 'required',
-                    'username'  => 'required|min:5',
+                    'username'  => 'required',
                     'password'  => 'required|min:5',
                     'nama'  => 'required',
                     'email'  => 'required|min:5|email',
