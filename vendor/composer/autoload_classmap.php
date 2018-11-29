@@ -23,6 +23,8 @@ return array(
     'App\\Http\\Controllers\\Trfudara\\Trfudaracontroller' => $baseDir . '/app/Http/Controllers/Trfudara/Trfudaracontroller.php',
     'App\\Http\\Controllers\\Udrcargo\\Udrcargocontroller' => $baseDir . '/app/Http/Controllers/Udrcargo/Udrcargocontroller.php',
     'App\\Http\\Controllers\\Vendor\\Vendorcontroller' => $baseDir . '/app/Http/Controllers/Vendor/Vendorcontroller.php',
+    'App\\Http\\Controllers\\laporan\\laporandarat' => $baseDir . '/app/Http/Controllers/laporan/laporandarat.php',
+    'App\\Http\\Controllers\\resipengiriman\\resipengirimanController' => $baseDir . '/app/Http/Controllers/resipengiriman/resipengirimanController.php',
     'App\\Http\\Controllers\\udrcargocontroller' => $baseDir . '/app/Http/Controllers/udrcargocontroller.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
