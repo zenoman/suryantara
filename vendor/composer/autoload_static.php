@@ -357,6 +357,8 @@ class ComposerStaticInit083097e5561435a6cf31c63f1363a97a
         'App\\Http\\Controllers\\Trfudara\\Trfudaracontroller' => __DIR__ . '/../..' . '/app/Http/Controllers/Trfudara/Trfudaracontroller.php',
         'App\\Http\\Controllers\\Udrcargo\\Udrcargocontroller' => __DIR__ . '/../..' . '/app/Http/Controllers/Udrcargo/Udrcargocontroller.php',
         'App\\Http\\Controllers\\Vendor\\Vendorcontroller' => __DIR__ . '/../..' . '/app/Http/Controllers/Vendor/Vendorcontroller.php',
+        'App\\Http\\Controllers\\laporan\\laporandarat' => __DIR__ . '/../..' . '/app/Http/Controllers/laporan/laporandarat.php',
+        'App\\Http\\Controllers\\resipengiriman\\resipengirimanController' => __DIR__ . '/../..' . '/app/Http/Controllers/resipengiriman/resipengirimanController.php',
         'App\\Http\\Controllers\\udrcargocontroller' => __DIR__ . '/../..' . '/app/Http/Controllers/udrcargocontroller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

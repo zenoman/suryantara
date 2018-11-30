@@ -50,10 +50,13 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->username}}</td>
-                            <td><a href="admin/{{$row->id}}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-key"></i> Edit Data</a>
-                                <a href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
-                                        <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>hapus</a>
+                            <td>
+                            	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
+                                        <i class="fa fa-key"></i> Ganti Password</a>
+                            	<a href="admin/{{$row->id}}" class="btn btn-rimary btn-sm">
+                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                                <a  onclick="return confirm('Hapus Data ?')" href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>hapus</a>
                             </td>
 						</tr>
 						@endforeach

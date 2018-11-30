@@ -16,7 +16,7 @@ class trf_lautcontroller extends Controller
 */
 public function index()
 {
-$tarif_laut=Trf_lautmodel::get();
+$tarif_laut=Trf_lautmodel::paginate(20);
 return view('trflaut/index',['trflaut'=>$tarif_laut]);
 }/**
 * Show the form for creating a new resource.

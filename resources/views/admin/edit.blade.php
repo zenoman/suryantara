@@ -1,5 +1,15 @@
 @extends('layout.master')
 @section('content')
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -72,7 +82,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">No.telp</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="telp" name="telp" value="{{$datadmin->telp}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="telp" name="telp" required onkeypress="return isNumberKey(event)" value="{{$datadmin->telp}}"></p>
 						@if($errors->has('telp'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('telp')}}

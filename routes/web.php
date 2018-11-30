@@ -14,6 +14,8 @@ Route::get('/admin/create','Admin\Admincontroller@create');
 Route::get('/admin/{id}','Admin\Admincontroller@edit');
 Route::put('/admin/{id}','Admin\Admincontroller@update');
 Route::get('/admin/{id}/delete','Admin\Admincontroller@destroy');
+Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
+Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');

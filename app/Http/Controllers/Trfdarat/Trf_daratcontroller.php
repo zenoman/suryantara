@@ -17,7 +17,7 @@ class Trf_daratcontroller extends Controller
 public function index()
 {
 // dd("index");
-$tarif_darat=Trf_daratmodel::paginate(30);
+$tarif_darat=Trf_daratmodel::paginate(20);
 //dd($tarif_darat);
 return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 }

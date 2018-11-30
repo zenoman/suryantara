@@ -1,5 +1,16 @@
 @extends('layout.master')
 @section('content')
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
+
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -39,7 +50,12 @@
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tarif</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="tarif" value="{{$trflaut->tarif}}"></p>
+							<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword"  name="tarif" required onkeypress="return isNumberKey(event)" value="{{$trflaut->tarif}}">
+							</div>
 						@if($errors->has('tarif'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
@@ -50,7 +66,12 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Berat Minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="berat_minimal" value="{{$trflaut->berat_min}}"></p>
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="berat_minimal" required onkeypress="return isNumberKey(event)" value="{{$trflaut->berat_min}}">
+								<div class="input-group-addon">
+									Kg
+								</div>
+							</div>
 						@if($errors->has('berat_minimal'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('berat_minimal')}}
@@ -62,7 +83,12 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Estimasi</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="estimasi" value="{{$trflaut->estimasi}}"></p>
+						<div class="input-group">
+							<input type="text" class="form-control" id="inputPassword" name="estimasi" required onkeypress="return isNumberKey(event)" value="{{$trflaut->estimasi}}">
+							<div class="input-group-addon">
+									Hari
+							</div>
+						</div>
 						@if($errors->has('estimasi'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('estimasi')}}

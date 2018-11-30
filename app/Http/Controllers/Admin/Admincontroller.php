@@ -24,18 +24,20 @@ class Admincontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
         return view('admin/create');
     }
 
-    public function changepass($id)
+    public function changepas($id)
     {
         $admin = Adminmodel::find($id);
-        return view('admin/changepass',['dataadmin'=>$admin]);
+        return view('admin/changepas',['datadmin'=>$admin]);
     }
 
-    public function actionchangepass(Request $request, $id){
+    public function actionchangepas(Request $request, $id){
         $rules = [
                 'konfirmasi_username'       =>  'required|min:5',
                 'konfirmasi_password'       =>  'required|min:5',
@@ -51,14 +53,14 @@ class Admincontroller extends Controller
         if($request->password==$newpass){
             if($request->konfirmasi_password_baru==$request->password_baru){
                  Adminmodel::find($id)->update([
-            'password' => md5($request->konfirmasi_password_baru)
+            'password' =>md5($request->konfirmasi_password_baru)
         ]);
         return redirect('admin')->with('status','Edit Password berhasil');
             }else{
-             return redirect('admin/'.$id.'/changepass')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
+             return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
             }
         }else{
-        return redirect('admin/'.$id.'/changepass')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
+        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
         }
        
     }
@@ -90,7 +92,7 @@ class Admincontroller extends Controller
         Adminmodel::create([
             'kode'  => $request->kode,
             'username'  => $request->username,
-            'password'  => md5($request->password),
+            'password'  =>md5($request->password),
             'nama'  => $request->nama,
             'email'  => $request->email,
             'telp'  => $request->telp,
@@ -153,8 +155,7 @@ class Admincontroller extends Controller
         
         Adminmodel::find($id)->update([
             'kode'  => $request->kode,
-            'username'  => $request->username,
-            'password'  => md5($request->password),
+            'username'  => $request->username,            
             'nama'  => $request->nama,
             'email'  => $request->email,
             'telp'  => $request->telp,

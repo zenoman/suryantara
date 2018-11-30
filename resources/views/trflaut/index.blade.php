@@ -49,15 +49,16 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->tarif}}</td>
-                            <td><a href="trflaut/{{$row->id}}" class="btn btn-warning btn-sm">
+                            <td><a href="trflaut/{{$row->id}}" class="btn btn-primary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit</a>
                                 <a href="trflaut/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
-                                        <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>Hapus</a>
+                                        <i class="fa fa-remove"></i>Hapus</a>
                             </td>
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
+					
 				</div>
 			</section>
 		</div><!--.container-fluid-->
