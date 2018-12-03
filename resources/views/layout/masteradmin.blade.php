@@ -160,5 +160,6 @@
 	@yield('js')
 	<!-- ===================================================================== -->
 	<script src="{{asset('assets/js/app.js')}}"></script>
+	@yield('otherjs')
 </body>
 </html>	

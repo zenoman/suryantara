@@ -1,15 +1,11 @@
-@extends('layout.master2')
+@extends('layout.masteradmin')
+@section('css')
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+@endsection
 @section('content')
-<script type="text/javascript">
-     function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
-</script>
+<div class="page-content">
+		<div class="container-fluid">
+		
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -193,11 +189,28 @@
 							</small>
 				</form>
 			</div>
+		
+		</div>
+	</div>
         @endsection
 @section('js')
 
+<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
 <script src="{{asset('assets/js/resi.js')}}"></script>
 
+@endsection
+@section('otherjs')
+<script src="{{asset('assets/js/resi.js')}}"></script>
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
 @endsection

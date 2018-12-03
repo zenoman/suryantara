@@ -50,7 +50,7 @@
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->tarif}}</td>
                             <td><a href="trflaut/{{$row->id}}" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit</a>
+                                        <i class="fa fa-pencil"></i> Edit Data</a>
                                 <a href="trflaut/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
                                         <i class="fa fa-remove"></i>Hapus</a>
                             </td>
@@ -58,9 +58,22 @@
 						@endforeach
 						</tbody>
 					</table>
-					
+					{{ $trflaut->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
+	@endsection
+
+	@section('js')
+	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+	@yield('js')
+	<script>
+		$(function() {
+			$('#example').DataTable({
+            responsive: true,
+            "paging":false
+        });
+		});
+	</script>
 	@endsection

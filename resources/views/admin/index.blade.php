@@ -56,7 +56,7 @@
                             	<a href="admin/{{$row->id}}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                 <a  onclick="return confirm('Hapus Data ?')" href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>hapus</a>
+                                        <i class="fa fa-remove"></i>Hapus</a>
                             </td>
 						</tr>
 						@endforeach

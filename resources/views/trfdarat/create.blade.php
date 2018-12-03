@@ -1,4 +1,9 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>tarif darat</title>
+@endsection
+
 @section('content')
 <script type="text/javascript">
      function isNumberKey(evt)
@@ -10,7 +15,9 @@
          return true;
       }
 </script>
-<header class="section-header">
+<div class="page-content">
+		<div class="container-fluid">
+		<header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
@@ -102,4 +109,7 @@
 							</small>
 				</form>
 			</div>
+		</div>
+	</div>
+
         @endsection

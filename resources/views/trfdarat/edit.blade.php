@@ -1,6 +1,11 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+@section('header')
+<title>Edit tarif darat</title>
+@endsection
 @section('content')
-<script type="text/javascript">
+<div class="page-content">
+		<div class="container-fluid">
+		<script type="text/javascript">
      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
@@ -108,5 +113,8 @@
 							</small>
 				</form>
 			</div>
+		
+		</div>
+	</div>
 
         @endsection
