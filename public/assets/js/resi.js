@@ -1,5 +1,8 @@
 $(document).ready(function(){
-
+		var satuan = 'kg';
+		$('#satuan').on('change',function(e){
+			satuan = this.value;
+		})
 		$('#kota_tujuan').select2({
 		placeholder: 'Cari kota tujuan',
 		ajax:{
@@ -10,7 +13,13 @@ $(document).ready(function(){
 				return {
 					results : $.map(data, function (item){
 						if(item.kode != null){
-						hitung(item.tarif,item.tujuan);	
+							if(satuan=='kg'){
+								hitung(item.tarif,item.tujuan);	
+							}else{
+								$("#biaya_kirim").val(0);
+								$("#b_kirim").html(0);
+								hitung_total();
+							}
 						}
 						return {
 							id: item.kode,
@@ -23,6 +32,7 @@ $(document).ready(function(){
 			cache: true
 		}
 	});
+		
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
 		});
@@ -56,7 +66,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			$("#volume").val(total);
 			}
 			
@@ -66,7 +76,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			$("#volume").val(total);
 			}
 			
@@ -76,7 +86,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  parseInt(panjang) +  parseInt(lebar) +  parseInt(tinggi);
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			$("#volume").val(total);
 			}
 			
@@ -120,6 +130,16 @@ $(document).ready(function(){
 			$("#total").html(0);
 			$('#nama_barang').focus();
 		}
+		
+		$("#btncetak").click(function(){
+		var divToPrint=document.getElementById('hidden_div');
+		var newWin=window.open('','Print-Window');
+		newWin.document.open();
+		newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+		newWin.document.close();
+		setTimeout(function(){newWin.close();},10);
+		});
+
 		$("#btnsimpan").click(function(){
 			var nama_barang	= $("#nama_barang").val();
 			var d_panjang	= $("#d_panjang").val();

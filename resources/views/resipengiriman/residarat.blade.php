@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
 @section('content')
-<div class="page-content">
+<div class="page-content" id="printdiv">
 		<div class="container-fluid">
 		
 <header class="section-header">
@@ -30,7 +30,7 @@
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Dimensi(P, L, T) </label>
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang" value="0">&nbsp;
 								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar" value="0">&nbsp;
@@ -41,7 +41,7 @@
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">volume</label>
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="volume" >
 							</div>
@@ -57,13 +57,18 @@
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Berat</label>
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
-								<div class="input-group-addon">Kg</div>
+								<select class="form-control" id="satuan">
+								<option>kg</option>
+								<option>koli</option>
+							</select>
 							</div>
 						</div>
+						
 					</div>
+
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
@@ -184,6 +189,7 @@
 							<small class="text-muted">
 								<!-- <input class="btn btn-primary" type="submit" name="submit" value="simpan"> -->
 								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan</button>
+								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								
 							</small>
@@ -191,6 +197,65 @@
 			</div>
 		
 		</div>
+	<div id="hidden_div">
+       <table border="1">
+        	<tr>
+        		<td class="3">Logo</td>
+        		<td>
+        			<table border="1">
+        				<tr>
+        					<td colspan="2">No :</td>
+        				</tr>
+        				<tr>
+        					<td>Kota Asal</td>
+        					<td>Kota Tujuan</td>
+        				</tr>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        				<tr>
+        					<td>Jumlah Barang</td>
+        					<td>Berat</td>
+        				</tr>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        			</table>
+        		</td>
+        		<td>Pengiriman Via</td>
+        	</tr>
+        	<tr>
+        		<td>Pengirim</td>
+        		<td>Penerima</td>
+        		<td rowspan="3">
+        			<table border="1">
+        				<tr>
+        					<td>Ukuran Dimensi</td>
+        					<td>Ukuran Volume</td>
+        				</tr>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        			</table>
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>Nama Barang</td>
+        		<td>Biaya Kirim</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        </table>
+    </div>
 	</div>
         @endsection
 @section('js')
@@ -212,5 +277,6 @@
 
          return true;
       }
+
 </script>
 @endsection
