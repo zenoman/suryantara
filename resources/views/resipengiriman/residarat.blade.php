@@ -197,64 +197,78 @@
 			</div>
 		
 		</div>
-	<div id="hidden_div">
-       <table border="1">
-        	<tr>
-        		<td class="3">Logo</td>
-        		<td>
-        			<table border="1">
-        				<tr>
-        					<td colspan="2">No :</td>
-        				</tr>
-        				<tr>
-        					<td>Kota Asal</td>
-        					<td>Kota Tujuan</td>
-        				</tr>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        				<tr>
-        					<td>Jumlah Barang</td>
-        					<td>Berat</td>
-        				</tr>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        		</td>
-        		<td>Pengiriman Via</td>
-        	</tr>
-        	<tr>
-        		<td>Pengirim</td>
-        		<td>Penerima</td>
-        		<td rowspan="3">
-        			<table border="1">
-        				<tr>
-        					<td>Ukuran Dimensi</td>
-        					<td>Ukuran Volume</td>
-        				</tr>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>Nama Barang</td>
-        		<td>Biaya Kirim</td>
-        	</tr>
-        	<tr>
-        		<td></td>
-        		<td></td>
-        	</tr>
-        </table>
+	<div id="hidden_div" style="display: none;">
+       <div>
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 20%">logo</td>
+				<td style="width: 30%">alamat</td>
+				<td style="width: 30%">
+					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
+						<tr style="border: 1px solid black;">
+							<td colspan="2" style="border: 1px solid black;">
+								<p style="margin-top: 9px;margin-bottom: 9px;margin-left: 6px;">SCK -</p> 
+							
+							</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black;" align="center">
+							Kota Asal</td>
+							<td style="border: 1px solid black;" align="center">
+							Kota Tujuan</td>
+							
+						</tr>
+						<tr>
+							<td style="border: 1px solid black;" align="center">
+							Kediri</td>
+							<td style="border: 1px solid black;" align="center">
+							Malang</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black;" align="center">
+							Jumlah Barang</td>
+							<td style="border: 1px solid black;" align="center">
+							Berat</td>
+						</tr>
+						<tr>
+							<td style="border: 1px solid black;" align="center">
+							1</td>
+							<td style="border: 1px solid black;" align="center">
+							3 kg</td>
+						</tr>
+					</table>
+				</td>
+				<td style="width: 20%">
+					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
+						<tr>
+							<td style="border: 1px solid black;">Pengiriman Via</td>
+						</tr>
+						<tr>
+							<td>Kargo Darat</td>
+						</tr>
+						<tr>
+							<td>Kargo Laut</td>
+						</tr>
+						<tr>
+							<td>Kargo Udara</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="border: solid;">
+		<p>alamat</p>
+	</div>
+	<div style="border: solid;">
+		<p>via</p>
+	</div>
     </div>
 	</div>
         @endsection
