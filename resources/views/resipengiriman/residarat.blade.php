@@ -19,7 +19,7 @@
 
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-
+						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
 						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
@@ -187,7 +187,7 @@
 					</div>
 					{{csrf_field()}}
 							<small class="text-muted">
-								<!-- <input class="btn btn-primary" type="submit" name="submit" value="simpan"> -->
+								
 								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan</button>
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
@@ -345,7 +345,7 @@
 						</tr>
 						
 						<tr>
-							<td style="width: 25%;font-size: 15;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 15;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 15;">
 								<b id="cetak_total"></b>
@@ -539,7 +539,7 @@
 						</tr>
 						
 						<tr>
-							<td style="width: 25%;font-size: 15;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 15;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 15;">
 								<b id="cetak_total2"></b>

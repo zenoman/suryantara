@@ -52,6 +52,7 @@ class resipengirimanController extends Controller
     {
        $simpan = DB::table('resi_pengiriman')
        ->insert([
+        'id_admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'darat',
         'kota_asal'     => $request->kota_asal,

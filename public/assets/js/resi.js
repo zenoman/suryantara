@@ -188,7 +188,10 @@ $(document).ready(function(){
 			$("#cetak_tanggal2").html("Kediri, "+tanggal);
 		}
 
-		$("#btnsimpan").click(function(){
+		$("#btnsimpan").click(function(e){
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
 			var d_panjang	= $("#d_panjang").val();
 			var d_tinggi	= $("#d_tinggi").val();
@@ -208,7 +211,7 @@ $(document).ready(function(){
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
-			if(nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
+			if(iduser==''||nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
 				$.ajax({
@@ -216,6 +219,7 @@ $(document).ready(function(){
                 url: 'residarat',
                 data: {
                     '_token': $('input[name=_token]').val(),
+                    'iduser'		: iduser,
                     'nama_barang'	: nama_barang,
 					'dimensi'		: dimensi,
 					'ukuran_volume'	: volume,
@@ -234,8 +238,7 @@ $(document).ready(function(){
                 	'total_biaya'	: total_biaya
                 },
                 success:function(){
-                    notie.confirm('Resi Disimpan<br>Cetak Resi ?', 'Ya', 'Tidak', function() {
-            		notie.alert(1, 'Resi Dicetak', 2);});
+                    alert('Data Berhasil Disimpan');
                 	bersih();
                 },
             });
