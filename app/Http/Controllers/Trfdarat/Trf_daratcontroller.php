@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Trfdarat;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Trf_daratmodel;
 
@@ -26,6 +27,13 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 *
 * @return \Illuminate\Http\Response
 */
+public function caridata(Request $request)
+    {
+        $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$request->cari.'%')->get();
+        
+        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari]);
+    }
+
 public function create(){
 return view('trfdarat/create');
 }

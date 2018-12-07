@@ -24,7 +24,7 @@ class Logincontroller extends Controller
     }
     public function masuk(Request $request){
         $username = $request->username;
-        $password =md5($request->password);
+        $password =($request->password);
 
         $dataadmin = DB::table('admin')->where([['username',$username],['password',$password]])->get();
         foreach ($dataadmin as $dataadmin) {

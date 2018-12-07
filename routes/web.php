@@ -16,6 +16,7 @@ Route::put('/admin/{id}','Admin\Admincontroller@update');
 Route::get('/admin/{id}/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
 Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
+Route::post('admin/cari','Admin\Admincontroller@caridata');
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');
@@ -33,6 +34,7 @@ Route::get('/trfdarat/create','Trfdarat\Trf_daratcontroller@create');
 Route::get('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@edit');
 Route::put('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@update');
 Route::get('/trfdarat/{id}/delete','Trfdarat\Trf_daratcontroller@destroy');
+Route::post('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
 //===============================================trf laut
 Route::get('/trflaut','Trf_laut\Trf_lautcontroller@index');
 Route::post('/trflaut','Trf_laut\Trf_lautcontroller@store');
@@ -40,6 +42,7 @@ Route::get('/trflaut/create','Trf_laut\Trf_lautcontroller@create');
 Route::get('/trflaut/{id}','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
 Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
+Route::post('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');

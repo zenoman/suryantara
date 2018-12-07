@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Adminmodel;
 class Admincontroller extends Controller
@@ -24,6 +25,12 @@ class Admincontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function caridata(Request $request)
+    {
+        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
+        
+        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$request->cari]);
+    }
 
 
     public function create()

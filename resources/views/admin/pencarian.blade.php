@@ -6,7 +6,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Data Admin</h2>
+							<h2 class = "page-header">Hasil Pencarian</h2>
 						</div>
 					</div>
 				</div>
@@ -20,36 +20,11 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-					<a href="{{url('admin/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                                        <i class="fa fa-search"></i> Cari Data</button>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="post" action="{{url('admin/cari')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama admin" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+						<a>List Data Admin</a>
 						<thead>
 						<tr>
 							<th>No</th>
@@ -70,7 +45,7 @@
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($admin as $row)
+                            @foreach($datadmin as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
@@ -89,7 +64,7 @@
 						@endforeach
 						</tbody>
 					</table>
-					 <!--{{ $admin->links() }}-->
+					 
 				</div>
 			</section>
 		</div><!--.container-fluid-->
