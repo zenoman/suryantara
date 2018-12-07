@@ -15,9 +15,11 @@ $(document).ready(function(){
 						if(item.kode != null){
 							if(satuan=='kg'){
 								hitung(item.tarif,item.tujuan);
-								$("#cetak_kota_tujuan").html(item.tujuan);	
+								$("#cetak_kota_tujuan").html(item.tujuan);
+								$("#cetak_kota_tujuan2").html(item.tujuan);	
 							}else{
 								$("#cetak_kota_tujuan").html(item.tujuan);
+								$("#cetak_kota_tujuan2").html(item.tujuan);
 								$("#biaya_kirim").val(0);
 								$("#b_kirim").html(0);
 								hitung_total();
