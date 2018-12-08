@@ -117,12 +117,6 @@
 	                <span class="lbl">Tarif Udara</span>
 	            </a>
 	        </li>
-	        <li class="gold">
-	            <a href="{{url('udrkargo')}}">
-	                <i class="fa fa-cubes"></i>
-	                <span class="lbl">Udara Kargo</span>
-	            </a>
-	        </li>
 	        <li class="red">
 	            <a href="{{url('vendor')}}">
 	                <i class="fa fa-users"></i>

@@ -1,5 +1,14 @@
-@extends('layout.master')
-@section('tabel')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+@endsection
+
+@section('content')
 <div class="page-content">
 	    <div class="container-fluid">
 	       
@@ -147,4 +156,8 @@
 	        </div>
 	    </div><!--.container-fluid-->
 	</div>
+@endsection
+
+@section('js')
+<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 @endsection

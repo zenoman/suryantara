@@ -1,5 +1,12 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>Suryantara</title>
+@endsection
 @section('content')
+
+<div class="page-content">
+		<div class="container-fluid">
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -80,4 +87,6 @@
 							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
 				</form>
 			</div>
+		
+	</div></div>
         @endsection

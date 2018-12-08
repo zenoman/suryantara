@@ -1,5 +1,18 @@
-@extends('layout.master')
-@section('tabel')
+@extends('layout.masteradmin')
+
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
+
+@section('css')
+<link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
+@endsection
+
+
+@section('content')
 	<div class="page-content">
 		<div class="container-fluid">
 			<header class="section-header">
@@ -20,6 +33,7 @@
                     </div>
                     @endif
 					<a href="{{url('trflaut/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+					<a href="{{url('trflaut/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -49,7 +63,7 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->tarif}}</td>
-                            <td><a href="trflaut/{{$row->id}}" class="btn btn-primary btn-sm">
+                            <td><a href="trflaut/{{$row->id}}/edit" class="btn btn-primary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                 <a href="trflaut/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
                                         <i class="fa fa-remove"></i>Hapus</a>

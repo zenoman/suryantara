@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Trf_daratmodel;
 
+use App\Exports\TrfdaratExport;
+use App\Imports\TrfDaratImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
+
 class Trf_daratcontroller extends Controller
 {
     /**
 * Display a listing of the resource.
-*
+* 
 * @return \Illuminate\Http\Response
 */
 public function index()
@@ -26,6 +31,34 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 *
 * @return \Illuminate\Http\Response
 */
+//------------------------------------
+   public function importexcel (){
+        return view('trfdarat/importexcel');
+    }
+
+    public function downloadtemplate(){
+         $file= public_path(). "/file/template.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+    return Response::download($file, 'template.xlsx', $headers);
+    return redirect('trfdarat/importexcel');
+    }
+
+
+        public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new TrfDaratImport, request()->file('file'));
+        }
+        return redirect('trfdarat')->with('status','Import excel sukses');
+    }
+
+    public function exsportexcel(){
+    return Excel::download(new TrfdaratExport, 'Tarif Darat.xlsx');
+    return redirect('trfdarat/importexcel');
+
+    }
+//-----------------------------------
 public function create(){
 return view('trfdarat/create');
 }
