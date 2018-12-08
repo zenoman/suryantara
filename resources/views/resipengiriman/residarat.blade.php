@@ -16,7 +16,7 @@
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
-
+					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
@@ -217,7 +217,7 @@
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
 							<td colspan="2" style="border: 1px solid black;">
-								<p style="margin-left: 6px;">SCK -</p> 
+								<p style="margin-left: 6px;" id="cetak_resi"></p> 
 							
 							</td>
 						</tr>
@@ -411,7 +411,7 @@
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
 							<td colspan="2" style="border: 1px solid black;">
-								<p style="margin-left: 6px;">SCK -</p> 
+								<p style="margin-left: 6px;" id="cetak_resi2"></p> 
 							
 							</td>
 						</tr>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\resipengiriman;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
     /**
@@ -16,9 +16,22 @@ class resipengirimanController extends Controller
     public function index(){
 
     }
+    public function carikode(){
+        $kodeuser = sprintf("%02s",session::get('id'));
+        $kode = DB::table('resi_pengiriman')
+        ->where('no_resi','like','%'.$kodeuser.'%')
+        ->max('no_resi');
+
+        $newkode    = explode("-", $kode);
+        $nomer      = sprintf("%06s",$newkode[2]+1);
+        $tanggal    = date('dmy');
+        $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
+        return response()->json($finalkode);
+    }
+
     public function residarat()
     {
-       return view('resipengiriman/residarat');
+        return view('resipengiriman/residarat');
     }
     public function carikota(Request $request){
         if($request->has('q')){
@@ -50,17 +63,10 @@ class resipengirimanController extends Controller
      */
     public function store(Request $request)
     {
-        $kode = DB::table('resi_pengiriman')->max('no_resi');
-        if($kode != NULL){
-            $countkode = $kode+1;
-            $newkode = sprintf("%06s", $countkode);
-        }else{
-            $newkode = "000001";
-        }
 
        $simpan = DB::table('resi_pengiriman')
        ->insert([
-        'no_resi'       => $newkode,
+        'no_resi'       => $request->noresi,
         'id_admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'darat',

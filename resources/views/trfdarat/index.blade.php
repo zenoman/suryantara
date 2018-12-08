@@ -108,7 +108,6 @@
 
 	@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	@yield('js')
 	<script>
 		$(function() {
 			$('#example').DataTable({
