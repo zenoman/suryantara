@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Trf_laut;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Trf_lautmodel;
 
@@ -26,6 +27,7 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
 *
 * @return \Illuminate\Http\Response
 */
+<<<<<<< HEAD
 //------------------------------------
    public function importexcel (){
         return view('trflaut/importexcel');
@@ -48,6 +50,12 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
         return redirect('trflaut')->with('status','Import excel sukses');
     }
 //-----------------------------------
+=======
+public  function caridata(Request $request){
+	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$request->cari.'%')->get();
+	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari]);
+}
+>>>>>>> master
 public function create()
 {
 return view('trflaut/create');

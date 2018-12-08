@@ -33,8 +33,40 @@
                     </div>
                     @endif
 					<a href="{{url('trflaut/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+<<<<<<< HEAD
 					<a href="{{url('trflaut/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
                     <br><br>
+=======
+					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
+                                        <i class="fa fa-search"></i> Cari Data</button>
+                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
+                                        </div>
+                                        
+
+                                        <div class="modal-body">
+                                           <form method="post" action="{{url('trflaut/cari')}}">
+                                            <div class="form-group">
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama admin" required>
+                                            </div>
+                                           {{csrf_field()}}
+                                            <input type="submit" class="btn btn-info" value="Cari Data">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            
+                                            </form>
+                                        </div>
+                                 
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+
+					<br><br>
+>>>>>>> master
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -79,15 +111,4 @@
 	</div><!--.page-content-->
 	@endsection
 
-	@section('js')
-	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	@yield('js')
-	<script>
-		$(function() {
-			$('#example').DataTable({
-            responsive: true,
-            "paging":false
-        });
-		});
-	</script>
-	@endsection
+	

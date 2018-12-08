@@ -50,8 +50,18 @@ class resipengirimanController extends Controller
      */
     public function store(Request $request)
     {
+        $kode = DB::table('resi_pengiriman')->max('no_resi');
+        if($kode != NULL){
+            $countkode = $kode+1;
+            $newkode = sprintf("%06s", $countkode);
+        }else{
+            $newkode = "000001";
+        }
+
        $simpan = DB::table('resi_pengiriman')
        ->insert([
+        'no_resi'       => $newkode,
+        'id_admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'darat',
         'kota_asal'     => $request->kota_asal,
