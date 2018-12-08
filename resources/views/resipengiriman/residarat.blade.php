@@ -96,7 +96,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="t_pengirim" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim" >
 							</div>
 						</div>
 					</div>
@@ -112,7 +112,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="t_penerima" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima" >
 							</div>
 						</div>
 					</div>
@@ -187,10 +187,10 @@
 					</div>
 					{{csrf_field()}}
 							<small class="text-muted">
-								
-								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan</button>
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>
+								
+								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 								
 							</small>
 				</form>

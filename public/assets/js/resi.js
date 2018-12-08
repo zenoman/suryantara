@@ -1,5 +1,6 @@
 $(document).ready(function(){
 		var satuan = 'kg';
+		var kotatujuan;
 		$('#satuan').on('change',function(e){
 			satuan = this.value;
 		})
@@ -16,10 +17,12 @@ $(document).ready(function(){
 							if(satuan=='kg'){
 								hitung(item.tarif,item.tujuan);
 								$("#cetak_kota_tujuan").html(item.tujuan);
-								$("#cetak_kota_tujuan2").html(item.tujuan);	
+								$("#cetak_kota_tujuan2").html(item.tujuan);
+								kotatujuan = item.tujuan;	
 							}else{
 								$("#cetak_kota_tujuan").html(item.tujuan);
 								$("#cetak_kota_tujuan2").html(item.tujuan);
+								kotatujuan = item.tujuan;
 								$("#biaya_kirim").val(0);
 								$("#b_kirim").html(0);
 								hitung_total();
@@ -147,6 +150,8 @@ $(document).ready(function(){
 		});
 
 		function tempelresi(){
+			$("#cetak_kota_tujuan").html(kotatujuan);
+			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_asal").html($("#kota_asal").val());
 			$("#cetak_jumlah_barang").html($("#jumlah").val());
 			$("#cetak_berat").html($("#berat").val()+" "+satuan);
@@ -168,7 +173,7 @@ $(document).ready(function(){
 			$("#cetak_total").html("Rp. "+totalnya);
 
 			var d = new Date();
-			var tanggal = d.getDate()+" - "+d.getMonth()+" - "+d.getFullYear();
+			var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
 			$("#cetak_tanggal").html("Kediri, "+tanggal);
 			//========================================================
 			$("#cetak_kota_asal2").html($("#kota_asal").val());
@@ -238,7 +243,7 @@ $(document).ready(function(){
                 	'total_biaya'	: total_biaya
                 },
                 success:function(){
-                    alert('Data Berhasil Disimpan');
+                    notie.alert(1, 'Data Disimpan', 2);
                 	bersih();
                 },
             });
