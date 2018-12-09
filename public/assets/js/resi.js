@@ -150,7 +150,7 @@ $(document).ready(function(){
 			$("#total").html(0);
 			$('#nama_barang').focus();
 			kotatujuan ='';
-			carikode();
+			noresi = '';
 		}
 		
 		$("#btncetak").click(function(){
@@ -165,8 +165,6 @@ $(document).ready(function(){
 
 		function tempelresi(){
 			carikode();
-			$("#cetak_resi").html("SCK - "+noresi);
-			$("#cetak_resi2").html("SCK - "+noresi);
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_asal").html($("#kota_asal").val());
@@ -263,7 +261,9 @@ $(document).ready(function(){
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
+                	
                 	bersih();
+                	carikode();
                 },
             });
 			}
