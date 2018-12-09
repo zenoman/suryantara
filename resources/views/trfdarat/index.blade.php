@@ -1,6 +1,4 @@
 @extends('layout.masteradmin')
-
-
 @section('header')
 <title>Suryantara</title>
 @endsection

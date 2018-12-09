@@ -29,12 +29,15 @@ class resipengirimanController extends Controller
         return response()->json($finalkode);
     }
     public function tampil(){
-        $datakirim = 
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $datakirim = DB::table('resi_pengiriman')
+        ->orderby('id','desc')
+        ->get();
+        return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     public function residarat()
     {
         $webinfo = DB::table('setting')->limit(1)->get();
-
         return view('resipengiriman/residarat',['webinfo'=>$webinfo]);
     }
     public function carikota(Request $request){
