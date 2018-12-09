@@ -1,5 +1,22 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
 @section('content')
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
+<div class="page-content">
+		<div class="container-fluid">
 			<header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -39,7 +56,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Telp</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="telp" placeholder="Text Readonly"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="telp" required onkeypress="return isNumberKey(event)" placeholder="Text Readonly"></p>
 							@if($errors->has('telp'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('telp')}}
@@ -66,4 +83,6 @@
 
 				</form>
 			</div>
+	</div>
+</div>
         @endsection

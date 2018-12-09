@@ -1,5 +1,18 @@
-@extends('layout.master')
-@section('tabel')
+@extends('layout.masteradmin')
+
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
+
+@section('css')
+<link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
+@endsection
+
+
+@section('content')
 	<div class="page-content">
 		<div class="container-fluid">
 			<header class="section-header">
@@ -94,4 +107,17 @@
 			</section>
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
+	@endsection
+
+		@section('js')
+	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+	@yield('js')
+	<script>
+		$(function() {
+			$('#example').DataTable({
+            responsive: true,
+            "paging":false
+        });
+		});
+	</script>
 	@endsection

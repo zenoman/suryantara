@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Trf_lautmodel;
 
+use App\Imports\Trf_lautImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 class trf_lautcontroller extends Controller
 {
 /**
@@ -24,10 +27,35 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
 *
 * @return \Illuminate\Http\Response
 */
+<<<<<<< HEAD
+//------------------------------------
+   public function importexcel (){
+        return view('trflaut/importexcel');
+    }
+
+    public function downloadtemplate(){
+         $file= public_path(). "/file/template tarif laut.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+    return Response::download($file, 'template tarif laut.xlsx', $headers);
+    return redirect('trflaut/importexcel');
+    }
+
+
+        public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new Trf_lautImport, request()->file('file'));
+        }
+        return redirect('trflaut')->with('status','Import excel sukses');
+    }
+//-----------------------------------
+=======
 public  function caridata(Request $request){
 	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$request->cari.'%')->get();
 	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari]);
 }
+>>>>>>> master
 public function create()
 {
 return view('trflaut/create');

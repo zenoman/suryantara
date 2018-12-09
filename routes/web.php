@@ -32,18 +32,33 @@ Route::get('/trfudara/{id}/delete','Trfudara\Trfudaracontroller@destroy');
 Route::get('/trfdarat','Trfdarat\Trf_daratcontroller@index');
 Route::post('/trfdarat','Trfdarat\Trf_daratcontroller@store');
 Route::get('/trfdarat/create','Trfdarat\Trf_daratcontroller@create');
-Route::get('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@edit');
+Route::get('/trfdarat/{id}/edit','Trfdarat\Trf_daratcontroller@edit');
 Route::put('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@update');
 Route::get('/trfdarat/{id}/delete','Trfdarat\Trf_daratcontroller@destroy');
+<<<<<<< HEAD
+//------------------------export import
+Route::get('/trfdarat/importexcel','Trfdarat\Trf_daratcontroller@importexcel');
+Route::post('/trfdarat/prosesimportexcel','Trfdarat\Trf_daratcontroller@prosesimportexcel');
+Route::get('/trfdarat/download','Trfdarat\Trf_daratcontroller@downloadtemplate');
+Route::get('/trfdarat/exporttrfdarat','Trfdarat\Trf_daratcontroller@exsportexcel');
+=======
 Route::post('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
+>>>>>>> master
 //===============================================trf laut
 Route::get('/trflaut','Trf_laut\Trf_lautcontroller@index');
 Route::post('/trflaut','Trf_laut\Trf_lautcontroller@store');
 Route::get('/trflaut/create','Trf_laut\Trf_lautcontroller@create');
-Route::get('/trflaut/{id}','Trf_laut\Trf_lautcontroller@edit');
+Route::get('/trflaut/{id}/edit','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
 Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
+<<<<<<< HEAD
+//------------------------export import
+Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');
+Route::post('/trflaut/prosesimportexcel','Trf_laut\Trf_lautcontroller@prosesimportexcel');
+Route::get('/trflaut/download','Trf_laut\Trf_lautcontroller@downloadtemplate');
+=======
 Route::post('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
+>>>>>>> master
 //===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');
@@ -51,13 +66,6 @@ Route::get('/vendor/create','Vendor\Vendorcontroller@create');
 Route::get('/vendor/{id}','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
 Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
-//================================================udara kargo
-Route::get('/udrkargo','Udrcargo\Udrcargocontroller@index');
-Route::post('/udrkargo','Udrcargo\Udrcargocontroller@store');
-Route::get('/udrkargo/create','Udrcargo\Udrcargocontroller@create');
-Route::get('/udrkargo/{id}','Udrcargo\Udrcargocontroller@edit');
-Route::put('/udrkargo/{id}','Udrcargo\Udrcargocontroller@update');
-Route::get('/udrkargo/{id}/delete','Udrcargo\Udrcargocontroller@destroy');
 //==============================================================Login
 Route::get('/login','Login\Logincontroller@index');
 Route::post('/login/masuk','Login\Logincontroller@masuk');

@@ -1,5 +1,22 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
 @section('content')
+<script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
+<div class="page-content">
+		<div class="container-fluid">
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -51,7 +68,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Genco KG</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="gencoKG" placeholder="Misal : 23613/Kg"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="gencoKG" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23613/Kg"></p>
 							@if($errors->has('gencoKG'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('gencoKG ')}}
@@ -62,10 +79,32 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" placeholder="Misal : 280000"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" required onkeypress="return isNumberKey(event)" placeholder="Misal : 280000"></p>
 							@if($errors->has('minimal'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('minimal')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">Tarif</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tarif"  required onkeypress="return isNumberKey(event)" placeholder="Text Disabled" ></p>
+							@if($errors->has('tarif'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('tarif')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">Persentase</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="persentase"  required onkeypress="return isNumberKey(event)" placeholder="Text Readonly"></p>
+							@if($errors->has('persentase'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('persentase')}}
                                          </div>
                                        @endif
 						</div>
@@ -78,4 +117,6 @@
 							</small>
 				</form>
 			</div>
+	</div>
+</div>
         @endsection

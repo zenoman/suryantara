@@ -33,6 +33,9 @@
                     </div>
                     @endif
 					<a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+<<<<<<< HEAD
+					<a href="{{url('trfdarat/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+=======
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -60,6 +63,7 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
+>>>>>>> master
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -89,7 +93,7 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
-                            <td><a href="trfdarat/{{$row->id}}" class="btn btn-primary btn-sm">
+                            <td><a href="trfdarat/{{$row->id}}/edit" class="btn btn-primary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                 <a href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
                                         <i class="fa fa-remove"></i>Hapus</a>

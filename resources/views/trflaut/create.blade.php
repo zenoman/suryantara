@@ -1,4 +1,9 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
+
+@section('header')
+<title>Suryantara</title>
+@endsection
+
 @section('content')
 <script type="text/javascript">
      function isNumberKey(evt)
@@ -10,7 +15,8 @@
          return true;
       }
 </script>
-
+	<div class="page-content">
+		<div class="container-fluid">
 <header class="section-header">
 				<div class="tbl">
 					<div class="tbl-row">
@@ -103,4 +109,6 @@
 							</small>
 				</form>
 			</div>
+    </div>
+</div>
         @endsection
