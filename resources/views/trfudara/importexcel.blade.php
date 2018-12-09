@@ -65,7 +65,7 @@
                                                <li>
                                                    isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
                                                </li><br>
-                                               <img src="{{url('img/import/darat.PNG')}}">
+                                               <img src="{{url('img/import/udara.PNG')}}">
                                                <br><br>
                                                <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
                                                <div class="alert alert-danger">
@@ -75,7 +75,7 @@
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
-                                            <a href="{{url('trflaut/download')}}" class="btn btn-info">Download Template Excel</a>
+                                            <a href="{{url('trfudara/download')}}" class="btn btn-info">Download Template Excel</a>
                         </div>
                         <hr>
 <p></p>
@@ -89,7 +89,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="/trflaut/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="/trfudara/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>
@@ -107,7 +107,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
+                                    <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
