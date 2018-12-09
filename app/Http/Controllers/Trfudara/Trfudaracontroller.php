@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Trfudaramodel;
 
+use App\Imports\TrfudaraImport;
+use App\Exports\TrfudaraExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 class Trfudaracontroller extends Controller
 {
@@ -27,6 +31,40 @@ class Trfudaracontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //------------------------------------
+   public function importexcel (){
+        return view('trfudara/importexcel');
+    }
+
+    public function downloadtemplate(){
+         $file= public_path(). "/file/template tarif Udara.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+    return Response::download($file, 'template tarif Udara.xlsx', $headers);
+    return redirect('trfudara/importexcel');
+    }
+
+
+        public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new TrfudaraImport, request()->file('file'));
+        }
+        return redirect('trfudara')->with('status','Import excel sukses');
+    }
+
+    public function exsportexcel(){
+    return Excel::download(new TrfudaraExport, 'Tarif Udara.xlsx');
+    return redirect('trfudara/importexcel');
+
+    }
+//-----------------------------------
+public function caridata(Request $request)
+    {
+        $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$request->cari.'%')->get();
+        
+        return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$request->cari]);
+    }
     public function create()
     {
         //
@@ -96,12 +134,13 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
         // $tar = Trfudaramodel::find($id);
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
                // dd($trfudara);
+        // $kd_ud = $trfudara=>$kode;
         foreach ($trfudara as $row) {
             $kode = $row->kode;
 
         }
         $udara_kargo = DB::table('udara_kargo')->where('kode_udara',$kode)->get();
-        return view('trfudara/edit',['trfudara'=>$trfudara,'udaracargo'=>$udara_kargo]);
+        return view('trfudara/edit',['trfudara'=>$trfudara,'udaracargo'=>$udara_kargo]); 
     }
 
     /**
@@ -115,20 +154,16 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     {
         $rules = [
             'kode' => 'required|min:1',
-            'tujuan' => 'required|min:3',
-            'airlans' => 'required|min:3',
+            'tujuan' => 'required|min:1',
+            'airlans' => 'required|min:1',
             'gencoKG' => 'required|min:1',
-            'minimal' => 'required|min:0',
-            'kode_udara' => 'required|min:0',
-            'tarif' => 'required',
-            'persentase' => 'required'
+            'minimal' => 'required|min:1'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
          ];
         $this->validate($request,$rules,$customMessages);
-        // dd($customMessages);
         
         Trfudaramodel::find($id)->update([
             'kode' => $request->kode,
@@ -138,12 +173,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'minimal' => $request->minimal
             ]);
 
-        $id_udka = $request->kode;
-        DB::table('udara_kargo')->where('id',$id_udka)->update([
+        $kode = $request->kode;
+
+        DB::table('udara_kargo')->where('kode_udara',$kode)->update([
             'tarif' => $request->tarif,
             'persentase' => $request->persentase
 
         ]);
+        
 
         return redirect('trfudara')->with('status','Edit Data Sukses');
     }

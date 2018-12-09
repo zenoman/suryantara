@@ -69,7 +69,6 @@ public function caridata(Request $request)
         return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari]);
     }
 
-
 public function create(){
 return view('trfdarat/create');
 }

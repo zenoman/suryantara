@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\models\Trf_lautmodel;
 
 use App\Imports\Trf_lautImport;
+use App\Exports\Trf_lautExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 class trf_lautcontroller extends Controller
@@ -49,13 +50,18 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
         }
         return redirect('trflaut')->with('status','Import excel sukses');
     }
+
+    public function exsportexcel(){
+    return Excel::download(new Trf_LautExport, 'Tarif Laut.xlsx');
+    return redirect('trflaut/importexcel');
+
+    }
 //-----------------------------------
 
 public  function caridata(Request $request){
 	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$request->cari.'%')->get();
 	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari]);
 }
-
 public function create()
 {
 return view('trflaut/create');

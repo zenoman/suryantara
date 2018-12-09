@@ -29,8 +29,9 @@
  @foreach($trfudara as $row)
 
 			<div class="box-typical box-typical-padding">
-						<form action="/trfudara/{{$row->id}}" role="form" method="POST" enctype="multipart/form-data">
-			
+						<form action="{{ url('trfudara/'.$row->id) }}" role="form" method="POST">
+
+			<input type="hidden" class="form-control" id="inputPassword" placeholder="Text" name="id" value="{{$row->id}}">
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold	">Kode</label>
 						<div class="col-sm-10">
@@ -100,10 +101,10 @@
 									Rp.
 								</div>
 
-							<input type="text" class="form-control" id="inputPassword"  name="tarif" required onkeypress="return isNumberKey(event)" value="{{$ro->tarif}}">
+							<input type="text" class="form-control" id="inputPassword"  name="tarif" onkeypress="return isNumberKey(event)" value="{{$ro->tarif}}">
 							
 							</div>
-							@if($errors->has('tarif')){
+							@if($errors->has('tarif'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
                                          </div>

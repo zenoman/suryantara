@@ -25,7 +25,7 @@
 				</div>
 			</header>
 			<section class="card">
-				   
+				  
 				<div class="card-block">
 					 @if (session('status'))
                     <div class="alert alert-success alert-dismissable">
@@ -37,15 +37,13 @@
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<a>List Data Tarif Laut</a>
+						<a>List Data Tarif Udara</a>
 						<thead>
 						<tr>
 							<th>No</th>
 							<th>Kode Tujuan</th>
 							<th>Tujuan</th>
-							<th>Tarif</th>
-							<th>Berat Minimal</th>
-							<th>Estimasi</th>
+							<th>Airlans</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -54,28 +52,25 @@
 							<th>No</th>
 							<th>Kode Tujuan</th>
 							<th>Tujuan</th>
-							<th>Tarif</th>
-							<th>Berat Minimal</th>
-							<th>Estimasi</th>
+							<th>Airlans</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($trflaut as $row)
+                            @foreach($trf_udr as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
-                            <td>{{$row->tarif}}</td>
-                            <td>{{$row->berat_min}}</td>
-                            <td>{{$row->estimasi}}</td>
+                            <td>{{$row->airlans}}</td>
+                            <th>Airlans</th>
                             <td>
                             	
-                            	<a href="trflaut/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
+                            	<a href="trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="trflaut/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                <a  onclick="return confirm('Hapus Data ?')" href="trfudara/{{$row->id}}/delete" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i>Hapus</a>
                             </td>
 						</tr>
@@ -88,6 +83,7 @@
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 	@endsection
+
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
