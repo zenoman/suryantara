@@ -32,7 +32,7 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 *
 * @return \Illuminate\Http\Response
 */
-<<<<<<< HEAD
+
 //------------------------------------
    public function importexcel (){
         return view('trfdarat/importexcel');
@@ -61,7 +61,7 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 
     }
 //-----------------------------------
-=======
+
 public function caridata(Request $request)
     {
         $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$request->cari.'%')->get();
@@ -69,7 +69,7 @@ public function caridata(Request $request)
         return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari]);
     }
 
->>>>>>> master
+
 public function create(){
 return view('trfdarat/create');
 }
