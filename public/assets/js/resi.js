@@ -1,6 +1,6 @@
 $(document).ready(function(){
 		var satuan = 'kg';
-		var kotatujuan;
+		var kotatujuan ='';
 		var noresi;
 		$('#satuan').on('change',function(e){
 			satuan = this.value;
@@ -149,6 +149,7 @@ $(document).ready(function(){
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
 			$('#nama_barang').focus();
+			kotatujuan ='';
 			carikode();
 		}
 		
@@ -158,9 +159,8 @@ $(document).ready(function(){
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
-		newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();
-		setTimeout(function(){newWin.close();},10);
 		});
 
 		function tempelresi(){

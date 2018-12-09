@@ -2,6 +2,12 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
+@section('header')
+@foreach($webinfo as $info)
+<title>{{$info->namaweb}}</title>
+<link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
+@endforeach
+@endsection
 @section('content')
 <div class="page-content" id="printdiv">
 		<div class="container-fluid">
@@ -255,13 +261,13 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;">Kargo Darat</p></td>
+							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Laut</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Laut</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Udara</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
@@ -449,13 +455,13 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;">Kargo Darat</p></td>
+							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Laut</p></td>
+							<td><p style="margin-left: 2%;"> <strike>Kargo Laut</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Udara</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>

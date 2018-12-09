@@ -31,7 +31,9 @@ class resipengirimanController extends Controller
 
     public function residarat()
     {
-        return view('resipengiriman/residarat');
+        $webinfo = DB::table('setting')->limit(1)->get();
+
+        return view('resipengiriman/residarat',['webinfo'=>$webinfo]);
     }
     public function carikota(Request $request){
         if($request->has('q')){
