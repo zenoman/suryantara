@@ -1,9 +1,11 @@
 $(document).ready(function(){
 		var satuan = 'kg';
-		var kotatujuan;
+		var kotatujuan ='';
+		var noresi;
 		$('#satuan').on('change',function(e){
 			satuan = this.value;
 		})
+		carikode();
 		$('#kota_tujuan').select2({
 		placeholder: 'Cari kota tujuan',
 		ajax:{
@@ -43,7 +45,18 @@ $(document).ready(function(){
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
 		});
-
+		function carikode(){
+			$.ajax({
+			url:'/carikode',
+			dataType:'json',
+			success:function(data){
+				noresi = data;
+				$("#noresi").html(data);
+				$("#cetak_resi").html("SCK - "+data);
+				$("#cetak_resi2").html("SCK - "+data);
+			}
+		});
+		}
 		function hitung(harga,tujuan){
 			var berat = $("#berat").val();
 			if(berat!=''){
@@ -136,6 +149,8 @@ $(document).ready(function(){
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
 			$('#nama_barang').focus();
+			kotatujuan ='';
+			carikode();
 		}
 		
 		$("#btncetak").click(function(){
@@ -144,12 +159,14 @@ $(document).ready(function(){
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
-		newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();
-		setTimeout(function(){newWin.close();},10);
 		});
 
 		function tempelresi(){
+			carikode();
+			$("#cetak_resi").html("SCK - "+noresi);
+			$("#cetak_resi2").html("SCK - "+noresi);
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_asal").html($("#kota_asal").val());
@@ -196,6 +213,7 @@ $(document).ready(function(){
 		$("#btnsimpan").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			var no_resi		= noresi;
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
 			var d_panjang	= $("#d_panjang").val();
@@ -224,6 +242,7 @@ $(document).ready(function(){
                 url: 'residarat',
                 data: {
                     '_token': $('input[name=_token]').val(),
+                    'noresi'		: no_resi,
                     'iduser'		: iduser,
                     'nama_barang'	: nama_barang,
 					'dimensi'		: dimensi,

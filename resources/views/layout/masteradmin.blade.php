@@ -11,12 +11,9 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	@yield('header')
 	<!-- <title>Suryantara</title> -->
-	<link href="{{asset('assets/img/favicon.144x144.png')}}" rel="apple-touch-icon" type="image/png" sizes="144x144">
-	<link href="{{asset('assets/img/favicon.114x114.png')}}" rel="apple-touch-icon" type="image/png" sizes="114x114">
-	<link href="{{asset('assets/img/favicon.72x72.png')}}" rel="apple-touch-icon" type="image/png" sizes="72x72">
-	<link href="{{asset('assets/img/favicon.57x57.png')}}" rel="apple-touch-icon" type="image/png">
-	<link href="{{asset('assets/img/favicon.png')}}" rel="icon" type="image/png">
-	<link href="{{asset('assets/img/favicon.ico')}}" rel="shortcut icon">
+	
+	<!-- <link href="{{asset('img/favicon.png')}}" rel="icon" type="image/png"> -->
+	
 	<!-- =============================plugin css============================== -->
 	@yield('css')
 	<!-- ===================================================================== -->
@@ -32,8 +29,8 @@
 	<header class="site-header">
 	    <div class="container-fluid">
 	        <a href="#" class="site-logo">
-	            <img class="hidden-md-down" src="{{asset('assets/img/logo-2.png')}}" alt="">
-	            <img class="hidden-lg-down" src="{{asset('assets/img/logo-2-mob.png')}}" alt="">
+	            <img class="hidden-md-down" src="{{asset('img/suryantara_home.png')}}" alt="">
+	            <img class="hidden-lg-down" src="{{asset('img/suryantara_home.png')}}" alt="">
 	        </a>
 	
 	        <button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
@@ -46,12 +43,7 @@
 	        <div class="site-header-content">
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
-	                   
-	
-	
-	                   
-	
-	                    <div class="dropdown user-menu">
+	                   <div class="dropdown user-menu">
 	                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
 	                        </button>

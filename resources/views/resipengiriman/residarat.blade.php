@@ -2,6 +2,12 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
+@section('header')
+@foreach($webinfo as $info)
+<title>{{$info->namaweb}}</title>
+<link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
+@endforeach
+@endsection
 @section('content')
 <div class="page-content" id="printdiv">
 		<div class="container-fluid">
@@ -16,7 +22,7 @@
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
-
+					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
@@ -217,7 +223,7 @@
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
 							<td colspan="2" style="border: 1px solid black;">
-								<p style="margin-left: 6px;">SCK -</p> 
+								<p style="margin-left: 6px;" id="cetak_resi"></p> 
 							
 							</td>
 						</tr>
@@ -255,13 +261,13 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;">Kargo Darat</p></td>
+							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Laut</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Laut</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Udara</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
@@ -411,7 +417,7 @@
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
 							<td colspan="2" style="border: 1px solid black;">
-								<p style="margin-left: 6px;">SCK -</p> 
+								<p style="margin-left: 6px;" id="cetak_resi2"></p> 
 							
 							</td>
 						</tr>
@@ -449,13 +455,13 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;">Kargo Darat</p></td>
+							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Laut</p></td>
+							<td><p style="margin-left: 2%;"> <strike>Kargo Laut</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;">Kargo Udara</p></td>
+							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
