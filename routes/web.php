@@ -33,7 +33,7 @@ Route::get('/trfudara/{id}/delete','Trfudara\Trfudaracontroller@destroy');
 Route::get('/trfudara/importexcel','Trfudara\Trfudaracontroller@importexcel');
 Route::post('/trfudara/prosesimportexcel','Trfudara\Trfudaracontroller@prosesimportexcel');
 Route::get('/trfudara/download','Trfudara\Trfudaracontroller@downloadtemplate');
-Route::get('/trfudara/exporttrfdarat','Trfudara\Trfudaracontroller@exsportexcel');
+Route::get('/trfudara/exporttrfudara','Trfudara\Trfudaracontroller@exsportexcel');
 Route::post('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //==============================================trf darat
 Route::get('/trfdarat','Trfdarat\Trf_daratcontroller@index');
@@ -59,14 +59,21 @@ Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
 Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');
 Route::post('/trflaut/prosesimportexcel','Trf_laut\Trf_lautcontroller@prosesimportexcel');
 Route::get('/trflaut/download','Trf_laut\Trf_lautcontroller@downloadtemplate');
+Route::get('/trflaut/exporttrflaut','Trf_laut\Trf_lautcontroller@exsportexcel');
 Route::post('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');
 Route::get('/vendor/create','Vendor\Vendorcontroller@create');
-Route::get('/vendor/{id}','Vendor\Vendorcontroller@edit');
+Route::get('/vendor/{id}/edit','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
 Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
+Route::post('vendor/cari','Vendor\Vendorcontroller@caridata');
+//------------------------export import
+Route::get('/vendor/importexcel','Vendor\Vendorcontroller@importexcel');
+Route::post('/vendor/prosesimportexcel','Vendor\Vendorcontroller@prosesimportexcel');
+Route::get('/vendor/exportvendor','Vendor\Vendorcontroller@exsportexcel');
+Route::get('/vendor/download','Vendor\Vendorcontroller@downloadtemplate');
 //==============================================================Login
 Route::get('/login','Login\Logincontroller@index');
 Route::post('/login/masuk','Login\Logincontroller@masuk');

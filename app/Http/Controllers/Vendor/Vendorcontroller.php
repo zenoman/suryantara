@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Vendormodel;
+use Illuminate\Support\Facades\DB;
 
+use App\Imports\VendorImport;
+use App\Exports\VendorExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 class Vendorcontroller extends Controller
 {
 /**
@@ -17,15 +22,53 @@ class Vendorcontroller extends Controller
 public function index()
 {
 $vnd=Vendormodel::get();
-return view('vendor/index',['vendor'=>$vnd]);
+$setting = DB::table('setting')->get();
+return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
 }/**
 * Show the form for creating a new resource.
 *
 * @return \Illuminate\Http\Response
 */
+//------------------------------------
+   public function importexcel (){
+    $setting = DB::table('setting')->get();
+        return view('vendor/importexcel',['title'=>$setting]);
+    }
+
+    public function downloadtemplate(){
+         $file= public_path(). "/file/template vendor.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+    return Response::download($file, 'template vendor.xlsx', $headers);
+    return redirect('vendor/importexcel');
+    }
+
+
+        public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new VendorImport, request()->file('file'));
+        }
+        return redirect('vendor')->with('status','Import excel sukses');
+    }
+
+    public function exsportexcel(){
+    return Excel::download(new VendorExport, 'Vendor.xlsx');
+    return redirect('vendor/importexcel');
+
+    }
+//-----------------------------------
+public function caridata(Request $request)
+    {
+        $ven = DB::table('vendor')->where('vendor','like','%'.$request->cari.'%')->get();
+        $setting = DB::table('setting')->get();
+        return view('vendor/pencarian', ['vendor'=>$ven, 'cari'=>$request->cari,'title'=>$setting]);
+    }
+
 public function create()
 {
-return view('vendor/create');
+	$setting = DB::table('setting')->get();
+return view('vendor/create',['title'=>$setting]);
 }
 /**
 * Store a newly created resource in storage.
@@ -67,7 +110,8 @@ public function show($id)
 public function edit($id)
 {
 $vnd = Vendormodel::find($id);
-return view('vendor/edit',['vendor'=>$vnd]); }
+$setting = DB::table('setting')->get();
+return view('vendor/edit',['vendor'=>$vnd,'title'=>$setting]); }
 /**
 * Update the specified resource in storage.
 ** @param \Illuminate\Http\Request $request

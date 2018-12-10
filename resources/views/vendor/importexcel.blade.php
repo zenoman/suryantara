@@ -18,7 +18,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Import excel</h2>
+							<h2>Export Import excel</h2>
 							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
@@ -61,24 +61,24 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template tarif laut excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template vendor excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
-                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
+                                                   Buka file <b>"template vendor.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
                                                </li>
                                                <li>
-                                                   isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
+                                                   isi data seperti gamabar dibawah.
                                                </li><br>
-                                               <img src="{{url('img/import/darat.PNG')}}">
+                                               <img src="{{url('img/import/vendor.JPG')}}">
                                                <br><br>
-                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+                                               <li>Kemudian save <b>template vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
-                                               </div>
+                                               </div> 
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
-                                            <a href="{{url('trflaut/download')}}" class="btn btn-info">Download Template Excel</a>
+                                    <a href="{{url('vendor/download')}}" class="btn btn-info">Download Template Excel</a>
                         </div>
                         <hr>
 <p></p>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="/trflaut/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="/vendor/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>
@@ -110,7 +110,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
+                                    <a href="{{url('vendor/exportvendor')}}" class="btn btn-primary">Export Tarif Darat</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

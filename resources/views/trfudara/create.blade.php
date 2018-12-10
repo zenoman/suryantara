@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('content')
@@ -66,9 +69,14 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Genco KG</label>
+						<label class="col-sm-2 form-control-label semibold">genco KG</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="gencoKG" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23613/Kg"></p>
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="gencoKG" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23 kg">
+								<div class="input-group-addon">
+									Kg
+								</div>
+							</div>
 							@if($errors->has('gencoKG'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('gencoKG ')}}
@@ -79,7 +87,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Minimal</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" required onkeypress="return isNumberKey(event)" placeholder="Misal : 280000"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" required onkeypress="return isNumberKey(event)" placeholder="Misal : 28"></p>
 							@if($errors->has('minimal'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('minimal')}}
@@ -88,9 +96,15 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Tarif</label>
+						<label class="col-sm-2 form-control-label semibold">Tarif</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tarif"  required onkeypress="return isNumberKey(event)" placeholder="Text Disabled" ></p>
+								<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="tarif" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								
+							</div>
 							@if($errors->has('tarif'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tarif')}}
@@ -99,9 +113,14 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Persentase</label>
+						<label class="col-sm-2 form-control-label semibold">Persentase</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="persentase"  required onkeypress="return isNumberKey(event)" placeholder="Text Readonly"></p>
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="persentase"  required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 %">
+								<div class="input-group-addon">
+									%
+								</div>
+							</div>
 							@if($errors->has('persentase'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('persentase')}}

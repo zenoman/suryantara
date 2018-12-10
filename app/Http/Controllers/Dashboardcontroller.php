@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Dashboardcontroller extends Controller
 {
@@ -13,7 +14,8 @@ class Dashboardcontroller extends Controller
      */
     public function index()
     {
-        return view('dashboard/index');
+        $setting = DB::table('setting')->get();
+        return view('dashboard/index',['title'=>$setting]);
     }
 
     /**

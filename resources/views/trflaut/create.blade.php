@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('content')
@@ -58,7 +61,7 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="tarif" required onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="inputPassword" name="tarif" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
 								
 							</div>
 							@if($errors->has('tarif'))
@@ -72,7 +75,7 @@
 						<label class="col-sm-2 form-control-label semibold">Berat minimal</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="berat_minimal" required onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="inputPassword" name="berat_minimal" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
 								<div class="input-group-addon">
 									Kg
 								</div>
@@ -88,7 +91,7 @@
 						<label class="col-sm-2 form-control-label semibold">Estimasi</label>
 						<div class="col-sm-10">
 								<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="estimasi" required onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="inputPassword" name="estimasi" required onkeypress="return isNumberKey(event)" placeholder="Misal : 2 hari">
 								<div class="input-group-addon">
 									Hari
 								</div>

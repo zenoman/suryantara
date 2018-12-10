@@ -28,9 +28,9 @@ class resipengirimanController extends Controller
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
         return response()->json($finalkode);
     }
-    public function tampil(){
-        $datakirim = 
-    }
+    // public function tampil(){
+    //     $datakirim = ;
+    // }
     public function residarat()
     {
         $webinfo = DB::table('setting')->limit(1)->get();

@@ -1,7 +1,12 @@
 @extends('layout.masteradmin')
+
 @section('header')
-<title>Edit tarif darat</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
+
 @section('content')
 <div class="page-content">
 		<div class="container-fluid">
