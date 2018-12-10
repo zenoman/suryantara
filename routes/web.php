@@ -8,7 +8,10 @@ Route::get('/dashboard','Dashboardcontroller@index');
 //==============================================resi pengiriman
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
+Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
+Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
+Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');

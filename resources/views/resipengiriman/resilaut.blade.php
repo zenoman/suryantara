@@ -16,7 +16,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Resi Pengiriman Darat</h2>
+							<h2>Buat Resi Pengiriman Laut</h2>
 						</div>
 					</div>
 				</div>
@@ -261,10 +261,10 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
+							<td> <p style="margin-left: 2%;"><strike>Kargo Darat</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;"><strike>Kargo Laut</strike></p></td>
+							<td><p style="margin-left: 2%;"><b>Kargo Laut</b></p></td>
 						</tr>
 						<tr>
 							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
@@ -455,10 +455,10 @@
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
 						</tr>
 						<tr>
-							<td> <p style="margin-left: 2%;"><b>Kargo Darat</b></p></td>
+							<td> <p style="margin-left: 2%;"><strike>Kargo Darat</strike></p></td>
 						</tr>
 						<tr>
-							<td><p style="margin-left: 2%;"> <strike>Kargo Laut</strike></p></td>
+							<td><p style="margin-left: 2%;"> <b>Kargo Laut</b></p></td>
 						</tr>
 						<tr>
 							<td><p style="margin-left: 2%;"><strike>Kargo Udara</strike></p></td>
@@ -599,11 +599,10 @@
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
-<!-- <script src="{{asset('assets/js/resi.js')}}"></script> -->
 
 @endsection
 @section('otherjs')
-<script src="{{asset('assets/js/resi.js')}}"></script>
+<script src="{{asset('assets/js/resilaut.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey(evt)
       {

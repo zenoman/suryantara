@@ -87,8 +87,8 @@
 	            </span>
 	             <ul>
                 <li><a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a></li>
-	                <!-- <li><a href="#"><span class="lbl">Pengiriman Laut</span></a></li>
-	                <li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
+	                <li><a href="{{url('/resipengirimanlaut')}}"><span class="lbl">Pengiriman Laut</span></a></li>
+	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
 	            </ul>
 	        </li>
 	        <li class="green">
