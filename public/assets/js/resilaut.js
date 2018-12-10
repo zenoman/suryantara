@@ -14,7 +14,7 @@ $(document).ready(function(){
 		$('#kota_tujuan').select2({
 		placeholder: 'Cari kota tujuan',
 		ajax:{
-			url:'/carikota',
+			url:'/carilaut',
 			dataType:'json',
 			delay:250,
 			processResults: function (data){
@@ -254,7 +254,7 @@ $(document).ready(function(){
    			}else{
 				$.ajax({
                 type: 'POST',
-                url: 'residarat',
+                url: 'simpanlaut',
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'noresi'		: no_resi,

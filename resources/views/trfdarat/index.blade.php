@@ -1,6 +1,4 @@
 @extends('layout.masteradmin')
-
-
 @section('header')
 @foreach($title as $row)
 <title>{{$row->namaweb}}</title>
