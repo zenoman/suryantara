@@ -40,46 +40,41 @@
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<a>List Data Tarif Darat</a>
+						<b>List data vendor</b>
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Kode Tujuan</th>
-							<th>Tujuan</th>
-							<th>Tarif</th>
-							<th>Berat Minimal</th>
-							<th>Estimasi</th>
+							<th>Id Vendor</th>
+							<th>Vendor</th>
+							<th>Telp</th>
+							<th>Alamat</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Kode Tujuan</th>
-							<th>Tujuan</th>
-							<th>Tarif</th>
-							<th>Berat Minimal</th>
-							<th>Estimasi</th>
+							<th>Id Vendor</th>
+							<th>Vendor</th>
+							<th>Telp</th>
+							<th>Alamat</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($trf_drt as $row)
+                            @foreach($vendor as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->kode}}</td>
-                            <td>{{$row->tujuan}}</td>
-                            <td>{{$row->tarif}}</td>
-                            <td>{{$row->berat_min}}</td>
-                            <td>{{$row->estimasi}}</td>
-                            <td>
-                            	
-                            	<a href="trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+                            <td>{{$row->idvendor}}</td>
+                            <td>{{$row->vendor}}</td>
+                            <td>{{$row->telp}}</td>
+                            <td>{{$row->alamat}}</td>
+                            <td><a href="vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-pencil"></i> Edit</a>
+                                <a href="vendor/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>Hapus</a>
                             </td>
 						</tr>
 						@endforeach

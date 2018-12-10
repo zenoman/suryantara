@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('css')
@@ -76,7 +79,6 @@
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
                                     <a href="{{url('trfdarat/download')}}" class="btn btn-info">Download Template Excel</a>
-                                    <a href="{{url('barang/eksportkategori')}}" class="btn btn-primary">Download Kategori</a>
                         </div>
                         <hr>
 <p></p>

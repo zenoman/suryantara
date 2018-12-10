@@ -22,7 +22,8 @@ class trf_lautcontroller extends Controller
 public function index()
 {
 $tarif_laut=Trf_lautmodel::paginate(20);
-return view('trflaut/index',['trflaut'=>$tarif_laut]);
+$setting = DB::table('setting')->get();
+return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
 }/**
 * Show the form for creating a new resource.
 *
@@ -31,7 +32,8 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
 
 //------------------------------------
    public function importexcel (){
-        return view('trflaut/importexcel');
+    $setting = DB::table('setting')->get();
+        return view('trflaut/importexcel',['title'=>$setting]);
     }
 
     public function downloadtemplate(){
@@ -60,11 +62,13 @@ return view('trflaut/index',['trflaut'=>$tarif_laut]);
 
 public  function caridata(Request $request){
 	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$request->cari.'%')->get();
-	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari]);
+    $setting = DB::table('setting')->get();
+	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari,'title'=>$setting]);
 }
 public function create()
 {
-return view('trflaut/create');
+    $setting = DB::table('setting')->get();
+return view('trflaut/create',['title'=>$setting]);
 }
 /**
 * Store a newly created resource in storage.
@@ -111,7 +115,8 @@ public function show($id)
 public function edit($id)
 {
 $tarif_laut = Trf_lautmodel::find($id);
-return view('trflaut/edit',['trflaut'=>$tarif_laut]); 
+    $setting = DB::table('setting')->get();
+return view('trflaut/edit',['trflaut'=>$tarif_laut,'title'=>$setting]); 
 }
 /**
 * Update the specified resource in storage.

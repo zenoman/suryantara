@@ -19,8 +19,8 @@ class Logincontroller extends Controller
      */
     public function index()
     {
-        
-        return view('login/index');
+        $setting = DB::table('setting')->get();
+        return view('login/index',['title'=>$setting]);
     }
     public function masuk(Request $request){
         $username = $request->username;

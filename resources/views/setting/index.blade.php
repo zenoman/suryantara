@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 @section('content')
 
@@ -63,8 +66,12 @@
 					</div>
 					 					<div class="form-group row">
                                             <label  class="col-sm-2 form-control-label">Ganti Icon</label><p>
-                                            <img src="../img/setting/{{$row->icon}}" width="100" height="100">
-                                            <input type="file" name="icon" required>
+                                            @if(isset($row->icon) && $row->icon)
+                                            <img src="../img/setting/{{$row->icon}}" width="50" height="50">
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="icon">
                                         </div>
                                         @if($errors->has('ico'))
                                        <div class="alert alert-danger">
@@ -73,8 +80,12 @@
                                        @endif
                                             <div class="form-group row">
                                             <label  class="col-sm-2 form-control-label">Ganti Logo</label><p>
+                                            @if(isset($row->logo) && $row->logo)
                                             <img src="../img/setting/{{$row->logo}}" width="100" height="100">
-                                            <input type="file" name="logo" required>
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="logo">
                                         </div>
                                           @if($errors->has('logo'))
                                        <div class="alert alert-danger">
@@ -87,6 +98,5 @@
 							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
 				</form>
 			</div>
-		
 	</div></div>
         @endsection

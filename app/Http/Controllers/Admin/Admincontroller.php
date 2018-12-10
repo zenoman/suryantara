@@ -17,7 +17,8 @@ class Admincontroller extends Controller
     public function index()
     {
         $admins = Adminmodel::paginate(20);
-        return view('admin/index',['admin'=>$admins]);
+        $setting = DB::table('setting')->get();
+        return view('admin/index',['admin'=>$admins,'title'=>$setting]);
     }
 
     /**
@@ -28,20 +29,22 @@ class Admincontroller extends Controller
      public function caridata(Request $request)
     {
         $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
-        
-        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$request->cari]);
+        $setting = DB::table('setting')->get();
+        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$request->cari,'title'=>$setting]);
     }
 
 
     public function create()
     {
-        return view('admin/create');
+        $setting = DB::table('setting')->get();
+        return view('admin/create',['title'=>$setting]);
     }
 
     public function changepas($id)
     {
         $admin = Adminmodel::find($id);
-        return view('admin/changepas',['datadmin'=>$admin]);
+        $setting = DB::table('setting')->get();
+        return view('admin/changepas',['datadmin'=>$admin,'title'=>$setting]);
     }
 
     public function actionchangepas(Request $request, $id){
@@ -130,7 +133,8 @@ class Admincontroller extends Controller
     public function edit($id)
     {
         $admin = Adminmodel::find($id);
-        return view('admin/edit',['datadmin'=>$admin]);
+        $setting = DB::table('setting')->get();
+        return view('admin/edit',['datadmin'=>$admin,'title'=>$setting]);
     }
 
     /**

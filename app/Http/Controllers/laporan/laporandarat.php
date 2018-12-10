@@ -18,7 +18,8 @@ class laporandarat extends Controller
                 ->join('tarif_darat','tarif_darat.kode','=','resi_pengiriman.kode_tujuan')
                 ->select(DB::raw('resi_pengiriman.*,tarif_darat.tujuan'))
                 ->get();
-        return view('laporan/index',['data'=>$data]);
+        $setting = DB::table('setting')->get();
+        return view('laporan/index',['data'=>$data,'title'=>$setting]);
     }
 
     /**

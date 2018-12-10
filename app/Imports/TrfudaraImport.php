@@ -23,6 +23,7 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
                     
                     ]);
     	 DB::table('udara_kargo')->insert([
+                    'kode_udara'=>$row['kode_tujuan'],
                     'tarif'=>$row['tarif'],
                     'persentase'=>$row['persentase']
                     ]);
