@@ -37,9 +37,13 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Resi</th>
+							<th>No.Resi</th>
+							<th>Tanggal</th>
+							<th>Jalur</th>
 							<th>Isi Paket</th>
-							<th>Via Pengiriman</th>
+							<th>Tujuan</th>
+							<th>Pengirim</th>
+							<th>Admin</th>
 						</tr>
 						</thead>
 						
@@ -49,11 +53,17 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->no_resi}}</td>
-                            <td>{{$row->nama_barang}}</td>
                             <td>
-                            	{{$row->pengiriman_via}}
+                            	<span class="label label-danger">{{$row->no_resi}}
+                            	</span>
                             </td>
+                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->pengiriman_via}}</td>
+                            <td>{{$row->nama_barang}}</td>
+                            <td>{{$row->kota_asal}} - {{$row->kode_tujuan}}
+                            </td>
+                            <td>{{$row->nama_pengirim}}</td>
+                            <td>{{$row->username}}</td>
                             
 						</tr>
 						@endforeach
@@ -61,12 +71,17 @@
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Resi</th>
+							<th>No.Resi</th>
+							<th>Tanggal</th>
+							<th>Jalur</th>
 							<th>Isi Paket</th>
-							<th>Via Pengiriman</th>
+							<th>Tujuan</th>
+							<th>Pengirim</th>
+							<th>Admin</th>
 						</tr>
 						</tfoot>
 					</table>
+					{{ $datakirim->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->

@@ -30,16 +30,15 @@ class resipengirimanController extends Controller
         $nomer      = sprintf("%06s",$newkode[2]+1);
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
         }
-        
-
-
         return response()->json($finalkode);
     }
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,admin.username'))
+        ->join('admin','admin.id','=','resi_pengiriman.id_admin')
         ->orderby('id','desc')
-        ->get();
+        ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     public function residarat()
@@ -115,7 +114,8 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan
        ]);
         return response()->json($simpan);
     }
@@ -144,7 +144,8 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan
        ]);
         return response()->json($simpan);
     }

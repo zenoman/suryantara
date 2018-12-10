@@ -247,6 +247,7 @@ $(document).ready(function(){
 			var biaya_asu 	= $("#biaya_asuransi").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var satuan		= $('#satuan').val();
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			if(iduser==''||nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
@@ -274,7 +275,8 @@ $(document).ready(function(){
 					'biaya_packing'	: biaya_packing,
 					'biaya_asu' 	: biaya_asu,
 					'keterangan'	: keterangan,
-                	'total_biaya'	: total_biaya
+                	'total_biaya'	: total_biaya,
+                	'satuan'		: satuan
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
