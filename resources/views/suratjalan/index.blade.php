@@ -26,7 +26,7 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
-						<div class="col-md-12 col-sm-12">
+					<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Tujuan</label>
 							<div class="input-group">
@@ -35,15 +35,13 @@
 						</div>
 					</div>
 					
+
 					</div>
-					<div class="row">
-					<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan"></textarea>
-							</div>
-						</div>
+					<hr>
+					<div class="form-group row">
+					<div class="col-md-4 col-sm-6">
+						<label class="form-label" for="exampleInputDisabled">No.Resi</label>
+						<select class="select2" id="kota_tujuan"></select>
 					</div>
 					</div>
 					{{csrf_field()}}
@@ -61,7 +59,7 @@
 	</div>
         @endsection
 @section('js')
-
+<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
 <!-- <script src="{{asset('assets/js/resi.js')}}"></script> -->

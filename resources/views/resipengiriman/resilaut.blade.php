@@ -50,6 +50,7 @@
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="volume" >
+								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
 					</div>
@@ -58,6 +59,10 @@
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)">
+								<select class="form-control" id="satuan">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
 							</div>
 						</div>
 					</div>
@@ -66,10 +71,7 @@
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
-								<select class="form-control" id="satuan">
-								<option>kg</option>
-								<option>koli</option>
-							</select>
+								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
 						
@@ -208,7 +210,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO].png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">
@@ -402,7 +404,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO].png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">
