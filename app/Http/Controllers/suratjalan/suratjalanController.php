@@ -12,7 +12,22 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
+    public function carikode(){
+        $tanggal    = date('dmy');
+        $kodeuser = sprintf("%02s",session::get('id'));
+        $kode = DB::table('surat_jalan')
+        ->where('kode','like','%'.$kodeuser.'%')
+        ->max('kode');
 
+        if(!$kode){
+            $finalkode = "SJ".$tanggal."-".$kodeuser."-000001";
+        }else{
+            $newkode    = explode("-", $kode);
+        $nomer      = sprintf("%06s",$newkode[2]+1);
+        $finalkode  = "SJ".$tanggal."-".$kodeuser."-".$nomer;
+        }
+        return response()->json($finalkode);
+    }
     public function cariresi(Request $request){
     	if($request->has('q')){
             $cari = $request->q;

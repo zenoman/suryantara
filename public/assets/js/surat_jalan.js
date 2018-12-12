@@ -1,4 +1,5 @@
 $(document).ready(function(){
+		carikode();
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -37,7 +38,7 @@ $(document).ready(function(){
 			},
             });
 		});
-		//===================================================
+	//===================================================
 		$("#carinoresi").on('select2:close',function(e){
 			$('#penerima').focus();
 		});
@@ -48,5 +49,15 @@ $(document).ready(function(){
 		$('#berat').val(berat);
 
 	}
-
+	//========================================================
+	function carikode(){
+			$.ajax({
+			url:'/carikodesj',
+			dataType:'json',
+			success:function(data){
+				noresi = data;
+				$("#noresi").html(data);
+			}
+		});
+		}
 });

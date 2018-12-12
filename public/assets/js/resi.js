@@ -20,7 +20,26 @@ $(document).ready(function(){
 			processResults: function (data){
 				return {
 					results : $.map(data, function (item){
-						if(item.kode != null){
+						return {
+							id: item.id,
+							text: item.tujuan
+						}
+
+					})
+				}
+			},
+			cache: true
+		}
+	});
+	//=================================================
+	$('#kota_tujuan').on('select2:select',function(e){
+			var kode = $(this).val();
+			$.ajax({
+                type: 'GET',
+                url: '/carihasilkota/'+kode,
+                success:function (data){
+				return {
+					results : $.map(data, function (item){
 							if(satuan=='kg'){
 								hitung(item.tarif,item.tujuan);
 								$("#cetak_kota_tujuan").html(item.tujuan);
@@ -34,18 +53,11 @@ $(document).ready(function(){
 								$("#b_kirim").html(0);
 								hitung_total();
 							}
-						}
-						return {
-							id: item.kode,
-							text: item.tujuan
-						}
-
 					})
 				}
 			},
-			cache: true
-		}
-	});
+            });
+		});
 	//============================================ fokus input pengirim 	
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
@@ -163,6 +175,7 @@ $(document).ready(function(){
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
+			$('#satuan').val('kg');
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';

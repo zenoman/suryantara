@@ -55,24 +55,40 @@ class resipengirimanController extends Controller
             $cari = $request->q;
             
             $data = DB::table('tarif_darat')
-                    ->select('tujuan','kode','tarif')
+                    ->select('tujuan','id')
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
             return response()->json($data);
         }
     }
+    public function carihasilkota($id){
+        $data = DB::table('tarif_darat')
+                    ->select('tujuan','id','tarif')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
+    }
     public function carilaut(Request $request){
         if($request->has('q')){
             $cari = $request->q;
             
             $data = DB::table('tarif_laut')
-                    ->select('tujuan','kode','tarif')
+                    ->select('tujuan','id')
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
             return response()->json($data);
         }
+    }
+    public function carihasillaut($id){
+         $data = DB::table('tarif_laut')
+                    ->select('tujuan','id','tarif')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
     }
     /**
      * Show the form for creating a new resource.
