@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
+Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 //===========================================
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
