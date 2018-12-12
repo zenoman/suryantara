@@ -1,5 +1,7 @@
 $(document).ready(function(){
+	var noresisj ;
 		carikode();
+
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -55,9 +57,74 @@ $(document).ready(function(){
 			url:'/carikodesj',
 			dataType:'json',
 			success:function(data){
-				noresi = data;
+				noresisj = data;
 				$("#noresi").html(data);
+				getdata();
 			}
 		});
 		}
+	//========================================================
+	 function getdata(){
+            $.ajax({
+                    type:'GET',
+                    dataType:'json',
+                    url: '/caridetailsj/'+noresisj,
+                    success:function(data){
+                        managerow(data);
+                    },error:function(){
+                        console.log(data);
+                        alert('error');
+                    }
+                });
+           }
+    //==========================================================
+    function managerow(data){
+            var rows ='';
+            $.each(data,function(key, value){
+                rows = rows + '<tr>';
+                rows = rows + '<td>' +value.no_resi+'</td>';
+                rows = rows + '<td> suryantara cargo </td>';
+                rows = rows + '<td>' +value.penerima+'</td>';
+                rows = rows + '<td>' +value.alamat+'</td>';
+                rows = rows + '<td>' +value.jumlah+'</td>';
+                rows = rows + '<td>' +value.berat+'</td>';
+                rows = rows + '<td>' +value.isi+'</td>';
+                rows = rows + '</tr>';
+            });
+            $("tbody").html(rows);
+        }
+    //============================================================
+    $("#btntambah").click(function(e){
+    	// 
+    	var penerima = $("#penerima").val();
+    	var jumlah = $("#jumlah").val();
+    	var berat = $("#berat").val();
+    	var tujuan = $("#tujuan").val();
+    	var isipaket = $("#isipaket").val();
+
+    	if($("#carinoresi").val() =='' ||penerima==''||jumlah==''||berat==''||tujuan==''||isipaket==''){
+    		notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+    	}else{
+    		var resi = $("#carinoresi").select2('data');
+    		var noresi = resi[0].text;
+    		$.ajax({
+                type: 'POST',
+                url: '/tambahdetailsj',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'kode': noresisj,
+                    'noresi': noresi,
+                    'penerima' : $("#penerima").val(),
+			    	'jumlah' : $("#jumlah").val(),
+			    	'berat' : $("#berat").val(),
+			    	'tujuan' : $("#tujuan").val(),
+			    	'isipaket' : $("#isipaket").val()
+                },
+                success: function(data) {
+                	 notie.alert(1, 'Data Disimpan', 2);
+                    getdata();
+                },
+            });
+    	}
+    });
 });

@@ -20,7 +20,7 @@ class resipengirimanController extends Controller
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
         $kode = DB::table('resi_pengiriman')
-        ->where('no_resi','like','%'.$kodeuser.'%')
+        ->where('no_resi','like','%-'.$kodeuser.'-%')
         ->max('no_resi');
 
         if(!$kode){

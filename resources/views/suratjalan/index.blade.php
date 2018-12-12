@@ -1,5 +1,6 @@
 @extends('layout.masteradmin')
 @section('css')
+<meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
 @section('header')
@@ -71,7 +72,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">tujuan</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat">
+								<input type="text" class="form-control" id="tujuan">
 							</div>
 						</div>
 					</div>
@@ -80,11 +81,33 @@
 							<label class="form-label" for="exampleInputDisabled">Isi Paket</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="isipaket">
+								<span class="input-group-btn"><button class="btn btn-info bootstrap-touchspin-up" type="button" id="btntambah">tambah</button></span>
 							</div>
 						</div>
 					</div>
 					</div>
 					{{csrf_field()}}
+					<table id="table-sm" class="table table-bordered table-hover table-sm">
+				<thead>
+				<tr>
+					<th rowspan="2" class="text-center">No.Resi</th>
+					<th rowspan="2" class="text-center">Pengirim</th>
+					<th rowspan="2" class="text-center">Penerima</th>
+					<th rowspan="2" class="text-center">Tujuan</th>
+					<th colspan="2" class="text-center">Jumlah</th>
+					<th rowspan="2" class="text-center">Isi Paket</th>
+				</tr>
+				<tr>
+					<th class="text-center">Koli</th>
+					<th class="text-center">Kg</th>
+				</tr>
+				</thead>
+				<tbody>
+				
+				
+				</tbody>
+			</table>
+			<hr>
 					<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
 								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>
