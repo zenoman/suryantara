@@ -63,6 +63,18 @@ $(document).ready(function(){
 			}
 		});
 		}
+	//==============================================================
+    function hapusdetail(id){
+    var foo = "bar";
+    if(foo=="bar"){
+    	var isgood = confirm('Dialogue');
+    	if(isgood){
+    		alert(id);	
+    	}else{
+    		alert('cancel');
+    	}
+    }
+    }
 	//========================================================
 	 function getdata(){
             $.ajax({
@@ -89,6 +101,7 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.jumlah+'</td>';
                 rows = rows + '<td>' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
+                rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo()"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
             });
             $("tbody").html(rows);
@@ -122,9 +135,24 @@ $(document).ready(function(){
                 },
                 success: function(data) {
                 	 notie.alert(1, 'Data Disimpan', 2);
+                	 bersihdetail();
                     getdata();
                 },
             });
     	}
     });
+    //===============================================================
+    function bersihdetail(){
+    	$("#penerima").val('');
+    	$("#jumlah").val('');
+    	$("#berat").val('');
+    	$("#tujuan").val('');
+    	$("#isipaket").val('');
+    	$("#carinoresi").focus();
+    }
+    //==================================================================
+    function halo(){
+    	alert('halo');
+    }
+    
 });
