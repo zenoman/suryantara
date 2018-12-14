@@ -96,6 +96,10 @@ public function caridata(Request $request)
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
          ];
         $this->validate($request,$rules,$customMessages);
+$dtlam= DB::table('tarif_udara')->where('kode',$request->kode)->count();
+if($dtlam > 0){
+    return redirect('trfudara/create')->with('status','Kode tujuan tarif udara yang anda masukan sudah ada!! ');
+}else{
         Trfudaramodel::create([
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
@@ -110,7 +114,7 @@ public function caridata(Request $request)
             'persentase' => $request->persentase
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
-
+}
     }
 
     /**

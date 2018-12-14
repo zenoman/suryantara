@@ -61,19 +61,23 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template vendor excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template vendor excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <li>
-                                                   Buka file <b>"template vendor.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-                                               </li>
-                                               <li>
-                                                   isi data seperti gamabar dibawah.
+                                                   Buka file <b>"template vendor.xlsx"</b> kemudian isi data seperti gambar dibaeah ini.
                                                </li><br>
-                                               <img src="{{url('img/import/vendor.JPG')}}">
+                                               <img src="{{url('img/import_export/vendor.JPG')}}">
                                                <br><br>
-                                               <li>Kemudian save <b>template vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+                                               <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
+                                               <br></br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <li>Untuk export vendor sangat sederhana.Lihat gambar dibawah ini.</li><br>
+                                               <img src="{{url('img/import_export/0055.JPG')}}"  width="100%" height="100%">
+                                               <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
-                                               </div> 
+                                               </div>
+                                               <br></br>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
@@ -110,7 +114,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('vendor/exportvendor')}}" class="btn btn-primary">Export Tarif Darat</a>
+                                    <a href="{{url('vendor/exportvendor')}}" class="btn btn-primary">Export Vendor</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

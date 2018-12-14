@@ -48,9 +48,9 @@ return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
 
         public function prosesimportexcel(Request $request){
         if($request->hasFile('file')){
-        Excel::import(new Trf_lautImport, request()->file('file'));
+        $status = Excel::import(new Trf_lautImport, request()->file('file'));
         }
-        return redirect('trflaut')->with('status','Import excel sukses');
+        return redirect('trflaut')->with('status',$status);
     }
 
     public function exsportexcel(){
@@ -90,6 +90,12 @@ $customMessages = [
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
 ];
 $this->validate($request,$rules,$customMessages);
+
+$dtlam= DB::table('tarif_laut')->where('kode',$request->kode)->count();
+if($dtlam > 0){
+    return redirect('trflaut/create')->with('status','Kode tujuan tarif laut yang anda masukan sudah ada!! ');
+}else{
+
 Trf_lautmodel::create([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
@@ -97,6 +103,8 @@ Trf_lautmodel::create([
 'berat_min' => $request->berat_minimal,'estimasi' => $request->estimasi
 ]);
 return redirect('trflaut')->with('status','Tambah Data Sukses');
+
+}
 }
 /**
 * Display the specified resource.
@@ -138,7 +146,10 @@ $customMessages = [
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
 ];
 $this->validate($request,$rules,$customMessages);
-
+// $dtlam= DB::table('tarif_laut')->where('kode',$request->kode)->get();
+// if(!$dtlam->isEmpty()){
+//     return redirect('trflaut/'.$id.'/edit')->with('status','Kode tujuan tari laut yang anda masukan sudah ada!! ');
+// }else{
 Trf_lautmodel::find($id)->update([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
@@ -147,6 +158,7 @@ Trf_lautmodel::find($id)->update([
 'estimasi' => $request->estimasi
 ]);
 return redirect('trflaut')->with('status','Edit Data Sukses');
+// }
 }
 /**
 * Remove the specified resource from storage.

@@ -61,19 +61,25 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <p>
                                                <li>
-                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-                                               </li>
-                                               <li>
-          isi data seperti gamabar dibawah perhatikan pada bagian <b>genco_per_kg,minimal,tarif,persentase</b> hanyan diisi dengan angka saja
+                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>genco_per_kg,minimal,tarif dan persentase</b> hanyan diisi dengan angka saja.
                                                </li><br>
-                                               <img src="{{url('img/import/udara.PNG')}}">
-                                               <br><br>
-                                               <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+                                               <img src="{{url('img/import_export/udara.JPG')}}">
+                                               <p>
+                                               <br>
+                                               <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
+                                               <br></br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <li>Untuk export tarif udara sangat sederhana.Lihat gambar dibawah ini.</li><br>
+                                               <img src="{{url('img/import_export/004.JPG')}}"  width="100%" height="100%">
+                                               <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
+                                               <br></br>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
@@ -110,7 +116,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
+                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Udara</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

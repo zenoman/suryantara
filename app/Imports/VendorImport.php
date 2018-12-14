@@ -13,6 +13,12 @@ class VendorImport implements ToCollection, WithHeadingRow{
     */
     public function collection(Collection $collec){
         foreach ($collec as $row){
+            $kode=$row['id_vendor'];
+            // dd($kode);
+$dtlam= DB::table('vendor')->where('idvendor',$kode)->count();
+if($dtlam > 0){
+        // $status = "Maaf Ada Data Yang Sama";
+}else{
     	 DB::table('vendor')->insert([
                     'idvendor'=>$row['id_vendor'],
                     'vendor'=>$row['nama_vendor'],
@@ -20,5 +26,6 @@ class VendorImport implements ToCollection, WithHeadingRow{
                     'alamat' => $row['alamat']
                     ]);
     	}
+      }
     }
 }
