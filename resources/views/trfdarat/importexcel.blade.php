@@ -61,19 +61,28 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <p>
                                                <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-                                               </li>
-                                               <li>
-                                                   isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
+                                                   Buka file <b>"template.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja.
                                                </li><br>
-                                               <img src="{{url('img/import/darat.PNG')}}">
-                                               <br><br>
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+                                               <img src="{{url('img/import_export/darat.JPG')}}">
+                                               <p>
+                                               <div class="alert alert-danger">
+                                                <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
+                                               </div>
+                                               <br>
+                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini Lalu klik <b>upload file</b>.</li><br>
+                                               <br></br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <li>Untuk export tarif darat sangat sederhana.Lihat gambar dibawah ini.</li><br>
+                                               <img src="{{url('img/import_export/002.JPG')}}"  width="100%" height="100%">
+                                               <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
+                                               <br></br>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">

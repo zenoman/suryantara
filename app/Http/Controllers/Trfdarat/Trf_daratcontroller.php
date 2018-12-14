@@ -95,6 +95,10 @@ $customMessages = [
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
 ];
 $this->validate($request,$rules,$customMessages);
+$dtlam= DB::table('tarif_darat')->where('kode',$request->kode)->count();
+if($dtlam > 0){
+    return redirect('trfdarat/create')->with('status','Kode tujuan tarif darat yang anda masukan sudah ada!! ');
+}else{
 Trf_daratmodel::create([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
@@ -104,6 +108,7 @@ Trf_daratmodel::create([
 ]);
 
 return redirect('trfdarat')->with('status','Input Data Sukses');
+}
 }/**
 * Display the specified resource.
 *
