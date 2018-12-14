@@ -101,7 +101,7 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.jumlah+'</td>';
                 rows = rows + '<td>' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
-                rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo()"><i class="fa fa-trash"></i></button></td>';
+                rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
             });
             $("tbody").html(rows);
@@ -151,8 +151,15 @@ $(document).ready(function(){
     	$("#carinoresi").focus();
     }
     //==================================================================
-    function halo(){
-    	alert('halo');
+    function halo(id){
+    var foo='bar';
+    if(foo=='bar'){
+     var isgood = confirm('hapus ? ');
+     if(isgood == true){
+            alert(id);
+     }   
     }
+    }
+    window.halo=halo;
     
 });
