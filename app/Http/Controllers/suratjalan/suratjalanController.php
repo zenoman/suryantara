@@ -64,5 +64,8 @@ class suratjalanController extends Controller
             'isi' => $request->isipaket
         ]);
     }
+    public function hapusdetail($id){
+        DB::table('detail_sj')->where('id',$id)->delete();
+    }
     
 }

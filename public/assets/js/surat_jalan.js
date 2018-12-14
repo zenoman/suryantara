@@ -104,7 +104,7 @@ $(document).ready(function(){
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
             });
-            $("tbody").html(rows);
+            $("#tubuh").html(rows);
         }
     //============================================================
     $("#btntambah").click(function(e){
@@ -156,10 +156,30 @@ $(document).ready(function(){
     if(foo=='bar'){
      var isgood = confirm('hapus ? ');
      if(isgood == true){
-            alert(id);
+           $.ajax({
+                    type:'GET',
+                    dataType:'json',
+                    url: '/hapusdetailsj/'+id,
+                    success:function(){
+                        notie.alert(3, 'Detail Dihapus', 2);
+                        getdata();
+                    },error:function(){
+                       notie.alert(3, 'Detail Dihapus', 2);
+                        getdata();
+                    }
+                });
      }   
     }
     }
     window.halo=halo;
-    
+    //============================================ cetak resi
+        
+        $("#btncetak").click(function(){
+           
+        var divToPrint=document.getElementById('hidden_div');
+        var newWin=window.open('','Print-Window');
+        newWin.document.open();
+        newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.close();
+        });
 });

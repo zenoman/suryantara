@@ -103,7 +103,7 @@
 					<th class="text-center">Kg</th>
 				</tr>
 				</thead>
-				<tbody>
+				<tbody id="tubuh">
 				
 				
 				</tbody>
@@ -121,6 +121,104 @@
 		</div>
 
 	</div>
+<div id="hidden_div" style="display: none;">
+
+	<h2 align="center">
+		SURAT JALAN
+		<br>	
+		<span style="font-size: 18;margin-bottom: 20px;">CV. SURYANTARA CARGO</span>
+		<br>	
+		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
+	</h2>
+	<table>
+		<tr>
+			<td>No</td>
+			<td>:&nbsp;sj283478297</td>
+		</tr>
+		<tr>
+			<td>Tanggal</td>
+			<td>:&nbsp;12-09-2018</td>
+		</tr>
+		<tr>
+			<td>Tujuan</td>
+			<td>:&nbsp;asdklfjsadklfjskldafjskl</td>
+		</tr>
+	</table>
+	<table border="1" width="100%;" style="border-collapse:collapse;border: 1px solid black;">
+		<tr align="center">
+			<td rowspan="2">No</td>
+			<td rowspan="2">No. Resi</td>
+			<td rowspan="2">Pengirim</td>
+			<td rowspan="2">Penerima</td>
+			<td rowspan="2">Tujuan</td>
+			<td colspan="2">Jumlah</td>
+			<td rowspan="2">Isi Paket</td>
+			<td colspan="3"> Biaya</td>
+			<td rowspan="2">Ket</td>
+		</tr>
+		<tr align="center">
+			<td>Koli</td>
+			<td>Kg</td>
+			<td>Cash</td>
+			<td>BT</td>
+			<td>BL</td>
+		</tr>
+		<tr align="center">
+			<td>1</td>
+			<td>239084902</td>
+			<td>suryantara cargo</td>
+			<td>deifa satrio</td>
+			<td>mageri gurah kediri</td>
+			<td>4</td>
+			<td>20</td>
+			<td>mouse gaming</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td colspan="5" align="right"><b>Sub Total</b></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="5" align="right"><b>Grand Total</b></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<br>
+	<table border="1" width="100%;">
+		<tr align="center">
+			<td>
+				<p>Diserahkan Oleh</p>
+				<br>
+				<p>Koordinat Cabang Asal</p>
+			</td>
+			<td>
+				<p>Diserahkan Oleh</p>
+				<br>
+				<p>Koordinat Cabang Asal</p>
+			</td>
+			<td>
+				<p>Diserahkan Oleh</p>
+				<br>
+				<p>Koordinat Cabang Asal</p>
+			</td>
+		</tr>
+	</table>
+</div>
         @endsection
 @section('js')
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
