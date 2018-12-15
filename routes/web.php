@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
-<<<<<<< HEAD
-=======
+
 Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
 Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
 Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
@@ -10,8 +9,7 @@ Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@cariha
 Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
-//===========================================
->>>>>>> parent of 524e7a3... halo halo
+
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::get('/laporan','laporan\laporandarat@index');
