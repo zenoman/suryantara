@@ -91,6 +91,15 @@
 	                <li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
 	            </ul>
 	        </li>
+<<<<<<< HEAD
+=======
+	        <li class="green">
+	            <a href="{{url('listpengiriman')}}">
+	                <i class="fa fa-list-alt"></i>
+	                <span class="lbl">List Pengiriman</span>
+	            </a>
+	        </li>
+>>>>>>> parent of aa3909b... surat jalan
 	        <li class="red">
 	            <a href="{{url('trfdarat')}}">
 	                <i class="fa fa-truck"></i>

@@ -27,6 +27,12 @@ class resipengirimanController extends Controller
         $tanggal    = date('dmy');
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        }
+        
+
+>>>>>>> parent of aa3909b... surat jalan
 
         return response()->json($finalkode);
     }
