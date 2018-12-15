@@ -30,11 +30,15 @@ class resipengirimanController extends Controller
         return response()->json($finalkode);
     }
     public function tampil(){
+<<<<<<< HEAD
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
         ->orderby('id','desc')
         ->get();
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
+=======
+        $datakirim = 
+>>>>>>> parent of 8f1a224... titik lengkap iki
     }
     public function residarat()
     {
