@@ -68,6 +68,21 @@ class resipengirimanController extends Controller
             
             $data = DB::table('tarif_darat')
                     ->select('tujuan','kode','tarif')
+<<<<<<< HEAD
+=======
+                    ->where('tujuan','like','%'.$cari.'%')
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
+    public function carilaut(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('tarif_laut')
+                    ->select('tujuan','kode','tarif')
+>>>>>>> parent of 893e333... fixs bug resi
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             

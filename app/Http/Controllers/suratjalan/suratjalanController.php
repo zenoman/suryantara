@@ -13,6 +13,7 @@ class suratjalanController extends Controller
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -33,6 +34,9 @@ class suratjalanController extends Controller
         $data = DB::table('detail_sj')->where('kode',$id)->get();
         return response()->json($data);
     }
+=======
+
+>>>>>>> parent of 893e333... fixs bug resi
     public function cariresi(Request $request){
     	if($request->has('q')){
             $cari = $request->q;

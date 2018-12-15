@@ -41,7 +41,11 @@ $(document).ready(function(){
 			cache: true
 		}
 	});
+<<<<<<< HEAD
 		
+=======
+	//============================================ fokus input pengirim 	
+>>>>>>> parent of 893e333... fixs bug resi
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
 		});

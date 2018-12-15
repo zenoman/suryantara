@@ -1,7 +1,10 @@
 $(document).ready(function(){
+<<<<<<< HEAD
 	var noresisj ;
 		carikode();
 
+=======
+>>>>>>> parent of 893e333... fixs bug resi
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -40,7 +43,7 @@ $(document).ready(function(){
 			},
             });
 		});
-	//===================================================
+		//===================================================
 		$("#carinoresi").on('select2:close',function(e){
 			$('#penerima').focus();
 		});
@@ -51,6 +54,7 @@ $(document).ready(function(){
 		$('#berat').val(berat);
 
 	}
+<<<<<<< HEAD
 	//========================================================
 	function carikode(){
 			$.ajax({
@@ -162,4 +166,7 @@ $(document).ready(function(){
     }
     window.halo=halo;
     
+=======
+
+>>>>>>> parent of 893e333... fixs bug resi
 });
