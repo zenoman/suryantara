@@ -62,6 +62,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
                                                    Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
@@ -85,6 +86,11 @@
                                                <li>
                                                    Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
 >>>>>>> parent of abc5835... import export
+=======
+                                               <li>Download file template tarif laut excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>
+                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                </li>
                                                <li>
                                                    isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
@@ -95,6 +101,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
 =======
                                                <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
@@ -108,6 +115,9 @@
 =======
                                                <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
 >>>>>>> parent of abc5835... import export
+=======
+                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
@@ -151,6 +161,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
 =======
                                     <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
@@ -164,6 +175,9 @@
 =======
                                     <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
 >>>>>>> parent of abc5835... import export
+=======
+                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

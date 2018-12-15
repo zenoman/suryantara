@@ -62,6 +62,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
                                                    Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
@@ -101,6 +102,10 @@
 =======
                                                <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
+=======
+                                               <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                    Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
                                                </li>
                                                <li>
@@ -109,7 +114,10 @@
                                                <img src="{{url('img/import/udara.PNG')}}">
                                                <br><br>
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+<<<<<<< HEAD
 >>>>>>> parent of abc5835... import export
+=======
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
@@ -153,6 +161,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
 =======
                                     <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
@@ -166,6 +175,9 @@
 =======
                                     <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
 >>>>>>> parent of abc5835... import export
+=======
+                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
