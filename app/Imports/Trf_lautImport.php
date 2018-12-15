@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\DB;
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
 
 class Trf_lautImport implements ToCollection, WithHeadingRow{
     /**

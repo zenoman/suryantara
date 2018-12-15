@@ -58,6 +58,7 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
+<<<<<<< HEAD
                                                <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
                                                    Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
@@ -68,6 +69,18 @@
                                                <img src="{{url('img/import/udara.PNG')}}">
                                                <br><br>
                                                <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+=======
+                                               <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>
+                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
+                                               </li>
+                                               <li>
+          isi data seperti gamabar dibawah perhatikan pada bagian <b>genco_per_kg,minimal,tarif,persentase</b> hanyan diisi dengan angka saja
+                                               </li><br>
+                                               <img src="{{url('img/import/udara.PNG')}}">
+                                               <br><br>
+                                               <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
@@ -107,7 +120,11 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
+<<<<<<< HEAD
                                     <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
+=======
+                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
+>>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
