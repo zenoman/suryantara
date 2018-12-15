@@ -3,8 +3,11 @@ use Illuminate\Support\Facades\Input;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
 Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
 Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@carihasillaut');
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');

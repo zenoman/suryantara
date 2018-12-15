@@ -18,7 +18,7 @@ class suratjalanController extends Controller
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
         $kode = DB::table('surat_jalan')
-        ->where('kode','like','%-'.$kodeuser.'-%')
+        ->where('kode','like','%'.$kodeuser.'%')
         ->max('kode');
 
         if(!$kode){
@@ -30,6 +30,7 @@ class suratjalanController extends Controller
         }
         return response()->json($finalkode);
     }
+<<<<<<< HEAD
     public function caridetail($id){
         $data = DB::table('detail_sj')->where('kode',$id)->get();
         return response()->json($data);
@@ -37,6 +38,8 @@ class suratjalanController extends Controller
 =======
 
 >>>>>>> parent of 893e333... fixs bug resi
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
     public function cariresi(Request $request){
     	if($request->has('q')){
             $cari = $request->q;
@@ -57,6 +60,7 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
+<<<<<<< HEAD
     public function tambahdetail(Request $request){
         DB::table('detail_sj')
         ->insert([
@@ -71,5 +75,7 @@ class suratjalanController extends Controller
     }
 =======
 >>>>>>> parent of fe21324... surat jalan part 1
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
     
 }

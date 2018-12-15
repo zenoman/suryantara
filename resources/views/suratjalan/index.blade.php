@@ -1,6 +1,5 @@
 @extends('layout.masteradmin')
 @section('css')
-<meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
 @section('header')
@@ -79,7 +78,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">tujuan</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="tujuan">
+								<input type="text" class="form-control" id="berat">
 							</div>
 						</div>
 					</div>
@@ -88,6 +87,7 @@
 							<label class="form-label" for="exampleInputDisabled">Isi Paket</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="isipaket">
+<<<<<<< HEAD
 								<span class="input-group-btn"><button class="btn btn-info bootstrap-touchspin-up" type="button" id="btntambah">tambah</button></span>
 =======
 					
@@ -99,6 +99,8 @@
 							<div class="input-group">
 								<textarea rows="4" class="form-control" id="keterangan"></textarea>
 >>>>>>> parent of 3f9982c... nyicil surat jalan
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 							</div>
 						</div>
 =======
@@ -107,6 +109,7 @@
 					</div>
 					</div>
 					{{csrf_field()}}
+<<<<<<< HEAD
 					<table id="table-sm" class="table table-bordered table-hover table-sm">
 				<thead>
 				<tr>
@@ -129,6 +132,8 @@
 				</tbody>
 			</table>
 			<hr>
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 					<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
 								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>

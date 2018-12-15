@@ -41,7 +41,11 @@ INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `emai
 	(6, 'admin001', 'devasatrio', '74b213f68f648006a318f52713450f27', 'deva satrio', '085604556712', 'satriosuklun@gmail.com', 'gurah magersari');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
+<<<<<<< HEAD
 -- membuang struktur untuk table kargo.pendapatan
+=======
+-- Dumping structure for table kargo.pendapatan
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 DROP TABLE IF EXISTS `pendapatan`;
 CREATE TABLE IF NOT EXISTS `pendapatan` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -79,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `total_biaya` varchar(20) DEFAULT NULL,
   `keterangan` text,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel kargo.resi_pengiriman: ~0 rows (lebih kurang)
@@ -87,6 +92,18 @@ DELETE FROM `resi_pengiriman`;
 INSERT INTO `resi_pengiriman` (`id`, `id_admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `total_biaya`, `keterangan`) VALUES
 	(1, NULL, 'iouio', 'darat', 'hjkhjk', 'darat01', '2018-12-03', 8, 5, '5 x 6 x 7', '18', 'kljsdfjkls', 'kljdjfkl', 'lksdjfk', 'klsdjfklf', '12500', '10000', '5000', '27500', 'sakldfjsakldf'),
 	(2, NULL, 'jaskldjfkl', 'darat', 'sajkdlfjasdkl', 'darat03', '2018-12-03', 3, 2, '10 x 40 x 60', '110', 'kalsdjfkl', 'ksjdfkl', 'klsjdfkl', 'kljsdklf', '6000', '1000', '5000', '12000', 'skladfjskdlf');
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.resi_pengiriman: ~4 rows (approximately)
+DELETE FROM `resi_pengiriman`;
+/*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
+INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `total_biaya`, `keterangan`, `status`, `satuan`) VALUES
+	(1, '101218-06-000001', NULL, 6, 'sepatu bola + jersey', 'darat', 'kediri', 'malang', '2018-12-10', 2, 16, '30 x 40 x 50', '15', 'harko', 'udin', '0293482930490', '023489239', '2000', '3000', '4000', '9000', 'halo halo', 'N', 'koli'),
+	(2, '101218-06-000002', NULL, 6, 'ram laptop', 'darat', 'kediri', 'blitar', '2018-12-10', 2, 1, '8 x 10 x 5', '0.1', 'hedro', 'dini', '09384209893', '03928493', '3000', '2000', '1000', '6000', 'halo ini coba', 'N', 'kg'),
+	(3, '101218-06-000003', NULL, 6, 'kerudung mantul', 'laut', 'bekasi', 'kalimantan', '2018-12-10', 3, 2, '7 x 3 x 10', '0.0525', 'deni', 'hari', '09328493208', '09328949', '20000', '3000', '5000', '28000', 'laskdjklsjf', 'N', 'koli'),
+	(4, '101218-06-000004', NULL, 6, 'alat masak', 'laut', 'kediri', 'maluku', '2018-12-10', 3, 4, '20 x 30 x 10', '1.5', 'heri', 'heru', '029849238', '90238490289', '100000', '2000', '500', '102500', 'slkjkasldfj', 'N', 'kg');
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- membuang struktur untuk table kargo.setting
@@ -101,14 +118,22 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.setting: ~0 rows (lebih kurang)
+=======
+-- Dumping data for table kargo.setting: ~1 rows (approximately)
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`) VALUES
 	(1, 'kargo live', 'abihsan@gmail.com', '082261110369', '1540293331-nk.png', '1540293331-92734-images.png');
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
+<<<<<<< HEAD
 -- membuang struktur untuk table kargo.tarif_darat
+=======
+-- Dumping structure for table kargo.tarif_darat
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 DROP TABLE IF EXISTS `tarif_darat`;
 CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,13 +165,23 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `berat_min` int(11) DEFAULT NULL,
   `estimasi` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 
 -- Membuang data untuk tabel kargo.tarif_laut: ~0 rows (lebih kurang)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
 INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
+<<<<<<< HEAD
 	(2, 'DD154', 'kedirss', 31232, 1231, 'sadasd');
+=======
+	(3, 'laut001', 'maluku', 25000, 5, '5'),
+	(4, 'laut002', 'sumatra', 30000, 5, '3'),
+	(5, 'laut003', 'kalimantan', 40000, 3, '3');
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
 -- membuang struktur untuk table kargo.tarif_udara
@@ -161,7 +196,11 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.tarif_udara: ~0 rows (lebih kurang)
+=======
+-- Dumping data for table kargo.tarif_udara: ~1 rows (approximately)
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
 INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `gencoKG`, `minimal`) VALUES
@@ -198,7 +237,11 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.vendor: ~0 rows (lebih kurang)
+=======
+-- Dumping data for table kargo.vendor: ~1 rows (approximately)
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 DELETE FROM `vendor`;
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`) VALUES

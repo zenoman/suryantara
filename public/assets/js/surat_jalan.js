@@ -1,10 +1,14 @@
 $(document).ready(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	var noresisj ;
 		carikode();
 
 =======
 >>>>>>> parent of 893e333... fixs bug resi
+=======
+		carikode();
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -61,12 +65,12 @@ $(document).ready(function(){
 			url:'/carikodesj',
 			dataType:'json',
 			success:function(data){
-				noresisj = data;
+				noresi = data;
 				$("#noresi").html(data);
-				getdata();
 			}
 		});
 		}
+<<<<<<< HEAD
 	//==============================================================
     function hapusdetail(id){
     var foo = "bar";
@@ -169,4 +173,6 @@ $(document).ready(function(){
 =======
 
 >>>>>>> parent of 893e333... fixs bug resi
+=======
+>>>>>>> parent of a226352... surat jalan part 2 + db baru
 });
