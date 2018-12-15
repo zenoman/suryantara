@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
 Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
 Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
@@ -8,6 +9,8 @@ Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@cariha
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
 Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
+=======
+>>>>>>> parent of fe21324... surat jalan part 1
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 
 =======

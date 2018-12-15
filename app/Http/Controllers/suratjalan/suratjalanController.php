@@ -12,6 +12,7 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
+<<<<<<< HEAD
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -64,5 +65,7 @@ class suratjalanController extends Controller
             'isi' => $request->isipaket
         ]);
     }
+=======
+>>>>>>> parent of fe21324... surat jalan part 1
     
 }

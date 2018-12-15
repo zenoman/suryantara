@@ -36,11 +36,17 @@
 						</div>
 					</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					
+
+>>>>>>> parent of fe21324... surat jalan part 1
 					</div>
 					<hr>
 					<div class="form-group row">
 					<div class="col-md-4 col-sm-6">
 						<label class="form-label" for="exampleInputDisabled">No.Resi</label>
+<<<<<<< HEAD
 						<select class="select2" id="carinoresi"></select>
 					</div>
 					<div class="col-md-4 col-sm-6">
@@ -95,6 +101,9 @@
 >>>>>>> parent of 3f9982c... nyicil surat jalan
 							</div>
 						</div>
+=======
+						<select class="select2" id="kota_tujuan"></select>
+>>>>>>> parent of fe21324... surat jalan part 1
 					</div>
 					</div>
 					{{csrf_field()}}
@@ -137,11 +146,10 @@
 
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
-
+<!-- <script src="{{asset('assets/js/resi.js')}}"></script> -->
 
 @endsection
 @section('otherjs')
-<script src="{{asset('assets/js/surat_jalan.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey(evt)
       {
