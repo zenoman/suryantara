@@ -74,11 +74,14 @@ class suratjalanController extends Controller
             'isi' => $request->isipaket
         ]);
     }
+<<<<<<< HEAD
 =======
 >>>>>>> parent of fe21324... surat jalan part 1
 =======
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
 =======
 >>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
+=======
+>>>>>>> parent of 524e7a3... halo halo
     
 }

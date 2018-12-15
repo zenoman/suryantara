@@ -169,6 +169,7 @@ $(document).ready(function(){
     	$("#carinoresi").focus();
     }
     //==================================================================
+<<<<<<< HEAD
     function halo(){
     	alert('halo');
     }
@@ -180,4 +181,17 @@ $(document).ready(function(){
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
 =======
 >>>>>>> parent of 1c234eb... surat jalan part 3
+=======
+    function halo(id){
+    var foo='bar';
+    if(foo=='bar'){
+     var isgood = confirm('hapus ? ');
+     if(isgood == true){
+            alert(id);
+     }   
+    }
+    }
+    window.halo=halo;
+    
+>>>>>>> parent of 524e7a3... halo halo
 });
