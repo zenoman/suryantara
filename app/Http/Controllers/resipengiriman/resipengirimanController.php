@@ -26,6 +26,7 @@ class resipengirimanController extends Controller
         $nomer      = sprintf("%06s",$newkode[2]+1);
         $tanggal    = date('dmy');
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
+<<<<<<< HEAD
 
         return response()->json($finalkode);
     }
@@ -42,6 +43,17 @@ class resipengirimanController extends Controller
     public function residarat()
     {
         $webinfo = DB::table('setting')->limit(1)->get();
+=======
+        return response()->json($finalkode);
+    }
+    // public function tampil(){
+    //     $datakirim = ;
+    // }
+    public function residarat()
+    {
+        $webinfo = DB::table('setting')->limit(1)->get();
+
+>>>>>>> parent of 58273d3... sembRNG
         return view('resipengiriman/residarat',['webinfo'=>$webinfo]);
     }
     public function carikota(Request $request){
@@ -101,6 +113,7 @@ class resipengirimanController extends Controller
         return response()->json($simpan);
     }
 
+<<<<<<< HEAD
     public function simpanlaut(Request $request)
     {
 
@@ -130,6 +143,8 @@ class resipengirimanController extends Controller
         return response()->json($simpan);
     }
 
+=======
+>>>>>>> parent of 58273d3... sembRNG
     /**
      * Display the specified resource.
      *
