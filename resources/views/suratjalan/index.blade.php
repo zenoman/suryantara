@@ -27,7 +27,7 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
-					<div class="col-md-12 col-sm-12">
+						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Tujuan</label>
 							<div class="input-group">
@@ -35,6 +35,7 @@
 							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
 					</div>
 					<hr>
 					<div class="form-group row">
@@ -82,6 +83,16 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="isipaket">
 								<span class="input-group-btn"><button class="btn btn-info bootstrap-touchspin-up" type="button" id="btntambah">tambah</button></span>
+=======
+					
+					</div>
+					<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">
+								<textarea rows="4" class="form-control" id="keterangan"></textarea>
+>>>>>>> parent of 3f9982c... nyicil surat jalan
 							</div>
 						</div>
 					</div>
@@ -123,7 +134,7 @@
 	</div>
         @endsection
 @section('js')
-<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
+
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
 

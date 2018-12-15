@@ -234,6 +234,7 @@ $(document).ready(function(){
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			if(iduser==''||nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+   				
    			}else{
 				$.ajax({
                 type: 'POST',
