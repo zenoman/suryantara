@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Input;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
 Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
 =======
@@ -17,6 +18,8 @@ Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
 =======
 >>>>>>> parent of fe21324... surat jalan part 1
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 
 =======

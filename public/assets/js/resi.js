@@ -42,8 +42,11 @@ $(document).ready(function(){
 		}
 	});
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 =======
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 	//============================================ fokus input pengirim 	
 >>>>>>> parent of 893e333... fixs bug resi
 		$("#kota_tujuan").on('select2:close',function(e){

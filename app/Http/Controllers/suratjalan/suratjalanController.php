@@ -14,6 +14,7 @@ class suratjalanController extends Controller
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -77,5 +78,7 @@ class suratjalanController extends Controller
 >>>>>>> parent of fe21324... surat jalan part 1
 =======
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
     
 }

@@ -251,7 +251,10 @@ $(document).ready(function(){
 <<<<<<< HEAD
 =======
 			var satuan		= $('#satuan').val();
+<<<<<<< HEAD
 >>>>>>> parent of 893e333... fixs bug resi
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 			if(iduser==''||nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    				

@@ -42,8 +42,11 @@ INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `emai
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- membuang struktur untuk table kargo.pendapatan
 =======
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 -- Dumping structure for table kargo.pendapatan
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
 DROP TABLE IF EXISTS `pendapatan`;
@@ -84,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `keterangan` text,
   PRIMARY KEY (`id`)
 <<<<<<< HEAD
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel kargo.resi_pengiriman: ~0 rows (lebih kurang)
@@ -95,6 +99,10 @@ INSERT INTO `resi_pengiriman` (`id`, `id_admin`, `nama_barang`, `pengiriman_via`
 =======
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 -- Dumping data for table kargo.resi_pengiriman: ~4 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
@@ -103,7 +111,10 @@ INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_
 	(2, '101218-06-000002', NULL, 6, 'ram laptop', 'darat', 'kediri', 'blitar', '2018-12-10', 2, 1, '8 x 10 x 5', '0.1', 'hedro', 'dini', '09384209893', '03928493', '3000', '2000', '1000', '6000', 'halo ini coba', 'N', 'kg'),
 	(3, '101218-06-000003', NULL, 6, 'kerudung mantul', 'laut', 'bekasi', 'kalimantan', '2018-12-10', 3, 2, '7 x 3 x 10', '0.0525', 'deni', 'hari', '09328493208', '09328949', '20000', '3000', '5000', '28000', 'laskdjklsjf', 'N', 'koli'),
 	(4, '101218-06-000004', NULL, 6, 'alat masak', 'laut', 'kediri', 'maluku', '2018-12-10', 3, 4, '20 x 30 x 10', '1.5', 'heri', 'heru', '029849238', '90238490289', '100000', '2000', '500', '102500', 'slkjkasldfj', 'N', 'kg');
+<<<<<<< HEAD
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- membuang struktur untuk table kargo.setting
@@ -119,10 +130,14 @@ CREATE TABLE IF NOT EXISTS `setting` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.setting: ~0 rows (lebih kurang)
 =======
 -- Dumping data for table kargo.setting: ~1 rows (approximately)
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+-- Dumping data for table kargo.setting: ~1 rows (approximately)
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`) VALUES
@@ -130,8 +145,11 @@ INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`) VALUE
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- membuang struktur untuk table kargo.tarif_darat
 =======
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 -- Dumping structure for table kargo.tarif_darat
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
 DROP TABLE IF EXISTS `tarif_darat`;
@@ -166,15 +184,20 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `estimasi` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 <<<<<<< HEAD
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 =======
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 
 -- Membuang data untuk tabel kargo.tarif_laut: ~0 rows (lebih kurang)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
 INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
+<<<<<<< HEAD
 <<<<<<< HEAD
 	(2, 'DD154', 'kedirss', 31232, 1231, 'sadasd');
 =======
@@ -182,6 +205,11 @@ INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimas
 	(4, 'laut002', 'sumatra', 30000, 5, '3'),
 	(5, 'laut003', 'kalimantan', 40000, 3, '3');
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+	(3, 'laut001', 'maluku', 25000, 5, '5'),
+	(4, 'laut002', 'sumatra', 30000, 5, '3'),
+	(5, 'laut003', 'kalimantan', 40000, 3, '3');
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
 -- membuang struktur untuk table kargo.tarif_udara
@@ -197,10 +225,14 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.tarif_udara: ~0 rows (lebih kurang)
 =======
 -- Dumping data for table kargo.tarif_udara: ~1 rows (approximately)
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+-- Dumping data for table kargo.tarif_udara: ~1 rows (approximately)
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
 INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `gencoKG`, `minimal`) VALUES
@@ -238,10 +270,14 @@ CREATE TABLE IF NOT EXISTS `vendor` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Membuang data untuk tabel kargo.vendor: ~0 rows (lebih kurang)
 =======
 -- Dumping data for table kargo.vendor: ~1 rows (approximately)
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+-- Dumping data for table kargo.vendor: ~1 rows (approximately)
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 DELETE FROM `vendor`;
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`) VALUES

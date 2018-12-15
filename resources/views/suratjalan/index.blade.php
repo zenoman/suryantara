@@ -36,6 +36,7 @@
 					</div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 					
 
@@ -83,9 +84,16 @@
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6">
+=======
+					
+					</div>
+					<div class="row">
+					<div class="col-md-12 col-sm-12">
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Isi Paket</label>
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
 							<div class="input-group">
+<<<<<<< HEAD
 								<input type="text" class="form-control" id="isipaket">
 <<<<<<< HEAD
 								<span class="input-group-btn"><button class="btn btn-info bootstrap-touchspin-up" type="button" id="btntambah">tambah</button></span>
@@ -101,6 +109,9 @@
 >>>>>>> parent of 3f9982c... nyicil surat jalan
 =======
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+								<textarea rows="4" class="form-control" id="keterangan"></textarea>
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 							</div>
 						</div>
 =======
@@ -109,6 +120,7 @@
 					</div>
 					</div>
 					{{csrf_field()}}
+<<<<<<< HEAD
 <<<<<<< HEAD
 					<table id="table-sm" class="table table-bordered table-hover table-sm">
 				<thead>
@@ -133,6 +145,8 @@
 			<hr>
 =======
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
 					<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
 								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>

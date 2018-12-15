@@ -69,7 +69,10 @@ class resipengirimanController extends Controller
             $data = DB::table('tarif_darat')
                     ->select('tujuan','kode','tarif')
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
@@ -82,7 +85,10 @@ class resipengirimanController extends Controller
             
             $data = DB::table('tarif_laut')
                     ->select('tujuan','kode','tarif')
+<<<<<<< HEAD
 >>>>>>> parent of 893e333... fixs bug resi
+=======
+>>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
