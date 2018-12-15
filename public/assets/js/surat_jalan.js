@@ -1,14 +1,7 @@
 $(document).ready(function(){
-<<<<<<< HEAD
-<<<<<<< HEAD
 	var noresisj ;
 		carikode();
 
-=======
->>>>>>> parent of 893e333... fixs bug resi
-=======
-		carikode();
->>>>>>> parent of a226352... surat jalan part 2 + db baru
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -47,7 +40,7 @@ $(document).ready(function(){
 			},
             });
 		});
-		//===================================================
+	//===================================================
 		$("#carinoresi").on('select2:close',function(e){
 			$('#penerima').focus();
 		});
@@ -58,20 +51,18 @@ $(document).ready(function(){
 		$('#berat').val(berat);
 
 	}
-<<<<<<< HEAD
 	//========================================================
 	function carikode(){
 			$.ajax({
 			url:'/carikodesj',
 			dataType:'json',
 			success:function(data){
-				noresi = data;
+				noresisj = data;
 				$("#noresi").html(data);
+				getdata();
 			}
 		});
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	//==============================================================
     function hapusdetail(id){
     var foo = "bar";
@@ -84,8 +75,6 @@ $(document).ready(function(){
     	}
     }
     }
-=======
->>>>>>> parent of 1c234eb... surat jalan part 3
 	//========================================================
 	 function getdata(){
             $.ajax({
@@ -112,17 +101,10 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.jumlah+'</td>';
                 rows = rows + '<td>' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
-<<<<<<< HEAD
-<<<<<<< HEAD
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
-=======
->>>>>>> parent of 1c234eb... surat jalan part 3
-=======
-                rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo()"><i class="fa fa-trash"></i></button></td>';
->>>>>>> parent of d4b9a2a... surat jalan part 4
                 rows = rows + '</tr>';
             });
-            $("tbody").html(rows);
+            $("#tubuh").html(rows);
         }
     //============================================================
     $("#btntambah").click(function(e){
@@ -153,12 +135,12 @@ $(document).ready(function(){
                 },
                 success: function(data) {
                 	 notie.alert(1, 'Data Disimpan', 2);
+                	 bersihdetail();
                     getdata();
                 },
             });
     	}
     });
-<<<<<<< HEAD
     //===============================================================
     function bersihdetail(){
     	$("#penerima").val('');
@@ -169,29 +151,35 @@ $(document).ready(function(){
     	$("#carinoresi").focus();
     }
     //==================================================================
-<<<<<<< HEAD
-    function halo(){
-    	alert('halo');
-    }
-    
-=======
-
->>>>>>> parent of 893e333... fixs bug resi
-=======
->>>>>>> parent of a226352... surat jalan part 2 + db baru
-=======
->>>>>>> parent of 1c234eb... surat jalan part 3
-=======
     function halo(id){
     var foo='bar';
     if(foo=='bar'){
      var isgood = confirm('hapus ? ');
      if(isgood == true){
-            alert(id);
+           $.ajax({
+                    type:'GET',
+                    dataType:'json',
+                    url: '/hapusdetailsj/'+id,
+                    success:function(){
+                        notie.alert(3, 'Detail Dihapus', 2);
+                        getdata();
+                    },error:function(){
+                       notie.alert(3, 'Detail Dihapus', 2);
+                        getdata();
+                    }
+                });
      }   
     }
     }
     window.halo=halo;
-    
->>>>>>> parent of 524e7a3... halo halo
+    //============================================ cetak resi
+        
+        $("#btncetak").click(function(){
+           
+        var divToPrint=document.getElementById('hidden_div');
+        var newWin=window.open('','Print-Window');
+        newWin.document.open();
+        newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.close();
+        });
 });

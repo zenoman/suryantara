@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('css')
@@ -58,69 +61,28 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <p>
                                                <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-=======
-                                               <li>Download file template tarif laut excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Download file template tarif laut excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
->>>>>>> parent of abc5835... import export
-=======
-                                               <li>Download file template tarif laut excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-                                               </li>
-                                               <li>
-                                                   isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
+                                                   Buka file <b>"template tarif laut.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja.
                                                </li><br>
-                                               <img src="{{url('img/import/darat.PNG')}}">
-                                               <br><br>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
-=======
-                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of abc5835... import export
-=======
-                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
+                                               <img src="{{url('img/import_export/laut.JPG')}}">
+                                               <p>
+                                               <div class="alert alert-danger">
+                                                <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
+                                               </div>
+                                               <br>
+                                               <li>Kemudian save <b>template tarif laut.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
+                                               <br></br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <li>Untuk export tarif Laut sangat sederhana.Lihat gambar dibawah ini.</li><br>
+                                               <img src="{{url('img/import_export/003.JPG')}}"  width="100%" height="100%">
+                                               <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
+                                               <br></br>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
@@ -157,27 +119,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
-=======
-                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                    <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                    <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of abc5835... import export
-=======
-                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
+                                    <a href="{{url('trflaut/exporttrflaut')}}" class="btn btn-primary">Export Tarif Laut</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

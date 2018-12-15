@@ -12,14 +12,11 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
         $kode = DB::table('surat_jalan')
-        ->where('kode','like','%'.$kodeuser.'%')
+        ->where('kode','like','%-'.$kodeuser.'-%')
         ->max('kode');
 
         if(!$kode){
@@ -31,16 +28,10 @@ class suratjalanController extends Controller
         }
         return response()->json($finalkode);
     }
-<<<<<<< HEAD
     public function caridetail($id){
         $data = DB::table('detail_sj')->where('kode',$id)->get();
         return response()->json($data);
     }
-=======
-
->>>>>>> parent of 893e333... fixs bug resi
-=======
->>>>>>> parent of a226352... surat jalan part 2 + db baru
     public function cariresi(Request $request){
     	if($request->has('q')){
             $cari = $request->q;
@@ -61,7 +52,6 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
-<<<<<<< HEAD
     public function tambahdetail(Request $request){
         DB::table('detail_sj')
         ->insert([
@@ -74,14 +64,8 @@ class suratjalanController extends Controller
             'isi' => $request->isipaket
         ]);
     }
-<<<<<<< HEAD
-=======
->>>>>>> parent of fe21324... surat jalan part 1
-=======
->>>>>>> parent of a226352... surat jalan part 2 + db baru
-=======
->>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
-=======
->>>>>>> parent of 524e7a3... halo halo
+    public function hapusdetail($id){
+        DB::table('detail_sj')->where('id',$id)->delete();
+    }
     
 }

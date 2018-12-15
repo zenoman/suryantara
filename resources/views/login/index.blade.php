@@ -4,7 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Suryantara</title>
+	@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 
 	<link href="assets/img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
 	<link href="assets/img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
@@ -39,13 +42,8 @@
                         <input type="text" class="form-control" placeholder="Usename" name="username" />
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" />
+                        <input type="password" class="form-control" placeholder="Password" name="password" />
                     </div>
-                    <p class="form-row">
-                             <label class="inline" for="rememberme">
-                                <input type="checkbox" onclick="tampilsandi()"> Tampilkan Sandi
-                            </label>
-                    </p>
                     <!-- <div class="form-group">
                         <div class="checkbox float-left">
                             <input type="checkbox" id="signed-in"/>
@@ -89,16 +87,5 @@
         });
     </script>
 <script src="assets/js/app.js"></script>
- <script type="text/javascript">
-        function tampilsandi() {
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-}
-
-    </script>
 </body>
 </html>

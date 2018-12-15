@@ -1,35 +1,27 @@
 <?php
 namespace App\Imports;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
->>>>>>> parent of abc5835... import export
-=======
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
+// use Maatwebsite\Excel\Concerns\WithValidation;
 
 class Trf_lautImport implements ToCollection, WithHeadingRow{
     /**
     * @param Collection $collection
     */
+    // use Importable;
+    
     public function collection(Collection $collec)
     {
-    	// dd($collec);
         foreach ($collec as $row){
+            $kode=$row['kode_tujuan'];
+            // dd($kode);
+$dtlam= DB::table('tarif_laut')->where('kode',$kode)->count();
+if($dtlam > 0){
+        // $status = "Maaf Ada Data Yang Sama";
+}else{
     	 DB::table('tarif_laut')->insert([
                     'kode'=>$row['kode_tujuan'],
                     'tujuan'=>$row['tujuan'],
@@ -38,5 +30,9 @@ class Trf_lautImport implements ToCollection, WithHeadingRow{
                     'estimasi'=> $row['estimasi']
                     ]);
     	}
+        // $status = "Import Sukses";
+  }
+  // return $status;
+  // return redirect('tarif_laut')->with('status',$status);
     }
 }

@@ -17,83 +17,78 @@ class resipengirimanController extends Controller
 
     }
     public function carikode(){
+        $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
         $kode = DB::table('resi_pengiriman')
-        ->where('no_resi','like','%'.$kodeuser.'%')
+        ->where('no_resi','like','%-'.$kodeuser.'-%')
         ->max('no_resi');
 
-        $newkode    = explode("-", $kode);
+        if(!$kode){
+            $finalkode = $tanggal."-".$kodeuser."-000001";
+        }else{
+            $newkode    = explode("-", $kode);
         $nomer      = sprintf("%06s",$newkode[2]+1);
-        $tanggal    = date('dmy');
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         }
-        
-
->>>>>>> parent of aa3909b... surat jalan
-
         return response()->json($finalkode);
     }
     public function tampil(){
-
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,admin.username'))
+        ->join('admin','admin.id','=','resi_pengiriman.id_admin')
         ->orderby('id','desc')
-        ->get();
+        ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
-        $datakirim = 
-
     }
     public function residarat()
     {
         $webinfo = DB::table('setting')->limit(1)->get();
-=======
-        return response()->json($finalkode);
-    }
-    // public function tampil(){
-    //     $datakirim = ;
-    // }
-    public function residarat()
-    {
-        $webinfo = DB::table('setting')->limit(1)->get();
-
->>>>>>> parent of 58273d3... sembRNG
         return view('resipengiriman/residarat',['webinfo'=>$webinfo]);
+    }
+    public function resilaut(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman/resilaut',['webinfo'=>$webinfo]);
     }
     public function carikota(Request $request){
         if($request->has('q')){
             $cari = $request->q;
             
             $data = DB::table('tarif_darat')
-                    ->select('tujuan','kode','tarif')
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
+                    ->select('tujuan','id')
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
             return response()->json($data);
         }
     }
+    public function carihasilkota($id){
+        $data = DB::table('tarif_darat')
+                    ->select('tujuan','id','tarif')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
+    }
     public function carilaut(Request $request){
         if($request->has('q')){
             $cari = $request->q;
             
             $data = DB::table('tarif_laut')
-                    ->select('tujuan','kode','tarif')
-<<<<<<< HEAD
->>>>>>> parent of 893e333... fixs bug resi
-=======
->>>>>>> parent of 591ea06... Merge remote-tracking branch 'origin/master'
+                    ->select('tujuan','id')
                     ->where('tujuan','like','%'.$cari.'%')
                     ->get();
             
             return response()->json($data);
         }
+    }
+    public function carihasillaut($id){
+         $data = DB::table('tarif_laut')
+                    ->select('tujuan','id','tarif')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
     }
     /**
      * Show the form for creating a new resource.
@@ -135,12 +130,12 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan
        ]);
         return response()->json($simpan);
     }
 
-<<<<<<< HEAD
     public function simpanlaut(Request $request)
     {
 
@@ -165,13 +160,11 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan
        ]);
         return response()->json($simpan);
     }
-
-=======
->>>>>>> parent of 58273d3... sembRNG
     /**
      * Display the specified resource.
      *

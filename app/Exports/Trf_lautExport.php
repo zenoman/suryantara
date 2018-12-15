@@ -19,7 +19,7 @@ class Trf_lautExport implements FromCollection, WithHeadings{
         return [
             'Kode Tujuan',
             'Tujuan',
-            'Tarif Darat',
+            'Tarif Laut',
             'Berat Minimal',
             'estimasi',
         ];

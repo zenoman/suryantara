@@ -23,7 +23,8 @@ class Trfudaracontroller extends Controller
     {
         //
         $udara = Trfudaramodel::get();
-        return view('trfudara/index',['trf_udara'=>$udara]);
+    $setting = DB::table('setting')->get();
+        return view('trfudara/index',['trf_udara'=>$udara,'title'=>$setting]);
     }
 
     /**
@@ -33,7 +34,8 @@ class Trfudaracontroller extends Controller
      */
     //------------------------------------
    public function importexcel (){
-        return view('trfudara/importexcel');
+        $setting = DB::table('setting')->get();
+        return view('trfudara/importexcel',['title'=>$setting]);
     }
 
     public function downloadtemplate(){
@@ -62,13 +64,13 @@ class Trfudaracontroller extends Controller
 public function caridata(Request $request)
     {
         $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$request->cari.'%')->get();
-        
-        return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$request->cari]);
+            $setting = DB::table('setting')->get();
+        return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$request->cari,'title'=>$setting]);
     }
     public function create()
     {
-        //
-        return view('trfudara/create');
+            $setting = DB::table('setting')->get();
+        return view('trfudara/create',['title'=>$setting]);
     }
 
     /**
@@ -94,6 +96,10 @@ public function caridata(Request $request)
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
          ];
         $this->validate($request,$rules,$customMessages);
+$dtlam= DB::table('tarif_udara')->where('kode',$request->kode)->count();
+if($dtlam > 0){
+    return redirect('trfudara/create')->with('status','Kode tujuan tarif udara yang anda masukan sudah ada!! ');
+}else{
         Trfudaramodel::create([
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
@@ -108,7 +114,7 @@ public function caridata(Request $request)
             'persentase' => $request->persentase
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
-
+}
     }
 
     /**
@@ -131,16 +137,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     public function edit($id)
     {
         //
-        // $tar = Trfudaramodel::find($id);
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
-               // dd($trfudara);
-        // $kd_ud = $trfudara=>$kode;
         foreach ($trfudara as $row) {
             $kode = $row->kode;
 
         }
+    $setting = DB::table('setting')->get();
         $udara_kargo = DB::table('udara_kargo')->where('kode_udara',$kode)->get();
-        return view('trfudara/edit',['trfudara'=>$trfudara,'udaracargo'=>$udara_kargo]); 
+        return view('trfudara/edit',['trfudara'=>$trfudara,'udaracargo'=>$udara_kargo,'title'=>$setting]); 
     }
 
     /**
