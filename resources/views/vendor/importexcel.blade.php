@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('css')
@@ -15,7 +18,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Import excel</h2>
+							<h2>Export Import excel</h2>
 							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
@@ -58,66 +61,24 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
+                                               <li>Download file template vendor excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
+                                                   Buka file <b>"template vendor.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
                                                </li>
                                                <li>
-                                                   isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
+                                                   isi data seperti gamabar dibawah.
                                                </li><br>
-                                               <img src="{{url('img/import/udara.PNG')}}">
+                                               <img src="{{url('img/import/vendor.JPG')}}">
                                                <br><br>
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
-=======
-                                               <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
-=======
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-                                               <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-                                               </li>
-                                               <li>
-                                                   isi data seperti gamabar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja
-                                               </li><br>
-                                               <img src="{{url('img/import/udara.PNG')}}">
-                                               <br><br>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                               <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                               <li>Download file template tarif Udara excel di tab sebelah bagian <b>import Excel</b></li>
-                                               <li>
-                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
-                                               </li>
-                                               <li>
-          isi data seperti gamabar dibawah perhatikan pada bagian <b>genco_per_kg,minimal,tarif,persentase</b> hanyan diisi dengan angka saja
-                                               </li><br>
-                                               <img src="{{url('img/import/udara.PNG')}}">
-                                               <br><br>
-                                               <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
->>>>>>> parent of abc5835... import export
+                                               <li>Kemudian save <b>template vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
-                                               </div>
+                                               </div> 
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
-                                            <a href="{{url('trfudara/download')}}" class="btn btn-info">Download Template Excel</a>
+                                    <a href="{{url('vendor/download')}}" class="btn btn-info">Download Template Excel</a>
                         </div>
                         <hr>
 <p></p>
@@ -131,7 +92,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="/trfudara/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="/vendor/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>
@@ -149,23 +110,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
-=======
-                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                    <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of 8f1a224... titik lengkap iki
-=======
-                                    <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
-=======
-                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
->>>>>>> parent of abc5835... import export
+                                    <a href="{{url('vendor/exportvendor')}}" class="btn btn-primary">Export Tarif Darat</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

@@ -10,11 +10,14 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 <<<<<<< HEAD
 =======
 use Illuminate\Support\Facades\DB;
+<<<<<<< HEAD
 >>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
 =======
 >>>>>>> parent of 8f1a224... titik lengkap iki
 =======
 >>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
+=======
+>>>>>>> parent of abc5835... import export
 
 class Trf_lautImport implements ToCollection, WithHeadingRow{
     /**
