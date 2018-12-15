@@ -26,6 +26,13 @@ class resipengirimanController extends Controller
         $nomer      = sprintf("%06s",$newkode[2]+1);
         $tanggal    = date('dmy');
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
+<<<<<<< HEAD
+=======
+        }
+        
+
+
+>>>>>>> parent of aa3909b... surat jalan
         return response()->json($finalkode);
     }
     public function tampil(){
@@ -97,6 +104,37 @@ class resipengirimanController extends Controller
         return response()->json($simpan);
     }
 
+<<<<<<< HEAD
+=======
+    public function simpanlaut(Request $request)
+    {
+
+       $simpan = DB::table('resi_pengiriman')
+       ->insert([
+        'no_resi'       => $request->noresi,
+        'id_admin'      => $request->iduser,
+        'nama_barang'   => $request->nama_barang,
+        'pengiriman_via'=> 'laut',
+        'kota_asal'     => $request->kota_asal,
+        'kode_tujuan'   => $request->kota_tujuan,
+        'tgl'           =>  date('Y-m-d'),
+        'jumlah'        => $request->jumlah,
+        'berat'         => $request->berat,
+        'dimensi'       => $request->dimensi,
+        'ukuran_volume' => $request->ukuran_volume,
+        'nama_pengirim' => $request->n_pengirim,
+        'nama_penerima' => $request->n_penerima,
+        'telp_pengirim' => $request->t_pengirim,
+        'telp_penerima' => $request->t_penerima,
+        'biaya_kirim'   => $request->biaya_kirim,
+        'biaya_packing' => $request->biaya_packing,
+        'biaya_asuransi'=> $request->biaya_asu,
+        'total_biaya'   => $request->total_biaya,
+        'keterangan'    => $request->keterangan
+       ]);
+        return response()->json($simpan);
+    }
+>>>>>>> parent of aa3909b... surat jalan
     /**
      * Display the specified resource.
      *
