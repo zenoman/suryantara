@@ -71,6 +71,7 @@ $(document).ready(function(){
 		});
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//==============================================================
     function hapusdetail(id){
     var foo = "bar";
@@ -83,6 +84,8 @@ $(document).ready(function(){
     	}
     }
     }
+=======
+>>>>>>> parent of 1c234eb... surat jalan part 3
 	//========================================================
 	 function getdata(){
             $.ajax({
@@ -109,7 +112,10 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.jumlah+'</td>';
                 rows = rows + '<td>' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
+<<<<<<< HEAD
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
+=======
+>>>>>>> parent of 1c234eb... surat jalan part 3
                 rows = rows + '</tr>';
             });
             $("tbody").html(rows);
@@ -143,12 +149,12 @@ $(document).ready(function(){
                 },
                 success: function(data) {
                 	 notie.alert(1, 'Data Disimpan', 2);
-                	 bersihdetail();
                     getdata();
                 },
             });
     	}
     });
+<<<<<<< HEAD
     //===============================================================
     function bersihdetail(){
     	$("#penerima").val('');
@@ -175,4 +181,6 @@ $(document).ready(function(){
 >>>>>>> parent of 893e333... fixs bug resi
 =======
 >>>>>>> parent of a226352... surat jalan part 2 + db baru
+=======
+>>>>>>> parent of 1c234eb... surat jalan part 3
 });

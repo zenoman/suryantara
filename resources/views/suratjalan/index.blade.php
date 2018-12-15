@@ -119,7 +119,6 @@
 					<th rowspan="2" class="text-center">Tujuan</th>
 					<th colspan="2" class="text-center">Jumlah</th>
 					<th rowspan="2" class="text-center">Isi Paket</th>
-					<th rowspan="2">#</th>
 				</tr>
 				<tr>
 					<th class="text-center">Koli</th>
