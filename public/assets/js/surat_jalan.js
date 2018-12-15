@@ -113,9 +113,13 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
 <<<<<<< HEAD
+<<<<<<< HEAD
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
 =======
 >>>>>>> parent of 1c234eb... surat jalan part 3
+=======
+                rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo()"><i class="fa fa-trash"></i></button></td>';
+>>>>>>> parent of d4b9a2a... surat jalan part 4
                 rows = rows + '</tr>';
             });
             $("tbody").html(rows);
@@ -165,16 +169,9 @@ $(document).ready(function(){
     	$("#carinoresi").focus();
     }
     //==================================================================
-    function halo(id){
-    var foo='bar';
-    if(foo=='bar'){
-     var isgood = confirm('hapus ? ');
-     if(isgood == true){
-            alert(id);
-     }   
+    function halo(){
+    	alert('halo');
     }
-    }
-    window.halo=halo;
     
 =======
 
