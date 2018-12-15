@@ -60,6 +60,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
                                                <li>
                                                    Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
@@ -75,6 +76,9 @@
 =======
                                                <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
 >>>>>>> parent of 8f1a224... titik lengkap iki
+=======
+                                               <li>Download file template excel di tab sebelah bagian <b>import Excel</b></li>
+>>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                <li>
                                                    Buka file <b>"template.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
                                                </li>
@@ -84,11 +88,15 @@
                                                <img src="{{url('img/import/udara.PNG')}}">
                                                <br><br>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
 >>>>>>> parent of 8d4d6fc... Merge branch 'master' of https://github.com/zenoman/suryantara
 =======
                                                <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
 >>>>>>> parent of 8f1a224... titik lengkap iki
+=======
+                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel</b></li><br>
+>>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
@@ -130,6 +138,7 @@
 						<div class="panel-body" align="center">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
 =======
                                     <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Darat</a>
@@ -137,6 +146,9 @@
 =======
                                     <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
 >>>>>>> parent of 8f1a224... titik lengkap iki
+=======
+                                    <a href="{{url('trfudara/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
+>>>>>>> parent of e0fcee6... Merge branch 'master' of https://github.com/zenoman/suryantara
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
