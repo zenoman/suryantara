@@ -26,13 +26,7 @@ class resipengirimanController extends Controller
         $nomer      = sprintf("%06s",$newkode[2]+1);
         $tanggal    = date('dmy');
         $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
-<<<<<<< HEAD
-=======
-        }
-        
 
-
->>>>>>> parent of aa3909b... surat jalan
         return response()->json($finalkode);
     }
     public function tampil(){
@@ -104,8 +98,6 @@ class resipengirimanController extends Controller
         return response()->json($simpan);
     }
 
-<<<<<<< HEAD
-=======
     public function simpanlaut(Request $request)
     {
 
@@ -134,7 +126,7 @@ class resipengirimanController extends Controller
        ]);
         return response()->json($simpan);
     }
->>>>>>> parent of aa3909b... surat jalan
+
     /**
      * Display the specified resource.
      *
