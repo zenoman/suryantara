@@ -13,19 +13,35 @@ class suratjalanController extends Controller
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
     public function carikode(){
-        $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
+        $carikodedulu = DB::table('detail_sj')
+        ->select('kode')
+        ->where('kode','like','%-'.$kodeuser.'-%')
+        ->groupBy('kode')
+        ->get();
+        // dd($carikodedulu);
+        if($carikodedulu){
+          foreach ($carikodedulu as $rows) {
+              $finalkode = $rows->kode;
+          }
+            
+        }else{
+           $tanggal    = date('dmy');
         $kode = DB::table('surat_jalan')
         ->where('kode','like','%-'.$kodeuser.'-%')
         ->max('kode');
 
         if(!$kode){
+            
             $finalkode = "SJ".$tanggal."-".$kodeuser."-000001";
         }else{
             $newkode    = explode("-", $kode);
         $nomer      = sprintf("%06s",$newkode[2]+1);
         $finalkode  = "SJ".$tanggal."-".$kodeuser."-".$nomer;
+        } 
         }
+
+        
         return response()->json($finalkode);
     }
     public function caridetail($id){

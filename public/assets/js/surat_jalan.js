@@ -59,6 +59,7 @@ $(document).ready(function(){
 			success:function(data){
 				noresisj = data;
 				$("#noresi").html(data);
+                 $("#cetak_kodesj").html(":&nbsp;"+data);
 				getdata();
 			}
 		});
@@ -92,19 +93,45 @@ $(document).ready(function(){
     //==========================================================
     function managerow(data){
             var rows ='';
+            var rows2 ='';
+            var totaljumlah =0;
+            var totalkg =0;
+            var no = 0;
             $.each(data,function(key, value){
+                no +=1;
                 rows = rows + '<tr>';
                 rows = rows + '<td>' +value.no_resi+'</td>';
                 rows = rows + '<td> suryantara cargo </td>';
                 rows = rows + '<td>' +value.penerima+'</td>';
                 rows = rows + '<td>' +value.alamat+'</td>';
-                rows = rows + '<td>' +value.jumlah+'</td>';
-                rows = rows + '<td>' +value.berat+'</td>';
+                rows = rows + '<td class="text-center">' +value.jumlah+'</td>';
+                rows = rows + '<td class="text-center">' +value.berat+'</td>';
                 rows = rows + '<td>' +value.isi+'</td>';
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
+                totaljumlah += value.jumlah;
+                totalkg += value.berat;
+                rows2 = rows2 + '<tr align="center">';
+                rows2 = rows2 + '<td>'+no+'</td>';
+                rows2 = rows2 + '<td>'+value.no_resi+'</td>';
+                rows2 = rows2 + '<td>suryantara cargo</td>';
+                rows2 = rows2 + '<td>'+value.penerima+'</td>';
+                rows2 = rows2 + '<td>' +value.alamat+'</td>';
+                rows2 = rows2 + '<td>' +value.jumlah+'</td>';
+                rows2 = rows2 + '<td>' +value.berat+'</td>';
+                rows2 = rows2 + '<td>' +value.isi+'</td>';
+                rows2 = rows2 + '<td>-</td>';
+                rows2 = rows2 + '<td>-</td>';
+                rows2 = rows2 + '<td>-</td>';
+                rows2 = rows2 + '<td>-</td>';
+                rows2 = rows2 + '</tr>';
             });
             $("#tubuh").html(rows);
+            $("#list_cetak").html(rows2);
+            $("#totaljumlah").html(totaljumlah);
+            $("#cetak_subtotaljumlah").html(totaljumlah);
+            $("#cetak_subtotalberat").html(totalkg);
+            $("#totalkg").html(totalkg);
         }
     //============================================================
     $("#btntambah").click(function(e){
@@ -148,6 +175,7 @@ $(document).ready(function(){
     	$("#berat").val('');
     	$("#tujuan").val('');
     	$("#isipaket").val('');
+        $("#carinoresi").val(null).trigger('change');
     	$("#carinoresi").focus();
     }
     //==================================================================
@@ -175,11 +203,15 @@ $(document).ready(function(){
     //============================================ cetak resi
         
         $("#btncetak").click(function(){
-           
+        tempel_cetak();
         var divToPrint=document.getElementById('hidden_div');
         var newWin=window.open('','Print-Window');
         newWin.document.open();
         newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
         newWin.document.close();
         });
+    //=====================================
+    function tempel_cetak(){
+    $("#cetak_tujuan").html(":&nbsp;"+$("#tujuan_sj").val());
+    }
 });

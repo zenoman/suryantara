@@ -31,7 +31,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Tujuan</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang" autofocus>
+								<input type="text" class="form-control" id="tujuan_sj" autofocus>
 							</div>
 						</div>
 					</div>
@@ -107,6 +107,20 @@
 				
 				
 				</tbody>
+				<tfoot>
+				<tr>
+					<th colspan="4" class="text-center">Sub Total</th>
+					<th class="text-center" id="totaljumlah">-</th>
+					<th class="text-center" id="totalkg">-</th>
+					<th colspan="2" class="text-center">&nbsp;</th>
+				</tr>
+				<tr>
+					<th colspan="4" class="text-center">Grand Total</th>
+					<th class="text-center">-</th>
+					<th class="text-center">-</th>
+					<th colspan="2" class="text-center">&nbsp;</th>
+				</tr>
+				</tfoot>
 			</table>
 			<hr>
 					<small class="text-muted">
@@ -133,19 +147,20 @@
 	<table>
 		<tr>
 			<td>No</td>
-			<td>:&nbsp;sj283478297</td>
+			<td id="cetak_kodesj"></td>
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td>:&nbsp;12-09-2018</td>
+			<td>:&nbsp;{{date('d-m-Y')}}</td>
 		</tr>
 		<tr>
 			<td>Tujuan</td>
-			<td>:&nbsp;asdklfjsadklfjskldafjskl</td>
+			<td id="cetak_tujuan"></td>
 		</tr>
 	</table>
 	<table border="1" width="100%;" style="border-collapse:collapse;border: 1px solid black;">
-		<tr align="center">
+		<thead>
+			<tr align="center">
 			<td rowspan="2">No</td>
 			<td rowspan="2">No. Resi</td>
 			<td rowspan="2">Pengirim</td>
@@ -163,24 +178,16 @@
 			<td>BT</td>
 			<td>BL</td>
 		</tr>
-		<tr align="center">
-			<td>1</td>
-			<td>239084902</td>
-			<td>suryantara cargo</td>
-			<td>deifa satrio</td>
-			<td>mageri gurah kediri</td>
-			<td>4</td>
-			<td>20</td>
-			<td>mouse gaming</td>
-			<td>-</td>
-			<td>-</td>
-			<td>-</td>
-			<td>-</td>
-		</tr>
+		</thead>
+		
+		<tbody  id="list_cetak">
+			
+		</tbody>
+		<tfoot>
 		<tr>
 			<td colspan="5" align="right"><b>Sub Total</b></td>
-			<td></td>
-			<td></td>
+			<td id="cetak_subtotaljumlah"></td>
+			<td id="cetak_subtotalberat"></td>
 			<td></td>
 			<td></td>
 			<td></td>
@@ -197,9 +204,10 @@
 			<td></td>
 			<td></td>
 		</tr>
+		</tfoot>
 	</table>
 	<br>
-	<table border="1" width="100%;">
+	<table width="100%;">
 		<tr align="center">
 			<td>
 				<p>Diserahkan Oleh</p>
@@ -207,14 +215,14 @@
 				<p>Koordinat Cabang Asal</p>
 			</td>
 			<td>
-				<p>Diserahkan Oleh</p>
+				<p>Diantar Oleh</p>
 				<br>
-				<p>Koordinat Cabang Asal</p>
+				<p>Sopir</p>
 			</td>
 			<td>
-				<p>Diserahkan Oleh</p>
+				<p>Diterima Oleh</p>
 				<br>
-				<p>Koordinat Cabang Asal</p>
+				<p>Koordinat Cabang Tujuan</p>
 			</td>
 		</tr>
 	</table>

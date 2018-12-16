@@ -1,5 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::get('404',['as'=>'404','uses'=>'ErrorController@notfound']);
+Route::get('500',['as'=>'500','uses'=>'ErrorController@fatal']);
+//============================================
 Route::get('/hapusdetailsj/{id}','suratjalan\suratjalanController@hapusdetail');
 Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
 Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
@@ -13,7 +16,8 @@ Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::get('/laporan','laporan\laporandarat@index');
-Route::get('/','Login\Logincontroller@index');
+Route::get('/login','Login\Logincontroller@index');
+Route::get('/','landing\landingcontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');
 //==============================================resi pengiriman
 Route::resource('/residarat','resipengiriman\resipengirimanController');
