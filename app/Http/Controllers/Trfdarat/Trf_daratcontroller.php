@@ -41,11 +41,11 @@ $setting = DB::table('setting')->get();
     }
 
     public function downloadtemplate(){
-         $file= public_path(). "/file/template.xlsx";
+         $file= public_path(). "/file/template tarif darat.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
-    return Response::download($file, 'template.xlsx', $headers);
+    return Response::download($file, 'template tarif darat.xlsx', $headers);
     return redirect('trfdarat/importexcel');
     }
 

@@ -17,7 +17,7 @@ class TrfDaratImport implements ToCollection, WithHeadingRow{
             $kode=$row['kode_tujuan'];
 $dtlam= DB::table('tarif_darat')->where('kode',$kode)->count();
 if($dtlam > 0){
-    $status = "Maaf Ada Data Yang Sama";
+    // $status = "Maaf Ada Data Yang Sama";
 }else{
     	 DB::table('tarif_darat')->insert([
                     'kode'=>$row['kode_tujuan'],
@@ -27,9 +27,9 @@ if($dtlam > 0){
                     'estimasi'=> $row['estimasi']
                     ]);
 }
-        $status = "Import Sukses";
+        // $status = "Import Sukses";
   }
-  return redirect('tarif_laut')->with('status',$status);
+  // return redirect('tarif_laut')->with('status',$status);
 	}
 }
 

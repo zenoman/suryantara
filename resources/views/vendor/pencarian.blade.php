@@ -71,7 +71,7 @@
                             <td>{{$row->vendor}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
-                            <td><a href="vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm">
+                            <td><a href="/vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm">
                                         <i class="fa fa-pencil"></i> Edit</a>
                                 <a href="vendor/{{$row->id}}/delete" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>Hapus</a>

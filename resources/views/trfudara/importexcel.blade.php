@@ -71,7 +71,6 @@
                                                <p>
                                                <br>
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
-                                               <br></br>
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <li>Untuk export tarif udara sangat sederhana.Lihat gambar dibawah ini.</li><br>
                                                <img src="{{url('img/import_export/004.JPG')}}"  width="100%" height="100%">

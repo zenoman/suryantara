@@ -82,7 +82,7 @@ Route::get('/vendor/{id}/edit','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
 Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
 Route::post('vendor/cari','Vendor\Vendorcontroller@caridata');
-//------------------------export import
+//------------------------export import 
 Route::get('/vendor/importexcel','Vendor\Vendorcontroller@importexcel');
 Route::post('/vendor/prosesimportexcel','Vendor\Vendorcontroller@prosesimportexcel');
 Route::get('/vendor/exportvendor','Vendor\Vendorcontroller@exsportexcel');

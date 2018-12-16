@@ -14,11 +14,6 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
     {
         //
         foreach ($roww as $row){
-            $kode=$row['kode_tujuan'];
-$dtlam= DB::table('tarif_udara')->where('kode',$kode)->count();
-if($dtlam > 0){
-    // $status = "Maaf Ada Data Yang Sama";
-}else{
     	 DB::table('tarif_udara')->insert([
                     'kode'=>$row['kode_tujuan'],
                     'tujuan'=>$row['tujuan'],
@@ -33,8 +28,6 @@ if($dtlam > 0){
                     'persentase'=>$row['persentase']
                     ]);
     	}
-        // $status = "Import Sukses";
-  }
-  // return redirect('tarif_laut')->with('status',$status);
+
     }
 }

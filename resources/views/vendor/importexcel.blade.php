@@ -62,14 +62,12 @@
 												<br>
 
                                                <li>Download file template vendor excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
-                                               <li>
-                                                   Buka file <b>"template vendor.xlsx"</b> kemudian isi data seperti gambar dibaeah ini.
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><p>
+                                               <li>Buka file <b>"template vendor.xlsx"</b> kemudian isi data seperti gambar dibaeah ini.
                                                </li><br>
                                                <img src="{{url('img/import_export/vendor.JPG')}}">
                                                <br><br>
                                                <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
-                                               <br></br>
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <li>Untuk export vendor sangat sederhana.Lihat gambar dibawah ini.</li><br>
                                                <img src="{{url('img/import_export/0055.JPG')}}"  width="100%" height="100%">
