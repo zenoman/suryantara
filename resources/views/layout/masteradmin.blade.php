@@ -87,8 +87,8 @@
 	            </span>
 	             <ul>
                 <li><a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a></li>
-	                <!-- <li><a href="#"><span class="lbl">Pengiriman Laut</span></a></li>
-	                <li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
+	                <li><a href="{{url('/resipengirimanlaut')}}"><span class="lbl">Pengiriman Laut</span></a></li>
+	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
 	            </ul>
 	        </li>
 	        <li class="green">
@@ -97,6 +97,19 @@
 	                <span class="lbl">List Pengiriman</span>
 	            </a>
 	        </li>
+	        <li class="red with-sub">
+	        	<span>
+	                <i class="fa fa-bus"></i>
+	                <span class="lbl">Surat Jalan</span>
+	            </span>
+	             <ul>
+                <li><a href="{{url('/buatsuratjalan')}}"><span class="lbl">Buat Surat Jalan</span></a></li>
+	                <li><a href="#"><span class="lbl">
+	                Daftar Surat Jalan </span></a></li>
+	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
+	            </ul>
+	        </li>
+	        
 	        <li class="red">
 	            <a href="{{url('trfdarat')}}">
 	                <i class="fa fa-truck"></i>

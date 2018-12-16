@@ -25,7 +25,8 @@ public function index()
 // dd("index");
 $tarif_darat=Trf_daratmodel::paginate(20);
 //dd($tarif_darat);
-return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
+$setting = DB::table('setting')->get();
+return view('trfdarat/index',['trf_drt'=>$tarif_darat,'title'=>$setting]);
 }
 /**
 * Show the form for creating a new resource.
@@ -35,7 +36,8 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 
 //------------------------------------
    public function importexcel (){
-        return view('trfdarat/importexcel');
+$setting = DB::table('setting')->get();
+        return view('trfdarat/importexcel',['title'=>$setting]);
     }
 
     public function downloadtemplate(){
@@ -65,12 +67,13 @@ return view('trfdarat/index',['trf_drt'=>$tarif_darat]);
 public function caridata(Request $request)
     {
         $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$request->cari.'%')->get();
-        
-        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari]);
+        $setting = DB::table('setting')->get();
+        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari,'title'=>$setting]);
     }
 
 public function create(){
-return view('trfdarat/create');
+    $setting = DB::table('setting')->get();
+return view('trfdarat/create',['title'=>$setting]);
 }
 /**
 * Store a newly created resource in storage.
@@ -92,6 +95,10 @@ $customMessages = [
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
 ];
 $this->validate($request,$rules,$customMessages);
+$dtlam= DB::table('tarif_darat')->where('kode',$request->kode)->count();
+if($dtlam > 0){
+    return redirect('trfdarat/create')->with('status','Kode tujuan tarif darat yang anda masukan sudah ada!! ');
+}else{
 Trf_daratmodel::create([
 'kode' => $request->kode,
 'tujuan' => $request->tujuan,
@@ -101,6 +108,7 @@ Trf_daratmodel::create([
 ]);
 
 return redirect('trfdarat')->with('status','Input Data Sukses');
+}
 }/**
 * Display the specified resource.
 *
@@ -118,7 +126,8 @@ public function show($id)
 public function edit($id)
 {
 $tarif_darat = Trf_daratmodel::find($id);
-return view('trfdarat/edit',['trf_drt'=>$tarif_darat]);
+$setting = DB::table('setting')->get();
+return view('trfdarat/edit',['trf_drt'=>$tarif_darat,'title'=>$setting]);
 }
 /**
 * Update the specified resource in storage.

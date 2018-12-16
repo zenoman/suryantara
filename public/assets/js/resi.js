@@ -1,11 +1,16 @@
 $(document).ready(function(){
-		var satuan = 'kg';
-		var kotatujuan ='';
-		var noresi;
-		$('#satuan').on('change',function(e){
-			satuan = this.value;
-		})
+	//============================================deklarasi variabel
+	var satuan = 'kg';
+	var kotatujuan ='';
+	var noresi;
+	//=============================================ganti satuan	
+	$('#satuan').on('change',function(e){
+		satuan = this.value;
+	})
+	//=============================================cari kode
 		carikode();
+
+	//=============================================cari kota tujuan
 		$('#kota_tujuan').select2({
 		placeholder: 'Cari kota tujuan',
 		ajax:{
@@ -15,7 +20,26 @@ $(document).ready(function(){
 			processResults: function (data){
 				return {
 					results : $.map(data, function (item){
-						if(item.kode != null){
+						return {
+							id: item.id,
+							text: item.tujuan
+						}
+
+					})
+				}
+			},
+			cache: true
+		}
+	});
+	//=================================================
+	$('#kota_tujuan').on('select2:select',function(e){
+			var kode = $(this).val();
+			$.ajax({
+                type: 'GET',
+                url: '/carihasilkota/'+kode,
+                success:function (data){
+				return {
+					results : $.map(data, function (item){
 							if(satuan=='kg'){
 								hitung(item.tarif,item.tujuan);
 								$("#cetak_kota_tujuan").html(item.tujuan);
@@ -29,22 +53,16 @@ $(document).ready(function(){
 								$("#b_kirim").html(0);
 								hitung_total();
 							}
-						}
-						return {
-							id: item.kode,
-							text: item.tujuan
-						}
-
 					})
 				}
 			},
-			cache: true
-		}
-	});
-		
+            });
+		});
+	//============================================ fokus input pengirim 	
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
 		});
+	//============================================ cari kode
 		function carikode(){
 			$.ajax({
 			url:'/carikode',
@@ -57,6 +75,7 @@ $(document).ready(function(){
 			}
 		});
 		}
+	//============================================ hitung estimasi tujuan
 		function hitung(harga,tujuan){
 			var berat = $("#berat").val();
 			if(berat!=''){
@@ -65,6 +84,7 @@ $(document).ready(function(){
 			$("#b_kirim").html(jumlah);
 			hitung_total();		
 		}}
+	//============================================ hitung total
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_kirim = $("#biaya_kirim").val();
@@ -73,6 +93,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung total	
 		$("#biaya_packing").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_pack = $("#biaya_packing").val();
@@ -81,6 +102,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung volumetrik
 		$("#d_panjang").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var panjang = $("#d_panjang").val();
@@ -91,6 +113,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung volumetrik
 		$("#d_lebar").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var panjang = $("#d_panjang").val();
@@ -101,6 +124,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung volumetrik
 		$("#d_tinggi").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var panjang = $("#d_panjang").val();
@@ -111,6 +135,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung total biaya
 		$("#biaya_asuransi").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi").val();
@@ -119,6 +144,7 @@ $(document).ready(function(){
 			}
 			
 		})
+	//============================================ hitung total biaya
 		function hitung_total(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
@@ -126,6 +152,7 @@ $(document).ready(function(){
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#total").html(totalnya);
 		}
+	//============================================ bersih
 		function bersih(){
 			$("#nama_barang").val('');
 			$("#d_panjang").val(0);
@@ -135,7 +162,7 @@ $(document).ready(function(){
 			$("#jumlah").val('');
 			$("#berat").val('');
 			$("#kota_asal").val('');
-			$("#kota_tujuan").select2("val","");
+			$("#kota_tujuan").val(null).trigger('change');
 			$("#n_pengirim").val('');
 			$("#t_pengirim").val('');
 			$("#n_penerima").val('');
@@ -148,29 +175,63 @@ $(document).ready(function(){
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
+			$('#satuan').val('kg');
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';
 		}
+	//============================================ cetak resi
 		
 		$("#btncetak").click(function(){
+			var no_resi		= noresi;
+			var iduser		= $("#iduser").val();
+			var nama_barang	= $("#nama_barang").val();
+			var d_panjang	= $("#d_panjang").val();
+			var d_tinggi	= $("#d_tinggi").val();
+			var d_lebar		= $("#d_lebar").val();
+			var volume		= $("#volume").val();
+			var jumlah		= $("#jumlah").val();
+			var berat		= $("#berat").val();
+			var kota_asal	= $("#kota_asal").val();
+			var kota_tujuan = $("#cetak_kota_tujuan").html();
+			var n_pengirim 	= $("#n_pengirim").val();
+			var t_pengirim	= $("#t_pengirim").val();
+			var n_penerima	= $("#n_penerima").val();
+			var t_penerima 	= $("#t_penerima").val();
+			var biaya_kirim	= $("#biaya_kirim").val();
+			var biaya_packing = $("#biaya_packing").val();
+			var biaya_asu 	= $("#biaya_asuransi").val();
+			var keterangan 	= $.trim($("#keterangan").val());
+			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var satuan		= $('#satuan').val();
+			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
+			
+			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+   			}else{
 		tempelresi();
 
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-		newWin.document.close();
+		newWin.document.close();}
 		});
-
+	//============================================ tempel variabel
 		function tempelresi(){
 			carikode();
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_asal").html($("#kota_asal").val());
+			if(satuan=='koli'){
+			$("#cetak_jumlah_barang").html($("#jumlah").val()+" "+satuan);
+			$("#cetak_jumlah_barang2").html($("#jumlah").val()+" "+satuan);
+			}else{
 			$("#cetak_jumlah_barang").html($("#jumlah").val());
-			$("#cetak_berat").html($("#berat").val()+" "+satuan);
-			$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
+			$("#cetak_jumlah_barang2").html($("#jumlah").val());
+			}
+			$("#cetak_berat").html($("#berat").val()+" Kg");
+			$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim").html($("#n_pengirim").val());
 			$("#cetak_telp_pengirim").html("No. Telp : "+$("#t_pengirim").val());
@@ -192,9 +253,8 @@ $(document).ready(function(){
 			$("#cetak_tanggal").html("Kediri, "+tanggal);
 			//========================================================
 			$("#cetak_kota_asal2").html($("#kota_asal").val());
-			$("#cetak_jumlah_barang2").html($("#jumlah").val());
-			$("#cetak_berat2").html($("#berat").val()+" "+satuan);
-			$("#cetak_dimensi2").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
+			$("#cetak_berat2").html($("#berat").val()+" Kg");
+			$("#cetak_dimensi2").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik2").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim2").html($("#n_pengirim").val());
 			$("#cetak_telp_pengirim2").html("No. Telp : "+$("#t_pengirim").val());
@@ -207,7 +267,7 @@ $(document).ready(function(){
 			$("#cetak_total2").html("Rp. "+totalnya);
 			$("#cetak_tanggal2").html("Kediri, "+tanggal);
 		}
-
+	//============================================ simpan transaksi
 		$("#btnsimpan").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -221,7 +281,7 @@ $(document).ready(function(){
 			var jumlah		= $("#jumlah").val();
 			var berat		= $("#berat").val();
 			var kota_asal	= $("#kota_asal").val();
-			var kota_tujuan = $("#kota_tujuan").val();
+			var kota_tujuan = $("#cetak_kota_tujuan").html();
 			var n_pengirim 	= $("#n_pengirim").val();
 			var t_pengirim	= $("#t_pengirim").val();
 			var n_penerima	= $("#n_penerima").val();
@@ -231,8 +291,10 @@ $(document).ready(function(){
 			var biaya_asu 	= $("#biaya_asuransi").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var satuan		= $('#satuan').val();
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
-			if(iduser==''||nama_barang == '' || d_panjang == 0 || d_lebar==0 || d_tinggi==0 || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_packing ==0 || biaya_kirim==0 || biaya_packing==0 || biaya_asu =='' || keterangan==''){
+			
+			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
 				$.ajax({
@@ -257,7 +319,8 @@ $(document).ready(function(){
 					'biaya_packing'	: biaya_packing,
 					'biaya_asu' 	: biaya_asu,
 					'keterangan'	: keterangan,
-                	'total_biaya'	: total_biaya
+                	'total_biaya'	: total_biaya,
+                	'satuan'		: satuan
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -268,4 +331,4 @@ $(document).ready(function(){
             });
 			}
 		});
-	});
+});

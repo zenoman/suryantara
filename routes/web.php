@@ -1,15 +1,30 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::get('404',['as'=>'404','uses'=>'ErrorController@notfound']);
+Route::get('500',['as'=>'500','uses'=>'ErrorController@fatal']);
+//============================================
+Route::get('/hapusdetailsj/{id}','suratjalan\suratjalanController@hapusdetail');
+Route::post('/tambahdetailsj','suratjalan\suratjalanController@tambahdetail');
+Route::get('/caridetailsj/{id}','suratjalan\suratjalanController@caridetail');
+Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
+Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@carihasillaut');
+Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
+Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
+Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
+Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
+//===========================================
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::get('/laporan','laporan\laporandarat@index');
-Route::get('/login','Login\Logincontroller@index');
-Route::get('/','landing\landingcontroller@index');
+Route::get('/','Login\Logincontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');
 //==============================================resi pengiriman
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
+Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
+Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
+Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');
@@ -34,7 +49,7 @@ Route::get('/trfudara/{id}/delete','Trfudara\Trfudaracontroller@destroy');
 Route::get('/trfudara/importexcel','Trfudara\Trfudaracontroller@importexcel');
 Route::post('/trfudara/prosesimportexcel','Trfudara\Trfudaracontroller@prosesimportexcel');
 Route::get('/trfudara/download','Trfudara\Trfudaracontroller@downloadtemplate');
-Route::get('/trfudara/exporttrfdarat','Trfudara\Trfudaracontroller@exsportexcel');
+Route::get('/trfudara/exporttrfudara','Trfudara\Trfudaracontroller@exsportexcel');
 Route::post('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //==============================================trf darat
 Route::get('/trfdarat','Trfdarat\Trf_daratcontroller@index');
@@ -60,14 +75,21 @@ Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
 Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');
 Route::post('/trflaut/prosesimportexcel','Trf_laut\Trf_lautcontroller@prosesimportexcel');
 Route::get('/trflaut/download','Trf_laut\Trf_lautcontroller@downloadtemplate');
+Route::get('/trflaut/exporttrflaut','Trf_laut\Trf_lautcontroller@exsportexcel');
 Route::post('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');
 Route::get('/vendor/create','Vendor\Vendorcontroller@create');
-Route::get('/vendor/{id}','Vendor\Vendorcontroller@edit');
+Route::get('/vendor/{id}/edit','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
 Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
+Route::post('vendor/cari','Vendor\Vendorcontroller@caridata');
+//------------------------export import
+Route::get('/vendor/importexcel','Vendor\Vendorcontroller@importexcel');
+Route::post('/vendor/prosesimportexcel','Vendor\Vendorcontroller@prosesimportexcel');
+Route::get('/vendor/exportvendor','Vendor\Vendorcontroller@exsportexcel');
+Route::get('/vendor/download','Vendor\Vendorcontroller@downloadtemplate');
 //==============================================================Login
 Route::get('/login','Login\Logincontroller@index');
 Route::post('/login/masuk','Login\Logincontroller@masuk');

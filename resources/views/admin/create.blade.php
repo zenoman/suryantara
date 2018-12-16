@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 @section('content')
@@ -46,7 +49,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama Admin"></p>
 							@if($errors->has('nama'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('nama')}}
@@ -57,7 +60,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" placeholder="Masukkan Username"  name="username"></p>
+							<p class="form-control-static"><input type="text" class="form-control" placeholder="Masukkan Username Admin Minimal 5 Huruf"  name="username"></p>
 							@if($errors->has('username'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('username')}}
@@ -68,7 +71,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Password</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password" name="password"></p>
+							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password Admin Minimal 5 Huru" name="password"></p>
 							@if($errors->has('password'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('password')}}

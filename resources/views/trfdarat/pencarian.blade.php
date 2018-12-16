@@ -2,7 +2,10 @@
 
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 

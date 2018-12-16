@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\models\Settingmodel;
+use Illuminate\Support\Facades\DB;
 
 class Settingcontroller extends Controller
 {
@@ -19,7 +20,8 @@ class Settingcontroller extends Controller
     {
         //
         $setting = Settingmodel::get();
-        return view('setting/index',['setting'=>$setting]);
+        $setting = DB::table('setting')->get();
+        return view('setting/index',['setting'=>$setting,'title'=>$setting]);
     }
 
     /**

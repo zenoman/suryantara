@@ -12,12 +12,16 @@ class TrfudaraExport implements FromCollection, WithHeadings{
     */
     public function collection()
        {
-        return DB::table('udara_udara')->select('kode','tujuan','airlans','gencoKG','minimal,')->get();;
-        return DB::table('udara_kargo')->select('tarif','persentase')->get();;
+        // return DB::table('tarif_udara')->select('kode','tujuan','airlans','gencoKG','minimal')->JOIN()->get();;
+        // return DB::table('udara_kargo')->select('tarif','persentase')->where('kode_udara',$kode)->get();;
+return  DB::table('tarif_udara')
+->join('udara_kargo', 'udara_kargo.kode_udara', '=', 'tarif_udara.kode')
+->select('udara_kargo.tarif','udara_kargo.persentase','tarif_udara.kode','tarif_udara.tujuan','tarif_udara.airlans','tarif_udara.gencoKG','tarif_udara.minimal')->get();;
     }
     public function headings(): array
     {
         return [
-            'kode','tujuan','airlans','gencoKG','minimal','tarif','persentase',
+            'kode','tujuan','airlans','genco_per_kg','minimal','tarif','persentase',
         ];
+}
 }

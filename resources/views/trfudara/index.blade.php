@@ -2,7 +2,10 @@
 
 
 @section('header')
-<title>Suryantara</title>
+@foreach($title as $row)
+<title>{{$row->namaweb}}</title>
+<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@endforeach
 @endsection
 
 
@@ -47,7 +50,7 @@
                                         <div class="modal-body">
                                            <form method="post" action="{{url('trfudara/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama udara" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Tujuan udara" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
