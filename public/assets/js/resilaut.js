@@ -162,7 +162,7 @@ $(document).ready(function(){
 			$("#jumlah").val('');
 			$("#berat").val('');
 			$("#kota_asal").val('');
-			$("#kota_tujuan").select2("val","");
+			$("#kota_tujuan").val(null).trigger('change');
 			$("#n_pengirim").val('');
 			$("#t_pengirim").val('');
 			$("#n_penerima").val('');
