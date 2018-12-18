@@ -52,31 +52,33 @@ CREATE TABLE IF NOT EXISTS `detail_sj` (
   `berat` int(11) DEFAULT NULL,
   `satuan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.detail_sj: ~4 rows (approximately)
 DELETE FROM `detail_sj`;
 /*!40000 ALTER TABLE `detail_sj` DISABLE KEYS */;
 INSERT INTO `detail_sj` (`id`, `kode`, `no_resi`, `penerima`, `alamat`, `jumlah`, `isi`, `berat`, `satuan`) VALUES
-	(1, 'SJ121218-06-000001', '101218-06-000001', 'hari', 'kediri', 2, 'sepatu bola + jersey', 16, NULL),
-	(2, 'SJ121218-06-000001', '111218-06-000007', 'hadi', 'sdkfj', 10, 'mouse gaming', 8, NULL),
-	(3, 'SJ121218-06-000001', '111218-06-000006', 'hendro', 'malang', 3, 'keyboard', 8, NULL),
-	(4, 'SJ121218-06-000001', '101218-06-000003', 'dedi', 'gurah', 3, 'kerudung mantul', 2, NULL);
+	(11, 'SJ161218-06-000001', '111218-06-000005', 'hadi', 'malang', 5, 'lampu mobil', 10, NULL),
+	(12, 'SJ161218-06-000001', '101218-06-000004', 'deni', 'kalimantan', 3, 'alat masak', 4, NULL),
+	(20, 'SJ161218-06-000001', '161218-06-000014', 'hari', 'alskdfjksdf', 2, 'emas batangan', 3, NULL);
 /*!40000 ALTER TABLE `detail_sj` ENABLE KEYS */;
 
--- Dumping structure for table kargo.pendapatan
-DROP TABLE IF EXISTS `pendapatan`;
-CREATE TABLE IF NOT EXISTS `pendapatan` (
+-- Dumping structure for table kargo.omset
+DROP TABLE IF EXISTS `omset`;
+CREATE TABLE IF NOT EXISTS `omset` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `id_admin` int(11) DEFAULT NULL,
   `tgl` varchar(100) DEFAULT NULL,
-  `pendapatan` varchar(45) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `keterangan` text,
+  `status` enum('pendapatan','pengeluaran') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.pendapatan: ~0 rows (approximately)
-DELETE FROM `pendapatan`;
-/*!40000 ALTER TABLE `pendapatan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pendapatan` ENABLE KEYS */;
+-- Dumping data for table kargo.omset: ~0 rows (approximately)
+DELETE FROM `omset`;
+/*!40000 ALTER TABLE `omset` DISABLE KEYS */;
+/*!40000 ALTER TABLE `omset` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_pengiriman
 DROP TABLE IF EXISTS `resi_pengiriman`;
@@ -98,31 +100,21 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `nama_penerima` varchar(70) DEFAULT NULL,
   `telp_pengirim` varchar(20) DEFAULT NULL,
   `telp_penerima` varchar(20) DEFAULT NULL,
-  `biaya_kirim` varchar(20) DEFAULT NULL,
-  `biaya_packing` varchar(20) DEFAULT NULL,
-  `biaya_asuransi` varchar(20) DEFAULT NULL,
-  `total_biaya` varchar(20) DEFAULT NULL,
+  `biaya_kirim` int(11) DEFAULT NULL,
+  `biaya_packing` int(11) DEFAULT NULL,
+  `biaya_asuransi` int(11) DEFAULT NULL,
+  `biaya_ppn` int(11) DEFAULT NULL,
+  `total_biaya` int(11) DEFAULT NULL,
   `keterangan` text,
   `status` enum('Y','N') DEFAULT 'N',
   `satuan` varchar(10) DEFAULT NULL,
+  `metode_bayar` enum('cash','bt') DEFAULT 'cash',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~9 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~0 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
-INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `total_biaya`, `keterangan`, `status`, `satuan`) VALUES
-	(1, '101218-06-000001', NULL, 6, 'sepatu bola + jersey', 'darat', 'kediri', 'malang', '2018-12-10', 2, 16, '30 x 40 x 50', '15', 'harko', 'udin', '0293482930490', '023489239', '2000', '3000', '4000', '9000', 'halo halo', 'N', 'koli'),
-	(2, '101218-06-000002', NULL, 6, 'ram laptop', 'darat', 'kediri', 'blitar', '2018-12-10', 2, 1, '8 x 10 x 5', '0.1', 'hedro', 'dini', '09384209893', '03928493', '3000', '2000', '1000', '6000', 'halo ini coba', 'N', 'kg'),
-	(3, '101218-06-000003', NULL, 6, 'kerudung mantul', 'laut', 'bekasi', 'kalimantan', '2018-12-10', 3, 2, '7 x 3 x 10', '0.0525', 'deni', 'hari', '09328493208', '09328949', '20000', '3000', '5000', '28000', 'laskdjklsjf', 'N', 'koli'),
-	(4, '101218-06-000004', NULL, 6, 'alat masak', 'laut', 'kediri', 'maluku', '2018-12-10', 3, 4, '20 x 30 x 10', '1.5', 'heri', 'heru', '029849238', '90238490289', '100000', '2000', '500', '102500', 'slkjkasldfj', 'N', 'kg'),
-	(5, '111218-06-000005', NULL, 6, 'lampu mobil', 'laut', 'kediri', 'sumatra', '2018-12-11', 5, 10, '20 x 30 x 20', '3', 'handi', 'harko', '029389', '02989032', '300000', '10000', '5000', '315000', 'halo halo', 'N', 'kg'),
-	(6, '111218-06-000006', NULL, 6, 'keyboard', 'darat', 'kediri', 'malang', '2018-12-11', 3, 8, '20 x 30 x 10', '1.5', 'dendi', 'hadi', '09824390823490', '0923489023489', '24000', '0', '0', '24000', 'halo halo', 'N', 'kg'),
-	(7, '111218-06-000007', NULL, 6, 'mouse gaming', 'darat', 'kediri', 'nganjuk', '2018-12-11', 10, 8, '20 x 10 x 30', '1.5', 'hari', 'dian', '093289', '983490', '10000', '0', '2000', '12000', 'halo', 'N', 'koli'),
-	(8, '121218-06-000008', NULL, 6, 'sepatu kuda', 'darat', 'kediri', 'magelang', '2018-12-12', 5, 20, '20 x 30 x 40', '6', 'deni', 'hadi', '02394829034829', '2029384923', '10000', '3000', '0', '13000', 'halo halo', 'N', 'koli'),
-	(9, '121218-06-000009', NULL, 6, 'rak sampah', 'darat', 'lampung', 'magelang', '2018-12-12', 1, 20, '20 x 30 x 50', '7.5', 'hendri', 'abi', '02938492', '0934892', '200000', '0', '10000', '210000', 'cepet ya', 'N', 'kg'),
-	(10, '121218-06-000010', NULL, 6, 'sepatu', 'laut', 'kediri', 'manadi', '2018-12-12', 3, 2, '0 x 0 x 0', '0', 'hari anto', 'subandi', '0398429', '0389203', '50000', '0', '0', '50000', NULL, 'N', 'kg'),
-	(11, '121218-06-000011', NULL, 6, 'jilbab cewek', 'darat', 'kediri', 'nganjuk', '2018-12-12', 3, 2, '20 x 10 x 20', '1', 'hartini', 'dandi', '0923849023', '03284932', '10000', '1000', '500', '11500', 'halo halo', 'N', 'koli');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting

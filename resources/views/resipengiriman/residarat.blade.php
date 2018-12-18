@@ -26,11 +26,22 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
-						<div class="col-md-12 col-sm-12">
+						<div class="col-md-9 col-sm-9">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="nama_barang" autofocus>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="metode">
+								<option value="cash">cash</option>
+								<option value="bt">BT</option>
+							</select>
 							</div>
 						</div>
 					</div>
@@ -172,6 +183,10 @@
 									<tr>
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi">0</td>
+									</tr>
+									<tr>
+										<td>PPN</td>
+										<td id="b_ppn">0</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="text-center">
@@ -317,7 +332,7 @@
 						<b>Syarat - syarat :</b>
 					</p>
 					
-					<ol align="left" style="font-size: 13;">
+					<ol align="left" style="font-size: 10;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -351,6 +366,11 @@
 							<td>&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 15;" id="cetak_biaya_asu"></td>
 						</tr>
+						<tr>
+							<td style="width: 25%;font-size: 15;">PPN</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td align="right" style="font-size: 15;" id="cetak_biaya_ppn"></td>
+						</tr>
 						
 						<tr>
 							<td style="width: 25%;font-size: 15;"><b>Total</b></td>
@@ -377,7 +397,7 @@
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 12;" id="cetak_tanggal"></p>
+								<p align="center" style="font-size: 12;" id="cetak_tanggal"></p>
 									<br>
 									<p align="center" style="font-size: 12">Tanda Tangan Petugas</p>
 							
@@ -511,7 +531,7 @@
 						<b>Syarat - syarat :</b>
 					</p>
 					
-					<ol align="left" style="font-size: 13;">
+					<ol align="left" style="font-size: 10;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -545,7 +565,11 @@
 							<td>&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 15;" id="cetak_biaya_asu2"></td>
 						</tr>
-						
+						<tr>
+							<td style="width: 25%;font-size: 15;">PPN</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td align="right" style="font-size: 15;" id="cetak_biaya_ppn2"></td>
+						</tr>
 						<tr>
 							<td style="width: 25%;font-size: 15;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
@@ -601,7 +625,7 @@
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
-<!-- <script src="{{asset('assets/js/resi.js')}}"></script> -->
+
 
 @endsection
 @section('otherjs')
@@ -617,4 +641,5 @@
       }
 
 </script>
+
 @endsection

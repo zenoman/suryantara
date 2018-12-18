@@ -80,15 +80,19 @@ $(document).ready(function(){
 			var berat = $("#berat").val();
 			if(berat!=''){
 			var jumlah = harga*berat;
+			var ppn = (jumlah*1)/100;
 			$("#biaya_kirim").val(jumlah);
-			$("#b_kirim").html(jumlah);
+			$("#b_kirim").html(rupiah(jumlah));
+			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
 		}}
 	//============================================ hitung total
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_kirim = $("#biaya_kirim").val();
-			$("#b_kirim").html(biaya_kirim);
+			var ppn = (biaya_kirim*1)/100;
+			$("#b_kirim").html(rupiah(biaya_kirim));
+			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
 			}
 			
@@ -97,7 +101,7 @@ $(document).ready(function(){
 		$("#biaya_packing").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_pack = $("#biaya_packing").val();
-			$("#b_packing").html(biaya_pack);
+			$("#b_packing").html(rupiah(biaya_pack));
 			hitung_total();		
 			}
 			
@@ -139,7 +143,7 @@ $(document).ready(function(){
 		$("#biaya_asuransi").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi").val();
-			$("#b_asuransi").html(biaya_asu);
+			$("#b_asuransi").html(rupiah(biaya_asu));
 			hitung_total();	
 			}
 			
@@ -149,8 +153,9 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#total").html(totalnya);
+			var b_ppn		= $("#b_ppn").html().replace('.','');
+			var totalnya = parseInt(b_ppn)+parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+			$("#total").html(rupiah(totalnya));
 		}
 	//============================================ bersih
 		function bersih(){
@@ -174,6 +179,7 @@ $(document).ready(function(){
 			$("#b_kirim").html(0);
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);
+			$("#b_ppn").html(0);
 			$("#total").html(0);
 			$('#satuan').val('kg');
 			$('#nama_barang').focus();
@@ -238,15 +244,17 @@ $(document).ready(function(){
 			$("#cetak_penerima").html($("#n_penerima").val());
 			$("#cetak_telp_penerima").html("No. Telp : "+$("#t_penerima").val());
 			$("#cetak_isi_paket").html($("#nama_barang").val());
-			$("#cetak_biaya_kirim").html("Rp. "+$("#biaya_kirim").val());
-			$("#cetak_biaya_packing").html("Rp. "+$("#biaya_packing").val());
-			$("#cetak_biaya_asu").html("Rp. "+$("#biaya_asuransi").val());
-			
+			$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			$("#cetak_biaya_packing").html("Rp. "+rupiah($("#biaya_packing").val()));
+			$("#cetak_biaya_asu").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			$("#cetak_biaya_ppn").html("Rp. "+$("#b_ppn").html());
+			$("#cetak_biaya_ppn2").html("Rp. "+$("#b_ppn").html());
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#cetak_total").html("Rp. "+totalnya);
+			var b_ppn		=$("#b_ppn").text().replace('.','');
+			var totalnya = parseInt(b_ppn) + parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+			$("#cetak_total").html("Rp. " + rupiah(totalnya));
 
 			var d = new Date();
 			var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
@@ -261,10 +269,10 @@ $(document).ready(function(){
 			$("#cetak_penerima2").html($("#n_penerima").val());
 			$("#cetak_telp_penerima2").html("No. Telp : "+$("#t_penerima").val());
 			$("#cetak_isi_paket2").html($("#nama_barang").val());
-			$("#cetak_biaya_kirim2").html("Rp. "+$("#biaya_kirim").val());
-			$("#cetak_biaya_packing2").html("Rp. "+$("#biaya_packing").val());
-			$("#cetak_biaya_asu2").html("Rp. "+$("#biaya_asuransi").val());
-			$("#cetak_total2").html("Rp. "+totalnya);
+			$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			$("#cetak_biaya_packing2").html("Rp. "+rupiah($("#biaya_packing").val()));
+			$("#cetak_biaya_asu2").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			$("#cetak_total2").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal2").html("Kediri, "+tanggal);
 		}
 	//============================================ simpan transaksi
@@ -293,7 +301,7 @@ $(document).ready(function(){
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan').val();
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
-			
+			var metode		= $("#metode").val();
 			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -320,7 +328,9 @@ $(document).ready(function(){
 					'biaya_asu' 	: biaya_asu,
 					'keterangan'	: keterangan,
                 	'total_biaya'	: total_biaya,
-                	'satuan'		: satuan
+                	'satuan'		: satuan,
+                	'metode'		: metode,
+                	'ppn'			: $('#b_ppn').text().replace('.','')
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -331,4 +341,18 @@ $(document).ready(function(){
             });
 			}
 		});
+		//==================================================
+		function rupiah(bilangan){
+			var	number_string = bilangan.toString(),
+			sisa 	= number_string.length % 3,
+			rupiah 	= number_string.substr(0, sisa),
+			ribuan 	= number_string.substr(sisa).match(/\d{3}/gi);
+			
+		if (ribuan) {
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+
+			return rupiah;
+		}
 });
