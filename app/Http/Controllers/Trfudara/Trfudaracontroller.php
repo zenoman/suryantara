@@ -86,9 +86,9 @@ public function caridata(Request $request)
             'kode' => 'required|min:3',
             'tujuan' => 'required|min:3',
             'airlans' => 'required|min:3',
-            'gencoKG' => 'required|min:1',
-            'minimal' => 'required|min:1',
-            'tarif' => 'required|min:1',
+            'ber_perkg' => 'required|min:1',
+            'tarif_perkg' => 'required|min:1',
+            'tarif_dokumen' => 'required|min:1',
             'persentase' => 'required|min:1'
                 ];
          $customMessages = [
@@ -104,13 +104,13 @@ if($dtlam > 0){
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'gencoKG' => $request->gencoKG,
-            'minimal' => $request->minimal
+            'perkg' => $request->ber_perkg
 ]);
         DB::table('udara_kargo')
         ->insert([
             'kode_udara' => $request->kode,
-            'tarif' => $request->tarif,
+            'tarif_perkg' => $request->tarif_perkg,
+            'tarif_dokumen' => $request->tarif_dokumen,
             'persentase' => $request->persentase
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
@@ -157,12 +157,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     public function update(Request $request, $id)
     {
         $rules = [
-            'kode' => 'required|min:1',
-            'tujuan' => 'required|min:1',
-            'airlans' => 'required|min:1',
-            'gencoKG' => 'required|min:1',
-            'minimal' => 'required|min:1'
-            ];
+            'kode' => 'required|min:3',
+            'tujuan' => 'required|min:3',
+            'airlans' => 'required|min:3',
+            'ber_perkg' => 'required|min:1',
+            'tarif_perkg' => 'required|min:1',
+            'tarif_dokumen' => 'required|min:1',
+            'persentase' => 'required|min:1'
+                ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
@@ -173,14 +175,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'gencoKG' => $request->gencoKG,
-            'minimal' => $request->minimal
+            'perkg' => $request->ber_perkg
             ]);
 
         $kode = $request->kode;
 
         DB::table('udara_kargo')->where('kode_udara',$kode)->update([
-            'tarif' => $request->tarif,
+            'tarif_perkg' => $request->tarif_perkg,
+            'tarif_dokumen' => $request->tarif_dokumen,
             'persentase' => $request->persentase
 
         ]);

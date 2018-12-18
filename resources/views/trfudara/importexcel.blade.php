@@ -65,7 +65,7 @@
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <p>
                                                <li>
-                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>genco_per_kg,minimal,tarif dan persentase</b> hanyan diisi dengan angka saja.
+                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>berat_perkg,	tarif_perkg, tarif_dokumen dan persentase</b> hanyan diisi dengan angka saja.
                                                </li><br>
                                                <img src="{{url('img/import_export/udara.JPG')}}">
                                                <p>

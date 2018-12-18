@@ -71,47 +71,52 @@
                                        @endif
 						</div>
 					</div>
-
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">genco KG</label>
+						<label class="col-sm-2 form-control-label semibold">Berat PerKg</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="gencoKG" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23 kg">
+								<input type="text" class="form-control" id="inputPassword" name="ber_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23 kg">
 								<div class="input-group-addon">
 									Kg
 								</div>
 							</div>
-							@if($errors->has('gencoKG'))
+							@if($errors->has('ber_perkg'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('gencoKG ')}}
+                                        {{ $errors->first('ber_perkg')}}
                                          </div>
                                        @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Minimal</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="minimal" required onkeypress="return isNumberKey(event)" placeholder="Misal : 28"></p>
-							@if($errors->has('minimal'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('minimal')}}
-                                         </div>
-                                       @endif
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Tarif</label>
+						<label class="col-sm-2 form-control-label semibold">Tarif PerKG</label>
 						<div class="col-sm-10">
 								<div class="input-group">
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="tarif" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								<input type="text" class="form-control" id="inputPassword" name="tarif_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
 								
 							</div>
-							@if($errors->has('tarif'))
+							@if($errors->has('tarif_perkg'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('tarif')}}
+                                        {{ $errors->first('tarif_perkg')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tarif Dokumen</label>
+						<div class="col-sm-10">
+								<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="tarif_dokumen" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								
+							</div>
+							@if($errors->has('tarif_dokumen'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('tarif_dokumen')}}
                                          </div>
                                        @endif
 						</div>

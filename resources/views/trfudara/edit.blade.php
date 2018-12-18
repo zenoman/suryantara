@@ -67,26 +67,20 @@
                                          </div>
                                         @endif
 						</div>
-					</div>
+					</div>					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Genco per Kg</label>
+						<label class="col-sm-2 form-control-label semibold">Berat PerKg</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" required onkeypress="return isNumberKey(event)" placeholder="Text" name="gencoKG" value="{{$row->gencoKG}}"></p>
-						@if($errors->has('gencoKG'))
+							<div class="input-group">
+							<input type="text" class="form-control" id="inputPassword" required onkeypress="return isNumberKey(event)" placeholder="Text" name="ber_perkg" value="{{$row->perkg}}">
+
+								<div class="input-group-addon">
+									Kg
+								</div>
+							</div>
+						@if($errors->has('ber_perkg'))
                                         <div class="alert alert-danger">
-                                        {{ $errors->first('gencoKG')}}
-                                         </div>
-                                        @endif
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Minimal</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" required onkeypress="return isNumberKey(event)" placeholder="Text" name="minimal" value="{{$row->minimal}}"></p>
-						@if($errors->has('minimal'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('minimal')}}
+                                        {{ $errors->first('ber_perkg')}}
                                          </div>
                                         @endif
 						</div>
@@ -96,20 +90,35 @@
 					@foreach($udaracargo as $ro)
 					<input type="hidden" name="id_cargo" value="{{$ro->id}}">
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Tarif</label>
+						<label class="col-sm-2 form-control-label semibold">Tarif PerKg</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-
 							<div class="input-group-addon">
 									Rp.
 								</div>
-
-							<input type="text" class="form-control" id="inputPassword"  name="tarif" onkeypress="return isNumberKey(event)" value="{{$ro->tarif}}">
+							<input type="text" class="form-control" id="inputPassword"  name="tarif_perkg" onkeypress="return isNumberKey(event)" value="{{$ro->tarif_perkg}}">
 							
 							</div>
-							@if($errors->has('tarif'))
+							@if($errors->has('tarif_perkg'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('tarif')}}
+                                        {{ $errors->first('tarif_perkg')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tarif Dokumen</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+							<div class="input-group-addon">
+									Rp.
+								</div>
+							<input type="text" class="form-control" id="inputPassword"  name="tarif_dokumen" onkeypress="return isNumberKey(event)" value="{{$ro->tarif_dokumen}}">
+							
+							</div>
+							@if($errors->has('tarif_dokumen'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('tarif_dokumen')}}
                                          </div>
                                        @endif
 						</div>
