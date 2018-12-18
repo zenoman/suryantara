@@ -44,10 +44,14 @@ $(document).ready(function(){
 								hitung(item.tarif,item.tujuan);
 								$("#cetak_kota_tujuan").html(item.tujuan);
 								$("#cetak_kota_tujuan2").html(item.tujuan);
+								$("#cetak_kota_tujuan3").html(item.tujuan);
+								$("#cetak_kota_tujuan4").html(item.tujuan);
 								kotatujuan = item.tujuan;	
 							}else{
 								$("#cetak_kota_tujuan").html(item.tujuan);
 								$("#cetak_kota_tujuan2").html(item.tujuan);
+								$("#cetak_kota_tujuan3").html(item.tujuan);
+								$("#cetak_kota_tujuan4").html(item.tujuan);
 								kotatujuan = item.tujuan;
 								$("#biaya_kirim").val(0);
 								$("#b_kirim").html(0);
@@ -70,8 +74,10 @@ $(document).ready(function(){
 			success:function(data){
 				noresi = data;
 				$("#noresi").html(data);
-				$("#cetak_resi").html("SCK - "+data);
-				$("#cetak_resi2").html("SCK - "+data);
+				$("#cetak_resi").html(data);
+				$("#cetak_resi2").html(data);
+				$("#cetak_resi3").html(data);
+				$("#cetak_resi4").html(data);
 			}
 		});
 		}
@@ -228,13 +234,21 @@ $(document).ready(function(){
 			carikode();
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
+			$("#cetak_kota_tujuan3").html(kotatujuan);
+			$("#cetak_kota_tujuan4").html(kotatujuan);
+
 			$("#cetak_kota_asal").html($("#kota_asal").val());
+
 			if(satuan=='koli'){
 			$("#cetak_jumlah_barang").html($("#jumlah").val()+" "+satuan);
 			$("#cetak_jumlah_barang2").html($("#jumlah").val()+" "+satuan);
+			$("#cetak_jumlah_barang3").html($("#jumlah").val()+" "+satuan);
+			$("#cetak_jumlah_barang4").html($("#jumlah").val()+" "+satuan);
 			}else{
 			$("#cetak_jumlah_barang").html($("#jumlah").val());
 			$("#cetak_jumlah_barang2").html($("#jumlah").val());
+			$("#cetak_jumlah_barang3").html($("#jumlah").val());
+			$("#cetak_jumlah_barang4").html($("#jumlah").val());
 			}
 			$("#cetak_berat").html($("#berat").val()+" Kg");
 			$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
@@ -249,6 +263,8 @@ $(document).ready(function(){
 			$("#cetak_biaya_asu").html("Rp. "+rupiah($("#biaya_asuransi").val()));
 			$("#cetak_biaya_ppn").html("Rp. "+$("#b_ppn").html());
 			$("#cetak_biaya_ppn2").html("Rp. "+$("#b_ppn").html());
+			$("#cetak_biaya_ppn3").html("Rp. "+$("#b_ppn").html());
+
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
@@ -274,6 +290,36 @@ $(document).ready(function(){
 			$("#cetak_biaya_asu2").html("Rp. "+rupiah($("#biaya_asuransi").val()));
 			$("#cetak_total2").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal2").html("Kediri, "+tanggal);
+			//===========================================================
+			$("#cetak_kota_asal3").html($("#kota_asal").val());
+			$("#cetak_berat3").html($("#berat").val()+" Kg");
+			$("#cetak_dimensi3").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
+			$("#cetak_volumetrik3").html($("#volume").val()+" Kg");
+			$("#cetak_pengirim3").html($("#n_pengirim").val());
+			$("#cetak_telp_pengirim3").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_penerima3").html($("#n_penerima").val());
+			$("#cetak_telp_penerima3").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_isi_paket3").html($("#nama_barang").val());
+			$("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			$("#cetak_biaya_packing3").html("Rp. "+rupiah($("#biaya_packing").val()));
+			$("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			$("#cetak_total3").html("Rp. "+rupiah(totalnya));
+			$("#cetak_tanggal3").html("Kediri, "+tanggal);
+			//============================================================
+			$("#cetak_kota_asal4").html($("#kota_asal").val());
+			$("#cetak_berat4").html($("#berat").val()+" Kg");
+			$("#cetak_dimensi4").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
+			$("#cetak_volumetrik4").html($("#volume").val()+" Kg");
+			$("#cetak_pengirim4").html($("#n_pengirim").val());
+			$("#cetak_telp_pengirim4").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_penerima4").html($("#n_penerima").val());
+			$("#cetak_telp_penerima4").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_isi_paket4").html($("#nama_barang").val());
+			$("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			$("#cetak_biaya_packing4").html("Rp. "+rupiah($("#biaya_packing").val()));
+			$("#cetak_biaya_asu4").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			$("#cetak_total4").html("Rp. "+rupiah(totalnya));
+			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
 	//============================================ simpan transaksi
 		$("#btnsimpan").click(function(e){

@@ -8,30 +8,26 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(){
+    public function index(){}
 
-    }
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
+        
         $kode = DB::table('resi_pengiriman')
         ->where('no_resi','like','%-'.$kodeuser.'-%')
         ->max('no_resi');
 
         if(!$kode){
-            $finalkode = $tanggal."-".$kodeuser."-000001";
+            $finalkode = "KDR".$tanggal."-".$kodeuser."-000001";
         }else{
             $newkode    = explode("-", $kode);
-        $nomer      = sprintf("%06s",$newkode[2]+1);
-        $finalkode  = $tanggal."-".$kodeuser."-".$nomer;
+            $nomer      = sprintf("%06s",$newkode[2]+1);
+            $finalkode  = "KDR".$tanggal."-".$kodeuser."-".$nomer;
         }
         return response()->json($finalkode);
     }
+
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
