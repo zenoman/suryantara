@@ -159,7 +159,9 @@ class resipengirimanController extends Controller
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
         'keterangan'    => $request->keterangan,
-        'satuan'        => $request->satuan
+        'satuan'        => $request->satuan,
+        'metode_bayar'  => $request->metode,
+        'biaya_ppn'     => $request->ppn
        ]);
         return response()->json($simpan);
     }
