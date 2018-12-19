@@ -13,10 +13,12 @@
 
 
 -- Dumping database structure for kargo
+DROP DATABASE IF EXISTS `kargo`;
 CREATE DATABASE IF NOT EXISTS `kargo` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `kargo`;
 
 -- Dumping structure for table kargo.admin
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -29,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.admin: ~3 rows (approximately)
+-- Dumping data for table kargo.admin: ~2 rows (approximately)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `email`, `alamat`) VALUES
@@ -39,6 +41,7 @@ INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `emai
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.detail_sj
+DROP TABLE IF EXISTS `detail_sj`;
 CREATE TABLE IF NOT EXISTS `detail_sj` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` text,
@@ -62,6 +65,7 @@ INSERT INTO `detail_sj` (`id`, `kode`, `no_resi`, `penerima`, `alamat`, `jumlah`
 /*!40000 ALTER TABLE `detail_sj` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.omset
+DROP TABLE IF EXISTS `omset`;
 CREATE TABLE IF NOT EXISTS `omset` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `id_admin` int(11) DEFAULT NULL,
@@ -78,6 +82,7 @@ DELETE FROM `omset`;
 /*!40000 ALTER TABLE `omset` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_pengiriman
+DROP TABLE IF EXISTS `resi_pengiriman`;
 CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_resi` text,
@@ -108,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~5 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~4 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `total_biaya`, `keterangan`, `status`, `satuan`, `metode_bayar`) VALUES
@@ -120,6 +125,7 @@ INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
+DROP TABLE IF EXISTS `setting`;
 CREATE TABLE IF NOT EXISTS `setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `namaweb` varchar(45) NOT NULL,
@@ -138,6 +144,7 @@ INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`) VALUE
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_jalan
+DROP TABLE IF EXISTS `surat_jalan`;
 CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` text,
@@ -154,6 +161,7 @@ DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_darat
+DROP TABLE IF EXISTS `tarif_darat`;
 CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -176,6 +184,7 @@ INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estima
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_laut
+DROP TABLE IF EXISTS `tarif_laut`;
 CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -197,6 +206,7 @@ INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimas
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_udara
+DROP TABLE IF EXISTS `tarif_udara`;
 CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -214,6 +224,7 @@ DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.vendor
+DROP TABLE IF EXISTS `vendor`;
 CREATE TABLE IF NOT EXISTS `vendor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idvendor` varchar(100) DEFAULT NULL,
