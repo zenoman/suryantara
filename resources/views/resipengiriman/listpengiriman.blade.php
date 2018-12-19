@@ -44,6 +44,7 @@
 							<th>Tujuan</th>
 							<th>Pengirim</th>
 							<th>Admin</th>
+							<th>Status</th>
 						</tr>
 						</thead>
 						
@@ -54,8 +55,11 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                            	<span class="label label-danger">{{$row->no_resi}}
-                            	</span>
+                            	<a onclick="halo({{$row->id}})" data-id="">
+                            		<span class="label label-danger">{{$row->no_resi}}
+                            		</span>	
+                            	</a>
+                            	
                             </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
@@ -64,7 +68,7 @@
                             </td>
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->username}}</td>
-                            
+                            <td class="text-center">{{$row->status}}</td>
 						</tr>
 						@endforeach
 						</tbody>
@@ -78,6 +82,7 @@
 							<th>Tujuan</th>
 							<th>Pengirim</th>
 							<th>Admin</th>
+							<th>Status</th>
 						</tr>
 						</tfoot>
 					</table>
@@ -98,5 +103,9 @@
             "paging":false
         });
 		});
+
+		function halo(resi){
+			alert(resi);
+		}
 	</script>
 	@endsection
