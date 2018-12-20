@@ -38,15 +38,25 @@
 					</div>
 					<hr>
 					<div class="form-group row">
-					<div class="col-md-4 col-sm-6">
-						<label class="form-label" for="exampleInputDisabled">No.Resi</label>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">No.Resi</label>
 						<select class="select2" id="carinoresi"></select>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="pengirim" readonly>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="penerima">
+								<input type="text" class="form-control" id="penerima" readonly>
 							</div>
 						</div>
 					</div>
@@ -54,8 +64,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)">
-							<div class="input-group-addon"></div>
+								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)" readonly>
+							<div class="input-group-addon">Koli</div>
 							</div>
 						</div>
 					</div>
@@ -63,7 +73,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)" readonly>
 							<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -72,7 +82,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">tujuan</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="tujuan">
+								<input type="text" class="form-control" id="tujuan" readonly>
 							</div>
 						</div>
 					</div>
@@ -80,7 +90,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Isi Paket</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="isipaket">
+								<input type="text" class="form-control" id="isipaket" readonly>
 								<span class="input-group-btn"><button class="btn btn-info bootstrap-touchspin-up" type="button" id="btntambah">tambah</button></span>
 							</div>
 						</div>
