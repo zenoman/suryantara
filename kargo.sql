@@ -107,21 +107,21 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `biaya_ppn` int(11) DEFAULT '0',
   `total_biaya` int(11) DEFAULT '0',
   `keterangan` text,
-  `status` enum('Y','N') DEFAULT 'N',
+  `status` enum('Y','N','US','RS') DEFAULT 'N',
   `satuan` varchar(10) DEFAULT NULL,
   `metode_bayar` enum('cash','bt') DEFAULT 'cash',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~4 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~5 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `kode_jalan`, `id_admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `total_biaya`, `keterangan`, `status`, `satuan`, `metode_bayar`) VALUES
-	(1, 'KDR181218-06-000001', NULL, 6, 'ban motor', 'darat', 'kediri', 'malang', '2018-12-18', 4, 3, '20 x 30 x 20', '3', 'hadi', 'deni', '902384902', '90824902', 9000, 1000, 2000, 90, 12000, 'skldfjskldf', 'N', 'kg', 'cash'),
-	(2, 'KDR181218-06-000002', NULL, 6, 'sepatu kuda', 'darat', 'kediri', 'nganjuk', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'aris', '902384290', '928920', 7500, 500, 2000, 75, 10000, 'askldfjaskld', 'N', 'kg', 'bt'),
-	(3, 'KDR181218-06-000003', NULL, 6, 'lampu manten', 'darat', 'kediri', 'malang', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'mega', '023984902', '9203489028', 9000, 10000, 0, 90, 19000, 'asdfasd', 'N', 'kg', 'bt'),
-	(4, 'KDR191218-06-000004', NULL, 6, 'motor supra', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 8, '30 x 20 x 50', '7.5', 'handri', 'jeki', '029384290', '290384290', 320000, 1300, 0, 3200, 321300, 'askldjklsf', 'N', 'kg', 'bt'),
-	(5, 'KDR191218-06-000005', NULL, 6, 'perabot masak', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 5, '30 x 20 x 30', '4.5', 'dini', 'suko', '90284902', '902348902', 200000, 3000, 10000, 2000, 213000, 'askldfjsdklf', 'N', 'kg', 'cash');
+	(1, 'KDR181218-06-000001', NULL, 6, 'ban motor', 'darat', 'kediri', 'malang', '2018-12-18', 4, 3, '20 x 30 x 20', '3', 'hadi', 'deni', '902384902', '90824902', 9000, 1000, 2000, 90, 12000, 'skldfjskldf', 'Y', 'kg', 'cash'),
+	(2, 'KDR181218-06-000002', NULL, 6, 'sepatu kuda', 'darat', 'kediri', 'nganjuk', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'aris', '902384290', '928920', 7500, 500, 2000, 75, 10075, 'askldfjaskld', 'Y', 'kg', 'bt'),
+	(3, 'KDR181218-06-000003', NULL, 6, 'lampu manten', 'darat', 'kediri', 'malang', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'mega', '023984902', '9203489028', 9000, 10000, 0, 90, 19090, 'asdfasd', 'Y', 'kg', 'bt'),
+	(4, 'KDR191218-06-000004', NULL, 6, 'motor supra', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 8, '30 x 20 x 50', '7.5', 'handri', 'jeki', '029384290', '290384290', 320000, 1300, 0, 3200, 321300, 'askldjklsf', 'Y', 'kg', 'bt'),
+	(5, 'KDR191218-06-000005', NULL, 6, 'perabot masak', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 5, '30 x 20 x 30', '4.5', 'dini', 'suko', '90284902', '902348902', 200000, 3000, 10000, 2000, 213000, 'askldfjsdklf', 'Y', 'kg', 'cash');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
