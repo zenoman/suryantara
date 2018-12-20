@@ -86,10 +86,9 @@ public function caridata(Request $request)
             'kode' => 'required|min:3',
             'tujuan' => 'required|min:3',
             'airlans' => 'required|min:3',
-            'ber_perkg' => 'required|min:1',
-            'tarif_perkg' => 'required|min:1',
-            'tarif_dokumen' => 'required|min:1',
-            'persentase' => 'required|min:1'
+            'biaya_perkg' => 'required|min:1',
+            'minimal_heavy' => 'required|min:1',
+            'biaya_dokumen' => 'required|min:1',
                 ];
          $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -104,14 +103,9 @@ if($dtlam > 0){
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'perkg' => $request->ber_perkg
-]);
-        DB::table('udara_kargo')
-        ->insert([
-            'kode_udara' => $request->kode,
-            'tarif_perkg' => $request->tarif_perkg,
-            'tarif_dokumen' => $request->tarif_dokumen,
-            'persentase' => $request->persentase
+            'perkg' => $request->biaya_perkg,
+            'minimal_heavy' => $request->minimal_heavy,
+            'biaya_dokumen' => $request->biaya_dokumen
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
 }
@@ -138,13 +132,8 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     {
         //
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
-        foreach ($trfudara as $row) {
-            $kode = $row->kode;
-
-        }
     $setting = DB::table('setting')->get();
-        $udara_kargo = DB::table('udara_kargo')->where('kode_udara',$kode)->get();
-        return view('trfudara/edit',['trfudara'=>$trfudara,'udaracargo'=>$udara_kargo,'title'=>$setting]); 
+        return view('trfudara/edit',['trfudara'=>$trfudara,'title'=>$setting]); 
     }
 
     /**
@@ -160,10 +149,9 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => 'required|min:3',
             'tujuan' => 'required|min:3',
             'airlans' => 'required|min:3',
-            'ber_perkg' => 'required|min:1',
-            'tarif_perkg' => 'required|min:1',
-            'tarif_dokumen' => 'required|min:1',
-            'persentase' => 'required|min:1'
+            'biaya_perkg' => 'required|min:1',
+            'minimal_heavy' => 'required|min:1',
+            'biaya_dokumen' => 'required|min:1',
                 ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -175,17 +163,10 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'perkg' => $request->ber_perkg
+            'perkg' => $request->biaya_perkg,
+            'minimal_heavy' => $request->minimal_heavy,
+            'biaya_dokumen' => $request->biaya_dokumen
             ]);
-
-        $kode = $request->kode;
-
-        DB::table('udara_kargo')->where('kode_udara',$kode)->update([
-            'tarif_perkg' => $request->tarif_perkg,
-            'tarif_dokumen' => $request->tarif_dokumen,
-            'persentase' => $request->persentase
-
-        ]);
         
 
         return redirect('trfudara')->with('status','Edit Data Sukses');

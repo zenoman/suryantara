@@ -18,14 +18,10 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
                     'kode'=>$row['kode_tujuan'],
                     'tujuan'=>$row['tujuan'],
                     'airlans'=>$row['airlans'],
-                    'perkg'=>$row['berat_perkg'],
+                    'perkg'=>$row['tarif_perkg'],
+                    'minimal_heavy'=>$row['minimal_heavy'],
+                    'biaya_dokumen'=>$row['tarif_dokumen'],
                     
-                    ]);
-    	 DB::table('udara_kargo')->insert([
-                    'kode_udara'=>$row['kode_tujuan'],
-                    'tarif_perkg'=>$row['tarif_perkg'],
-                    'tarif_dokumen'=>$row['tarif_dokumen'],
-                    'persentase'=>$row['persentase']
                     ]);
     	}
 

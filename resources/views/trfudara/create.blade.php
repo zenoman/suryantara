@@ -72,34 +72,34 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Berat PerKg</label>
+						<label class="col-sm-2 form-control-label semibold">biaya PerKg</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="ber_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal : 23 kg">
+								<input type="text" class="form-control" id="inputPassword" name="biaya_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
 								<div class="input-group-addon">
-									Kg
+									Rp.
 								</div>
 							</div>
-							@if($errors->has('ber_perkg'))
+							@if($errors->has('biaya_perkg'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('ber_perkg')}}
+                                        {{ $errors->first('biaya_perkg')}}
                                          </div>
                                        @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Tarif PerKG</label>
+						<label class="col-sm-2 form-control-label semibold">minimal heavy</label>
 						<div class="col-sm-10">
 								<div class="input-group">
 								<div class="input-group-addon">
-									Rp.
+									.Kg
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="tarif_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								<input type="text" class="form-control" id="inputPassword" name="minimal_heavy" required onkeypress="return isNumberKey(event)" placeholder="Misal : 30 KG">
 								
 							</div>
-							@if($errors->has('tarif_perkg'))
+							@if($errors->has('minimal_heavy'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('tarif_perkg')}}
+                                        {{ $errors->first('minimal_heavy')}}
                                          </div>
                                        @endif
 						</div>
@@ -111,28 +111,12 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="tarif_dokumen" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								<input type="text" class="form-control" id="inputPassword" name="biaya_dokumen" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
 								
 							</div>
-							@if($errors->has('tarif_dokumen'))
+							@if($errors->has('biaya_dokumen'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('tarif_dokumen')}}
-                                         </div>
-                                       @endif
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Persentase</label>
-						<div class="col-sm-10">
-							<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="persentase"  required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 %">
-								<div class="input-group-addon">
-									%
-								</div>
-							</div>
-							@if($errors->has('persentase'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('persentase')}}
+                                        {{ $errors->first('biaya_dokumen')}}
                                          </div>
                                        @endif
 						</div>

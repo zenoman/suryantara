@@ -6,15 +6,13 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class TrfudaraExport implements FromCollection, WithHeadings
-{
+class TrfudaraExport implements FromCollection, WithHeadings{
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
-    {
-    	return DB::table('tarif_udara')->select('kode','tujuan','airlans','perkg','minimal_heavy','biaya_dokumen')->get();;
-        //
+       {
+        return DB::table('tarif_udara')->select('kode','tujuan','airlans','perkg','minimal_heavy','biaya_dokumen')->get();;
     }
     public function headings(): array
     {
@@ -27,4 +25,4 @@ class TrfudaraExport implements FromCollection, WithHeadings
             'tarif_dokumen',
         ];
     }
-}
+    }
