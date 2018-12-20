@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
                 break;
             default:
                 return $this->renderHttpException($e);
-                break;
+            break;
         }
         }else{
         return parent::render($request, $exception);

@@ -9,6 +9,49 @@ use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
     public function index(){}
+    public function uangkembali($id){
+         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($data as $row) {
+            
+                if($row->status=='N'){
+                    $status = "US";
+                }else{
+                    $status = "Y";
+                }
+            
+
+        }
+        DB::table('resi_pengiriman')->where('id',$id)
+        ->update([
+        'status'=>$status
+        ]);
+        return back()->with('status','Status Berhasil Diubah');
+    }
+    public function resikembali($id){
+        $data=DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($data as $row) {
+            if($row->metode_bayar=='cash'){
+                $status = "Y";
+            }else{
+                if($row->status=='N'){
+                    $status = "RS";
+                }else{
+                    $status = "Y";
+                }
+            }
+
+        }
+        DB::table('resi_pengiriman')->where('id',$id)
+        ->update([
+        'status'=>$status
+        ]);
+        return back()->with('status','Status Berhasil Diubah');
+    }
+    public function carilistresi($id){
+        $data = DB::table('resi_pengiriman')
+        ->where('id',$id);
+        return response()->json($data);
+    }
 
     public function carikode(){
         $tanggal    = date('dmy');

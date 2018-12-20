@@ -33,8 +33,7 @@ $(document).ready(function(){
                 success:function (data){
 				return {
 					results : $.map(data, function (item){
-					
-							cariitem(item.nama_barang,item.jumlah,item.berat);
+					cariitem(item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
 			},
@@ -45,8 +44,11 @@ $(document).ready(function(){
 			$('#penerima').focus();
 		});
 	//===================================================
-	function cariitem(barang,jumlah,berat){
+	function cariitem(barang,jumlah,berat,pengirim,penerima,tujuan){
+        $('#penerima').val(penerima);
+        $('#pengirim').val(pengirim);
 		$('#isipaket').val(barang);
+        $('#tujuan').val(tujuan);
 		$('#jumlah').val(jumlah);
 		$('#berat').val(berat);
 
@@ -100,13 +102,13 @@ $(document).ready(function(){
             $.each(data,function(key, value){
                 no +=1;
                 rows = rows + '<tr>';
-                rows = rows + '<td>' +value.no_resi+'</td>';
-                rows = rows + '<td> suryantara cargo </td>';
-                rows = rows + '<td>' +value.penerima+'</td>';
-                rows = rows + '<td>' +value.alamat+'</td>';
+                rows = rows + '<td class="text-center">' +value.no_resi+'</td>';
+                rows = rows + '<td>'+value.nama_pengirim+'</td>';
+                rows = rows + '<td>' +value.nama_penerima+'</td>';
+                rows = rows + '<td>' +value.kode_tujuan+'</td>';
                 rows = rows + '<td class="text-center">' +value.jumlah+'</td>';
                 rows = rows + '<td class="text-center">' +value.berat+'</td>';
-                rows = rows + '<td>' +value.isi+'</td>';
+                rows = rows + '<td>' +value.nama_barang+'</td>';
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
@@ -146,19 +148,14 @@ $(document).ready(function(){
     		notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
     	}else{
     		var resi = $("#carinoresi").select2('data');
-    		var noresi = resi[0].text;
+    		var noresi = resi[0].id;
     		$.ajax({
                 type: 'POST',
                 url: '/tambahdetailsj',
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'kode': noresisj,
-                    'noresi': noresi,
-                    'penerima' : $("#penerima").val(),
-			    	'jumlah' : $("#jumlah").val(),
-			    	'berat' : $("#berat").val(),
-			    	'tujuan' : $("#tujuan").val(),
-			    	'isipaket' : $("#isipaket").val()
+                    'noresi': noresi
                 },
                 success: function(data) {
                 	 notie.alert(1, 'Data Disimpan', 2);
@@ -170,6 +167,7 @@ $(document).ready(function(){
     });
     //===============================================================
     function bersihdetail(){
+        $('#pengirim').val('');
     	$("#penerima").val('');
     	$("#jumlah").val('');
     	$("#berat").val('');

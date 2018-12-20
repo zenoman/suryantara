@@ -25,6 +25,7 @@
 					</div>
 				</div>
 			</header>
+
 			<section class="card">
 				<div class="card-block">
 					@if (session('status'))
@@ -54,12 +55,171 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>
-                            	<a onclick="halo({{$row->id}})" data-id="">
-                            		<span class="label label-danger">{{$row->no_resi}}
-                            		</span>	
-                            	</a>
-                            	
+                            <td class="text-center">
+                            	<button class="btn btn-sm btn-primary"
+						data-toggle="modal"
+						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+
+				<div class="modal fade bd-example-modal-lg{{$row->id}}"
+					 tabindex="-1"
+					 role="dialog"
+					 aria-labelledby="myLargeModalLabel"
+					 aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+									<i class="font-icon-close-2"></i>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Detail Resi</h4>
+							</div>
+							<div class="modal-body">
+				
+				<div class="card-block invoice">
+					<div class="row">
+						<div class="col-lg-6 company-info text-left">
+							<h5>Isi paket : {{$row->nama_barang}}</h5>
+							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
+
+							<div class="invoice-block">
+								<div>Pengirim : {{$row->nama_pengirim}}</div>
+								<div>No.Telpon : {{$row->telp_pengirim}}</div>
+							</div>
+							<br>
+							<div class="invoice-block">
+								<div>Penerima : {{$row->nama_penerima}}</div>
+								<div>No.Telpon : {{$row->telp_penerima}}</div>
+							</div>
+							<br>
+							<div class="invoice-block">
+							<div>Tanggal : {{$row->tgl}}</div>
+								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
+								<div>Metode Bayar : {{$row->metode_bayar}}</div>
+							</div>
+							<br>
+							<!-- <div class="invoice-block">
+								<h5>Invoice To:</h5>
+								<div>Rebeca Manes</div>
+								<div>
+									Normand axis LTD <br>
+									3 Goodman street
+								</div>
+							</div> -->
+						</div>
+						<div class="col-lg-6 clearfix invoice-info">
+							<div class="text-lg-right">
+								<h5>{{$row->no_resi}}</h5>
+								
+								<table class="pull-right table-sm">
+									<tr>
+										<td>Operator</td>
+										<td>{{$row->username}}</td>
+									</tr>
+									<tr>
+										<td>Berat Aktual</td>
+										<td>{{$row->berat}} Kg</td>
+									</tr>
+									<tr>
+										<td>Berat Volumetrik</td>
+										<td>{{$row->ukuran_volume}} Kg</td>
+									</tr>
+									<tr>
+										<td>Dimensi</td>
+										<td>{{$row->dimensi}}</td>
+									</tr>
+									<tr>
+										<td>Jumlah</td>
+										<td>{{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								<br>
+								
+							</div>
+							
+						</div>
+					</div>
+					<div class="row table-details">
+						<div class="col-lg-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Detail Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										
+										<td class="text-right">Biaya Kirim</td>
+										<td>Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+										
+									</tr>
+									<tr>
+										
+										<td class="text-right">Biaya Packing</td>
+										<td>Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
+										
+									</tr>
+									<tr>
+										
+										<td class="text-right">Biaya Asuransi</td>
+										<td>Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
+									
+									</tr>
+									<tr>
+										
+										<td class="text-right">PPN</td>
+										<td>Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+										
+									</tr>
+									<tr>
+										<td><h4>Total</h4></td>
+										<td><h4>
+											Rp. {{number_format($row->total_biaya,2,',','.')}}
+										</h4></td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<br>
+						<div class="col-lg-12 terms-and-conditions">
+							<strong>Status : 
+							 @if($row->status=='N')
+								Menunggu Pengembalian Resi / Uang
+                            @else
+								Pengiriman Sukses
+                        	@endif
+							</strong>
+							
+						</div>
+						
+					</div>
+				</div>
+							</div>
+							<div class="modal-footer">
+								@if($row->metode_bayar=='cash')
+									@if($row->status=='N')
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary">Resi Dikembalikan</a>
+									@endif
+								@else
+									@if($row->status=='N')
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+									@elseif($row->status=='US')
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+									@else
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									@endif
+								@endif
+								
+								
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div><!--.modal-->
                             </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
@@ -68,7 +228,15 @@
                             </td>
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->username}}</td>
-                            <td class="text-center">{{$row->status}}</td>
+                            <td class="text-center">
+                            @if($row->status=='Y')
+                            <span class="label label-success">
+								Sukses
+							</span>
+                            @else
+							<span class="label label-danger">Menunggu</span>
+                        	@endif
+                            </td>
 						</tr>
 						@endforeach
 						</tbody>
@@ -104,8 +272,6 @@
         });
 		});
 
-		function halo(resi){
-			alert(resi);
-		}
+	
 	</script>
 	@endsection
