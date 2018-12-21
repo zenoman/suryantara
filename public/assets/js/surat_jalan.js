@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var noresisj ;
 		carikode();
-
+        $("#carivendor").focus();
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',
@@ -24,6 +24,28 @@ $(document).ready(function(){
 			cache: true
 		}
 	});
+        //=============================================cari vendor
+        $('#carivendor').select2({
+        placeholder: 'Cari vendor',
+        ajax:{
+            url:'/carivendor',
+            dataType:'json',
+            delay:250,
+            processResults: function (data){
+                return {
+                    results : $.map(data, function (item){
+                        
+                        return {
+                            id: item.id,
+                            text: item.vendor
+                        }
+
+                    })
+                }
+            },
+            cache: true
+        }
+    });
 		//=================================================
 		$('#carinoresi').on('select2:select',function(e){
 			var isi = $(this).val();
@@ -39,6 +61,27 @@ $(document).ready(function(){
 			},
             });
 		});
+    //=================================================
+        $('#carivendor').on('select2:select',function(e){
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '/carivendor/'+id,
+                success:function (data){
+                return {
+                    results : $.map(data, function (item){
+                        $('#telpvendor').val(item.telp);
+                        $('#alamatvendor').val(item.alamat);
+                        $('#cabang').val(item.cabang);
+                        $("#cetak_tujuan").html(":&nbsp;"+item.vendor+"-"+item.telp);
+                        $("#cetak_tujuan2").html(":&nbsp;"+item.vendor+"-"+item.telp);
+                        $("#cetak_alamat").html(":&nbsp;"+item.alamat);
+                        $("#cetak_alamat2").html(":&nbsp;"+item.alamat);
+                    })
+                }
+            },
+            });
+        });
 	//===================================================
 		$("#carinoresi").on('select2:close',function(e){
 			$('#penerima').focus();
@@ -51,7 +94,7 @@ $(document).ready(function(){
         $('#tujuan').val(tujuan);
 		$('#jumlah').val(jumlah);
 		$('#berat').val(berat);
-
+        $('#btntambah').focus();
 	}
 	//========================================================
 	function carikode(){
@@ -62,6 +105,7 @@ $(document).ready(function(){
 				noresisj = data;
 				$("#noresi").html(data);
                  $("#cetak_kodesj").html(":&nbsp;"+data);
+                 $("#cetak_kodesj2").html(":&nbsp;"+data);
 				getdata();
 			}
 		});
@@ -94,8 +138,10 @@ $(document).ready(function(){
            }
     //==========================================================
     function managerow(data){
+            var cabang = $('#cabang').val();
             var rows ='';
             var rows2 ='';
+            var rows3 ='';
             var totaljumlah =0;
             var totalkg =0;
             var no = 0;
@@ -116,28 +162,60 @@ $(document).ready(function(){
                 rows2 = rows2 + '<tr align="center">';
                 rows2 = rows2 + '<td>'+no+'</td>';
                 rows2 = rows2 + '<td>'+value.no_resi+'</td>';
-                rows2 = rows2 + '<td>suryantara cargo</td>';
-                rows2 = rows2 + '<td>'+value.penerima+'</td>';
-                rows2 = rows2 + '<td>' +value.alamat+'</td>';
+                rows2 = rows2 + '<td>'+value.nama_pengirim+'</td>';
+                rows2 = rows2 + '<td>'+value.nama_penerima+'</td>';
+                rows2 = rows2 + '<td>' +value.kode_tujuan+'</td>';
                 rows2 = rows2 + '<td>' +value.jumlah+'</td>';
                 rows2 = rows2 + '<td>' +value.berat+'</td>';
-                rows2 = rows2 + '<td>' +value.isi+'</td>';
-                rows2 = rows2 + '<td>-</td>';
-                rows2 = rows2 + '<td>-</td>';
-                rows2 = rows2 + '<td>-</td>';
+                rows2 = rows2 + '<td>' +value.nama_barang+'</td>';
+                if(value.metode_bayar=='cash'){
+                        rows2 = rows2 + '<td>-</td>';
+                        rows2 = rows2 + '<td> </td>';   
+                    }else{
+                        rows2 = rows2 + '<td> </td>'; 
+                        rows2 = rows2 + '<td>-</td>'; 
+                    }
                 rows2 = rows2 + '<td>-</td>';
                 rows2 = rows2 + '</tr>';
+                //=======================================
+                rows3 = rows3 + '<tr align="center">';
+                rows3 = rows3 + '<td>'+no+'</td>';
+                rows3 = rows3 + '<td>'+value.no_resi+'</td>';
+                rows3 = rows3 + '<td>'+value.nama_pengirim+'</td>';
+                rows3 = rows3 + '<td>'+value.nama_penerima+'</td>';
+                rows3 = rows3 + '<td>' +value.kode_tujuan+'</td>';
+                rows3 = rows3 + '<td>' +value.jumlah+'</td>';
+                rows3 = rows3 + '<td>' +value.berat+'</td>';
+                rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
+                if(value.metode_bayar=='cash'){
+                        rows3 = rows3 + '<td>'+value.total_biaya+'</td>';
+                        rows3 = rows3 + '<td> </td>';   
+                    }else{
+                        rows3 = rows3 + '<td> </td>'; 
+                        rows3 = rows3 + '<td>'+value.total_biaya+'</td>'; 
+                    }
+                rows3 = rows3 + '<td>-</td>';
+                rows3 = rows3 + '</tr>';
+
             });
             $("#tubuh").html(rows);
             $("#list_cetak").html(rows2);
+            $("#list_cetak2").html(rows3);
             $("#totaljumlah").html(totaljumlah);
             $("#cetak_subtotaljumlah").html(totaljumlah);
             $("#cetak_subtotalberat").html(totalkg);
+            $("#cetak_subtotaljumlah2").html(totaljumlah);
+            $("#cetak_subtotalberat2").html(totalkg);
             $("#totalkg").html(totalkg);
         }
     //============================================================
     $("#btntambah").click(function(e){
-    	// 
+    	var foo='bar';
+    if(foo=='bar'){
+     var isgood = confirm('Tambahkan Resi Kesurat Jalan ? ');
+     if(isgood == true){ 
+        var l = Ladda.create(this);
+        l.start();
     	var penerima = $("#penerima").val();
     	var jumlah = $("#jumlah").val();
     	var berat = $("#berat").val();
@@ -162,9 +240,16 @@ $(document).ready(function(){
                 	 bersihdetail();
                     getdata();
                 },
+            }).always(
+            function() {
+                l.stop();
             });
-    	}
+    	}}}
     });
+    //=============================================================
+    $('#btnbersihdetail').click(function(){
+        bersihdetail();
+    })
     //===============================================================
     function bersihdetail(){
         $('#pengirim').val('');
@@ -201,8 +286,15 @@ $(document).ready(function(){
     //============================================ cetak resi
         
         $("#btncetak").click(function(){
+
         tempel_cetak();
-        var divToPrint=document.getElementById('hidden_div');
+        if($('#cabang').val()=='Y'){
+            var divToPrint=document.getElementById('hidden_divcabang');
+        }else{
+           var divToPrint=document.getElementById('hidden_div'); 
+        }
+        
+        
         var newWin=window.open('','Print-Window');
         newWin.document.open();
         newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
@@ -210,6 +302,5 @@ $(document).ready(function(){
         });
     //=====================================
     function tempel_cetak(){
-    $("#cetak_tujuan").html(":&nbsp;"+$("#tujuan_sj").val());
     }
 });

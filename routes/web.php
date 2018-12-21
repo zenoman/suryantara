@@ -14,6 +14,8 @@ Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@cariha
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
 Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
+Route::get('/carivendor','suratjalan\suratjalanController@carivendor');
+Route::get('/carivendor/{id}','suratjalan\suratjalanController@hasilvendor');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 //===========================================
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');

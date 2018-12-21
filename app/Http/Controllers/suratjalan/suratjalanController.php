@@ -57,9 +57,29 @@ class suratjalanController extends Controller
             return response()->json($data);
         }
     }
+    public function carivendor(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('vendor')
+                    ->select('vendor','id')
+                    ->where('vendor','like','%'.$cari.'%')
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
     public function hasilresi($id){
     	$data = DB::table('resi_pengiriman')
                     ->select('nama_barang','no_resi','jumlah','berat','id','nama_pengirim','nama_penerima','kode_tujuan')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
+    }
+    public function hasilvendor($id){
+        $data = DB::table('vendor')
+                    ->select('vendor','id','alamat','telp','cabang')
                     ->where('id',$id)
                     ->get();
             
