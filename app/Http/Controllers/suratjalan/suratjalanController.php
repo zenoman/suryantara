@@ -35,11 +35,15 @@ class suratjalanController extends Controller
                 }
             }
            
-        } 
-        
-        
-        return response()->json($finalkode);
+        } return response()->json($finalkode);
     }
+
+    public function listsuratjalan(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $listdata = DB::table('surat_jalan')->where('status','!=','N')->paginate(40);
+        return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
+    }
+
     public function caridetail($id){
         $data = DB::table('resi_pengiriman')->where('kode_jalan',$id)->get();
         return response()->json($data);

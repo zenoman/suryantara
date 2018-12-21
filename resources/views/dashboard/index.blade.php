@@ -9,7 +9,7 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+<link href="{{asset('assets/css/lib/charts-c3js/c3.min.css')}}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -18,6 +18,16 @@
 	       
 	
 	        <div class="row">
+	        	<div class="col-xl-12 dahsboard-column">
+	        	<section class="card">
+            <header class="card-header">
+                Bar Chart
+            </header>
+            <div class="card-block">
+                <div id="bar-chart"></div>
+            </div>
+        </section>
+    </div>
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
@@ -163,5 +173,7 @@
 @endsection
 
 @section('js')
-<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/d3/d3.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/charts-c3js/c3.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/charts-c3js/c3js-init.js')}}"></script>
 @endsection

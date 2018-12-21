@@ -356,6 +356,8 @@ $(document).ready(function(){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    				
    			}else{
+   				var l = Ladda.create(this);
+                l.start();
 				$.ajax({
                 type: 'POST',
                 url: 'simpanlaut',
@@ -389,6 +391,9 @@ $(document).ready(function(){
                 	bersih();
                 	carikode();
                 },
+            }).always(
+            function() {
+                l.stop();
             });
 			}
 		});

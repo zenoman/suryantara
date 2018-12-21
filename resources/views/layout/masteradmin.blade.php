@@ -104,7 +104,7 @@
 	            </span>
 	             <ul>
                 <li><a href="{{url('/buatsuratjalan')}}"><span class="lbl">Buat Surat Jalan</span></a></li>
-	                <li><a href="#"><span class="lbl">
+	                <li><a href="{{url('/listsuratjalan')}}"><span class="lbl">
 	                Daftar Surat Jalan </span></a></li>
 	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
 	            </ul>

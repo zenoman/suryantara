@@ -1,7 +1,10 @@
 @extends('layout.masteradmin')
+
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
+
 @section('header')
 @foreach($webinfo as $info)
 <title>{{$info->namaweb}}</title>
@@ -211,8 +214,10 @@
 					{{csrf_field()}}
 							<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>
-								
+
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								</button>
+
 								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 								
 							</small>
@@ -1018,13 +1023,13 @@
 	</div>
         @endsection
 @section('js')
-
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
-
-
+<script src="{{asset('assets/js/lib/ladda-button/spin.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/ladda-button/ladda.min.js')}}"></script>
 @endsection
+
 @section('otherjs')
 <script src="{{asset('assets/js/resi.js')}}"></script>
 <script type="text/javascript">

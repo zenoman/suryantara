@@ -352,6 +352,8 @@ $(document).ready(function(){
 			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
+   				var l = Ladda.create(this);
+                l.start();
 				$.ajax({
                 type: 'POST',
                 url: 'residarat',
@@ -385,6 +387,9 @@ $(document).ready(function(){
                 	bersih();
                 	carikode();
                 },
+            }).always(
+            function() {
+                l.stop();
             });
 			}
 		});
