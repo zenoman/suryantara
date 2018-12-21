@@ -115,7 +115,7 @@
                                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trfudara/exportudara')}}" class="btn btn-primary">Export Tarif Udara</a>
+                                    <a href="{{url('trfudara/exporttrfudara')}}" class="btn btn-primary">Export Tarif Udara</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
