@@ -1,8 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
-Route::get('404',['as'=>'404','uses'=>'ErrorController@notfound']);
-Route::get('500',['as'=>'500','uses'=>'ErrorController@fatal']);
-//============================================
+Route::post('/tambahkansj','suratjalan\suratjalanController@store');
 Route::get('/uangkembali/{id}','resipengiriman\resipengirimanController@uangkembali');
 Route::get('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
 Route::get('/carilistresi/{id}','resipengiriman\resipengirimanController@carilistresi');

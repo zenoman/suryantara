@@ -73,10 +73,11 @@ $(document).ready(function(){
                         $('#telpvendor').val(item.telp);
                         $('#alamatvendor').val(item.alamat);
                         $('#cabang').val(item.cabang);
-                        $("#cetak_tujuan").html(":&nbsp;"+item.vendor+"-"+item.telp);
-                        $("#cetak_tujuan2").html(":&nbsp;"+item.vendor+"-"+item.telp);
+                        $("#cetak_tujuan").html(":&nbsp;"+item.vendor+"("+item.telp+")");
+                        $("#cetak_tujuan2").html(":&nbsp;"+item.vendor+"("+item.telp+")");
                         $("#cetak_alamat").html(":&nbsp;"+item.alamat);
                         $("#cetak_alamat2").html(":&nbsp;"+item.alamat);
+                        $('#carinoresi').focus();
                     })
                 }
             },
@@ -144,6 +145,8 @@ $(document).ready(function(){
             var rows3 ='';
             var totaljumlah =0;
             var totalkg =0;
+            var totalcash = 0;
+            var totalbt = 0;
             var no = 0;
             $.each(data,function(key, value){
                 no +=1;
@@ -159,6 +162,7 @@ $(document).ready(function(){
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
                 totalkg += value.berat;
+
                 rows2 = rows2 + '<tr align="center">';
                 rows2 = rows2 + '<td>'+no+'</td>';
                 rows2 = rows2 + '<td>'+value.no_resi+'</td>';
@@ -188,11 +192,13 @@ $(document).ready(function(){
                 rows3 = rows3 + '<td>' +value.berat+'</td>';
                 rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
                 if(value.metode_bayar=='cash'){
-                        rows3 = rows3 + '<td>'+value.total_biaya+'</td>';
-                        rows3 = rows3 + '<td> </td>';   
+                        rows3 = rows3 + '<td align="left">'+"Rp. "+rupiah(value.total_biaya)+'</td>';
+                        rows3 = rows3 + '<td> </td>';
+                        totalcash += value.total_biaya;   
                     }else{
                         rows3 = rows3 + '<td> </td>'; 
-                        rows3 = rows3 + '<td>'+value.total_biaya+'</td>'; 
+                        rows3 = rows3 + '<td align="left">'+"Rp. "+rupiah(value.total_biaya)+'</td>'; 
+                        totalbt += value.total_biaya;
                     }
                 rows3 = rows3 + '<td>-</td>';
                 rows3 = rows3 + '</tr>';
@@ -207,27 +213,34 @@ $(document).ready(function(){
             $("#cetak_subtotaljumlah2").html(totaljumlah);
             $("#cetak_subtotalberat2").html(totalkg);
             $("#totalkg").html(totalkg);
+            $('#totalcash').val(totalcash);
+            $('#totalbt').val(totalbt);
+            $('#cetak_totalcashnya').html("Rp. "+rupiah(totalcash));
+            $('#cetak_totalbtnya').html("Rp. "+rupiah(totalbt));
         }
     //============================================================
     $("#btntambah").click(function(e){
-    	var foo='bar';
+        if($('#pengirim').val()==''){
+                notie.alert(3, 'Maaf, Data Resi Harus Diisi', 2);
+            }else{
+               var foo='bar';
     if(foo=='bar'){
      var isgood = confirm('Tambahkan Resi Kesurat Jalan ? ');
      if(isgood == true){ 
         var l = Ladda.create(this);
         l.start();
-    	var penerima = $("#penerima").val();
-    	var jumlah = $("#jumlah").val();
-    	var berat = $("#berat").val();
-    	var tujuan = $("#tujuan").val();
-    	var isipaket = $("#isipaket").val();
+        var penerima = $("#penerima").val();
+        var jumlah = $("#jumlah").val();
+        var berat = $("#berat").val();
+        var tujuan = $("#tujuan").val();
+        var isipaket = $("#isipaket").val();
 
-    	if($("#carinoresi").val() =='' ||penerima==''||jumlah==''||berat==''||tujuan==''||isipaket==''){
-    		notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
-    	}else{
-    		var resi = $("#carinoresi").select2('data');
-    		var noresi = resi[0].id;
-    		$.ajax({
+        if($("#carinoresi").val() =='' ||penerima==''||jumlah==''||berat==''||tujuan==''||isipaket==''){
+            notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+        }else{
+            var resi = $("#carinoresi").select2('data');
+            var noresi = resi[0].id;
+            $.ajax({
                 type: 'POST',
                 url: '/tambahdetailsj',
                 data: {
@@ -236,15 +249,17 @@ $(document).ready(function(){
                     'noresi': noresi
                 },
                 success: function(data) {
-                	 notie.alert(1, 'Data Disimpan', 2);
-                	 bersihdetail();
+                     notie.alert(1, 'Data Disimpan', 2);
+                     bersihdetail();
                     getdata();
                 },
             }).always(
             function() {
                 l.stop();
             });
-    	}}}
+        }}} 
+            }
+    	
     });
     //=============================================================
     $('#btnbersihdetail').click(function(){
@@ -286,8 +301,9 @@ $(document).ready(function(){
     //============================================ cetak resi
         
         $("#btncetak").click(function(){
-
-        tempel_cetak();
+            if($('#telpvendor').val()=='' || $('#biaya_sj').val()==''){
+                notie.alert(3, 'Maaf, Data Vendor Harus Di Isi', 2);
+            }else{
         if($('#cabang').val()=='Y'){
             var divToPrint=document.getElementById('hidden_divcabang');
         }else{
@@ -298,9 +314,74 @@ $(document).ready(function(){
         var newWin=window.open('','Print-Window');
         newWin.document.open();
         newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-        newWin.document.close();
+        newWin.document.close();  
+            }
+        
         });
-    //=====================================
-    function tempel_cetak(){
-    }
+    
+    //==================================================
+        function rupiah(bilangan){
+            var number_string = bilangan.toString(),
+            sisa    = number_string.length % 3,
+            rupiah  = number_string.substr(0, sisa),
+            ribuan  = number_string.substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+            return rupiah;
+        }
+    //======================================================
+    $('#btnsimpan').click(function(){
+        var foo='bar';
+    if(foo=='bar'){
+     var isgood = confirm('Apakah Anda Yakin Data Sudah Benar ?');
+     if(isgood == true){
+        if($('#telpvendor').val()=='' || $('#biaya_sj').val()==''){
+                notie.alert(3, 'Maaf, Data Vendor Dan Biaya Harus Di Isi', 2);
+            }else{
+                var noresi = $("#noresi").html();
+                var dats = $('#carivendor').select2('data');
+
+                var tujuan = dats[0].text+"-"+$("#telpvendor").val();
+                var alamat = $("#alamatvendor").val();
+                var totalkg = $('#totalkg').html();
+                var totalkoli = $('#totaljumlah').html();
+                var totalcash = $('#totalcash').val();
+                var totalbt    =$('#totalbt').val();
+
+                var l = Ladda.create(this);
+                l.start();
+                $.ajax({
+                type: 'POST',
+                url: '/tambahkansj',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                        'noresi' : noresi,
+                        'tujuan' : tujuan,
+                        'alamat' : alamat,
+                        'totalkg' : totalkg,
+                        'totalkoli' : totalkoli,
+                        'totalcash' : totalcash,
+                        'totalbt'   : totalbt,
+                        'biaya'     : $('#biaya_sj').val()
+                },
+                success: function() {
+                     notie.alert(1, 'Data Disimpan', 2);
+                     bersihdetail();
+                      $("#carivendor").val(null).trigger('change');
+                      $('#alamatvendor').val('');
+                      $('#telpvendor').val('');
+                      $('#biaya_sj').val('');
+                     carikode();
+                    getdata();
+                    $('#carivendor').focus();
+                },
+            }).always(
+            function() {
+                l.stop();
+            });
+    }}}})
 });

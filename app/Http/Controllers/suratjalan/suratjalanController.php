@@ -110,5 +110,40 @@ class suratjalanController extends Controller
             'kode_jalan'=>null,
         ]);
     }
+
+    public function store(Request $request){
+        $jumlahdata = DB::table('surat_jalan')
+        ->where('kode',$request->noresi)->count();
+        if($jumlahdata>0){
+            DB::table('surat_jalan')
+             ->where('kode',$request->noresi)
+            ->update([
+                'tujuan' => $request->tujuan,
+                'alamat_tujuan' => $request->alamat,
+                'totalkg' => $request->totalkg,
+                'totalkoli' => $request->totalkoli,
+                'totalcash' => $request->totalcash,
+                'totalbt'   => $request->totalbt,
+                'biaya'     => $request->biaya,
+                'status' =>'Y',
+                'tgl'=>date('d-m-Y')
+            ]);
+        }else{
+             DB::table('surat_jalan')
+            ->insert([
+                'kode' => $request->noresi,
+                'tujuan' => $request->tujuan,
+                'alamat_tujuan' => $request->alamat,
+                'totalkg' => $request->totalkg,
+                'totalkoli' => $request->totalkoli,
+                'totalcash' => $request->totalcash,
+                'totalbt'   => $request->totalbt,
+                'biaya'     => $request->biaya,
+                'status' =>'Y',
+                'tgl'=>date('d-m-Y')
+            ]);
+            
+        }
+    }
     
 }

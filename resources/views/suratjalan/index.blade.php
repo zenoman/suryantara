@@ -146,10 +146,23 @@
 				
 				</tfoot>
 			</table>
+			<br>
+			<input type="hidden" id="totalcash">
+			<input type="hidden" id="totalbt">
+		
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya</label>
+							<div class="input-group">
+								<div class="input-group-addon">Rp</div>
+								<input type="text" class="form-control" onkeypress="return isNumberKey(event)" id="biaya_sj">
+							</div>
+						</div>
+					
 			<hr>
 					<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-								<button class="btn btn-primary" type="button" id="btnsimpan"> Simpan & Selesai</button>
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
+								
 								
 								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 					</small>
@@ -304,8 +317,8 @@
 			<td id="cetak_subtotaljumlah2" align="center"></td>
 			<td id="cetak_subtotalberat2" align="center"></td>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td id="cetak_totalcashnya"></td>
+			<td id="cetak_totalbtnya"></td>
 			<td></td>
 			
 		</tr>
