@@ -8,6 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class suratjalanController extends Controller
 {
+    public function bayar(Request $request){
+        if($request->biaya_baru==''){
+            DB::table('surat_jalan')
+            ->where('id',$request->id_sj)
+            ->update([
+                'status'=>'P'
+            ]);
+        }else{
+            DB::table('surat_jalan')
+            ->where('id',$request->id_sj)
+            ->update([
+                'biaya'=>$request->biaya_baru,
+                'status'=>'P'
+            ]);
+        }
+        return back()->with('status','Berhasil Membayar Surat Jalan');
+    }
     public function index(){
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
@@ -40,7 +57,13 @@ class suratjalanController extends Controller
 
     public function listsuratjalan(){
         $webinfo = DB::table('setting')->limit(1)->get();
-        $listdata = DB::table('surat_jalan')->where('status','!=','N')->paginate(40);
+        $listdata =
+        DB::table('surat_jalan')
+        ->select(DB::raw('surat_jalan.*,admin.username'))
+        ->join('admin','admin.id','=','surat_jalan.id_admin')
+        ->where('surat_jalan.status','!=','N')
+        ->orderby('surat_jalan.id','desc')
+        ->paginate(40);
         return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
 
@@ -130,7 +153,8 @@ class suratjalanController extends Controller
                 'totalbt'   => $request->totalbt,
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
-                'tgl'=>date('d-m-Y')
+                'tgl'=>date('d-m-Y'),
+                'id_admin'=> session::get('id')
             ]);
         }else{
              DB::table('surat_jalan')
@@ -145,6 +169,7 @@ class suratjalanController extends Controller
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
                 'tgl'=>date('d-m-Y')
+
             ]);
             
         }

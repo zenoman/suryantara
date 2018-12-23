@@ -74,7 +74,7 @@
 							<th>Tujuan</th>
 							<th>Tanggal</th>
 							<th>Status</th>
-							<th class="text-center">Aksi</th>
+							<th>Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -84,7 +84,7 @@
 							<th>Tujuan</th>
 							<th>Tanggal</th>
 							<th>Status</th>
-							<th class="text-center">Aksi</th>
+							<th>Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -97,19 +97,157 @@
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>@if($row->status=='Y')
+                            	
+								<span class="label label-danger">
+								Belum Lunas
+								</span>
+                            	@else
                             	<span class="label label-success">
 								Lunas
 								</span>
-                            	@else
-                            	<span class="label label-danger">
-								Belum Lunas
-								</span>
                             	@endif
                             	</td>
-                            <td class="text-center">
-                            	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
-                                        <i class="fa fa-key"></i> Bayar Sekarang</a>
-                            	
+                            <td>
+                    			<button class="btn btn-primary"
+						data-toggle="modal"
+						data-target=".bd-example-modal-lg{{$row->id}}"><i class="glyphicon glyphicon-usd"></i> Telah Di Bayar</button>
+
+						<div class="modal fade bd-example-modal-lg{{$row->id}}"
+					 tabindex="-1"
+					 role="dialog"
+					 aria-labelledby="myLargeModalLabel"
+					 aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+									<i class="font-icon-close-2"></i>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Detail Surat Jalan</h4>
+							</div>
+							<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-6 company-info">
+							<p>Pembuat : {{$row->username}}</p>
+
+							<!-- <div class="invoice-block">
+								<div>1 Infinite loop</div>
+								<div>95014 Cuperino, CA</div>
+								<div>United States</div>
+							</div>
+
+							<div class="invoice-block">
+								<div>Telephone: 555-692-7754</div>
+								<div>Fax: 555-692-7754</div>
+							</div> -->
+
+							<div class="invoice-block">
+								<h5>Tujuan:</h5>
+								<div>{{$row->tujuan}}</div>
+								<div>
+									{{$row->alamat_tujuan}}
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6 clearfix invoice-info">
+							<div class="text-lg-right">
+								<h5>{{$row->kode}}</h5>
+								<div>Tanggal: {{$row->tgl}}</div>
+							</div>
+
+						</div>
+					</div>
+					<br>
+					<div class="row table-details">
+						<div class="col-lg-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Resi</th>
+										<th>Isi Paket</th>
+										<th>Jumlah</th>
+										<th>Berat</th>
+										<th>Cash</th>
+										<th>BT</th>
+									</tr>
+								</thead>
+								<tbody>
+								@php
+									$dataresi = DB::table('resi_pengiriman')
+									->where('kode_jalan',$row->kode)
+									->get();
+								@endphp
+								@foreach($dataresi as $resi)
+									<tr>
+										<td>{{$resi->no_resi}}</td>
+										<td>{{$resi->nama_barang}}</td>
+										<td>{{$resi->jumlah}} Koli</td>
+										<td>{{$resi->berat}} Kg</td>
+										@if($resi->metode_bayar=='cash')
+										<td>Rp. {{number_format($resi->total_biaya,2,',','.')}}</td>
+										<td> </td>
+										@else
+										<td> </td>
+										<td>Rp. {{number_format($resi->total_biaya,2,',','.')}}</td>
+										@endif
+									</tr>
+								@endforeach
+								<tr>
+									<td colspan="2">
+										Total
+									</td>
+									<td>
+										{{$row->totalkoli}} Koli
+									</td>
+									<td>
+										{{$row->totalkg}} Kg
+									</td>
+									<td>
+										@if($row->totalcash>0)
+										Rp. {{number_format($row->totalcash,2,',','.')}}
+										@endif
+									</td>
+									<td>
+										@if($row->totalbt>0)
+										Rp. {{number_format($row->totalbt,2,',','.')}}
+										@endif
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-lg-12 terms-and-conditions">
+							<strong>Status : </strong>
+							@if($row->status=='Y')
+							Surat Jalan Belum Di lunasi
+							@else
+							Surat Jalan Telah Lunas
+							@endif
+							<h4>Perkiraan Biaya : Rp. {{number_format($row->biaya,2,',','.')}}</h4>
+							@if($row->status != 'P')
+							<form action="bayarsj" method="post">
+								<label for="biaya_baru">Perubahan Biaya</label>
+								<input type="text" name="biaya_baru" class="form-control" placeholder="Opsional, Tergantung Apakah Ada Perubahan Biaya">
+								<input type="hidden" name="id_sj" value="{{$row->id}}">
+								{{@csrf_field()}}
+							@endif
+						</div>
+						
+					</div>
+							</div>
+							<div class="modal-footer">
+								@if($row->status != 'P')
+								<button type="submit" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Surat Jalan Ini Telah Di Lunasi ?')">Bayar</button>
+								</form>
+								@endif
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div><!--.modal-->
                             </td>
 						</tr>
 						@endforeach

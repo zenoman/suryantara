@@ -423,6 +423,7 @@
 				</td>
 			</tr>
 		</table>
+	<span style="font-size: 9">pengirim</span>
 	</div>
 	<hr>
 	 <div>
@@ -621,8 +622,8 @@
 				</td>
 			</tr>
 		</table>
+	<span style="font-size: 9">arsip</span>
 	</div>
-	<hr>
 	<br>
 	<div>
 		<table style="width: 100%;">
@@ -785,7 +786,7 @@
 					
 				</td>
 			</tr>
-			<tr >
+			<tr>
 				<td colspan="2" style="height: 20%;">
 					<table style="width: 100%;border-collapse:collapse;">
 						<tr>
@@ -820,6 +821,7 @@
 				</td>
 			</tr>
 		</table>
+	<span style="font-size: 9">asal</span>
 	</div>
 	<hr>
 	<div>
@@ -1018,6 +1020,7 @@
 				</td>
 			</tr>
 		</table>
+		<span style="font-size: 9">penerima</span>
 	</div>
     </div>
 	</div>

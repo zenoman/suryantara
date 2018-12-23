@@ -420,6 +420,7 @@
 				</td>
 			</tr>
 		</table>
+		<span style="font-size: 9">pengirim</span>
 	</div>
 	<hr>
 	 <div>
@@ -618,6 +619,7 @@
 				</td>
 			</tr>
 		</table>
+		<span style="font-size: 9">arsip</span>
 	</div>
 	<hr>
 	<br>
@@ -817,6 +819,7 @@
 				</td>
 			</tr>
 		</table>
+		<span style="font-size: 9">asal</span>
 	</div>
 	<hr>
 	<div>
@@ -1015,6 +1018,7 @@
 				</td>
 			</tr>
 		</table>
+		<span style="font-size: 9">penerima</span>
 	</div>
     </div>
 	</div>

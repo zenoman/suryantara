@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::post('/bayarsj','suratjalan\suratjalanController@bayar');
 Route::get('/listsuratjalan','suratjalan\suratjalanController@listsuratjalan');
 Route::post('/tambahkansj','suratjalan\suratjalanController@store');
 Route::get('/uangkembali/{id}','resipengiriman\resipengirimanController@uangkembali');
