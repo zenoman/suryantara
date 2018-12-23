@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
 Route::post('/bayarsj','suratjalan\suratjalanController@bayar');
 Route::get('/listsuratjalan','suratjalan\suratjalanController@listsuratjalan');
 Route::post('/tambahkansj','suratjalan\suratjalanController@store');
@@ -28,6 +29,8 @@ Route::get('/dashboard','Dashboardcontroller@index');
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
+Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
+Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
