@@ -113,6 +113,16 @@
                                        @endif
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label">Level admin</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="level" class="form-control">
+								<option>Select</option>
+								<option value="superadmin">Superadmin</option>
+								<option value="admin">Admin</option>
+							</select>
+						</div>
+					</div>
 
 
 

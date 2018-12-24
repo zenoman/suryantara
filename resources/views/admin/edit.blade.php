@@ -67,17 +67,6 @@
                                         @endif
 						</div>
 					</div>
-					<!-- <div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Password</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="password" class="form-control" id="inputPassword" placeholder="password" name="password" value="{{$datadmin->password}}"></p>
-						@if($errors->has('password'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('password')}}
-                                         </div>
-                                        @endif
-						</div>
-					</div> -->
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Email</label>
 						<div class="col-sm-10">
@@ -109,6 +98,17 @@
                                         {{ $errors->first('alamat')}}
                                          </div>
                                         @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label">Level admin</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="level" class="form-control">
+								<option value="{{$datadmin->level}}">{{$datadmin->level}}</option>
+								<option>Select</option>
+								<option value="superadmin">Superadmin</option>
+								<option value="admin">Admin</option>
+							</select>
 						</div>
 					</div>
 {{csrf_field()}}
