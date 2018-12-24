@@ -75,10 +75,10 @@
 						<label class="col-sm-2 form-control-label semibold">biaya PerKg</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="biaya_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
 								<div class="input-group-addon">
 									Rp.
 								</div>
+								<input type="text" class="form-control" id="inputPassword" name="biaya_perkg" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
 							</div>
 							@if($errors->has('biaya_perkg'))
                                        <div class="alert alert-danger">
@@ -91,10 +91,10 @@
 						<label class="col-sm-2 form-control-label semibold">minimal heavy</label>
 						<div class="col-sm-10">
 								<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="minimal_heavy" required onkeypress="return isNumberKey(event)" placeholder="Misal : 30 KG">
 								<div class="input-group-addon">
 									.Kg
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="minimal_heavy" required onkeypress="return isNumberKey(event)" placeholder="Misal : 30 KG">
 								
 							</div>
 							@if($errors->has('minimal_heavy'))

@@ -89,7 +89,8 @@ class Admincontroller extends Controller
                     'nama'  => 'required',
                     'email'  => 'required|min:5|email',
                     'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5'
+                    'alamat'  => 'required|min:5',
+                    'level'=>'required'
                     ];
 
     $customMessages = [
@@ -106,7 +107,8 @@ class Admincontroller extends Controller
             'nama'  => $request->nama,
             'email'  => $request->email,
             'telp'  => $request->telp,
-            'alamat'  => $request->alamat
+            'alamat'  => $request->alamat,
+            'level' => $request->level
 
         ]);
 
@@ -149,11 +151,11 @@ class Admincontroller extends Controller
         $rules = [
                     'kode'      => 'required',
                     'username'  => 'required|min:5',
-                    'password'  => 'required|min:5',
                     'nama'  => 'required',
                     'email'  => 'required|min:5|email',
                     'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5'
+                    'alamat'  => 'required|min:5',
+                    'level'=>'required'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -166,11 +168,12 @@ class Admincontroller extends Controller
         
         Adminmodel::find($id)->update([
             'kode'  => $request->kode,
-            'username'  => $request->username,            
             'nama'  => $request->nama,
+            'username'  => $request->username,            
             'email'  => $request->email,
             'telp'  => $request->telp,
-            'alamat'  => $request->alamat
+            'alamat'  => $request->alamat,
+            'level' => $request->level
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
     }
