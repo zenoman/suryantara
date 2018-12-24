@@ -49,11 +49,6 @@
 						<label class="col-sm-2 form-control-label">Kode Admin</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
-						@if($errors->has('kode'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('kode')}}
-                                         </div>
-                                        @endif
 						</div>
 @endif
 					</div>
@@ -112,6 +107,7 @@
                                         @endif
 						</div>
 					</div>
+					@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 					<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label">Level admin</label>
 						<div class="col-sm-10">
@@ -123,6 +119,7 @@
 							</select>
 						</div>
 					</div>
+					@endif
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">
