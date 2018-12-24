@@ -232,6 +232,38 @@ class resipengirimanController extends Controller
        ]);
         return response()->json($simpan);
     }
+     public function simpanudara(Request $request)
+    {
+
+       $simpan = DB::table('resi_pengiriman')
+       ->insert([
+        'no_resi'       => $request->noresi,
+        'id_admin'      => $request->iduser,
+        'nama_barang'   => $request->nama_barang,
+        'pengiriman_via'=> 'udara',
+        'kota_asal'     => $request->kota_asal,
+        'kode_tujuan'   => $request->kota_tujuan,
+        'tgl'           =>  date('Y-m-d'),
+        'jumlah'        => $request->jumlah,
+        'berat'         => $request->berat,
+        'dimensi'       => $request->dimensi,
+        'ukuran_volume' => $request->ukuran_volume,
+        'nama_pengirim' => $request->n_pengirim,
+        'nama_penerima' => $request->n_penerima,
+        'telp_pengirim' => $request->t_pengirim,
+        'telp_penerima' => $request->t_penerima,
+        'biaya_kirim'   => $request->biaya_kirim,
+        'biaya_smu' => $request->biaya_smu,
+        'biaya_karantina' => $request->biaya_karantina,
+        'total_biaya'   => $request->total_biaya,
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan,
+        'metode_bayar'  => $request->metode,
+        'biaya_ppn'     => $request->ppn,
+        'no_smu'        => $request->nosmu
+       ]);
+        return response()->json($simpan);
+    }
     /**
      * Display the specified resource.
      *

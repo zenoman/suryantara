@@ -305,7 +305,7 @@ $(document).ready(function(){
 			$("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
 			$("#cetak_total3").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal3").html("Kediri, "+tanggal);
-			//============================================================
+		//============================================================
 			$("#cetak_kota_asal4").html($("#kota_asal").val());
 			$("#cetak_berat4").html($("#berat").val()+" Kg");
 			$("#cetak_dimensi4").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");

@@ -33,6 +33,7 @@ Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carih
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
+Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
