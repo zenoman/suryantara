@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
     public function index(){}
+    public function resiudara(){
+    $webinfo = DB::table('setting')->limit(1)->get();
+    return view('resipengiriman/resiudara',['webinfo'=>$webinfo]);
+    }
     public function uangkembali($id){
          $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
@@ -121,6 +125,26 @@ class resipengirimanController extends Controller
             return response()->json($data);
         }
     }
+    public function cariudara(Request $request){
+       if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('tarif_udara')
+                    ->select('tujuan','id','airlans')
+                    ->where('tujuan','like','%'.$cari.'%')
+                    ->get();
+            
+            return response()->json($data);
+        } 
+    }
+    public function carihasiludara($id){
+        $data = DB::table('tarif_udara')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
+    }
+
     public function carihasillaut($id){
          $data = DB::table('tarif_laut')
                     ->select('tujuan','id','tarif')

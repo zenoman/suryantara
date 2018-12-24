@@ -8,6 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class suratjalanController extends Controller
 {
+    public function bayar(Request $request){
+        if($request->biaya_baru==''){
+            DB::table('surat_jalan')
+            ->where('id',$request->id_sj)
+            ->update([
+                'status'=>'P'
+            ]);
+        }else{
+            DB::table('surat_jalan')
+            ->where('id',$request->id_sj)
+            ->update([
+                'biaya'=>$request->biaya_baru,
+                'status'=>'P'
+            ]);
+        }
+        return back()->with('status','Berhasil Membayar Surat Jalan');
+    }
     public function index(){
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
@@ -35,11 +52,21 @@ class suratjalanController extends Controller
                 }
             }
            
-        } 
-        
-        
-        return response()->json($finalkode);
+        } return response()->json($finalkode);
     }
+
+    public function listsuratjalan(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $listdata =
+        DB::table('surat_jalan')
+        ->select(DB::raw('surat_jalan.*,admin.username'))
+        ->join('admin','admin.id','=','surat_jalan.id_admin')
+        ->where('surat_jalan.status','!=','N')
+        ->orderby('surat_jalan.id','desc')
+        ->paginate(40);
+        return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
+    }
+
     public function caridetail($id){
         $data = DB::table('resi_pengiriman')->where('kode_jalan',$id)->get();
         return response()->json($data);
@@ -109,6 +136,43 @@ class suratjalanController extends Controller
         ->update([
             'kode_jalan'=>null,
         ]);
+    }
+
+    public function store(Request $request){
+        $jumlahdata = DB::table('surat_jalan')
+        ->where('kode',$request->noresi)->count();
+        if($jumlahdata>0){
+            DB::table('surat_jalan')
+             ->where('kode',$request->noresi)
+            ->update([
+                'tujuan' => $request->tujuan,
+                'alamat_tujuan' => $request->alamat,
+                'totalkg' => $request->totalkg,
+                'totalkoli' => $request->totalkoli,
+                'totalcash' => $request->totalcash,
+                'totalbt'   => $request->totalbt,
+                'biaya'     => $request->biaya,
+                'status' =>'Y',
+                'tgl'=>date('d-m-Y'),
+                'id_admin'=> session::get('id')
+            ]);
+        }else{
+             DB::table('surat_jalan')
+            ->insert([
+                'kode' => $request->noresi,
+                'tujuan' => $request->tujuan,
+                'alamat_tujuan' => $request->alamat,
+                'totalkg' => $request->totalkg,
+                'totalkoli' => $request->totalkoli,
+                'totalcash' => $request->totalcash,
+                'totalbt'   => $request->totalbt,
+                'biaya'     => $request->biaya,
+                'status' =>'Y',
+                'tgl'=>date('d-m-Y')
+
+            ]);
+            
+        }
     }
     
 }
