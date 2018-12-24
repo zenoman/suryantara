@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Adminmodel;
+use Illuminate\Support\Facades\Session;
 class Admincontroller extends Controller
 {
     /**
@@ -16,9 +17,12 @@ class Admincontroller extends Controller
      */
     public function index()
     {
-        $admins = Adminmodel::paginate(20);
+        // $admins = Adminmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        return view('admin/index',['admin'=>$admins,'title'=>$setting]);
+        $id=Session::get('id');
+        $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
+        // dd($datadmin);
+        return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
     }
 
     /**

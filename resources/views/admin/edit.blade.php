@@ -33,8 +33,8 @@
 						<form action="{{ url('admin/'.$datadmin->id) }}" role="form" method="POST">
 
 				
-
-				<div class="form-group row">
+@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Kode Admin</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
@@ -44,6 +44,18 @@
                                          </div>
                                         @endif
 						</div>
+@else
+				<div class="form-group row">
+						<label class="col-sm-2 form-control-label">Kode Admin</label>
+						<div class="col-sm-10">
+							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
+						@if($errors->has('kode'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('kode')}}
+                                         </div>
+                                        @endif
+						</div>
+@endif
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
@@ -115,6 +127,10 @@
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
+								@if(Session::get('id') == $datadmin->id)
+								<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
+                                        <i class="fa fa-key"></i> Ganti Password</a>
+								@endif
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								
 							</small>

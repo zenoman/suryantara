@@ -61,7 +61,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Airlans</label>
+						<label class="col-sm-2 form-control-label semibold">Airlines</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="airlans" placeholder="Misal : LION PREMIUM(JT 786)"></p>
 							@if($errors->has('airlans'))

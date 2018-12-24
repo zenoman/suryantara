@@ -29,6 +29,7 @@ class Logincontroller extends Controller
         $dataadmin = DB::table('admin')->where([['username',$username],['password',$password]])->get();
         foreach ($dataadmin as $dataadmin) {
             $id = $dataadmin->id;
+            $level=$dataadmin->level;
         }
 
         $data = DB::table('admin')->where([['username',$username],['password',$password]])->count();
@@ -36,6 +37,7 @@ class Logincontroller extends Controller
         if($data>0){
                 Session::put('username',$request->username);
                 Session::put('id',$id);
+                Session::put('level',$level);
                 Session::put('login',TRUE);
                 return redirect('dashboard');
         }else{
