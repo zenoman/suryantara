@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
     public function index(){}
+    public function tambahnosmu(Request $request){
+        DB::table('resi_pengiriman')
+        ->where('id',$request->kode)
+        ->update([
+            'no_smu'=>$request->nosmu
+        ]);
+        return back()->with('status','No SMU Di Simpan');
+    }
     public function resiudara(){
     $webinfo = DB::table('setting')->limit(1)->get();
     return view('resipengiriman/resiudara',['webinfo'=>$webinfo]);

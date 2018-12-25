@@ -257,7 +257,7 @@
 							<td style="border: 1px solid black;" align="center">
 							<p style="font-size: 14;" id="cetak_kota_asal"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan">Malang</p></td>
+							<p style="font-size: 14;" id="cetak_kota_tujuan"></p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
@@ -457,7 +457,7 @@
 							<td style="border: 1px solid black;" align="center">
 							<p style="font-size: 14;" id="cetak_kota_asal2"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan2">Malang</p></td>
+							<p style="font-size: 14;" id="cetak_kota_tujuan2"></p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
@@ -657,7 +657,7 @@
 							<td style="border: 1px solid black;" align="center">
 							<p style="font-size: 14;" id="cetak_kota_asal3"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan3">Malang</p></td>
+							<p style="font-size: 14;" id="cetak_kota_tujuan3"></p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
@@ -856,7 +856,7 @@
 							<td style="border: 1px solid black;" align="center">
 							<p style="font-size: 14;" id="cetak_kota_asal4"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan4">Malang</p></td>
+							<p style="font-size: 14;" id="cetak_kota_tujuan4"></p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">

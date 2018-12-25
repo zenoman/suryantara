@@ -1,8 +1,10 @@
 $(document).ready(function(){
+
 	var noresi;
 	var satuan = 'kg';
 	var kotatujuan ='';
 	carikode();
+	$('#nama_barang').focus();
 	//=============================================ganti satuan	
 	$('#satuan').on('change',function(e){
 		satuan = this.value;
@@ -196,6 +198,9 @@ $(document).ready(function(){
 	function tempelresi(){
 
 		$("#cetak_kota_tujuan").html(kotatujuan);
+		$("#cetak_kota_tujuan2").html(kotatujuan);
+		$("#cetak_kota_tujuan3").html(kotatujuan);
+		$("#cetak_kota_tujuan4").html(kotatujuan);
 		$("#cetak_kota_asal").html($("#kota_asal").val());
 		if(satuan=='koli'){
 			$("#cetak_jumlah_barang").html($("#jumlah").val()+" "+satuan);
@@ -226,6 +231,7 @@ $(document).ready(function(){
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
 		$("#cetak_tanggal").html("Kediri, "+tanggal);
+		$('#cetak_nosmu').html($('#nomer_smu').val());
 		//================file 2======================================
 		$("#cetak_kota_asal2").html($("#kota_asal").val());
 		$("#cetak_berat2").html($("#berat").val()+" Kg");
@@ -242,6 +248,7 @@ $(document).ready(function(){
 		$('#cetak_biaya_ppn2').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total2").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal2").html("Kediri, "+tanggal);
+		$('#cetak_nosmu2').html($('#nomer_smu').val());
 		//================file 3============================
 		$("#cetak_kota_asal3").html($("#kota_asal").val());
 		$("#cetak_berat3").html($("#berat").val()+" Kg");
@@ -258,6 +265,7 @@ $(document).ready(function(){
 		$('#cetak_biaya_ppn3').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total3").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal3").html("Kediri, "+tanggal);
+		$('#cetak_nosmu3').html($('#nomer_smu').val());
 		//=====================file 4 ========================
 		$("#cetak_kota_asal4").html($("#kota_asal").val());
 		$("#cetak_berat4").html($("#berat").val()+" Kg");
@@ -274,7 +282,7 @@ $(document).ready(function(){
 		$('#cetak_biaya_ppn4').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total4").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal4").html("Kediri, "+tanggal);
-
+		$('#cetak_nosmu4').html($('#nomer_smu').val());
 	}
 	//===============================================
 	function valid(){
@@ -374,7 +382,7 @@ $(document).ready(function(){
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
-                	// bersih();
+                	bersih();
                 	carikode();
                 },
             }).always(
@@ -383,4 +391,35 @@ $(document).ready(function(){
             });
 			}
 		});
+	//================================================
+	function bersih(){
+			$("#nama_barang").val('');
+			$("#d_panjang").val(0);
+			$("#d_tinggi").val(0);
+			$("#d_lebar").val(0);
+			$("#volume").val(0);
+			$("#jumlah").val('');
+			$("#berat").val('');
+			$("#kota_asal").val('');
+			$("#kota_tujuan").val(null).trigger('change');
+			$('#status').val('');
+			$("#n_pengirim").val('');
+			$("#t_pengirim").val('');
+			$("#n_penerima").val('');
+			$("#t_penerima").val('');
+			$("#biaya_kirim").val(0);
+			$("#biaya_smu").val(0);
+			$("#biaya_karantina").val(0);
+			$("#keterangan").val('');
+			$("#b_kirim").html(0);
+			$("#b_smu").html(0);
+			$("#b_karantina").html(0);
+			$("#b_ppn").html(0);
+			$("#total").html(0);
+			$('#satuan').val('kg');
+			$('#nomer_smu').val('');
+			$('#nama_barang').focus();
+			kotatujuan ='';
+			noresi = '';
+		}
 });

@@ -78,7 +78,14 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
+							
+							@if($row->pengiriman_via=='udara')
+							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
+							<p>No. SMU : {{$row->no_smu}}</p>
+							@else
 							<h5>Isi paket : {{$row->nama_barang}}</h5>
+							@endif
+
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
 							<div class="invoice-block">
@@ -150,30 +157,38 @@
 									<tr>
 										
 										<td class="text-right">Biaya Kirim</td>
-										<td>Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
 										
 									</tr>
+								@if($row->pengiriman_via=='udara')
 									<tr>
-										
+										<td class="text-right">Biaya SMU</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_smu,2,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Karantina</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
+									</tr>
+								@else
+									<tr>
 										<td class="text-right">Biaya Packing</td>
-										<td>Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
-										
+										<td class="text-right">Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
 									</tr>
 									<tr>
-										
 										<td class="text-right">Biaya Asuransi</td>
-										<td>Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
-									
+										<td class="text-right">Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
 									</tr>
+								@endif
+									
 									<tr>
 										
 										<td class="text-right">PPN</td>
-										<td>Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
 										
 									</tr>
 									<tr>
 										<td><h4>Total</h4></td>
-										<td><h4>
+										<td class="text-right"><h4>
 											Rp. {{number_format($row->total_biaya,2,',','.')}}
 										</h4></td>
 									</tr>
@@ -196,24 +211,42 @@
 						</div>
 						
 					</div>
+					@if($row->pengiriman_via=='udara')
+						@if($row->no_smu=='')
+						<br>	
+							<div class="row text-left">
+								<form action="tambahsmu" method="post">
+									<label>Tambahkan No. SMU</label>
+									<div class="input-group input-group-sm">
+										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
+										<input type="hidden" name="kode" value="{{$row->id}}">
+										{{@csrf_field()}}
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="submit">Simpan</button>
+										</span>
+									</div>
+								</form>
+							</div>
+						@endif
+					@endif
 				</div>
 							</div>
 							<div class="modal-footer">
+							
 								@if($row->metode_bayar=='cash')
 									@if($row->status=='N')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary">Resi Dikembalikan</a>
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
 									@endif
 								@else
 									@if($row->status=='N')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
 									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
 									@elseif($row->status=='US')
 									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@else
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									@elseif($row->status=='RS')
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
 									@endif
 								@endif
-								
 								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
@@ -229,13 +262,29 @@
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->username}}</td>
                             <td class="text-center">
-                            @if($row->status=='Y')
-                            <span class="label label-success">
-								Sukses
-							</span>
+                            @if($row->pengiriman_via=='udara')
+                            	@if($row->no_smu=='')
+                            	<span class="label label-danger">Menunggu</span>
+                            	@else
+                            	@if($row->status=='Y')
+		                            <span class="label label-success">
+										Sukses
+									</span>
+	                            @else
+									<span class="label label-danger">Menunggu</span>
+	                        	@endif
+                            	@endif
+                            	
                             @else
-							<span class="label label-danger">Menunggu</span>
-                        	@endif
+                            	@if($row->status=='Y')
+		                            <span class="label label-success">
+										Sukses
+									</span>
+	                            @else
+									<span class="label label-danger">Menunggu</span>
+	                        	@endif
+                            @endif
+	                            
                             </td>
 						</tr>
 						@endforeach

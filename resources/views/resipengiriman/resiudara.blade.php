@@ -50,7 +50,7 @@
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang" value="0">&nbsp;
 								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar" value="0">&nbsp;
@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume"  value="0">
+								<input type="text" class="form-control" id="volume" onkeypress="return isNumberKey(event)"  value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -370,6 +370,7 @@
 				<td style="border: 1px solid black;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket"></p>
+				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu"></span></p>
 				</td>
 				<td style="border: 1px solid black;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
@@ -570,6 +571,8 @@
 				<td style="border: 1px solid black;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket2"></p>
+				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu2"></span></p>
+				
 				</td>
 				<td style="border: 1px solid black;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
@@ -770,6 +773,8 @@
 				<td style="border: 1px solid black;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket3"></p>
+				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu3"></span></p>
+				
 				</td>
 				<td style="border: 1px solid black;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
@@ -970,6 +975,8 @@
 				<td style="border: 1px solid black;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket4"></p>
+				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu4"></span></p>
+				
 				</td>
 				<td style="border: 1px solid black;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">

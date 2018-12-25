@@ -166,6 +166,11 @@ $(document).ready(function(){
                 rows2 = rows2 + '<tr align="center">';
                 rows2 = rows2 + '<td>'+no+'</td>';
                 rows2 = rows2 + '<td>'+value.no_resi+'</td>';
+                if(value.pengiriman_via=='udara'){
+                    rows2 = rows2 + '<td>'+value.no_smu+'</td>';
+                }else{
+                    rows2 = rows2 + '<td align="center"> - </td>';
+                }
                 rows2 = rows2 + '<td>'+value.nama_pengirim+'</td>';
                 rows2 = rows2 + '<td>'+value.nama_penerima+'</td>';
                 rows2 = rows2 + '<td>' +value.kode_tujuan+'</td>';
@@ -185,6 +190,11 @@ $(document).ready(function(){
                 rows3 = rows3 + '<tr align="center">';
                 rows3 = rows3 + '<td>'+no+'</td>';
                 rows3 = rows3 + '<td>'+value.no_resi+'</td>';
+                if(value.pengiriman_via=='udara'){
+                    rows3 = rows3 + '<td>'+value.no_smu+'</td>';
+                }else{
+                    rows3 = rows3 + '<td align="center"> - </td>';
+                }
                 rows3 = rows3 + '<td>'+value.nama_pengirim+'</td>';
                 rows3 = rows3 + '<td>'+value.nama_penerima+'</td>';
                 rows3 = rows3 + '<td>' +value.kode_tujuan+'</td>';

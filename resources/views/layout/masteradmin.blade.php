@@ -137,6 +137,24 @@
 	                <span class="lbl">Vendor</span>
 	            </a>
 	        </li>
+	        <li class="green with-sub">
+	        	<span>
+	                <i class="fa fa-file"></i>
+	                <span class="lbl">Laporan</span>
+	            </span>
+	             <ul>
+                <li>
+                	<a href="#" data-toggle="modal" data-target=".bd-example-modal-sm">Laporan Pemasukan</a>
+
+                	
+                </li>
+	            <li>
+	            	<a href="{{url('/listsuratjalan')}}"><span class="lbl">
+	                Laporan Pengeluaran</span></a>
+	            </li>
+	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
+	            </ul>
+	        </li>
 	        <li class="brown">
 	            <a href="{{url('setting')}}">
 	                <i class="font-icon font-icon-cogwheel"></i>
@@ -153,6 +171,36 @@
 	
 
 	</nav>
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+									<i class="font-icon-close-2"></i>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Masukan Bulan</h4>
+							</div>
+							<div class="modal-body">
+								<div class="btn-group">
+								<button type="button" class="btn btn-inline btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Action
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">Action</a>
+									<a class="dropdown-item" href="#">Another action</a>
+									<a class="dropdown-item" href="#">Something else here</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Separated link</a>
+								</div>
+							</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-rounded btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
 	@yield('content')	
 	<!-- <div class="page-content">
 		<div class="container-fluid">

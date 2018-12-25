@@ -204,6 +204,7 @@
 			<tr align="center">
 			<td rowspan="2">No</td>
 			<td rowspan="2">No. Resi</td>
+			<td rowspan="2">No. SMU</td>
 			<td rowspan="2">Pengirim</td>
 			<td rowspan="2">Penerima</td>
 			<td rowspan="2">Tujuan</td>
@@ -226,7 +227,7 @@
 		</tbody>
 		<tfoot>
 		<tr>
-			<td colspan="5" align="right"><b>Total</b></td>
+			<td colspan="6" align="right"><b>Total</b></td>
 			<td id="cetak_subtotaljumlah" align="center"></td>
 			<td id="cetak_subtotalberat" align="center"></td>
 			<td></td>
@@ -291,6 +292,7 @@
 			<tr align="center">
 			<td rowspan="2">No</td>
 			<td rowspan="2">No. Resi</td>
+			<td rowspan="2">No. SMU</td>
 			<td rowspan="2">Pengirim</td>
 			<td rowspan="2">Penerima</td>
 			<td rowspan="2">Tujuan</td>
@@ -313,7 +315,7 @@
 		</tbody>
 		<tfoot>
 		<tr>
-			<td colspan="5" align="right"><b>Total</b></td>
+			<td colspan="6" align="right"><b>Total</b></td>
 			<td id="cetak_subtotaljumlah2" align="center"></td>
 			<td id="cetak_subtotalberat2" align="center"></td>
 			<td></td>
