@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Adminmodel;
+use Illuminate\Support\Facades\Session;
 class Admincontroller extends Controller
 {
     /**
@@ -16,9 +17,12 @@ class Admincontroller extends Controller
      */
     public function index()
     {
-        $admins = Adminmodel::paginate(20);
+        // $admins = Adminmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        return view('admin/index',['admin'=>$admins,'title'=>$setting]);
+        $id=Session::get('id');
+        $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
+        // dd($datadmin);
+        return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
     }
 
     /**
@@ -148,6 +152,31 @@ class Admincontroller extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Session::get('id') == $request->id && Session::get('level') == 'admin'){
+                    $rules = [
+                    'username'  => 'required|min:5',
+                    'nama'  => 'required',
+                    'email'  => 'required|min:5|email',
+                    'telp'  => 'required|min:5|numeric',
+                    'alamat'  => 'required|min:5',
+            ];
+        $customMessages = [
+        'required'  => 'Maaf, :attribute harus di isi',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+        'numeric'   => 'Maaf, data harus angka',
+        'email'     => 'Maaf, data harus email'
+
+         ];
+        $this->validate($request,$rules,$customMessages);
+        Adminmodel::find($id)->update([
+            'nama'  => $request->nama,
+            'username'  => $request->username,            
+            'email'  => $request->email,
+            'telp'  => $request->telp,
+            'alamat'  => $request->alamat
+            ]);
+        return redirect('/dashboard')->with('status','Edit Data Sukses');
+       } else if(Session::get('id') == $request->id && Session::get('level') != 'admin') {
         $rules = [
                     'kode'      => 'required',
                     'username'  => 'required|min:5',
@@ -165,8 +194,35 @@ class Admincontroller extends Controller
 
          ];
         $this->validate($request,$rules,$customMessages);
-        
-        Adminmodel::find($id)->update([
+            Adminmodel::find($id)->update([
+            'kode'  => $request->kode,
+            'nama'  => $request->nama,
+            'username'  => $request->username,            
+            'email'  => $request->email,
+            'telp'  => $request->telp,
+            'alamat'  => $request->alamat,
+            'level' => $request->level
+            ]);
+        return redirect('/dashboard')->with('status','Edit Data Sukses');
+        }else{
+            $rules = [
+                    'kode'      => 'required',
+                    'username'  => 'required|min:5',
+                    'nama'  => 'required',
+                    'email'  => 'required|min:5|email',
+                    'telp'  => 'required|min:5|numeric',
+                    'alamat'  => 'required|min:5',
+                    'level'=>'required'
+            ];
+        $customMessages = [
+        'required'  => 'Maaf, :attribute harus di isi',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+        'numeric'   => 'Maaf, data harus angka',
+        'email'     => 'Maaf, data harus email'
+
+         ];
+        $this->validate($request,$rules,$customMessages);
+            Adminmodel::find($id)->update([
             'kode'  => $request->kode,
             'nama'  => $request->nama,
             'username'  => $request->username,            
@@ -176,6 +232,7 @@ class Admincontroller extends Controller
             'level' => $request->level
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
+        }
     }
 
     /**

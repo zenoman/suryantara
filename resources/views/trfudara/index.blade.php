@@ -71,7 +71,7 @@
 							<th>No</th>
 							<th>Kode</th>
 							<th>Tujuan</th>
-							<th>Airline</th>
+							<th>Airlines</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -80,7 +80,7 @@
 							<th>No</th>
 							<th>kode</th>
 							<th>Tujuan</th>
-							<th>Airline</th>
+							<th>Airlines</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>

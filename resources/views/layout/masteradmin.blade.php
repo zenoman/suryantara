@@ -48,7 +48,8 @@
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-	                            
+	                            <a class="dropdown-item" href="{{url('admin/'.Session::get('id'))}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
+
 	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
 	                        </div>
 	                    </div>
@@ -73,13 +74,15 @@
 	            </span>
 	        </a>
 	        </li>
+@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 
 	        <li class="blue">
 	            <a href="{{url('admin')}}">
 	                <i class="font-icon font-icon-user"></i>
 	                <span class="lbl">Admin</span>
-	            </a>
+	               </a>
 	        </li>
+@endif
 	        <li class="magenta with-sub">
 	        	<span>
 	                <i class="font-icon font-icon-pencil"></i>
