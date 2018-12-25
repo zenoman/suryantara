@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
 Route::post('/bayarsj','suratjalan\suratjalanController@bayar');
 Route::get('/listsuratjalan','suratjalan\suratjalanController@listsuratjalan');

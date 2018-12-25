@@ -31,6 +31,15 @@
     <div class="page-center">
         <div class="page-center-in">
             <div class="container-fluid">
+                @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div><br />
+      @endif
                 <form class="sign-box" method="post" action="login/masuk">
                     {{@csrf_field()}}
                     <div class="sign-avatar">
@@ -39,20 +48,24 @@
                     </div> 
                     <header class="sign-title">Sign In</header>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usename" name="username" />
+                        <input type="text" class="form-control" placeholder="Usename" name="username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" name="password" />
+                        <input type="password" class="form-control" placeholder="Password" id="pass" name="password" required>
                     </div>
-                    <!-- <div class="form-group">
-                        <div class="checkbox float-left">
-                            <input type="checkbox" id="signed-in"/>
-                            <label for="signed-in">Keep me signed in</label>
-                        </div>
-                        <div class="float-right reset">
-                            <a href="reset-password.html">Reset Password</a>
-                        </div>
-                    </div> -->
+                    <div class="checkbox">
+                      <input type="checkbox" id="check-1" onclick="tampilsandi()">
+                      <label for="check-1">Tampilkan Sandi</label>
+                    </div>
+                    <br>
+                    <div class="form-group text-center" id="captcha">
+                        <span>{!! captcha_img() !!}</span>
+               <button type="button" class="btn btn-success btn-sm" id="refresh"><i class="fa fa-refresh"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="masukan captcha" name="captcha" required>
+                    </div>
+                   
                     <button type="submit" class="btn btn-rounded" name="submit" >Masuk</button>
                     
                     <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
@@ -86,6 +99,26 @@
                 },100);
             });
         });
+        $('#refresh').click(function(){
+  $.ajax({
+     type:'GET',
+     url:'refreshcaptcha',
+     success:function(data){
+        $("#captcha span").html(data.captcha);
+     }
+  });
+});
+    </script>
+    <script>
+      
+        function tampilsandi() {
+    var x = document.getElementById("pass");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+  }
     </script>
 <script src="assets/js/app.js"></script>
 </body>

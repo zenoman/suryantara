@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
-// use Illuminate\Database\Eloquent\Model;
+use Mews\Captcha\Facades\Captcha;
 use App\Http\Controllers\Controller;
 use App\models\Loginmodel;
 
@@ -23,6 +22,12 @@ class Logincontroller extends Controller
         return view('login/index',['title'=>$setting]);
     }
     public function masuk(Request $request){
+        $request->validate([
+            'password' => 'required',
+            'username' => 'required',
+            'captcha' => 'required|captcha'
+        ]);
+
         $username = $request->username;
         $password =md5($request->password);
 
@@ -41,6 +46,10 @@ class Logincontroller extends Controller
         }else{
             return redirect('login');
         }
+    }
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
     public function logout(){
         Session::flush();
