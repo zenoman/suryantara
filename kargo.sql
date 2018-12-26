@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.tarif_laut: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel kargo.tarif_laut: ~2 rows (lebih kurang)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
 INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
