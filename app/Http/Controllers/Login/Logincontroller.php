@@ -11,23 +11,22 @@ use App\models\Loginmodel;
 
 class Logincontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $setting = DB::table('setting')->get();
         return view('login/index',['title'=>$setting]);
     }
     public function masuk(Request $request){
-        $request->validate([
-            'password' => 'required',
-            'username' => 'required',
-            'captcha' => 'required|captcha'
-        ]);
-
+        $rules = [
+                'password' => 'required',
+                'username' => 'required',
+                'captcha' => 'required|captcha'
+                ];
+        $customMessages = [
+        'required'  => 'Maaf, data harus di isi',
+        'captcha'   => 'Maaf, Kode Captcha Salah'
+         ];
+        $this->validate($request,$rules,$customMessages);
         $username = $request->username;
         $password =md5($request->password);
 
@@ -46,7 +45,7 @@ class Logincontroller extends Controller
                 Session::put('login',TRUE);
                 return redirect('dashboard');
         }else{
-            return redirect('login');
+            return back()->with('status','username atau password salah');
         }
     }
     public function refreshCaptcha()
@@ -60,62 +59,5 @@ class Logincontroller extends Controller
     public function validatelogin(){
         Session::flush();
         return redirect('login')->with('status','Maaf, Anda Harus Login');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

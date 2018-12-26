@@ -82,4 +82,69 @@ class laporanController extends Controller
 
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
     }
+    //===================================================
+    public function cetakpemasukan(Request $request){
+    	$jalur = $request->jalur;
+    	$bulan = explode('-', $request->tahun);
+    	$bln = $bulan[0];
+    	$thn = $bulan[1];
+    	if($jalur=='darat'){
+    		$data = DB::table('resi_pengiriman')
+    		->select(DB::raw('resi_pengiriman.*,admin.username'))
+    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
+    		->whereMonth('resi_pengiriman.tgl',$bln)
+    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->where('resi_pengiriman.pengiriman_via','darat')
+    		->get();
+    		$total = DB::table('resi_pengiriman')
+    		->select(DB::raw('SUM(total_biaya) as totalnya'))
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','darat')
+    		->get();
+    	}elseif ($jalur=='laut') {
+    		$data = DB::table('resi_pengiriman')
+    		->select(DB::raw('resi_pengiriman.*,admin.username'))
+    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
+    		->whereMonth('resi_pengiriman.tgl',$bln)
+    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->where('resi_pengiriman.pengiriman_via','laut')
+    		->get();
+    		$total = DB::table('resi_pengiriman')
+    		->select(DB::raw('SUM(total_biaya) as totalnya'))
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','laut')
+    		->get();
+    	}elseif ($jalur=='udara'){
+    		$data = DB::table('resi_pengiriman')
+    		->select(DB::raw('resi_pengiriman.*,admin.username'))
+    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
+    		->whereMonth('resi_pengiriman.tgl',$bln)
+    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->where('resi_pengiriman.pengiriman_via','udara')
+    		->get();
+    		$total = DB::table('resi_pengiriman')
+    		->select(DB::raw('SUM(total_biaya) as totalnya'))
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','udara')
+    		->get();
+    	}else{
+    		$data = DB::table('resi_pengiriman')
+    		->select(DB::raw('resi_pengiriman.*,admin.username'))
+    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
+    		->whereMonth('resi_pengiriman.tgl',$bln)
+    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->get();
+    		$total = DB::table('resi_pengiriman')
+    		->select(DB::raw('SUM(total_biaya) as totalnya'))
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->get();
+    	}
+    	$webinfo = DB::table('setting')->limit(1)->get();
+
+    	return view('laporan/cetakpemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->tahun,'total'=>$total,'jalur'=>$jalur]);
+    }
 }
