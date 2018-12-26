@@ -25,6 +25,7 @@ class laporanController extends Controller
     	$bln = $bulan[0];
     	$thn = $bulan[1];
     	if($jalur=='darat'){
+
     		$data = DB::table('resi_pengiriman')
     		->select(DB::raw('resi_pengiriman.*,admin.username'))
     		->join('admin','admin.id','=','resi_pengiriman.id_admin')
@@ -75,12 +76,25 @@ class laporanController extends Controller
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
+
+
+    	}elseif ($jalur=='laut') {
+    		# code...
+    	}elseif ($jalur=='udara'){
+
+    	}else{
+    		$data = DB::table('resi_pengiriman')
+
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
     		->get();
     	}
     	$webinfo = DB::table('setting')->limit(1)->get();
 
+
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
+
+    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data]);
+
     }
 }

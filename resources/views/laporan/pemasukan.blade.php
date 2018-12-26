@@ -85,6 +85,7 @@
 					</table>
 				</div>
 			</section>
+
 	
 			@foreach($total as $ttl)
 			<section class="card">
@@ -171,7 +172,10 @@
 					</table>
 					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
 			</div>
-@endsection
+
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
+	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
@@ -180,6 +184,7 @@
             responsive: true
         });
 		});
+
 		
 	</script>
 	@endsection
