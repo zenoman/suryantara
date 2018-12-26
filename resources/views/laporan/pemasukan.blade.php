@@ -22,19 +22,15 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan Pemasukan {{$bulanya}}</h2>
+							<h2>Laporan Pemasukan</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<section class="card">
-
+				   
 				<div class="card-block">
-					@if($jalur=='semua')
-				@else
-				  <h4>Jalur Pengiriman : {{$jalur}}</h4> 
-				@endif
-					@if (session('status'))
+					 @if (session('status'))
                     <div class="alert alert-success alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
@@ -46,14 +42,7 @@
 							<th>No</th>
 							<th>No resi</th>
 							<th>tanggal</th>
-							<th>Tujuan</th>
-								@if($jalur=='semua')
-									<th>jalur</th>
-								@endif
-							<th>pengirim</th>
-							<th>penerima</th>
-							<th>admin</th>
-							<th>Subtotal</th>
+							<th>jalur</th>
 							<!-- <th>Aksi</th> -->
 						</tr>
 						</thead>
@@ -62,14 +51,7 @@
 							<th>No</th>
 							<th>No resi</th>
 							<th>tanggal</th>
-							<th>Tujuan</th>
-								@if($jalur=='semua')
-									<th>jalur</th>
-								@endif
-							<th>pengirim</th>
-							<th>penerima</th>
-							<th>admin</th>
-							<th>Subtotal</th>
+							<th>jalur</th>
 							<!-- <th>Aksi</th> -->
 						</tr>
 						</tfoot>
@@ -81,28 +63,21 @@
                             <td>{{$no}}</td>
                             <td>{{$row->no_resi}}</td>
                             <td>{{$row->tgl}}</td>
-                            <td>{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
-                            	@if($jalur=='semua')
-								 <td>{{$row->pengiriman_via}}</td>
-                            @endif
-                            <td>{{$row->nama_pengirim}}</td>
-                            <td>{{$row->nama_penerima}}</td>
-							<td>{{$row->username}}</td>
-							<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
-                          
+                            <td>{{$row->pengiriman_via}}</td>
+                            <!-- <td>
+                            	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
+                                        <i class="fa fa-key"></i> Ganti Password</a>
+                            	<a href="admin/{{$row->id}}" class="btn btn-rimary btn-sm">
+                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                                <a  onclick="return confirm('Hapus Data ?')" href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</a>
+                            </td> -->
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
 				</div>
 			</section>
-			@foreach($total as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
-				</div>
-			</section>
-			@endforeach
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 	@endsection
@@ -112,7 +87,8 @@
 	<script>
 		$(function() {
 			$('#example').DataTable({
-            responsive: true
+            responsive: true,
+            "paging":false
         });
 		});
 	</script>

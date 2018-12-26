@@ -52,7 +52,7 @@
 						<div class="col-sm-10">
 							<p class="form-control-static">
 								<div class="radio">
-								<input type="radio" name="jalur" id="radio-1" value="darat">
+								<input type="jalur" id="radio-1" value="darat">
 								<label for="radio-1">Jalur Darat </label>
 								&nbsp;&nbsp;
 								<input type="radio" name="jalur" id="radio-2" value="udara">
@@ -71,7 +71,7 @@
 						{{csrf_field()}}
 							<small class="text-muted">
 								
-								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>
