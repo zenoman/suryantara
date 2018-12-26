@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Landingmodel;
+use App\models\Daratanmodel;
+
 
 class landingcontroller extends Controller
 {
@@ -16,9 +18,12 @@ class landingcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        
-        return view('landing/index');
+     $tarif_darat=Landingmodel::get();
+     $lautan=DB::table('tarif_laut')->get();
+	return view('landing/index',['darat'=>$tarif_darat,'laut'=>$lautan]);
     }
+
 }
