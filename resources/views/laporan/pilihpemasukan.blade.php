@@ -52,9 +52,9 @@
 						<div class="col-sm-10">
 							<p class="form-control-static">
 								<div class="radio">
-								<input type="jalur" id="radio-1" value="darat">
+								<input type="radio" id="radio-1" value="darat" name="jalur">
 								<label for="radio-1">Jalur Darat </label>
-								&nbsp;&nbsp;
+								&nbsp;&nbsp; 
 								<input type="radio" name="jalur" id="radio-2" value="udara">
 								<label for="radio-2">Jalur Udara </label>
 								&nbsp;&nbsp;

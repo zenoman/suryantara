@@ -5,6 +5,7 @@ namespace App\Http\Controllers\laporan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 class laporanController extends Controller
 {
     public function pilihpemasukan(){
@@ -21,28 +22,6 @@ class laporanController extends Controller
     public function tampilpemasukan(Request $request){
     	$jalur = $request->jalur;
     	$bulan = explode('-', $request->bulan);
-    	$bln = $bulan[0];
-    	$thn = $bulan[1];
-    	if($jalur=='darat'){
-
-    	}elseif ($jalur=='laut') {
-    		# code...
-    	}elseif ($jalur=='udara'){
-
-    	}else{
-    		$data = DB::table('resi_pengiriman')
-    		->whereMonth('tgl',$bln)
-    		->whereYear('tgl',$thn)
-    		->get();
-    	}
-    	$webinfo = DB::table('setting')->limit(1)->get();
-
-    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data]);
-    }
-    //===================================================
-    public function cetakpemasukan(Request $request){
-    	$jalur = $request->jalur;
-    	$bulan = explode('-', $request->tahun);
     	$bln = $bulan[0];
     	$thn = $bulan[1];
     	if($jalur=='darat'){
@@ -102,6 +81,6 @@ class laporanController extends Controller
     	}
     	$webinfo = DB::table('setting')->limit(1)->get();
 
-    	return view('laporan/cetakpemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->tahun,'total'=>$total,'jalur'=>$jalur]);
+    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
     }
 }
