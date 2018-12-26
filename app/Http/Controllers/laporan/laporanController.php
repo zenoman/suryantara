@@ -75,26 +75,17 @@ class laporanController extends Controller
     		->whereYear('resi_pengiriman.tgl',$thn)
     		->get();
     		$total = DB::table('resi_pengiriman')
-    		->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
 
 
-    	}elseif ($jalur=='laut') {
-    		# code...
-    	}elseif ($jalur=='udara'){
-
-    	}else{
-    		$data = DB::table('resi_pengiriman')
-
-    		->whereMonth('tgl',$bln)
-    		->whereYear('tgl',$thn)
-    		->get();
     	}
     	$webinfo = DB::table('setting')->limit(1)->get();
 
 
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
-
-    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data]);
 
     }
 }

@@ -161,12 +161,7 @@
 	                <span class="lbl">Setting</span>
 	            </a>
 	        </li>
-	        <li class="brown">
-	            <a href="{{url('laporan')}}">
-	                <i class="fa fa-file"></i>
-	                <span class="lbl">Laporan</span>
-	            </a>
-	        </li>
+	       
 	    </ul>
 	
 

@@ -172,9 +172,6 @@
 					</table>
 					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
 			</div>
-
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
