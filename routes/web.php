@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::post('/laporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
@@ -23,7 +24,7 @@ Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 //===========================================
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
-Route::get('/laporan','laporan\laporandarat@index');
+Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 Route::get('/login','Login\Logincontroller@index');
 Route::get('/','landing\landingcontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');

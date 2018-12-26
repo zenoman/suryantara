@@ -22,36 +22,55 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan Pengiriman</h2>
+							<h2>Laporan Pemasukan {{$bulanya}}</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<section class="card">
+
 				<div class="card-block">
-					<!-- <a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-                    <br><br> -->
+					@if($jalur=='semua')
+				@else
+				  <h4>Jalur Pengiriman : {{$jalur}}</h4> 
+				@endif
+					@if (session('status'))
+                    <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('status') }}
+                    </div>
+                    @endif
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Nama Barang</th>
-							<th>via</th>
-							<th>koata tujuan</th>
+							<th>No resi</th>
 							<th>tanggal</th>
-							<th>Pengirim</th>
-							<th>Penerima</th>
+							<th>Tujuan</th>
+								@if($jalur=='semua')
+									<th>jalur</th>
+								@endif
+							<th>pengirim</th>
+							<th>penerima</th>
+							<th>admin</th>
+							<th>Subtotal</th>
+							<!-- <th>Aksi</th> -->
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Nama Barang</th>
-							<th>via</th>
-							<th>koata tujuan</th>
+							<th>No resi</th>
 							<th>tanggal</th>
+							<th>Tujuan</th>
+								@if($jalur=='semua')
+									<th>jalur</th>
+								@endif
 							<th>pengirim</th>
-							<th>Penerima</th>
+							<th>penerima</th>
+							<th>admin</th>
+							<th>Subtotal</th>
+							<!-- <th>Aksi</th> -->
 						</tr>
 						</tfoot>
 						<tbody>
@@ -60,31 +79,40 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->nama_barang}}</td>
-                            <td>{{$row->pengiriman_via}}</td>
-                            <td>{{$row->tujuan}}</td>
+                            <td>{{$row->no_resi}}</td>
                             <td>{{$row->tgl}}</td>
+                            <td>{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
+                            	@if($jalur=='semua')
+								 <td>{{$row->pengiriman_via}}</td>
+                            @endif
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->nama_penerima}}</td>
+							<td>{{$row->username}}</td>
+							<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
+                          
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
 				</div>
 			</section>
+			@foreach($total as $ttl)
+			<section class="card">
+				<div class="card-block">
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+				</div>
+			</section>
+			@endforeach
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 	@endsection
 
-
-	@section('js')
+		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	@yield('js')
 	<script>
 		$(function() {
 			$('#example').DataTable({
-            responsive: true,
-            "paging":true
+            responsive: true
         });
 		});
 	</script>
