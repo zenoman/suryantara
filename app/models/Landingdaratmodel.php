@@ -4,9 +4,9 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Landingmodel extends Model
+class Landingdaratmodel extends Model
 {
 	public $timestamps = false;
-    protected $table = 'admin';
+    protected $table = 'tarif_darat';
     protected $guarded = ['id'];
 }

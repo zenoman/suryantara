@@ -28,6 +28,9 @@ Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 Route::get('/login','Login\Logincontroller@index');
 Route::get('/','landing\landingcontroller@index');
+Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
+Route::get('/landlaut','landinglaut\landinglautcontroller@index');
+Route::get('/landudara','landingudara\landingudaracontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');
 //==============================================resi pengiriman
 Route::resource('/residarat','resipengiriman\resipengirimanController');
