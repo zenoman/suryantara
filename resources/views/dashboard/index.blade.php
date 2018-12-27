@@ -163,6 +163,11 @@
 	                                <td nowrap align="center">23th May</td>
 	                            </tr>
 	                        </table>
+	                        @php
+for ($i = 1; $i <= 10; $i++) {
+    echo $i;
+}
+@endphp
 	                    </div><!--.box-typical-body-->
 	                </section><!--.box-typical-dashboard-->
 	                
@@ -175,5 +180,33 @@
 @section('js')
 <script src="{{asset('assets/js/lib/d3/d3.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/charts-c3js/c3.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/charts-c3js/c3js-init.js')}}"></script>
+
+<script>
+	$(document).ready(function() {
+    console.log(11);
+
+    var barChart = c3.generate({
+        bindto: '#bar-chart',
+        data: {
+            columns: [
+                ['Pengiriman', 30, 200, 100, 400, 150, 250,10,]
+            ],
+            type: 'bar'
+        },axis: {
+        x: {
+            type: 'category',
+            categories: ['21-12-2018', '22-12-2018', '23-12-2018', '24-12-2018', '25-12-2018', '26-12-2018', '27-12-2018',]
+        }
+    },   
+        bar: {
+            width: {
+                ratio: 0.5
+            }
+        }
+    });
+
+   
+});
+
+</script>
 @endsection

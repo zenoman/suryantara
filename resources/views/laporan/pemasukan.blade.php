@@ -77,7 +77,7 @@
                             @endif
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->nama_penerima}}</td>
-							<td>{{$row->username}}</td>
+							<td>{{$row->admin}}</td>
 							<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
                         </tr>
 						@endforeach
@@ -167,7 +167,7 @@
                             @endif
                             <td align="center">{{$row->nama_pengirim}}</td>
                             <td align="center">{{$row->nama_penerima}}</td>
-							<td align="center">{{$row->username}}</td>
+							<td align="center">{{$row->admin}}</td>
 							<td align="center">{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
                           
 						</tr>

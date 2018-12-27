@@ -5,11 +5,15 @@ $(document).ready(function() {
         bindto: '#bar-chart',
         data: {
             columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 130, 100, 140, 200, 150, 50]
+                ['Pengiriman', 30, 200, 100, 400, 150, 250,10]
             ],
             type: 'bar'
-        },
+        },axis: {
+        x: {
+            type: 'category',
+            categories: ['21-12-2018', '22-12-2018', '23-12-2018', '24-12-2018', '25-12-2018', '26-12-2018', '27-12-2018']
+        }
+    },   
         bar: {
             width: {
                 ratio: 0.5

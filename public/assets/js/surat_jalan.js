@@ -167,7 +167,11 @@ $(document).ready(function(){
                 rows2 = rows2 + '<td>'+no+'</td>';
                 rows2 = rows2 + '<td>'+value.no_resi+'</td>';
                 if(value.pengiriman_via=='udara'){
-                    rows2 = rows2 + '<td>'+value.no_smu+'</td>';
+                   if(value.no_smu==null){
+                        rows2 = rows2 + '<td align="center"> </td>';
+                    }else{
+                      rows2 = rows2 + '<td>'+value.no_smu+'</td>';
+                    }
                 }else{
                     rows2 = rows2 + '<td align="center"> - </td>';
                 }
@@ -191,7 +195,11 @@ $(document).ready(function(){
                 rows3 = rows3 + '<td>'+no+'</td>';
                 rows3 = rows3 + '<td>'+value.no_resi+'</td>';
                 if(value.pengiriman_via=='udara'){
-                    rows3 = rows3 + '<td>'+value.no_smu+'</td>';
+                    if(value.no_smu==null){
+                        rows3 = rows3 + '<td align="center"> </td>';
+                    }else{
+                      rows3 = rows3 + '<td>'+value.no_smu+'</td>';
+                    }
                 }else{
                     rows3 = rows3 + '<td align="center"> - </td>';
                 }

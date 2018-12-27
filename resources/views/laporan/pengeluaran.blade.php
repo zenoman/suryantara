@@ -69,7 +69,7 @@
                             	@if($vendor=='semua')
 								  <td>{{$row->tujuan}}</td>
                             	@endif
-                            <td>{{$row->username}}</td>
+                            <td>{{$row->admin}}</td>
 							<td>{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
                         </tr>
 						@endforeach
@@ -153,7 +153,7 @@
                             	@if($vendor=='semua')
 								 <td align="center">{{$row->tujuan}}</td>
                             	@endif
-                            <td align="center">{{$row->username}}</td>
+                            <td align="center">{{$row->admin}}</td>
                            
 							<td align="center">{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
                           

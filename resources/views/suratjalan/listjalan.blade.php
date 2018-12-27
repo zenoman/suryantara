@@ -108,9 +108,16 @@
                             	@endif
                             	</td>
                             <td>
-                    			<button class="btn btn-primary"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}"><i class="glyphicon glyphicon-usd"></i> Telah Di Bayar</button>
+                            	@if($row->status=='Y')
+                            	<button class="btn btn-warning btn-sm"
+									data-toggle="modal"
+									data-target=".bd-example-modal-lg{{$row->id}}">Bayar Sekarang</button>
+                            	@else
+                            	<button class="btn btn-primary btn-sm"
+									data-toggle="modal"
+									data-target=".bd-example-modal-lg{{$row->id}}">Lihat Detail</button>
+                            	@endif
+                    			
 
 						<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
@@ -128,7 +135,7 @@
 							<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-6 company-info">
-							<p>Pembuat : {{$row->username}}</p>
+							<p>Pembuat : {{$row->admin}}</p>
 
 							<!-- <div class="invoice-block">
 								<div>1 Infinite loop</div>

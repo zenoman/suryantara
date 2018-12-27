@@ -27,7 +27,7 @@
 					<p>No. Surat : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
+						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Cari Vendor</label>
