@@ -19,8 +19,13 @@ class Admincontroller extends Controller
     {
         // $admins = Adminmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        $id=Session::get('id');
+        if(Session::get('level') == 'programer') {
         $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
+    }else{
+        $id=Session::get('id');
+        $level='admin';
+        $datadmin = DB::table('admin')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
+    }
         // dd($datadmin);
         return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
     }
@@ -32,8 +37,15 @@ class Admincontroller extends Controller
      */
      public function caridata(Request $request)
     {
-        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
+        // $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
         $setting = DB::table('setting')->get();
+        if(Session::get('level') == 'programer') {
+        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->paginate(20);
+    }else{
+        $id=Session::get('id');
+        $level='admin';
+        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
+    }
         return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$request->cari,'title'=>$setting]);
     }
 
@@ -62,6 +74,9 @@ class Admincontroller extends Controller
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
          ];
         $this->validate($request,$rules,$customMessages);
+
+        if(Session::get('id') == $request->id && Session::get('level') != 'admin'){
+        //_____________________________________________________________
         $newpass =md5($request->konfirmasi_password);
         //dd($newpass);
         if($request->password==$newpass){
@@ -76,6 +91,23 @@ class Admincontroller extends Controller
         }else{
         return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
         }
+    }else{
+        //_____________________________________________________________
+        $newpass =md5($request->konfirmasi_password);
+        //dd($newpass);
+        if($request->password==$newpass){
+            if($request->konfirmasi_password_baru==$request->password_baru){
+                 Adminmodel::find($id)->update([
+            'password' =>md5($request->konfirmasi_password_baru)
+        ]);
+        return redirect('/')->with('status','Edit Password berhasil');
+            }else{
+             return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
+            }
+        }else{
+        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
+        }
+    }
        
     }
     /**
@@ -104,6 +136,11 @@ class Admincontroller extends Controller
         'email'     => 'Maaf, data harus email'
     ];
         $this->validate($request,$rules,$customMessages);
+                    $kode=$request->kode;
+$dtlam= DB::table('admin')->where('kode',$kode)->count();
+if($dtlam > 0){
+    return redirect('admin/create')->with('status','Kode admin Yang anda masukan sudah ada!!');
+}else{
         Adminmodel::create([
             'kode'  => $request->kode,
             'username'  => $request->username,
@@ -115,8 +152,8 @@ class Admincontroller extends Controller
             'level' => $request->level
 
         ]);
-
         return redirect('admin')->with('status','Input Data Sukses');
+}
     }
 
     /**
@@ -153,6 +190,7 @@ class Admincontroller extends Controller
     public function update(Request $request, $id)
     {
         if(Session::get('id') == $request->id && Session::get('level') == 'admin'){
+            //_____________________________________________________________
                     $rules = [
                     'username'  => 'required|min:5',
                     'nama'  => 'required',
@@ -176,7 +214,8 @@ class Admincontroller extends Controller
             'alamat'  => $request->alamat
             ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
-       } else if(Session::get('id') == $request->id && Session::get('level') != 'admin') {
+       } else if(Session::get('id') == $request->id && Session::get('level') == 'programer') {
+        //_____________________________________________________________
         $rules = [
                     'kode'      => 'required',
                     'username'  => 'required|min:5',
@@ -205,14 +244,13 @@ class Admincontroller extends Controller
             ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
         }else{
+            //_____________________________________________________________
             $rules = [
-                    'kode'      => 'required',
                     'username'  => 'required|min:5',
                     'nama'  => 'required',
                     'email'  => 'required|min:5|email',
                     'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5',
-                    'level'=>'required'
+                    'alamat'  => 'required|min:5'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -223,13 +261,11 @@ class Admincontroller extends Controller
          ];
         $this->validate($request,$rules,$customMessages);
             Adminmodel::find($id)->update([
-            'kode'  => $request->kode,
             'nama'  => $request->nama,
             'username'  => $request->username,            
             'email'  => $request->email,
             'telp'  => $request->telp,
-            'alamat'  => $request->alamat,
-            'level' => $request->level
+            'alamat'  => $request->alamat
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
         }

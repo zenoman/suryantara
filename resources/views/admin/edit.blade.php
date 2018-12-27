@@ -33,11 +33,12 @@
 						<form action="{{ url('admin/'.$datadmin->id) }}" role="form" method="POST">
 
 				
-@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+@if(Session::get('level') == 'programer')
 <div class="form-group row">
 						<label class="col-sm-2 form-control-label">Kode Admin</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}">
+								<span class="help-block">*<b>pastikan</b> kode Kode admin <b>tidak sama</b> dengan kode admin yang lain </span></p>
 						@if($errors->has('kode'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -50,8 +51,8 @@
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
 						</div>
-@endif
 					</div>
+@endif
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
@@ -66,7 +67,8 @@
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="username" value="{{$datadmin->username}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" id="inputPassword" placeholder="Text" name="username" value="{{$datadmin->username}}"></p>
+							<span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span>
 						@if($errors->has('username'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('username')}}
@@ -107,9 +109,9 @@
                                         @endif
 						</div>
 					</div>
-					@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+					@if(Session::get('level') == 'programer')
 					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label">Level admin</label>
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Level admin</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="level" class="form-control">
 								<option value="{{$datadmin->level}}">{{$datadmin->level}}</option>

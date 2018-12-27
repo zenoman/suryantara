@@ -26,7 +26,6 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<h5 class="m-t-lg with-border">Horizontal Inputs</h5>
 
 					@foreach($setting as $row)
 				<form action="{{url('setting/'.$row->id) }}" role="form" method="POST" enctype="multipart/form-data">

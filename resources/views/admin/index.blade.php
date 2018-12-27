@@ -72,6 +72,7 @@
 							<th>Kode Admin</th>
 							<th>Nama</th>
 							<th>Username</th>
+							<th>Level</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -81,6 +82,7 @@
 							<th>kode Admin</th>
 							<th>Nama</th>
 							<th>Username</th>
+							<th>Level</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -93,6 +95,7 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->username}}</td>
+                            <td>{{$row->level}}</td>
                             <td>
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
                                         <i class="fa fa-key"></i> Ganti Password</a>
