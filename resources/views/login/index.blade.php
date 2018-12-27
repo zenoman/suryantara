@@ -31,16 +31,21 @@
     <div class="page-center">
         <div class="page-center-in">
             <div class="container-fluid">
-                @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div><br />
-      @endif
                 <form class="sign-box" method="post" action="login/masuk">
+                   @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                      <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ $error }}
+                    </div>
+                    @endforeach
+                  @endif
+                   @if (session('status'))
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('status') }}
+                    </div>
+                    @endif
                     {{@csrf_field()}}
                     <div class="sign-avatar">
                     

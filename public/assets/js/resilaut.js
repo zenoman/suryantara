@@ -190,7 +190,7 @@ $(document).ready(function(){
 			$('#nama_barang').focus();
 			$('#satuan').val('kg');
 			$('#metode').val('cash');
-
+			satuan='kg';
 			kotatujuan ='';
 			noresi = '';
 		}

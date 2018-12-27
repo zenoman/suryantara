@@ -31,10 +31,10 @@ class suratjalanController extends Controller
     }
     public function carikode(){
         $kodeuser = sprintf("%02s",session::get('id'));
-       
-        $tanggal    = date('dmy');
+        $tanggal  = date('dmy');
+        $lastuser = $tanggal."-".$kodeuser;
         $kode = DB::table('surat_jalan')
-        ->where('kode','like','%-'.$kodeuser.'-%')
+        ->where('kode','like','%'.$lastuser.'-%')
         ->max('kode');
 
         if($kode==''){
@@ -59,10 +59,8 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         $listdata =
         DB::table('surat_jalan')
-        ->select(DB::raw('surat_jalan.*,admin.username'))
-        ->join('admin','admin.id','=','surat_jalan.id_admin')
-        ->where('surat_jalan.status','!=','N')
-        ->orderby('surat_jalan.id','desc')
+        ->where('status','!=','N')
+        ->orderby('id','desc')
         ->paginate(40);
         return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
@@ -121,7 +119,7 @@ class suratjalanController extends Controller
             DB::table('surat_jalan')
             ->insert([
                 'kode' => $kode,
-                'tgl'  => date('d-m-Y')
+                'tgl'  => date('Y-m-d')
             ]);
         }
         DB::table('resi_pengiriman')
@@ -153,8 +151,8 @@ class suratjalanController extends Controller
                 'totalbt'   => $request->totalbt,
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
-                'tgl'=>date('d-m-Y'),
-                'id_admin'=> session::get('id')
+                'tgl'=>date('Y-m-d'),
+                'admin'=> session::get('username')
             ]);
         }else{
              DB::table('surat_jalan')
@@ -168,8 +166,8 @@ class suratjalanController extends Controller
                 'totalbt'   => $request->totalbt,
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
-                'tgl'=>date('d-m-Y')
-
+                'tgl'=>date('Y-m-d'),
+                'admin'=> session::get('username')
             ]);
             
         }

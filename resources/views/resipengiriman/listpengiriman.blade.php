@@ -120,7 +120,7 @@
 								<table class="pull-right table-sm">
 									<tr>
 										<td>Operator</td>
-										<td>{{$row->username}}</td>
+										<td>{{$row->admin}}</td>
 									</tr>
 									<tr>
 										<td>Berat Aktual</td>
@@ -260,7 +260,7 @@
                             <td>{{$row->kota_asal}} - {{$row->kode_tujuan}}
                             </td>
                             <td>{{$row->nama_pengirim}}</td>
-                            <td>{{$row->username}}</td>
+                            <td>{{$row->admin}}</td>
                             <td class="text-center">
                             @if($row->pengiriman_via=='udara')
                             	@if($row->no_smu=='')

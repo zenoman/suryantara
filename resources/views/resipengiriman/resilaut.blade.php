@@ -26,7 +26,7 @@
 					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-						<input type="hidden" value="{{Session::get('id')}}" id="iduser">
+						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
 						<div class="col-md-9 col-sm-9">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>

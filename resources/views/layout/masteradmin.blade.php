@@ -143,16 +143,15 @@
 	                <span class="lbl">Laporan</span>
 	            </span>
 	             <ul>
-                <li>
-                	<a href="{{url('/laporanpemasukan')}}"><span class="lbl">
-	                Laporan Pemasukan</span></a>
-                	
-                </li>
-	            <li>
-	            	<a href="{{url('/listsuratjalan')}}"><span class="lbl">
-	                Laporan Pengeluaran</span></a>
-	            </li>
-	                <!--<li><a href="#"><span class="lbl">Pengiriman Udara</span></a></li> -->
+	                <li>
+	                	<a href="{{url('/laporanpemasukan')}}"><span class="lbl">
+		                Laporan Pemasukan</span></a>
+	                	
+	                </li>
+		            <li>
+		            	<a href="{{url('/laporanpengeluaran')}}"><span class="lbl">
+		                Laporan Pengeluaran</span></a>
+		            </li>
 	            </ul>
 	        </li>
 	        <li class="brown">

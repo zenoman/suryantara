@@ -22,11 +22,17 @@ class Logincontroller extends Controller
         return view('login/index',['title'=>$setting]);
     }
     public function masuk(Request $request){
-        $request->validate([
+       
+        $rules = [
             'password' => 'required',
             'username' => 'required',
             'captcha' => 'required|captcha'
-        ]);
+            ];
+        $customMessages = [
+        'required'  => 'Maaf, data harus di isi',
+        'captcha'       => 'Maaf, kode captcha salah'
+         ];
+        $this->validate($request,$rules,$customMessages);
 
         $username = $request->username;
         $password =md5($request->password);
@@ -46,7 +52,7 @@ class Logincontroller extends Controller
                 Session::put('login',TRUE);
                 return redirect('dashboard');
         }else{
-            return redirect('login');
+            return back()->with('status','Maaf, Username atau Password Salah');
         }
     }
     public function refreshCaptcha()

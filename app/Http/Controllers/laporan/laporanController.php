@@ -8,6 +8,56 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class laporanController extends Controller
 {
+    public function tampilpengeluaran(Request $request){
+        $vendor = $request->vendor;
+        $bulan = explode('-', $request->bulan);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+        if($vendor=='semua'){
+            $data = DB::table('surat_jalan')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+            $total = DB::table('surat_jalan')
+            ->select(DB::raw('SUM(biaya) as totalnya'))
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+
+        }else{
+             $data = DB::table('surat_jalan')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('tujuan',$vendor)
+            ->get();
+            $total = DB::table('surat_jalan')
+            ->select(DB::raw('SUM(biaya) as totalnya'))
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('tujuan',$vendor)
+            ->get();
+
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor]);
+    }
+    //============================================
+    public function pilihpengeluaran(){
+        $bulan = DB::table('surat_jalan')
+        ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('tgl','desc')
+        ->get();
+
+        $vendor = DB::table('surat_jalan')
+        ->select(DB::raw('surat_jalan.*'))
+        ->groupby('tujuan')
+        ->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pilihpengeluaran',['title'=>$webinfo,'bulan'=>$bulan,'vendor'=>$vendor]);
+    }
+    //===============================================
     public function pilihpemasukan(){
     	$bulan = DB::table('resi_pengiriman')
     	->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
@@ -27,11 +77,9 @@ class laporanController extends Controller
     	if($jalur=='darat'){
 
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','darat')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','darat')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -41,11 +89,9 @@ class laporanController extends Controller
     		->get();
     	}elseif ($jalur=='laut') {
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','laut')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','laut')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -55,11 +101,9 @@ class laporanController extends Controller
     		->get();
     	}elseif ($jalur=='udara'){
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','udara')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','udara')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -69,10 +113,8 @@ class laporanController extends Controller
     		->get();
     	}else{
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
     		->get();
     		$total = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))
