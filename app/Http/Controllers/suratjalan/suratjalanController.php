@@ -121,7 +121,7 @@ class suratjalanController extends Controller
             DB::table('surat_jalan')
             ->insert([
                 'kode' => $kode,
-                'tgl'  => date('d-m-Y')
+                'tgl'  => date('Y-m-d')
             ]);
         }
         DB::table('resi_pengiriman')
@@ -153,7 +153,7 @@ class suratjalanController extends Controller
                 'totalbt'   => $request->totalbt,
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
-                'tgl'=>date('d-m-Y'),
+                'tgl'=>date('Y-m-d'),
                 'id_admin'=> session::get('id')
             ]);
         }else{
@@ -168,7 +168,7 @@ class suratjalanController extends Controller
                 'totalbt'   => $request->totalbt,
                 'biaya'     => $request->biaya,
                 'status' =>'Y',
-                'tgl'=>date('d-m-Y')
+                'tgl'=>date('Y-m-d')
 
             ]);
             

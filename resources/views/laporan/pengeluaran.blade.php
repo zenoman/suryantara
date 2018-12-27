@@ -22,28 +22,25 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan Pemasukan {{$bulanya}}</h2>
+							<h2>Laporan Pengeluaran {{$bulanya}}</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<section class="card">
 				<div class="card-block">
-					@if($jalur!='semua')
-						<h4>Jalur : {{$jalur}}</h4>
+					@if($vendor!='semua')
+						<h4>vendor : {{$vendor}}</h4>
 					@endif
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>No resi</th>
+							<th>Kode</th>
 							<th>tanggal</th>
-							<th>Tujuan</th>
-								@if($jalur=='semua')
-									<th>jalur</th>
+								@if($vendor=='semua')
+									<th>vendor</th>
 								@endif
-							<th>pengirim</th>
-							<th>penerima</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -51,14 +48,11 @@
 						<tfoot>
 						<tr> 
 							<th>No</th>
-							<th>No resi</th>
+							<th>Kode</th>
 							<th>tanggal</th>
-							<th>Tujuan</th>
-								@if($jalur=='semua')
-									<th>jalur</th>
+								@if($vendor=='semua')
+									<th>vendor</th>
 								@endif
-							<th>pengirim</th>
-							<th>penerima</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -69,16 +63,14 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->no_resi}}</td>
+                            <td>{{$row->kode}}</td>
                             <td>{{$row->tgl}}</td>
-                            <td>{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
-                            	@if($jalur=='semua')
-								 <td>{{$row->pengiriman_via}}</td>
-                            @endif
-                            <td>{{$row->nama_pengirim}}</td>
-                            <td>{{$row->nama_penerima}}</td>
-							<td>{{$row->username}}</td>
-							<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
+                           
+                            	@if($vendor=='semua')
+								  <td>{{$row->tujuan}}</td>
+                            	@endif
+                            <td>{{$row->username}}</td>
+							<td>{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>
@@ -117,10 +109,10 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-						@if($jalur=='semua')
-						Laporan Pemasukan Bulan {{$bulanya}}
+						@if($vendor=='semua')
+						Laporan Pengeluaran Bulan {{$bulanya}}
 						@else
-						Laporan Pemasukan {{$jalur}} Bulan {{$bulanya}}
+						Laporan Pengeluaran {{$vendor}} Bulan {{$bulanya}}
 						@endif
 						
 					</b>
@@ -140,14 +132,11 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>No resi</th>
+							<th>Kode</th>
 							<th>tanggal</th>
-							<th>Tujuan</th>
-								@if($jalur=='semua')
-									<th>jalur</th>
+								@if($vendor=='semua')
+									<th>vendor</th>
 								@endif
-							<th>pengirim</th>
-							<th>penerima</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -159,16 +148,14 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td align="center">{{$no}}</td>
-                            <td align="center">{{$row->no_resi}}</td>
+                            <td align="center">{{$row->kode}}</td>
                             <td align="center">{{$row->tgl}}</td>
-                            <td align="center">{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
-                            	@if($jalur=='semua')
-								 <td>{{$row->pengiriman_via}}</td>
-                            @endif
-                            <td align="center">{{$row->nama_pengirim}}</td>
-                            <td align="center">{{$row->nama_penerima}}</td>
-							<td align="center">{{$row->username}}</td>
-							<td align="center">{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
+                            	@if($vendor=='semua')
+								 <td align="center">{{$row->tujuan}}</td>
+                            	@endif
+                            <td align="center">{{$row->username}}</td>
+                           
+							<td align="center">{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
                           
 						</tr>
 						@endforeach
