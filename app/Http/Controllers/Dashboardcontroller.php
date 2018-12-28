@@ -7,80 +7,26 @@ use Illuminate\Support\Facades\DB;
 
 class Dashboardcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $listsj = DB::table('surat_jalan')
+        ->where('status','=','Y')
+        ->get();
+
+        $resi = DB::table('resi_pengiriman')
+        ->where('status','!=','Y')
+        ->get();
+        $uanghariini = DB::table('resi_pengiriman')
+        ->select(DB::raw('SUM(total_biaya) as total'))
+        ->where('tgl',date('Y-m-d'))
+        ->get();
+        $jumlahresi = DB::table('resi_pengiriman')
+        ->where('status','!=','Y')
+        ->count();
+        $jumlahsj = DB::table('surat_jalan')
+        ->where('status','=','Y')
+        ->count();
         $setting = DB::table('setting')->get();
-        return view('dashboard/index',['title'=>$setting]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('dashboard/index',['title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj]);
     }
 }
