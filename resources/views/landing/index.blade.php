@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SURYANTARA</title>
-
+    @foreach($des as $row)
+    <title>{{$row->namaweb}}</title>
+    @endforeach
     <!-- Bootstrap core CSS -->
     <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,8 +31,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SURYANTARA CARGO</a>
+        @foreach($des as $row)
+        <a class="navbar-brand js-scroll-trigger text-uppercase" href="#page-top">{{$row->header}}</a>
+        @endforeach
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
@@ -61,10 +62,13 @@
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="asset_user/img/delivery.png" alt="">
-        <h1 class="text-uppercase mb-0">Suryantara Cargo</h1>
+        @foreach($des as $row)
+        <img class="img-fluid mb-5 d-block mx-auto" src="{{asset('img/setting/'.$row->landing)}}" alt="">
+        
+        <h1 class="text-uppercase mb-0">{{$row->header}}</h1>
         <hr class="star-light">
-        <h2 class="font-weight-light mb-0">Selamat Datang Di Suryantara Cargo</h2>
+        <h2 class="font-weight-light mb-0">{{$row->sapaan}}</h2>
+        @endforeach
       </div>
     </header>
     <!--LINK TABLE DARAT-->
@@ -112,40 +116,41 @@
         </div>
       </div>
     </section>
-  <!--tentang kami-->   
+  <!--tentang kami-->
     <section class="masthead bg-primary text-white text-center mb-0" id="tentang">
+      @foreach($des as $row) 
       <div class="container">
         <h1 class="text-uppercase mb-0">Tentang Kami</h1>
-        <hr class="star-light">
-         
-        <h4 class="font-weight-light mb-0" >Kami adalah sebuah badan usaha yang bergerak dibidang pengiriman paket/barang</h4>
-        <h4 class="font-weight-light mb-0" >melalui Darat , Laut , dan Udara keseluruh nusantara dengan cepat dan tepat</h4>
-        <h4 class="font-weight-light mb-0" >dengan pelayanan kami yang ramah dan sopan kami akan membantu anda dengan </h>
-        <h4 class="font-weight-light mb-0" >semaksimal mungkin karena bagi kami kepuasan pelanggan adalah proiritas utama kami </h4>         
+        <hr class="star-light">         
+        <h4>{{$row->desk}}</h4>       
       </div>
-    </section>     
+    </section>
+    @endforeach  
 <!-- Footer -->
     <footer class="footer text-center">
       <div class="container">
         <div class="row">
+          @foreach($des as $row)
           <div class="col-md-4 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Location</h4>
-            <p class="lead mb-0">2215 John Daniel Drive
-              <br>Clark, MO 65243</p>
+            <p class="lead mb-0">{{$row->alamat}}</p>
           </div>
+          @endforeach
           <div class="col-md-4 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Around the Web</h4>
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
+              @foreach($des as $row)
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="{{$row->email}}">
                   <i class="fab fa-fw fa-google-plus-g"></i>
                 </a>
               </li>
+              @endforeach
               <li class="list-inline-item">
                 <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
                   <i class="fab fa-fw fa-twitter"></i>

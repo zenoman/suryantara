@@ -23,7 +23,8 @@ class landingcontroller extends Controller
     {
      $tarif_darat=Landingmodel::get();
      $lautan=DB::table('tarif_laut')->get();
-	return view('landing/index',['darat'=>$tarif_darat,'laut'=>$lautan]);
+     $desk=DB::table('setting')->get();
+	return view('landing/index',['darat'=>$tarif_darat,'laut'=>$lautan,'des'=>$desk]);
     }
 
 }

@@ -33,7 +33,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Nama Web</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="namaweb" value="{{$row->namaweb}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Nama Web" name="namaweb" value="{{$row->namaweb}}"></p>
 						@if($errors->has('namaweb'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('namaweb')}}
@@ -41,17 +41,61 @@
                                         @endif
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Email</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="email" placeholder="Text Disabled" value="{{$row->email}}"></p>
-						@if($errors->has('email'))
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">Deskripsi Web</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="desk" placeholder="Deskripsi Web Disabled" value="{{$row->desk}}"></p>
+            @if($errors->has('desk'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('desk')}}
+                                         </div>
+                                        @endif
+            </div>
+          </div>             
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">Alamat</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Alamat" name="alamat" value="{{$row->alamat}}"></p>
+            @if($errors->has('alamat'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('alamat')}}
+                                         </div>
+                                        @endif
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">Email</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="email" placeholder="Email" value="{{$row->email}}"></p>
+            @if($errors->has('email'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('email')}}
                                          </div>
                                         @endif
-						</div>
-					</div>
+            </div>
+          </div>   
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">Header</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Header" name="header" value="{{$row->header}}"></p>
+            @if($errors->has('header'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('header')}}
+                                         </div>
+                                        @endif
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label">Ucapan Pembuka</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Ucapan Pembuka" name="sapaan" value="{{$row->sapaan}}"></p>
+            @if($errors->has('sapaan'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('sapaan')}}
+                                         </div>
+                                        @endif
+            </div>
+          </div>             
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Kontak</label>
 						<div class="col-sm-10">
@@ -77,6 +121,7 @@
                                         {{ $errors->first('icon')}}
                                          </div>
                                        @endif
+                                       <!--====================-->
                                             <div class="form-group row">
                                             <label  class="col-sm-2 form-control-label">Ganti Logo</label><p>
                                             @if(isset($row->logo) && $row->logo)
@@ -89,6 +134,21 @@
                                           @if($errors->has('logo'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('logo')}}
+                                         </div>
+                                       @endif
+                                       <!--=====================-->
+                                       <div class="form-group row">
+                                            <label  class="col-sm-2 form-control-label">Ganti Logo Landing</label><p>
+                                            @if(isset($row->landing) && $row->landing)
+                                            <img src="../img/setting/{{$row->landing}}" width="100" height="100">
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="landing">
+                                        </div>
+                                          @if($errors->has('landing'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('landing')}}
                                          </div>
                                        @endif
 				@endforeach

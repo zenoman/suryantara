@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Landingmodel extends Model
 {
 	public $timestamps = false;
-    protected $table = 'admin';
+    protected $table = 'setting';
     protected $guarded = ['id'];
 }
