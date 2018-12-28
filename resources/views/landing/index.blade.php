@@ -40,18 +40,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('login')}}">Login</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hub">Hubungi Kami</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#tentang">Tentang Kami</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('')}}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#biaya">
               Biaya Pengiriman</a>
             </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hub">Lokasi Kami</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-0">
+              <a class="nav-link py-3 px-0 px-lg-0 rounded js-scroll-trigger" href="#tentang">Tentang Kami</a>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -73,26 +74,28 @@
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-md-6 col-lg-4">
-            <a>
-              <img class="img-fluid" src="asset_user/img/delivery-truck.png" alt="">
+            <a class="d-block mx-auto">
+              <div class="my-auto w-100 text-center">
+              <img class="img-fluid" src="asset_user/img/darat.png" alt="">
+              </div>
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landdarat')}}">
-              <h3 class="text-secondary ">Tarif Darat</h3>
+              <h3 class="text-secondary text-center">Tarif Darat</h3>
               </a>
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="asset_user/img/ship.png" alt="">
+              <img class="img-fluid" src="asset_user/img/laut.png" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landlaut')}}">
-              <h3 class="text-secondary ">Tarif Laut</h3>
+              <h3 class="text-secondary text-center">Tarif Laut</h3>
               </a>
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="asset_user/img/airplane.png" alt="">
+              <img class="img-fluid" src="asset_user/img/udara.png" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landudara')}}">
-              <h3 class="text-secondary ">Tarif Udara</h3>
+              <h3 class="text-secondary text-center ">Tarif Udara</h3>
               </a>
             </a>
           </div>                  
@@ -171,7 +174,7 @@
 
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small>&copy; Suryantara Cargo 2018 by Joyoboyo Intermedia</small>
+        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="#" target="_blank">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
@@ -194,6 +197,7 @@
     <!-- Contact Form JavaScript -->
     <script src="asset_user/js/jqBootstrapValidation.js"></script>
     <script src="asset_user/js/contact_me.js"></script>
+    <script src="asset_user/js/main.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="asset_user/js/freelancer.min.js"></script>

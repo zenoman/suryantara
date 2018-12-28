@@ -1392,4 +1392,10 @@ form .response.error { color: red; }
 	The End :)
 \*------------------------------------*/
 
-
+.link{
+  color:white;
+}
+.link:hover{
+  color:white;
+  text-decoration: none;
+}
