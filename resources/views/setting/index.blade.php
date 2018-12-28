@@ -26,7 +26,6 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<h5 class="m-t-lg with-border">Horizontal Inputs</h5>
 
 					@foreach($setting as $row)
 				<form action="{{url('setting/'.$row->id) }}" role="form" method="POST" enctype="multipart/form-data">
@@ -73,9 +72,9 @@
                                             @endif
                                             <input type="file" name="icon">
                                         </div>
-                                        @if($errors->has('ico'))
+                                        @if($errors->has('icon'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('ico')}}
+                                        {{ $errors->first('icon')}}
                                          </div>
                                        @endif
                                             <div class="form-group row">

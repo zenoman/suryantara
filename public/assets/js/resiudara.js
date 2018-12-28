@@ -421,5 +421,6 @@ $(document).ready(function(){
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';
+			satuan = 'kg';
 		}
 });

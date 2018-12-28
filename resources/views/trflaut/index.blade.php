@@ -50,7 +50,7 @@
                                         <div class="modal-body">
                                            <form method="post" action="{{url('trflaut/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama admin" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama Tujuan Laut" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">

@@ -68,9 +68,9 @@ class resipengirimanController extends Controller
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
-        
+        $lastuser = $tanggal."-".$kodeuser;
         $kode = DB::table('resi_pengiriman')
-        ->where('no_resi','like','%-'.$kodeuser.'-%')
+        ->where('no_resi','like','%'.$lastuser.'-%')
         ->max('no_resi');
 
         if(!$kode){
@@ -86,8 +86,6 @@ class resipengirimanController extends Controller
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,admin.username'))
-        ->join('admin','admin.id','=','resi_pengiriman.id_admin')
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -183,7 +181,7 @@ class resipengirimanController extends Controller
        $simpan = DB::table('resi_pengiriman')
        ->insert([
         'no_resi'       => $request->noresi,
-        'id_admin'      => $request->iduser,
+        'admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'darat',
         'kota_asal'     => $request->kota_asal,
@@ -215,7 +213,7 @@ class resipengirimanController extends Controller
        $simpan = DB::table('resi_pengiriman')
        ->insert([
         'no_resi'       => $request->noresi,
-        'id_admin'      => $request->iduser,
+        'admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'laut',
         'kota_asal'     => $request->kota_asal,
@@ -246,7 +244,7 @@ class resipengirimanController extends Controller
        $simpan = DB::table('resi_pengiriman')
        ->insert([
         'no_resi'       => $request->noresi,
-        'id_admin'      => $request->iduser,
+        'admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'udara',
         'kota_asal'     => $request->kota_asal,

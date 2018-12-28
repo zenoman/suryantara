@@ -122,7 +122,6 @@
 						</div>
 					</div>
 					@endforeach
-			</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">
@@ -131,6 +130,7 @@
 							</small>
 				</form>
 			</div>
+		</div>
 	</div>
-</div>
-        @endsection
+
+        @endsection 

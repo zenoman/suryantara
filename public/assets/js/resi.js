@@ -191,6 +191,7 @@ $(document).ready(function(){
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';
+			satuan='kg';
 		}
 	//============================================ cetak resi
 		
@@ -264,7 +265,7 @@ $(document).ready(function(){
 			$("#cetak_biaya_ppn").html("Rp. "+$("#b_ppn").html());
 			$("#cetak_biaya_ppn2").html("Rp. "+$("#b_ppn").html());
 			$("#cetak_biaya_ppn3").html("Rp. "+$("#b_ppn").html());
-
+			$("#cetak_biaya_ppn4").html("Rp. "+$("#b_ppn").html());
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();

@@ -15,10 +15,8 @@ class laporanController extends Controller
         $thn = $bulan[1];
         if($vendor=='semua'){
             $data = DB::table('surat_jalan')
-            ->select(DB::raw('surat_jalan.*,admin.username'))
-            ->join('admin','admin.id','=','surat_jalan.id_admin')
-            ->whereMonth('surat_jalan.tgl',$bln)
-            ->whereYear('surat_jalan.tgl',$thn)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
             ->get();
             $total = DB::table('surat_jalan')
             ->select(DB::raw('SUM(biaya) as totalnya'))
@@ -28,17 +26,15 @@ class laporanController extends Controller
 
         }else{
              $data = DB::table('surat_jalan')
-            ->select(DB::raw('surat_jalan.*,admin.username'))
-            ->join('admin','admin.id','=','surat_jalan.id_admin')
-            ->whereMonth('surat_jalan.tgl',$bln)
-            ->whereYear('surat_jalan.tgl',$thn)
-            ->where('surat_jalan.tujuan',$vendor)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('tujuan',$vendor)
             ->get();
             $total = DB::table('surat_jalan')
             ->select(DB::raw('SUM(biaya) as totalnya'))
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
-            ->where('surat_jalan.tujuan',$vendor)
+            ->where('tujuan',$vendor)
             ->get();
 
         }
@@ -81,11 +77,9 @@ class laporanController extends Controller
     	if($jalur=='darat'){
 
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','darat')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','darat')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -95,11 +89,9 @@ class laporanController extends Controller
     		->get();
     	}elseif ($jalur=='laut') {
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','laut')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','laut')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -109,11 +101,9 @@ class laporanController extends Controller
     		->get();
     	}elseif ($jalur=='udara'){
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
-    		->where('resi_pengiriman.pengiriman_via','udara')
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
+    		->where('pengiriman_via','udara')
     		->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
@@ -123,10 +113,8 @@ class laporanController extends Controller
     		->get();
     	}else{
     		$data = DB::table('resi_pengiriman')
-    		->select(DB::raw('resi_pengiriman.*,admin.username'))
-    		->join('admin','admin.id','=','resi_pengiriman.id_admin')
-    		->whereMonth('resi_pengiriman.tgl',$bln)
-    		->whereYear('resi_pengiriman.tgl',$thn)
+    		->whereMonth('tgl',$bln)
+    		->whereYear('tgl',$thn)
     		->get();
     		$total = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))

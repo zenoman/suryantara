@@ -10,6 +10,7 @@
 
 @section('css')
 <link href="{{asset('assets/css/lib/charts-c3js/c3.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{asset('assets/css/separate/pages/widgets.min.css')}}">
 @endsection
 
 @section('content')
@@ -18,10 +19,38 @@
 	       
 	
 	        <div class="row">
+	        	<div class="col-xl-4 dahsboard-column">
+	        		@foreach($uanghariini as $rows)
+					<section class="widget widget-simple-sm-fill">
+								<div class="widget-simple-sm-icon">
+									<i class="font-icon font-icon-wallet"></i>
+								</div>
+								<div class="widget-simple-sm-fill-caption">
+									{{"Rp. ".number_format($rows->total,0,',','.')}}
+								</div>
+					</section>
+					@endforeach
+	        	</div>
+	        	<div class="col-xl-4 dahsboard-column">
+	        		<section class="widget widget-simple-sm-fill orange">
+								<div class="widget-simple-sm-icon">
+									<i class="font-icon font-icon-page"></i>
+								</div>
+								<div class="widget-simple-sm-fill-caption">Resi Menunggu : {{$jumlahresi}}</div>
+					</section>
+	        	</div>
+	        	<div class="col-xl-4 dahsboard-column">
+	        		<section class="widget widget-simple-sm-fill red">
+								<div class="widget-simple-sm-icon">
+									<i class="font-icon font-icon-clip"></i>
+								</div>
+								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
+					</section>
+	        	</div>
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
             <header class="card-header">
-                Bar Chart
+                Pengiriman Minggu Ini
             </header>
             <div class="card-block">
                 <div id="bar-chart"></div>
@@ -31,138 +60,61 @@
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
-	                        <h3 class="panel-title">Recent orders</h3>
+	                        <h3 class="panel-title">Jumlah Resi Menunggu</h3>
 	                    </header>
 	                    <div class="box-typical-body panel-body">
 	                        <table class="tbl-typical">
 	                            <tr>
-	                                <th><div>Status</div></th>
-	                                <th><div>Clients</div></th>
-	                                <th align="center"><div>Orders#</div></th>
-	                                <th align="center"><div>Date</div></th>
+	                                
+	                                <th align="center"><div>No. Resi</div></th>
+	                                <th><div>Admin</div></th>
+	                                <th align="center"><div>Tanggal</div></th>
 	                            </tr>
+	                            @foreach($resi as $row)
 	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-success">Active</span>
+	                            	<td>
+	                                	<span class="label label-danger">
+	                                	{{$row->no_resi}}
+										</span>
 	                                </td>
-	                                <td>John Doe</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Today</span> 8:30</td>
+	                                <td>{{$row->admin}}</td>
+	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$row->tgl}}</span></td>
 	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-success">Active</span>
-	                                </td>
-	                                <td>Thomas Bayer</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Today</span> 16:30</td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-default">Inactive</span>
-	                                </td>
-	                                <td>Nicolas Karabat</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Yesterday</span></td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-default">Unpaid</span>
-	                                    <span class="label label-default">Inactive</span>
-	                                </td>
-	                                <td>Alexandre Pome</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center">23th May</td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-success">Active</span>
-	                                </td>
-	                                <td>John Doe</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Today</span> 8:30</td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-success">Active</span>
-	                                </td>
-	                                <td>Thomas Bayer</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Today</span> 16:30</td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-primary">Paid</span>
-	                                    <span class="label label-default">Inactive</span>
-	                                </td>
-	                                <td>Nicolas Karabat</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">Yesterday</span></td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-default">Unpaid</span>
-	                                    <span class="label label-default">Inactive</span>
-	                                </td>
-	                                <td>Alexandre Pome</td>
-	                                <td align="center">3435362</td>
-	                                <td class="color-blue-grey" nowrap align="center">23th May</td>
-	                            </tr>
+	                            @endforeach
+
 	                        </table>
-	                    </div><!--.box-typical-body-->
-	                </section><!--.box-typical-dashboard-->
-	            </div><!--.col-->
+	                    </div>
+	                </section>
+	            </div>
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
-	                        <h3 class="panel-title">Recent tickets</h3>
+	                        <h3 class="panel-title">List Surat Jalan Belum Lunas</h3>
 	                    </header>
 	                    <div class="box-typical-body panel-body">
 	                        <table class="tbl-typical">
 	                            <tr>
-	                                <th><div>Status</div></th>
-	                                <th><div>Subject</div></th>
-	                                <th align="center"><div>Department</div></th>
-	                                <th align="center"><div>Date</div></th>
+	                                <th><div>Kode</div></th>
+	                                <th><div>Admin</div></th>
+	                                <th align="center"><div>Tanggal</div></th>
 	                            </tr>
+	                            @foreach($listsj as $row2)
 	                            <tr>
 	                                <td>
-	                                    <span class="label label-success">Open</span>
+	                                    <span class="label label-danger">
+	                                    	{{$row2->kode}}
+	                                    </span>
 	                                </td>
-	                                <td>Website down for one week</td>
-	                                <td align="center">Support</td>
-	                                <td nowrap align="center"><span class="semibold">Today</span> 8:30</td>
-	                            </tr>
-	                            <tr>
 	                                <td>
-	                                    <span class="label label-success">Open</span>
+	                                	{{$row2->admin}}
 	                                </td>
-	                                <td>Restoring default settings</td>
-	                                <td align="center">Support</td>
-	                                <td nowrap align="center"><span class="semibold">Today</span> 16:30</td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-warning">Progress</span>
-	                                </td>
-	                                <td>Loosing control on server</td>
-	                                <td align="center">Support</td>
-	                                <td nowrap align="center"><span class="semibold">Yesterday</span></td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <span class="label label-danger">Closed</span>
-	                                </td>
-	                                <td>Authorizations keys</td>
-	                                <td align="center">Support</td>
-	                                <td nowrap align="center">23th May</td>
-	                            </tr>
+	                                <td align="center">
+	                                {{$row2->tgl}}
+	                            	</td>
+	                             </tr>
+	                            @endforeach
 	                        </table>
+	                       
 	                    </div><!--.box-typical-body-->
 	                </section><!--.box-typical-dashboard-->
 	                
@@ -175,5 +127,57 @@
 @section('js')
 <script src="{{asset('assets/js/lib/d3/d3.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/charts-c3js/c3.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/charts-c3js/c3js-init.js')}}"></script>
+
+<script>
+	$(document).ready(function() {
+    console.log(11);
+
+    var barChart = c3.generate({
+        bindto: '#bar-chart',
+        data: {
+            columns: [
+                ['Pengiriman',
+            @php
+	            $date = date('Y-m-d');
+        		$waktu = strtotime($date);
+
+			for ($i = 6; $i >= 0; $i--) {
+				$minus = strtotime("-".$i." days", $waktu);
+				$hasil = date('Y-m-d',$minus);
+				$jumlah = DB::table('resi_pengiriman')->where('tgl',$hasil)->count();
+				echo $jumlah.",";
+			}
+			@endphp
+                ]
+            ],
+            type: 'bar'
+        },axis: {
+        x: {
+            type: 'category',
+            categories: [
+            @php
+	            $date = date('d-m-Y');
+        		$waktu = strtotime($date);
+
+			for ($i = 6; $i >= 0; $i--) {
+				$minus = strtotime("-".$i." days", $waktu);
+				$hasil = date('d-m-Y',$minus);
+				echo "'".$hasil."',";
+			}
+
+			@endphp
+            ]
+        }
+    },   
+        bar: {
+            width: {
+                ratio: 0.5
+            }
+        }
+    });
+
+   
+});
+
+</script>
 @endsection

@@ -91,11 +91,14 @@ class Settingcontroller extends Controller
         'email'     => 'Maaf, data harus email'
          ];
         $this->validate($request,$rules,$customMessages);
-        $setting=Settingmodel::find($id);
+        // $setting=Settingmodel::get();
+        $setting= DB::table('setting')->where('id',$id)->get();
+        foreach ($setting as $row) {
+        // $set=$row->icon;
+        // dd($set);
         if($request->hasFile('icon')){
-            File::delete('img/setting/'.$setting->icon);
-            $nameicon=$request->file('icon')->
-            getClientOriginalname();
+            File::delete('img/setting/'.$row->icon);
+            $nameicon=$request->file('icon')->getClientOriginalname();
             $lower_file_name=strtolower($nameicon);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $nameicon=time().'-'.$replace_space;
@@ -103,15 +106,17 @@ class Settingcontroller extends Controller
             $request->file('icon')->move($destination,$nameicon);
         }
         if($request->hasFile('logo')){
-            File::delete('img/setting/'.$setting->logo);
-            $namelog=$request->file('logo')->
-            getClientOriginalname();
+            File::delete('img/setting/'.$row->logo);
+            $namelog=$request->file('logo')->getClientOriginalname();
             $lower_file_name=strtolower($namelog);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $namelogo=time().'-'.$replace_space;
             $destination=public_path('img/setting');
             $request->file('logo')->move($destination,$namelogo);
         }
+
+        }
+        // $nama=$request->namaweb;
         if($request->hasFile('icon','logo')){
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
@@ -119,6 +124,12 @@ class Settingcontroller extends Controller
             'email'=>$request->email,
             'icon'=>$nameicon,
             'logo'=>$namelogo
+        ]);
+        }else{
+            Settingmodel::find($id)->update([
+            'namaweb'=>$request->namaweb,
+            'kontak'=>$request->kontak,
+            'email'=>$request->email
         ]);
         }
 
