@@ -68,7 +68,6 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->airlans}}</td>
-                            <th>Airlans</th>
                             <td>
                             	
                             	<a href="/trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm">

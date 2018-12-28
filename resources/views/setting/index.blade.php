@@ -72,9 +72,9 @@
                                             @endif
                                             <input type="file" name="icon">
                                         </div>
-                                        @if($errors->has('ico'))
+                                        @if($errors->has('icon'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('ico')}}
+                                        {{ $errors->first('icon')}}
                                          </div>
                                        @endif
                                             <div class="form-group row">

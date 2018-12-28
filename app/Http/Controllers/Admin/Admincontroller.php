@@ -19,10 +19,12 @@ class Admincontroller extends Controller
     {
         // $admins = Adminmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        if(Session::get('level') == 'programer') {
+        $id=Session::get('id');
+    if(Session::get('level') == 'programer') {
+        //________________________________________________________________
         $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
     }else{
-        $id=Session::get('id');
+        //________________________________________________________________
         $level='admin';
         $datadmin = DB::table('admin')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
     }
@@ -39,10 +41,12 @@ class Admincontroller extends Controller
     {
         // $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
         $setting = DB::table('setting')->get();
-        if(Session::get('level') == 'programer') {
+        $id=Session::get('id');
+    if(Session::get('level') == 'programer') {
+        //_______________________________________________
         $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->paginate(20);
     }else{
-        $id=Session::get('id');
+        //_______________________________________________
         $level='admin';
         $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
     }

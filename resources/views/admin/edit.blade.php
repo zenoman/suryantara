@@ -34,11 +34,10 @@
 
 				
 @if(Session::get('level') == 'programer')
-<div class="form-group row">
+	<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Kode Admin</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}">
-								<span class="help-block">*<b>pastikan</b> kode Kode admin <b>tidak sama</b> dengan kode admin yang lain </span></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"><span class="help-block">*<b>pastikan</b> kode Kode admin <b>tidak sama</b> dengan kode admin yang lain </span></p>
 						@if($errors->has('kode'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -53,6 +52,7 @@
 						</div>
 					</div>
 @endif
+					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
@@ -67,8 +67,7 @@
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" id="inputPassword" placeholder="Text" name="username" value="{{$datadmin->username}}"></p>
-							<span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="username" value="{{$datadmin->username}}"><span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span></p>
 						@if($errors->has('username'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('username')}}
@@ -109,9 +108,9 @@
                                         @endif
 						</div>
 					</div>
-					@if(Session::get('level') == 'programer')
+					@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Level admin</label>
+						<label for="exampleSelect" class="col-sm-2 form-control-label">Level admin</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="level" class="form-control">
 								<option value="{{$datadmin->level}}">{{$datadmin->level}}</option>
@@ -127,7 +126,7 @@
 							<small class="text-muted">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								@if(Session::get('id') == $datadmin->id)
-								<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
+								<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning">
                                         <i class="fa fa-key"></i> Ganti Password</a>
 								@endif
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

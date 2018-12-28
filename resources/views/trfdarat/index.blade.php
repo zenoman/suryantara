@@ -48,7 +48,7 @@
                                         <div class="modal-body">
                                            <form method="post" action="{{url('trfdarat/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan kota tujuan" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan tujuan Darat" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
