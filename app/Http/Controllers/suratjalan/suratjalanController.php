@@ -172,5 +172,23 @@ class suratjalanController extends Controller
             
         }
     }
+
+    public function destroy(Request $request){
+        $delid = $request->delid;
+        if(!$delid){
+            return back()->with('statuserror','Maaf, Tidak Ada Data Yang Dipilih');
+        }else{
+          $nc = count($delid);
+        
+        for($i=0;$i<$nc;$i++)
+        {
+            $did = $delid[$i];
+            DB::table('surat_jalan')->where('id',$did)->delete();
+
+        }
+        return back()->with('status','Data Berhasil Dihapus');  
+        }
+        
+    }
     
 }

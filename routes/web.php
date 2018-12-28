@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');
 Route::post('/laporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
 Route::post('/laporanpemasukan','laporan\laporanController@tampilpemasukan');
