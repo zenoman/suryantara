@@ -91,37 +91,34 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `satuan` varchar(10) DEFAULT NULL,
   `metode_bayar` enum('cash','bt') DEFAULT 'cash',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~25 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~29 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `total_biaya`, `keterangan`, `status`, `satuan`, `metode_bayar`) VALUES
-	(1, 'KDR181218-06-000001', NULL, 'SJ201218-07-000001', 'devasatrio', 'ban motor', 'darat', 'kediri', 'malang', '2018-12-18', 4, 3, '20 x 30 x 20', '3', 'hadi', 'deni', '902384902', '90824902', 9000, 1000, 2000, 90, 0, 0, 12000, 'skldfjskldf', 'Y', 'kg', 'cash'),
-	(2, 'KDR181218-06-000002', NULL, 'SJ201218-07-000001', 'devasatrio', 'sepatu kuda', 'darat', 'kediri', 'nganjuk', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'aris', '902384290', '928920', 7500, 500, 2000, 75, 0, 0, 10075, 'askldfjaskld', 'Y', 'kg', 'bt'),
 	(3, 'KDR181218-06-000003', NULL, 'SJ201218-06-000001', 'devasatrio', 'lampu manten', 'darat', 'kediri', 'malang', '2018-12-18', 3, 3, '20 x 30 x 20', '3', 'hari', 'mega', '023984902', '9203489028', 9000, 10000, 0, 90, 0, 0, 19090, 'asdfasd', 'Y', 'kg', 'bt'),
 	(4, 'KDR191218-06-000004', NULL, 'SJ201218-06-000001', 'devasatrio', 'motor supra', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 8, '30 x 20 x 50', '7.5', 'handri', 'jeki', '029384290', '290384290', 320000, 1300, 0, 3200, 0, 0, 321300, 'askldjklsf', 'Y', 'kg', 'bt'),
 	(5, 'KDR191218-06-000005', NULL, 'SJ211218-06-000002', 'devasatrio', 'perabot masak', 'laut', 'kediri', 'kalimantan', '2018-12-19', 3, 5, '30 x 20 x 30', '4.5', 'dini', 'suko', '90284902', '902348902', 200000, 3000, 10000, 2000, 0, 0, 213000, 'askldfjsdklf', 'Y', 'kg', 'cash'),
 	(6, 'KDR211218-06-000006', NULL, 'SJ211218-06-000003', 'devasatrio', 'celana cewek', 'darat', 'kediri', 'magelang', '2018-12-21', 4, 5, '30 x 20 x 30', '4.5', 'hadi', 'dendi', '092834902890', '0938492', 50000, 200, 1000, 500, 0, 0, 51700, 'aklsdjskldf', 'Y', 'kg', 'cash'),
-	(7, 'KDR211218-06-000007', NULL, 'SJ211218-06-000004', 'devasatrio', 'mesin mobil', 'laut', 'kediri', 'kalimantan', '2018-12-21', 3, 6, '40 x 20 x 30', '6', 'eni', 'dian', '2432379789', '928490280', 400000, 2000, 0, 4000, 0, 0, 406000, 'salkdjklsadjf', 'Y', 'koli', 'bt'),
-	(8, 'KDR211218-06-000008', NULL, 'SJ211218-06-000004', 'devasatrio', 'kaca mata', 'laut', 'kediri', 'kalimantan', '2018-12-21', 3, 6, '30 x 20 x 40', '6', 'daniel', 'jepri', '90238490289', '0328490280', 240000, 600, 0, 2400, 0, 0, 243000, 'klsadjklsad', 'Y', 'kg', 'bt'),
 	(9, 'KDR221218-06-000009', NULL, 'SJ221218-06-000005', 'devasatrio', 'aklfjdakl', 'darat', 'ksdjafkl', 'malang', '2018-12-22', 2, 5, '30 x 20 x 30', '4.5', 'ksadjf', 'skljfdk', '9028902', '890890', 3000, 2000, 1000, 30, 0, 0, 6030, 'asfs', 'Y', 'koli', 'cash'),
 	(11, 'KDR241218-06-000010', '0001', 'SJ251218-06-000006', 'devasatrio', 'kljklj', 'udara', 'kediri', 'alor', '2018-12-24', 1, 2, '10 x 20 x 40', '2', 'ga', 'ha', '98789', '878989', 80000, 0, 0, 800, 25000, 1200, 107000, 'kljkl', 'Y', 'kg', 'cash'),
 	(12, 'KDR241218-06-000011', '0002', NULL, 'devasatrio', 'halo2', 'udara', 'kediri', 'balikpapan', '2018-12-24', 5, 4, '20 x 20 x 40', '4', 'gaa', 'haa', '012', '012', 44000, 0, 0, 440, 25000, 1060, 70500, 'ini comen', 'Y', 'koli', 'bt'),
-	(13, 'KDR241218-06-000012', '9876543', 'SJ271218-06-000007', 'devasatrio', 'halo2', 'udara', 'kediri', 'balikpapan', '2018-12-24', 5, 4, '20 x 20 x 40', '4', 'gaa', 'haa', '012', '012', 44000, 0, 0, 440, 25000, 1060, 70500, 'ini comen', 'Y', 'koli', 'bt'),
-	(14, 'KDR251218-06-000013', '0050020003', 'SJ271218-06-000007', 'devasatrio', 'halo halo ini barang', 'udara', 'kediri', 'balikpapan', '2018-12-25', 1, 5, '30 x 30 x 20', '4.5', 'hari', 'hendro', '2099348290', '92348290', 110000, 0, 0, 1100, 25000, 2000, 138100, 'cepet ya bos', 'Y', 'kg', 'cash'),
 	(15, 'KDR251218-06-000014', '123 - 456789025', NULL, 'devasatrio', 'mesin mobil ferguso', 'udara', 'kediri', 'ambon', '2018-12-25', 1, 3, '20 x 30 x 20', '3', 'hari', 'deni', '902348290', '029384902', 109500, 0, 0, 1095, 25000, 1005, 136600, 'eri', 'N', 'kg', 'cash'),
 	(16, 'KDR251218-06-000015', NULL, NULL, 'devasatrio', 'deini', 'udara', 'kediri', 'ambon', '2018-12-25', 2, 12, '20 x 30 x 20', '3', 'saf', 'ksjadklf', '023948', '90843', 438000, 0, 0, 4380, 25000, 1080, 468460, 'cepet ya cuy', 'N', 'kg', 'cash'),
 	(17, 'KDR251218-06-000016', '121212', 'SJ251218-06-000006', 'devasatrio', 'jilbab pubg mobile', 'udara', 'kediri', 'alor', '2018-11-25', 1, 3, '20 x 30 x 20', '3', 'deni', 'hari', '02394890', '09823490', 120000, 0, 0, 1200, 25000, 800, 147000, 'cepet ya', 'N', 'kg', 'cash'),
 	(18, 'KDR271218-07-000001', NULL, 'SJ271218-06-000008', 'harianti', 'sepatu nike', 'darat', 'kediri', 'magelang', '2018-12-27', 2, 3, '20 x 30 x 20', '3', 'hari', 'dinda', '019212348761', '092791648267', 30000, 2000, 500, 300, 0, 0, 32800, 'cepet ya', 'N', 'kg', 'cash'),
-	(19, 'KDR271218-07-000002', NULL, 'SJ271218-06-000009', 'harianti', 'mouse gaming', 'darat', 'kediri', 'blitar', '2018-12-27', 3, 10, '40 x 20 x 50', '10', 'nindi', 'ari', '9857209172567', '096715679871', 25000, 1250, 3000, 250, 0, 0, 29500, 'koli dan bayarnya bt', 'N', 'koli', 'bt'),
 	(20, 'KDR271218-07-000003', NULL, 'SJ271218-06-000008', 'harianti', 'meja lipat', 'laut', 'kediri', 'kalimantan', '2018-12-27', 3, 5, '30 x 20 x 30', '4.5', 'heru', 'indah sari', '984719471209', '034819272937', 200000, 18000, 1000, 2000, 0, 0, 221000, 'cepet ya', 'N', 'koli', 'cash'),
-	(21, 'KDR271218-07-000004', NULL, 'SJ271218-06-000009', 'harianti', 'snack leo net', 'laut', 'kediri', 'sumatra', '2018-12-27', 1, 8, '30 x 30 x 40', '9', 'onisan', 'silfi', '012987651246', '0085608346172', 240000, 2000, 600, 2400, 0, 0, 245000, 'halo halo', 'N', 'kg', 'bt'),
 	(22, 'KDR271218-07-000005', NULL, NULL, 'harianti', 'laptop asus', 'laut', 'kediri', 'kalimantan', '2018-12-27', 1, 3, '30 x 20 x 20', '3', 'dani', 'ina', '093919381984', '092837481938', 20000, 800, 2000, 200, 0, 0, 23000, 'halo', 'N', 'koli', 'bt'),
 	(23, 'KDR271218-07-000006', NULL, NULL, 'harianti', 'lego star wars', 'laut', 'kediri', 'manadi', '2018-12-27', 1, 2, '30 x 20 x 10', '1.5', 'harianto', 'nana', '0934802834909', '9023482039809', 50000, 2500, 500, 500, 0, 0, 53500, 'halo halo', 'N', 'kg', 'cash'),
 	(24, 'KDR271218-07-000007', NULL, 'SJ271218-06-000008', 'harianti', 'ban mobil', 'udara', 'kediri', 'balikpapan', '2018-12-27', 1, 2, '30 x 20 x 10', '1.5', 'hadii', 'heri', '03948290298247', '03948091283490', 150000, 0, 0, 1500, 25000, 20000, 196500, 'klasdfjlskadf', 'N', 'koli', 'bt'),
-	(25, 'KDR271218-07-000008', '098 - 095483789', 'SJ271218-06-000009', 'harianti', 'jangkar kapal', 'udara', 'kediri', 'alor', '2018-12-27', 1, 2, '20 x 30 x 10', '1.5', 'hari', 'nina', '023948290', '90238490', 80000, 0, 0, 800, 25000, 2000, 107800, 'halo halo', 'N', 'kg', 'cash'),
-	(26, 'KDR271218-07-000009', '123 - 0983948', 'SJ271218-06-000008', 'harianti', 'bella square', 'udara', 'kediri', 'balikpapan', '2018-12-27', 1, 2, '30 x 20 x 10', '1.5', 'hari', 'didi', '029348290', '2409200', 200000, 0, 0, 2000, 25000, 3000, 230000, 'halo', 'Y', 'koli', 'cash');
+	(26, 'KDR271218-07-000009', '123 - 0983948', 'SJ271218-06-000008', 'harianti', 'bella square', 'udara', 'kediri', 'balikpapan', '2018-12-27', 1, 2, '30 x 20 x 10', '1.5', 'hari', 'didi', '029348290', '2409200', 200000, 0, 0, 2000, 25000, 3000, 230000, 'halo', 'Y', 'koli', 'cash'),
+	(27, 'KDR281218-07-000001', NULL, NULL, 'harianti', 'speker', 'darat', 'kediri', 'malang', '2018-12-28', 2, 3, '20 x 30 x 20', '3', 'haris', 'palevi', '092384902', '023890290', 9000, 1000, 10, 90, 0, 0, 10100, 'lakdsfjkl', 'N', 'kg', 'cash'),
+	(28, 'KDR281218-07-000002', NULL, NULL, 'harianti', 'sabuk sekolah', 'darat', 'kediri', 'blitar', '2018-12-28', 1, 2, '30 x 20 x 10', '1.5', 'ina', 'harni', '902834902390', '029384902900', 6000, 2000, 140, 60, 0, 0, 8200, 'akldfj', 'N', 'kg', 'bt'),
+	(29, 'KDR281218-07-000003', NULL, NULL, 'harianti', 'mobil bayi', 'laut', 'kediri', 'kalimantan', '2018-12-28', 1, 12, '20 x 40 x 60', '12', 'dendi', 'oki', '09123482900', '02938492089', 200000, 18000, 0, 2000, 0, 0, 220000, 'askldfjal', 'N', 'koli', 'bt'),
+	(30, 'KDR281218-07-000004', NULL, NULL, 'harianti', 'bola bowling', 'laut', 'kediri', 'manado', '2018-12-28', 1, 3, '20 x 30 x 15', '2.25', 'dini', 'harko', '02913842900', '2394829000', 120000, 800, 2000, 1200, 0, 0, 124000, 'cepet ya', 'N', 'kg', 'cash'),
+	(31, 'KDR281218-07-000005', NULL, NULL, 'harianti', 'lampu taman', 'udara', 'kediri', 'balikpapan', '2018-12-28', 5, 5, '30 x 20 x 30', '4.5', 'hari', 'dina', '029384290', '293482900', 110000, 0, 0, 1100, 25000, 900, 137000, 'cepte', 'N', 'kg', 'cash'),
+	(32, 'KDR281218-07-000006', NULL, NULL, 'harianti', 'jam tangan', 'udara', 'kediri', 'alor', '2018-12-28', 5, 2, '30 x 20 x 10', '1.5', 'sindi', 'nanda', '93480294809', '0239489028490', 400000, 0, 0, 4000, 25000, 1000, 430000, 'halo', 'N', 'koli', 'bt');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
@@ -166,15 +163,11 @@ DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
 INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`) VALUES
 	(1, 'devasatrio', 'SJ201218-06-000001', 'PT tani mundur jaya-0923820938', '2018-12-21', 'P', 11, 6, 0, 340390, 25000, 'Jln saguling no 1 malang'),
-	(2, 'harianti', 'SJ201218-07-000001', 'PT Moro Dadi-098329', '2018-12-25', 'Y', 6, 7, 12000, 10075, 40000, 'Jln badut ulang tahun no 3 magelang'),
 	(4, 'devasatrio', 'SJ211218-06-000002', 'PT Moro Dadi-098329', '2018-12-21', 'P', 5, 3, 213000, 0, 20000, 'Jln badut ulang tahun no 3 magelang'),
 	(5, 'devasatrio', 'SJ211218-06-000003', 'PT tani mundur jaya-0923820938', '2018-12-21', 'P', 5, 4, 51700, 0, 3000, 'Jln saguling no 1 malang'),
-	(6, 'devasatrio', 'SJ211218-06-000004', 'PT Iwak Enak-0938409', '2018-12-21', 'P', 12, 6, 0, 649000, 30000, 'mungkung loceret nganjuk'),
 	(7, 'devasatrio', 'SJ221218-06-000005', 'PT tani mundur jaya-0923820938', '2018-12-25', 'P', 5, 2, 6030, 0, 70000, 'Jln saguling no 1 malang'),
-	(8, 'devasatrio', 'SJ251218-06-000006', 'PT tani mundur jaya-0923820938', '2018-12-25', 'Y', 5, 2, 254000, 0, 67000, 'Jln saguling no 1 malang'),
-	(9, 'devasatrio', 'SJ271218-06-000007', 'PT tani mundur jaya-0923820938', '2018-12-27', 'Y', 9, 6, 138100, 70500, 30000, 'Jln saguling no 1 malang'),
-	(10, 'devasatrio', 'SJ271218-06-000008', 'PT Moro Dadi-098329', '2018-12-27', 'Y', 12, 7, 483800, 196500, 70000, 'Jln badut ulang tahun no 3 magelang'),
-	(11, 'devasatrio', 'SJ271218-06-000009', 'PT Iwak Enak-0938409', '2018-12-27', 'Y', 20, 5, 107800, 274500, 80000, 'mungkung loceret nganjuk');
+	(8, 'devasatrio', 'SJ251218-06-000006', 'PT tani mundur jaya-0923820938', '2018-12-25', 'P', 5, 2, 254000, 0, 67000, 'Jln saguling no 1 malang'),
+	(10, 'devasatrio', 'SJ271218-06-000008', 'PT Moro Dadi-098329', '2018-12-27', 'P', 12, 7, 483800, 196500, 60000, 'Jln badut ulang tahun no 3 magelang');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_darat
@@ -283,6 +276,16 @@ SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTIT
 DELIMITER //
 CREATE TRIGGER `editvendor` BEFORE UPDATE ON `vendor` FOR EACH ROW BEGIN
 update surat_jalan set tujuan=concat(new.vendor,'-',new.telp) where tujuan=concat(old.vendor,'-',old.telp);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- Dumping structure for trigger kargo.hapus_suratjalan
+DROP TRIGGER IF EXISTS `hapus_suratjalan`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `hapus_suratjalan` BEFORE DELETE ON `surat_jalan` FOR EACH ROW BEGIN
+delete from resi_pengiriman where resi_pengiriman.kode_jalan = old.kode;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;

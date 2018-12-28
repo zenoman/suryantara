@@ -36,8 +36,14 @@
                                 {{ session('status') }}
                     </div>
                     @endif
+                    @if (session('statuserror'))
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('statuserror') }}
+                    </div>
+                    @endif
 					
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
+					<!-- <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -61,12 +67,12 @@
                                         </div>
                                  
                                     </div>
-                                    <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                    <br><br>
-					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                            </div> 
+                    <br><br>-->
+                    <form action="hapuslistsj" method="post">
+                    	{{@csrf_field()}}
+                    <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
@@ -75,6 +81,7 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
+							<th class="no-sort"><input type="checkbox" id="selectall"/></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -85,6 +92,7 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
+							<th>#</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -108,18 +116,37 @@
                             	@endif
                             	</td>
                             <td>
+
                             	@if($row->status=='Y')
                             	<button class="btn btn-warning btn-sm"
 									data-toggle="modal"
-									data-target=".bd-example-modal-lg{{$row->id}}">Bayar Sekarang</button>
+									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Bayar Sekarang</button>
                             	@else
                             	<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
-									data-target=".bd-example-modal-lg{{$row->id}}">Lihat Detail</button>
+									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
                             	@endif
                     			
 
-						<div class="modal fade bd-example-modal-lg{{$row->id}}"
+						
+                            </td>
+                            <td class="text-center">
+								<input type="checkbox" name="delid[]" class="case" value="{{$row->id}}" />
+							</td>
+						</tr>
+						@endforeach
+						</tbody>
+					</table>
+					<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-danger pull-right">Hapus Data Terpilih
+					</button>
+					</form>
+					 {{ $data->links() }}
+				</div>
+			</section>
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
+	 @foreach($data as $row)
+	 <div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
 					 aria-labelledby="myLargeModalLabel"
@@ -137,16 +164,6 @@
 						<div class="col-lg-6 company-info">
 							<p>Pembuat : {{$row->admin}}</p>
 
-							<!-- <div class="invoice-block">
-								<div>1 Infinite loop</div>
-								<div>95014 Cuperino, CA</div>
-								<div>United States</div>
-							</div>
-
-							<div class="invoice-block">
-								<div>Telephone: 555-692-7754</div>
-								<div>Fax: 555-692-7754</div>
-							</div> -->
 
 							<div class="invoice-block">
 								<h5>Tujuan:</h5>
@@ -255,16 +272,7 @@
 						</div>
 					</div>
 				</div><!--.modal-->
-                            </td>
-						</tr>
-						@endforeach
-						</tbody>
-					</table>
-					 {{ $data->links() }}
-				</div>
-			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+	 @endforeach
 	@endsection
 
 		@section('js')
@@ -273,8 +281,32 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":false,
+            "columnDefs": [ {
+          "targets": 'no-sort',
+          "orderable": false,
+    		} ]
         });
 		});
+
 	</script>
+	<script language="javascript">
+    $(function(){
+    // add multiple select / deselect functionality
+    $("#selectall").click(function () {
+          $('.case').attr('checked', this.checked);
+    });
+    // if all checkbox are selected, check the selectall checkbox
+    // and viceversa
+    $(".case").click(function(){
+
+        if($(".case").length == $(".case:checked").length) {
+            $("#selectall").attr("checked", "checked");
+        } else {
+            $("#selectall").removeAttr("checked");
+        }
+
+    });
+});
+</script>
 	@endsection
