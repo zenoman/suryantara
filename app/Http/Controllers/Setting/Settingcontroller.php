@@ -97,7 +97,7 @@ class Settingcontroller extends Controller
         $this->validate($request,$rules,$customMessages);
          $setting = DB::table('setting')->where('id',$id)->get();
         foreach ($setting as $row) {
-            if($request->hasFile('icon') && $request->hasFile('logo') && $request->hasFile('landing')){
+            if($request->hasFile('icon') && $request->hasFile('logo') && $request->hasFile('landing') && $request->hasFile('logodarat') && $request->hasFile('logolaut') && $request->hasFile('logoudara')){
 
             if($request->hasFile('icon')){
             File::delete('img/setting/'.$row->icon);
@@ -130,6 +130,37 @@ class Settingcontroller extends Controller
             $destination=public_path('img/setting');
             $request->file('landing')->move($destination,$namelanding);
             }
+            if($request->hasFile('logodarat')){
+            File::delete('img/setting/'.$row->logodarat);
+            $namedara=$request->file('logodarat')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namedara);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namedarat=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logodarat')->move($destination,$namedarat);
+            }
+             if($request->hasFile('logolaut')){
+            File::delete('img/setting/'.$row->logolaut);
+            $namelau=$request->file('logolaut')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namelau);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namelaut=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logolaut')->move($destination,$namelaut);
+            }
+            if($request->hasFile('logoudara')){
+            File::delete('img/setting/'.$row->logoudara);
+            $nameudar=$request->file('logoudara')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($nameudar);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $nameudara=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logoudara')->move($destination,$nameudara);
+            }
+
             DB::table('setting')
             ->where('id',$id)
             ->update([
@@ -140,6 +171,9 @@ class Settingcontroller extends Controller
             'header'=>$request->header,
             'icon'=>$nameicon,
             'logo'=>$namelogo,
+            'logodarat'=>$namadarat,
+            'logolaut'=>$namalaut,
+            'logoudara'=>$namaudara,
             'landing'=>$namelanding,
             'sapaan'=>$request->sapaan,
             'kontak'=>$request->kontak
@@ -216,6 +250,78 @@ class Settingcontroller extends Controller
             'email'=>$request->email,
             'header'=>$request->header,
             'landing'=>$namelanding,
+            'sapaan'=>$request->sapaan,
+            'kontak'=>$request->kontak
+            ]);
+            }elseif ($request->hasFile('logodarat')) {
+            if($request->hasFile('logodarat')){
+            File::delete('img/setting/'.$row->logodarat);
+            $namedara=$request->file('logodarat')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namedara);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namedarat=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logodarat')->move($destination,$namedarat);
+            }
+
+             DB::table('setting')
+            ->where('id',$id)
+            ->update([
+            'namaweb'=>$request->namaweb,
+            'desk'=>$request->desk,
+            'alamat'=>$request->alamat,
+            'email'=>$request->email,
+            'header'=>$request->header,
+            'logodarat'=>$namedarat,
+            'sapaan'=>$request->sapaan,
+            'kontak'=>$request->kontak
+            ]);
+            }elseif ($request->hasFile('logolaut')) {
+            if($request->hasFile('logolaut')){
+            File::delete('img/setting/'.$row->logolaut);
+            $namelau=$request->file('logolaut')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namelau);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namelaut=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logolaut')->move($destination,$namelaut);
+            }
+
+             DB::table('setting')
+            ->where('id',$id)
+            ->update([
+            'namaweb'=>$request->namaweb,
+            'desk'=>$request->desk,
+            'alamat'=>$request->alamat,
+            'email'=>$request->email,
+            'header'=>$request->header,
+            'logolaut'=>$namelaut,
+            'sapaan'=>$request->sapaan,
+            'kontak'=>$request->kontak
+            ]);
+            }elseif ($request->hasFile('logoudara')) {
+            if($request->hasFile('logoudara')){
+            File::delete('img/setting/'.$row->logoudara);
+            $nameudar=$request->file('logoudara')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($nameudar);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $nameudara=time().'-'.$replace_space;
+            $destination=public_path('img/setting');
+            $request->file('logoudara')->move($destination,$nameudara);
+            }
+
+             DB::table('setting')
+            ->where('id',$id)
+            ->update([
+            'namaweb'=>$request->namaweb,
+            'desk'=>$request->desk,
+            'alamat'=>$request->alamat,
+            'email'=>$request->email,
+            'header'=>$request->header,
+            'logoudara'=>$nameudara,
             'sapaan'=>$request->sapaan,
             'kontak'=>$request->kontak
             ]);

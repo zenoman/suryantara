@@ -151,6 +151,51 @@
                                         {{ $errors->first('landing')}}
                                          </div>
                                        @endif
+                                       <!-- ====== -->
+                                       <div class="form-group row">
+                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Darat</label><p>
+                                            @if(isset($row->logodarat) && $row->logodarat)
+                                            <img src="../img/setting/{{$row->logodarat}}" width="100" height="100">
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="logodarat">
+                                        </div>
+                                          @if($errors->has('logodarat'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('logodarat')}}
+                                         </div>
+                                       @endif
+                                       <!--=====-->
+                                       <div class="form-group row">
+                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Laut</label><p>
+                                            @if(isset($row->logolaut) && $row->logolaut)
+                                            <img src="../img/setting/{{$row->logolaut}}" width="100" height="100">
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="logolaut">
+                                        </div>
+                                          @if($errors->has('logolaut'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('logolaut')}}
+                                         </div>
+                                       @endif
+                                       <!---->
+                                       <div class="form-group row">
+                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Udara</label><p>
+                                            @if(isset($row->logoudara) && $row->logoudara)
+                                            <img src="../img/setting/{{$row->logoudara}}" width="100" height="100">
+                                            @else
+                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
+                                            @endif
+                                            <input type="file" name="logoudara">
+                                        </div>
+                                          @if($errors->has('logoudara'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('logoudara')}}
+                                         </div>
+                                       @endif
 				@endforeach
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
