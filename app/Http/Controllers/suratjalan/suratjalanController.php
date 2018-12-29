@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\suratjalan;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -189,6 +189,20 @@ class suratjalanController extends Controller
         return back()->with('status','Data Berhasil Dihapus');  
         }
         
+    }
+
+    public function caridata(Request $request){
+      
+        $cari = $request->cari;
+        
+            $listdata = DB::table('surat_jalan')
+            ->where('kode','like','%'.$cari.'%')
+            ->orwhere('tujuan','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->get();
+         
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('suratjalan/cari',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
     
 }

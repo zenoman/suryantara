@@ -1,14 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\resipengiriman;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
-    public function index(){}
+    public function caridataresi(Request $request){
+        $cari = $request->cari;
+        $datakirim = DB::table('resi_pengiriman')
+            ->where('no_resi','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->orwhere('pengiriman_via','like','%'.$cari.'%')
+            ->orwhere('kode_tujuan','like','%'.$cari.'%')
+            ->orwhere('admin','like','%'.$cari.'%')
+            ->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        
+        return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
     public function tambahnosmu(Request $request){
         DB::table('resi_pengiriman')
         ->where('id',$request->kode)

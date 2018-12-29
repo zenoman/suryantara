@@ -55,7 +55,10 @@
 								<option value="semua">Semua</option>
 								@foreach($vendor as $vn)
 								<option value="{{$vn->tujuan}}">
-									{{$vn->tujuan}}
+									@php
+										$tujuan = explode("-", $vn->tujuan);
+									@endphp
+									{{$tujuan[0]}}
 								</option>
 								@endforeach
 							</select>
