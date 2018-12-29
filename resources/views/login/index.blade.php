@@ -67,11 +67,20 @@
                         <span>{!! captcha_img() !!}</span>
                <button type="button" class="btn btn-success btn-sm" id="refresh"><i class="fa fa-refresh"></i></button>
                     </div>
+
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="masukan captcha" name="captcha" required>
                     </div>
-                   
-                    <button type="submit" class="btn btn-rounded" name="submit" >Masuk</button>
+                   <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-rounded" name="submit" >Masuk</button>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{url('/')}}" class="btn btn-warning btn-rounded">Website Saya</a>
+                        </div>
+                    </div>
+                    
+                    
                     
                     <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
                     <!--<button type="button" class="close">
