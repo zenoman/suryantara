@@ -48,7 +48,7 @@ Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resila
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');
 Route::get('/admin/create','Admin\Admincontroller@create');
-Route::get('/admin/{id}','Admin\Admincontroller@edit');
+Route::get('/admin/{id}/edit','Admin\Admincontroller@edit');
 Route::put('/admin/{id}','Admin\Admincontroller@update');
 Route::get('/admin/{id}/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');

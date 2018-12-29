@@ -74,9 +74,9 @@
                             <td>
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
                                         <i class="fa fa-key"></i> Ganti Password</a>
-                            	<a href="admin/{{$row->id}}" class="btn btn-rimary btn-sm">
+                            	<a href="/admin/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
+                                <a  onclick="return confirm('Hapus Data ?')" href="/admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i>Hapus</a>
                             </td>
 						</tr>
