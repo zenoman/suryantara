@@ -52,20 +52,25 @@
     </nav>
 <br>
 <br> 
-<section class="masthead bg-primary text-white text-center mb-0">
+
+<section class="masthead bg-light text-dark text-center mb-0">
   <div class="container">
     <h1 class="text-uppercase mb-0">Tarif Udara</h1>
     <br>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Kota Tujuan</th>
-        <th scope="col">Biaya</th>    
-      </tr>
-    </thead>
-    <tbody>
-     <?php $i = 1;?>
+    <br>
+     <div id="page-wrapper">    
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <thead class="thead-dark text-secondary">
+                <tr>
+                    <th>No</th>
+                    <th>Kota Tujuan</th>
+                    <th>Biaya</th>
+                </tr>
+            </thead>
+            <tbody>
+              <?php $i = 1;?>
       @foreach($udara as $row)
         <?php $no = $i++;?>
       <tr>
@@ -74,17 +79,13 @@
         <td>{{"Rp ". number_format($row->perkg,0,',','.')." /Kg"}}</td>
       </tr>
       @endforeach
-    </tbody>
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Kota Tujuan</th>
-        <th scope="col">Biaya</th>    
-      </tr>
-    </thead>
-  </table>
+            </tbody>
+          </table>
+        </div>                              
+    </div>
+</div>                
   <br> 
-  <a onclick="window.history.go(-1);" class="btn btn-secondary">Kembali</a>   
+  <a onclick="window.history.go(-1);" class="btn btn-secondary text-white">Kembali</a>   
   </div>
 </section>
 <footer class="footer text-center">
