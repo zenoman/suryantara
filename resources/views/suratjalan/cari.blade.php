@@ -119,7 +119,7 @@
 					<div class="pull-right">
 						<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-warning">Hapus Data Terpilih
 					</button>
-					<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+					<a href="{{url('/listsuratjalan')}}" class="btn btn-danger">Kembali</a>
 					</div>
 					</form>
 				</div>
