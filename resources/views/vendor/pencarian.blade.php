@@ -36,7 +36,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('vendor')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -71,10 +71,14 @@
                             <td>{{$row->vendor}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
-                            <td><a href="/vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit</a>
-                                <a href="vendor/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>Hapus</a>
+                            <td>
+<form action="/vendor/delete"  method="post">
+<a href="/vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

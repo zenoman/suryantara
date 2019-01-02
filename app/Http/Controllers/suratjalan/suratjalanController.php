@@ -191,10 +191,8 @@ class suratjalanController extends Controller
         
     }
 
-    public function caridata(Request $request){
-      
+    public function caridata(Request $request){      
         $cari = $request->cari;
-        
             $listdata = DB::table('surat_jalan')
             ->where('kode','like','%'.$cari.'%')
             ->orwhere('tujuan','like','%'.$cari.'%')

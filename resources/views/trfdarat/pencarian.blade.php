@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -36,9 +37,10 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('trfdarat')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
+                    <!-- <form action="hapusdata" method="post"> -->
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<a>List Data Tarif Darat</a>
 						<thead>
@@ -71,21 +73,25 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
-                            <td>{{$row->tarif}}</td>
-                            <td>{{$row->berat_min}}</td>
-                            <td>{{$row->estimasi}}</td>
+                            <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
+                            <td>{{"Kg ".$row->berat_min}}</td>
+                            <td>{{$row->estimasi." Hari"}}</td>
                             <td>
                             	
-                            	<a href="/trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+<form action="/trfdarat/delete"  method="post">
+<a href="/trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
-					 
+				
 				</div>
 			</section>
 		</div><!--.container-fluid-->

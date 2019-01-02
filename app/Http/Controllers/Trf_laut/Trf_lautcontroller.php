@@ -61,9 +61,10 @@ return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
 //-----------------------------------
 
 public  function caridata(Request $request){
-	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$request->cari.'%')->get();
+    $cari=$request->cari;
+	$trflaut= DB::table('tarif_laut')->where('tujuan','like','%'.$cari.'%')->orwhere('kode','like','%'.$cari.'%')->get();
     $setting = DB::table('setting')->get();
-	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$request->cari,'title'=>$setting]);
+	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$cari,'title'=>$setting]);
 }
 public function create()
 {
@@ -165,9 +166,10 @@ return redirect('trflaut')->with('status','Edit Data Sukses');
 *
 * @param int $id* @return \Illuminate\Http\Response
 */
-public function destroy($id)
+public function destroy(Request $request)
 {
+    $id = $request->aid;
 Trf_lautmodel::destroy($id);
-return redirect('trflaut')->with('status','Hapus Data Sukses');
+return back()->with('status','Hapus Data Sukses');
 }
 }

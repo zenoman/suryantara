@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -36,7 +37,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('trflaut')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -71,15 +72,19 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
-                            <td>{{$row->tarif}}</td>
-                            <td>{{$row->berat_min}}</td>
-                            <td>{{$row->estimasi}}</td>
+                            <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
+                            <td>{{"Kg ".$row->berat_min}}</td>
+                            <td>{{$row->estimasi." Hari"}}</td>
                             <td>
                             	
+                                        <form action="/trflaut/delete"  method="post">
                             	<a href="/trflaut/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="trflaut/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

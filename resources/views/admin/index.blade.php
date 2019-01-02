@@ -48,7 +48,7 @@
                                         
 
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('admin/cari')}}">
+                                           <form method="get" action="{{url('admin/cari')}}">
                                             <div class="form-group">
                                                 <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama admin" required>
                                             </div>
@@ -97,12 +97,18 @@
                             <td>{{$row->username}}</td>
                             <td>{{$row->level}}</td>
                             <td>
+                              <form action="/admin/delete"  method="post">
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
                                         <i class="fa fa-key"></i> Ganti Password</a>
-                            	<a href="admin/{{$row->id}}" class="btn btn-rimary btn-sm">
+
+                            	<a href="admin/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+                                        	{{csrf_field()}}
+                                        	
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

@@ -141,9 +141,10 @@ return redirect('vendor')->with('status','edit Data Sukses');
 *
 * @param int $id* @return \Illuminate\Http\Response
 */
-public function destroy($id)
-{
+public function destroy(Request $request)
+    {
+        $id = $request->aid;
 Vendormodel::destroy($id);
-return redirect('vendor')->with('status','hapus Data Sukses');
+return back()->with('status','hapus Data Sukses');
 }
 }

@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -36,7 +37,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('admin')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -72,12 +73,16 @@
                             <td>{{$row->username}}</td>
                             <td>{{$row->level}}</td>
                             <td>
+                                        <form action="/admin/delete"  method="post">
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
                                         <i class="fa fa-key"></i> Ganti Password</a>
                             	<a href="/admin/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="/admin/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+                                        	{{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

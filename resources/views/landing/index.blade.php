@@ -9,6 +9,7 @@
     <meta name="author" content="">
     @foreach($des as $row)
     <title>{{$row->namaweb}}</title>
+    <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
     @endforeach
     <!-- Bootstrap core CSS -->
     <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +42,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('')}}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('')}}">Home</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#biaya">
@@ -158,7 +159,7 @@
 
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="#" target="_blank">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
