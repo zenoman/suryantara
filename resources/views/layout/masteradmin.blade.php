@@ -10,19 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	@yield('header')
-	<!-- <title>Suryantara</title> -->
-	
-	<!-- <link href="{{asset('img/favicon.png')}}" rel="icon" type="image/png"> -->
-	
-	<!-- =============================plugin css============================== -->
 	@yield('css')
-	<!-- ===================================================================== -->
-	<!-- =============================css=================================== -->
+	
 	<link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
-	<!-- =================================================================== -->
-
 </head>
 <body class="with-side-menu">
 
@@ -100,7 +92,7 @@
 	                <span class="lbl">List Pengiriman</span>
 	            </a>
 	        </li>
-	        <li class="red with-sub">
+	        <li class="brown with-sub">
 	        	<span>
 	                <i class="fa fa-bus"></i>
 	                <span class="lbl">Surat Jalan</span>
@@ -119,7 +111,7 @@
 	                <span class="lbl">Tarif Darat</span>
 	            </a>
 	        </li>
-	        <li class="pink-red">
+	        <li class="pink">
 	            <a href="{{url('trflaut')}}">
 	                <i class="font-icon font-icon-help"></i>
 	                <span class="lbl">Tarif Laut</span>
@@ -137,21 +129,36 @@
 	                <span class="lbl">Vendor</span>
 	            </a>
 	        </li>
+	        <li class="blue">
+	            <a href="{{url('pengeluaranlain')}}">
+	                <i class="fa fa-external-link"></i>
+	                <span class="lbl">Pengeluaran Lainya</span>
+	            </a>
+	        </li>
 	        <li class="green with-sub">
-	        	<span>
+	            <span>
 	                <i class="fa fa-file"></i>
 	                <span class="lbl">Laporan</span>
 	            </span>
-	             <ul>
+	            <ul>
 	                <li>
 	                	<a href="{{url('/laporanpemasukan')}}"><span class="lbl">
 		                Laporan Pemasukan</span></a>
 	                	
 	                </li>
-		            <li>
-		            	<a href="{{url('/laporanpengeluaran')}}"><span class="lbl">
-		                Laporan Pengeluaran</span></a>
-		            </li>
+	                <li class="with-sub">
+	                    <span>
+	                        <span class="lbl">Laporan Pengeluaran</span>
+	                    </span>
+	                    <ul>
+	                        <li><a href="{{url('/laporanpengeluaran')}}"><span class="lbl">Vendor</span></a></li>
+
+	                        <li>
+	                        	<a href="{{url('/laporanpengeluaranlainya')}}"><span class="lbl">Lainya</span></a>
+	                        </li>
+	                        
+	                    </ul>
+	                </li>
 	            </ul>
 	        </li>
 	        <li class="brown">
@@ -177,9 +184,7 @@
 	<script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
 	<script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
 	<script src="{{asset('assets/js/plugins.js')}}"></script>
-	<!-- =========================plugin js=================================== -->
 	@yield('js')
-	<!-- ===================================================================== -->
 	<script src="{{asset('assets/js/app.js')}}"></script>
 	@yield('otherjs')
 </body>

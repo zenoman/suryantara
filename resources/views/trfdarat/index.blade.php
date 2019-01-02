@@ -46,9 +46,9 @@
                                         
 
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('trfdarat/cari')}}">
+                                           <form method="get" action="{{url('trfdarat/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan tujuan Darat" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan kode/tujuan/tarif" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
@@ -70,6 +70,8 @@
 							<th>Kode</th>
 							<th>Tujuan</th>
 							<th>Tarif</th>
+							<th>Berat Minimal</th>
+							<th>Estimasi</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -79,9 +81,11 @@
 							<th>kode</th>
 							<th>Tujuan</th>
 							<th>Tarif</th>
+							<th>Berat Minimal</th>
+							<th>Estimasi</th>
 							<th>Aksi</th>
 						</tr>
-						</tfoot>
+						</tfoot> 
 						<tbody>
 						<?php $i = 1;?>
                             @foreach($trf_drt as $row)
@@ -91,10 +95,18 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
-                            <td><a href="trfdarat/{{$row->id}}/edit" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a href="trfdarat/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+                            <td>{{"Kg ".$row->berat_min}}</td>
+                            <td>{{$row->estimasi." Hari"}}</td>
+
+                            <td>
+<form action="/trfdarat/delete"  method="post">
+<a href="/trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

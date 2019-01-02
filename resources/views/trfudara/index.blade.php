@@ -48,9 +48,9 @@
                                         
 
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('trfudara/cari')}}">
+                                           <form method="get" action="{{url('trfudara/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Tujuan udara" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan kode/tujuan/airlans" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
@@ -72,6 +72,9 @@
 							<th>Kode</th>
 							<th>Tujuan</th>
 							<th>Airlines</th>
+							<th>Biaya perKg</th>
+							<th>Biaya documen</th>
+							<th>Heavy cargo</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -81,6 +84,9 @@
 							<th>kode</th>
 							<th>Tujuan</th>
 							<th>Airlines</th>
+							<th>Biaya perKg</th>
+							<th>Biaya documen</th>
+							<th>Heavy cargo</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -93,10 +99,17 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->airlans}}</td>
-                            <td><a href="trfudara/{{$row->id}}/edit" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a href="trfudara/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove" onclick="return confirm('Hapus Data ?')"></i>Hapus</a>
+                            <td>    {{"kg ". $row->perkg}}</td>
+                            <td>    {{$row->minimal_heavy. "%"}}</td>
+                            <td>    {{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
+                            <td>
+<form action="/trfudara/delete"  method="post">
+<a href="/trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

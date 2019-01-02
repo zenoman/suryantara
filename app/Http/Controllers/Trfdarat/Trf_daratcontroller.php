@@ -66,9 +66,10 @@ $setting = DB::table('setting')->get();
 
 public function caridata(Request $request)
     {
-        $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$request->cari.'%')->get();
+        $cari=$request->cari;
+        $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$cari.'%')->orwhere('kode','like','%'.$cari.'%')->get();
         $setting = DB::table('setting')->get();
-        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$request->cari,'title'=>$setting]);
+        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$cari,'title'=>$setting]);
     }
 
 public function create(){
@@ -165,9 +166,10 @@ return redirect('trfdarat')->with('status','Edit Data Sukses');
 * @param int $id
 * @return \Illuminate\Http\Response
 */
-public function destroy($id)
-{
+public function destroy(Request $request)
+    {
+        $id = $request->aid;
 Trf_daratmodel::destroy($id);
-return redirect('trfdarat')->with('status','Hapus Data Sukses');
+return back()->with('status','Hapus Data Sukses');
 }
 }

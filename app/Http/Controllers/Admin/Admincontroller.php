@@ -39,18 +39,34 @@ class Admincontroller extends Controller
      */
      public function caridata(Request $request)
     {
-        // $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->get();
         $setting = DB::table('setting')->get();
         $id=Session::get('id');
+        $cari=$request->cari;
     if(Session::get('level') == 'programer') {
         //_______________________________________________
-        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->paginate(20);
+        $datadmin = DB::table('admin')->where('id','!=',$id)
+        ->where(function ($huft) use ($cari){
+            $huft->where('nama','like','%'.$cari.'%')
+            ->orwhere('kode','like','%'.$cari.'%')
+            ->orwhere('username','like','%'.$cari.'%')
+            ->orwhere('email','like','%'.$cari.'%');
+        })
+        ->paginate(20);
     }else{
         //_______________________________________________
         $level='admin';
-        $datadmin = DB::table('admin')->where('nama','like','%'.$request->cari.'%')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
+        $datadmin = DB::table('admin')->where('id','!=',$id)
+        ->where(function($huft) use ($cari){
+            $huft->where('nama','like','%'.$cari.'%')
+            ->orwhere('kode','like','%'.$cari.'%')
+            ->orwhere('username','like','%'.$cari.'%')
+            ->orwhere('email','like','%'.$cari.'%');
+        })->where(function($huft) use ($level){
+            $huft->where('level','=',$level);
+        })
+        ->paginate(20);
     }
-        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$request->cari,'title'=>$setting]);
+        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$cari,'title'=>$setting]);
     }
 
 
@@ -281,9 +297,11 @@ if($dtlam > 0){
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->aid;
          Adminmodel::destroy($id);
-        return redirect('admin')->with('status','Hapus Data Sukses');
+        // return redirect('admin')->with('status','Hapus Data Sukses');
+        return back()->with('status','Hapus Data Sukses');
     }
 }

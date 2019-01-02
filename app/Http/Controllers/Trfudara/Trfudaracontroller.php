@@ -63,9 +63,10 @@ class Trfudaracontroller extends Controller
 //-----------------------------------
 public function caridata(Request $request)
     {
-        $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$request->cari.'%')->get();
+        $cari=$request->cari;
+        $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$cari.'%')->orwhere('kode','like','%'.$cari.'%')->get();
             $setting = DB::table('setting')->get();
-        return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$request->cari,'title'=>$setting]);
+        return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$cari,'title'=>$setting]);
     }
     public function create()
     {
@@ -178,10 +179,11 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->aid;
         Trfudaramodel::destroy($id);
-        return redirect('trfudara')->with('status','Hapus Data Sukses');
+        return back()->with('status','Hapus Data Sukses');
         //
     }
 }

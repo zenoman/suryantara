@@ -41,28 +41,7 @@
                                         @endif
 						</div>
 					</div>
-          <div class="form-group row">
-            <label class="col-sm-2 form-control-label">Deskripsi Web</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="desk" placeholder="Deskripsi Web Disabled" value="{{$row->desk}}"></p>
-            @if($errors->has('desk'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('desk')}}
-                                         </div>
-                                        @endif
-            </div>
-          </div>             
-          <div class="form-group row">
-            <label class="col-sm-2 form-control-label">Alamat</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Alamat" name="alamat" value="{{$row->alamat}}"></p>
-            @if($errors->has('alamat'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('alamat')}}
-                                         </div>
-                                        @endif
-            </div>
-          </div>
+             
           <div class="form-group row">
             <label class="col-sm-2 form-control-label">Email</label>
             <div class="col-sm-10">
@@ -74,28 +53,7 @@
                                         @endif
             </div>
           </div>   
-          <div class="form-group row">
-            <label class="col-sm-2 form-control-label">Header</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Header" name="header" value="{{$row->header}}"></p>
-            @if($errors->has('header'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('header')}}
-                                         </div>
-                                        @endif
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 form-control-label">Ucapan Pembuka</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Ucapan Pembuka" name="sapaan" value="{{$row->sapaan}}"></p>
-            @if($errors->has('sapaan'))
-                                        <div class="alert alert-danger">
-                                        {{ $errors->first('sapaan')}}
-                                         </div>
-                                        @endif
-            </div>
-          </div>             
+           
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label">Kontak</label>
 						<div class="col-sm-10">
@@ -136,66 +94,7 @@
                                         {{ $errors->first('logo')}}
                                          </div>
                                        @endif
-                                       <!--=====================-->
-                                       <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Logo Landing</label><p>
-                                            @if(isset($row->landing) && $row->landing)
-                                            <img src="../img/setting/{{$row->landing}}" width="100" height="100">
-                                            @else
-                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
-                                            @endif
-                                            <input type="file" name="landing">
-                                        </div>
-                                          @if($errors->has('landing'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('landing')}}
-                                         </div>
-                                       @endif
-                                       <!-- ====== -->
-                                       <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Darat</label><p>
-                                            @if(isset($row->logodarat) && $row->logodarat)
-                                            <img src="../img/setting/{{$row->logodarat}}" width="100" height="100">
-                                            @else
-                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
-                                            @endif
-                                            <input type="file" name="logodarat">
-                                        </div>
-                                          @if($errors->has('logodarat'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('logodarat')}}
-                                         </div>
-                                       @endif
-                                       <!--=====-->
-                                       <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Laut</label><p>
-                                            @if(isset($row->logolaut) && $row->logolaut)
-                                            <img src="../img/setting/{{$row->logolaut}}" width="100" height="100">
-                                            @else
-                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
-                                            @endif
-                                            <input type="file" name="logolaut">
-                                        </div>
-                                          @if($errors->has('logolaut'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('logolaut')}}
-                                         </div>
-                                       @endif
-                                       <!---->
-                                       <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Logo Tarif Udara</label><p>
-                                            @if(isset($row->logoudara) && $row->logoudara)
-                                            <img src="../img/setting/{{$row->logoudara}}" width="100" height="100">
-                                            @else
-                                            <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
-                                            @endif
-                                            <input type="file" name="logoudara">
-                                        </div>
-                                          @if($errors->has('logoudara'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('logoudara')}}
-                                         </div>
-                                       @endif
+                                       
 				@endforeach
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">

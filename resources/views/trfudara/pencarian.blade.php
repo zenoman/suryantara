@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -36,7 +37,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('trfudara')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -47,6 +48,9 @@
 							<th>Kode Tujuan</th>
 							<th>Tujuan</th>
 							<th>Airlans</th>
+							<th>Biaya perKg</th>
+							<th>Biaya documen</th>
+							<th>Heavy cargo</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -56,6 +60,9 @@
 							<th>Kode Tujuan</th>
 							<th>Tujuan</th>
 							<th>Airlans</th>
+							<th>Biaya perKg</th>
+							<th>Biaya documen</th>
+							<th>Heavy cargo</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -68,12 +75,17 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->airlans}}</td>
+                            <td>    {{"kg ". $row->perkg}}</td>
+                            <td>    {{$row->minimal_heavy. "%"}}</td>
+                            <td>    {{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
                             <td>
-                            	
-                            	<a href="/trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                <a  onclick="return confirm('Hapus Data ?')" href="trfudara/{{$row->id}}/delete" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</a>
+<form action="/trfudara/delete"  method="post">
+<a href="/trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
                             </td>
 						</tr>
 						@endforeach

@@ -1,10 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::get('/carisuratjalan','suratjalan\suratjalanController@caridata');
 Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');
 Route::post('/laporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
+Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::post('/laporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
@@ -52,10 +54,10 @@ Route::post('/admin','Admin\Admincontroller@store');
 Route::get('/admin/create','Admin\Admincontroller@create');
 Route::get('/admin/{id}/edit','Admin\Admincontroller@edit');
 Route::put('/admin/{id}','Admin\Admincontroller@update');
-Route::get('/admin/{id}/delete','Admin\Admincontroller@destroy');
+Route::post('/admin/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
 Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
-Route::post('admin/cari','Admin\Admincontroller@caridata');
+Route::get('admin/cari','Admin\Admincontroller@caridata');
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');
@@ -65,47 +67,47 @@ Route::post('/trfudara','Trfudara\Trfudaracontroller@store');
 Route::get('/trfudara/create','Trfudara\Trfudaracontroller@create');
 Route::get('/trfudara/{id}/edit','Trfudara\Trfudaracontroller@edit');
 Route::put('/trfudara/{id}','Trfudara\Trfudaracontroller@update');
-Route::get('/trfudara/{id}/delete','Trfudara\Trfudaracontroller@destroy');
+Route::post('/trfudara/delete','Trfudara\Trfudaracontroller@destroy');
+Route::get('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //-----------------------export import
 Route::get('/trfudara/importexcel','Trfudara\Trfudaracontroller@importexcel');
 Route::post('/trfudara/prosesimportexcel','Trfudara\Trfudaracontroller@prosesimportexcel');
 Route::get('/trfudara/download','Trfudara\Trfudaracontroller@downloadtemplate');
 Route::get('/trfudara/exporttrfudara','Trfudara\Trfudaracontroller@exsportexcel');
-Route::post('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //==============================================trf darat
 Route::get('/trfdarat','Trfdarat\Trf_daratcontroller@index');
 Route::post('/trfdarat','Trfdarat\Trf_daratcontroller@store');
 Route::get('/trfdarat/create','Trfdarat\Trf_daratcontroller@create');
 Route::get('/trfdarat/{id}/edit','Trfdarat\Trf_daratcontroller@edit');
 Route::put('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@update');
-Route::get('/trfdarat/{id}/delete','Trfdarat\Trf_daratcontroller@destroy');
+Route::post('/trfdarat/delete','Trfdarat\Trf_daratcontroller@destroy');
+Route::get('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
 //------------------------export import
 Route::get('/trfdarat/importexcel','Trfdarat\Trf_daratcontroller@importexcel');
 Route::post('/trfdarat/prosesimportexcel','Trfdarat\Trf_daratcontroller@prosesimportexcel');
 Route::get('/trfdarat/download','Trfdarat\Trf_daratcontroller@downloadtemplate');
 Route::get('/trfdarat/exporttrfdarat','Trfdarat\Trf_daratcontroller@exsportexcel');
-Route::post('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
 //===============================================trf laut
 Route::get('/trflaut','Trf_laut\Trf_lautcontroller@index');
 Route::post('/trflaut','Trf_laut\Trf_lautcontroller@store');
 Route::get('/trflaut/create','Trf_laut\Trf_lautcontroller@create');
 Route::get('/trflaut/{id}/edit','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
-Route::get('/trflaut/{id}/delete','Trf_laut\Trf_lautcontroller@destroy');
+Route::post('/trflaut/delete','Trf_laut\Trf_lautcontroller@destroy');
+Route::get('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //------------------------export import
 Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');
 Route::post('/trflaut/prosesimportexcel','Trf_laut\Trf_lautcontroller@prosesimportexcel');
 Route::get('/trflaut/download','Trf_laut\Trf_lautcontroller@downloadtemplate');
 Route::get('/trflaut/exporttrflaut','Trf_laut\Trf_lautcontroller@exsportexcel');
-Route::post('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //===============================================vendor
 Route::get('/vendor','Vendor\Vendorcontroller@index');
 Route::post('/vendor','Vendor\Vendorcontroller@store');
 Route::get('/vendor/create','Vendor\Vendorcontroller@create');
 Route::get('/vendor/{id}/edit','Vendor\Vendorcontroller@edit');
 Route::put('/vendor/{id}','Vendor\Vendorcontroller@update');
-Route::get('/vendor/{id}/delete','Vendor\Vendorcontroller@destroy');
-Route::post('vendor/cari','Vendor\Vendorcontroller@caridata');
+Route::post('/vendor/delete','Vendor\Vendorcontroller@destroy');
+Route::get('vendor/cari','Vendor\Vendorcontroller@caridata');
 //------------------------export import 
 Route::get('/vendor/importexcel','Vendor\Vendorcontroller@importexcel');
 Route::post('/vendor/prosesimportexcel','Vendor\Vendorcontroller@prosesimportexcel');

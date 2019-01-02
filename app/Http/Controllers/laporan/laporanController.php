@@ -51,7 +51,6 @@ class laporanController extends Controller
         ->get();
 
         $vendor = DB::table('surat_jalan')
-        ->select(DB::raw('surat_jalan.*'))
         ->groupby('tujuan')
         ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -129,5 +128,19 @@ class laporanController extends Controller
 
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
 
+    }
+    public function pilihpengeluaranlain(){
+        $bulan = DB::table('pengeluaran_lain')
+        ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('tgl','desc')
+        ->get();
+
+        $kategori = DB::table('pengeluaran_lain')
+        ->groupby('kategori')
+        ->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pilihpengeluaranlain',['title'=>$webinfo,'bulan'=>$bulan,'kategori'=>$kategori]);
     }
 }

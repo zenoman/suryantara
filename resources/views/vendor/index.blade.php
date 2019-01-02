@@ -48,7 +48,7 @@
                                         
 
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('vendor/cari')}}">
+                                           <form method="get" action="{{url('vendor/cari')}}">
                                             <div class="form-group">
                                                 <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama Vendor" required>
                                             </div>
@@ -96,11 +96,14 @@
                             <td>{{$row->vendor}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
-                            <td><a href="vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit</a>
-                                <a href="vendor/{{$row->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data ?')">
-                                        <i class="fa fa-remove"></i>Hapus</a>
-                            </td>
+                            <td>
+<form action="/vendor/delete"  method="post">
+<a href="/vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+
+                                        {{csrf_field()}}
+                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+                    					</form>
 						</tr>
 						@endforeach
 						</tbody>
