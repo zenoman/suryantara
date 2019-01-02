@@ -18,7 +18,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Pilih Laporan Pemasukan</h2>
+							<h2>Pilih Laporan Pengeluaran Lain</h2>
 						</div>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{url('laporanpemasukan') }}" role="form" method="POST">
+				<form action="{{url('laporanpengeluaran') }}" role="form" method="POST">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
@@ -48,26 +48,21 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Jalur</label>
+						<label class="col-sm-2 form-control-label semibold">Kategori</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<div class="radio">
-								<input type="radio" id="radio-1" value="darat" name="jalur">
-								<label for="radio-1">Jalur Darat </label>
-								&nbsp;&nbsp; 
-								<input type="radio" name="jalur" id="radio-2" value="udara">
-								<label for="radio-2">Jalur Udara </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-3" value="laut">
-								<label for="radio-3">Jalur Laut </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-4" value="semua" checked="">
-								<label for="radio-4">Semua Jalur </label>
-							</div>
+								<select class="select2" name="vendor">
+								<option value="semua">Semua</option>
+								@foreach($kategori as $kat)
+								<option value="{{$kat->kategori}}">
+									{{$kat->kategori}}
+								</option>
+								@endforeach
+							</select>
 							</p>
+							 
 						</div>
 					</div>
-					
 						{{csrf_field()}}
 							<small class="text-muted text-right">
 								

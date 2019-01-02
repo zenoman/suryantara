@@ -161,7 +161,7 @@
 			<hr>
 					<small class="text-muted">
 								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
 								
 								
 								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
@@ -174,13 +174,23 @@
 	</div>
 <div id="hidden_div" style="display: none;">
 
-	<h2 align="center">
+	<table width="100%">
+		<tr>
+			<td width="20%" align="center">
+				<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="70%">
+			</td>
+			<td width="60%">
+				<h2 align="center">
 		SURAT JALAN
 		<br>	
 		<span style="font-size: 18;margin-bottom: 20px;">CV. SURYANTARA CARGO</span>
 		<br>	
 		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
 	</h2>
+			</td>
+			<td width="20%"></td>
+		</tr>
+	</table>
 	<table>
 		<tr>
 			<td>No</td>
@@ -195,7 +205,7 @@
 			<td id="cetak_tujuan"></td>
 		</tr>
 		<tr>
-			<td>No. Telp</td>
+			<td>Alamat</td>
 			<td id="cetak_alamat"></td>
 		</tr>
 	</table>
@@ -261,14 +271,25 @@
 	</table>
 </div>
 <div id="hidden_divcabang" style="display: none;">
-
-	<h2 align="center">
+	
+	<table width="100%">
+		<tr>
+			<td width="20%" align="center">
+				<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="70%">
+			</td>
+			<td width="60%">
+				<h2 align="center">
 		SURAT JALAN
 		<br>	
 		<span style="font-size: 18;margin-bottom: 20px;">CV. SURYANTARA CARGO</span>
 		<br>	
 		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
 	</h2>
+			</td>
+			<td width="20%"></td>
+		</tr>
+	</table>
+	
 	<table>
 		<tr>
 			<td>No</td>
@@ -283,7 +304,7 @@
 			<td id="cetak_tujuan2"></td>
 		</tr>
 		<tr>
-			<td>No. Telp</td>
+			<td>Alamat</td>
 			<td id="cetak_alamat2"></td>
 		</tr>
 	</table>

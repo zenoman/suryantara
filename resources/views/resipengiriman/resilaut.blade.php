@@ -227,7 +227,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">
@@ -427,7 +427,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">
@@ -627,7 +627,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">
@@ -826,7 +826,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.png')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
 				<p align="center">

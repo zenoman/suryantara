@@ -18,7 +18,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Pilih Laporan Pengeluaran</h2>
+							<h2>Pilih Laporan Pengeluaran Vendor</h2>
 						</div>
 					</div>
 				</div>
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 						{{csrf_field()}}
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								
 								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

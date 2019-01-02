@@ -1,10 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Input;
+Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::get('/carisuratjalan','suratjalan\suratjalanController@caridata');
 Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');
 Route::post('/laporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
+Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::post('/laporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
