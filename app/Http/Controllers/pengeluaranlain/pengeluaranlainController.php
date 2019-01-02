@@ -10,8 +10,12 @@ class pengeluaranlainController extends Controller
 {
     public function index()
     {
+        $data = DB::table('pengeluaran_lain')
+        ->orderby('id','desc')
+        ->paginate(40);
+
         $setting = DB::table('setting')->limit(1)->get();
-        return view('pengeluaranlain/index',['title'=>$setting]);
+        return view('pengeluaranlain/index',['title'=>$setting,'data'=>$data]);
     }
 
     /**
@@ -21,26 +25,45 @@ class pengeluaranlainController extends Controller
      */
     public function create()
     {
-        return "insert data";
+        $setting = DB::table('setting')->limit(1)->get();
+        return view('pengeluaranlain/create',['title'=>$setting]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('gambar')){
+            $namagambar=$request->file('gambar')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namagambar);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namagambar=time().'-'.$replace_space;
+            $destination=public_path('img/nota');
+            $request->file('gambar')->move($destination,$namagambar);
+            
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>$request->admin,
+                'kategori'=>$request->kategori,
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->jumlah,
+                'tgl'=>date('Y-m-d'),
+                'gambar'=>$namagambar
+            ]);
+
+        }else{
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>$request->admin,
+                'kategori'=>$request->kategori,
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->jumlah,
+                'tgl'=>date('Y-m-d')
+            ]);
+        }
+
+        return redirect('/pengeluaranlain')->with('status','Berhasil Menambah Data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

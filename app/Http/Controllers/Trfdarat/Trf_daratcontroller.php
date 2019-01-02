@@ -158,7 +158,7 @@ Trf_daratmodel::find($id)->update([
 'berat_min' => $request->berat_minimal,
 'estimasi' => $request->estimasi
 ]);
-return redirect('trfdarat')->with('status','Edit Data Sukses');
+return back()->with('status','Edit Data Sukses');
 }
 /**
 * Remove the specified resource from storage.
