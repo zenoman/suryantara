@@ -30,7 +30,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{url('laporanpengeluaran') }}" role="form" method="POST">
+				<form action="{{url('tampillaporanpengeluaranlain') }}" role="form" method="GET">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
@@ -51,7 +51,7 @@
 						<label class="col-sm-2 form-control-label semibold">Kategori</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="vendor">
+								<select class="select2" name="kategori">
 								<option value="semua">Semua</option>
 								@foreach($kategori as $kat)
 								<option value="{{$kat->kategori}}">

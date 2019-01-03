@@ -42,7 +42,7 @@
 							<th>Kategori</th>
 							<th>Jumlah</th>
 							<th>Admin</th>
-							<th>Keteranga</th>
+							<th>Keterangan</th>
 							<th class="no-sort text-center">#</th>
 						</tr>
 						</thead>
@@ -53,7 +53,7 @@
 							<th>Kategori</th>
 							<th>Jumlah</th>
 							<th>Admin</th>
-							<th>Keteranga</th>
+							<th>Keterangan</th>
 							<th class="no-sort text-center">#</th>
 						</tr>
 						</tfoot> 
@@ -74,7 +74,15 @@
 								{{$row->keterangan}}
 							</td>
 							<td class="text-center">
-								<button class="btn btn-primary" type="button" onclick="return iwak()">
+								<button
+								 class="btn btn-success edit-modal" type="button" 
+								 onclick="return iwak()" 
+								 data-tgl="{{$row->tgl}}" 
+								 data-ket="{{$row->keterangan}}" 
+								 data-admin="{{$row->admin}}" 
+								 data-kat="{{$row->kategori}}"
+								 data-gambar="{{$row->gambar}}"
+								 data-jumlah="{{"Rp ".number_format($row->jumlah,0,',','.')}}">
 									<i class="fa fa-eye"></i>
 								</button>
 							</td>
@@ -101,11 +109,37 @@
 								<h4 class="modal-title" id="myModalLabel">Detail Pengeluaran</h4>
 							</div>
 							<div class="modal-body">
-								...
+								<div class="card-block invoice">
+					<div class="row">
+						<div class="col-lg-6 company-info">
+							<h5 id="jumlahnya"></h5>
+							<p>Kategori : <span id="katnya"></span></p>
+						</div>
+						<div class="col-lg-6 clearfix invoice-info">
+							<div class="text-lg-right">
+								<h5 id="tglnya"></h5>
+								<div><strong>Pembuat :</strong> <span id="pembuatnya"></span></div>
+							</div>
+
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-lg-12 terms-and-conditions">
+							<strong>Keterangan : </strong><br>
+							<span id="ketnya">
+								
+							</span>
+						</div>
+						<div class="col-lg-12 text-center">
+							<img src="" id="fotonya" width="50%">
+						</div>
+					</div>
+				</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-rounded btn-primary">Save changes</button>
+								
 							</div>
 						</div>
 					</div>
@@ -126,6 +160,16 @@
     		} ]
         });
 		});
+		$(document).on('click', '.edit-modal', function() {
+          	$('#tglnya').html($(this).data('tgl'));
+            $('#ketnya').html($(this).data('ket'));
+            $('#pembuatnya').html($(this).data('admin'));
+            $('#jumlahnya').html($(this).data('jumlah'));
+            $('#katnya').html($(this).data('kat'));
+             $("#fotonya").attr("src","img/nota/"+$(this).data('gambar'));
+            $('.bd-example-modal-lg').modal('show');
+        });
+
 		function iwak(){
 			$('.bd-example-modal-lg').modal('show');
 		}

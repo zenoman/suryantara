@@ -143,4 +143,45 @@ class laporanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/pilihpengeluaranlain',['title'=>$webinfo,'bulan'=>$bulan,'kategori'=>$kategori]);
     }
+    public function tampilpengeluaranlain(Request $request){
+        $kategori = $request->kategori;
+        $bulan = explode('-', $request->bulan);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+
+        if($kategori=='semua'){
+            $data = DB::table('pengeluaran_lain')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->paginate(40);
+             $data2 = DB::table('pengeluaran_lain')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }else{
+            $data = DB::table('pengeluaran_lain')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->paginate(40);
+            $data2 = DB::table('pengeluaran_lain')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->bulan,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
+    }
 }

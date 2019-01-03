@@ -159,6 +159,11 @@
 	                        
 	                    </ul>
 	                </li>
+	                <li>
+	                	<a href="{{url('/omset')}}"><span class="lbl">
+		                Omset</span></a>
+	                	
+	                </li>
 	            </ul>
 	        </li>
 	        <li class="brown">

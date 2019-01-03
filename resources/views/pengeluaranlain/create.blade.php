@@ -57,7 +57,7 @@
 								<option value="servis">servis</option>
 								<option value="parkir">parkir</option>
 								<option value="tol">tol</option>
-								<option value="lain">lainya</option>
+								<option value="lainya">lainya</option>
 							</select>
 							</p>
 						</div>
