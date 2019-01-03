@@ -112,7 +112,8 @@
     <div class="single-product-area">
       <div class="container">
         <h1 class="text-uppercase text-center mb-0">Lokasi Kami</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126486.11387369903!2d112.03784828547029!3d-7.822487605206616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7858fb7bf1947d%3A0x4027a76e3531190!2sGurah%2C+Kediri%2C+Jawa+Timur!5e0!3m2!1sid!2sid!4v1542003545581" width="1135" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8086238669516!2d112.04435151463143!3d-7.810073394371994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7857f571ee29ad%3A0x4f4428370fac379f!2sSuryantara+Cargo!5e0!3m2!1sen!2sid!4v1546438704586" width="1130" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
             
         </div>
       </div>
