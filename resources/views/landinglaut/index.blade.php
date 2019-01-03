@@ -8,7 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SURYANTARA</title>
+    @foreach($des as $row)
+    <title>{{$row->namaweb}}</title>
+    <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+    @endforeach
 
     <!-- Bootstrap core CSS -->
     <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,9 +46,7 @@
               <a onclick="window.history.go(-1);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
               <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('login')}}">Login</a>
-            </li>
+            
           </ul>
         </div>
       </div>
@@ -84,51 +85,40 @@
     </div>
 </div>                
   <br>  
-  <a onclick="window.history.go(-1);" class="btn btn-secondary">Kembali</a>   
+  <a onclick="window.history.go(-1);" class="btn btn-secondary text-white">Kembali</a>   
   </div>
 </section>
 <footer class="footer text-center">
       <div class="container">
         <div class="row">
+          @foreach($des as $row)
           <div class="col-md-4 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Location</h4>
-            <p class="lead mb-0">2215 John Daniel Drive
-              <br>Clark, MO 65243</p>
+            <p class="lead mb-0">{{$row->alamat}}</p>
+            
           </div>
+          @endforeach
           <div class="col-md-4 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <h4 class="text-uppercase mb-4">sosial media</h4>
             <ul class="list-inline mb-0">
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+              
+             <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/bakol.tahu.148">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fab fa-fw fa-google-plus-g"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fab fa-fw fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fab fa-fw fa-linkedin-in"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fab fa-fw fa-dribbble"></i>
-                </a>
-              </li>
+              
             </ul>
           </div>
-          <div class="col-md-4">
-            <h4 class="text-uppercase mb-4">About Freelancer</h4>
-            <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by
-              <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Gmail</h4>
+            <ul class="list-inline mb-0">
+              
+              @foreach($des as $row)
+              <p class="lead mb-0">{{$row->email}}</p>
+              @endforeach
+              
+            </ul>
           </div>
         </div>
       </div>
