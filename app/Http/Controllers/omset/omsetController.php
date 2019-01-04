@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\omset;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;

@@ -66,7 +66,7 @@
 						{{csrf_field()}}
 							<small class="text-muted text-right">
 								
-								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pengeluaran Lain ?')" value="Lanjut">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>

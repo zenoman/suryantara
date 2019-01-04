@@ -41,7 +41,7 @@
 									<th>Kategori</th>
 							@endif
 							<th>Jumlah</th>
-							<th>Admin</th>
+							<th>Pembuat</th>
 							<th>Keterangan</th>
 						</tr>
 						</thead>
@@ -53,7 +53,7 @@
 									<th>Kategori</th>
 							@endif
 							<th>Jumlah</th>
-							<th>Admin</th>
+							<th>Pembuat</th>
 							<th>Keterangan</th>
 						</tr>
 						</tfoot>
@@ -140,7 +140,7 @@
 									<th>Kategori</th>
 							@endif
 							<th>Jumlah</th>
-							<th>Admin</th>
+							<th>Pembuat</th>
 							<th>Keterangan</th>
 						</tr>
 						</thead>

@@ -30,7 +30,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{url('laporanpemasukan') }}" role="form" method="POST">
+				<form action="{{url('tampillaporanpemasukan') }}" role="form" method="GET">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>

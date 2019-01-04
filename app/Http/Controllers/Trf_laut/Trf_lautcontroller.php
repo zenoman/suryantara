@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Trf_laut;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;

@@ -50,7 +50,7 @@ Route::post('/laporanpengeluaran','laporan\laporanController@tampilpengeluaran')
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
-Route::post('/laporanpemasukan','laporan\laporanController@tampilpemasukan');
+Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 

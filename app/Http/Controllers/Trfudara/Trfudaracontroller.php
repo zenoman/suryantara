@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Trfudara;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;

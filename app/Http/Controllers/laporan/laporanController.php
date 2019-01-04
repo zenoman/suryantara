@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\laporan;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -153,10 +153,12 @@ class laporanController extends Controller
             $data = DB::table('pengeluaran_lain')
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
             ->paginate(40);
              $data2 = DB::table('pengeluaran_lain')
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
             ->get();
             $total = DB::table('pengeluaran_lain')
             ->select(DB::raw('SUM(jumlah) as totalnya'))
@@ -168,11 +170,13 @@ class laporanController extends Controller
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
             ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
             ->paginate(40);
             $data2 = DB::table('pengeluaran_lain')
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
             ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
             ->get();
             $total = DB::table('pengeluaran_lain')
             ->select(DB::raw('SUM(jumlah) as totalnya'))

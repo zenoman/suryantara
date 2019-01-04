@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\landing;
-
+ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;

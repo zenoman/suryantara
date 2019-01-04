@@ -144,7 +144,8 @@
 	<script>
 		$(function() {
 			$('#example').DataTable({
-            responsive: true
+            responsive: true,
+            "paging":false
         });
 		});
 
