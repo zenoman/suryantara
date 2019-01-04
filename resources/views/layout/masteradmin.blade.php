@@ -166,6 +166,12 @@
 	                </li>
 	            </ul>
 	        </li>
+	        <li class="red">
+	            <a href="{{url('backup')}}">
+	                <i class="fa fa-download"></i>
+	                <span class="lbl">Backup</span>
+	            </a>
+	        </li>
 	        <li class="brown">
 	            <a href="{{url('setting')}}">
 	                <i class="font-icon font-icon-cogwheel"></i>

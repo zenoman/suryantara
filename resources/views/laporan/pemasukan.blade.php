@@ -83,6 +83,7 @@
 						@endforeach
 						</tbody>
 					</table>
+					{{ $data->links() }}
 				</div>
 			</section>
 
@@ -155,7 +156,7 @@
 						
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($data as $row)
+                            @foreach($data2 as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td align="center">{{$no}}</td>
@@ -183,7 +184,8 @@
 	<script>
 		$(function() {
 			$('#example').DataTable({
-            responsive: true
+            responsive: true,
+            "paging":false
         });
 		});
 

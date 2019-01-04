@@ -17,6 +17,12 @@ class laporanController extends Controller
             $data = DB::table('surat_jalan')
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('surat_jalan')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
             ->get();
             $total = DB::table('surat_jalan')
             ->select(DB::raw('SUM(biaya) as totalnya'))
@@ -29,7 +35,15 @@ class laporanController extends Controller
             ->whereMonth('tgl',$bln)
             ->whereYear('tgl',$thn)
             ->where('tujuan',$vendor)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('surat_jalan')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('tujuan',$vendor)
+            ->orderby('tgl','desc')
             ->get();
+
             $total = DB::table('surat_jalan')
             ->select(DB::raw('SUM(biaya) as totalnya'))
             ->whereMonth('tgl',$bln)
@@ -39,7 +53,7 @@ class laporanController extends Controller
 
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor]);
+        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
     }
     //============================================
     public function pilihpengeluaran(){
@@ -79,7 +93,14 @@ class laporanController extends Controller
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
     		->where('pengiriman_via','darat')
-    		->get();
+            ->orderby('tgl','desc')
+    		->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
     		->whereMonth('tgl',$bln)
@@ -91,7 +112,14 @@ class laporanController extends Controller
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
     		->where('pengiriman_via','laut')
-    		->get();
+            ->orderby('tgl','desc')
+    		->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
     		->whereMonth('tgl',$bln)
@@ -103,7 +131,14 @@ class laporanController extends Controller
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
     		->where('pengiriman_via','udara')
-    		->get();
+            ->orderby('tgl','desc')
+    		->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->get();
     		$total = DB::table('resi_pengiriman')
     		->select(DB::raw('SUM(total_biaya) as totalnya'))
     		->whereMonth('tgl',$bln)
@@ -114,7 +149,13 @@ class laporanController extends Controller
     		$data = DB::table('resi_pengiriman')
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
-    		->get();
+            ->orderby('tgl','desc')
+    		->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
     		$total = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))
             ->whereMonth('tgl',$bln)
@@ -126,7 +167,7 @@ class laporanController extends Controller
     	$webinfo = DB::table('setting')->limit(1)->get();
 
 
-    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur]);
+    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'data3'=>$data->appends(request()->input())]);
 
     }
     public function pilihpengeluaranlain(){

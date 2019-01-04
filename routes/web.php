@@ -1,5 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//==============================================backup
+Route::get('/backup','backup\backupController@index');
+Route::get('/tampilbackup','backup\backupController@tampil');
+Route::get('/printpendapatan/{bulan}/{tahun}','backup\backupController@cetakpendapatan');
+Route::get('/exsportpendapatan/{bulan}/{tahun}','backup\backupController@exsportpendapatan');
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
 
@@ -46,7 +51,7 @@ Route::get('/carivendor/{id}','suratjalan\suratjalanController@hasilvendor');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 
 //=====================================================laporan
-Route::post('/laporanpengeluaran','laporan\laporanController@tampilpengeluaran');
+Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');

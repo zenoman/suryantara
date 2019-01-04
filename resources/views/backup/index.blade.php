@@ -18,7 +18,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Pilih Laporan Pengeluaran Vendor</h2>
+							<h2>Pilih Bulan</h2>
 						</div>
 					</div>
 				</div>
@@ -30,38 +30,36 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{url('tampillaporanpengeluaran') }}" role="form" method="GET">
+				<form action="{{url('tampilbackup') }}" role="form" method="GET">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="bulan">
-								@foreach($bulan as $row)
-								<option value="{{$row->bulan."-".$row->tahun}}">
-									{{$row->bulan."-".$row->tahun}}
-								</option>
-								@endforeach
+								<select class="form-control" name="bulan">
+									@php
+									for($i=1;$i<=12;$i++){
+									echo "<option value='".$i."'>".$i."</option>";
+									}
+									@endphp
+								
 							</select>
 							</p>
 							 
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Vendor</label>
+						<label class="col-sm-2 form-control-label semibold">Tahun</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="vendor">
-								<option value="semua">Semua</option>
-								@foreach($vendor as $vn)
-								<option value="{{$vn->tujuan}}">
-									@php
-										$tujuan = explode("-", $vn->tujuan);
-									@endphp
-									{{$tujuan[0]}}
-								</option>
-								@endforeach
-							</select>
+								<select name="tahun" class="form-control">
+								@php
+									for($ii=2019;$ii<(int)date('Y')+3;$ii++){
+										echo"<option value='".$ii."'>".$ii."</option>";
+									}
+								@endphp
+								
+								</select>
 							</p>
 							 
 						</div>
@@ -69,7 +67,7 @@
 						{{csrf_field()}}
 							<small class="text-muted text-right">
 								
-								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Bulan / Tahun Benar ?')" value="Lanjut">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>
