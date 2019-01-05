@@ -1,6 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Input;
 //==============================================backup
+Route::get('/selesai','backup\backupController@selesai');
+Route::get('/printomset/{bulan}/{tahun}','backup\backupController@cetakomset');
+Route::get('/exsportomset/{bulan}/{tahun}','backup\backupController@exsportomset');
+Route::get('/hapuspengeluaranlain/{bulan}/{tahun}','backup\backupController@hapuspengeluaranlain');
+Route::get('/printpengeluaranlain/{bulan}/{tahun}','backup\backupController@cetakpengeluaranlain');
+Route::get('/exsportpengeluaranlain/{bulan}/{tahun}','backup\backupController@exsportpengeluaranlain');
+Route::get('/hapuspengeluaran/{bulan}/{tahun}','backup\backupController@hapuspengeluaran');
+Route::get('/printpengeluaran/{bulan}/{tahun}','backup\backupController@cetakpengeluaran');
+Route::get('/exsportpengeluaran/{bulan}/{tahun}','backup\backupController@exsportpengeluaran');
+Route::get('/selanjutnya','backup\backupController@selanjutnya');
+Route::get('/hapuspendapatan/{bulan}/{tahun}','backup\backupController@hapuspendapatan');
 Route::get('/backup','backup\backupController@index');
 Route::get('/tampilbackup','backup\backupController@tampil');
 Route::get('/printpendapatan/{bulan}/{tahun}','backup\backupController@cetakpendapatan');

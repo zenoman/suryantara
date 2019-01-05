@@ -68,6 +68,7 @@
 							</ul>
 						</div>
 						<div>
+							@if(Session::get('backup_step')==1)
 							<header class="steps-numeric-title">Backup Pendapatan</header>
 						<div class="form-group">
 							<a href="{{url('/exsportpendapatan/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
@@ -78,22 +79,70 @@
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>
-							@if(Session::get('backup_status')=='n')
-							<a onclick="alert('Backup Data Terlebih Dahulu !')" class="btn btn-danger btn-square-icon">
+
+							
+							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapuspendapatan/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
 								<i class="fa fa-trash"></i>
 								Hapus Data
 							</a>
-							@else
-							<a href="{{url('/printpendapatan/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
-								<i class="fa fa-trash"></i>
-								Hapus Data
-							</a>
-							@endif
 						</div>
+						@elseif(Session::get('backup_step')==2)
+						<header class="steps-numeric-title">Backup Pengeluaran Vendor</header>
+						<div class="form-group">
+							<a href="{{url('/exsportpengeluaran/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
+								<i class="fa fa-file-excel-o"></i>
+								Exsport Excel
+							</a>
+							<a id="pendapatan_cetak" href="{{url('/printpengeluaran/'.$bulan.'/'.$tahun.'')}}" target="_blank()" class="btn btn-info btn-square-icon">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>
+
+							
+							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapuspengeluaran/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
+								<i class="fa fa-trash"></i>
+								Hapus Data
+							</a>
+						</div>
+						@elseif(Session::get('backup_step')==3)
+						<header class="steps-numeric-title">Backup Pengeluaran Lainya</header>
+						<div class="form-group">
+							<a href="{{url('/exsportpengeluaranlain/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
+								<i class="fa fa-file-excel-o"></i>
+								Exsport Excel
+							</a>
+							<a href="{{url('/printpengeluaranlain/'.$bulan.'/'.$tahun.'')}}" target="_blank()" class="btn btn-info btn-square-icon">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>
+
+							
+							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapuspengeluaranlain/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
+								<i class="fa fa-trash"></i>
+								Hapus Data
+							</a>
+						</div>
+						@elseif(Session::get('backup_step')==4)
+						<header class="steps-numeric-title">Backup Omset</header>
+						<div class="form-group">
+							<a href="{{url('/exsportomset/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
+								<i class="fa fa-file-excel-o"></i>
+								Exsport Excel
+							</a>
+							<a href="{{url('/printomset/'.$bulan.'/'.$tahun.'')}}" target="_blank()" class="btn btn-info btn-square-icon">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>
+						</div>
+						@endif
+						@if(Session::get('backup_step')==4)
 						
-						<!-- <button type="button" class="btn btn-rounded btn-grey float-left">← Back</button> -->
-						<button type="button" class="btn btn-rounded float-right">Selanjutnya →</button>
-						</div>
+						<a href="{{url('/selesai')}}" class="btn btn-rounded float-right">Selesai
+							</a>
+						@else
+						<a href="{{url('/selanjutnya')}}" class="btn btn-rounded float-right">Selanjutnya →
+							</a>
+						@endif
 						
 					</section>
 				</div>
@@ -103,5 +152,5 @@
 	
 @endsection
 @section('js')
-
+	
 @endsection
