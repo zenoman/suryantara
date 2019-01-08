@@ -66,10 +66,12 @@ $setting = DB::table('setting')->get();
 
 public function caridata(Request $request)
     {
+        $url = $request->fullurl();
+        // dd($url);
         $cari=$request->cari;
         $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$cari.'%')->orwhere('kode','like','%'.$cari.'%')->get();
         $setting = DB::table('setting')->get();
-        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$cari,'title'=>$setting]);
+        return view('trfdarat/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$cari,'title'=>$setting,'url'=>$url]);
     }
 
 public function create(){

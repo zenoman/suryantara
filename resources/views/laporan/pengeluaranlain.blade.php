@@ -88,6 +88,7 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 						
+						<a href="{{url('/export_laporan_pengeluaran_lain/'.$bulanya.'/'.$kategori.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan lain</a>
 							<button type="button" class="btn btn-primary" onclick="cetak()">
 								cetak
 							</button>	

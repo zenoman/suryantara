@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
+use App\Exports\LaporanPemasukanExport;
+use App\Exports\LaporanPengeluaranVendorExport;
+use App\Exports\LaporanPengeluaranLainExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
+
+
 class laporanController extends Controller
 {
     public function tampilpengeluaran(Request $request){
@@ -87,8 +95,8 @@ class laporanController extends Controller
     	$bulan = explode('-', $request->bulan);
     	$bln = $bulan[0];
     	$thn = $bulan[1];
-    	if($jalur=='darat'){
 
+    	if($jalur=='darat'){
     		$data = DB::table('resi_pengiriman')
     		->whereMonth('tgl',$bln)
     		->whereYear('tgl',$thn)
@@ -229,4 +237,42 @@ class laporanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->bulan,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
     }
+    public function exsportlaporanpemasukan($bulannya, $jalur){
+        $bulan = explode('-', $bulannya);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+
+            if ($jalur !='semua') {
+        $namafile = "Export laporan pemasukan pada bulan ".$bln." tahun ".$thn." di jalur ".$jalur.".xlsx";
+            }else{
+        $namafile = "Export laporan pemasukan pada bulan ".$bln." tahun ".$thn." di ".$jalur." jalur.xlsx";
+            }
+        return Excel::download(new LaporanPemasukanExport($bln,$thn,$jalur),$namafile);
+
+    }
+    public function exsportlaporanpengluaranvendor($bulannya, $vendor){
+        $bulan = explode('-', $bulannya);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+        if ($vendor !='semua') {
+            $namafile = "Export laporan pengeluaran pada bulan ".$bln." tahun ".$thn." vendor ".$vendor.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran pada bulan ".$bln." tahun ".$thn." di ".$vendor." vendor.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranVendorExport($bln,$thn,$vendor),$namafile);
+    }
+        public function exsportlaporanpengeluaranlain($bulannya, $kategori){
+        $bulan = explode('-', $bulannya);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+        if ($kategori !='semua') {
+            $namafile = "Export laporan pengeluaran lain pada bulan ".$bln." tahun ".$thn." dengan kategori ".$kategori.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran lain pada bulan ".$bln." tahun ".$thn." di ".$kategori." kategori.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranLainExport($bln,$thn,$kategori),$namafile);
+
+    }
+
+
 }

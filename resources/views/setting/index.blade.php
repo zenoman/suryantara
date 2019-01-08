@@ -68,7 +68,7 @@
 					 					<div class="form-group row">
                                             <label  class="col-sm-2 form-control-label">Ganti Icon</label><p>
                                             @if(isset($row->icon) && $row->icon)
-                                            <img src="../img/setting/{{$row->icon}}" width="50" height="50">
+                                            <img src="{{url('../img/setting/'.$row->icon)}}" width="50" height="50">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif
@@ -83,7 +83,7 @@
                                             <div class="form-group row">
                                             <label  class="col-sm-2 form-control-label">Ganti Logo</label><p>
                                             @if(isset($row->logo) && $row->logo)
-                                            <img src="../img/setting/{{$row->logo}}" width="100" height="100">
+                                            <img src="{{url('../img/setting/'.$row->logo)}}" width="100" height="100">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif

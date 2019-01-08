@@ -32,7 +32,7 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
-                    @endif
+                    @endif 
 					<a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('trfdarat/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">

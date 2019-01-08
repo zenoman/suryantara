@@ -68,7 +68,7 @@
 					</table>
 					<br>
 					<div class="text-right">
-						
+<a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
 							<button type="button" class="btn btn-primary" onclick="cetak()">
 								cetak
 							</button>	
