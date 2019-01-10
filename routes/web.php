@@ -18,6 +18,8 @@ Route::get('/printpendapatan/{bulan}/{tahun}','backup\backupController@cetakpend
 Route::get('/exsportpendapatan/{bulan}/{tahun}','backup\backupController@exsportpendapatan');
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
+//----------------------------export omset
+Route::get('/omset/export','omset\omsetController@export');
 
 //===============================================pengeluaran lain
 Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
@@ -68,13 +70,17 @@ Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluar
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
-Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
+//---------------------------------------------------export Laporan
+Route::get('/export_laporan_pemasukan/{bulanya}/{jalur}','laporan\laporanController@exsportlaporanpemasukan');
+Route::get('/export_laporan_pengeluaran_vendor/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
+Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
 
 //===========================================
 
 
 Route::get('/login','Login\Logincontroller@index');
+Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/','landing\landingcontroller@index');
 Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
 Route::get('/landlaut','landinglaut\landinglautcontroller@index');

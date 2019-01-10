@@ -79,6 +79,7 @@
                             <td>
                             	
 <form action="/trfdarat/delete"  method="post">
+	<input type="hidden" name="" value="{{$url}}">
 <a href="/trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
 
                                         {{csrf_field()}}

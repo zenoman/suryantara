@@ -73,10 +73,10 @@
                             <td>{{$row->username}}</td>
                             <td>{{$row->level}}</td>
                             <td>
-                                        <form action="/admin/delete"  method="post">
+                                        <form action="{{url('admin/delete') }}"  method="post">
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
                                         <i class="fa fa-key"></i> Ganti Password</a>
-                            	<a href="/admin/{{$row->id}}/edit" class="btn btn-rimary btn-sm">
+                            	<a href="{{url('admin/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                         	{{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
