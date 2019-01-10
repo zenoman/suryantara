@@ -94,7 +94,7 @@
         <div class="row">
           @foreach($des as $row)
           <div class="col-md-4 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Location</h4>
+            <h4 class="text-uppercase mb-4">Lokasi</h4>
             <p class="lead mb-0">{{$row->alamat}}</p>
             
           </div>
@@ -121,7 +121,7 @@
             </ul>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Gmail</h4>
+            <h4 class="text-uppercase mb-4">E-mail</h4>
             <ul class="list-inline mb-0">
               
               @foreach($des as $row)
