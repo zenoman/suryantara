@@ -82,10 +82,7 @@
                     
                     
                     
-                    <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
-                    <!--<button type="button" class="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>-->
+                    <!--coba hosting git -->
                 </form>
             </div>
         </div>
