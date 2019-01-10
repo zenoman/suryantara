@@ -12,10 +12,10 @@
     <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
     @endforeach
     <!-- Bootstrap core CSS -->
-    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -23,7 +23,7 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
 
   </head>
 
@@ -81,7 +81,7 @@
           <div class="col-md-6 col-lg-4">
             <a class="d-block mx-auto">
               <div class="my-auto w-100 text-center">
-              <img class="img-fluid" src="asset_user/img/darat.png" alt="">
+              <img class="img-fluid" src="{{asset('asset_user/img/darat.png')}}" alt="">
               </div>
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landdarat')}}">
               <h3 class="text-secondary text-center">Tarif Darat</h3>
@@ -90,7 +90,7 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="asset_user/img/laut.png" alt="">
+              <img class="img-fluid" src="{{asset('asset_user/img/laut.png')}}" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landlaut')}}">
               <h3 class="text-secondary text-center">Tarif Laut</h3>
               </a>
@@ -98,7 +98,7 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="asset_user/img/udara.png" alt="">
+              <img class="img-fluid" src="{{asset('asset_user/img/udara.png')}}" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landudara')}}">
               <h3 class="text-secondary text-center ">Tarif Udara</h3>
               </a>
@@ -148,7 +148,16 @@
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
-              
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com">
+                  <i class="fab fa-fw fa-instagram"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.twitter.com">
+                  <i class="fab fa-fw fa-twitter"></i>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
@@ -180,20 +189,20 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
     <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="asset_user/js/jqBootstrapValidation.js"></script>
-    <script src="asset_user/js/contact_me.js"></script>
-    <script src="asset_user/js/main.js"></script>
+    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
+    <script src="{{asset('asset_user/js/main.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="asset_user/js/freelancer.min.js"></script>
+    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
 
   </body>
 
