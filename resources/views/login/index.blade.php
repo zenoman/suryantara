@@ -9,22 +9,22 @@
 <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
 @endforeach
 
-	<link href="assets/img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
-	<link href="assets/img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
-	<link href="assets/img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
-	<link href="assets/img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
-	<link href="assets/img/favicon.png" rel="icon" type="image/png">
-	<link href="assets/img/favicon.ico" rel="shortcut icon">
+	<link href="{{asset('assets/img/favicon.144x144.png')}}" rel="apple-touch-icon" type="image/png" sizes="144x144')}}">
+	<link href="{{asset('assets/img/favicon.114x114.png')}}" rel="apple-touch-icon" type="image/png" sizes="114x114')}}">
+	<link href="{{asset('assets/img/favicon.72x72.png')}}" rel="apple-touch-icon" type="image/png" sizes="72x72')}}">
+	<link href="{{asset('assets/img/favicon.57x57.png')}}" rel="apple-touch-icon" type="image/png">
+	<link href="{{asset('assets/img/favicon.png')}}" rel="icon" type="image/png')}}">
+	<link href="{{asset('assets/img/favicon.ico')}}" rel="shortcut icon">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-<link rel="stylesheet" href="assets/css/separate/pages/login.min.css">
-    <link rel="stylesheet" href="assets/css/lib/font-awesome/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="{{asset('assets/css/separate/pages/login.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 </head>
 <body>
 
@@ -92,12 +92,12 @@
     </div><!--.page-center-->
 
 
-<script src="assets/js/lib/jquery/jquery-3.2.1.min.js"></script>
-<script src="assets/js/lib/popper/popper.min.js"></script>
-<script src="assets/js/lib/tether/tether.min.js"></script>
-<script src="assets/js/lib/bootstrap/bootstrap.min.js"></script>
-<script src="assets/js/plugins.js"></script>
-    <script type="text/javascript" src="assets/js/lib/match-height/jquery.matchHeight.min.js"></script>
+<script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/lib/match-height/jquery.matchHeight.min.js')}}"></script>
     <script>
         $(function() {
             $('.page-center').matchHeight({
@@ -134,6 +134,6 @@
     }
   }
     </script>
-<script src="assets/js/app.js"></script>
+<script src="{{asset('assets/js/app.js')}}"></script>
 </body>
 </html>

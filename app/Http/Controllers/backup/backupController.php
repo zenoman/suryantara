@@ -64,7 +64,6 @@ class backupController extends Controller
     public function exsportpendapatan($bulan, $tahun){
     	$namafile = "backup_pendapatan_bulan_".$bulan."_tahun_".$tahun.".xlsx";
     	return Excel::download(new backupendapatan($bulan,$tahun),$namafile);
-    	
     }
     public function exsportpengeluaran($bulan, $tahun){
     	$namafile = "backup_pengeluaran_vendor_bulan_".$bulan."_tahun_".$tahun.".xlsx";

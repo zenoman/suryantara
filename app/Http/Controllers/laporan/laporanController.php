@@ -168,7 +168,6 @@ class laporanController extends Controller
 
 
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'data3'=>$data->appends(request()->input())]);
-
     }
     public function pilihpengeluaranlain(){
         $bulan = DB::table('pengeluaran_lain')
