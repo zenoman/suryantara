@@ -14,10 +14,10 @@
     @endforeach
 
     <!-- Bootstrap core CSS -->
-    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -25,7 +25,7 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
 
   </head>
 
@@ -107,7 +107,16 @@
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
-              
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com">
+                  <i class="fab fa-fw fa-instagram"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.twitter.com">
+                  <i class="fab fa-fw fa-twitter"></i>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
@@ -139,19 +148,19 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
-    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="asset_user/js/jqBootstrapValidation.js"></script>
-    <script src="asset_user/js/contact_me.js"></script>
+    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="asset_user/js/freelancer.min.js"></script>
+    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
 
   </body>
 
