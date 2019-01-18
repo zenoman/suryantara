@@ -11,11 +11,6 @@ use App\models\Loginmodel;
 
 class Logincontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $setting = DB::table('setting')->get();

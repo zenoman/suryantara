@@ -62,7 +62,7 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-                    <br><br>
+                    <br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
