@@ -67,13 +67,13 @@
 			<td>{{$row->telp_pengirim}}</td>
 			<td>{{$row->nama_penerima}}</td>
 			<td>{{$row->telp_penerima}}</td>
-			<td>{{$row->biaya_kirim}}</td>
-			<td>{{$row->biaya_packing}}</td>
-			<td>{{$row->biaya_asuransi}}</td>
-			<td>{{$row->biaya_smu}}</td>
-			<td>{{$row->biaya_karantina}}</td>
-			<td>{{$row->biaya_ppn}}</td>
-			<td>{{$row->total_biaya}}</td>
+			<td>{{"Rp ".number_format($row->biaya_kirim,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_packing,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_asuransi,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_smu,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_karantina,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_ppn,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
 			<td>{{$row->metode_bayar}}</td>
 			<td>{{$row->satuan}}</td>
 			<td>{{$row->keterangan}}</td>
