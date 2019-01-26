@@ -39,7 +39,7 @@ class Trfudaracontroller extends Controller
     }
 
     public function downloadtemplate(){
-         $file= public_path(). "/file/template tarif Udara.xlsx";
+         $file= base_path()."/../public_html/file/template tarif Udara.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
@@ -56,7 +56,7 @@ class Trfudaracontroller extends Controller
     }
 
     public function exsportexcel(){
-    return Excel::download(new TrfudaraExport, 'Tarif Udara.xlsx');
+    return Excel::download(new TrfudaraExport, 'Export Tarif Udara.xlsx');
     return redirect('trfudara/importexcel');
 
     }
@@ -186,4 +186,16 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
         return back()->with('status','Hapus Data Sukses');
         //
     }
+public function haphapus(Request $request)
+    {
+        // dd($request->pilihid);
+            if(!$request->pilihid){
+                return back()->with('statuserror','Tidak ada data yang dipilih');
+            }else{
+        foreach ($request->pilihid as $id) { 
+            Trfudaramodel::destroy($id);
+            }
+        }
+return back()->with('status','Hapus Data Sukses');
+}
 }

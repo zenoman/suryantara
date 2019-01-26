@@ -77,7 +77,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Berat Minimal</label>
+						<label class="col-sm-2 form-control-label semibold">Berat Minimal</label>
 						<div class="col-sm-10">
 							<div class="input-group">							
 							<input type="text" class="form-control" id="inputPassword" name="berat_minimal" required onkeypress="return isNumberKey(event)" value="{{$trf_drt->berat_min}}">
@@ -94,7 +94,7 @@
 					</div>
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Estimasi</label>
+						<label class="col-sm-2 form-control-label semibold">Estimasi</label>
 						<div class="col-sm-10">
 							<div class="input-group">								
 								<input type="text" class="form-control" id="inputPassword" name="estimasi" required onkeypress="return isNumberKey(event)"value="{{$trf_drt->estimasi}}">

@@ -1,3 +1,8 @@
+@if(Session::get('level') == 'admin')
+<script type="text/javascript">
+    window.location.href = '{{url("/dashboard")}}';
+</script>
+@endif
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +33,19 @@
             <td>Laba</td>
 		</tr>
 		@foreach($data as $row)
-		<tr>
+	<tr>
 			<td>{{$row->bulan}}</td>
 			<td>{{$row->tahun}}</td>
-			<td>{{$row->pemasukan}}</td>
-			<td>{{$row->pengeluaran}}</td>
-			<td>{{$row->pengeluaran_lainya}}</td>
-			<td>{{$row->laba}}</td>
+			<td>
+				{{"Rp ".number_format($row->pemasukan,0,',','.')}}
+			</td>
+			<td>
+				{{"Rp ".number_format($row->pengeluaran,0,',','.')}}
+			</td>
+			<td>
+				{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}
+			</td>
+			<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>
 		</tr>
 		@endforeach
 	</table>

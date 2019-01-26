@@ -100,7 +100,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="/trflaut/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="{{url('/trflaut/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>

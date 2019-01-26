@@ -5,14 +5,14 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-
-class VendorExport implements FromCollection, WithHeadings{
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+class VendorExport implements FromCollection, WithHeadings, ShouldAutoSize{
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-                return DB::table('vendor')->select('idvendor','vendor','telp','alamat')->get();;
+                return DB::table('vendor')->select('idvendor','vendor','telp','alamat','cabang')->get();;
     }
     public function headings(): array
     {
@@ -21,6 +21,7 @@ class VendorExport implements FromCollection, WithHeadings{
             'nama_vendor',
             'telp',
             'alamat',
+            'cabang',
         ];
     }
 }

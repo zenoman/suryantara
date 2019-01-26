@@ -36,7 +36,12 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
-                    @endif
+                    @elseif(session('statuserror'))
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('statuserror') }}
+                    </div>
+                    @endif 
                     <a href="{{url('trfdarat')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
@@ -52,6 +57,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -63,6 +69,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -76,21 +83,30 @@
                             <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
-                            <td>
-                            	
-<form action="/trfdarat/delete"  method="post">
+                            <td>                            	
+<form action="{{url('/trfdarat/delete') }}"  method="post">
 	<input type="hidden" name="" value="{{$url}}">
-<a href="/trfdarat/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i>Hapus</button>
                     					</form>
-                            </td>
+                    			</td>
+                            <form method="post" action="{{url('/trfdarat/hapuspilihan')}}">
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="id[]" value="{{$row->id}}" ></td>
 						</tr>
 						@endforeach
 						</tbody>
+						<tr>
+							<th colspan="7"></th>
+							<th>
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
+							</th>
+						</tr>
+						{{csrf_field()}}
+                        </form>
 					</table>
 				
 				</div>

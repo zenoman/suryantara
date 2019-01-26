@@ -49,7 +49,7 @@
                     {{@csrf_field()}}
                     <div class="sign-avatar">
                     
-                        <img src="assets/img/avatar-sign.png" alt="">
+                        <img src="{{asset('assets/img/avatar-sign.png')}}" alt="">
                     </div> 
                     <header class="sign-title">Sign In</header>
                     <div class="form-group">
@@ -82,7 +82,10 @@
                     
                     
                     
-                    <!--coba hosting git -->
+                    <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
+                    <!--<button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>-->
                 </form>
             </div>
         </div>

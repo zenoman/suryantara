@@ -37,7 +37,7 @@ class pengeluaranlainController extends Controller
             $lower_file_name=strtolower($namagambar);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $namagambar=time().'-'.$replace_space;
-            $destination=public_path('img/nota');
+            $destination=base_path('../public_html/img/nota');
             $request->file('gambar')->move($destination,$namagambar);
             
             DB::table('pengeluaran_lain')

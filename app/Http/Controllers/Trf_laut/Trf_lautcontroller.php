@@ -37,7 +37,7 @@ return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
     }
 
     public function downloadtemplate(){
-         $file= public_path(). "/file/template tarif laut.xlsx";
+         $file= base_path()."/../public_html/file/template tarif laut.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
@@ -50,11 +50,11 @@ return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
         if($request->hasFile('file')){
         $status = Excel::import(new Trf_lautImport, request()->file('file'));
         }
-        return redirect('trflaut')->with('status',$status);
+        return redirect('trflaut')->with('status','Import excel sukses');
     }
 
     public function exsportexcel(){
-    return Excel::download(new Trf_LautExport, 'Tarif Laut.xlsx');
+    return Excel::download(new Trf_LautExport, 'Export Tarif Laut.xlsx');
     return redirect('trflaut/importexcel');
 
     }
@@ -172,4 +172,18 @@ public function destroy(Request $request)
 Trf_lautmodel::destroy($id);
 return back()->with('status','Hapus Data Sukses');
 }
+//-------------------------------------------
+public function haphapus(Request $request)
+    {
+        // dd($request->pilihid);
+            if(!$request->pilihid){
+                return back()->with('statuserror','Tidak ada data yang dipilih');
+            }else{
+        foreach ($request->pilihid as $id) { 
+            Trf_lautmodel::destroy($id);
+            }
+        }
+return back()->with('status','Hapus Data Sukses');
+}
+
 }

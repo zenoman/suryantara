@@ -14,10 +14,10 @@
     @endforeach
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -25,7 +25,11 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
 
   </head>
 
@@ -53,41 +57,42 @@
     </nav>
 <br>
 <br> 
-<section class="masthead bg-light text-dark text-center mb-0">
-  <div class="container">
-    <h1 class="text-uppercase mb-0">Tarif Laut</h1>
+<div class="page-content">
+    <div class="container-fluid">
+      <header class="section-header">
+        
+      </header>
+      <section>
+        <div class="container">
+    <h1 class="text-uppercase text-center mb-0">Tarif Laut</h1>
     <br>
-    <br>
-     <div id="page-wrapper">    
-<div class="panel panel-default">
-    <div class="panel-body">
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead class="thead-dark text-secondary">
-                <tr>
-                    <th>No</th>
-                    <th>Kota Tujuan</th>
-                    <th>Biaya</th>
-                </tr>
+        <div class="card-block">
+          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead class="thead-dark text-secondary text-center" >
+            <tr>
+              <th>No</th>
+              <th>Kota Tujuan</th>
+              <th>Biaya</th>
+            </tr>
             </thead>
+            
             <tbody>
-              <?php $i = 1;?>
-      @foreach($laut as $row)
-        <?php $no = $i++;?>
-      <tr>
-        <td>{{$no}}</td>
-        <td>{{$row->tujuan}}</td>
-        <td>{{"Rp ". number_format($row->tarif,0,',','.')}}</td>
-      </tr>
-      @endforeach
+           <?php $i = 1;?>
+              @foreach($laut as $row)
+              <?php $no = $i++;?>
+              <tr>
+                <td class="text-center">{{$no}}</td>
+                <td class="text-center">{{$row->tujuan}}</td>
+                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')}}</td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
-        </div>                              
-    </div>
-</div>                
-  <br>  
-  <a onclick="window.history.go(-1);" class="btn btn-secondary text-white">Kembali</a>   
-  </div>
-</section>
+        </div>
+      </div>
+      </section>
+    </div><!--.container-fluid-->
+  </div><!--.page-content-->
 <footer class="footer text-center">
       <div class="container">
         <div class="row">
@@ -103,18 +108,13 @@
             <ul class="list-inline mb-0">
               
              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/bakol.tahu.148">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/profile.php?id=100014984589964">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/suryantaracargokediri?utm_source=ig_profile_share&igshid=i01k17uof3di">
                   <i class="fab fa-fw fa-instagram"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.twitter.com">
-                  <i class="fab fa-fw fa-twitter"></i>
                 </a>
               </li>
             </ul>
@@ -135,7 +135,7 @@
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small>&copy; Suryantara Cargo 2018 by Joyoboyo Intermedia</small>
+        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
@@ -148,19 +148,34 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
+    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
-    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
+    <script src="asset_user/js/jqBootstrapValidation.js"></script>
+    <script src="asset_user/js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="asset_user/js/freelancer.min.js"></script>
+    
+      <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins.js')}}"></script>
+
+  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+  <script>
+    $(function() {
+      $('#example').DataTable();
+    });
+  </script>
+
+<script src="{{asset('assets/js/app.js')}}"></script>
 
   </body>
 

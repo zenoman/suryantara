@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\models\Vendormodel;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\File;
 use App\Imports\VendorImport;
 use App\Exports\VendorExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,7 +37,7 @@ return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
     }
 
     public function downloadtemplate(){
-         $file= public_path(). "/file/template vendor.xlsx";
+         $file= base_path()."/../public_html/file/template vendor.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
@@ -53,7 +54,7 @@ return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
     }
 
     public function exsportexcel(){
-    return Excel::download(new VendorExport, 'Vendor.xlsx');
+    return Excel::download(new VendorExport, ' Export Vendor.xlsx');
     return redirect('vendor/importexcel');
 
     }
@@ -89,7 +90,8 @@ Vendormodel::create([
 'idvendor' => $request->idvendor,
 'vendor' => $request->vendor,
 'telp' => $request->telp,
-'alamat' => $request->alamat
+'alamat' => $request->alamat,
+'cabang' => $request->cabang
 ]);
 return redirect('vendor')->with('status','tambah Data Sukses');
 }
@@ -127,12 +129,12 @@ $rules = [
         'alamat' => 'required|min:1'
 ];
 $this->validate($request,$rules);
-
 Vendormodel::find($id)->update([
         'idvendor' => $request->idvendor,
         'vendor' => $request->vendor,
         'telp' => $request->telp,
-        'alamat' => $request->alamat
+        'alamat' => $request->alamat,
+        'cabang' => $request->cabang
 ]);
 return redirect('vendor')->with('status','edit Data Sukses');
 }

@@ -1,3 +1,4 @@
+
 @extends('layout.masteradmin')
 
 @section('css')
@@ -12,6 +13,11 @@
 @endsection
 
 @section('content')
+@if(Session::get('level') == 'admin')
+<script type="text/javascript">
+    window.location.href = '{{url("/dashboard")}}';
+</script>
+@endif
 <div class="page-content">
 		<div class="container-fluid">
 		<header class="section-header">

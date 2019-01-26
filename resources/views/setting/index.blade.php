@@ -31,7 +31,7 @@
 				<form action="{{url('setting/'.$row->id) }}" role="form" method="POST" enctype="multipart/form-data">
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Nama Web</label>
+						<label class="col-sm-2 form-control-label semibold">Nama Web</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Nama Web" name="namaweb" value="{{$row->namaweb}}"></p>
 						@if($errors->has('namaweb'))
@@ -43,7 +43,7 @@
 					</div>
              
           <div class="form-group row">
-            <label class="col-sm-2 form-control-label">Email</label>
+            <label class="col-sm-2 form-control-label semibold">Email</label>
             <div class="col-sm-10">
               <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="email" placeholder="Email" value="{{$row->email}}"></p>
             @if($errors->has('email'))
@@ -55,7 +55,7 @@
           </div>   
            
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label">Kontak</label>
+						<label class="col-sm-2 form-control-label semibold">Kontak</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="kontak" placeholder="Text Readonly" value="{{$row->kontak}}"></p>
 						@if($errors->has('kontak'))
@@ -66,9 +66,9 @@
 						</div>
 					</div>
 					 					<div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Icon</label><p>
+                                            <label  class="col-sm-2 form-control-label semibold">Ganti Icon</label><p>
                                             @if(isset($row->icon) && $row->icon)
-                                            <img src="{{url('../img/setting/'.$row->icon)}}" width="50" height="50">
+                                            <img src="{{asset('img/setting/'.$row->icon)}}" width="50" height="50">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif
@@ -81,9 +81,9 @@
                                        @endif
                                        <!--====================-->
                                             <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label">Ganti Logo</label><p>
+                                            <label  class="col-sm-2 form-control-label semibold">Ganti Logo</label><p>
                                             @if(isset($row->logo) && $row->logo)
-                                            <img src="{{url('../img/setting/'.$row->logo)}}" width="100" height="100">
+                                            <img src="{{url('img/setting/'.$row->logo)}}" width="100" height="100">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif

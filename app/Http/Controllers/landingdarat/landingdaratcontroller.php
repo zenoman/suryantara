@@ -20,7 +20,7 @@ class landingdaratcontroller extends Controller
     
     public function index()
     {
-     $tarif_darat=Landingdaratmodel::get();
+     $tarif_darat=Landingdaratmodel::paginate(10);
       $desk=DB::table('setting')->get();
 	return view('landingdarat/index',['darat'=>$tarif_darat,'des'=>$desk]);
     }

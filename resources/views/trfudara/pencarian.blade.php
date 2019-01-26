@@ -36,10 +36,16 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
+                    @elseif(session('statuserror'))
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('statuserror') }}
+                    </div>
                     @endif
                     <a href="{{url('trfudara')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
+<form action="{{url('/trfudara/hapuspilihan')}}" method="post">
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<a>List Data Tarif Udara</a>
 						<thead>
@@ -50,8 +56,9 @@
 							<th>Airlans</th>
 							<th>Biaya perKg</th>
 							<th>Biaya documen</th>
-							<th>Heavy cargo</th>
+							<th>Min Heavy cargo</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -62,8 +69,9 @@
 							<th>Airlans</th>
 							<th>Biaya perKg</th>
 							<th>Biaya documen</th>
-							<th>Heavy cargo</th>
+							<th>Min Heavy cargo</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -75,22 +83,31 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>{{$row->airlans}}</td>
-                            <td>    {{"kg ". $row->perkg}}</td>
-                            <td>    {{$row->minimal_heavy. "%"}}</td>
-                            <td>    {{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
+                            <td>{{"Rp ". number_format($row->perkg,0,',','.')}}</td>
+                            <td>{{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
+                            <td>{{$row->minimal_heavy. "kg"}}</td>
                             <td>
-<form action="/trfudara/delete"  method="post">
-<a href="/trfudara/{{$row->id}}/edit" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+<form action="{{url('/trfudara/delete') }}"  method="post">
+<a href="{{url('/trfudara/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
-                    					</form>
+                    			</form>
                             </td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						</tr>
 						@endforeach
 						</tbody>
+						<tr>
+							<th colspan="8"></th>
+							<th>
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
+							</th>
+						</tr>
 					</table>
+						{{csrf_field()}}
+                        </form>
 					 
 				</div>
 			</section>

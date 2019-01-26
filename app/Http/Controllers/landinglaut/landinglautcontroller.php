@@ -19,7 +19,7 @@ class landinglautcontroller extends Controller
     
     public function index()
     {
-     $tarif_laut = DB::table('tarif_laut')->get();
+     $tarif_laut = DB::table('tarif_laut')->paginate(10);
      $desk=DB::table('setting')->get();
      return view('landinglaut/index',['laut'=>$tarif_laut,'des'=>$desk]);
     }

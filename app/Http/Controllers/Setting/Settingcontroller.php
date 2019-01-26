@@ -49,7 +49,7 @@ class Settingcontroller extends Controller
             $lower_file_name=strtolower($nameicon);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $nameicon=time().'-'.$replace_space;
-            $destination=public_path('img/setting');
+            $destination=base_path('../public_html/img/setting');
             $request->file('icon')->move($destination,$nameicon);
         }
         if($request->hasFile('logo')){
@@ -59,7 +59,7 @@ class Settingcontroller extends Controller
             $lower_file_name=strtolower($namelog);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $namelogo=time().'-'.$replace_space;
-            $destination=public_path('img/setting');
+            $destination=base_path('../public_html/img/setting');
             $request->file('logo')->move($destination,$namelogo);
         }
     }
@@ -96,13 +96,6 @@ class Settingcontroller extends Controller
 
         return redirect('setting')->with('status','Edit Data Sukses');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

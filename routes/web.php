@@ -108,6 +108,7 @@ Route::get('/trfudara/create','Trfudara\Trfudaracontroller@create');
 Route::get('/trfudara/{id}/edit','Trfudara\Trfudaracontroller@edit');
 Route::put('/trfudara/{id}','Trfudara\Trfudaracontroller@update');
 Route::post('/trfudara/delete','Trfudara\Trfudaracontroller@destroy');
+Route::post('/trfudara/hapuspilihan','Trfudara\Trfudaracontroller@haphapus');
 Route::get('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //-----------------------export import
 Route::get('/trfudara/importexcel','Trfudara\Trfudaracontroller@importexcel');
@@ -121,6 +122,8 @@ Route::get('/trfdarat/create','Trfdarat\Trf_daratcontroller@create');
 Route::get('/trfdarat/{id}/edit','Trfdarat\Trf_daratcontroller@edit');
 Route::put('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@update');
 Route::post('/trfdarat/delete','Trfdarat\Trf_daratcontroller@destroy');
+Route::post('/trfdarat/hapuspilihan','Trfdarat\Trf_daratcontroller@haphapus');
+Route::get('/trfdarat/{id}/delete','Trfdarat\Trf_daratcontroller@hapus');
 Route::get('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
 //------------------------export import
 Route::get('/trfdarat/importexcel','Trfdarat\Trf_daratcontroller@importexcel');
@@ -134,6 +137,7 @@ Route::get('/trflaut/create','Trf_laut\Trf_lautcontroller@create');
 Route::get('/trflaut/{id}/edit','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
 Route::post('/trflaut/delete','Trf_laut\Trf_lautcontroller@destroy');
+Route::post('/trflaut/hapuspilihan','Trf_laut\Trf_lautcontroller@haphapus');
 Route::get('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //------------------------export import
 Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');
@@ -157,3 +161,19 @@ Route::get('/vendor/download','Vendor\Vendorcontroller@downloadtemplate');
 Route::get('/login','Login\Logincontroller@index');
 Route::post('/login/masuk','Login\Logincontroller@masuk');
 Route::get('/login/logout','Login\Logincontroller@logout');
+//==============================================================Karyawan
+Route::get('/karyawan','Karyawan\Karyawancontroller@index');
+Route::post('/karyawan','Karyawan\Karyawancontroller@store');
+Route::get('/karyawan/create','Karyawan\Karyawancontroller@create');
+Route::get('/karyawan/{id}/edit','Karyawan\Karyawancontroller@edit');
+Route::put('/karyawan/{id}','Karyawan\Karyawancontroller@update');
+Route::post('/karyawan/delete','Karyawan\Karyawancontroller@destroy');
+Route::get('karyawan/cari','Karyawan\Karyawancontroller@caridata');
+//==============================================================resi manual
+Route::get('/Manual','Manual\Manualcontroller@index');
+Route::post('/Manual','Manual\Manualcontroller@store');
+Route::get('/Manual/create','Manual\Manualcontroller@create');
+Route::get('/Manual/{id}/edit','Manual\Manualcontroller@edit');
+Route::put('/Manual/{id}','Manual\Manualcontroller@update');
+Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
+Route::get('Manual/cari','Manual\Manualcontroller@caridata');

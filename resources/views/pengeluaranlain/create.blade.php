@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<script type="text/javascript">
+<script>
      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
@@ -16,7 +16,9 @@
             return false;
 
          return true;
-      }
+      };
+      
+     
 </script>
 <div class="page-content">
 		<div class="container-fluid">
@@ -96,7 +98,7 @@
 						</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="file" name="gambar" required accept="image/*">
+								<input type="file" name="gambar" required accept="image/*" id="photo">
 								
 							</div>
 						</div>
@@ -112,5 +114,28 @@
 		</div>
 	</div>
 
+        @endsection
+        @section('otherjs')
+        <script>
+            $('input[type="file"]').change(function(){
+    var imageSizeArr = 0;
+    var imageSize = document.getElementById('photo');
+    var imageCount = imageSize.files.length;
+    for (var i = 0; i < imageSize.files.length; i++)
+    {
+         var imageSiz = imageSize.files[i].size;
+         var imagename = imageSize.files[i].name;
+         if (imageSiz > 3000000) {
+             $('#test').text('3');
+             var imageSizeArr = 1;
+         }
+         if (imageSizeArr == 1)
+         {
+             alert('Maaf, gambar "'+imagename+'" terlalu besar / memiliki ukuran lebih dari 3MB');
+             $('#photo').val('');
+         }
+     }
+ }); 
+        </script>
         @endsection
 

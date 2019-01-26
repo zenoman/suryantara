@@ -23,7 +23,8 @@ if($dtlam > 0){
                     'idvendor'=>$row['id_vendor'],
                     'vendor'=>$row['nama_vendor'],
                     'telp'=>$row['telp'],
-                    'alamat' => $row['alamat']
+                    'alamat' => $row['alamat'],
+                    'cabang' => $row['cabang']
                     ]);
     	}
       }

@@ -73,7 +73,9 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Status</th>
 							<th>Aksi</th>
+							
 						</tr>
 						</thead>
 						<tfoot>
@@ -83,7 +85,9 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Status</th>
 							<th>Aksi</th>
+							
 						</tr>
 						</tfoot>
 						<tbody>
@@ -97,8 +101,15 @@
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>
-<form action="/vendor/delete"  method="post">
-<a href="/vendor/{{$row->id}}/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+                                @if($row->cabang == 'N')
+                                Lainya
+                                @else
+                                cabang
+                                @endif
+                            </td>
+                            <td>
+<form action="{{url('/vendor/delete')}}"  method="post">
+<a href="{{url('/vendor/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">

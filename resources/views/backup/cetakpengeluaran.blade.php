@@ -1,3 +1,8 @@
+@if(Session::get('level') == 'admin')
+<script type="text/javascript">
+    window.location.href = '{{url("/dashboard")}}';
+</script>
+@endif
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +43,9 @@
 			<td>{{$row->tujuan}}</td>
 			<td>{{$row->totalkg}}</td>
 			<td>{{$row->totalkoli}}</td>
-			<td>{{$row->totalcash}}</td>
-			<td>{{$row->totalbt}}</td>
-			<td>{{$row->biaya}}</td>
+			<td>{{"Rp ".number_format($row->totalcash,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->totalbt,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
 			<td>{{$row->alamat_tujuan}}</td>
 			<td>{{$row->admin}}</td>
 		</tr>

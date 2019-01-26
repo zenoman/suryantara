@@ -1,3 +1,8 @@
+@if(Session::get('level') == 'admin')
+<script type="text/javascript">
+    window.location.href = '{{url("/dashboard")}}';
+</script>
+@endif
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +35,9 @@
 		<tr>
 			<td>{{$row->tgl}}</td>
 			<td>{{$row->kategori}}</td>
-			<td>{{$row->jumlah}}</td>
+			<td>
+				{{"Rp ".number_format($row->jumlah,0,',','.')}}
+			</td>
 			<td>{{$row->keterangan}}</td>
 			<td>{{$row->admin}}</td>
 		</tr>

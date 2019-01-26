@@ -41,7 +41,7 @@ $setting = DB::table('setting')->get();
     }
 
     public function downloadtemplate(){
-         $file= public_path(). "/file/template tarif darat.xlsx";
+         $file= base_path()."/../public_html/file/template tarif darat.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
@@ -58,7 +58,7 @@ $setting = DB::table('setting')->get();
     }
 
     public function exsportexcel(){
-    return Excel::download(new TrfdaratExport, 'Tarif Darat.xlsx');
+    return Excel::download(new TrfdaratExport, 'Export Tarif Darat.xlsx');
     return redirect('trfdarat/importexcel');
 
     }
@@ -160,7 +160,7 @@ Trf_daratmodel::find($id)->update([
 'berat_min' => $request->berat_minimal,
 'estimasi' => $request->estimasi
 ]);
-return back()->with('status','Edit Data Sukses');
+return redirect('trfdarat')->with('status','Edit Data Sukses');
 }
 /**
 * Remove the specified resource from storage.
@@ -174,4 +174,24 @@ public function destroy(Request $request)
 Trf_daratmodel::destroy($id);
 return back()->with('status','Hapus Data Sukses');
 }
+//------------------------------------
+public function hapus($id)
+    {
+         Trf_daratmodel::destroy($id);
+        return redirect('/trfdarat')->with('status','Hapus Data Sukses');
+    }
+//-------------------------------------------
+public function haphapus(Request $request)
+    {
+        // dd($request->pilihid);
+            if(!$request->pilihid){
+                return back()->with('statuserror','Tidak ada data yang dipilih');
+            }else{
+        foreach ($request->pilihid as $id) { 
+            Trf_daratmodel::destroy($id);
+            }
+        }
+return back()->with('status','Hapus Data Sukses');
+}
+
 }

@@ -5,8 +5,8 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-
-class TrfdaratExport implements FromCollection, WithHeadings{
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+class TrfdaratExport implements FromCollection, WithHeadings, ShouldAutoSize{
     /**
     * @return \Illuminate\Support\Collection
     */

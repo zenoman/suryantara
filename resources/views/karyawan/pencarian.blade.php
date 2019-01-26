@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -36,16 +37,16 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('vendor')}}" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('karyawan')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<b>List data vendor</b>
+					
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Id Vendor</th>
-							<th>Vendor</th>
+							<th>Kode karyawan</th>
+							<th>Nama</th>
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Aksi</th>
@@ -54,8 +55,8 @@
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Id Vendor</th>
-							<th>Vendor</th>
+							<th>kode karyawan</th>
+							<th>Nama</th>
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Aksi</th>
@@ -63,21 +64,22 @@
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($vendor as $row)
+                            @foreach($datKaryawan as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->idvendor}}</td>
-                            <td>{{$row->vendor}}</td>
+                            <td>{{$row->kode}}</td>
+                            <td>{{$row->nama}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>
-<form action="{{url('/vendor/delete') }}"  method="post">
-<a href="{{url('/vendor/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
-
-                                        {{csrf_field()}}
+                                        <form action="{{url('karyawan/delete') }}"  method="post">
+                            	<a href="{{url('karyawan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                                        	{{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-remove"></i>Hapus</button>
                     					</form>
                             </td>
 						</tr>
@@ -91,7 +93,7 @@
 	</div><!--.page-content-->
 	@endsection
 
-		@section('js')
+			@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
 		$(function() {

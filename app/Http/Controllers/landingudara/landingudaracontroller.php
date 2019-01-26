@@ -19,7 +19,7 @@ class landingudaracontroller extends Controller
     
     public function index()
     {
-     $tarif_udara=DB::table('tarif_udara')->get();
+     $tarif_udara=DB::table('tarif_udara')->paginate(10);
      $desk=DB::table('setting')->get();
 	return view('landingudara/index',['udara'=>$tarif_udara,'des'=>$desk]);
     }

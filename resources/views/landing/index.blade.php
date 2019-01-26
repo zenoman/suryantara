@@ -81,7 +81,7 @@
           <div class="col-md-6 col-lg-4">
             <a class="d-block mx-auto">
               <div class="my-auto w-100 text-center">
-              <img class="img-fluid" src="{{asset('asset_user/img/darat.png')}}" alt="">
+              <img class="img-fluid" src="asset_user/img/darat.png" alt="">
               </div>
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landdarat')}}">
               <h3 class="text-secondary text-center">Tarif Darat</h3>
@@ -90,7 +90,7 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="{{asset('asset_user/img/laut.png')}}" alt="">
+              <img class="img-fluid" src="asset_user/img/laut.png" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landlaut')}}">
               <h3 class="text-secondary text-center">Tarif Laut</h3>
               </a>
@@ -98,7 +98,7 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <a>
-              <img class="img-fluid" src="{{asset('asset_user/img/udara.png')}}" alt="">
+              <img class="img-fluid" src="asset_user/img/udara.png" alt="">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landudara')}}">
               <h3 class="text-secondary text-center ">Tarif Udara</h3>
               </a>
@@ -108,16 +108,17 @@
       </div>
     </section>
  <!--hubungi kami-->
-  <section class="hub" id="hub">
-    <div class="single-product-area">
+    <section class="portfolio" id="hub">
       <div class="container">
-        <h1 class="text-uppercase text-center mb-0">Lokasi Kami</h1>
-        <br>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8086238669516!2d112.04435151463143!3d-7.810073394371994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7857f571ee29ad%3A0x4f4428370fac379f!2sSuryantara+Cargo!5e0!3m2!1sen!2sid!4v1546438704586" width="1130" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
-            
-        </div>
+        <h2 class="text-center text-uppercase text-secondary mb-0">Lokasi Kami</h2>
+        <br>        
+        <div class="row">
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15811.040748701675!2d112.0699626!3d-7.8151904!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4f4428370fac379f!2sSuryantara+Cargo!5e0!3m2!1sid!2sid!4v1547396770588" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+       </div>
       </div>
     </section>
+  
   <!--tentang kami-->
     <section class="masthead bg-primary text-white text-center mb-0" id="tentang">
       @foreach($des as $row) 
@@ -144,18 +145,13 @@
             <ul class="list-inline mb-0">
               
              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/bakol.tahu.148">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/profile.php?id=100014984589964">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/suryantaracargokediri?utm_source=ig_profile_share&igshid=i01k17uof3di">
                   <i class="fab fa-fw fa-instagram"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.twitter.com">
-                  <i class="fab fa-fw fa-twitter"></i>
                 </a>
               </li>
             </ul>
@@ -190,7 +186,7 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Plugin JavaScript -->
     <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>

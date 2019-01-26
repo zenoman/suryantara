@@ -20,13 +20,17 @@ class Admincontroller extends Controller
         // $admins = Adminmodel::paginate(20);
         $setting = DB::table('setting')->get();
         $id=Session::get('id');
+        $lev='admin';
     if(Session::get('level') == 'programer') {
         //________________________________________________________________
         $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
     }else{
         //________________________________________________________________
-        $level='admin';
-        $datadmin = DB::table('admin')->where('id','!=',$id)->where('level','=',$level)->paginate(20);
+        $datadmin = DB::table('admin')->where('id','!=',$id)
+        ->where(function ($huft) use ($lev){
+            $huft->where('level','=',$lev);
+        })
+        ->paginate(20);
     }
         // dd($datadmin);
         return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
@@ -72,8 +76,19 @@ class Admincontroller extends Controller
 
     public function create()
     {
+        $table="admin";
+        $tut="kode";
+        $q=DB::table($table)->max($tut);
+        if(!$q){
+            $finalkode = "Admin-000001";
+        }else{
+            $newkode    = explode("-", $q);
+            $nomer      = sprintf("%06s",$newkode [1]+1);
+            $finalkode  = "Admin-".$nomer;
+        }
+// dd($finalkode);
         $setting = DB::table('setting')->get();
-        return view('admin/create',['title'=>$setting]);
+        return view('admin/create',['title'=>$setting,'kode'=>$finalkode]);
     }
 
     public function changepas($id)
@@ -104,6 +119,22 @@ class Admincontroller extends Controller
                  Adminmodel::find($id)->update([
             'password' =>md5($request->konfirmasi_password_baru)
         ]);
+        return redirect('/dashboard')->with('status','Edit Password berhasil');
+            }else{
+             return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
+            }
+        }else{
+        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
+        }
+    }else if(Session::get('id') != $request->id && Session::get('level') != 'admin'){
+        //_____________________________________________________________
+        $newpass =md5($request->konfirmasi_password);
+        //dd($newpass);
+        if($request->password==$newpass){
+            if($request->konfirmasi_password_baru==$request->password_baru){
+                 Adminmodel::find($id)->update([
+            'password' =>md5($request->konfirmasi_password_baru)
+        ]);
         return redirect('admin')->with('status','Edit Password berhasil');
             }else{
              return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
@@ -120,7 +151,7 @@ class Admincontroller extends Controller
                  Adminmodel::find($id)->update([
             'password' =>md5($request->konfirmasi_password_baru)
         ]);
-        return redirect('/')->with('status','Edit Password berhasil');
+        return redirect('/dashboard')->with('status','Edit Password berhasil');
             }else{
              return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
             }
@@ -139,13 +170,13 @@ class Admincontroller extends Controller
     public function store(Request $request)
     {
         $rules = [
-                    'kode'      => 'required',
+                    // 'kode'  =>'required',
                     'username'  => 'required',
-                    'password'  => 'required|min:5',
+                    'password'  => 'required|min:4',
                     'nama'  => 'required',
-                    'email'  => 'required|min:5|email',
-                    'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5',
+                    'email'  => 'required|email',
+                    'telp'  => 'required|numeric',
+                    'alamat'  => 'required|min:3',
                     'level'=>'required'
                     ];
 
@@ -156,22 +187,38 @@ class Admincontroller extends Controller
         'email'     => 'Maaf, data harus email'
     ];
         $this->validate($request,$rules,$customMessages);
+        //
+                $table="admin";
+        $tut="kode";
+        $q=DB::table($table)->max($tut);
+        if(!$q){
+            $finalkode = "Admin-000001";
+        }else{
+            $newkode    = explode("-", $q);
+            $nomer      = sprintf("%06s",$newkode [1]+1);
+            $finalkode  = "Admin-".$nomer;
+        }
+        //
+        
+        
                     $kode=$request->kode;
+                    // dd($kode);
 $dtlam= DB::table('admin')->where('kode',$kode)->count();
 if($dtlam > 0){
     return redirect('admin/create')->with('status','Kode admin Yang anda masukan sudah ada!!');
 }else{
         Adminmodel::create([
-            'kode'  => $request->kode,
+            'kode'  => $finalkode,
             'username'  => $request->username,
             'password'  =>md5($request->password),
             'nama'  => $request->nama,
-            'email'  => $request->email,
             'telp'  => $request->telp,
+            'email'  => $request->email,
             'alamat'  => $request->alamat,
             'level' => $request->level
 
         ]);
+        
         return redirect('admin')->with('status','Input Data Sukses');
 }
     }
@@ -234,16 +281,14 @@ if($dtlam > 0){
             'alamat'  => $request->alamat
             ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
-       } else if(Session::get('id') == $request->id && Session::get('level') == 'programer') {
+       } else if(Session::get('id') == $request->id && Session::get('level') == 'programer' || Session::get('level') == 'superadmin' ) {
         //_____________________________________________________________
-        $rules = [
-                    'kode'      => 'required',
+                    $rules = [
                     'username'  => 'required|min:5',
                     'nama'  => 'required',
                     'email'  => 'required|min:5|email',
                     'telp'  => 'required|min:5|numeric',
                     'alamat'  => 'required|min:5',
-                    'level'=>'required'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -253,14 +298,13 @@ if($dtlam > 0){
 
          ];
         $this->validate($request,$rules,$customMessages);
-            Adminmodel::find($id)->update([
-            'kode'  => $request->kode,
+        Adminmodel::find($id)->update([
             'nama'  => $request->nama,
             'username'  => $request->username,            
             'email'  => $request->email,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat,
-            'level' => $request->level
+            'level' =>  $request->level
             ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
         }else{
@@ -285,7 +329,8 @@ if($dtlam > 0){
             'username'  => $request->username,            
             'email'  => $request->email,
             'telp'  => $request->telp,
-            'alamat'  => $request->alamat
+            'alamat'  => $request->alamat,
+            'level' => $request->level
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
         }

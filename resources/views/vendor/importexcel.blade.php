@@ -62,15 +62,18 @@
 												<br>
 
                                                <li>Download file template vendor excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><p>
+                                               <img src="{{asset('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><p>
                                                <li>Buka file <b>"template vendor.xlsx"</b> kemudian isi data seperti gambar dibaeah ini.
                                                </li><br>
-                                               <img src="{{url('img/import_export/vendor.JPG')}}">
+                                               <img src="{{asset('img/import_export/ven.JPG')}}">
                                                <br><br>
+                                               <div class="alert alert-danger">
+                                                <b>NB</b> : Untuk Cabang masukan <b>Y</b> <i>jika Cabang</i> Dan <b>N</b> <i> jika Bukan Cabang</i> . 
+                                               </div><br>
                                                <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <img src="{{asset('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <li>Untuk export vendor sangat sederhana.Lihat gambar dibawah ini.</li><br>
-                                               <img src="{{url('img/import_export/0055.JPG')}}"  width="100%" height="100%">
+                                               <img src="{{asset('img/import_export/0055.JPG')}}"  width="100%" height="100%">
                                                <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
@@ -94,7 +97,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="/vendor/prosesimportexcel" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="{{url('/vendor/prosesimportexcel')}}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>
