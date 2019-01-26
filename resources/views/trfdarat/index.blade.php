@@ -65,9 +65,13 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
+<<<<<<< HEAD
 
                     <br>
 <form action="{{url('/trfdarat/hapuspilihan')}}" method="post">
+=======
+                    <br>
+>>>>>>> master
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>

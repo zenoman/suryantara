@@ -32,7 +32,7 @@
         <div class="page-center-in">
             <div class="container-fluid">
                 <form class="sign-box" method="post" action="login/masuk">
-                   @if ($errors->any())
+                   @if($errors->any())
                     @foreach ($errors->all() as $error)
                       <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

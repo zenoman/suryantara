@@ -232,7 +232,7 @@
 		</tr>
 		</thead>
 		
-		<tbody  id="list_cetak">
+		<tbody id="list_cetak">
 			
 		</tbody>
 		<tfoot>
