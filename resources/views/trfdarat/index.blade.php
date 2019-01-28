@@ -65,13 +65,10 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-<<<<<<< HEAD
 
                     <br>
 <form action="{{url('/trfdarat/hapuspilihan')}}" method="post">
-=======
                     <br>
->>>>>>> master
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -109,8 +106,7 @@
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>
-<form action="{{url('/trfdarat/delete') }}"  method="post">
-	<input type="hidden" name="" value="{{$url}}">
+<form action="{{ url('/trfdarat/delete') }}"  method="post">
 <a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">

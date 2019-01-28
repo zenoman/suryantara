@@ -75,9 +75,7 @@ Route::get('/export_laporan_pemasukan/{bulanya}/{jalur}','laporan\laporanControl
 Route::get('/export_laporan_pengeluaran_vendor/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
 Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
-
 //===========================================
-
 
 Route::get('/login','Login\Logincontroller@index');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
@@ -86,7 +84,6 @@ Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
 Route::get('/landlaut','landinglaut\landinglautcontroller@index');
 Route::get('/landudara','landingudara\landingudaracontroller@index');
 Route::get('/dashboard','Dashboardcontroller@index');
-
 
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
@@ -176,4 +173,22 @@ Route::get('/Manual/create','Manual\Manualcontroller@create');
 Route::get('/Manual/{id}/edit','Manual\Manualcontroller@edit');
 Route::put('/Manual/{id}','Manual\Manualcontroller@update');
 Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
-Route::get('Manual/cari','Manual\Manualcontroller@caridata');
+//---------------------------------export import
+Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
+Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');
+Route::get('/Manual/download','Manual\Manualcontroller@downloadtemplate');
+//==============================================================jabatan
+Route::get('/jabatan','Jabatan\Jabatancontroller@index');
+Route::post('/jabatan','Jabatan\Jabatancontroller@store');
+Route::get('/jabatan/create','Jabatan\Jabatancontroller@create');
+Route::get('/jabatan/{id}/edit','Jabatan\Jabatancontroller@edit');
+Route::put('/jabatan/{id}','Jabatan\Jabatancontroller@update');
+Route::post('/jabatan/delete','Jabatan\Jabatancontroller@destroy');
+//==============================================================kategori barang //spesial cargo
+Route::get('/kat_bar','Katbar\Katbarcontroller@index');
+Route::post('/kat_bar','Katbar\Katbarcontroller@store');
+Route::get('/kat_bar/create','Katbar\Katbarcontroller@create');
+Route::get('/kat_bar/{id}/edit','Katbar\Katbarcontroller@edit');
+Route::put('/kat_bar/{id}','Katbar\Katbarcontroller@update');
+Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
+

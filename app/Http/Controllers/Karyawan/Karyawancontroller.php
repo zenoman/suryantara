@@ -19,7 +19,12 @@ class Karyawancontroller extends Controller
     {
         // $Karyawans = Karyawanmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        $datKaryawan = DB::table('karyawan')->paginate(20);
+        // $datKaryawan = DB::table('karyawan')->paginate(20);
+          $datKaryawan = DB::table('karyawan')
+                ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
+                 ->select('karyawan.*','jabatan.jabatan')
+                 ->paginate(20);
+
         // dd($datKaryawan);
         return view('karyawan/index',['karyawan'=>$datKaryawan,'title'=>$setting]);
     }
@@ -61,7 +66,8 @@ class Karyawancontroller extends Controller
         }
 // dd($finalkode);
         $setting = DB::table('setting')->get();
-        return view('karyawan/create',['title'=>$setting,'kode'=>$finalkode]);
+        $jabat = DB::table('jabatan')->get();
+        return view('karyawan/create',['title'=>$setting,'kode'=>$finalkode,'jabatan'=>$jabat]);
     }
 
     public function store(Request $request)
@@ -69,6 +75,7 @@ class Karyawancontroller extends Controller
         $rules = [
                     // 'kode'  =>'required',
                     'nama'  => 'required',
+                    'jabatan'=>'required',
                     'telp'  => 'required|numeric',
                     'alamat'  => 'required|min:3'
                     ];
@@ -101,6 +108,7 @@ if($dtlam > 0){
         Karyawanmodel::create([
             'kode'  => $finalkode,
             'nama'  => $request->nama,
+            'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat
 
@@ -130,8 +138,15 @@ if($dtlam > 0){
     public function edit($id)
     {
         $Karyawan = Karyawanmodel::find($id);
+        // $idd=$id;
+        $jabat = DB::table('jabatan')->get();
+        // $Karyawan = DB::table('karyawan')
+        //         ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
+        //         ->select('karyawan.*','jabatan.jabatan')
+        //         // ->where('karyawan.id',$id);
+                 // dd($databarang);
         $setting = DB::table('setting')->get();
-        return view('karyawan/edit',['datKaryawan'=>$Karyawan,'title'=>$setting]);
+        return view('karyawan/edit',['datKaryawan'=>$Karyawan,'title'=>$setting,'jabatan'=>$jabat]);
     }
 
     /**
@@ -159,6 +174,7 @@ if($dtlam > 0){
         Karyawanmodel::find($id)->update([
             
             'nama'  => $request->nama,
+            'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat
             ]);

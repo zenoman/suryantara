@@ -36,35 +36,36 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
-
+					<a href="{{url('jabatan/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Fakur</th>
+							<th>Kategori Jabatan</th>
+							<th>Jabatan</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Fakur</th>
+							<th>Kategori Jabatan</th>
+							<th>Jabatan</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($manual as $row)
+                            @foreach($jabatan as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->faktur}}</td>
+                            <td>{{$row->kategori}}</td>
+                            <td>{{$row->jabatan}}</td>
                             <td>
-                              <form action="{{ url('/Manual/delete')}}"  method="post">                            	
-                            	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                              <form action="{{ url('/jabatan/delete')}}"  method="post">                            	
+                            	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                         	{{csrf_field()}}
                                         	
@@ -77,7 +78,7 @@
 						@endforeach
 						</tbody>
 					</table>
-					 {{ $manual->links() }}
+					 {{ $jabatan->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->

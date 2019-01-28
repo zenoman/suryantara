@@ -47,6 +47,7 @@
 							<th>No</th>
 							<th>Kode karyawan</th>
 							<th>Nama</th>
+							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Aksi</th>
@@ -57,6 +58,7 @@
 							<th>No</th>
 							<th>kode karyawan</th>
 							<th>Nama</th>
+							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Aksi</th>
@@ -69,6 +71,7 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
+                            <td>{{$row->nama}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>

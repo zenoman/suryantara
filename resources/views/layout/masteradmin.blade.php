@@ -75,7 +75,12 @@
 	               </a>
 	        </li>
 @endif
-
+			<li class="blue">
+	            <a href="{{url('jabatan')}}">
+	                <i class="font-icon font-icon-award"></i>
+	                <span class="lbl">Jabatan</span>
+	               </a>
+	        </li>
 	        <li class="blue">
 	            <a href="{{url('karyawan')}}">
 	                <i class="font-icon font-icon-users"></i>
@@ -118,6 +123,12 @@
 	            </ul>
 	        </li>
 	        
+	        <li class="green">
+	            <a href="{{url('kat_bar')}}">
+	                <i class="font-icon font-icon-list-square"></i>
+	                <span class="lbl">Kategori Barang</span>
+	            </a>
+	        </li>
 	        <li class="red">
 	            <a href="{{url('trfdarat')}}">
 	                <i class="fa fa-truck"></i>

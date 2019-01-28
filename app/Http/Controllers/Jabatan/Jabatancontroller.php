@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Manual;
+namespace App\Http\Controllers\Jabatan;
 ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\models\Manualmodel;
+use App\models\Jabatanmodel;
 use Illuminate\Support\Facades\Session;
 
-use App\Imports\ManualImport;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Response;
-class Manualcontroller extends Controller
+class Jabatancontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,11 +18,11 @@ class Manualcontroller extends Controller
      */
     public function index()
     {
-        // $Manuals = Manualmodel::paginate(20);
+        // $Jabatans = Jabatanmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        $datmanual = DB::table('kode_resimanual')->paginate(20);
-        // dd($datManual);
-        return view('Manual/index',['manual'=>$datmanual,'title'=>$setting]);
+        $datJabatan = DB::table('jabatan')->paginate(20);
+        // dd($datJabatan);
+        return view('Jabatan/index',['jabatan'=>$datJabatan,'title'=>$setting]);
     }
 
     /**
@@ -33,37 +30,18 @@ class Manualcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//------------------------------------
-   public function importexcel (){
-$setting = DB::table('setting')->get();
-        return view('Manual/importexcel',['title'=>$setting]);
-    }
-        public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template resi manual.xlsx";
-            $headers = array(
-              'Content-Type: application/excel',
-            );
-    return Response::download($file, 'template tarif darat.xlsx', $headers);
-    return redirect('trfdarat/importexcel');
-    }
-        public function prosesimportexcel(Request $request){
-        if($request->hasFile('file')){
-        Excel::import(new ManualImport, request()->file('file'));
-        }
-        return redirect('Manual')->with('status','Import excel sukses');
-    }
-//-----------------------------------
 
     public function create()
     {
         $setting = DB::table('setting')->get();
-        return view('Manual/create',['title'=>$setting]);
+        return view('jabatan/create',['title'=>$setting]);
     }
 
     public function store(Request $request)
     {
         $rules = [
-                    'kode'  =>'required'
+                    'kate'  =>'required',
+                    'jabatan'  =>'required'
                     ];
  
     $customMessages = [
@@ -71,21 +49,22 @@ $setting = DB::table('setting')->get();
     ];
         $this->validate($request,$rules,$customMessages);
         //
-        $data=$request->kode;
+        $data=$request->jabatan;
         for ($i=0; $i < count($data) ; $i++) { 
             if($i == count($data)-1){
-                $final = $data[$i];
+                $pros = $data[$i];
             }else{
-                $final = $data[$i];
+                $pros = $data[$i];
             }
-        Manualmodel::create([
-            'faktur'  => $final
+        $kat =$request->kate;
+        Jabatanmodel::create([
+            'kategori' => $kat,
+            'jabatan'  => $pros
 
         ]);
         }
-        // dd($final);
         
-        return redirect('Manual')->with('status','Input Data Sukses');
+        return redirect('jabatan')->with('status','Input Data Sukses');
     }
 
     /**
@@ -107,6 +86,9 @@ $setting = DB::table('setting')->get();
      */
     public function edit($id)
     {
+        $jab = Jabatanmodel::find($id);
+        $setting = DB::table('setting')->get();
+        return view('jabatan/edit',['jabat'=>$jab,'title'=>$setting]);
 
     }
 
@@ -119,6 +101,19 @@ $setting = DB::table('setting')->get();
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+                    'jabatan'  => 'required|min:2',
+            ];
+        $customMessages = [
+        'required'  => 'Maaf, :attribute harus di isi',
+        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+
+         ];
+        $this->validate($request,$rules,$customMessages);
+        Jabatanmodel::find($id)->update([
+            'jabatan'  => $request->jabatan
+            ]);
+        return redirect('/jabatan')->with('status','Edit Data Sukses');
  
     }
 
@@ -131,8 +126,8 @@ $setting = DB::table('setting')->get();
     public function destroy(Request $request)
     {
         $id = $request->aid;
-         Manualmodel::destroy($id);
-        // return redirect('Manual')->with('status','Hapus Data Sukses');
+         Jabatanmodel::destroy($id);
+        // return redirect('Jabatan')->with('status','Hapus Data Sukses');
         return back()->with('status','Hapus Data Sukses');
     }
 }

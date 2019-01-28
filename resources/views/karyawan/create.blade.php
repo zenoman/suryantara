@@ -57,6 +57,23 @@
 						</div>
 					</div>
 					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="jabatan" class="form-control">
+								<option>Pilih Jabatan</option>
+								@foreach($jabatan as $row)
+								<option value="{{$row->id}}">{{$row->jabatan}}</option>
+								@endforeach
+							</select>
+						</div>
+						@if($errors->has('jabatan'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('jabatan')}}
+                                         </div>
+                                       @endif
+					</div>
+
+					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">No.telp</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="telp" required onkeypress="return isNumberKey(event)" placeholder="Misal : 085**********"></p>
