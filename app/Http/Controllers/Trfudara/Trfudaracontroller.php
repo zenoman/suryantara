@@ -70,8 +70,9 @@ public function caridata(Request $request)
     }
     public function create()
     {
+            $katebara = DB::table('kategori_barang')->get();
             $setting = DB::table('setting')->get();
-        return view('trfudara/create',['title'=>$setting]);
+        return view('trfudara/create',['title'=>$setting,'katbar'=>$katebara]);
     }
 
     /**
@@ -87,6 +88,7 @@ public function caridata(Request $request)
             'kode' => 'required|min:3',
             'tujuan' => 'required|min:3',
             'airlans' => 'required|min:3',
+            'katbarang' => 'required',
             'biaya_perkg' => 'required|min:1',
             'minimal_heavy' => 'required|min:1',
             'biaya_dokumen' => 'required|min:1',
@@ -104,6 +106,7 @@ if($dtlam > 0){
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
+            'id_kategori_barang' =>$request->katbarang,
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
             'biaya_dokumen' => $request->biaya_dokumen
@@ -133,8 +136,13 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     {
         //
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
+        $trfudara = DB::table('tarif_udara')
+                ->join('kategori_barang', 'kategori_barang.id', '=', 'tarif_udara.id_kategori_barang')
+                ->select('tarif_udara.*','kategori_barang.spesial_cargo')
+                ->where('tarif_udara.id',$id)->get();
+    $kate = DB::table('kategori_barang')->get();
     $setting = DB::table('setting')->get();
-        return view('trfudara/edit',['trfudara'=>$trfudara,'title'=>$setting]); 
+        return view('trfudara/edit',['trfudara'=>$trfudara,'title'=>$setting,'katbar'=>$kate]); 
     }
 
     /**
@@ -150,6 +158,7 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => 'required|min:3',
             'tujuan' => 'required|min:3',
             'airlans' => 'required|min:3',
+            'katbarang' =>'required',
             'biaya_perkg' => 'required|min:1',
             'minimal_heavy' => 'required|min:1',
             'biaya_dokumen' => 'required|min:1',
@@ -164,6 +173,7 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
+            'id_kategori_barang'=>$request->katbarang,
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
             'biaya_dokumen' => $request->biaya_dokumen

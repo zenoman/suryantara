@@ -72,7 +72,7 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->nama}}</td>
-                            <td>{{$row->nama}}</td>
+                            <td>{{$row->jabatan}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>
