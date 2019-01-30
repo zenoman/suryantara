@@ -75,7 +75,20 @@
 	               </a>
 	        </li>
 @endif
-			<li class="blue">
+			<li class="red with-sub">
+	            <span>
+	                <i class="font-icon font-icon-users"></i>
+	                <span class="lbl">Karyawan</span>
+	            </span>
+	            <ul>
+	                <li><a href="{{url('jabatan')}}"><span class="lbl">Jabatan</span></a></li>
+	                <li><a href="{{url('karyawan')}}">
+	                	<span class="lbl">Data Karyawan</span></a>
+	                </li>
+	                
+	            </ul>
+	        </li>
+			<!-- <li class="blue">
 	            <a href="{{url('jabatan')}}">
 	                <i class="font-icon font-icon-award"></i>
 	                <span class="lbl">Jabatan</span>
@@ -86,22 +99,31 @@
 	                <i class="font-icon font-icon-users"></i>
 	                <span class="lbl">Karyawan</span>
 	               </a>
-	        </li>
+	        </li> 
 	        <li class="green">
 	            <a href="{{url('Manual')}}">
 	                <i class="glyphicon glyphicon-list-alt"></i>
 	                <span class="lbl">Manual</span>
 	               </a>
-	        </li>
+	        </li>-->
 	        <li class="magenta with-sub">
 	        	<span>
 	                <i class="font-icon font-icon-pencil"></i>
 	                <span class="lbl">Resi Pengiriman</span>
 	            </span>
 	             <ul>
-                <li><a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a></li>
-	                <li><a href="{{url('/resipengirimanlaut')}}"><span class="lbl">Pengiriman Laut</span></a></li>
-	                <li><a href="{{url('/resipengirimanudara')}}"><span class="lbl">Pengiriman Udara</span></a></li> 
+	             	<li>
+	                	<a href="{{url('Manual')}}"><span class="lbl">Resi Manual</span></a>
+	                </li>
+                	<li>
+                		<a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a>
+                	</li>
+	                <li>
+	                	<a href="{{url('/resipengirimanlaut')}}"><span class="lbl">Pengiriman Laut</span></a>
+	                </li>
+	                <li>
+	                	<a href="{{url('/resipengirimanudara')}}"><span class="lbl">Pengiriman Udara</span></a>
+	                </li>
 	            </ul>
 	        </li>
 	        <li class="green">
@@ -123,7 +145,35 @@
 	            </ul>
 	        </li>
 	        
-	        <li class="green">
+	        <li class="magenta with-sub">
+	            <span>
+	                <span class="fa fa-money"></span>
+	                <span class="lbl">Tarif Pengiriman</span>
+	            </span>
+	            <ul>
+	                <li>
+	                	<a href="{{url('trfdarat')}}"><span class="lbl">Tarif Darat</span></a>
+	                </li>
+
+	                <li>
+	                	<a href="{{url('trflaut')}}"><span class="lbl">Tarif Laut</span></a>
+	                </li>
+
+	                <li class="with-sub">
+	                    <span>
+	                        <span class="lbl">Udara</span>
+	                    </span>
+	                    <ul>
+	                        <li>
+	                        	<a href="{{url('trfudara')}}"><span class="lbl">Tarif Udara</span></a>
+	                        </li>
+	                        <li><a href="{{url('kat_bar')}}"><span class="lbl">Special Charge</span></a></li>
+	                       
+	                    </ul>
+	                </li>
+	            </ul>
+	        </li>
+	        <!-- <li class="green">
 	            <a href="{{url('kat_bar')}}">
 	                <i class="font-icon font-icon-list-square"></i>
 	                <span class="lbl">Kategori Barang</span>
@@ -146,7 +196,7 @@
 	                <i class="fa fa-plane"></i>
 	                <span class="lbl">Tarif Udara</span>
 	            </a>
-	        </li>
+	        </li> -->
 	        <li class="red">
 	            <a href="{{url('vendor')}}">
 	                <i class="fa fa-users"></i>
