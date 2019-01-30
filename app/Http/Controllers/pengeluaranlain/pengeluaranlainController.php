@@ -17,12 +17,6 @@ class pengeluaranlainController extends Controller
         $setting = DB::table('setting')->limit(1)->get();
         return view('pengeluaranlain/index',['title'=>$setting,'data'=>$data]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $setting = DB::table('setting')->limit(1)->get();
@@ -62,44 +56,5 @@ class pengeluaranlainController extends Controller
         }
 
         return redirect('/pengeluaranlain')->with('status','Berhasil Menambah Data');
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
