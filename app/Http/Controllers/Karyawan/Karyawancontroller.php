@@ -137,15 +137,16 @@ if($dtlam > 0){
      */
     public function edit($id)
     {
-        $Karyawan = Karyawanmodel::find($id);
+        // $Karyawan = Karyawanmodel::find($id);
         // $idd=$id;
+        $Karyawan = DB::table('karyawan')
+                ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
+                ->select('karyawan.*','jabatan.jabatan')
+                ->where('karyawan.id',$id)->get();
+                 // dd($Karyawan);
         $jabat = DB::table('jabatan')->get();
-        // $Karyawan = DB::table('karyawan')
-        //         ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
-        //         ->select('karyawan.*','jabatan.jabatan')
-        //         // ->where('karyawan.id',$id);
-                 // dd($databarang);
         $setting = DB::table('setting')->get();
+        // dd($Karyawan->id);
         return view('karyawan/edit',['datKaryawan'=>$Karyawan,'title'=>$setting,'jabatan'=>$jabat]);
     }
 
