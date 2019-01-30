@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class katbarcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         // $katbars = katbarmodel::paginate(20);
@@ -24,13 +19,7 @@ class katbarcontroller extends Controller
         // dd($datkatbar);
         return view('katbar/index',['katbar'=>$datkatbar,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    
     public function create()
     {
         $setting = DB::table('setting')->get();
@@ -39,33 +28,11 @@ class katbarcontroller extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
-                    'spesial_cargo'  =>'required',
-                    'charge'  =>'required'
-                    ];
- 
-    $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi',
-    ];
-        $this->validate($request,$rules,$customMessages);
-        //
-        $data=$request->spesial_cargo;
-
-        for ($i=0; $i < count($data) ; $i++) { 
-            if($i == count($data)-1){
-                $spc = $data[$i];
-                $char =$request->charge[$i];
-            }else{
-                $spc = $data[$i];
-                $char =$request->charge[$i];
-            }
         katbarmodel::create([
-            'spesial_cargo' => $spc,
-            'charge'  => $char
+            'spesial_cargo' => $request->spesial_cargo,
+            'charge'  => $request->charge
 
         ]);
-        }
-        
         return redirect('kat_bar')->with('status','Input Data Sukses');
     }
 

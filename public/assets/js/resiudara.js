@@ -9,6 +9,10 @@ $(document).ready(function(){
 	$('#satuan').on('change',function(e){
 		satuan = this.value;
 	})
+	//=============================================ganti kategori	
+	$('#kategori').on('change',function(e){
+		kategori = this.value;
+	})
 	//===========================================
 	function carikode(){
 			$.ajax({
@@ -62,14 +66,29 @@ $(document).ready(function(){
 								$('#biaya_kirim').val(0);
 								$('#b_kirim').html(0);
 								$('#b_ppn').html(0);
+								$('#b_charge').html(0);
 							}else{
-								$('#status').val('Normal Cargo');
-								var berat = $('#berat').val();
-								var jumlah  = item.perkg*berat;
-								var ppn		= (jumlah*1)/100;
-								$('#biaya_kirim').val(jumlah);
-								$('#b_kirim').html(rupiah(jumlah));
-								$('#b_ppn').html(rupiah(ppn));
+								if (kategori=='biasa') {
+									$('#status').val('Normal Cargo');
+									var berat = $('#berat').val();
+									var jumlah  = item.perkg*berat;
+									var ppn		= (jumlah*1)/100;
+									$('#b_charge').html(0);
+									$('#biaya_kirim').val(jumlah);
+									$('#b_kirim').html(rupiah(jumlah));
+									$('#b_ppn').html(rupiah(ppn));
+								}else{
+									$('#status').val('Normal Cargo');
+									var berat = $('#berat').val();
+									var jumlah  = item.perkg*berat;
+									var ppn		= (jumlah*1)/100;
+									var totalcarge = (jumlah*kategori)/100;
+									$('#b_charge').html(rupiah(totalcarge));
+									$('#biaya_kirim').val(jumlah);
+									$('#b_kirim').html(rupiah(jumlah));
+									$('#b_ppn').html(rupiah(ppn));
+								}
+								
 							}
 							}else{
 								if(parseInt($('#min_heavy').val()) < parseInt($('#berat').val())){
@@ -80,6 +99,7 @@ $(document).ready(function(){
 								$('#biaya_kirim').val(0);
 								$('#b_kirim').html(0);
 								$('#b_ppn').html(0);
+								$('#b_charge').html(0);
 							}
 							kotatujuan = item.tujuan;
 							$('#biaya_smu').val(item.biaya_dokumen);
@@ -101,7 +121,8 @@ $(document).ready(function(){
 		var biaya_dokumen = parseInt($('#biaya_smu').val());
 		var biaya_karantina = parseInt($('#biaya_karantina').val());
 		var biaya_ppn 		= parseInt($('#b_ppn').text().replace('.',''));
-		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_ppn;
+		var biaya_charge = parseInt($('#b_charge').text().replace('.',''));
+		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_ppn +biaya_charge;
 		$('#total').html(rupiah(jumlah));
 	}
 	//==============================================
@@ -155,6 +176,12 @@ $(document).ready(function(){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_kirim = $("#biaya_kirim").val();
 			var ppn = (biaya_kirim*1)/100;
+			if (kategori!='biasa') {
+			var charge = (biaya_kirim*kategori)/100;	
+			$('#b_charge').html(rupiah(charge));
+			}else{
+			$('#b_charge').html(0);
+			}
 			$("#b_kirim").html(rupiah(biaya_kirim));
 			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
@@ -227,6 +254,10 @@ $(document).ready(function(){
 		$('#cetak_biaya_smu').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina').html("Rp. "+rupiah($('#biaya_karantina').val()));
 		$('#cetak_biaya_ppn').html("Rp. "+$('#b_ppn').html());
+		$('#cetak_biaya_charge').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge2').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge3').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge4').html("Rp. "+$('#b_charge').html());
 		$("#cetak_total").html("Rp. " +$('#total').html());
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
@@ -344,6 +375,7 @@ $(document).ready(function(){
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan').val();
 			var ppn 		= $('#b_ppn').text().replace('.','');
+			var change		= $('#b_charge').text().replace('.','');
 			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 			var nosmu 		= $('#nomer_smu').val();
@@ -378,7 +410,8 @@ $(document).ready(function(){
                 	'satuan'		: satuan,
                 	'metode'		: metode,
                 	'ppn'			: ppn,
-                	'nosmu'			: nosmu
+                	'nosmu'			: nosmu,
+                	'charge'		: change
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
