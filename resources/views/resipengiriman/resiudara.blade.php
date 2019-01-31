@@ -264,10 +264,10 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
-				<p align="center">
+				<p align="center" style="font-size: 13;">
 					<b>Office :</b><br>
 					Jalan Pamenang No. 10 Sukorejo <br>
 					Gurah, Kediri <br>
@@ -278,40 +278,40 @@
 				<td style="width: 30%">
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
-							<td colspan="2" style="border: 1px solid black;">
+							<td colspan="2" style="border: 1px solid black; font-size: 13;">
 								<p style="margin-left: 6px;" id="cetak_resi"></p> 
 							
 							</td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact">
-							<p style="font-size: 14;" align="center">Kota Asal</p></td>
+							<p style="font-size: 13;" align="center">Kota Asal</p></td>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Kota Tujuan</p></td>
+							<p style="font-size: 13;">Kota Tujuan</p></td>
 							
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_asal"></p></td>
+							<p style="font-size: 13;" id="cetak_kota_asal"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan">Malang</p></td>
+							<p style="font-size: 13;" id="cetak_kota_tujuan">Malang</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Jumlah Barang</p></td>
+							<p style="font-size: 13;">Jumlah Barang</p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
+							<p style="font-size: 13;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_jumlah_barang"></p></td>
+							<p style="font-size: 13;" id="cetak_jumlah_barang"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_berat"></p></td>
+							<p style="font-size: 13;" id="cetak_berat"></p></td>
 						</tr>
 					</table>
 				</td>
 				<td style="width: 15%">
-					<table style="font-size:15;width: 100%;border-collapse:collapse;border: 1px solid black;">
+					<table style="font-size:13;width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
@@ -337,8 +337,8 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Penerima</td>
 				<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 12;">
 						<tr>
@@ -355,13 +355,13 @@
 				</td>
 			</tr>
 			<tr >
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim"></strong></p>
 					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim">
 						
 					</p>
 				</td>
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima"></strong></p>
 				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima">
 					</p>
@@ -384,7 +384,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td style="border: 1px solid black;">
+				<td style="border: 1px solid black;font-size: 13;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket"></p>
 				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu"></span></p>
@@ -469,10 +469,10 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
-				<p align="center">
+				<p align="center" style="font-size: 13;">
 					<b>Office :</b><br>
 					Jalan Pamenang No. 10 Sukorejo <br>
 					Gurah, Kediri <br>
@@ -483,40 +483,40 @@
 				<td style="width: 30%">
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
-							<td colspan="2" style="border: 1px solid black;">
+							<td colspan="2" style="border: 1px solid black;font-size: 13;">
 								<p style="margin-left: 6px;" id="cetak_resi2"></p> 
 							
 							</td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact">
-							<p style="font-size: 14;" align="center">Kota Asal</p></td>
+							<p style="font-size: 13;" align="center">Kota Asal</p></td>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Kota Tujuan</p></td>
+							<p style="font-size: 13;">Kota Tujuan</p></td>
 							
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_asal2"></p></td>
+							<p style="font-size: 13;" id="cetak_kota_asal2"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan2">Malang</p></td>
+							<p style="font-size: 13;" id="cetak_kota_tujuan2">Malang</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Jumlah Barang</p></td>
+							<p style="font-size: 13;">Jumlah Barang</p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
+							<p style="font-size: 13;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_jumlah_barang2"></p></td>
+							<p style="font-size: 13;" id="cetak_jumlah_barang2"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_berat2"></p></td>
+							<p style="font-size: 13;" id="cetak_berat2"></p></td>
 						</tr>
 					</table>
 				</td>
 				<td style="width: 15%">
-					<table style="font-size:15;width: 100%;border-collapse:collapse;border: 1px solid black;">
+					<table style="font-size:13;width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
@@ -542,8 +542,8 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Penerima</td>
 				<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 12;">
 						<tr>
@@ -560,13 +560,13 @@
 				</td>
 			</tr>
 			<tr >
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim2"></strong></p>
 					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim2">
 						
 					</p>
 				</td>
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima2"></strong></p>
 				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima2">
 					</p>
@@ -589,7 +589,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td style="border: 1px solid black;">
+				<td style="border: 1px solid black;font-size: 13;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket2"></p>
 				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu2"></span></p>
@@ -675,10 +675,10 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
-				<p align="center">
+				<p align="center" style="font-size: 13;">
 					<b>Office :</b><br>
 					Jalan Pamenang No. 10 Sukorejo <br>
 					Gurah, Kediri <br>
@@ -689,40 +689,40 @@
 				<td style="width: 30%">
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
-							<td colspan="2" style="border: 1px solid black;">
+							<td colspan="2" style="border: 1px solid black;font-size: 13;">
 								<p style="margin-left: 6px;" id="cetak_resi3"></p> 
 							
 							</td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact">
-							<p style="font-size: 14;" align="center">Kota Asal</p></td>
+							<p style="font-size: 13;" align="center">Kota Asal</p></td>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Kota Tujuan</p></td>
+							<p style="font-size: 13;">Kota Tujuan</p></td>
 							
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_asal3"></p></td>
+							<p style="font-size: 13;" id="cetak_kota_asal3"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan3">Malang</p></td>
+							<p style="font-size: 13;" id="cetak_kota_tujuan3">Malang</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Jumlah Barang</p></td>
+							<p style="font-size: 13;">Jumlah Barang</p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
+							<p style="font-size: 13;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_jumlah_barang3"></p></td>
+							<p style="font-size: 13;" id="cetak_jumlah_barang3"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_berat3"></p></td>
+							<p style="font-size: 13;" id="cetak_berat3"></p></td>
 						</tr>
 					</table>
 				</td>
 				<td style="width: 15%">
-					<table style="font-size:15;width: 100%;border-collapse:collapse;border: 1px solid black;">
+					<table style="font-size:13;width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
@@ -748,8 +748,8 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Penerima</td>
 				<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 12;">
 						<tr>
@@ -766,13 +766,13 @@
 				</td>
 			</tr>
 			<tr >
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim3"></strong></p>
 					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim3">
 						
 					</p>
 				</td>
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima3"></strong></p>
 				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima3">
 					</p>
@@ -795,7 +795,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td style="border: 1px solid black;">
+				<td style="border: 1px solid black;font-size: 13;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket3"></p>
 				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu3"></span></p>
@@ -881,10 +881,10 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="60%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="60%">
 				</td>
 				<td style="width: 30%">
-				<p align="center">
+				<p align="center" style="font-size: 13;">
 					<b>Office :</b><br>
 					Jalan Pamenang No. 10 Sukorejo <br>
 					Gurah, Kediri <br>
@@ -895,40 +895,40 @@
 				<td style="width: 30%">
 					<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr style="border: 1px solid black;">
-							<td colspan="2" style="border: 1px solid black;">
+							<td colspan="2" style="border: 1px solid black; font-size: 13;">
 								<p style="margin-left: 6px;" id="cetak_resi4"></p> 
 							
 							</td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact">
-							<p style="font-size: 14;" align="center">Kota Asal</p></td>
+							<p style="font-size: 13;" align="center">Kota Asal</p></td>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Kota Tujuan</p></td>
+							<p style="font-size: 13;">Kota Tujuan</p></td>
 							
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_asal4"></p></td>
+							<p style="font-size: 13;" id="cetak_kota_asal4"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_kota_tujuan4">Malang</p></td>
+							<p style="font-size: 13;" id="cetak_kota_tujuan4">Malang</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
-							<p style="font-size: 14;">Jumlah Barang</p></td>
+							<p style="font-size: 13;">Jumlah Barang</p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
+							<p style="font-size: 13;background-color: #bee3f7;-webkit-print-color-adjust:exact">Berat</p></td>
 						</tr>
 						<tr>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_jumlah_barang4"></p></td>
+							<p style="font-size: 13;" id="cetak_jumlah_barang4"></p></td>
 							<td style="border: 1px solid black;" align="center">
-							<p style="font-size: 14;" id="cetak_berat4"></p></td>
+							<p style="font-size: 13;" id="cetak_berat4"></p></td>
 						</tr>
 					</table>
 				</td>
 				<td style="width: 15%">
-					<table style="font-size:15;width: 100%;border-collapse:collapse;border: 1px solid black;">
+					<table style="font-size:13;width: 100%;border-collapse:collapse;border: 1px solid black;">
 						<tr>
 							<td style="border: 1px solid black;background-color: #bee3f7;-webkit-print-color-adjust:exact" align="center">
 								<p style="margin-left: 2%;">Pengiriman Via</p></td>
@@ -954,8 +954,8 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black;font-size: 13;" align="center">Penerima</td>
 				<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 12;">
 						<tr>
@@ -972,13 +972,13 @@
 				</td>
 			</tr>
 			<tr >
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim4"></strong></p>
 					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim4">
 						
 					</p>
 				</td>
-				<td align="center" style="border: 1px solid black; width: 20%;">
+				<td align="center" style="border: 1px solid black; width: 20%;font-size: 13;">
 					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima4"></strong></p>
 				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima4">
 					</p>
@@ -1001,7 +1001,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td style="border: 1px solid black;">
+				<td style="border: 1px solid black;font-size: 13;">
 				<p style="margin-left: 2%;margin-bottom: 6%;">Isi Paket/Nama barang :</p>
 				<p style="margin-left: 2%;margin-right: 2%;margin-bottom: 10%;margin-top: 3%;" id="cetak_isi_paket4"></p>
 				<p style="margin-left: 2%;margin-right: 2%;">No.SMU : <span id="cetak_nosmu4"></span></p>

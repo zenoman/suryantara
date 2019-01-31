@@ -195,6 +195,10 @@
 										<td class="text-right">Biaya Karantina</td>
 										<td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
 									</tr>
+									<tr>
+										<td class="text-right">Biaya Charge</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+									</tr>
 								@else
 									<tr>
 										<td class="text-right">Biaya Packing</td>

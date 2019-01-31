@@ -376,7 +376,7 @@ $(document).ready(function(){
 			var satuan		= $('#satuan').val();
 			var ppn 		= $('#b_ppn').text().replace('.','');
 			var change		= $('#b_charge').text().replace('.','');
-			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
+			var total_biaya = parseInt(change) + parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 			var nosmu 		= $('#nomer_smu').val();
 			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
