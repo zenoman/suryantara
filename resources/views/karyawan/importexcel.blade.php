@@ -61,32 +61,39 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
-                                               <p>
+                                               <li>Download file <b>jabatan</b> dan <b>template karyawan</b> di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li>
+                                               <img src="{{url('img/import_export/202.JPG')}}"  width="100%" height="100%"><br><br>
                                                <li>
-                                                   Buka file <b>"template tarif darat.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja.
+                                                   Buka file <b>"template karyawan.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
+                                               </li>
+                                               <li>
+                                                   isi <b>id_jabatan</b> sesuai dengan <b>id jabatan</b> di file <b>"jabatan.xlsx"</b>, jangan isikan id lain selain id yang tercantum pada file <b>"jabatan.xlsx"</b>. untuk lebih jelas lihat gambar di bawah ini
                                                </li><br>
-                                               <img src="{{url('img/import_export/darat.JPG')}}">
-                                               <p>
-                                               <div class="alert alert-danger">
-                                                <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
-                                               </div>
-                                               <br>
-                                               <li>Kemudian save <b>template tarif darat.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
-                                               <li>Untuk export tarif darat sangat sederhana.Lihat gambar dibawah ini.</li><br>
-                                               <img src="{{url('img/import_export/002.JPG')}}"  width="100%" height="100%">
+                                               <img src="{{url('img/import_export/jabatan.JPG')}}">
+                                               <br><br>
+                                               <img src="{{url('img/import_export/karyawan.JPG')}}"><br><br>
+                                               <li>
+                                                   Untuk kode <b>Harus</b> di isi dengan Karyawan-000001 jika data <b>belum ada</b> di web, jika sudah ada tinggal masukan kode urutan dari web.
+                                               </li><br><br>
+                                               <div class="alert alert-warning">
+                                                <b>Data tisak akan masuk apa bila ada kode yang sama.</b>
+                                               </div><br>
+                                               <li>Kemudian save <b>template karyawan.xlsx</b> dan upload ditab sebelah paling bawah yaitu <b>upload file</b>,Lihat gambar di baewah ini</li><br>
+                                               <img src="{{url('img/import_export/202.JPG')}}"  width="100%" height="100%"><br><br>
+                                               <li>Untuk export tarif udara sangat sederhana Tinggal klok tombol export Karyawan ditab sebelah.Lihat gambar dibawah ini.</li><br>
+                                               <img src="{{url('img/import_export/005.JPG')}}"  width="100%" height="100%">
                                                <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
                                                <br></br>
+                                               <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trfdarat/download')}}" class="btn btn-info">Download Template Excel</a>
+                                    <a href="{{url('karyawan/downlod')}}" class="btn btn-info">Download jabatan</a>
+                                    <a href="{{url('karyawan/download')}}" class="btn btn-info">Download Template Excel</a>
                         </div>
                         <hr>
 <p></p>
@@ -100,7 +107,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form action="{{url('/trfdarat/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
+                                            <form action="{{url('/karyawan/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
                                             <input type="file"name="file" required>
@@ -113,12 +120,12 @@
                                     </form> 
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
                                     </div><!--.tab-pane-->
-                    <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
+                            <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
 						<div class="panel-body" align="center">
-                                    <a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-primary">Export Tarif Darat</a>
+                                    <a href="{{url('/karyawan/karyawanexport')}}" class="btn btn-primary">Export Karyawan</a>
                         </div>
                         <hr>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

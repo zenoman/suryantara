@@ -34,6 +34,13 @@ class Manualcontroller extends Controller
      * @return \Illuminate\Http\Response
      */
 //------------------------------------
+    public function caridata(Request $request)
+    {
+        $cari=$request->cari;
+        $manu = DB::table('kode_resimanual')->where('faktur','like','%'.$cari.'%')->get();
+            $setting = DB::table('setting')->get();
+        return view('Manual/pencarian', ['manual'=>$manu, 'cari'=>$cari,'title'=>$setting]);
+    }
    public function importexcel (){
 $setting = DB::table('setting')->get();
         return view('Manual/importexcel',['title'=>$setting]);
@@ -135,4 +142,16 @@ $setting = DB::table('setting')->get();
         // return redirect('Manual')->with('status','Hapus Data Sukses');
         return back()->with('status','Hapus Data Sukses');
     }
+    public function haphapus(Request $request)
+    {
+        // dd($request->pilihid);
+            if(!$request->pilihid){
+                return back()->with('statuserror','Tidak ada data yang dipilih');
+            }else{
+        foreach ($request->pilihid as $id) { 
+            Manualmodel::destroy($id);
+            }
+        }
+return back()->with('status','Hapus Data Sukses');
+}
 }

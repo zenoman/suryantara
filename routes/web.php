@@ -166,6 +166,12 @@ Route::get('/karyawan/{id}/edit','Karyawan\Karyawancontroller@edit');
 Route::put('/karyawan/{id}','Karyawan\Karyawancontroller@update');
 Route::post('/karyawan/delete','Karyawan\Karyawancontroller@destroy');
 Route::get('karyawan/cari','Karyawan\Karyawancontroller@caridata');
+//------------------------export import 
+Route::get('/karyawan/importexcel','Karyawan\Karyawancontroller@importexcel');
+Route::post('/karyawan/prosesimportexcel','Karyawan\Karyawancontroller@prosesimportexcel');
+Route::get('/karyawan/karyawanexport','Karyawan\Karyawancontroller@exsportexcel');
+Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt');
+Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
 //==============================================================resi manual
 Route::get('/Manual','Manual\Manualcontroller@index');
 Route::post('/Manual','Manual\Manualcontroller@store');
@@ -173,6 +179,8 @@ Route::get('/Manual/create','Manual\Manualcontroller@create');
 Route::get('/Manual/{id}/edit','Manual\Manualcontroller@edit');
 Route::put('/Manual/{id}','Manual\Manualcontroller@update');
 Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
+Route::post('/Manual/hapuspilihan','Manual\Manualcontroller@haphapus');
+Route::get('/Manual/cari','Manual\Manualcontroller@caridata');
 //---------------------------------export import
 Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');

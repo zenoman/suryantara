@@ -40,8 +40,10 @@ class Jabatancontroller extends Controller
     public function store(Request $request)
     {
         $rules = [
-                    'kate'  =>'required',
-                    'jabatan'  =>'required'
+                    
+                    'jabatan'  =>'required',
+                    'gaji_pokok'  =>'required',
+                    'uang_makan'  =>'required'
                     ];
  
     $customMessages = [
@@ -49,23 +51,16 @@ class Jabatancontroller extends Controller
     ];
         $this->validate($request,$rules,$customMessages);
         //
-        $data=$request->jabatan;
-        for ($i=0; $i < count($data) ; $i++) { 
-            if($i == count($data)-1){
-                $pros = $data[$i];
-            }else{
-                $pros = $data[$i];
-            }
-        $kat =$request->kate;
         Jabatanmodel::create([
-            'kategori' => $kat,
-            'jabatan'  => $pros
+            'jabatan'  => $request->jabatan,
+            'gaji_pokok'  => $request->gaji_pokok,
+            'uang_makan'  => $request->uang_makan
 
         ]);
+        return redirect('jabatan')->with('status','Input Data Sukses');
         }
         
-        return redirect('jabatan')->with('status','Input Data Sukses');
-    }
+    
 
     /**
      * Display the specified resource.
@@ -103,6 +98,8 @@ class Jabatancontroller extends Controller
     {
         $rules = [
                     'jabatan'  => 'required|min:2',
+                    'gaji_pokok'  =>'required',
+                    'uang_makan'  =>'required'
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -111,7 +108,9 @@ class Jabatancontroller extends Controller
          ];
         $this->validate($request,$rules,$customMessages);
         Jabatanmodel::find($id)->update([
-            'jabatan'  => $request->jabatan
+            'jabatan'  => $request->jabatan,
+            'gaji_pokok'  => $request->gaji_pokok,
+            'uang_makan'  => $request->uang_makan
             ]);
         return redirect('/jabatan')->with('status','Edit Data Sukses');
  

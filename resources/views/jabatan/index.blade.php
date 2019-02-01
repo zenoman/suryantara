@@ -42,16 +42,18 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Kategori Jabatan</th>
 							<th>Jabatan</th>
+							<th>Gaji Pokok</th>
+							<th>Uang Makan</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Kategori Jabatan</th>
 							<th>Jabatan</th>
+							<th>Gaji Pokok</th>
+							<th>Uang Makan</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -61,8 +63,9 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->kategori}}</td>
                             <td>{{$row->jabatan}}</td>
+                            <td>{{"Rp ". number_format($row->gaji_pokok,0,',','.')}}</td>
+                            <td>{{"Rp ". number_format($row->uang_makan,0,',','.')}}</td>
                             <td>
                               <form action="{{ url('/jabatan/delete')}}"  method="post">                            	
                             	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">

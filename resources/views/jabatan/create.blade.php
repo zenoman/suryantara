@@ -9,61 +9,6 @@
 
 @section('content')
 <!--  -->
-<script language="Javascript" type="text/javascript">
-//fungsi remove html
-//====================================================
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-    }
-}
-//====================================================
-
-var counter = 1; //variabel nomor inputan
-var limit = 10; // limit
-
-//fungsi tambah input
-function addInput(divName){
-
- if (counter == limit)  {
-    alert("Telah mencapai limit " + counter + " inputan");
- }
- else {
-    var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div id="input'+counter+'" class="">'+
-					'<div class="form-group row">'+
-					'<p id="no1'+counter+'"></p>'+
-						'<label class="col-sm-2 form-control-label semibold">Nama Jabatan</label>'+
-						'<div class="col-sm-10">'+
-'<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="jabatan[]" placeholder="Masukan Nama Jabatan">'+
-'<a href="#" onclick="del('+counter+')"><button class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button></a>'+
-						'</div>'+
-					'</div>'+
-                        '</div>';
-
-    document.getElementById(divName).appendChild(newdiv);
-    counter++;
- }
-}
-//fungsi hapus input
-function del(no) {
-  document.getElementById('input'+no).remove();
-  counter = counter - 1;
-  for(i=no;i<=limit;i++){
-    var id = document.getElementById('input'+i);
-    if (id === null){
-
-    } else {
-
-    }
-  }
-}
-</script>
 <!--  -->
 <script type="text/javascript">
      function isNumberKey(evt)
@@ -88,27 +33,49 @@ function del(no) {
 			</header>
 			<div class="box-typical box-typical-padding">
 				<form action="{{ url('jabatan') }}" role="form" method="POST">
-
-
-<!--  -->
-<div id="dynamicInput">
-						<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Kategori</label>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Nama Jabatan</label>
 						<div class="col-sm-10">
-							<select id="exampleSelect" name="kate" class="form-control">
-								<option>Pilih Kategori</option>
-								<option value="Staff">Staff</option>
-								<option value="Operasional">Operasional</option>
-							</select>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Masukan Nama Jabatan" name="jabatan" ></p>
+							 @if($errors->has('jabatan'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('jabatan')}}
+                                         </div>
+                                       @endif
 						</div>
-					</div><br>
-</div>
-<!--  -->
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onClick="addInput('dynamicInput');" class="btn btn-warning btn-sm"><i class="fa fa-plus"> Masukan Nama Jabatan</i></button>
-<br>
-<hr></hr>
-
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Gaji Pokok</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="gaji_pokok" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
+							</div>
+							@if($errors->has('gaji_pokok'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('gaji_pokok')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Uang Makan</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="uang_makan" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
+							</div>
+							@if($errors->has('uang_makan'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('uang_makan')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
 
 {{csrf_field()}}
 							<small class="text-muted">
@@ -120,6 +87,3 @@ function del(no) {
 			</div>
 			</div>
         @endsection
-		@section('js')
-	<script src="{{asset('assets/class.php')}}"></script>
-	@endsection
