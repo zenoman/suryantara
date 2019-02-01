@@ -24,7 +24,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Edit Jabatan</h2>
+							<h2>Edit Special Cargo</h2>
 						</div>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 
 						<form action="{{ url('kat_bar/'.$katbar->id) }}" role="form" method="POST">
 					<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="exampleInput">Nama</label>
 		<input type="text" class="form-control" id="exampleInput" placeholder="Masukan Nama Kategori Barang" name="spesial_cargo" value="{{$katbar->spesial_cargo}}"><p>
@@ -44,11 +44,11 @@
                                         @endif
 						</fieldset>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="exampleInput" >Charge</label>
 						<div class="input-group">
-		<input type="tect" class="form-control"  placeholder="Contoh : 50 %"  name="charge" value="{{$katbar->charge}}">
+		<input type="number" min="0" max="100" class="form-control"  placeholder="Contoh : 50" name="charge" value="{{$katbar->charge}}">
 						<div class="input-group-addon">%</div>
 						</div>
 						<p>

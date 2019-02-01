@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class Settingcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -95,9 +90,5 @@ class Settingcontroller extends Controller
         }
 
         return redirect('setting')->with('status','Edit Data Sukses');
-    }
-    public function destroy($id)
-    {
-        //
     }
 }
