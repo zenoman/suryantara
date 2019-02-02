@@ -6,7 +6,9 @@
 <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
-
+@section('css')
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+@endsection
 @section('content')
 <!--  -->
 <script language="Javascript" type="text/javascript">
@@ -31,7 +33,7 @@ var limit = 10; // limit
 function addInput(divName){
 
  if (counter == limit)  {
-    alert("Telah mencapai limit " + counter + " inputan");
+    alert("Limit hanya " + counter + " inputan");
  }
  else {
     var newdiv = document.createElement('div');
@@ -51,7 +53,7 @@ function addInput(divName){
 						'</fieldset>'+
 					'</div>'+
 				'</div>'+
-                        '</div>';;
+                '</div>';;
 
     document.getElementById(divName).appendChild(newdiv);
     counter++;
@@ -95,7 +97,15 @@ function del(no) {
 			</header>
 			<div class="box-typical box-typical-padding">
 				<form action="{{ url('Manual') }}" role="form" method="POST">
-
+					<label class="form-label" for="exampleInputDisabled">Pemegang</label>
+					<select class="select2" name="pemegang">
+						@foreach($karyawan as $kar)
+						<option value="{{$kar->id}}">
+							{{$kar->nama}}
+						</option>
+						@endforeach
+					</select>
+					<br><br>
 <!--  -->
 <div id="dynamicInput">
 </div>
@@ -117,5 +127,7 @@ function del(no) {
 			</div>
         @endsection
 		@section('js')
+		<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 	<script src="{{asset('assets/class.php')}}"></script>
+
 	@endsection

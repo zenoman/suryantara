@@ -14,17 +14,19 @@ class ManualImport implements ToCollection, WithHeadingRow{
     public function collection(Collection $rows){
     	        //
         foreach ($rows as $row){
-            $kode=$row['faktur'];
-$dtlam= DB::table('kode_resimanual')->where('faktur',$kode)->count();
-if($dtlam > 0){
-    // $status = "Maaf Ada Data Yang Sama";
-}else{
-    	 DB::table('kode_resimanual')->insert([
-                    'faktur'=>$row['faktur']
-                    ]);
-}
-        // $status = "Import Sukses";
+        $kode=$row['no_resi'];
+        
+        $dtlam = DB::table('resi_pengiriman')
+        ->where('no_resi',$kode)->count();
+        
+        if($dtlam == 0){
+    	 DB::table('resi_pengiriman')
+         ->insert([
+            'no_resi'=>$row['no_resi'],
+            'pemegang'=>$row['id_karyawan'],
+            'metode_input'=>'manual'
+            ]);
+        }
   }
-  // return redirect('tarif_laut')->with('status',$status);
-	}
+  }
 }

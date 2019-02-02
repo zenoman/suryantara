@@ -77,6 +77,7 @@
 						<tr>
 							<th>No</th>
 							<th>Resi</th>
+							<th>Pemegang</th>
 							<th>Aksi</th>
 							<th class="text-center">#</th>
 						</tr>
@@ -85,6 +86,7 @@
 						<tr>
 							<th>No</th>
 							<th>Resi</th>
+							<th>Pemegang</th>
 							<th>Aksi</th>
 							<th class="text-center">#</th>
 						</tr>
@@ -95,9 +97,10 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->faktur}}</td>
+                            <td>{{$row->no_resi}}</td>
+                            <td>{{$row->nama}}</td>
                             <td>
-                              <form action="{{ url('/Manual/delete')}}"  method="post">                            	
+                              <form action="{{ url('/Manual/delete')}}" method="post">                            	
                             	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                         	{{csrf_field()}}

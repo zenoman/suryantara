@@ -185,6 +185,7 @@ Route::get('/Manual/cari','Manual\Manualcontroller@caridata');
 Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');
 Route::get('/Manual/download','Manual\Manualcontroller@downloadtemplate');
+Route::get('/Manual/downloadkaryawan','Manual\Manualcontroller@dowloadkaryawan');
 //==============================================================jabatan
 Route::get('/jabatan','Jabatan\Jabatancontroller@index');
 Route::post('/jabatan','Jabatan\Jabatancontroller@store');

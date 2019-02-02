@@ -8,16 +8,14 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function collection()
     {
-        return DB::table('karyawan')->select('kode','nama','telp','alamat','id_jabatan')->get();;
+        return DB::table('karyawan')->select('id','kode','nama','telp','alamat','id_jabatan')->get();;
     }
     public function headings(): array
     {
         return [
+            'id karyawan',
             'Kode Karyawan',
             'Nama Karyawan',
             'telp ',
