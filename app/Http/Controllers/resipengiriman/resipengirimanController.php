@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\resipengiriman;
 ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
@@ -31,7 +30,8 @@ class resipengirimanController extends Controller
     }
     public function resiudara(){
     $webinfo = DB::table('setting')->limit(1)->get();
-    return view('resipengiriman/resiudara',['webinfo'=>$webinfo]);
+    $kategori = DB::table('kategori_barang')->get();
+    return view('resipengiriman/resiudara',['webinfo'=>$webinfo,'kategori'=>$kategori]);
     }
     public function uangkembali($id){
          $data=DB::table('resi_pengiriman')->where('id',$id)->get();
@@ -278,7 +278,8 @@ class resipengirimanController extends Controller
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
-        'no_smu'        => $request->nosmu
+        'no_smu'        => $request->nosmu,
+        'biaya_charge'  =>$request->charge
        ]);
         return response()->json($simpan);
     }

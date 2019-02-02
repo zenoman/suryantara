@@ -37,41 +37,34 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('karyawan')}}" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
+					<form action="{{url('/Manual/hapuspilihan')}}" method="post">
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-					
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Kode karyawan</th>
-							<th>Nama</th>
-							<th>Telp</th>
-							<th>Alamat</th>
+							<th>Fakur</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>kode karyawan</th>
-							<th>Nama</th>
-							<th>Telp</th>
-							<th>Alamat</th>
+							<th>Fakur</th>
 							<th>Aksi</th>
+							<th><i class="font-icon font-icon-ok"></i></th>
 						</tr>
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($datKaryawan as $row)
+                            @foreach($manual as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->kode}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->telp}}</td>
-                            <td>{{$row->alamat}}</td>
+                            <td>{{$row->faktur}}</td>
                             <td>
                                         <form action="{{url('karyawan/delete') }}"  method="post">
                             	<a href="{{url('karyawan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
@@ -82,10 +75,19 @@
                                         <i class="fa fa-remove"></i>Hapus</button>
                     					</form>
                             </td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						</tr>
 						@endforeach
 						</tbody>
+						<tr>
+							<th colspan="3"></th>
+							<th>
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
+							</th>
+						</tr>
 					</table>
+					{{csrf_field()}}
+                        </form>
 					 
 				</div>
 			</section>

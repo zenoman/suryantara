@@ -37,6 +37,7 @@
                     </div>
                     @endif
 					<a href="{{url('karyawan/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+					<a href="{{url('karyawan/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

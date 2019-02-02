@@ -44,6 +44,38 @@
                                         @endif
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Gaji Pokok</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="gaji_pokok" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000" value="{{$jabat->gaji_pokok}}">
+							</div>
+							@if($errors->has('gaji_pokok'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('gaji_pokok')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Uang Makan</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Rp.
+								</div>
+								<input type="text" class="form-control" id="inputPassword" name="uang_makan" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000" value="{{$jabat->uang_makan}}">
+							</div>
+							@if($errors->has('uang_makan'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('uang_makan')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
 
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">

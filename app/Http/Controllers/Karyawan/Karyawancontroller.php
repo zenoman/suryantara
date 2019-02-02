@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Karyawanmodel;
-use Illuminate\Support\Facades\Session;
+
+use Illuminate\Support\Facades\File;
+use App\Imports\KaryawanImport;
+use App\Exports\KaryawanExport;
+use App\Exports\JabatanExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 class Karyawancontroller extends Controller
 {
     /**
@@ -34,6 +40,38 @@ class Karyawancontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//------------------------------------
+   public function importexcel (){
+    $setting = DB::table('setting')->get();
+        return view('karyawan/importexcel',['title'=>$setting]);
+    }
+
+    public function downloadtemplate(){
+         $file= base_path()."/../public_html/file/template karyawan.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+    return Response::download($file, 'template karyawan.xlsx', $headers);
+    return redirect('karyawan/importexcel');
+    }
+    public function downloadtemplatejbt(){
+    return Excel::download(new JabatanExport, 'Jabatan.xlsx');
+    return redirect('karyawan/importexcel');
+    }
+
+        public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new KaryawanImport, request()->file('file'));
+        }
+        return redirect('karyawan')->with('status','Import excel sukses');
+    }
+
+    public function exsportexcel(){
+    return Excel::download(new KaryawanExport, ' Export Vendor.xlsx');
+    return redirect('karyawan/importexcel');
+
+    }
+//-----------------------------------
      public function caridata(Request $request)
     {
         $setting = DB::table('setting')->get();

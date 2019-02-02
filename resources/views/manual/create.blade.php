@@ -35,16 +35,23 @@ function addInput(divName){
  }
  else {
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div id="input'+counter+'" class="">'+
-					'<div class="form-group row">'+
+    newdiv.innerHTML =' <div id="input'+counter+'" class="">'+
+				'<div class="row">'+
 					'<p id="no1'+counter+'"></p>'+
-						'<label class="col-sm-1 form-control-label semibold">Kode</label>'+
-						'<div class="col-sm-10">'+
-'<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="kode[]" placeholder="Masukan Nama Manual">'+
-'<a href="#" onclick="del('+counter+')"><button class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button></a>'+
-						'</div>'+
+					'<div class="col-lg-4">'+
+						'<fieldset class="form-group">'+
+							'<label class="form-label semibold" for="exampleInput">Kode</label>'+
+		'<input type="text" class="form-control" id="exampleInput" placeholder="Masukan No Resi Manual" name="kode[]">'+
+						'</fieldset>'+
 					'</div>'+
-                        '</div>';
+					'<div class="col-lg-4">'+
+						'<fieldset class="form-group"><p>'+
+						'<label class="form-label semibold" for="exampleInputPassword1" > Hapus</label>'+
+						'<a href="#" onclick="del('+counter+')"><button class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button></a>'+
+						'</fieldset>'+
+					'</div>'+
+				'</div>'+
+                        '</div>';;
 
     document.getElementById(divName).appendChild(newdiv);
     counter++;

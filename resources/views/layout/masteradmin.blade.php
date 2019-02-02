@@ -21,8 +21,8 @@
 	<header class="site-header">
 	    <div class="container-fluid">
 	        <a href="#" class="site-logo">
-	            <img class="hidden-md-down" src="{{asset('img/suryantara_home.png')}}" alt="">
-	            <img class="hidden-lg-down" src="{{asset('img/suryantara_home.png')}}" alt="">
+	            <img class="hidden-md-down" src="{{asset('img/LOGO2.PNG')}}" alt="">
+	            <img class="hidden-lg-down" src="{{asset('img/LOGO2.PNG')}}" alt="">
 	        </a>
 	
 	        <button id="show-hide-sidebar-toggle" class="show-hide-sidebar">

@@ -57,9 +57,9 @@
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <p>
                                                <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif,berat_minimal dan estimasi</b> hanyan diisi dengan angka saja.
+                                                   Buka file <b>"template.xlsx"</b> kemudian isi data seperti gambar dibawah.
                                                </li><br>
-                                               <img src="{{url('img/import_export/darat.JPG')}}">
+                                               <img src="{{url('img/import_export/manual.JPG')}}">
                                                <p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.

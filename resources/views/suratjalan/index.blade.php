@@ -177,13 +177,13 @@
 	<table width="100%">
 		<tr>
 			<td width="20%" align="center">
-				<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="70%">
+				<img src="{{asset('img/LOGO1.png')}}" alt="" width="70%">
 			</td>
 			<td width="60%">
 				<h2 align="center">
 		SURAT JALAN
 		<br>	
-		<span style="font-size: 18;margin-bottom: 20px;">CV. SURYANTARA CARGO</span>
+		<span style="font-size: 18;margin-bottom: 20px;">PT. KADIRI LOGISTIK CARGO</span>
 		<br>	
 		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
 	</h2>
@@ -275,13 +275,13 @@
 	<table width="100%">
 		<tr>
 			<td width="20%" align="center">
-				<img src="{{asset('img/LOGO.jpeg')}}" alt="" width="70%">
+				<img src="{{asset('img/LOGO1.png')}}" alt="" width="70%">
 			</td>
 			<td width="60%">
 				<h2 align="center">
 		SURAT JALAN
 		<br>	
-		<span style="font-size: 18;margin-bottom: 20px;">CV. SURYANTARA CARGO</span>
+		<span style="font-size: 18;margin-bottom: 20px;">PT. KADIRI LOGISTIK CARGO</span>
 		<br>	
 		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
 	</h2>
