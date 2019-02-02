@@ -42,7 +42,7 @@
                     </div>
                     @endif
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -56,7 +56,7 @@
                                         <div class="modal-body">
                                            <form method="get" action="{{url('/Manual/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan faktur" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan resi" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
@@ -76,17 +76,17 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Fakur</th>
+							<th>Resi</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th class="text-center">#</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>Fakur</th>
+							<th>Resi</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th class="text-center">#</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -111,14 +111,13 @@
 						</tr>
 						@endforeach
 						</tbody>
-						<tr>
-							<th colspan="3"></th>
-							<th>
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
-							</th>
-						</tr>
+						
 					</table>
 					{{csrf_field()}}
+					<div class="text-right">
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+					</div>
+					
                         </form>
 					 {{ $manual->links() }}
 				</div>

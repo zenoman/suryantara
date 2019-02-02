@@ -37,7 +37,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('karyawan')}}" class="btn btn-danger">Kembali</a>
+                    <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
 					<form action="{{url('/Manual/hapuspilihan')}}" method="post">

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var noresi;
 	var satuan = 'kg';
 	var kotatujuan ='';
+	var kategori='biasa';
 	carikode();
 	$('#nama_barang').focus();
 	//=============================================ganti satuan	
@@ -450,10 +451,12 @@ $(document).ready(function(){
 			$("#b_ppn").html(0);
 			$("#total").html(0);
 			$('#satuan').val('kg');
+			$('#kategori').val('');
 			$('#nomer_smu').val('');
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';
 			satuan = 'kg';
+			kategori = 'biasa';
 		}
 });
