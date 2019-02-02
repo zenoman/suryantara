@@ -27,10 +27,12 @@
     <!-- Custom styles for this template -->
     <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
     
-    
     <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
+    
+    <!--<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">-->
+
   </head>
 
   <body id="page-top">
@@ -57,43 +59,66 @@
     </nav>
 <br>
 <br>
+
 <div class="page-content">
-    <div class="container-fluid">
-      <header class="section-header">
+  <div class="container-fluid">
+    <header class="section-header">
         
-      </header>
-      <section>
-        <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Tarif Darat</h1>
+    </header>
+
+    <section>  
+
+    <div class="container">
+    <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
     <br>
-        <div class="card-block">
-          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead class="thead-dark text-secondary text-center" >
-            <tr>
-              <th>No</th>
-              <th>Kota Tujuan</th>
-              <th>Biaya</th>
-            </tr>
-            </thead>
+    <br>
+        <form method="get" action="{{url('landdarat/cari')}}">
+        <div class="row">
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+          <div class="col-sm-5 col-sm-offset-1">
+            <label>Kota Tujuan<small> :</small></label>
+            <div class="form-group">
+              
+              <input type="text" class="form-control" name="kot" placeholder="Misal : Kediri">
+            </div>
+          </div>
+
+          <div class="col-sm-5 col-sm-offset-1">
+            <label>Berat minimal<small> :</small></label>
+            <div class="form-group">
             
-            <tbody>
-           <?php $i = 1;?>
-              @foreach($darat as $row)
-              <?php $no = $i++;?>
-              <tr>
-                <td class="text-center">{{$no}}</td>
-                <td class="text-center">{{$row->tujuan}}</td>
-                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')}}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
+            
+              <div class="input-group">
+                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
+                <div class="input-group-addon">
+                  Kg
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <div class="col-sm-1 col-sm-offset-1">
+            
+            <div class="form-group">
+              <label><small></small></label>          
+              <div class="input-group">
+                <input type="submit" class="btn btn-info" value="Cari">
+                
+              </div>
+            </div>
+          </div>
+              
+              
+
+        </form>
+        
       </div>
       </section>
     </div><!--.container-fluid-->
   </div><!--.page-content-->
-<footer class="footer text-center">
+
+  <footer class="footer text-center">
       <div class="container">
         <div class="row">
           @foreach($des as $row)
@@ -117,6 +142,7 @@
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
+              
             </ul>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
@@ -131,11 +157,11 @@
           </div>
         </div>
       </div>
-    </footer>
+  </footer>
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-       <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
@@ -161,7 +187,8 @@
 
     <!-- Custom scripts for this template -->
     <script src="asset_user/js/freelancer.min.js"></script>
-     <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+    
+  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
   <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
   <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
   <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
@@ -173,10 +200,24 @@
       $('#example').DataTable();
     });
   </script>
+  <script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+  </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>
 
   </body>
 
 </html>
+
+
+
+
 
