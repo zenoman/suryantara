@@ -78,7 +78,8 @@
 							<th>No</th>
 							<th>Resi</th>
 							<th>Pemegang</th>
-							<th>Aksi</th>
+							<th class="text-center">Status</th>
+							<th class="text-center">Aksi</th>
 							<th class="text-center">#</th>
 						</tr>
 						</thead>
@@ -87,7 +88,8 @@
 							<th>No</th>
 							<th>Resi</th>
 							<th>Pemegang</th>
-							<th>Aksi</th>
+							<th class="text-center">Status</th>
+							<th class="text-center">Aksi</th>
 							<th class="text-center">#</th>
 						</tr>
 						</tfoot>
@@ -99,7 +101,18 @@
                             <td>{{$no}}</td>
                             <td>{{$row->no_resi}}</td>
                             <td>{{$row->nama}}</td>
-                            <td>
+                            <td class="text-center">
+                            	@if($row->total_biaya > 0)
+                            	<span class="label label-success">
+                            	Sudah Diisi
+                           		</span>
+                            	@else
+                            	<span class="label label-danger">
+                            	Belum Diisi
+                            	</span>
+                            	@endif
+                            </td>
+                            <td class="text-center">
                               <form action="{{ url('/Manual/delete')}}" method="post">                            	
                             	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>

@@ -21,7 +21,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where('metode_input','manual')
+        ->where('resi_pengiriman.metode_input','manual')
         ->paginate(20);
         return view('Manual/index',['manual'=>$datmanual,'title'=>$setting]);
     }
@@ -97,14 +97,24 @@ class Manualcontroller extends Controller
     }
     public function haphapus(Request $request)
     {
-        // dd($request->pilihid);
-            if(!$request->pilihid){
+        if(!$request->pilihid){
                 return back()->with('statuserror','Tidak ada data yang dipilih');
             }else{
         foreach ($request->pilihid as $id) { 
             Manualmodel::destroy($id);
             }
         }
-return back()->with('status','Hapus Data Sukses');
-}
+    return back()->with('status','Hapus Data Sukses');
+    }
+    public function edit($id){
+        $karyawan = DB::table('karyawan')->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.id','=',$id]])
+        ->get();
+        
+        return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan]);
+    }
 }
