@@ -225,6 +225,8 @@
 	                        <span class="lbl">Laporan Pengeluaran</span>
 	                    </span>
 	                    <ul>
+	                        <li><a href="{{url('/laporanpengeluarangjkw')}}"><span class="lbl">Gaji Karyawan</span></a></li>
+
 	                        <li><a href="{{url('/laporanpengeluaran')}}"><span class="lbl">Vendor</span></a></li>
 
 	                        <li>

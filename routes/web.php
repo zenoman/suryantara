@@ -65,7 +65,9 @@ Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 
 //=====================================================laporan
 Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');
-Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
+Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran'); 
+Route::get('/laporanpengeluarangjkw','laporan\laporanController@pilihpengeluarangajikaryawan'); 
+Route::get('/tampillaporanpengeluarangjkw','laporan\laporanController@tampilpengeluarangjkw');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
@@ -73,6 +75,7 @@ Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 //---------------------------------------------------export Laporan
 Route::get('/export_laporan_pemasukan/{bulanya}/{jalur}','laporan\laporanController@exsportlaporanpemasukan');
 Route::get('/export_laporan_pengeluaran_vendor/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
+Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','laporan\laporanController@exsportlaporanpengluarangjkw');
 Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
 //===========================================
