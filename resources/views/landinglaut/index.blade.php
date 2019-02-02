@@ -59,14 +59,7 @@
     </nav>
 <br>
 <br>
-
-<div class="page-content">
-  <div class="container-fluid">
-    <header class="section-header">
-        
-    </header>
-
-    <section>  
+    <section class="text-center mb-0">  
 
     <div class="container">
     <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
@@ -91,9 +84,7 @@
             
               <div class="input-group">
                 <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                <div class="input-group-addon">
-                  Kg
-                </div>
+                
               </div>
             </div>
           </div>
@@ -108,15 +99,13 @@
               </div>
             </div>
           </div>
-              
-              
-
         </form>
         
       </div>
+      <br>
+      <br>
+       <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali </a>
       </section>
-    </div><!--.container-fluid-->
-  </div><!--.page-content-->
 
   <footer class="footer text-center">
       <div class="container">

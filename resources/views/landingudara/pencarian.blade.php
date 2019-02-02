@@ -58,15 +58,11 @@
 <br>
 <br> 
 
-<div class="page-content">
-    <div class="container-fluid">
-      <header class="section-header">
-        
-      </header>
-      <section>
-        
+
+    <section class="text-center mb-0">
     <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
     <br>
+    <div class="container">
         <div class="card-block">
           <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead class="thead-dark text-secondary text-center" >
@@ -94,10 +90,12 @@
             </tbody>
           </table>
         </div>
-    
+        <br>
+        <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali</a>
+      </div>
+                  
       </section>
-    </div><!--.container-fluid-->
-  </div><!--.page-content-->    
+      
 <footer class="footer text-center">
       <div class="container">
         <div class="row">
