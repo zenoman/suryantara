@@ -24,4 +24,13 @@ class landinglautcontroller extends Controller
      return view('landinglaut/index',['laut'=>$tarif_laut,'des'=>$desk]);
     }
 
+    public function pencarian(Request $request)
+    {
+     $kot = $request->kot;
+     $brt = $request->brt;
+     $desk=DB::table('setting')->get();
+     $trf_lt = DB::table('tarif_laut')->where('tujuan','like','%'.$kot.'%')->where('berat_min','like','%'.$brt.'%')->get();
+     return view('landinglaut/pencarian',['trf_lt'=>$trf_lt ,'kot'=>$kot ,  'brt'=>$brt , 'des'=>$desk]);
+    }
+
 }

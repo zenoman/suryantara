@@ -84,8 +84,11 @@ Route::get('/login','Login\Logincontroller@index');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/','landing\landingcontroller@index');
 Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
+Route::get('/landdarat/cari','landingdarat\landingdaratcontroller@pencarian');
 Route::get('/landlaut','landinglaut\landinglautcontroller@index');
+Route::get('/landlaut/cari','landinglaut\landinglautcontroller@pencarian');
 Route::get('/landudara','landingudara\landingudaracontroller@index');
+Route::get('/landudara/cari','landingudara\landingudaracontroller@pencarian');
 Route::get('/dashboard','Dashboardcontroller@index');
 
 //===========================================admin
@@ -188,6 +191,7 @@ Route::get('/Manual/cari','Manual\Manualcontroller@caridata');
 Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');
 Route::get('/Manual/download','Manual\Manualcontroller@downloadtemplate');
+Route::get('/Manual/downloadkaryawan','Manual\Manualcontroller@dowloadkaryawan');
 //==============================================================jabatan
 Route::get('/jabatan','Jabatan\Jabatancontroller@index');
 Route::post('/jabatan','Jabatan\Jabatancontroller@store');

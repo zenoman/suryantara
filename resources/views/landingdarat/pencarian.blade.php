@@ -14,10 +14,10 @@
     @endforeach
 
     <!-- Bootstrap core CSS -->
-    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -25,13 +25,11 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
     
     <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
-    
-    <!--<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">-->
 
   </head>
 
@@ -49,7 +47,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a onclick="window.history.go(-1);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
+              <a onclick="window.history.go(-2);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
               <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
             
@@ -58,56 +56,44 @@
       </div>
     </nav>
 <br>
-<br>   
-
-    <section class="text-center mb-0">  
-
-    <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
+<br> 
+      <section class="text-center mb-0">
+        
+    <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
     <br>
-    <br>
-        <form method="get" action="{{url('landdarat/cari')}}">
-        <div class="row">
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-          <div class="col-sm-5 col-sm-offset-1">
-            <label>Kota Tujuan<small> :</small></label>
-            <div class="form-group">
-              
-              <input type="text" class="form-control" name="kot" placeholder="Misal : Kediri">
-            </div>
-          </div>
-
-          <div class="col-sm-5 col-sm-offset-1">
-            <label>Berat minimal<small> :</small></label>
-            <div class="form-group">
+      <div class="container">
+        <div class="card-block">
+          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead class="thead-dark text-secondary text-center" >
+            <tr>
+              <th>No</th>
+              <th>Kota Tujuan</th>
+              <th>Berat Mininmal</th>
+              <th>Biaya</th>
+            </tr>
+            </thead>
             
-            
-              <div class="input-group">
-                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                
-              </div>
-            </div>
-          </div>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <div class="col-sm-1 col-sm-offset-1">
-            
-            <div class="form-group">
-              <label><small></small></label>          
-              <div class="input-group">
-                <input type="submit" class="btn btn-info" value="Cari">
-                
-              </div>
-            </div>
-          </div>
-        </form>
+            <tbody>
+           <?php $i = 1;?>
+              @foreach($trf_drt as $row)
+              <?php $no = $i++;?>
+              <tr>
+                <td class="text-center">{{$no}}</td>
+                <td class="text-center">{{$row->tujuan}}</td>
+                <td class="text-center">{{"Rp ". number_format($row->berat_min,0,',','.')." /Kg"}}</td>
+                <td class="text-center">{{$row->tarif}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali</a>
       </div>
-      <br>
-      <br>
-       <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali </a>
       </section>
-
-  <footer class="footer text-center">
+    </div><!--.container-fluid-->
+  </div><!--.page-content-->    
+<footer class="footer text-center">
       <div class="container">
         <div class="row">
           @foreach($des as $row)
@@ -146,7 +132,7 @@
           </div>
         </div>
       </div>
-  </footer>
+    </footer>
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
@@ -163,19 +149,19 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
-    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="asset_user/js/jqBootstrapValidation.js"></script>
-    <script src="asset_user/js/contact_me.js"></script>
+    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="asset_user/js/freelancer.min.js"></script>
+    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
     
   <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
   <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
@@ -189,24 +175,9 @@
       $('#example').DataTable();
     });
   </script>
-  <script type="text/javascript">
-     function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
-  </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>
 
   </body>
 
 </html>
-
-
-
-
-

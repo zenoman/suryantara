@@ -25,4 +25,12 @@ class landingdaratcontroller extends Controller
 	return view('landingdarat/index',['darat'=>$tarif_darat,'des'=>$desk]);
     }
 
+    public function pencarian(Request $request)
+    {
+     $kot = $request->kot;
+     $brt = $request->brt;
+     $desk=DB::table('setting')->get();
+     $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$kot.'%')->where('berat_min','like','%'.$brt.'%')->get();
+     return view('landingdarat/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot ,  'brt'=>$brt , 'des'=>$desk]);
+    }
 }

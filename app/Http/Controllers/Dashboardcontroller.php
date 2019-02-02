@@ -48,7 +48,7 @@ class Dashboardcontroller extends Controller
                 $laba = $pemasukan - $pengeluaran - $pengeluaran_lain;
                 $insert = DB::table('omset')
                 ->insert([
-                    'bulan'=>date('m'),
+                    'bulan'=>12,
                     'tahun'=>$tahun-1,
                     'pemasukan'=>$pemasukan,
                     'pengeluaran'=>$pengeluaran,
@@ -62,7 +62,7 @@ class Dashboardcontroller extends Controller
                 $laba = $pemasukan - $pengeluaran - $pengeluaran_lain;
                 $insert = DB::table('omset')
                 ->insert([
-                    'bulan'=>date('m'),
+                    'bulan'=>date('m')-1,
                     'tahun'=>$tahun,
                     'pemasukan'=>$pemasukan,
                     'pengeluaran'=>$pengeluaran,

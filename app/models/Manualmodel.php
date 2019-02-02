@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Manualmodel extends Model
 {
 	public $timestamps = false;
-    protected $table = 'kode_resimanual';
+    protected $table = 'resi_pengiriman';
     protected $guarded = ['id'];
 }

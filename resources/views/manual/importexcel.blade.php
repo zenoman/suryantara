@@ -53,21 +53,24 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
-                                               <p>
+                                               <li>Download file template excel dan data karyawan pada tab <b>import Excel.</b>
+                                               </li>
+                                               <br>
                                                <li>
-                                                   Buka file <b>"template.xlsx"</b> kemudian isi data seperti gambar dibawah.
+                                                   Buka file <b>"template.xlsx"</b> kemudian isi data seperti gambar dibawah. pastikan id karyawan sesuai dengan data karyawan.
                                                </li><br>
-                                               <img src="{{url('img/import_export/manual.JPG')}}">
-                                               <p>
+                                               <i>Data Karyawan</i><br>
+                                               <img src="{{url('img/import_export/manual_1.PNG')}}">
+                                               <br><br>
+                                               <i>Contoh pengisian template resi manual</i><br>
+                                                <img src="{{url('img/import_export/manual_2.PNG')}}">
+                                                <br><br>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
                                                </div>
                                                <br>
-                                               <li>Kemudian save <b>template.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
-                                               <br><p></p>
+                                               <li>Kemudian save <b>template resi manual.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini Lalu klik <b>upload file</b>.</li><br>
+                                               
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
                                                </div>
@@ -76,7 +79,9 @@
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
+							<a href="{{url('Manual/downloadkaryawan')}}" class="btn btn-primary">Download Data Karyawan</a>
                                     <a href="{{url('Manual/download')}}" class="btn btn-info">Download Template Excel</a>
+
                         </div>
                         <hr>
 <p></p>
@@ -93,7 +98,7 @@
                                             <form action="{{url('/Manual/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
-                                            <input type="file"name="file" required>
+                                            <input type="file"name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                               <p class="help-block">*File excel tidak boleh kosong</p>
                                         </div>
                                         {{csrf_field()}}
