@@ -47,16 +47,12 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Pemegang</label>
 							<div class="input-group">
-								<select class="select2" name="pemegang">
-						@foreach($karyawan as $kar)
-						<option value="{{$kar->id}}" @if($kar->id==$row->pemegang)selected @endif>
-							{{$kar->nama}}
-						</option>
-						@endforeach
-					</select>
+								<input type="text" class="form-control" value="{{$row->nama}}" readonly>
+								
 							</div>
 						</div>
 					</div>
+					<input type="hidden" value="{{Session::get('username')}}" id="iduser">
 			<div class="col-md-4 col-sm-4">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jalur Pengiriman</label>
@@ -72,15 +68,17 @@
 				</div>
 			</div>
 
+
+
 			<div class="box-typical box-typical-padding" id="formdarat">
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
-						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
+						
 						<div class="col-md-9 col-sm-9">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang" autofocus>
+								<input type="text" class="form-control" id="nama_barang_darat" autofocus>
 							</div>
 						</div>
 					</div>
@@ -88,7 +86,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
-								<select class="form-control" id="metode">
+								<select class="form-control" id="metode_darat">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
 							</select>
@@ -99,9 +97,9 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi" value="0">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_darat" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_darat" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_darat" value="0">
 									
 							</div>
 						</div>
@@ -110,7 +108,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume"  value="0">
+								<input type="text" class="form-control" id="volume_darat"  value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -119,8 +117,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)">
-								<select class="form-control" id="satuan">
+								<input type="text" class="form-control" id="jumlah_darat" onkeypress="return isNumberKey(event)">
+								<select class="form-control" id="satuan_darat">
 								<option value="kg">&nbsp;</option>
 								<option value="koli">koli</option>
 							</select>
@@ -131,7 +129,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="berat_darat" onkeypress="return isNumberKey(event)">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -142,13 +140,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal" >
+								<input type="text" class="form-control" id="kota_asal_darat" >
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
-						<select class="select2" id="kota_tujuan"></select>
+						<select class="select2" id="kota_tujuan_darat"></select>
 					</div>
 					</div>
 					<hr>
@@ -157,7 +155,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="n_pengirim">
+								<input type="text" class="form-control" id="n_pengirim_darat">
 							</div>
 						</div>
 					</div>
@@ -165,7 +163,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_darat" >
 							</div>
 						</div>
 					</div>
@@ -173,7 +171,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="n_penerima" >
+								<input type="text" class="form-control" id="n_penerima_darat" >
 							</div>
 						</div>
 					</div>
@@ -181,7 +179,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_darat" >
 							</div>
 						</div>
 					</div>
@@ -193,7 +191,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_kirim" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_kirim_darat" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -201,7 +199,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_packing" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_packing_darat" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -209,7 +207,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_asuransi" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_asuransi_darat" value="0" onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 					</div>
@@ -224,23 +222,23 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim">0</td>
+										<td id="b_kirim_darat">0</td>
 									</tr>
 									<tr>
 										<td>Biaya Packing</td>
-										<td id="b_packing">0</td>
+										<td id="b_packing_darat">0</td>
 									</tr>
 									<tr>
 										<td>Biaya Asuransi</td>
-										<td id="b_asuransi">0</td>
+										<td id="b_asuransi_darat">0</td>
 									</tr>
 									<tr>
 										<td>PPN</td>
-										<td id="b_ppn">0</td>
+										<td id="b_ppn_darat">0</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="text-center">
-											<h3 id="total">0</h3>
+											<h3 id="total_darat">0</h3>
 										</td>
 									</tr>
 								</tbody>
@@ -253,13 +251,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
 							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan"></textarea>
+								<textarea rows="4" class="form-control" id="keterangan_darat"></textarea>
 							</div>
 						</div>
 					</div>
 					</div>
 							<small class="text-muted">
-								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 
 								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
@@ -267,6 +265,14 @@
 							</small>
 				</form>
 			</div>
+
+
+
+
+
+
+
+
 			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;" >
 				laut
 			</div>
