@@ -76,7 +76,7 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
-						<div class="col-md-8 col-sm-8">
+						<div class="col-md-9 col-sm-9">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -84,19 +84,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-2">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Jalur Pengiriman</label>
-							<div class="input-group">
-								<select class="form-control" id="metode">
-								<option value="darat">Darat</option>
-								<option value="laut">Laut</option>
-								<option value="udara">Udara</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2 col-sm-2">
+					<div class="col-md-3 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
@@ -122,7 +110,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume"  value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="volume"  value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -159,12 +147,8 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal" >
-							</div>
-						</div>
+						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
+						<select class="select2" id="kota_tujuan"></select>
 					</div>
 					</div>
 					<hr>
@@ -274,10 +258,7 @@
 						</div>
 					</div>
 					</div>
-					{{csrf_field()}}
 							<small class="text-muted">
-								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 
@@ -285,6 +266,12 @@
 								
 							</small>
 				</form>
+			</div>
+			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;" >
+				laut
+			</div>
+			<div class="box-typical box-typical-padding" id="formudara" style="display: none;" >
+				udara
 			</div>
 		
 		</div>
@@ -294,4 +281,8 @@
 
 @section('js')
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
+
+@endsection
+@section('otherjs')
+<script src="{{asset('assets/js/resimanual.js')}}"></script>
 @endsection
