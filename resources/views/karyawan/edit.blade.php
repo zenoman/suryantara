@@ -38,6 +38,7 @@
 						<label class="col-sm-2 form-control-label semibold">Kode Karyawan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text"  value="{{$ro->kode}}">
+								<input type="hidden" class="form-control" name ="kodess" id="inputPassword" placeholder="Text"  value="{{$ro->kode}}">
 						</div>
 	</div>
 					<div class="form-group row">
@@ -55,7 +56,7 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="jabatan" class="form-control">
-								<option value="{{$ro->id}}">{{$ro->jabatan}}</option>
+								<option value="{{$ro->id_jabatan}}">{{$ro->jabatan}}</option>
 								<option>Pilih Jabatan</option>
 								@foreach($jabatan as $row)
 								<option value="{{$row->id}}">{{$row->jabatan}}</option>

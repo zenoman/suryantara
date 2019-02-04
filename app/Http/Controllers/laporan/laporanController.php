@@ -82,10 +82,9 @@ class laporanController extends Controller
     //============================================gjkw
     public function pilihpengeluarangajikaryawan(){
         $ambilbulan = DB::table('gaji_karyawan')
-        ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->select('bulan','tahun')
         ->groupby('bulan')
         ->groupby('tahun')
-        ->orderby('tgl','desc')
         ->get();
 
         $jabatan =  DB::table('karyawan')
@@ -260,54 +259,53 @@ class laporanController extends Controller
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
         $thn = $bulan[1];
-
+        // dd($request->bulan);
         if($namajabatan=='semua'){
             $data =DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->whereMonth('tgl',$bln)
-                ->whereYear('tgl',$thn)
-                ->orderby('tgl','desc')
+                ->where('bulan',$bln)
+                ->where('tahun',$thn)
+                ->orderby('kode_karyawan','asc')
                 ->paginate(40);
 
             $data2 = DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->whereMonth('tgl',$bln)
-                ->whereYear('tgl',$thn)
-                ->orderby('tgl','desc')
+                ->where('bulan',$bln)
+                ->where('tahun',$thn)
+                ->orderby('kode_karyawan','asc')
             ->get();
 
             $total = DB::table('gaji_karyawan')
             ->select(DB::raw('SUM(total) as total'))
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
+            ->where('bulan',$bln)
+            ->where('tahun',$thn)
             ->get();
 
         }else{
              $data=DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->whereMonth('tgl',$bln)
-                ->whereYear('tgl',$thn)
-                ->where('id_jabatan',$namajabatan)
-                ->orderby('tgl','desc')
+                ->where('bulan',$bln)
+                ->where('tahun',$thn)
+                ->orderby('kode_karyawan','asc')
                 ->paginate(40);
             $data2=DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->whereMonth('tgl',$bln)
-                ->whereYear('tgl',$thn)
+                ->where('bulan',$bln)
+                ->where('tahun',$thn)
                 ->where('id_jabatan',$namajabatan)
-                ->orderby('tgl','desc')
+                ->orderby('kode_karyawan','asc')
             ->get();
 
             $total = DB::table('gaji_karyawan')
             ->select(DB::raw('SUM(total) as total'))
-                ->whereMonth('tgl',$bln)
-                ->whereYear('tgl',$thn)
+                ->where('bulan',$bln)
+                ->where('tahun',$thn)
                 ->where('id_jabatan',$namajabatan)
-                ->orderby('tgl','desc')
+                ->orderby('kode_karyawan','asc')
             ->get();
         }
 if($namajabatan=='semua'){
@@ -346,16 +344,16 @@ return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'
         }
         return Excel::download(new LaporanPengeluaranVendorExport($bln,$thn,$vendor),$namafile);
     }
-        public function exsportlaporanpengluarangjkw($bulannya, $vendor){
+        public function exsportlaporanpengluarangjkw($bulannya, $jabatan){
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
-        if ($vendor !='semua') {
-            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." jabatan ".$vendor.".xlsx";
+        if ($jabatan !='semua') {
+            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." jabatan ".$jabatan.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." di ".$vendor." jabatan.xlsx";
+            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." di ".$jabatan." jabatan.xlsx";
         }
-        return Excel::download(new LaporanPengeluaranGajiKaryawanExport($bln,$thn,$vendor),$namafile);
+        return Excel::download(new LaporanPengeluaranGajiKaryawanExport($bln,$thn,$jabatan),$namafile);
     }
         public function exsportlaporanpengeluaranlain($bulannya, $kategori){
         $bulan = explode('-', $bulannya);

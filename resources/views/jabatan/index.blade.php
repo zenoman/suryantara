@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Data manual</h2>
+							<h2>Data jabatan</h2>
 						</div>
 					</div>
 				</div>

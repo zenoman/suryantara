@@ -26,7 +26,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Input Nama Jabatan</h2>
+							<h2>Input Jabatan</h2>
 						</div>
 					</div>
 				</div>

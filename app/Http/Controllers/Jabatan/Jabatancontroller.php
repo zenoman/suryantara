@@ -112,6 +112,14 @@ class Jabatancontroller extends Controller
             'gaji_pokok'  => $request->gaji_pokok,
             'uang_makan'  => $request->uang_makan
             ]);
+        $pros=$request->gaji_pokok + $request->uang_makan;
+        DB::table('gaji_karyawan')
+            ->where('id_jabatan',$id)
+            ->update([
+                'gaji_pokok'=>$request->gaji_pokok,
+                'uang_makan'=>$request->uang_makan,
+                'total'=>$pros
+            ]);
         return redirect('/jabatan')->with('status','Edit Data Sukses');
  
     }

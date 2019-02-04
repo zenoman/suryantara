@@ -68,24 +68,7 @@
                                         @endif
 						</div>
 					</div>					
-					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
-						<div class="col-sm-10">
-							<select id="exampleSelect" name="katbarang" class="form-control">
-								<option value="{{$row->id}}">{{$row->spesial_cargo}}</option>
-								<option>Pilih Kategori Barang</option>
-								@foreach($katbar as $ro)
-								<option value="{{$ro->id}}">{{$ro->spesial_cargo}}</option>
-								@endforeach
-								<option value="0">Lainya</option>
-							</select>
-						</div>
-						@if($errors->has('katbarang'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('katbarang')}}
-                                         </div>
-                                       @endif
-					</div>
+					
 						<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tarif PerKg</label>
 						<div class="col-sm-10">

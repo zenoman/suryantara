@@ -23,16 +23,16 @@ class LaporanPengeluaranGajiKaryawanExport implements FromCollection,WithHeading
         $vdr=$this->vdr;
         if($vdr != 'semua'){
             return DB::table('gaji_karyawan')
-            ->select(DB::raw('kode_karyawan,nama_karyawan,id_jabatan,tgl,gaji_pokok,uang_makan'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
+            ->select(DB::raw('kode_karyawan,nama_karyawan,id_jabatan,gaji_pokok,uang_makan'))
+            ->where('bulan',$this->bulan)
+            ->where('tahun',$this->tahun)
             ->where('id_jabatan',$this->vdr)
             ->get();;
         }else{
             return DB::table('gaji_karyawan')
-            ->select(DB::raw('kode_karyawan,nama_karyawan,id_jabatan,tgl,gaji_pokok,uang_makan'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
+            ->select(DB::raw('kode_karyawan,nama_karyawan,id_jabatan,gaji_pokok,uang_makan'))
+            ->where('bulan',$this->bulan)
+            ->where('tahun',$this->tahun)
             ->get();;
         }
         //
@@ -40,7 +40,7 @@ class LaporanPengeluaranGajiKaryawanExport implements FromCollection,WithHeading
         public function headings(): array
     {
         return [
-            'kode_karyawan','nama_karyawan','id_jabatan','tgl','gaji_pokok','uang_makan',
+            'kode_karyawan','nama_karyawan','id_jabatan','gaji_pokok','uang_makan',
         ];
     }
 }

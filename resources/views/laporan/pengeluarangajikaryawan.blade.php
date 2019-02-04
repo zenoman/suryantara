@@ -78,7 +78,7 @@
                             <td>{{$rw->jabatan}}</td>
 							@endforeach
 							@endif
-                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
 							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
 							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
                         </tr>
@@ -156,6 +156,7 @@
 							<th>Kode Karyawan</th>
 							<th>Nama Karyawan</th>
 							@if($jabatan=='semua')
+							@else
 							<th>Jabatan</th>
 							@endif
 							<th>Tanggal</th>
@@ -178,7 +179,7 @@
                             <td align="center">{{$rw->jabatan}}</td>
 							@endforeach
 							@endif
-                            <td  align="center">{{$row->tgl}}</td>
+                            <td  align="center">{{$row->bulan}}-{{$row->tahun}}</td>
 							<td  align="center">{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
 							<td  align="center">{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
                           

@@ -198,6 +198,7 @@ if($dtlam > 0){
     public function update(Request $request, $id)
     {
                     $rules = [
+                    'kodess' =>'required',
                     'nama'  => 'required',
                     'telp'  => 'required|min:5|numeric',
                     'alamat'  => 'required|min:5',
@@ -210,12 +211,18 @@ if($dtlam > 0){
 
          ];
         $this->validate($request,$rules,$customMessages);
+        $kode =$request->kodess;
         Karyawanmodel::find($id)->update([
-            
             'nama'  => $request->nama,
             'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat
+            ]);
+        // dd($kode);
+        DB::table('gaji_karyawan')
+            ->where('kode_karyawan',$kode)
+            ->update([
+                'nama_karyawan'  => $request->nama
             ]);
         return redirect('/karyawan')->with('status','Edit Data Sukses'); 
     }

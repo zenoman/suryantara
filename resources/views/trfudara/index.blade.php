@@ -82,7 +82,7 @@
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th class="text-center">#</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -95,7 +95,7 @@
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th class="text-center">#</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -123,14 +123,11 @@
 						</tr>
 						@endforeach
 						</tbody>
-						<tr>
-							<th colspan="8"></th>
-							<th>
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
-							</th>
-						</tr>
 					</table>
 						{{csrf_field()}}
+						<div class="text-right">
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+						</div>
                         </form>
 				</div>
 			</section>
