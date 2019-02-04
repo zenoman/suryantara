@@ -159,7 +159,7 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var b_ppn		= $("#b_ppn").text().replace('.','');
+			var b_ppn		= $("#b_ppn").text().replace(/\./g,'');
 			var totalnya = parseInt(b_ppn) + parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#total").html(rupiah(totalnya));
 		}
@@ -265,7 +265,7 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var b_ppn		= $("#b_ppn").text().replace('.','');
+			var b_ppn		= $("#b_ppn").text().replace(/\./g,'');
 			var totalnya = parseInt(b_ppn)+parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#cetak_total").html("Rp. "+rupiah(totalnya));
 
@@ -348,7 +348,7 @@ $(document).ready(function(){
 			var biaya_asu 	= $("#biaya_asuransi").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
-			var ppn 		= $('#b_ppn').text().replace('.','');
+			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
 			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var satuan		= $('#satuan').val();
 			var metode		= $("#metode").val();

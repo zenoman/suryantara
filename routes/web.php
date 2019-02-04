@@ -180,6 +180,8 @@ Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt'
 Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
 //==============================================================resi manual
 Route::post('/simpanmanualdarat','Manual\Manualcontroller@simpandarat');
+Route::post('/simpanmanuallaut','Manual\Manualcontroller@simpanlaut');
+Route::post('/simpanmanualudara','Manual\Manualcontroller@simpanudara');
 Route::get('/Manual','Manual\Manualcontroller@index');
 Route::post('/Manual','Manual\Manualcontroller@store');
 Route::get('/Manual/create','Manual\Manualcontroller@create');

@@ -74,6 +74,10 @@
 
 
 			<div class="box-typical box-typical-padding" id="formdarat">
+				<header class="card-header card-header-xl">
+					Jalur Darat
+				</header>
+				<br>
 				<div class="form-group row">
 						
 						<div class="col-md-9 col-sm-9">
@@ -274,11 +278,438 @@
 
 
 
-			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;" >
-				laut
+			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;">
+				<header class="card-header card-header-xl">
+					Jalur Laut
+				</header>
+				<br>
+			<div class="form-group row">
+						
+						<div class="col-md-9 col-sm-9">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nama_barang_laut">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="metode_laut">
+								<option value="cash">cash</option>
+								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_laut" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_laut" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_laut" value="0">
+									
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_laut"  value="0">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah_laut" onkeypress="return isNumberKey(event)">
+								<select class="form-control" id="satuan_laut">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_laut" onkeypress="return isNumberKey(event)">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="kota_asal_laut" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
+						<select class="select2" id="kota_tujuan_laut"></select>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_pengirim_laut">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_laut" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_penerima_laut" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_laut" >
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-7 col-md-7">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_kirim_laut" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_packing_laut" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_asuransi_laut" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<table class="table table-bordered" id="estimasi">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Estimasi Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Biaya Kirim</td>
+										<td id="b_kirim_laut">0</td>
+									</tr>
+									<tr>
+										<td>Biaya Packing</td>
+										<td id="b_packing_laut">0</td>
+									</tr>
+									<tr>
+										<td>Biaya Asuransi</td>
+										<td id="b_asuransi_laut">0</td>
+									</tr>
+									<tr>
+										<td>PPN</td>
+										<td id="b_ppn_laut">0</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="text-center">
+											<h3 id="total_laut">0</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">
+								<textarea rows="4" class="form-control" id="keterangan_laut"></textarea>
+							</div>
+						</div>
+					</div>
+					</div>
+							<small class="text-muted">
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_laut" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								</button>
+
+								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+								
+							</small>
 			</div>
+
+
+
+
+
 			<div class="box-typical box-typical-padding" id="formudara" style="display: none;" >
-				udara
+			<header class="card-header card-header-xl">
+					Jalur Udara
+				</header>
+				<br>
+					<div class="form-group row">
+						
+						<div class="col-md-8 col-sm-8">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nama_barang_udara">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kategori barang</label>
+							<div class="input-group">
+								<select class="form-control" id="kategori_udara">
+								<option value="biasa"></option>
+								@foreach($kategori as $kat)
+								<option value="{{$kat->charge}}">{{$kat->spesial_cargo}}</option>
+								@endforeach
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="metode_udara">
+								<option value="cash">cash</option>
+								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara" value="0">
+									
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_udara" onkeypress="return isNumberKey(event)"  value="0">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah_udara" onkeypress="return isNumberKey(event)">
+								<select class="form-control" id="satuan_udara">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_udara" onkeypress="return isNumberKey(event)" value="0">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+						<input type="hidden" id="min_heavy" value="0">
+					</div>
+
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="kota_asal_udara" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-sm-8">
+						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
+						<select class="select2" id="kota_tujuan_udara"></select>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="status_udara" readonly>
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nomer SMU (Boleh Kosong)</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nomer_smu_udara">
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_pengirim_udara">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_udara" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_penerima_udara" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" >
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-7 col-md-7">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_kirim_udara" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya SMU</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_smu_udara" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Karantina</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_karantina_udara" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<table class="table table-bordered" id="estimasi">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Estimasi Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Biaya Kirim</td>
+										<td id="b_kirim_udara">0</td>
+									</tr>
+									<tr>
+										<td>Biaya SMU</td>
+										<td id="b_smu_udara">0</td>
+									</tr>
+									<tr>
+										<td>Biaya Karantina</td>
+										<td id="b_karantina_udara">0</td>
+									</tr>
+									<tr>
+										<td>PPN</td>
+										<td id="b_ppn_udara">0</td>
+									</tr>
+									<tr>
+										<td>Charge</td>
+										<td id="b_charge_udara">0</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="text-center">
+											<h3 id="total_udara">0</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">
+								<textarea rows="4" class="form-control" id="keterangan_udara"></textarea>
+							</div>
+						</div>
+					</div>
+					</div>
+							<small class="text-muted">
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_udara"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								</button>
+
+								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+								
+							</small>
 			</div>
 		
 		</div>
