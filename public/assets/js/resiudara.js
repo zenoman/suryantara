@@ -121,8 +121,8 @@ $(document).ready(function(){
 		var biaya_kirim = parseInt($('#biaya_kirim').val());
 		var biaya_dokumen = parseInt($('#biaya_smu').val());
 		var biaya_karantina = parseInt($('#biaya_karantina').val());
-		var biaya_ppn 		= parseInt($('#b_ppn').text().replace('.',''));
-		var biaya_charge = parseInt($('#b_charge').text().replace('.',''));
+		var biaya_ppn 		= parseInt($('#b_ppn').text().replace(/\./g,''));
+		var biaya_charge = parseInt($('#b_charge').text().replace(/\./g,''));
 		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_ppn +biaya_charge;
 		$('#total').html(rupiah(jumlah));
 	}
@@ -340,7 +340,7 @@ $(document).ready(function(){
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan').val();
-			var ppn 		= $('#b_ppn').text().replace('.','');
+			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
 			var total_biaya = parseInt(ppn) + parseInt(biaya_smu) +  parseInt(biaya_karantina) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 		if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
@@ -375,8 +375,8 @@ $(document).ready(function(){
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan').val();
-			var ppn 		= $('#b_ppn').text().replace('.','');
-			var change		= $('#b_charge').text().replace('.','');
+			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
+			var change		= $('#b_charge').text().replace(/\./g,'');
 			var total_biaya = parseInt(change) + parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 			var nosmu 		= $('#nomer_smu').val();
