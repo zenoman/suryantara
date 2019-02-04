@@ -117,4 +117,34 @@ class Manualcontroller extends Controller
         
         return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan]);
     }
+    public function simpandarat(Request $request){
+        $simpan = DB::table('resi_pengiriman')
+        ->where('id',$request->idresi)
+       ->update([
+        'admin'      => $request->iduser,
+        'nama_barang'   => $request->nama_barang,
+        'pengiriman_via'=> 'darat',
+        'kota_asal'     => $request->kota_asal,
+        'kode_tujuan'   => $request->kota_tujuan,
+        'tgl'           =>  date('Y-m-d'),
+        'jumlah'        => $request->jumlah,
+        'berat'         => $request->berat,
+        'dimensi'       => $request->dimensi,
+        'ukuran_volume' => $request->ukuran_volume,
+        'nama_pengirim' => $request->n_pengirim,
+        'nama_penerima' => $request->n_penerima,
+        'telp_pengirim' => $request->t_pengirim,
+        'telp_penerima' => $request->t_penerima,
+        'biaya_kirim'   => $request->biaya_kirim,
+        'biaya_packing' => $request->biaya_packing,
+        'biaya_asuransi'=> $request->biaya_asu,
+        'total_biaya'   => $request->total_biaya,
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan,
+        'metode_bayar'  => $request->metode,
+        'biaya_ppn'     => $request->ppn,
+        'metode_input'  =>'manual'
+       ]);
+        return response()->json($simpan);
+    }
 }

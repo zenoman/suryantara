@@ -8,6 +8,7 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
 @section('content')
 <script type="text/javascript">
@@ -53,6 +54,8 @@
 						</div>
 					</div>
 					<input type="hidden" value="{{Session::get('username')}}" id="iduser">
+					<input type="hidden" value="{{$row->id}}" id="idresi">
+					{{csrf_field()}}
 			<div class="col-md-4 col-sm-4">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jalur Pengiriman</label>
@@ -71,8 +74,7 @@
 
 
 			<div class="box-typical box-typical-padding" id="formdarat">
-				<form action="#" role="form" method="POST">
-					<div class="form-group row">
+				<div class="form-group row">
 						
 						<div class="col-md-9 col-sm-9">
 						<div class="form-group">
@@ -257,13 +259,12 @@
 					</div>
 					</div>
 							<small class="text-muted">
-								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 
 								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 								
 							</small>
-				</form>
 			</div>
 
 
@@ -287,7 +288,10 @@
 
 @section('js')
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
-
+<script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
+<script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>
+<script src="{{asset('assets/js/lib/ladda-button/spin.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/ladda-button/ladda.min.js')}}"></script>
 @endsection
 @section('otherjs')
 <script src="{{asset('assets/js/resimanual.js')}}"></script>

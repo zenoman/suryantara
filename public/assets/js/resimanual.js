@@ -165,4 +165,74 @@ $(document).ready(function(){
 		$("#kota_tujuan_darat").on('select2:close',function(e){
 			$('#n_pengirim_darat').focus();
 		});
+	//============================================ simpan transaksi
+		$("#btnsimpan_darat").click(function(e){
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			var idresi		= $("#idresi").val();
+			var iduser		= $("#iduser").val();
+			var nama_barang	= $("#nama_barang_darat").val();
+			var d_panjang	= $("#d_panjang_darat").val();
+			var d_tinggi	= $("#d_tinggi_darat").val();
+			var d_lebar		= $("#d_lebar_darat").val();
+			var volume		= $("#volume_darat").val();
+			var jumlah		= $("#jumlah_darat").val();
+			var berat		= $("#berat_darat").val();
+			var kota_asal	= $("#kota_asal_darat").val();
+			var kota_tujuan = $('#kota_tujuan_darat').select2('data').text;
+			var n_pengirim 	= $("#n_pengirim_darat").val();
+			var t_pengirim	= $("#t_pengirim_darat").val();
+			var n_penerima	= $("#n_penerima_darat").val();
+			var t_penerima 	= $("#t_penerima_darat").val();
+			var biaya_kirim	= $("#biaya_kirim_darat").val();
+			var biaya_packing = $("#biaya_packing_darat").val();
+			var biaya_asu 	= $("#biaya_asuransi_darat").val();
+			var keterangan 	= $.trim($("#keterangan_darat").val());
+			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var satuan		= $('#satuan_darat').val();
+			var ppn 		= $('#b_ppn_darat').text().replace('.','');
+			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
+			var metode		= $("#metode_darat").val();
+			if(nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+   			}else{
+   				var l = Ladda.create(this);
+                l.start();
+				$.ajax({
+                type: 'POST',
+                url: '/simpanmanualdarat',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'idresi'		: idresi,
+                    'iduser'		: iduser,
+                    'nama_barang'	: nama_barang,
+					'dimensi'		: dimensi,
+					'ukuran_volume'	: volume,
+					'jumlah'		: jumlah,
+					'berat'			: berat,
+					'kota_asal'		: kota_asal,
+					'kota_tujuan' 	: kota_tujuan,
+					'n_pengirim' 	: n_pengirim,
+					't_pengirim'	: t_pengirim,
+					'n_penerima'	: n_penerima,
+					't_penerima'	: t_penerima,
+					'biaya_kirim'	: biaya_kirim,
+					'biaya_packing'	: biaya_packing,
+					'biaya_asu' 	: biaya_asu,
+					'keterangan'	: keterangan,
+                	'total_biaya'	: total_biaya,
+                	'satuan'		: satuan,
+                	'metode'		: metode,
+                	'ppn'			: ppn
+                },
+                success:function(){
+                    notie.alert(1, 'Data Disimpan', 2);
+                	window.location.href = "/Manual";
+                },
+            }).always(
+            function() {
+                l.stop();
+            });
+			}
+		});
 });
