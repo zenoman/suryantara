@@ -15,14 +15,14 @@ class Dashboardcontroller extends Controller
         ->get();
 
         $resi = DB::table('resi_pengiriman')
-        ->where('status','!=','Y')
+        ->where([['status','!=','Y'],['total_biaya','>',0]])
         ->get();
         $uanghariini = DB::table('resi_pengiriman')
         ->select(DB::raw('SUM(total_biaya) as total'))
         ->where('tgl',date('Y-m-d'))
         ->get();
         $jumlahresi = DB::table('resi_pengiriman')
-        ->where('status','!=','Y')
+        ->where([['status','!=','Y'],['total_biaya','>',0]])
         ->count();
         $jumlahsj = DB::table('surat_jalan')
         ->where('status','=','Y')
