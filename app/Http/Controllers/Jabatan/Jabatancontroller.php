@@ -20,7 +20,7 @@ class Jabatancontroller extends Controller
     {
         // $Jabatans = Jabatanmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        $datJabatan = DB::table('jabatan')->paginate(20);
+        $datJabatan = DB::table('jabatan')->orderby('id','ASC')->paginate(20);
         // dd($datJabatan);
         return view('Jabatan/index',['jabatan'=>$datJabatan,'title'=>$setting]);
     }

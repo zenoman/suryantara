@@ -71,10 +71,12 @@
                             	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
                                         	{{csrf_field()}}
-                                        	
+                                        	@if($row->id == '1')
+                                        	@else
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i>Hapus</button>
+                                        @endif
                     					</form>
                             </td>
 						</tr>

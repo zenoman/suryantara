@@ -23,7 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							
-							<h2>Laporan Pengeluaran {{$bulanya}}</h2>
+							<h2>Laporan Pengeluaran Gaji Karyawan Bulan {{$bulanya}}</h2>
 							
 						</div>
 					</div>
