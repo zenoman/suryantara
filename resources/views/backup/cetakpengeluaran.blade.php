@@ -10,7 +10,7 @@
 </head>
 <body onload="window.print()">
 	<h3 align="center">
-	Pendapatan Pengeluaran Vendor Bulan {{$bulan}} Tahun {{$tahun}}
+	Pengeluaran Vendor Bulan {{$bulan}} Tahun {{$tahun}}
 	</h3>
 	<table style="width: 100%">
 		<tr>

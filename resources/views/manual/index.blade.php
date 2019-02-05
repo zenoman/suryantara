@@ -56,7 +56,7 @@
                                         <div class="modal-body">
                                            <form method="get" action="{{url('/Manual/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan resi" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">

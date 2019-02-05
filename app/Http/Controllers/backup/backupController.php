@@ -36,7 +36,7 @@ class backupController extends Controller
     }
     public function cetakpendapatan(int $bulan,int $tahun){
     	$data = DB::table('resi_pengiriman')
-        ->select(DB::raw('tgl,no_resi,no_smu,kode_jalan,admin,nama_barang,pengiriman_via,kota_asal,kode_tujuan,jumlah,berat,dimensi,ukuran_volume,nama_pengirim,telp_pengirim,nama_penerima,telp_penerima,biaya_kirim,biaya_packing,biaya_asuransi,biaya_smu,biaya_karantina,biaya_ppn,total_biaya,metode_bayar,satuan,keterangan'))
+        ->select(DB::raw('tgl,no_resi,no_smu,kode_jalan,admin,nama_barang,pengiriman_via,kota_asal,kode_tujuan,jumlah,berat,dimensi,ukuran_volume,nama_pengirim,telp_pengirim,nama_penerima,telp_penerima,biaya_kirim,biaya_packing,biaya_asuransi,biaya_smu,biaya_karantina,biaya_ppn,total_biaya,metode_bayar,satuan,keterangan,biaya_charge'))
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
         ->get();

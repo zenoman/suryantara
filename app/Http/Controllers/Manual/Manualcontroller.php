@@ -33,7 +33,8 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['no_resi','like','%'.$cari.'%']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%']])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%']])
         ->get();
             $setting = DB::table('setting')->get();
         return view('Manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);

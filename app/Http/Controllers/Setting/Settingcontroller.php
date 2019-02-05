@@ -68,28 +68,36 @@ class Settingcontroller extends Controller
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'icon'=>$nameicon
         ]);
         }else if($request->hasFile('logo')){
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'logo'=>$namelogo
         ]);
         }else if($request->hasFile('icon','logo')){
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'icon'=>$nameicon,
             'logo'=>$namelogo
         ]);
         }else{
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
+            'header'=>$request->header,
             'kontak'=>$request->kontak,
+            'desk'=>$request->deskripsi,
             'email'=>$request->email
         ]);
         }

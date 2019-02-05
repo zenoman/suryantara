@@ -36,22 +36,17 @@
            <td>kota tujuan</td>
            <td>jumlah</td>
            <td>berat (kg)</td>
-           <td>dimensi (PxLxT)</td>
-           <td>volumetrik</td>
            <td>pengirim</td>
-           <td>telp. pengirim</td>
            <td>penerima</td>
-           <td>telp. penerima</td>
            <td>biaya kirim</td>
            <td>biaya packing</td>
            <td>biaya asuransi</td>
            <td>biaya SMU</td>
            <td>biaya karantina</td>
            <td>biaya ppn</td>
+           <td>biaya charge</td>
            <td>total biaya</td>
            <td>metode bayar</td>
-           <td>acuan bayar</td>
-           <td>keterangan</td>
 		</tr>
 		@foreach($data as $row)
 		<tr>
@@ -64,24 +59,19 @@
 			<td>{{$row->pengiriman_via}}</td>
 			<td>{{$row->kota_asal}}</td>
 			<td>{{$row->kode_tujuan}}</td>
-			<td>{{$row->jumlah}}</td>
+			<td>{{$row->jumlah}} koli</td>
 			<td>{{$row->berat}}</td>
-			<td>{{$row->dimensi}}</td>
-			<td>{{$row->ukuran_volume}}</td>
 			<td>{{$row->nama_pengirim}}</td>
-			<td>{{$row->telp_pengirim}}</td>
 			<td>{{$row->nama_penerima}}</td>
-			<td>{{$row->telp_penerima}}</td>
 			<td>{{"Rp ".number_format($row->biaya_kirim,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->biaya_packing,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->biaya_asuransi,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->biaya_smu,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->biaya_karantina,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->biaya_ppn,0,',','.')}}</td>
+			<td>{{"Rp ".number_format($row->biaya_charge,0,',','.')}}</td>
 			<td>{{"Rp ".number_format($row->total_biaya,0,',','.')}}</td>
 			<td>{{$row->metode_bayar}}</td>
-			<td>{{$row->satuan}}</td>
-			<td>{{$row->keterangan}}</td>
 		</tr>
 		@endforeach
 	</table>
