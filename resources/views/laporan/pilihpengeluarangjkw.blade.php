@@ -53,10 +53,10 @@
 							<p class="form-control-static">
 								<select class="select2" name="jabatan">
 								<option value="semua">Semua</option>
-								@foreach($vendor as $vn)
+								@foreach($jabatan as $vn)
 								<option value="{{$vn->id_jabatan}}">
 									@php
-										$jabatan = explode("-", $vn->jabatan);
+										$jabatan = explode("-", $vn->id_jabatan);
 									@endphp
 									{{$jabatan[0]}}
 								</option>

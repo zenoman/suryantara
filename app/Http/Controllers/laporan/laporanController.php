@@ -93,7 +93,7 @@ class laporanController extends Controller
                 ->select('karyawan.id_jabatan','jabatan.jabatan','jabatan.id')
                 ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pilihpengeluarangjkw',['title'=>$webinfo,'bulan'=>$ambilbulan,'vendor'=>$jabatan]);
+        return view('laporan/pilihpengeluarangjkw',['title'=>$webinfo,'bulan'=>$ambilbulan,'jabatan'=>$jabatan]);
     }
     //===============================================
     public function pilihpemasukan(){
@@ -259,8 +259,8 @@ class laporanController extends Controller
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
         $thn = $bulan[1];
-        // dd($request->bulan);
-        if($namajabatan=='semua'){
+        // dd($request->jabatan);
+        if($namajabatan == 'semua'){
             $data =DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
@@ -277,18 +277,23 @@ class laporanController extends Controller
                 ->orderby('kode_karyawan','asc')
             ->get();
 
-            $total = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(total) as total'))
+            $tot = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as tot'))
             ->where('bulan',$bln)
             ->where('tahun',$thn)
             ->get();
-
+            $tota = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(gaji_tambahan) as tota'))
+            ->where('bulan',$bln)
+            ->where('tahun',$thn)
+            ->get();
         }else{
              $data=DB::table('gaji_karyawan')
                 ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
                 ->select('gaji_karyawan.*','jabatan.jabatan')
                 ->where('bulan',$bln)
                 ->where('tahun',$thn)
+                ->where('id_jabatan',$namajabatan)
                 ->orderby('kode_karyawan','asc')
                 ->paginate(40);
             $data2=DB::table('gaji_karyawan')
@@ -300,12 +305,17 @@ class laporanController extends Controller
                 ->orderby('kode_karyawan','asc')
             ->get();
 
-            $total = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(total) as total'))
+            $tot = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as tot'))
                 ->where('bulan',$bln)
                 ->where('tahun',$thn)
                 ->where('id_jabatan',$namajabatan)
                 ->orderby('kode_karyawan','asc')
+            ->get();
+            $tota = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(gaji_tambahan) as tota'))
+            ->where('bulan',$bln)
+            ->where('tahun',$thn)
             ->get();
         }
 if($namajabatan=='semua'){
@@ -315,9 +325,21 @@ if($namajabatan=='semua'){
             ->select(DB::raw('jabatan'))
             ->where('id',$namajabatan)
             ->get();
-        }        
+        $idjabat=DB::table('jabatan')
+            ->select(DB::raw('id'))
+            ->where('id',$namajabatan)
+            ->get();
+        }       
+
+         foreach ($tot as $row) {
+             foreach ($tota as $rw) {
+                 $total = $row->tot + $rw->tota;
+             }
+         }
+        // dd($total);
+        // dd($jabat);
         $webinfo = DB::table('setting')->limit(1)->get();
-return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'jabatan'=>$jabat,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
+return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'jabatan'=>$jabat,'idd'=>$idjabat,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
     }
     //-----------------------------------------------------------------------------------------------
     public function exsportlaporanpemasukan($bulannya, $jalur){

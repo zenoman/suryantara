@@ -48,6 +48,10 @@
 							<th>Tanggal</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
+							@if($idd = '1' || $jabatan ='semua')
+							<th>Gaji Tambahan</th>
+							@else
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -61,6 +65,10 @@
 							<th>Tanggal</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
+							@if($idd = '1' || $jabatan ='semua')
+							<th>Gaji Tambahan</th>
+							@else
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -81,6 +89,10 @@
                             <td>{{$row->bulan}}-{{$row->tahun}}</td>
 							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
 							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
+							@if($idd = '1' || $jabatan ='semua')
+							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
+							@else
+							@endif
                         </tr>
 						@endforeach
 						</tbody>
@@ -89,11 +101,9 @@
 				</div>
 			</section>
 
-	
-			@foreach($total as $ttl)
 			<section class="card">
 				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->total,0,',','.')}}</b></h2>
+					<h2>Total <b>{{"Rp ".number_format($total,0,',','.')}}</b></h2>
 					<div class="pull-right">
 						@if($jabatan=='semua')
                             
@@ -115,8 +125,6 @@
 					</div>
 				</div>
 			</section>
-	
-			@endforeach
 			
 		</div>
 	</div>
@@ -162,6 +170,10 @@
 							<th>Tanggal</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
+							@if($idd = '1' || $jabatan ='semua')
+							<th>Gaji Tambahan</th>
+							@else
+							@endif
 						</tr>
 						</thead>
 						
@@ -182,13 +194,17 @@
                             <td  align="center">{{$row->bulan}}-{{$row->tahun}}</td>
 							<td  align="center">{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
 							<td  align="center">{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
+							@if($idd = '1' || $jabatan ='semua')
+							<td  align="center">{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
+							@else
+							@endif
                           
 						</tr>
 						@endforeach
 						
 						</tbody>
 					</table>
-					<p>Total : <b>{{"Rp. ".number_format($ttl->total,0,',','.')}}</b></p>
+					<p>Total : <b>{{"Rp. ".number_format($total,0,',','.')}}</b></p>
 			</div>
 	@endsection
 		@section('js')
