@@ -32,7 +32,6 @@ class Admincontroller extends Controller
         })
         ->paginate(20);
     }
-        // dd($datadmin);
         return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
     }
 

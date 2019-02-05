@@ -83,7 +83,9 @@
 							<th>Pemegang</th>
 							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
+                            @if(Session::get('level')!='admin')
 							<th class="text-center">#</th>
+                            @endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -96,7 +98,9 @@
                             <th>Pemegang</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
+                             @if(Session::get('level')!='admin')
                             <th class="text-center">#</th>
+                            @endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -357,8 +361,10 @@
                                             {{csrf_field()}}
                                             
                                             <input type="hidden" name="aid" value="{{$row->id}}">
+                                @if(Session::get('level')!='admin')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
+                                        @endif
                                         </form>
                                 @else
                               <form action="{{ url('/Manual/delete')}}" method="post">                            	
@@ -367,21 +373,28 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
+                                @if(Session::get('level')!='admin')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
+                                @endif
                     					</form>
                                         @endif
                             </td>
+                             @if(Session::get('level')!='admin')
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
 					{{csrf_field()}}
+                     @if(Session::get('level')!='admin')
 					<div class="text-right">
+
 						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
 					</div>
+                    @endif
 					
                         </form>
 					 {{ $manual->links() }}

@@ -15,10 +15,15 @@ use Illuminate\Support\Facades\File;
 class backupController extends Controller
 {
     public function index(){
-    	Session::put('backup_status','n');
-    	Session::put('backup_step','1');
-    	$webinfo = DB::table('setting')->limit(1)->get();
-		return view('backup/index',['title'=>$webinfo]);
+        if (Session::get('level') !='admin') {
+            Session::put('backup_status','n');
+        Session::put('backup_step','1');
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('backup/index',['title'=>$webinfo]);
+        }else{
+            return redirect('/dashboard');
+        }
+    	
     }
 
     public function tampil(Request $request){

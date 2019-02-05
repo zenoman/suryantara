@@ -8,15 +8,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\models\Settingmodel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Settingcontroller extends Controller
 {
     public function index()
     {
-        //
+        if(Session::get('level') !='admin'){
+
         $setting = Settingmodel::get();
         $setting = DB::table('setting')->get();
         return view('setting/index',['setting'=>$setting,'title'=>$setting]);
+        }else{
+            return redirect('/dashboard');
+        }
     }
     public function update(Request $request, $id)
     {
