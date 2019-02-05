@@ -8,15 +8,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\models\Settingmodel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Settingcontroller extends Controller
 {
     public function index()
     {
-        //
+        if(Session::get('level') !='admin'){
+
         $setting = Settingmodel::get();
         $setting = DB::table('setting')->get();
         return view('setting/index',['setting'=>$setting,'title'=>$setting]);
+        }else{
+            return redirect('/dashboard');
+        }
     }
     public function update(Request $request, $id)
     {
@@ -63,28 +68,36 @@ class Settingcontroller extends Controller
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'icon'=>$nameicon
         ]);
         }else if($request->hasFile('logo')){
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'logo'=>$namelogo
         ]);
         }else if($request->hasFile('icon','logo')){
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'header'=>$request->header,
             'email'=>$request->email,
+            'desk'=>$request->deskripsi,
             'icon'=>$nameicon,
             'logo'=>$namelogo
         ]);
         }else{
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
+            'header'=>$request->header,
             'kontak'=>$request->kontak,
+            'desk'=>$request->deskripsi,
             'email'=>$request->email
         ]);
         }

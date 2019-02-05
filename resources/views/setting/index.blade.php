@@ -31,9 +31,9 @@
 				<form action="{{url('setting/'.$row->id) }}" role="form" method="POST" enctype="multipart/form-data">
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Nama Web</label>
+						<label class="col-sm-2 form-control-label semibold">Header</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Nama Web" name="namaweb" value="{{$row->namaweb}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Header Website" name="namaweb" value="{{$row->namaweb}}"></p>
 						@if($errors->has('namaweb'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('namaweb')}}
@@ -41,7 +41,18 @@
                                         @endif
 						</div>
 					</div>
-             
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Nama Web</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Nama Website" name="header" value="{{$row->header}}"></p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Deskripsi</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control" placeholder="Deskripsi website" name="deskripsi">{{$row->desk}}</textarea></p>
+            </div>
+          </div>
           <div class="form-group row">
             <label class="col-sm-2 form-control-label semibold">Email</label>
             <div class="col-sm-10">

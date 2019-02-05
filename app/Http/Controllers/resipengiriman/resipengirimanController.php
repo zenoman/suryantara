@@ -98,6 +98,7 @@ class resipengirimanController extends Controller
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
+        ->where('metode_input','otomatis')
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);

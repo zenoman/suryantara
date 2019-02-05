@@ -28,7 +28,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
 
         }elseif ($jlr == 'udara') {
             return DB::table('resi_pengiriman')
-            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_ppn,biaya_smu,biaya_karantina,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->where('pengiriman_via',$this->jalur)
@@ -36,7 +36,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
 
         }else {
             return DB::table('resi_pengiriman')
-            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,biaya_ppn,biaya_smu,biaya_karantina,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->get();
@@ -98,6 +98,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
             'biaya_ppn',
             'biaya_smu',
             'biaya_karantina',
+            'biaya_charge',
             'Keterangan',
             'Status',
             'Satuan',
@@ -129,6 +130,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
                 'biaya_ppn',
                 'biaya_smu',
                 'biaya_karantina',
+                'biaya_charge',
                 'Keterangan',
                 'Status',
                 'Satuan',

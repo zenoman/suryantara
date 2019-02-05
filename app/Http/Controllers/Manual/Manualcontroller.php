@@ -22,6 +22,7 @@ class Manualcontroller extends Controller
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
         ->where('resi_pengiriman.metode_input','manual')
+        ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
         return view('Manual/index',['manual'=>$datmanual,'title'=>$setting]);
     }
@@ -29,9 +30,14 @@ class Manualcontroller extends Controller
     public function caridata(Request $request)
     {
         $cari=$request->cari;
-        $manu = DB::table('kode_resimanual')->where('faktur','like','%'.$cari.'%')->get();
+        $datmanual = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%']])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%']])
+        ->get();
             $setting = DB::table('setting')->get();
-        return view('Manual/pencarian', ['manual'=>$manu, 'cari'=>$cari,'title'=>$setting]);
+        return view('Manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
     }
     //=========================================================
     public function importexcel(){
