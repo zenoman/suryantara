@@ -59,8 +59,9 @@
 								<option value="servis">servis</option>
 								<option value="parkir">parkir</option>
 								<option value="tol">tol</option>
-								<option value="atk">atk</option>
-
+								<option value="atk">ATK</option>
+								<option value="listrik">listrik</option>
+								<option value="internet">internet</option>
 								<option value="lainya">lainya</option>
 							</select>
 							</p>

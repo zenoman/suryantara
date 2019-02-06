@@ -41,7 +41,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Kode</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Kode Tujuan" name="kode" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" required placeholder="Kode Tujuan" name="kode" ></p>
 							 @if($errors->has('kode'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -52,7 +52,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tujuan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="tujuan" placeholder="Misal : Kalimantan" ></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" required name="tujuan" placeholder="Misal : Kalimantan" ></p>
 							@if($errors->has('tujuan'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('tujuan')}}
@@ -63,7 +63,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Airlines</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="airlans" placeholder="Misal : LION PREMIUM(JT 786)"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" required name="airlans" placeholder="Misal : LION PREMIUM(JT 786)"></p>
 							@if($errors->has('airlans'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('airlans')}}
@@ -85,6 +85,17 @@
                                         {{ $errors->first('biaya_perkg')}}
                                          </div>
                                        @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Berat Minimal</label>
+						<div class="col-sm-10">
+								<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="berat_min" required onkeypress="return isNumberKey(event)" placeholder="Misal : 30 KG">
+								<div class="input-group-addon">
+									.Kg
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group row">

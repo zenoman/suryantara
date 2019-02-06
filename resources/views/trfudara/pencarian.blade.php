@@ -47,7 +47,6 @@
                     <br><br>
 <form action="{{url('/trfudara/hapuspilihan')}}" method="post">
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<a>List Data Tarif Udara</a>
 						<thead>
 						<tr>
 							<th>No</th>
@@ -57,8 +56,9 @@
 							<th>Biaya perKg</th>
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
+							<th>Berat Minimal</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th>#</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -70,8 +70,9 @@
 							<th>Biaya perKg</th>
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
+							<th>Berat Minimal</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th>#</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -86,26 +87,27 @@
                             <td>{{"Rp ". number_format($row->perkg,0,',','.')}}</td>
                             <td>{{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
                             <td>{{$row->minimal_heavy. "kg"}}</td>
+                            <td>{{$row->berat_minimal. "kg"}}</td>
                             <td>
 <form action="{{url('/trfudara/delete') }}"  method="post">
-<a href="{{url('/trfudara/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
+<a href="{{url('/trfudara/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i></a>
 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>
                     			</form>
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						</tr>
 						@endforeach
 						</tbody>
-						<tr>
-							<th colspan="8"></th>
-							<th>
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
-							</th>
-						</tr>
+
+							
 					</table>
+<div class="text-right">
+	<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+</div>
+
 						{{csrf_field()}}
                         </form>
 					 

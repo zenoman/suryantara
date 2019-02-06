@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 class Trfudaracontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -39,7 +34,8 @@ class Trfudaracontroller extends Controller
     }
 
     public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template tarif Udara.xlsx";
+         // $file= base_path()."/../public_html/file/template tarif Udara.xlsx";
+        $file="file/template tarif Udara.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
@@ -64,8 +60,12 @@ class Trfudaracontroller extends Controller
 public function caridata(Request $request)
     {
         $cari=$request->cari;
-        $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$cari.'%')->orwhere('kode','like','%'.$cari.'%')->get();
-            $setting = DB::table('setting')->get();
+        $trf_udr = DB::table('tarif_udara')
+        ->where('tujuan','like','%'.$cari.'%')
+        ->orwhere('kode','like','%'.$cari.'%')
+        ->orwhere('airlans','like','%'.$cari.'%')
+        ->get();
+        $setting = DB::table('setting')->get();
         return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$cari,'title'=>$setting]);
     }
     public function create()
@@ -85,13 +85,12 @@ public function caridata(Request $request)
     {
         //
         $rules = [
-            'kode' => 'required|min:3',
-            'tujuan' => 'required|min:3',
-            'airlans' => 'required|min:3',
-            'katbarang' => 'required',
-            'biaya_perkg' => 'required|min:1',
-            'minimal_heavy' => 'required|min:1',
-            'biaya_dokumen' => 'required|min:1',
+            'kode' => 'required',
+            'tujuan' => 'required',
+            'airlans' => 'required',
+            'biaya_perkg' => 'required',
+            'minimal_heavy' => 'required',
+            'biaya_dokumen' => 'required',
                 ];
          $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -106,62 +105,34 @@ if($dtlam > 0){
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'id_kategori_barang' =>$request->katbarang,
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
-            'biaya_dokumen' => $request->biaya_dokumen
+            'biaya_dokumen' => $request->biaya_dokumen,
+            'berat_minimal'=>$request->berat_min
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
 }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
-        $trfudara = DB::table('tarif_udara')
-                ->join('kategori_barang', 'kategori_barang.id', '=', 'tarif_udara.id_kategori_barang')
-                ->select('tarif_udara.*','kategori_barang.spesial_cargo')
-                ->where('tarif_udara.id',$id)->get();
+        $trfudara = 
+        DB::table('tarif_udara')
+        ->where('id',$id)->get();
     $kate = DB::table('kategori_barang')->get();
     $setting = DB::table('setting')->get();
         return view('trfudara/edit',['trfudara'=>$trfudara,'title'=>$setting,'katbar'=>$kate]); 
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = [
-            'kode' => 'required|min:3',
-            'tujuan' => 'required|min:3',
-            'airlans' => 'required|min:3',
-            'katbarang' =>'required',
-            'biaya_perkg' => 'required|min:1',
-            'minimal_heavy' => 'required|min:1',
-            'biaya_dokumen' => 'required|min:1',
+            'kode' => 'required',
+            'tujuan' => 'required',
+            'airlans' => 'required',
+            'biaya_perkg' => 'required',
+            'minimal_heavy' => 'required',
+            'biaya_dokumen' => 'required',
                 ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -173,22 +144,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'kode' => $request->kode,
             'tujuan' => $request->tujuan,
             'airlans' => $request->airlans,
-            'id_kategori_barang'=>$request->katbarang,
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
-            'biaya_dokumen' => $request->biaya_dokumen
+            'biaya_dokumen' => $request->biaya_dokumen,
+            'berat_minimal'=>$request->berat_min
             ]);
         
-
         return redirect('trfudara')->with('status','Edit Data Sukses');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $id = $request->aid;
@@ -196,9 +159,8 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
         return back()->with('status','Hapus Data Sukses');
         //
     }
-public function haphapus(Request $request)
+    public function haphapus(Request $request)
     {
-        // dd($request->pilihid);
             if(!$request->pilihid){
                 return back()->with('statuserror','Tidak ada data yang dipilih');
             }else{

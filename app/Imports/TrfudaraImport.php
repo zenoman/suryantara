@@ -21,6 +21,7 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
                     'perkg'=>$row['tarif_perkg'],
                     'minimal_heavy'=>$row['minimal_heavy'],
                     'biaya_dokumen'=>$row['tarif_dokumen'],
+                    'berat_minimal'=>$row['berat_minimal']
                     
                     ]);
     	}

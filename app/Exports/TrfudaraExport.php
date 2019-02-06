@@ -13,7 +13,7 @@ class TrfudaraExport implements FromCollection, WithHeadings, ShouldAutoSize
     */
     public function collection()
     {
-    	return DB::table('tarif_udara')->select('kode','tujuan','airlans','perkg','minimal_heavy','biaya_dokumen')->get();;
+    	return DB::table('tarif_udara')->select('kode','tujuan','airlans','perkg','berat_minimal','minimal_heavy','biaya_dokumen')->get();;
         //
     }
     public function headings(): array
@@ -23,6 +23,7 @@ class TrfudaraExport implements FromCollection, WithHeadings, ShouldAutoSize
             'tujuan',
             'airlans',
             'tarif_perkg',
+            'berat_minimal',
             'minimal_heavy',
             'tarif_dokumen',
         ];

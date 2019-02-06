@@ -86,7 +86,17 @@
                                        @endif
 						</div>
 					</div>
-
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Berat Minimal</label>
+						<div class="col-sm-10">
+								<div class="input-group">
+								<input type="text" class="form-control" id="inputPassword" name="berat_min" required onkeypress="return isNumberKey(event)" placeholder="Misal : 30 KG" value="{{$row->berat_minimal}}">
+								<div class="input-group-addon">
+									.Kg
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Minimal Heavy</label>
 						<div class="col-sm-10">
