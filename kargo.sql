@@ -57,11 +57,11 @@ CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.gaji_karyawan: ~7 rows (approximately)
+-- Dumping data for table kargo.gaji_karyawan: ~0 rows (approximately)
 DELETE FROM `gaji_karyawan`;
 /*!40000 ALTER TABLE `gaji_karyawan` DISABLE KEYS */;
 INSERT INTO `gaji_karyawan` (`id`, `kode_karyawan`, `nama_karyawan`, `id_jabatan`, `gaji_pokok`, `uang_makan`, `gaji_tambahan`, `total`, `bulan`, `tahun`) VALUES
-	(1, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 2638, 430000, 1, 2019),
+	(1, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 2638, 432638, 1, 2019),
 	(2, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 1, 2019),
 	(3, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 1, 2019),
 	(4, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 1, 2019),
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `omset` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.omset: ~1 rows (approximately)
+-- Dumping data for table kargo.omset: ~0 rows (approximately)
 DELETE FROM `omset`;
 /*!40000 ALTER TABLE `omset` DISABLE KEYS */;
 INSERT INTO `omset` (`id`, `bulan`, `tahun`, `pemasukan`, `pengeluaran`, `pengeluaran_lainya`, `gaji_karyawan`, `laba`) VALUES
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.setting: ~1 rows (approximately)
+-- Dumping data for table kargo.setting: ~0 rows (approximately)
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `bulan_sekarang`) VALUES
@@ -396,24 +396,29 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `perkg` int(11) DEFAULT '0',
   `minimal_heavy` int(11) DEFAULT '0',
   `biaya_dokumen` int(11) DEFAULT '0',
+  `berat_minimal` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_udara: ~11 rows (approximately)
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
-INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`) VALUES
-	(6, 'udara0001', 'udara0001', 'LION', 20000, 55, 5000),
-	(7, 'udara0002', 'udara0002', 'LION', 20000, 55, 5000),
-	(8, 'udara0003', 'udara0003', 'LION', 20000, 55, 5000),
-	(9, 'udara0004', 'udara0004', 'AIRLINE', 20000, 55, 5000),
-	(10, 'udara0005', 'udara0005', 'AIRLINE', 30000, 55, 5000),
-	(11, 'udara0006', 'udara0006', 'AIRLINE', 20000, 55, 5000),
-	(12, 'udara0007', 'udara0007', 'AIRLINE', 20000, 55, 5000),
-	(13, 'udara0008', 'udara0008', 'LION', 30000, 55, 5000),
-	(14, 'udara0009', 'udara0009', 'LION', 20000, 55, 5000),
-	(15, 'udara0010', 'udara0010', 'LION', 20000, 55, 5000),
-	(16, 'udara00009999', 'kediri', 'asdaas', 23000, 12, 2000);
+INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`, `berat_minimal`) VALUES
+	(6, 'udara0001', 'bandung betet', 'LION', 20000, 55, 5000, 15),
+	(7, 'udara0002', 'banten', 'LION', 20000, 55, 5000, 15),
+	(8, 'udara0003', 'bali', 'LION', 20000, 55, 5000, 11),
+	(9, 'udara0004', 'jakarta', 'garuda', 20000, 55, 5000, 11),
+	(10, 'udara0005', 'bali', 'garuda', 30000, 55, 5000, 11),
+	(11, 'udara0006', 'lampung', 'citilink', 20000, 55, 5000, 12),
+	(12, 'udara0007', 'kalimantan', 'garuda', 20000, 55, 5000, 10),
+	(13, 'udara0008', 'lampung', 'Lion NR', 30000, 55, 5000, 15),
+	(14, 'udara0009', 'udara0009', 'LION', 20000, 55, 5000, 10),
+	(15, 'udara0010', 'udara0010', 'LION', 20000, 55, 5000, 12),
+	(17, 'udara011', 'papua', 'garuda', 500000, 50, 25000, 11),
+	(18, 'udara0012', 'lombok', 'LION', 40000, 50, 25000, 11),
+	(19, 'udara0013', 'cikarang', 'LION', 45000, 40, 25000, 11),
+	(20, 'udara0014', 'situbondo', 'garuda', 50000, 30, 25000, 11),
+	(21, 'udara0015', 'ngadiboyo', 'garuda', 30000, 50, 25000, 11);
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.vendor

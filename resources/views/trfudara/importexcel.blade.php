@@ -67,7 +67,7 @@
                                                <li>
                                                    Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif_perkg, minimal_heavy dan tarif_dokumen</b> hanyan diisi dengan angka saja.
                                                </li><br>
-                                               <img src="{{url('img/import_export/udara.JPG')}}">
+                                               <img src="{{url('img/import_export/udara.JPG')}}" width="99%">
                                                <p>
                                                <br>
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
@@ -100,7 +100,7 @@
                                             <form action="{{url('/trfudara/prosesimportexcel')}}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
-                                            <input type="file"name="file" required>
+                                            <input type="file"name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                               <p class="help-block">*File excel tidak boleh kosong</p>
                                         </div>
                                         {{csrf_field()}}
