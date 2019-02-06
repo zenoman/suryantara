@@ -110,7 +110,7 @@
                                             <form action="{{url('/karyawan/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
-                                            <input type="file"name="file" required>
+                                            <input type="file"name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                               <p class="help-block">*File excel tidak boleh kosong</p>
                                         </div>
                                         {{csrf_field()}}

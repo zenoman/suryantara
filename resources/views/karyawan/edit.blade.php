@@ -56,10 +56,8 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="jabatan" class="form-control">
-								<option value="{{$ro->id_jabatan}}">{{$ro->jabatan}}</option>
-								<option>Pilih Jabatan</option>
 								@foreach($jabatan as $row)
-								<option value="{{$row->id}}">{{$row->jabatan}}</option>
+								<option value="{{$row->id}}" @if($row->id==$ro->id_jabatan)selected @endif>{{$row->jabatan}}</option>
 								@endforeach
 							</select>
 						</div>

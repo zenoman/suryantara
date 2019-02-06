@@ -60,7 +60,7 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="jabatan" class="form-control">
-								<option>Pilih Jabatan</option>
+								<option selected disabled hidden>Pilih Jabatan</option>
 								@foreach($jabatan as $row)
 								<option value="{{$row->id}}">{{$row->jabatan}}</option>
 								@endforeach

@@ -10,7 +10,10 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
     public function collection()
     {
-        return DB::table('karyawan')->select('id','kode','nama','telp','alamat','id_jabatan')->get();;
+        return DB::table('karyawan')
+        ->select(DB::raw('karyawan.id,karyawan.kode,karyawan.nama,karyawan.telp,karyawan.alamat,jabatan.jabatan'))
+        ->leftjoin('jabatan','jabatan.id','=','karyawan.id_jabatan')
+        ->get();;
     }
     public function headings(): array
     {
@@ -20,7 +23,7 @@ class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
             'Nama Karyawan',
             'telp ',
             'Alamat',
-            'Id Jabatan',
+            'Jabatan',
         ];
     }
     }

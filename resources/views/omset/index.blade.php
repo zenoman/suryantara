@@ -36,6 +36,7 @@
 							<th>Bulan</th>
 							<th>pemasukan</th>
 							<th>pengeluaran</th>
+							<th>Pengeluaran Gaji karyawan</th>
 							<th>pengeluaran lainya</th>
 							<th>Laba</th>
 						</tr>
@@ -46,6 +47,7 @@
 							<th>Bulan</th>
 							<th>pemasukan</th>
 							<th>pengeluaran</th>
+							<th>Pengeluaran Gaji karyawan</th>
 							<th>pengeluaran lainya</th>
 							<th>Laba</th>
 						</tr>
@@ -59,6 +61,7 @@
                             <td>{{$row->bulan}}-{{$row->tahun}}</td>
                             <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
+                            <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}</td>
 
 							<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>

@@ -16,43 +16,27 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 class Karyawancontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // $Karyawans = Karyawanmodel::paginate(20);
+        
         $setting = DB::table('setting')->get();
-        // $datKaryawan = DB::table('karyawan')->paginate(20);
-          $datKaryawan = DB::table('karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
-                 ->select('karyawan.*','jabatan.jabatan')
-                 ->paginate(20);
-
-        // dd($datKaryawan);
+        $datKaryawan = DB::table('karyawan')
+                ->select('karyawan.*','jabatan.jabatan')
+                ->leftjoin('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
+                ->paginate(20);
         return view('karyawan/index',['karyawan'=>$datKaryawan,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 //------------------------------------
    public function importexcel (){
     $setting = DB::table('setting')->get();
         return view('karyawan/importexcel',['title'=>$setting]);
     }
-
     public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template karyawan.xlsx";
+         $file= "file/template karyawan.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
     return Response::download($file, 'template karyawan.xlsx', $headers);
-    return redirect('karyawan/importexcel');
     }
     public function downloadtemplatejbt(){
     return Excel::download(new JabatanExport, 'Jabatan.xlsx');
@@ -67,24 +51,21 @@ class Karyawancontroller extends Controller
     }
 
     public function exsportexcel(){
-    return Excel::download(new KaryawanExport, ' Export Vendor.xlsx');
+    return Excel::download(new KaryawanExport, ' Export data karyawan.xlsx');
     return redirect('karyawan/importexcel');
 
     }
-//-----------------------------------
-     public function caridata(Request $request)
+    public function caridata(Request $request)
     {
         $setting = DB::table('setting')->get();
-        $id=Session::get('id');
         $cari=$request->cari;
-        //_______________________________________________
-        $datKaryawan = DB::table('karyawan')->where('id','!=',$id)
-        ->where(function ($huft) use ($cari){
-            $huft->where('nama','like','%'.$cari.'%')
-            ->orwhere('kode','like','%'.$cari.'%')
-            ->orwhere('alamat','like','%'.$cari.'%');
-        })
-        ->paginate(20);
+        
+        $datKaryawan = DB::table('karyawan')
+        ->select(DB::raw('karyawan.*,jabatan.jabatan'))
+        ->leftjoin('jabatan','jabatan.id','=','karyawan.id_jabatan')
+        ->where('karyawan.nama','like','%'.$cari.'%')
+        ->orwhere('jabatan.jabatan','like','%'.$cari.'%')
+        ->get();
     
         return view('karyawan/pencarian', ['datKaryawan'=>$datKaryawan, 'cari'=>$cari,'title'=>$setting]);
     }
