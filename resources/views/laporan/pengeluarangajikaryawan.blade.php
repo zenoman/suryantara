@@ -11,7 +11,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/separate/jabatan/datatables-net.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
 
 
@@ -22,9 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							
-							<h2>Laporan Pengeluaran Gaji Karyawan Bulan {{$bulanya}}</h2>
-							
+							<h2>Laporan Pengeluaran Gaji Karyawan Bulan {{$bulanya}} Tahun {{$tahunya}}</h2>
 						</div>
 					</div>
 				</div>
@@ -32,9 +30,7 @@
 			<section class="card">
 				<div class="card-block">
 					@if($jabatan!='semua')
-							@foreach($jabatan as $rw)
-						<h4>jabatan : {{$rw->jabatan}}</h4>
-							@endforeach
+						<h4>Jabatan : {{$jabatan}}</h4>
 					@endif
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -42,35 +38,13 @@
 							<th>No</th>
 							<th>Kode Karyawan</th>
 							<th>Nama Karyawan</th>
-							@if($jabatan!='semua')
 							<th>Jabatan</th>
-							@endif
-							<th>Tanggal</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
-							@if($idd = '1' || $jabatan ='semua')
-							<th>Gaji Tambahan</th>
-							@else
-							@endif
+							<th>Tambahan</th>
+							<th>Total</th>
 						</tr>
 						</thead>
-						<tfoot>
-						<tr> 
-							<th>No</th>
-							<th>Kode Karyawan</th>
-							<th>Nama Karyawan</th>
-							@if($jabatan!='semua')
-							<th>Jabatan</th>
-							@endif
-							<th>Tanggal</th>
-							<th>Gaji Pokok</th>
-							<th>Uang Makan</th>
-							@if($idd = '1' || $jabatan ='semua')
-							<th>Gaji Tambahan</th>
-							@else
-							@endif
-						</tr>
-						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
                             @foreach($data as $row)
@@ -79,23 +53,28 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode_karyawan}}</td>
                             <td>{{$row->nama_karyawan}}</td>
-                            @if($jabatan=='semua')
-
-                            @else
-                            @foreach($jabatan as $rw)
-                            <td>{{$rw->jabatan}}</td>
-							@endforeach
-							@endif
-                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
+                            <td>{{$row->jabatan}}</td>
 							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
 							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
-							@if($idd = '1' || $jabatan ='semua')
+							
 							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
-							@else
-							@endif
+							<td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>
+						<tfoot>
+						<tr> 
+							<th>No</th>
+							<th>Kode Karyawan</th>
+							<th>Nama Karyawan</th>
+							<th>Jabatan</th>
+							<th>Gaji Pokok</th>
+							<th>Uang Makan</th>
+							<th>Tambahan</th>
+							<th>Total</th>
+						</tr>
+						</tfoot>
+						
 					</table>
 					{{ $data->links() }}
 				</div>
@@ -103,21 +82,22 @@
 
 			<section class="card">
 				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($total,0,',','.')}}</b></h2>
+					@foreach($total as $tot)
+					<h2>Total <b>{{"Rp ".number_format($tot->totalnya,0,',','.')}}</b></h2>
+					@endforeach
 					<div class="pull-right">
 						@if($jabatan=='semua')
                             
-<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$bulanya.'/'.$jabatan.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
+<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$tglnya.'/'.$kodejabatan)}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
                         @else
-                        @foreach($jabatan as $row)
-<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$bulanya.'/'.$row->jabatan.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
-						@endforeach
+                        
+<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$tglnya.'/'.$kodejabatan)}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
+						
 						@endif
 							<button type="button" class="btn btn-primary" onclick="cetak()">
 								cetak
-							</button>	
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+							</button>
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali
 							</button>
 						
@@ -136,12 +116,9 @@
 				<td colspan="2" align="center">
 					<b>
 						@if($jabatan == 'semua')
-						Laporan Pengeluaran Bulan {{$bulanya}} Semua Jabatan
+						Laporan Pengeluaran Gaji Karyawan Bulan {{$bulanya}} Tahun {{$tahunya}}
 						@else
-
-							@foreach($jabatan as $roo)
-						Laporan Pengeluaran di jabatan {{$roo->jabatan}} Bulan {{$bulanya}}
-							@endforeach
+						Laporan Pengeluaran Gaji {{$jabatan}} Bulan {{$bulanya}} Tahun {{$tahunya}}
 						@endif
 						
 					</b>
@@ -163,17 +140,11 @@
 							<th>No</th>
 							<th>Kode Karyawan</th>
 							<th>Nama Karyawan</th>
-							@if($jabatan=='semua')
-							@else
 							<th>Jabatan</th>
-							@endif
-							<th>Tanggal</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
-							@if($idd = '1' || $jabatan ='semua')
-							<th>Gaji Tambahan</th>
-							@else
-							@endif
+							<th>Tambahan</th>
+							<th>Total</th>
 						</tr>
 						</thead>
 						
@@ -182,29 +153,23 @@
                             @foreach($data2 as $row)
                             <?php $no = $i++;?>
                         <tr>
-                        	<td  align="center">{{$no}}</td>
-                            <td  align="center">{{$row->kode_karyawan}}</td>
+                            <td>{{$no}}</td>
+                            <td>{{$row->kode_karyawan}}</td>
                             <td>{{$row->nama_karyawan}}</td>
-                            @if($jabatan=='semua')
-                            @else
-                            @foreach($jabatan as $rw)
-                            <td align="center">{{$rw->jabatan}}</td>
-							@endforeach
-							@endif
-                            <td  align="center">{{$row->bulan}}-{{$row->tahun}}</td>
-							<td  align="center">{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
-							<td  align="center">{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
-							@if($idd = '1' || $jabatan ='semua')
-							<td  align="center">{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
-							@else
-							@endif
-                          
-						</tr>
+                            <td>{{$row->jabatan}}</td>
+							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
+							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
+							
+							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
+							<td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
+                        </tr>
 						@endforeach
 						
 						</tbody>
 					</table>
-					<p>Total : <b>{{"Rp. ".number_format($total,0,',','.')}}</b></p>
+					@foreach($total as $tot)
+					<p>Total <b>{{"Rp ".number_format($tot->totalnya,0,',','.')}}</b></p>
+					@endforeach
 			</div>
 	@endsection
 		@section('js')

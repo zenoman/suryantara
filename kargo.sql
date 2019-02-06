@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versi server:                 10.1.36-MariaDB - mariadb.org binary distribution
--- OS Server:                    Win32
--- HeidiSQL Versi:               9.4.0.5174
+-- Server version:               10.1.30-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win32
+-- HeidiSQL Version:             9.4.0.5174
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,12 +12,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Membuang struktur basisdata untuk kargo
+-- Dumping database structure for kargo
 DROP DATABASE IF EXISTS `kargo`;
 CREATE DATABASE IF NOT EXISTS `kargo` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `kargo`;
 
--- membuang struktur untuk table kargo.admin
+-- Dumping structure for table kargo.admin
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.admin: ~3 rows (lebih kurang)
+-- Dumping data for table kargo.admin: ~3 rows (approximately)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `email`, `alamat`, `level`) VALUES
@@ -41,33 +41,36 @@ INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `emai
 	(9, 'Admin-000003', 'abiihsan', '74b213f68f648006a318f52713450f27', 'abi ihsan fadli', '098765546', 'abi@gmail.com', 'gurah', 'programer');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.gaji_karyawan
+-- Dumping structure for table kargo.gaji_karyawan
 DROP TABLE IF EXISTS `gaji_karyawan`;
 CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_karyawan` varchar(20) DEFAULT NULL,
   `nama_karyawan` varchar(40) DEFAULT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
-  `gaji_pokok` varchar(20) DEFAULT NULL,
-  `uang_makan` varchar(20) DEFAULT NULL,
-  `total` varchar(20) DEFAULT NULL,
-  `gaji_tambahan` int(30) DEFAULT NULL,
+  `gaji_pokok` int(11) DEFAULT NULL,
+  `uang_makan` int(11) DEFAULT NULL,
+  `gaji_tambahan` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
   `bulan` int(11) DEFAULT NULL,
   `tahun` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.gaji_karyawan: ~4 rows (lebih kurang)
+-- Dumping data for table kargo.gaji_karyawan: ~7 rows (approximately)
 DELETE FROM `gaji_karyawan`;
 /*!40000 ALTER TABLE `gaji_karyawan` DISABLE KEYS */;
-INSERT INTO `gaji_karyawan` (`id`, `kode_karyawan`, `nama_karyawan`, `id_jabatan`, `gaji_pokok`, `uang_makan`, `total`, `gaji_tambahan`, `bulan`, `tahun`) VALUES
-	(5, 'Karyawan-000001', 'abi ihsan', 1, '400000', '30000', '430000', 2638, 1, 2019),
-	(6, 'Karyawan-000002', 'abi ihsan fadli', 26, '400000', '30000', '430000', NULL, 1, 2019),
-	(7, 'Karyawan-000003', 'fadli', 25, '500000', '30000', '530000', NULL, 1, 2019),
-	(8, 'Karyawan-000004', 'singo', 26, '400000', '30000', '430000', NULL, 1, 2019);
+INSERT INTO `gaji_karyawan` (`id`, `kode_karyawan`, `nama_karyawan`, `id_jabatan`, `gaji_pokok`, `uang_makan`, `gaji_tambahan`, `total`, `bulan`, `tahun`) VALUES
+	(1, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 2638, 430000, 1, 2019),
+	(2, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 1, 2019),
+	(3, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 1, 2019),
+	(4, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 1, 2019),
+	(5, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 1, 2019),
+	(6, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 1, 2019),
+	(7, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 1, 2019);
 /*!40000 ALTER TABLE `gaji_karyawan` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.jabatan
+-- Dumping structure for table kargo.jabatan
 DROP TABLE IF EXISTS `jabatan`;
 CREATE TABLE IF NOT EXISTS `jabatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -77,17 +80,17 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.jabatan: ~3 rows (lebih kurang)
+-- Dumping data for table kargo.jabatan: ~4 rows (approximately)
 DELETE FROM `jabatan`;
 /*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
 INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`) VALUES
-	(1, 'Best Managger', '400000', '30000'),
+	(1, 'Base Managger', '400000', '30000'),
 	(24, 'Staff', '400000', '30000'),
 	(25, 'Staff Keuangan Pusat', '500000', '30000'),
 	(26, 'Staff Keuangan Cabang', '400000', '30000');
 /*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.karyawan
+-- Dumping structure for table kargo.karyawan
 DROP TABLE IF EXISTS `karyawan`;
 CREATE TABLE IF NOT EXISTS `karyawan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -97,19 +100,22 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `alamat` varchar(100) NOT NULL,
   `id_jabatan` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.karyawan: ~4 rows (lebih kurang)
+-- Dumping data for table kargo.karyawan: ~7 rows (approximately)
 DELETE FROM `karyawan`;
 /*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
 INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`) VALUES
 	(1, 'Karyawan-000001', 'abi ihsan', '085755957230', 'kediri', 1),
-	(2, 'Karyawan-000002', 'abi ihsan fadli', '5654', 'kediri', 26),
+	(2, 'Karyawan-000002', 'abi ihsan singo', '5654', 'kediri bajulan', 26),
 	(3, 'Karyawan-000003', 'fadli', '57656', 'kediri', 25),
-	(4, 'Karyawan-000004', 'singo', '65677', 'kediri', 26);
+	(4, 'Karyawan-000004', 'singo', '65677', 'kediri', 26),
+	(5, 'Karyawan-000005', 'hari anto', '0239482903890', 'gurah magersari', 24),
+	(6, 'Karyawan-000006', 'herman', '2390482390', 'gurah', 24),
+	(7, 'Karyawan-000007', 'dina', '2390482390', 'gurah', 24);
 /*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.kategori_barang
+-- Dumping structure for table kargo.kategori_barang
 DROP TABLE IF EXISTS `kategori_barang`;
 CREATE TABLE IF NOT EXISTS `kategori_barang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -118,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `kategori_barang` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.kategori_barang: ~3 rows (lebih kurang)
+-- Dumping data for table kargo.kategori_barang: ~3 rows (approximately)
 DELETE FROM `kategori_barang`;
 /*!40000 ALTER TABLE `kategori_barang` DISABLE KEYS */;
 INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`) VALUES
@@ -127,7 +133,7 @@ INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`) VALUES
 	(3, 'Meat / Frozen Food', '50');
 /*!40000 ALTER TABLE `kategori_barang` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.omset
+-- Dumping structure for table kargo.omset
 DROP TABLE IF EXISTS `omset`;
 CREATE TABLE IF NOT EXISTS `omset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,19 +142,19 @@ CREATE TABLE IF NOT EXISTS `omset` (
   `pemasukan` int(11) DEFAULT NULL,
   `pengeluaran` int(11) DEFAULT NULL,
   `pengeluaran_lainya` int(11) DEFAULT NULL,
-  `laba` int(11) DEFAULT NULL,
   `gaji_karyawan` int(30) NOT NULL,
+  `laba` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.omset: ~0 rows (lebih kurang)
+-- Dumping data for table kargo.omset: ~1 rows (approximately)
 DELETE FROM `omset`;
 /*!40000 ALTER TABLE `omset` DISABLE KEYS */;
-INSERT INTO `omset` (`id`, `bulan`, `tahun`, `pemasukan`, `pengeluaran`, `pengeluaran_lainya`, `laba`, `gaji_karyawan`) VALUES
-	(6, 1, 2019, 263790, 55000, 52000, -1663210, 1820000);
+INSERT INTO `omset` (`id`, `bulan`, `tahun`, `pemasukan`, `pengeluaran`, `pengeluaran_lainya`, `gaji_karyawan`, `laba`) VALUES
+	(1, 1, 2019, 263790, 55000, 52000, 3112638, -2955848);
 /*!40000 ALTER TABLE `omset` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.pengeluaran_lain
+-- Dumping structure for table kargo.pengeluaran_lain
 DROP TABLE IF EXISTS `pengeluaran_lain`;
 CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -161,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.pengeluaran_lain: ~5 rows (lebih kurang)
+-- Dumping data for table kargo.pengeluaran_lain: ~5 rows (approximately)
 DELETE FROM `pengeluaran_lain`;
 /*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
 INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah`, `tgl`, `gambar`) VALUES
@@ -172,7 +178,7 @@ INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah
 	(12, 'devasatrio', 'parkir', 'parkir mobil putih', 2000, '2019-01-04', '1546576232-favicon.png');
 /*!40000 ALTER TABLE `pengeluaran_lain` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.resi_pengiriman
+-- Dumping structure for table kargo.resi_pengiriman
 DROP TABLE IF EXISTS `resi_pengiriman`;
 CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -210,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.resi_pengiriman: ~20 rows (lebih kurang)
+-- Dumping data for table kargo.resi_pengiriman: ~20 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `total_biaya`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`) VALUES
@@ -236,7 +242,7 @@ INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`,
 	(24, '12345-006', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'N', NULL, 'cash', 'manual', '2');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.setting
+-- Dumping structure for table kargo.setting
 DROP TABLE IF EXISTS `setting`;
 CREATE TABLE IF NOT EXISTS `setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -254,14 +260,14 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.setting: ~0 rows (lebih kurang)
+-- Dumping data for table kargo.setting: ~1 rows (approximately)
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `bulan_sekarang`) VALUES
 	(1, 'Suryantara', 'abihsan@gmail.com', '082261110369', '1546485899-favicon.png', '1546486783-favicon.png', 'PT SURYANTARA CARGO', '1546074136-delivery.png', 'SELAMAT DATANG DI WEBSITE RESMI KAMI', 'PT SURYANTARA CARGO adalah jasa pengiriman barang yang telah terbukti kwalitas dan pelayanan nya', 'Jln PGA No.1 RW 01 RT 01 magersari gurah kediri', 2);
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.surat_jalan
+-- Dumping structure for table kargo.surat_jalan
 DROP TABLE IF EXISTS `surat_jalan`;
 CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -279,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel kargo.surat_jalan: ~5 rows (lebih kurang)
+-- Dumping data for table kargo.surat_jalan: ~5 rows (approximately)
 DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
 INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`) VALUES
@@ -290,7 +296,7 @@ INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `to
 	(5, 'devasatrio', 'SJ020219-06-000001', 'PT Iwak Enak-083223336313', '2019-02-02', 'Y', 4, 2, 106020, 38340, 30000, 'mungkung loceret nganjuk');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.tarif_darat
+-- Dumping structure for table kargo.tarif_darat
 DROP TABLE IF EXISTS `tarif_darat`;
 CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -302,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.tarif_darat: ~3 rows (lebih kurang)
+-- Dumping data for table kargo.tarif_darat: ~3 rows (approximately)
 DELETE FROM `tarif_darat`;
 /*!40000 ALTER TABLE `tarif_darat` DISABLE KEYS */;
 INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
@@ -311,7 +317,7 @@ INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estima
 	(16, 'darat00004', 'etan', 40000, 3, '2');
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.tarif_laut
+-- Dumping structure for table kargo.tarif_laut
 DROP TABLE IF EXISTS `tarif_laut`;
 CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -323,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.tarif_laut: ~51 rows (lebih kurang)
+-- Dumping data for table kargo.tarif_laut: ~51 rows (approximately)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
 INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
@@ -380,7 +386,7 @@ INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimas
 	(63, 'laut0056', 'laut56', 12050, 61, '2');
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.tarif_udara
+-- Dumping structure for table kargo.tarif_udara
 DROP TABLE IF EXISTS `tarif_udara`;
 CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -393,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.tarif_udara: ~11 rows (lebih kurang)
+-- Dumping data for table kargo.tarif_udara: ~11 rows (approximately)
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
 INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`) VALUES
@@ -410,7 +416,7 @@ INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_
 	(16, 'udara00009999', 'kediri', 'asdaas', 23000, 12, 2000);
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
--- membuang struktur untuk table kargo.vendor
+-- Dumping structure for table kargo.vendor
 DROP TABLE IF EXISTS `vendor`;
 CREATE TABLE IF NOT EXISTS `vendor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -422,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Membuang data untuk tabel kargo.vendor: ~3 rows (lebih kurang)
+-- Dumping data for table kargo.vendor: ~3 rows (approximately)
 DELETE FROM `vendor`;
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`) VALUES
@@ -431,7 +437,7 @@ INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`) VA
 	(5, 'vendor003', 'PT Moro Dadi', '082122272212', 'Jln badut ulang tahun no 3 magelang', 'N');
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 
--- membuang struktur untuk trigger kargo.editadmin
+-- Dumping structure for trigger kargo.editadmin
 DROP TRIGGER IF EXISTS `editadmin`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -442,7 +448,17 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger kargo.editvendor
+-- Dumping structure for trigger kargo.editkaryawan
+DROP TRIGGER IF EXISTS `editkaryawan`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `editkaryawan` BEFORE UPDATE ON `karyawan` FOR EACH ROW BEGIN
+update gaji_karyawan set nama_karyawan=new.nama where nama_karyawan=old.nama;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- Dumping structure for trigger kargo.editvendor
 DROP TRIGGER IF EXISTS `editvendor`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -452,7 +468,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- membuang struktur untuk trigger kargo.hapus_suratjalan
+-- Dumping structure for trigger kargo.hapus_suratjalan
 DROP TRIGGER IF EXISTS `hapus_suratjalan`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //

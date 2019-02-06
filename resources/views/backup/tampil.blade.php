@@ -66,9 +66,9 @@
 								<li>
 								@endif
 									<div class="icon">
-										<i class="fa fa-bar-chart"></i>
+										<i class="fa fa-users"></i>
 									</div>
-									<div class="caption">Omset</div>
+									<div class="caption">Pengeluaran Gaji Karyawan</div>
 								</li>
 							</ul>
 						</div>
@@ -128,9 +128,9 @@
 							</a>
 						</div>
 						@elseif(Session::get('backup_step')==4)
-						<header class="steps-numeric-title">Backup Omset</header>
+						<header class="steps-numeric-title">Pengeluaran Gaji Karyawan</header>
 						<div class="form-group">
-							<a href="{{url('/exsportomset/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
+							<!-- <a href="{{url('/exsportomset/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
 								<i class="fa fa-file-excel-o"></i>
 								Exsport Excel
 							</a>
@@ -138,6 +138,10 @@
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>
+							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapuspengeluaranlain/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
+								<i class="fa fa-trash"></i>
+								Hapus Data
+							</a> -->
 						</div>
 						@endif
 						@if(Session::get('backup_step')==4)

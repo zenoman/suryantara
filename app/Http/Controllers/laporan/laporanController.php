@@ -88,9 +88,9 @@ class laporanController extends Controller
         ->get();
 
         $jabatan =  DB::table('karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
+                ->select(DB::raw('karyawan.id_jabatan,jabatan.jabatan'))
+                ->leftjoin('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
                 ->groupby('karyawan.id_jabatan')
-                ->select('karyawan.id_jabatan','jabatan.jabatan','jabatan.id')
                 ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/pilihpengeluarangjkw',['title'=>$webinfo,'bulan'=>$ambilbulan,'jabatan'=>$jabatan]);
@@ -253,104 +253,78 @@ class laporanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->bulan,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
     }
-    //-----------------------------------------------------------------------------------------------
-        public function tampilpengeluarangjkw(Request $request){
+    //------------------------------------------------------------
+    public function tampilpengeluarangjkw(Request $request){
+        
         $namajabatan = $request->jabatan;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
         $thn = $bulan[1];
-        // dd($request->jabatan);
-        if($namajabatan == 'semua'){
-            $data =DB::table('gaji_karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
-                ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->where('bulan',$bln)
-                ->where('tahun',$thn)
-                ->orderby('kode_karyawan','asc')
-                ->paginate(40);
+        
+        if($namajabatan=='semua'){
+            $idjabatan = 'semua';
+            $jabat = 'semua';
+            $data = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->paginate(40);
 
             $data2 = DB::table('gaji_karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
-                ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->where('bulan',$bln)
-                ->where('tahun',$thn)
-                ->orderby('kode_karyawan','asc')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
             ->get();
 
-            $tot = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(total) as tot'))
-            ->where('bulan',$bln)
-            ->where('tahun',$thn)
-            ->get();
-            $tota = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(gaji_tambahan) as tota'))
-            ->where('bulan',$bln)
-            ->where('tahun',$thn)
+            $total = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as totalnya'))
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
             ->get();
         }else{
-             $data=DB::table('gaji_karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
-                ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->where('bulan',$bln)
-                ->where('tahun',$thn)
-                ->where('id_jabatan',$namajabatan)
-                ->orderby('kode_karyawan','asc')
-                ->paginate(40);
-            $data2=DB::table('gaji_karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'gaji_karyawan.id_jabatan')
-                ->select('gaji_karyawan.*','jabatan.jabatan')
-                ->where('bulan',$bln)
-                ->where('tahun',$thn)
-                ->where('id_jabatan',$namajabatan)
-                ->orderby('kode_karyawan','asc')
+        $jabatan = explode('-', $request->jabatan);
+        $idjabatan = $jabatan[0];
+        $jabat = $jabatan[1];
+        $data = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->paginate(40);
+
+            $data2 = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
             ->get();
 
-            $tot = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(total) as tot'))
-                ->where('bulan',$bln)
-                ->where('tahun',$thn)
-                ->where('id_jabatan',$namajabatan)
-                ->orderby('kode_karyawan','asc')
-            ->get();
-            $tota = DB::table('gaji_karyawan')
-            ->select(DB::raw('SUM(gaji_tambahan) as tota'))
-            ->where('bulan',$bln)
-            ->where('tahun',$thn)
+            $total = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as totalnya'))
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
             ->get();
         }
-if($namajabatan=='semua'){
-    $jabat ='semua';
-}else{
-        $jabat=DB::table('jabatan')
-            ->select(DB::raw('jabatan'))
-            ->where('id',$namajabatan)
-            ->get();
-        $idjabat=DB::table('jabatan')
-            ->select(DB::raw('id'))
-            ->where('id',$namajabatan)
-            ->get();
-        }       
-
-         foreach ($tot as $row) {
-             foreach ($tota as $rw) {
-                 $total = $row->tot + $rw->tota;
-             }
-         }
-        // dd($total);
-        // dd($jabat);
         $webinfo = DB::table('setting')->limit(1)->get();
-return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'jabatan'=>$jabat,'idd'=>$idjabat,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
+    return view('laporan/pengeluarangajikaryawan',[
+        'data'=>$data,
+        'tglnya'=>$request->bulan,
+        'title'=>$webinfo,
+        'total'=>$total,
+        'bulanya'=>$bln,
+        'tahunya'=>$thn,
+        'jabatan'=>$jabat,
+        'data2'=>$data2,
+        'kodejabatan'=>$idjabatan,
+        'data3'=>$data->appends(request()->input())
+    ]);
     }
-    //-----------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------
     public function exsportlaporanpemasukan($bulannya, $jalur){
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
 
             if ($jalur !='semua') {
-        $namafile = "Export laporan pemasukan pada bulan ".$bln." tahun ".$thn." di jalur ".$jalur.".xlsx";
+        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di jalur ".$jalur.".xlsx";
             }else{
-        $namafile = "Export laporan pemasukan pada bulan ".$bln." tahun ".$thn." di ".$jalur." jalur.xlsx";
+        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di ".$jalur." jalur.xlsx";
             }
         return Excel::download(new LaporanPemasukanExport($bln,$thn,$jalur),$namafile);
 
@@ -360,9 +334,9 @@ return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($vendor !='semua') {
-            $namafile = "Export laporan pengeluaran pada bulan ".$bln." tahun ".$thn." vendor ".$vendor.".xlsx";
+            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." vendor ".$vendor.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran pada bulan ".$bln." tahun ".$thn." di ".$vendor." vendor.xlsx";
+            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." di ".$vendor." vendor.xlsx";
         }
         return Excel::download(new LaporanPengeluaranVendorExport($bln,$thn,$vendor),$namafile);
     }
@@ -370,11 +344,8 @@ return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
-        if ($jabatan !='semua') {
-            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." jabatan ".$jabatan.".xlsx";
-        }else{
-            $namafile = "Export laporan pengeluaran gaji karyawan pada bulan ".$bln." tahun ".$thn." di ".$jabatan." jabatan.xlsx";
-        }
+        $namafile = "Export laporan pengeluaran gaji karyawan bulan ".$bln." tahun ".$thn.".xlsx";
+        
         return Excel::download(new LaporanPengeluaranGajiKaryawanExport($bln,$thn,$jabatan),$namafile);
     }
         public function exsportlaporanpengeluaranlain($bulannya, $kategori){
@@ -382,9 +353,9 @@ return view('laporan/pengeluarangajikaryawan',['data'=>$data,'title'=>$webinfo,'
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($kategori !='semua') {
-            $namafile = "Export laporan pengeluaran lain pada bulan ".$bln." tahun ".$thn." dengan kategori ".$kategori.".xlsx";
+            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." dengan kategori ".$kategori.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran lain pada bulan ".$bln." tahun ".$thn." di ".$kategori." kategori.xlsx";
+            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." di ".$kategori." kategori.xlsx";
         }
         return Excel::download(new LaporanPengeluaranLainExport($bln,$thn,$kategori),$namafile);
 

@@ -74,9 +74,8 @@
 <a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
 							<button type="button" class="btn btn-primary" onclick="cetak()">
 								cetak
-							</button>	
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+							</button>
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali
 							</button>
 						
@@ -119,6 +118,7 @@
 							<th>Bulan</th>
 							<th>pemasukan</th>
 							<th>pengeluaran</th>
+							<th>Pengeluaran Gaji karyawan</th>
 							<th>pengeluaran lainya</th>
 							<th>Laba</th>
 						</tr>
@@ -133,6 +133,7 @@
                             <td>{{$row->bulan}}-{{$row->tahun}}</td>
                             <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
+                            <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}</td>
 
 							<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>

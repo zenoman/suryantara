@@ -54,11 +54,8 @@
 								<select class="select2" name="jabatan">
 								<option value="semua">Semua</option>
 								@foreach($jabatan as $vn)
-								<option value="{{$vn->id_jabatan}}">
-									@php
-										$jabatan = explode("-", $vn->id_jabatan);
-									@endphp
-									{{$jabatan[0]}}
+								<option value="{{$vn->id_jabatan."-".$vn->jabatan}}">
+									{{$vn->jabatan}}
 								</option>
 								@endforeach
 							</select>
