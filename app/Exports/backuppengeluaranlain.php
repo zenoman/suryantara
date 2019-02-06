@@ -5,8 +5,8 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-
-class backuppengeluaranlain implements FromCollection, WithHeadings
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+class backuppengeluaranlain implements FromCollection, WithHeadings, ShouldAutoSize
 {
 	public function __construct(int $bulan,int $tahun)
     {
