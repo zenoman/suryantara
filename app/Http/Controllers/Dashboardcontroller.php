@@ -27,7 +27,6 @@ class Dashboardcontroller extends Controller
         $jumlahsj = DB::table('surat_jalan')
         ->where('status','=','Y')
         ->count();
-         // 
         $setting = DB::table('setting')->get();
         return view('dashboard/index',['title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj]);
     }
@@ -40,17 +39,20 @@ class Dashboardcontroller extends Controller
         foreach ($setting as $st){
             $bulan = $st->bulan_sekarang;
         }
+
         if($bulan != date('m')){
             $tahun = date('Y');
             if(date('m')==1){
+
                 $pemasukan = $this->cari_pemasukan($bulan,date('Y'),"ny");
+
                 $pengeluaran = $this->cari_pengeluaran($bulan,date('Y'),"ny");
+                
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"ny");
-                $tambah_gjkw = $this->tambahgjkw($pemasukan,$bulan,date('Y'),"ny");
-                $gaji_karyawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
-                $gajitambahan = $this->cari_gajikaryawantambahan($bulan,date('Y'),"ny");
-                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gaji_karyawan;
-                $gajikaryawan=$gaji_karyawan + $gajitambahan;
+                $this->masukangaji($pemasukan,$bulan,date('Y'),"ny");
+                $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
+                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan;
+                
                 $insert = DB::table('omset')
                 ->insert([
                     'bulan'=>12,
@@ -61,15 +63,14 @@ class Dashboardcontroller extends Controller
                     'laba'=>$laba,
                     'gaji_karyawan'=>$gajikaryawan
                 ]);
+
             }else{
                 $pemasukan = $this->cari_pemasukan($bulan,date('Y'),"y");
                 $pengeluaran = $this->cari_pengeluaran($bulan,date('Y'),"y");
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"y");
-                $tambah_gjkw = $this->tambahgjkw($pemasukan,$bulan,date('Y'),"y");
-                $gaji_karyawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
-                $gajitambahan = $this->cari_gajikaryawantambahan($bulan,date('Y'),"y");
-                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gaji_karyawan;
-                $gajikaryawan=$gaji_karyawan + $gajitambahan;
+                $this->masukangaji($pemasukan,$bulan,date('Y'),"y");
+                $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
+                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan;
                 $insert = DB::table('omset')
                 ->insert([
                     'bulan'=>date('m')-1,
@@ -134,106 +135,57 @@ class Dashboardcontroller extends Controller
         }
         return $newdata;
     }
-    function tambahgjkw($pemasukan,$bulan,$tahun,$status){
-                $datKaryawan = DB::table('karyawan')
-                ->join('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
-                 ->select('karyawan.kode','karyawan.nama','jabatan.id','jabatan.gaji_pokok','jabatan.uang_makan')
-                 ->get();
-                 
-        if($bulan != date('m')){
-            $tahun = date('Y');
-                 foreach ($datKaryawan as $roz) {
-                    if($roz->id ==1){
-                    $ambilgajitambahan=$pemasukan*1/100;
-                    
-            if(date('m')==1){
-                $total=$roz->gaji_pokok + $roz->uang_makan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$roz->kode,
-                    'nama_karyawan'=>$roz->nama,
-                    'bulan'=>12,
-                    'tahun'=>$tahun-1,
-                    'id_jabatan'=>$roz->id,
-                    'gaji_pokok'=>$roz->gaji_pokok,
-                    'uang_makan'=>$roz->uang_makan,
-                    'total'=>$total,
-                    'gaji_tambahan'=>$ambilgajitambahan
-                ]); 
-                 
-            }else{
-                 
-                    $total=$roz->gaji_pokok + $roz->uang_makan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$roz->kode,
-                    'nama_karyawan'=>$roz->nama,
-                    'bulan'=>date('m')-1,
-                    'tahun'=>$tahun,
-                    'id_jabatan'=>$roz->id,
-                    'gaji_pokok'=>$roz->gaji_pokok,
-                    'uang_makan'=>$roz->uang_makan,
-                    'total'=>$total,
-                    'gaji_tambahan'=>$ambilgajitambahan
-                ]); 
-                 }
-                }else{
-                    if(date('m')==1){
-                    $total=$roz->gaji_pokok + $roz->uang_makan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$roz->kode,
-                    'nama_karyawan'=>$roz->nama,
-                    'bulan'=>12,
-                    'tahun'=>$tahun-1,
-                    'id_jabatan'=>$roz->id,
-                    'gaji_pokok'=>$roz->gaji_pokok,
-                    'uang_makan'=>$roz->uang_makan,
-                    'total'=>$total
-                ]); 
-                 
-            }else{
-                 
-                    $total=$roz->gaji_pokok + $roz->uang_makan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$roz->kode,
-                    'nama_karyawan'=>$roz->nama,
-                    'bulan'=>date('m')-1,
-                    'tahun'=>$tahun,
-                    'id_jabatan'=>$roz->id,
-                    'gaji_pokok'=>$roz->gaji_pokok,
-                    'uang_makan'=>$roz->uang_makan,
-                    'total'=>$total
-                ]); 
-                 }
-                }
-            }
 
+    function masukangaji($pemasukan,$bulan,$tahun,$status){
+        if($status=="ny"){
+            $tahun -=1;
+        }
+        $datakaryawan =
+        DB::table('karyawan')
+        ->select(DB::raw('karyawan.*,jabatan.gaji_pokok,jabatan.uang_makan'))
+        ->join('jabatan','jabatan.id','=','karyawan.id_jabatan')
+        ->get();
+
+        foreach ($datakaryawan as $row) {
+            if ($row->id_jabatan==1) {
+                $gajitambahan = $pemasukan*1/100;
+                $totalgaji = $row->gaji_pokok + $row->uang_makan +$gajitambahan;
+                DB::table('gaji_karyawan')
+                ->insert([
+                    'kode_karyawan'=>$row->kode,
+                    'nama_karyawan'=>$row->nama,
+                    'id_jabatan'=>$row->id_jabatan,
+                    'gaji_pokok'=>$row->gaji_pokok,
+                    'uang_makan'=>$row->uang_makan,
+                    'gaji_tambahan'=>$gajitambahan,
+                    'total'=>$totalgaji,
+                    'bulan'=>$bulan,
+                    'tahun'=>$tahun
+                ]);    
+            }else{
+                $totalgaji = $row->gaji_pokok + $row->uang_makan;
+                DB::table('gaji_karyawan')
+                ->insert([
+                    'kode_karyawan'=>$row->kode,
+                    'nama_karyawan'=>$row->nama,
+                    'id_jabatan'=>$row->id_jabatan,
+                    'gaji_pokok'=>$row->gaji_pokok,
+                    'uang_makan'=>$row->uang_makan,
+                    'total'=>$totalgaji,
+                    'bulan'=>$bulan,
+                    'tahun'=>$tahun
+                ]);
+            }
+        }
     }
-}
-function cari_gajikaryawan($bulan,$tahun,$status){
+
+    function cari_gajikaryawan($bulan,$tahun,$status){
         if($status=="ny"){
             $tahun -=1;
         }
         $data = DB::table('gaji_karyawan')
         ->select(DB::raw('SUM(total) as totalnya'))
-        ->where('bulan',$bulan)
-        ->where('tahun',$tahun)
-        ->get();
-         foreach ($data as $row) {
-            $newdata = $row->totalnya;
-        }
-        return $newdata;
-    }
-    function cari_gajikaryawantambahan($bulan,$tahun,$status){
-        if($status=="ny"){
-            $tahun -=1;
-        }
-        $data = DB::table('gaji_karyawan')
-        ->select(DB::raw('SUM(gaji_tambahan) as totalnya'))
-        ->where('bulan',$bulan)
-        ->where('tahun',$tahun)
+        ->where([['bulan','=',$bulan],['tahun','=',$tahun]])
         ->get();
          foreach ($data as $row) {
             $newdata = $row->totalnya;
