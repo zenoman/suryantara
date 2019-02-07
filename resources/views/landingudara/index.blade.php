@@ -14,26 +14,15 @@
     @endforeach
 
     <!-- Bootstrap core CSS -->
-    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
-    <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
-
-    <!-- Custom styles for this template -->
-    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
-
-    
-    <!--<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">-->
-
+    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+    <link href="{{asset('asset_user/css/select2user.css')}}" rel="stylesheet">
   </head>
 
   <body id="page-top">
@@ -70,88 +59,56 @@
     <section>  
 
     <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
+    <h1 class="text-uppercase text-center mb-0">Cek Tarif Udara</h1>
     <br>
     <br>
         <form method="get" action="{{url('landudara/cari')}}">
         <div class="row">
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-          <!--
-          <div class="form-group">
-            <label class="col-sm-2 form-control-label semibold">Kota Tujuan</label>
-            <div class="col-sm-12">
-              <div class="input-group">
-                <input type="text" class="form-control" name="kot" placeholder="Misal : Kediri">
-              </div>
-             </div>             
-          </div>        
-          <div class="form-group">
-            <label class="col-sm-2 form-control-label semibold">Berat minimal</label>
-            <div class="col-sm-12">
-              <div class="input-group">
-                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                <div class="input-group-addon">
-                  Kg
-                </div>
-              </div>
-             
+          <div class="col-sm-2 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Asal<small> :</small></label>
+              <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
             </div>
           </div>
-          
-          <div class="form-group">
-            <label class="col-sm-2 form-control-label semibold">Penerbangan</label>
-            <div class="col-sm-12">
-              <select id="exampleSelect" name="psw" class="form-control">
-                <option>Pilih Penerbangan</option>
-                @foreach($select as $row)
-                <option>{{$row->airlans}}</option>
-                @endforeach
-              </select>
-             </div>             
-          </div>-->
-
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
-              <input type="text" class="form-control" name="kot" placeholder="Misal : Kediri">
+              <select id="kota_tujuan" class="select2" name="state">
+                @foreach($tujuan as $row)
+                <option>{{$row->tujuan}}</option>
+                @endforeach
+              </select>
+              
             </div>
           </div>
 
           <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
-            <label>Berat Minimal<small> :</small></label>
+            <label>Berat<small> :</small></label>
             
               <div class="input-group">
-                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                <div class="input-group-addon">
-                  Kg
-                </div>
+                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg" required>
               </div>
             </div>
           </div>
           
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
-              <label>Penerbangan<small> :</small></label>
+              <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">
-                <option>Pilih Penerbangan</option>
+                <option selected disabled hidden>Pilih Maskapai</option>
                 @foreach($select as $row)
                 <option>{{$row->airlans}}</option>
                 @endforeach
               </select>
             </div>
           </div>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <div class="col-sm-1 col-sm-offset-1"> 
-            <div class="form-group">
-              <label><small></small></label>          
-              <div class="input-group">
-                <input type="submit" class="btn btn-info" value="Cari">
-                
+               </div>   
+              <div class="text-right">
+                <button type="submit" class="btn btn-info">Cari</button>
+                <button type="button" class="btn btn-danger">Kembali</button>
               </div>
-            </div>
-          </div>
+            
 
         </form>
         
@@ -216,33 +173,23 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
-    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="asset_user/js/jqBootstrapValidation.js"></script>
-    <script src="asset_user/js/contact_me.js"></script>
+    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="asset_user/js/freelancer.min.js"></script>
-    
-  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/js/plugins.js')}}"></script>
-
-  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-  <script>
-    $(function() {
-      $('#example').DataTable();
-    });
-  </script>
+    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
+  
   <script type="text/javascript">
+    $('#kota_tujuan').select2();
      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
@@ -252,9 +199,6 @@
          return true;
       }
 </script>
-
-<script src="{{asset('assets/js/app.js')}}"></script>
-
   </body>
 
 </html>
