@@ -70,7 +70,7 @@
     <section>  
 
     <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
+    <h1 class="text-uppercase text-center mb-0">Cek Tarif Udara</h1>
     <br>
     <br>
         <form method="get" action="{{url('landudara/cari')}}">
@@ -120,22 +120,19 @@
 
           <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
-            <label>Berat Minimal<small> :</small></label>
+            <label>Berat<small> :</small></label>
             
               <div class="input-group">
                 <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                <div class="input-group-addon">
-                  Kg
-                </div>
               </div>
             </div>
           </div>
           
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
-              <label>Penerbangan<small> :</small></label>
+              <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">
-                <option>Pilih Penerbangan</option>
+                <option>Pilih Maskapai</option>
                 @foreach($select as $row)
                 <option>{{$row->airlans}}</option>
                 @endforeach
@@ -145,9 +142,9 @@
           <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <div class="col-sm-1 col-sm-offset-1"> 
             <div class="form-group">
-              <label><small></small></label>          
+              <label><small>&nbsp;</small></label>          
               <div class="input-group">
-                <input type="submit" class="btn btn-info" value="Cari">
+                <input type="submit" class="btn btn-info btn-block" value="Cari">
                 
               </div>
             </div>
