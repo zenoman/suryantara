@@ -11,18 +11,13 @@ use App\Http\Controllers\Controller;
 
 class landingudaracontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
     public function index()
     {
      $tarif_udara=DB::table('tarif_udara')->paginate(10);
      $desk=DB::table('setting')->get();
      $select=DB::table('tarif_udara')->groupBy('airlans')->get();
-	return view('landingudara/index',['udara'=>$tarif_udara,'select'=>$select,'des'=>$desk]);
+     $tujuan=DB::table('tarif_udara')->groupBy('tujuan')->get();
+	return view('landingudara/index',['udara'=>$tarif_udara,'select'=>$select,'des'=>$desk,'tujuan'=>$tujuan]);
     }
 
     public function pencarian(Request $request)
