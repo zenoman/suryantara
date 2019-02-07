@@ -57,7 +57,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th>#</i></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -69,7 +69,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
-							<th><i class="font-icon font-icon-ok"></i></th>
+							<th>#</i></th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -98,13 +98,10 @@
 						</tr>
 						@endforeach
 						</tbody>
-						<tr>
-							<th colspan="7"></th>
-							<th>
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-block btn-danger" value="hapus pilihan">
-							</th>
-						</tr>
 					</table>
+					<div class="text-right">
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+					</div>
 						{{csrf_field()}}
                         </form>
 					 

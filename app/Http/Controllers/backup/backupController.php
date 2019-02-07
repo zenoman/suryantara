@@ -9,6 +9,7 @@ use App\Exports\backupendapatan;
 use App\Exports\backuppengeluaran;
 use App\Exports\backuppengeluaranlain;
 use App\Exports\backupomset;
+use App\Exports\backupgajikaryawan;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
 
@@ -66,6 +67,22 @@ class backupController extends Controller
        ->get();
         return view('backup/cetakomset',['data'=>$data,'bulan'=>$bulan,'tahun'=>$tahun]);
     }
+    public function cetakgjkw(int $bulan,int $tahun){
+        $data = DB::table('gaji_karyawan')
+        ->select(DB::raw('
+                gaji_karyawan.kode_karyawan,
+                gaji_karyawan.nama_karyawan,
+                jabatan.jabatan,
+                gaji_karyawan.gaji_pokok,
+                gaji_karyawan.uang_makan,
+                gaji_karyawan.gaji_tambahan,
+                gaji_karyawan.total,
+                gaji_karyawan.bulan,
+                gaji_karyawan.tahun'))
+            ->join('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+       ->get();
+        return view('backup/cetakgjkw',['data'=>$data,'bulan'=>$bulan,'tahun'=>$tahun]);
+    }
     public function exsportpendapatan($bulan, $tahun){
     	$namafile = "backup_pendapatan_bulan_".$bulan."_tahun_".$tahun.".xlsx";
     	return Excel::download(new backupendapatan($bulan,$tahun),$namafile);
@@ -82,6 +99,10 @@ class backupController extends Controller
     public function exsportomset($bulan, $tahun){
         $namafile = "backup_omset_bulan_".$bulan."_tahun_".$tahun.".xlsx";
         return Excel::download(new backupomset($bulan,$tahun),$namafile);
+    }
+    public function exsporgjkw($bulan, $tahun){
+        $namafile = "Backup Gaji Karyawan bulan ".$bulan." tahun ".$tahun.".xlsx";
+        return Excel::download(new backupgajikaryawan($bulan,$tahun),$namafile);
     }
 
     public function hapuspendapatan($bulan, $tahun){
@@ -111,6 +132,12 @@ class backupController extends Controller
         DB::table('pengeluaran_lain')
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
+        ->delete();
+        return back();
+    }
+    public function hapusgjkw($bulan, $tahun){
+        $data = DB::table('gaji_karyawan')
+        ->where([['gaji_karyawan.bulan','=',$bulan],['gaji_karyawan.tahun','=',$tahun]])
         ->delete();
         return back();
     }

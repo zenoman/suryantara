@@ -16,6 +16,9 @@ Route::get('/backup','backup\backupController@index');
 Route::get('/tampilbackup','backup\backupController@tampil');
 Route::get('/printpendapatan/{bulan}/{tahun}','backup\backupController@cetakpendapatan');
 Route::get('/exsportpendapatan/{bulan}/{tahun}','backup\backupController@exsportpendapatan');
+Route::get('/exsporgajikaryawan/{bulan}/{tahun}','backup\backupController@exsporgjkw');
+Route::get('/printgajikaryawan/{bulan}/{tahun}','backup\backupController@cetakgjkw');
+Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgjkw');
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
 //----------------------------export omset

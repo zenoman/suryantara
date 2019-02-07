@@ -130,18 +130,18 @@
 						@elseif(Session::get('backup_step')==4)
 						<header class="steps-numeric-title">Pengeluaran Gaji Karyawan</header>
 						<div class="form-group">
-							<!-- <a href="{{url('/exsportomset/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
+							<a href="{{url('/exsporgajikaryawan/'.$bulan.'/'.$tahun.'')}}" class="btn btn-success btn-square-icon">
 								<i class="fa fa-file-excel-o"></i>
 								Exsport Excel
 							</a>
-							<a href="{{url('/printomset/'.$bulan.'/'.$tahun.'')}}" target="_blank()" class="btn btn-info btn-square-icon">
+							<a href="{{url('/printgajikaryawan/'.$bulan.'/'.$tahun.'')}}" target="_blank()" class="btn btn-info btn-square-icon">
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>
-							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapuspengeluaranlain/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
+							<a onclick="return confirm('Apakah data telah benar-benar terbackup ?')"href="{{url('/hapusgajikaryawan/'.$bulan.'/'.$tahun.'')}}" class="btn btn-danger btn-square-icon">
 								<i class="fa fa-trash"></i>
 								Hapus Data
-							</a> -->
+							</a>
 						</div>
 						@endif
 						@if(Session::get('backup_step')==4)
