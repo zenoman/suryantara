@@ -22,8 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2 class = "page-header">Hasil Pencarian</h2>
-							<h5>Hasil Pencarian "{{$cari}}"</h5>
+							<h2 class = "page-header">Hasil Pencarian "{{$cari}}"</h2>
 						</div>
 					</div>
 				</div>

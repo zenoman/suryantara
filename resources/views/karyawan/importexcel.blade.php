@@ -61,7 +61,7 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file <b>jabatan</b> dan <b>template karyawan</b> di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li>
+                                               <li>Download file <b>jabatan</b> dan <b>template karyawan</b> di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Jabatan</b> & <b>Download Template Excel</b>.</li>
                                                <img src="{{url('img/import_export/202.JPG')}}"  width="100%" height="100%"><br><br>
                                                <li>
                                                    Buka file <b>"template karyawan.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
@@ -73,10 +73,10 @@
                                                <br><br>
                                                <img src="{{url('img/import_export/karyawan.JPG')}}"><br><br>
                                                <li>
-                                                   Untuk kode <b>Harus</b> di isi dengan Karyawan-000001 jika data <b>belum ada</b> di web, jika sudah ada tinggal masukan kode urutan dari web.
+                                                   Untuk kode <b>Harus</b> di isi dengan Karyawan-000001 jika data <b>belum ada</b> di web, jika sudah ada tinggal masukan kode sesuai urutan dari web.
                                                </li><br><br>
                                                <div class="alert alert-warning">
-                                                <b>Data tisak akan masuk apa bila ada kode yang sama.</b>
+                                                <b>NB</b> : Data tisak akan masuk apa bila ada kode yang sama.
                                                </div><br>
                                                <li>Kemudian save <b>template karyawan.xlsx</b> dan upload ditab sebelah paling bawah yaitu <b>upload file</b>,Lihat gambar di baewah ini</li><br>
                                                <img src="{{url('img/import_export/202.JPG')}}"  width="100%" height="100%"><br><br>

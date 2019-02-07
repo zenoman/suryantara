@@ -74,7 +74,7 @@
                                                </div>
                                                <br>
                                                <li>Kemudian save <b>template tarif darat.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%"><p>
                                                <li>Untuk export tarif darat sangat sederhana.Lihat gambar dibawah ini.</li><br>
                                                <img src="{{url('img/import_export/002.JPG')}}"  width="100%" height="100%">
                                                <br><p></p>
@@ -103,7 +103,7 @@
                                             <form action="{{url('/trfdarat/prosesimportexcel') }}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
                                             <label>File excel</label>
-                                            <input type="file"name="file" required>
+                                            <input type="file"name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                               <p class="help-block">*File excel tidak boleh kosong</p>
                                         </div>
                                         {{csrf_field()}}

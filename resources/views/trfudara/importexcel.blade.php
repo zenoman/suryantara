@@ -65,10 +65,13 @@
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
                                                <p>
                                                <li>
-                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif_perkg, minimal_heavy dan tarif_dokumen</b> hanyan diisi dengan angka saja.
+                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif_perkg, minimal_heavy, tarif_dokumen dan berat_minimal</b> hanyan diisi dengan angka saja.
                                                </li><br>
                                                <img src="{{url('img/import_export/udara.JPG')}}" width="99%">
                                                <p>
+                                               <div class="alert alert-danger">
+                                                <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
+                                               </div>
                                                <br>
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
                                                <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><br>

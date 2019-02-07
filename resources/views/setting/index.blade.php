@@ -76,6 +76,17 @@
                                         @endif
 						</div>
 					</div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Alamat</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="alamat" placeholder="Text Readonly" value="{{$row->alamat}}"></p>
+            @if($errors->has('alamat'))
+                                        <div class="alert alert-danger">
+                                        {{ $errors->first('alamat')}}
+                                         </div>
+                                        @endif
+            </div>
+          </div>
 					 					<div class="form-group row">
                                             <label  class="col-sm-2 form-control-label semibold">Ganti Icon</label><p>
                                             @if(isset($row->icon) && $row->icon)

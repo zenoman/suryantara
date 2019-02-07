@@ -29,6 +29,7 @@ class Settingcontroller extends Controller
             'namaweb'=>'required|min:3',
             'email'=>'required|min:5|email',
             'kontak'=>'required|min:5|numeric',
+            'alamat'=>'required',
             'icon'=>'image|mimes:jpeg,jpg,png,gif|nullable|max:2000',
             'logo'=>'image|mimes:jpeg,jpg,png,gif|nullable|max:2000'
         ];
@@ -68,6 +69,7 @@ class Settingcontroller extends Controller
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'alamat'=>$request->alamat,
             'header'=>$request->header,
             'email'=>$request->email,
             'desk'=>$request->deskripsi,
@@ -86,6 +88,7 @@ class Settingcontroller extends Controller
         Settingmodel::find($id)->update([
             'namaweb'=>$request->namaweb,
             'kontak'=>$request->kontak,
+            'alamat'=>$request->alamat,
             'header'=>$request->header,
             'email'=>$request->email,
             'desk'=>$request->deskripsi,
@@ -97,6 +100,7 @@ class Settingcontroller extends Controller
             'namaweb'=>$request->namaweb,
             'header'=>$request->header,
             'kontak'=>$request->kontak,
+            'alamat'=>$request->alamat,
             'desk'=>$request->deskripsi,
             'email'=>$request->email
         ]);
