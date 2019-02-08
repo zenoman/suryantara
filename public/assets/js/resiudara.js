@@ -449,10 +449,12 @@ $(document).ready(function(){
 			$("#b_smu").html(0);
 			$("#b_karantina").html(0);
 			$("#b_ppn").html(0);
+			$("#b_charge").html(0);
 			$("#total").html(0);
 			$('#satuan').val('kg');
 			$('#kategori').val('');
 			$('#nomer_smu').val('');
+			$("#metode").val('cash');
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';

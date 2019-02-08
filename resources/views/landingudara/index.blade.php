@@ -30,9 +30,11 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SURYANTARA CARGO</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        @foreach($des as $row)
+    <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
+    @endforeach
+        
+        <!-- <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
@@ -44,7 +46,7 @@
             </li>
             
           </ul>
-        </div>
+        </div> -->
       </div>
     </nav>
 <br>
@@ -73,7 +75,7 @@
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
-              <select id="kota_tujuan" class="select2" name="state">
+              <select id="kota_tujuan" class="select2" name="kota_tujuan">
                 @foreach($tujuan as $row)
                 <option>{{$row->tujuan}}</option>
                 @endforeach
@@ -96,7 +98,7 @@
             <div class="form-group">
               <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">
-                <option selected disabled hidden>Pilih Maskapai</option>
+                <option value="semua">semua maskapai</option>
                 @foreach($select as $row)
                 <option>{{$row->airlans}}</option>
                 @endforeach
@@ -106,7 +108,7 @@
                </div>   
               <div class="text-right">
                 <button type="submit" class="btn btn-info">Cari</button>
-                <button type="button" class="btn btn-danger">Kembali</button>
+                <button type="button" onclick="window.history.go(-1);" class="btn btn-danger">Kembali</button>
               </div>
             
 
@@ -160,7 +162,9 @@
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018
+          @foreach($des as $row){{$row->header}}
+    @endforeach . All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 

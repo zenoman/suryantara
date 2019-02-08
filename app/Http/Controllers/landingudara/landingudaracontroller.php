@@ -22,12 +22,22 @@ class landingudaracontroller extends Controller
 
     public function pencarian(Request $request)
     {
-     $kot = $request->kot;
+     $kot = $request->kota_tujuan;
      $brt = $request->brt;
      $psw = $request->psw;
+     if ($psw=='semua') {
+     $trf_udr = DB::table('tarif_udara')
+     ->where('tujuan','like','%'.$kot.'%')
+     ->get();
+     }else{
+     $trf_udr = DB::table('tarif_udara')
+     ->where([['tujuan','like','%'.$kot.'%'],['airlans','like','%'.$psw.'%']])
+     ->get();
+     }
+     $kat = DB::table('kategori_barang')->get();
      $desk=DB::table('setting')->get();
-     $trf_udr = DB::table('tarif_udara')->where('tujuan','like','%'.$kot.'%')->where('minimal_heavy','like','%'.$brt.'%')->where('airlans','like','%'.$psw.'%')->get();
-     return view('landingudara/pencarian',['trf_udr'=>$trf_udr ,'kot'=>$kot ,  'brt'=>$brt , 'psw'=>$psw , 'des'=>$desk]);
+     
+     return view('landingudara/pencarian',['trf_udr'=>$trf_udr ,'kot'=>$kot , 'brt'=>$brt , 'psw'=>$psw , 'des'=>$desk,'kat'=>$kat]);
     }
 
 }

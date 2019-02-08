@@ -21,15 +21,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Plugin CSS -->
-    <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
-
     <!-- Custom styles for this template -->
     <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
     
     <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
 
   </head>
 
@@ -38,9 +34,11 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SURYANTARA CARGO</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+   @foreach($des as $row)
+    <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
+    @endforeach
+        
+        <!-- <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
@@ -52,7 +50,7 @@
             </li>
             
           </ul>
-        </div>
+        </div> -->
       </div>
     </nav>
 <br>
@@ -63,7 +61,6 @@
     <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
     <br>
     <div class="container">
-        <div class="card-block">
           <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead class="thead-dark text-secondary text-center" >
             <tr>
@@ -72,6 +69,7 @@
               <th>Berat Mininmal</th>
               <th>Pesawat</th>
               <th>Biaya</th>
+              <th>Estimasi Biaya</th>
             </tr>
             </thead>
             
@@ -82,18 +80,75 @@
               <tr>
                 <td class="text-center">{{$no}}</td>
                 <td class="text-center">{{$row->tujuan}}</td>
-                <td class="text-center">{{"Rp ". number_format($row->minimal_heavy,0,',','.')." /Kg"}}</td>
+                <td class="text-center">{{$row->berat_minimal." Kg"}}</td>
                 <td class="text-center">{{$row->airlans}}</td>
-                <td class="text-center">{{$row->perkg}}</td>
+                <td class="text-center">{{"Rp ". number_format($row->perkg,0,',','.')}}</td>
+                <td>
+                  @if($brt >= $row->berat_minimal)
+                  @php
+                  $estimasi = $brt*$row->perkg;
+                  @endphp
+                  {{"Rp ". number_format($estimasi,0,',','.')}}
+                  @else
+                  -
+                  @endif
+                </td>
               </tr>
               @endforeach
             </tbody>
           </table>
+          <br>
+        
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+    <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
+  <div class="card-body text-left">
+    <ul>
+      <li><b>Estimasi</b> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li>
+      <li><b>Estimasi</b> biaya belum termasuk biaya tambahan</li>
+      <li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li>
+      <li><b>Surcharge</b> adalah kategori barang tertentu yang mendapat tambahan biaya</li>
+    </ul>
+  </div>
+</div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+    <div class="card-header bg-dark text-white">List Barang Surcharge</div>
+  <div class="card-body">
+   <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead class="thead-primary text-secondary text-center" >
+            <tr>
+              <th>No</th>
+              <th>Kategori Barang</th>
+              <th>Tambahan Biaya</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+           <?php $i = 1;?>
+              @foreach($kat as $row)
+              <?php $no = $i++;?>
+              <tr>
+                <td class="text-center">{{$no}}</td>
+                <td class="text-center">{{$row->spesial_cargo}}</td>
+                <td class="text-center">{{$row->charge." %"}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+  </div>
+</div>
+  </div>
+</div>
+<br>
+        <div class="text-right">
+          <a onclick="window.history.go(-1);" class="btn btn-danger text-white">Kembali</a>
         </div>
-        <br>
-        <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali</a>
+        
       </div>
-                  
+          
       </section>
       
 <footer class="footer text-center">
@@ -139,7 +194,8 @@
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018 @foreach($des as $row){{$row->header}}
+    @endforeach . All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
@@ -159,27 +215,19 @@
     <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
     <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
-    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
+   
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
     
-  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/js/plugins.js')}}"></script>
-
   <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
   <script>
     $(function() {
-      $('#example').DataTable();
+      $('#example').DataTable({
+        responsive:true
+      });
     });
   </script>
-
-<script src="{{asset('assets/js/app.js')}}"></script>
 
   </body>
 
