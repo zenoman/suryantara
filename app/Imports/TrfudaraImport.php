@@ -12,7 +12,13 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
     */
     public function collection(Collection $roww)
     {
-        //
+        foreach ($roww as $row){
+            $kode=$row['kode_tujuan'];
+            // dd($kode);
+$dtlam= DB::table('tarif_udara')->where('kode',$kode)->count();
+if($dtlam > 0){
+        // $status = "Maaf Ada Data Yang Sama";
+}else{
         foreach ($roww as $row){
     	 DB::table('tarif_udara')->insert([
                     'kode'=>$row['kode_tujuan'],
@@ -27,4 +33,7 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
     	}
 
     }
+
+    }
+}
 }

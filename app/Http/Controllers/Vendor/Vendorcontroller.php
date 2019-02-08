@@ -57,11 +57,15 @@ return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
     return Excel::download(new VendorExport, ' Export Vendor.xlsx');
     return redirect('vendor/importexcel');
 
-    }
+    } 
 //-----------------------------------
 public function caridata(Request $request)
     {
-        $ven = DB::table('vendor')->where('vendor','like','%'.$request->cari.'%')->get();
+        $ven = DB::table('vendor')
+        ->where('vendor','like','%'.$request->cari.'%')
+        ->orwhere('idvendor','like','%'.$request->cari.'%')
+        ->get();
+
         $setting = DB::table('setting')->get();
         return view('vendor/pencarian', ['vendor'=>$ven, 'cari'=>$request->cari,'title'=>$setting]);
     }
