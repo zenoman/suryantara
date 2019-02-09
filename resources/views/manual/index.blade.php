@@ -71,8 +71,7 @@
                                 <!-- /.modal-dialog -->
                             </div>
                     <br><br>
-                    <form action="{{url('/Manual/hapuspilihan')}}" method="post">
-					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
@@ -83,9 +82,7 @@
 							<th>Pemegang</th>
 							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
-                            @if(Session::get('level')!='admin')
-							<th class="text-center">#</th>
-                            @endif
+                           
 						</tr>
 						</thead>
 						<tfoot>
@@ -98,9 +95,7 @@
                             <th>Pemegang</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
-                             @if(Session::get('level')!='admin')
-                            <th class="text-center">#</th>
-                            @endif
+                             
 						</tr>
 						</tfoot>
 						<tbody>
@@ -380,23 +375,15 @@
                     					</form>
                                         @endif
                             </td>
-                             @if(Session::get('level')!='admin')
-                            <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
-                            @endif
+                             
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
 					{{csrf_field()}}
-                     @if(Session::get('level')!='admin')
-					<div class="text-right">
-
-						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
-					</div>
-                    @endif
+                   
 					
-                        </form>
 					 {{ $manual->links() }}
 				</div>
 			</section>
