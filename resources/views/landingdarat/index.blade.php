@@ -25,13 +25,10 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="asset_user/css/freelancer.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
-    
-    <!--<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">-->
+    <!-- Custom styles for this template -->
+    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+    <link href="{{asset('asset_user/css/select2user.css')}}" rel="stylesheet">
 
   </head>
 
@@ -41,7 +38,9 @@
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
 
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SURYANTARA CARGO</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><b>@foreach($des as $row)
+    {{$row->header}}
+    @endforeach</b></a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
@@ -63,48 +62,37 @@
     <section class="text-center mb-0">  
 
     <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Cari Data</h1>
+    <h1 class="text-uppercase text-center mb-0">Cek Tarif Darat</h1>
     <br>
     <br>
-        <form method="get" action="{{url('landdarat/cari')}}">
+        <form method="get" action="{{url('landlaut/cari')}}">
         <div class="row">
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-          <div class="col-sm-5 col-sm-offset-1">
-            <label>Kota Tujuan<small> :</small></label>
+          <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
+              <label>Kota Asal<small> :</small></label>
+              <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
+            </div>
+          </div>
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Tujuan<small> :</small></label>
+              <select id="kota_tujuan" class="select2" name="tujuan">
+                @foreach($tujuan as $row)
+                <option>{{$row->tujuan}}</option>
+                @endforeach
+              </select>
               
-              <input type="text" class="form-control" name="kot" placeholder="Misal : Kediri">
             </div>
           </div>
-
-          <div class="col-sm-5 col-sm-offset-1">
-            <label>Berat minimal<small> :</small></label>
-            <div class="form-group">
-            
-            
-              <div class="input-group">
-                <input type="text" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg">
-                
+        </div>
+          <div class="text-right">
+                <button type="submit" class="btn btn-info">Cari</button>
+                <a onclick="window.history.go(-1);"><button type="button" class="btn btn-danger">Kembali</button></a>
               </div>
-            </div>
-          </div>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <div class="col-sm-1 col-sm-offset-1">
-            
-            <div class="form-group">
-              <label><small></small></label>          
-              <div class="input-group">
-                <input type="submit" class="btn btn-info" value="Cari">
-                
-              </div>
-            </div>
-          </div>
         </form>
+        
       </div>
-      <br>
-      <br>
-       <a onclick="window.history.go(-1);" class="btn btn-primary text-white">Kembali </a>
+
       </section>
 
   <footer class="footer text-center">
@@ -150,7 +138,9 @@
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018 @foreach($des as $row)
+    {{$row->header}}
+    @endforeach. All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 
@@ -176,20 +166,10 @@
 
     <!-- Custom scripts for this template -->
     <script src="asset_user/js/freelancer.min.js"></script>
-    
-  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/js/plugins.js')}}"></script>
+    <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 
-  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-  <script>
-    $(function() {
-      $('#example').DataTable();
-    });
-  </script>
   <script type="text/javascript">
+    $('#kota_tujuan').select2();
      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode

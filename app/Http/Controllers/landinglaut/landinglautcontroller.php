@@ -21,16 +21,16 @@ class landinglautcontroller extends Controller
     {
      $tarif_laut = DB::table('tarif_laut')->paginate(10);
      $desk=DB::table('setting')->get();
-     return view('landinglaut/index',['laut'=>$tarif_laut,'des'=>$desk]);
+     $tujuan=DB::table('tarif_laut')->groupBy('tujuan')->get();
+     return view('landinglaut/index',['laut'=>$tarif_laut,'des'=>$desk,'tujuan'=>$tujuan]);
     }
 
     public function pencarian(Request $request)
     {
-     $kot = $request->kot;
-     $brt = $request->brt;
+     $tuj = $request->tujuan;
      $desk=DB::table('setting')->get();
-     $trf_lt = DB::table('tarif_laut')->where('tujuan','like','%'.$kot.'%')->where('berat_min','like','%'.$brt.'%')->get();
-     return view('landinglaut/pencarian',['trf_lt'=>$trf_lt ,'kot'=>$kot ,  'brt'=>$brt , 'des'=>$desk]);
+     $trf_lt = DB::table('tarif_laut')->where('tujuan','like','%'.$tuj.'%')->get();
+     return view('landinglaut/pencarian',['trf_lt'=>$trf_lt ,'kot'=>$tujuan ,  'brt'=>$brt , 'des'=>$desk]);
     }
 
 }

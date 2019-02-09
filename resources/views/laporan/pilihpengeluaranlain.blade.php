@@ -44,7 +44,11 @@
 								@endforeach
 							</select>
 							</p>
-							 
+							 @if($errors->has('bulan'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('bulan')}}
+                                         </div>
+                                       @endif
 						</div>
 					</div>
 					<div class="form-group row">

@@ -39,7 +39,9 @@
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
 
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SURYANTARA CARGO</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><b>@foreach($des as $row)
+    {{$row->header}}
+    @endforeach</b></a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
@@ -136,7 +138,9 @@
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 <a class="link" onclick="login()"> Suryantara Cargo</a>. All Rights Reserved. <a href="{{url('/login')}}">Joyoboyo Intermedia</a></p></small>
+        <small><p>&copy; 2018 @foreach($des as $row)
+    {{$row->header}}
+    @endforeach. All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
 

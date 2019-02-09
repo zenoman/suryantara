@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Response;
 class laporanController extends Controller
 {
     public function tampilpengeluaran(Request $request){
+        $rules = [
+            'bulan' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
         $vendor = $request->vendor;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
@@ -108,6 +115,14 @@ class laporanController extends Controller
     }
     //================================================
     public function tampilpemasukan(Request $request){
+        $rules = [
+            'bulan' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+
     	$jalur = $request->jalur;
     	$bulan = explode('-', $request->bulan);
     	$bln = $bulan[0];
@@ -209,6 +224,14 @@ class laporanController extends Controller
         return view('laporan/pilihpengeluaranlain',['title'=>$webinfo,'bulan'=>$bulan,'kategori'=>$kategori]);
     }
     public function tampilpengeluaranlain(Request $request){
+        $rules = [
+            'bulan' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+
         $kategori = $request->kategori;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
@@ -255,7 +278,13 @@ class laporanController extends Controller
     }
     //------------------------------------------------------------
     public function tampilpengeluarangjkw(Request $request){
-        
+        $rules = [
+            'bulan' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
         $namajabatan = $request->jabatan;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
