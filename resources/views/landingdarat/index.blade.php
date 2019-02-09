@@ -38,10 +38,10 @@
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
 
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"><b>@foreach($des as $row)
-    {{$row->header}}
-    @endforeach</b></a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    @foreach($des as $row)
+    <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
+    @endforeach
+       <!--  <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
@@ -53,7 +53,7 @@
             </li>
             
           </ul>
-        </div>
+        </div> -->
       </div>
     </nav>
 <br>
