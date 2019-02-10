@@ -65,7 +65,7 @@
     <h1 class="text-uppercase text-center mb-0">Cek Tarif Darat</h1>
     <br>
     <br>
-        <form method="get" action="{{url('landlaut/cari')}}">
+        <form method="get" action="{{url('landdarat/cari')}}">
         <div class="row">
           <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
@@ -82,6 +82,15 @@
                 @endforeach
               </select>
               
+            </div>
+          </div>
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class="form-group">
+            <label>Berat<small> :</small></label>
+            
+              <div class="input-group">
+                <input type="number" min="0" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg" required>
+              </div>
             </div>
           </div>
         </div>
@@ -110,12 +119,12 @@
             <ul class="list-inline mb-0">
               
              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/profile.php?id=100014984589964">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank()" href="https://www.facebook.com/100014984589964">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/suryantaracargokediri?utm_source=ig_profile_share&igshid=i01k17uof3di">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank()" href="https://www.instagram.com/kadirilogistikcargo">
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
@@ -170,14 +179,6 @@
 
   <script type="text/javascript">
     $('#kota_tujuan').select2();
-     function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
   </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>

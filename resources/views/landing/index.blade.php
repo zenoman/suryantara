@@ -43,7 +43,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#biaya">
-              Biaya Pengiriman</a>
+              Cek Biaya</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hub">Lokasi Kami</a>
@@ -142,12 +142,12 @@
             <ul class="list-inline mb-0">
               
              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/profile.php?id=100014984589964">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank()" href="https://www.facebook.com/100014984589964">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/suryantaracargokediri?utm_source=ig_profile_share&igshid=i01k17uof3di">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank()" href="https://www.instagram.com/kadirilogistikcargo">
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
@@ -169,12 +169,7 @@
 
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-<<<<<<< HEAD
-        <small><p>&copy; 2018 @foreach($des as $row)
-    {{$row->header}}
-=======
         <small><p>&copy; 2018 @foreach($des as $row){{$row->header}}
->>>>>>> master
     @endforeach. All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>

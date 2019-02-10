@@ -23,14 +23,15 @@ class landingdaratcontroller extends Controller
      $tarif_darat=Landingdaratmodel::paginate(10);
       $desk=DB::table('setting')->get();
       $tujuan=DB::table('tarif_darat')->groupBy('tujuan')->get();
-	return view('landingdarat/index',['darat'=>$tarif_darat,'des'=>$desk,'tujuan'=>$tujuan]);
+    return view('landingdarat/index',['darat'=>$tarif_darat,'des'=>$desk,'tujuan'=>$tujuan]);
     }
 
     public function pencarian(Request $request)
     {
+    $brt = $request->brt;
      $kot = $request->tujuan;
      $desk=DB::table('setting')->get();
      $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$kot.'%')->get();
-     return view('landingdarat/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot , 'des'=>$desk]);
+     return view('landingdarat/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot ,'brt'=>$brt , 'des'=>$desk]);
     }
 }

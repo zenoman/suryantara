@@ -98,7 +98,7 @@
             </tbody>
           </table>
           <br>
-        
+        <p></p>
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
@@ -107,8 +107,7 @@
     <ul>
       <li><b>Estimasi</b> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li>
       <li><b>Estimasi</b> biaya belum termasuk biaya tambahan</li>
-      <li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li>
-      <li><b>Surcharge</b> adalah kategori barang tertentu yang mendapat tambahan biaya</li>
+      <li>Biaya tambahan meliputi : ppn, biaya packing, biaya ansuransi.</li>
     </ul>
   </div>
 </div>
@@ -166,12 +165,12 @@
             <ul class="list-inline mb-0">
               
              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/profile.php?id=100014984589964">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank()" href="https://www.facebook.com/100014984589964">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/suryantaracargokediri?utm_source=ig_profile_share&igshid=i01k17uof3di">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle"target="_blank()"  href="https://www.instagram.com/kadirilogistikcargo">
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>

@@ -27,10 +27,11 @@ class landinglautcontroller extends Controller
 
     public function pencarian(Request $request)
     {
+    $brt = $request->brt;
      $tuj = $request->tujuan;
      $desk=DB::table('setting')->get();
      $trf_lt = DB::table('tarif_laut')->where('tujuan','like','%'.$tuj.'%')->get();
-     return view('landinglaut/pencarian',['trf_lt'=>$trf_lt ,'kot'=>$tujuan ,  'brt'=>$brt , 'des'=>$desk]);
+     return view('landinglaut/pencarian',['trf_lt'=>$trf_lt ,'kot'=>$tuj,'brt'=>$brt , 'des'=>$desk]);
     }
 
 }
