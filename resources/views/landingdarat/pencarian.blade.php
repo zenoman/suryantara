@@ -199,7 +199,13 @@
   <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
   <script>
     $(function() {
+<<<<<<< HEAD
       $('#example').DataTable({responsive:true});
+=======
+      $('#example').DataTable({
+        responsive:true
+      });
+>>>>>>> master
     });
   </script>
 

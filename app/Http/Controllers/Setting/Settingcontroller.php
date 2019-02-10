@@ -73,7 +73,10 @@ class Settingcontroller extends Controller
             'header'=>$request->header,
             'email'=>$request->email,
             'desk'=>$request->deskripsi,
-            'icon'=>$nameicon
+            'icon'=>$nameicon,
+            'desk_udara'=>$request->desk_udara,
+            'desk_darat'=>$request->desk_darat,
+            'desk_laut'=>$request->desk_laut
         ]);
         }else if($request->hasFile('logo')){
         Settingmodel::find($id)->update([
@@ -82,7 +85,10 @@ class Settingcontroller extends Controller
             'header'=>$request->header,
             'email'=>$request->email,
             'desk'=>$request->deskripsi,
-            'logo'=>$namelogo
+            'logo'=>$namelogo,
+            'desk_udara'=>$request->desk_udara,
+            'desk_darat'=>$request->desk_darat,
+            'desk_laut'=>$request->desk_laut
         ]);
         }else if($request->hasFile('icon','logo')){
         Settingmodel::find($id)->update([
@@ -93,7 +99,10 @@ class Settingcontroller extends Controller
             'email'=>$request->email,
             'desk'=>$request->deskripsi,
             'icon'=>$nameicon,
-            'logo'=>$namelogo
+            'logo'=>$namelogo,
+            'desk_udara'=>$request->desk_udara,
+            'desk_darat'=>$request->desk_darat,
+            'desk_laut'=>$request->desk_laut
         ]);
         }else{
         Settingmodel::find($id)->update([
@@ -102,7 +111,10 @@ class Settingcontroller extends Controller
             'kontak'=>$request->kontak,
             'alamat'=>$request->alamat,
             'desk'=>$request->deskripsi,
-            'email'=>$request->email
+            'email'=>$request->email,
+            'desk_udara'=>$request->desk_udara,
+            'desk_darat'=>$request->desk_darat,
+            'desk_laut'=>$request->desk_laut
         ]);
         }
 
