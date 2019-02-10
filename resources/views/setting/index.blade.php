@@ -87,35 +87,55 @@
                                         @endif
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Info Udara</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_udara" id="desk_udara">{{$row->desk_udara}}</textarea></p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Info Darat</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_darat" id="desk_darat">{{$row->desk_darat}}</textarea></p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Info Laut</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_laut" id="desk_laut">{{$row->desk_laut}}</textarea></p>
+            </div>
+          </div>
 					 					<div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label semibold">Ganti Icon</label><p>
-                                            @if(isset($row->icon) && $row->icon)
+                              <label  class="col-sm-2 form-control-label semibold">Ganti Icon</label>
+                              <div class="col-sm-10">
+                                 @if(isset($row->icon) && $row->icon)
                                             <img src="{{asset('img/setting/'.$row->icon)}}" width="50" height="50">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif
-                                            <input type="file" name="icon">
+                                            <br><br>
+                                <p class="form-control-static">
+                                           
+                                            <input type="file" name="icon" accept="image/*">
+                                          </p>
                                         </div>
-                                        @if($errors->has('icon'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('icon')}}
-                                         </div>
-                                       @endif
+                                      </div> 
                                        <!--====================-->
-                                            <div class="form-group row">
-                                            <label  class="col-sm-2 form-control-label semibold">Ganti Logo</label><p>
+                                        <div class="form-group row">
+                                          <label  class="col-sm-2 form-control-label semibold">Ganti Logo</label>
+                                          <div class="col-sm-10">
                                             @if(isset($row->logo) && $row->logo)
                                             <img src="{{url('img/setting/'.$row->logo)}}" width="100" height="100">
                                             @else
                                             <img src="{{asset('img/gmbr.png')}}" width="100" height="100">
                                             @endif
-                                            <input type="file" name="logo">
+                                            <br><br>
+                                            <p class="form-control-static">
+                                            <input type="file" name="logo" accept="image/*">
+                                          </p>
                                         </div>
-                                          @if($errors->has('logo'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('logo')}}
-                                         </div>
-                                       @endif
+                                      </div>
+                                        
                                        
 				@endforeach
 {{csrf_field()}}
@@ -124,4 +144,66 @@
 				</form>
 			</div>
 	</div></div>
+        @endsection
+        @section('js')
+        <script src="{{asset('assets/js/ckeditor.js')}}"></script>
+        @endsection
+        @section('otherjs')
+         <script>
+    ClassicEditor
+    .create( document.querySelector('#desk_udara'),{
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    }
+    )
+
+    .catch( error => {
+        console.log( error );
+    });
+
+    </script>
+    <script>
+    ClassicEditor
+    .create( document.querySelector('#desk_darat'),{
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    }
+    )
+
+    .catch( error => {
+        console.log( error );
+    });
+
+    </script>
+    <script>
+    ClassicEditor
+    .create( document.querySelector('#desk_laut'),{
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    }
+    )
+
+    .catch( error => {
+        console.log( error );
+    });
+
+    </script>
         @endsection

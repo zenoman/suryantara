@@ -24,7 +24,7 @@ class Manualcontroller extends Controller
         ->where('resi_pengiriman.metode_input','manual')
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
-        return view('Manual/index',['manual'=>$datmanual,'title'=>$setting]);
+        return view('manual/index',['manual'=>$datmanual,'title'=>$setting]);
     }
 //------------------------------------
     public function caridata(Request $request)
@@ -37,12 +37,12 @@ class Manualcontroller extends Controller
         ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%']])
         ->get();
             $setting = DB::table('setting')->get();
-        return view('Manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
+        return view('manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
     }
     //=========================================================
     public function importexcel(){
         $setting = DB::table('setting')->get();
-        return view('Manual/importexcel',['title'=>$setting]);
+        return view('manual/importexcel',['title'=>$setting]);
     }
     //=========================================================
     public function downloadtemplate(){
@@ -67,7 +67,7 @@ class Manualcontroller extends Controller
     {
         $setting = DB::table('setting')->get();
         $karyawan = DB::table('karyawan')->get();
-        return view('Manual/create',['title'=>$setting,'karyawan'=>$karyawan]);
+        return view('manual/create',['title'=>$setting,'karyawan'=>$karyawan]);
     }
 
     public function store(Request $request)
