@@ -170,10 +170,6 @@
     <div class="copyright py-4 text-center text-white">
       <div class="container">
         <small><p>&copy; 2018 @foreach($des as $row){{$row->header}}
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     @endforeach. All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>

@@ -61,13 +61,13 @@
     <br>
         <form method="get" action="{{url('landlaut/cari') }}">
         <div class="row">
-          <div class="col-sm-2 col-sm-offset-1">
+          <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
               <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
             </div>
           </div>
-          <div class="col-sm-6 col-sm-offset-1">
+          <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
               <select id="kota_tujuan" class="select2" name="tujuan">
@@ -78,12 +78,12 @@
               
             </div>
           </div>
-          <div class="col-sm-3 col-sm-offset-1">
+          <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
             <label>Berat<small> :</small></label>
             
               <div class="input-group">
-                <input type="number" min="0" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg" required>
+                <input type="number" min="0" class="form-control" name="brt" placeholder="Misal : 10 kg" required>
               </div>
             </div>
           </div>

@@ -104,11 +104,9 @@
     <div class="card">
     <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
   <div class="card-body text-left">
-    <ul>
-      <li><b>Estimasi</b> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li>
-      <li><b>Estimasi</b> biaya belum termasuk biaya tambahan</li>
-      <li>Biaya tambahan meliputi : ppn, biaya packing, biaya ansuransi.</li>
-    </ul>
+     @foreach($des as $row)
+    {!!$row->desk_udara!!}
+    @endforeach
   </div>
 </div>
   </div>

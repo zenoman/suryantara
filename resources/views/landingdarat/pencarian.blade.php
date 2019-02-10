@@ -96,15 +96,13 @@
         </div>
         <br>
         <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <div class="card">
     <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
   <div class="card-body text-left">
-    <ul>
-      <li><b>Estimasi</b> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li>
-      <li><b>Estimasi</b> biaya belum termasuk biaya tambahan</li>
-      <li>Biaya tambahan meliputi : ppn, biaya packing, biaya ansuransi.</li>
-    </ul>
+     @foreach($des as $row)
+    {!!$row->desk_darat!!}
+    @endforeach
   </div>
 </div>
 <p><br></p>
@@ -199,13 +197,10 @@
   <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
   <script>
     $(function() {
-<<<<<<< HEAD
-      $('#example').DataTable({responsive:true});
-=======
+
       $('#example').DataTable({
         responsive:true
       });
->>>>>>> master
     });
   </script>
 

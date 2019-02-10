@@ -76,6 +76,7 @@
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
               <select id="kota_tujuan" class="select2" name="kota_tujuan">
+                <option></option>
                 @foreach($tujuan as $row)
                 <option>{{$row->tujuan}}</option>
                 @endforeach
@@ -89,7 +90,7 @@
             <label>Berat<small> :</small></label>
             
               <div class="input-group">
-                <input type="number" min="0" class="form-control" name="brt" required onkeypress="return isNumberKey(event)" placeholder="Misal : 10 kg" required>
+                <input type="number" min="0" class="form-control" name="brt" placeholder="Misal : 10 kg" required>
               </div>
             </div>
           </div>
@@ -99,9 +100,9 @@
               <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">
                 <option value="semua">semua maskapai</option>
-                @foreach($select as $row)
+                <!-- @foreach($select as $row)
                 <option>{{$row->airlans}}</option>
-                @endforeach
+                @endforeach -->
               </select>
             </div>
           </div>
@@ -193,7 +194,34 @@
     <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
   
   <script type="text/javascript">
-    $('#kota_tujuan').select2();
+    $('#kota_tujuan').select2({
+      placeholder: "Pilih kota tujuan"
+    });
+    //=================================================
+  $('#kota_tujuan').on('select2:select',function(e){
+      var kode = $(this).val();
+      $.ajax({
+      type: 'GET',
+      url: '/carimaskapai/'+kode,
+      success:function (data){
+      addoption(data);
+      },
+            });
+    });
+  function addoption(data){
+    $('#exampleSelect option').each(function() {
+    if ( $(this).val() != 'semua' ) {
+        $(this).remove();
+    }
+});
+  var newOption ='';
+  results : $.map(data, function (item){
+    $('#exampleSelect')
+         .append($("<option></option>")
+                    .attr("value",item.airlans)
+                    .text(item.airlans)); 
+    })
+   }
 </script>
   </body>
 

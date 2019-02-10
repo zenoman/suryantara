@@ -40,4 +40,11 @@ class landingudaracontroller extends Controller
      return view('landingudara/pencarian',['trf_udr'=>$trf_udr ,'kot'=>$kot , 'brt'=>$brt , 'psw'=>$psw , 'des'=>$desk,'kat'=>$kat]);
     }
 
+    public function carimaskapai($kode){
+        $trf_udr = DB::table('tarif_udara')
+     ->where('tujuan','like','%'.$kode.'%')
+     ->get();
+     return response()->json($trf_udr);
+    }
+
 }

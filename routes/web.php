@@ -91,6 +91,7 @@ Route::get('/landdarat/cari','landingdarat\landingdaratcontroller@pencarian');
 Route::get('/landlaut','landinglaut\landinglautcontroller@index');
 Route::get('/landlaut/cari','landinglaut\landinglautcontroller@pencarian');
 Route::get('/landudara','landingudara\landingudaracontroller@index');
+Route::get('/carimaskapai/{kode}','landingudara\landingudaracontroller@carimaskapai');
 Route::get('/landudara/cari','landingudara\landingudaracontroller@pencarian');
 Route::get('/dashboard','Dashboardcontroller@index');
 
