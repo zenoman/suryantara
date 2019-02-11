@@ -10,11 +10,11 @@ class resipengirimanController extends Controller
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where('no_resi','like','%'.$cari.'%')
-            ->orwhere('tgl','like','%'.$cari.'%')
-            ->orwhere('pengiriman_via','like','%'.$cari.'%')
-            ->orwhere('kode_tujuan','like','%'.$cari.'%')
-            ->orwhere('admin','like','%'.$cari.'%')
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis']])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis']])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis']])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis']])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis']])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
