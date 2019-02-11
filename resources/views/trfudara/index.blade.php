@@ -79,8 +79,8 @@
 							<th>Tujuan</th>
 							<th>Airlines</th>
 							<th>Biaya perKg</th>
-							<th>Biaya documen</th>
-							<th>Min Heavy cargo</th>
+							<th>Biaya dokumen</th>
+							<th>Heavy cargo</th>
 							<th>Berat Minimal</th>
 							<th class="text-center">Aksi</th>
 							<th class="text-center">#</th>
@@ -93,8 +93,8 @@
 							<th>Tujuan</th>
 							<th>Airlines</th>
 							<th>Biaya perKg</th>
-							<th>Biaya documen</th>
-							<th>Min Heavy cargo</th>
+							<th>Biaya dokumen</th>
+							<th>Heavy cargo</th>
 							<th>Berat Minimal</th>
 							<th class="text-center">Aksi</th>
 							<th class="text-center">#</th>

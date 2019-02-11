@@ -48,16 +48,23 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama Karyawan"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control"
+								name="nama" 
+								placeholder="Masukan Nama Karyawan"
+								required>
+							</p>
 							@if($errors->has('nama'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('nama')}}
-                                         </div>
-                                       @endif
+                            	<div class="alert alert-danger">
+                            		{{ $errors->first('nama')}}
+                            	</div>
+                           @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan</label>
+						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="jabatan" class="form-control">
 								<option selected disabled hidden>Pilih Jabatan</option>
@@ -76,19 +83,34 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">No.telp</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="telp" required onkeypress="return isNumberKey(event)" placeholder="Misal : 085**********"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control" 
+								name="telp" 
+								required 
+								onkeypress="return isNumberKey(event)" 
+								placeholder="Misal : 085**********">
+							</p>
 							
 							@if($errors->has('telp'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('telp')}}
-                                         </div>
-                                       @endif
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('telp')}}
+                                </div>
+                            @endif
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Alamat</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="alamat" placeholder="Masukkan Alamat"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control" 
+								name="alamat" 
+								placeholder="Masukkan Alamat"
+								required>
+							</p>
 							@if($errors->has('alamat'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('alamat')}}

@@ -22,7 +22,7 @@ class Jabatancontroller extends Controller
         $setting = DB::table('setting')->get();
         $datJabatan = DB::table('jabatan')->orderby('id','ASC')->paginate(20);
         // dd($datJabatan);
-        return view('Jabatan/index',['jabatan'=>$datJabatan,'title'=>$setting]);
+        return view('jabatan/index',['jabatan'=>$datJabatan,'title'=>$setting]);
     }
 
     /**
@@ -123,13 +123,6 @@ class Jabatancontroller extends Controller
         return redirect('/jabatan')->with('status','Edit Data Sukses');
  
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $id = $request->aid;

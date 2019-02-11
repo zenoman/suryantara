@@ -33,25 +33,25 @@
 						<form action="{{ url('admin/'.$datadmin->id) }}" role="form" method="POST">
 
 				
-@if(Session::get('level') == 'programer')
-	<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Kode Admin</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}">
-						</div>
-	</div>
-@else
+
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Kode Admin</label>
 						<div class="col-sm-10">
 							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text" name="kode" value="{{$datadmin->kode}}"></p>
 						</div>
 					</div>
-@endif
+
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="nama" name="nama" value="{{$datadmin->nama}}"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control"
+								name="nama" 
+								value="{{$datadmin->nama}}"
+								required>
+							</p>
 						@if($errors->has('nama'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('nama')}}
@@ -62,7 +62,16 @@
 				<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="username" value="{{$datadmin->username}}"><span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control"
+								name="username" 
+								value="{{$datadmin->username}}"
+								required>
+
+								<span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span>
+							</p>
 						@if($errors->has('username'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('username')}}
@@ -73,7 +82,13 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Email</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="email" name="email" value="{{$datadmin->email}}"></p>
+							<p class="form-control-static">
+								<input
+								type="text" 
+								class="form-control"
+								name="email" 
+								value="{{$datadmin->email}}" required>
+							</p>
 						@if($errors->has('email'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('email')}}
@@ -84,7 +99,14 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">No.telp</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="telp" name="telp" required onkeypress="return isNumberKey(event)" value="{{$datadmin->telp}}"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control"
+								name="telp" 
+								required 
+								onkeypress="return isNumberKey(event)" 
+								value="{{$datadmin->telp}}"></p>
 						@if($errors->has('telp'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('telp')}}
@@ -95,7 +117,16 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Alamat</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Alamat" name="alamat" value="{{$datadmin->alamat}}"></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control" 
+								id="inputPassword" 
+								placeholder="Alamat" 
+								name="alamat" 
+								value="{{$datadmin->alamat}}"
+								required>
+							</p>
 						@if($errors->has('alamat'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('alamat')}}
@@ -103,15 +134,17 @@
                                         @endif
 						</div>
 					</div>
-					@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+					@if(Session::get('level') !='admin')
 					<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Level admin</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="level" class="form-control">
-								<option value="{{$datadmin->level}}">{{$datadmin->level}}</option>
-								<option>Pilih Level admin</option>
-								<option value="superadmin">Superadmin</option>
-								<option value="admin">Admin</option>
+								@if(Session::get('level') == 'programer')
+								<option value="programer" @if($datadmin->level=='programer')selected @endif>Programer</option>
+								@endif
+								
+								<option value="admin" @if($datadmin->level=='admin')selected @endif>Admin</option>
+								<option value="superadmin" @if($datadmin->level=='superadmin')selected @endif>Superadmin</option>
 							</select>
 						</div>
 					</div>

@@ -8,8 +8,6 @@
 @endsection
 
 @section('content')
-<!--  -->
-<!--  -->
 <script type="text/javascript">
      function isNumberKey(evt)
       {
@@ -36,7 +34,13 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama Jabatan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Masukan Nama Jabatan" name="jabatan" ></p>
+							<p class="form-control-static">
+								<input 
+								type="text" 
+								class="form-control" 
+								placeholder="Masukan Nama Jabatan" name="jabatan"
+								required 
+								></p>
 							 @if($errors->has('jabatan'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('jabatan')}}
@@ -51,7 +55,13 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="gaji_pokok" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
+								<input
+								type="text"
+								class="form-control"
+								name="gaji_pokok" 
+								required 
+								onkeypress="return isNumberKey(event)" 
+								placeholder="Misal :Rp 23000">
 							</div>
 							@if($errors->has('gaji_pokok'))
                                        <div class="alert alert-danger">
@@ -67,7 +77,13 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="uang_makan" required onkeypress="return isNumberKey(event)" placeholder="Misal :Rp 23000">
+								<input 
+								type="text" 
+								class="form-control" 
+								name="uang_makan" 
+								required 
+								onkeypress="return isNumberKey(event)" 
+								placeholder="Misal :Rp 23000">
 							</div>
 							@if($errors->has('uang_makan'))
                                        <div class="alert alert-danger">

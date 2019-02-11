@@ -53,7 +53,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama Admin"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="nama" placeholder="Masukan Nama Admin" required></p>
 							@if($errors->has('nama'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('nama')}}
@@ -64,7 +64,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" placeholder="Masukkan Username Admin Minimal 5 Huruf"  name="username">
+							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" placeholder="Masukkan Username Admin Minimal 5 Huruf"  name="username" required>
 							<span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span>
 
 							@if($errors->has('username'))
@@ -78,7 +78,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Password</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password Admin Minimal 5 Huru" name="password"></p>
+							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password Admin Minimal 5 Huruf" name="password" required></p>
 							@if($errors->has('password'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('password')}}
@@ -89,7 +89,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Email</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="email" placeholder="Masukkan Email"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="email" placeholder="Masukkan Email" required></p>
 							@if($errors->has('email'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('email')}}
@@ -112,7 +112,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Alamat</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="alamat" placeholder="Masukkan Alamat"></p>
+							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="alamat" placeholder="Masukkan Alamat" required></p>
 							@if($errors->has('alamat'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('alamat')}}
@@ -124,12 +124,12 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Level admin</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="level" class="form-control">
-								<option>Pilih Level admin</option>
 								@if(Session::get('level') == 'programer')
 								<option value="programer">Programer</option>
 								@endif
-								<option value="superadmin">Superadmin</option>
+								
 								<option value="admin">Admin</option>
+								<option value="superadmin">Superadmin</option>
 							</select>
 						</div>
 					</div>
