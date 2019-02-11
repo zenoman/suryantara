@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\models\katbarmodel;
+use App\models\Katbarmodel;
 use Illuminate\Support\Facades\Session;
 
 class katbarcontroller extends Controller
@@ -28,7 +28,7 @@ class katbarcontroller extends Controller
 
     public function store(Request $request)
     {
-        katbarmodel::create([
+        Katbarmodel::create([
             'spesial_cargo' => $request->spesial_cargo,
             'charge'  => $request->charge
 
@@ -55,7 +55,7 @@ class katbarcontroller extends Controller
      */
     public function edit($id)
     {
-        $jab = katbarmodel::find($id);
+        $jab = Katbarmodel::find($id);
         $setting = DB::table('setting')->get();
         return view('katbar/edit',['katbar'=>$jab,'title'=>$setting]);
 
@@ -80,7 +80,7 @@ class katbarcontroller extends Controller
 
          ];
         $this->validate($request,$rules,$customMessages);
-        katbarmodel::find($id)->update([
+        Katbarmodel::find($id)->update([
             'spesial_cargo'  => $request->spesial_cargo,
             'charge'  => $request->charge
             ]);
@@ -97,7 +97,7 @@ class katbarcontroller extends Controller
     public function destroy(Request $request)
     {
         $id = $request->aid;
-         katbarmodel::destroy($id);
+         Katbarmodel::destroy($id);
         return back()->with('status','Hapus Data Sukses');
     }
 }

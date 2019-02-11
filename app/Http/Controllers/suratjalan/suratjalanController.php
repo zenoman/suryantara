@@ -75,7 +75,7 @@ class suratjalanController extends Controller
             
             $data = DB::table('resi_pengiriman')
                     ->select('no_resi','id')
-                    ->where('no_resi','like','%'.$cari.'%')
+                    ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0]])
                     ->whereNull('kode_jalan')
                     ->get();
             

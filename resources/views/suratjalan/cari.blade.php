@@ -55,7 +55,9 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
+							@if(Session::get('level') != 'admin')
 							<th class="no-sort"><input type="checkbox" id="selectall"/></th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -66,7 +68,9 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
+							@if(Session::get('level') != 'admin')
 							<th>#</th>
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -109,16 +113,20 @@
 
 						
                             </td>
+                            @if(Session::get('level') != 'admin')
                             <td>
 								<input type="checkbox" name="delid[]" class="case" value="{{$row->id}}" />
 							</td>
+							@endif
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
 					<div class="pull-right">
+						@if(Session::get('level') != 'admin')
 						<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-warning">Hapus Data Terpilih
 					</button>
+					@endif
 					<a href="{{url('/listsuratjalan')}}" class="btn btn-danger">Kembali</a>
 					</div>
 					</form>

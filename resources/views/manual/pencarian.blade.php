@@ -52,7 +52,9 @@
 							<th>Pemegang</th>
 							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
+                            @if(Session::get('level') != 'admin')
 							<th class="text-center">#</th>
+                            @endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -65,7 +67,9 @@
                             <th>Pemegang</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
+                            @if(Session::get('level') != 'admin')
                             <th class="text-center">#</th>
+                            @endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -332,16 +336,21 @@
                     					</form>
                                         @endif
                             </td>
-                            <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
+                            @if(Session::get('level') != 'admin')
+                            <td class="text-center"><input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}">
+                            </td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
 					{{csrf_field()}}
+                    @if(Session::get('level') != 'admin')
 					<div class="text-right">
 						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
 					</div>
+                    @endif
 					
                         </form>
 					 
