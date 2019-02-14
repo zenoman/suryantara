@@ -122,6 +122,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim" >
+							</div>
+						</div>
+					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
@@ -135,6 +143,14 @@
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima" >
 							</div>
 						</div>
 					</div>
@@ -322,15 +338,25 @@
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim"></strong></p>
-					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim">
-						
+					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+						<strong id="cetak_pengirim"></strong><br>
+						<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_pengirim">
+						</span><br>
+						<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_pengirim">
+						</strong>
 					</p>
+					
+					
 				</td>
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima"></strong></p>
-				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima">
-					</p>
+				<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+				<strong id="cetak_penerima"></strong><br>
+				<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_penerima">
+				</span><br>
+				<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_penerima">
+				</strong>
+				</p>
+				
 				</td>
 				<td rowspan="3" align="center" style="width: 40%;">
 					<p style="margin-top: 1%;">
@@ -522,15 +548,22 @@
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim2"></strong></p>
-					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim2">
-						
+					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+						<strong id="cetak_pengirim2"></strong><br>
+						<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_pengirim2">
+						</span><br>
+						<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_pengirim2">
+						</strong>
 					</p>
 				</td>
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima2"></strong></p>
-				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima2">
-					</p>
+					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+				<strong id="cetak_penerima2"></strong><br>
+				<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_penerima2">
+				</span><br>
+				<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_penerima2">
+				</strong>
+				</p>
 				</td>
 				<td rowspan="3" align="center" style="width: 40%;">
 					<p style="margin-top: 1%;">
@@ -721,15 +754,22 @@
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim3"></strong></p>
-					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim3">
-						
+					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+						<strong id="cetak_pengirim3"></strong><br>
+						<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_pengirim3">
+						</span><br>
+						<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_pengirim3">
+						</strong>
 					</p>
 				</td>
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima3"></strong></p>
-				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima3">
-					</p>
+				<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+				<strong id="cetak_penerima3"></strong><br>
+				<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_penerima3">
+				</span><br>
+				<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_penerima3">
+				</strong>
+				</p>
 				</td>
 				<td rowspan="3" align="center" style="width: 40%;">
 					<p style="margin-top: 1%;">
@@ -920,15 +960,22 @@
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_pengirim4"></strong></p>
-					<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_pengirim4">
-						
+					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+						<strong id="cetak_pengirim4"></strong><br>
+						<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_pengirim4">
+						</span><br>
+						<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_pengirim4">
+						</strong>
 					</p>
 				</td>
 				<td align="center" style="border: 1px solid black; width: 20%;">
-					<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;"><strong id="cetak_penerima4"></strong></p>
-				<p align="left" style="margin-left: 2%;font-size: 15;" id="cetak_telp_penerima4">
-					</p>
+				<p style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%;margin-right: 2%;">
+				<strong id="cetak_penerima4"></strong><br>
+				<span style="margin-left: 2%;font-size: 13;" id="cetak_alamat_penerima4">
+				</span><br>
+				<strong style="margin-left: 2%;font-size: 13;" id="cetak_telp_penerima4">
+				</strong>
+				</p>
 				</td>
 				<td rowspan="3" align="center" style="width: 40%;">
 					<p style="margin-top: 1%;">

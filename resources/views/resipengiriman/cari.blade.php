@@ -93,11 +93,13 @@
 							<div class="invoice-block">
 								<div>Pengirim : {{$row->nama_pengirim}}</div>
 								<div>No.Telpon : {{$row->telp_pengirim}}</div>
+								<div>Alamat : {{$row->alamat_pengirim}}</div>
 							</div>
 							<br>
 							<div class="invoice-block">
 								<div>Penerima : {{$row->nama_penerima}}</div>
 								<div>No.Telpon : {{$row->telp_penerima}}</div>
+								<div>Alamat : {{$row->alamat_penerima}}</div>
 							</div>
 							<br>
 							<div class="invoice-block">

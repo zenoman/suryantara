@@ -199,7 +199,9 @@ class resipengirimanController extends Controller
         'keterangan'    => $request->keterangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
-        'biaya_ppn'     => $request->ppn
+        'biaya_ppn'     => $request->ppn,
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
@@ -231,7 +233,9 @@ class resipengirimanController extends Controller
         'keterangan'    => $request->keterangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
-        'biaya_ppn'     => $request->ppn
+        'biaya_ppn'     => $request->ppn,
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
@@ -241,7 +245,7 @@ class resipengirimanController extends Controller
        $simpan = DB::table('resi_pengiriman')
        ->insert([
         'no_resi'       => $request->noresi,
-        'admin'      => $request->iduser,
+        'admin'         => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'udara',
         'kota_asal'     => $request->kota_asal,
@@ -256,7 +260,7 @@ class resipengirimanController extends Controller
         'telp_pengirim' => $request->t_pengirim,
         'telp_penerima' => $request->t_penerima,
         'biaya_kirim'   => $request->biaya_kirim,
-        'biaya_smu' => $request->biaya_smu,
+        'biaya_smu'     => $request->biaya_smu,
         'biaya_karantina' => $request->biaya_karantina,
         'total_biaya'   => $request->total_biaya,
         'keterangan'    => $request->keterangan,
@@ -264,7 +268,9 @@ class resipengirimanController extends Controller
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
         'no_smu'        => $request->nosmu,
-        'biaya_charge'  =>$request->charge
+        'biaya_charge'  =>$request->charge,
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
