@@ -1,5 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//==============================================pajak
+Route::get('/pajak','pajak\pajakcontroller@index');
+Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
 //==============================================backup
 Route::get('/selesai','backup\backupController@selesai');
 Route::get('/printomset/{bulan}/{tahun}','backup\backupController@cetakomset');

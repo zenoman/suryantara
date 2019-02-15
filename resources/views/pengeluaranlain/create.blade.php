@@ -96,6 +96,7 @@
                                     @endif
 						</div>
 					</div>
+
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Foto
 						</label>
@@ -118,6 +119,7 @@
 	</div>
 
         @endsection
+     
         @section('otherjs')
         <script>
             $('input[type="file"]').change(function(){
