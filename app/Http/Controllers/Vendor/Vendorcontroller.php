@@ -37,7 +37,8 @@ return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
     }
 
     public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template vendor.xlsx";
+         // $file= base_path()."/../public_html/file/template vendor.xlsx";
+         $file="file/template vendor.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
