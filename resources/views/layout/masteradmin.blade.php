@@ -46,9 +46,9 @@
 	                        </div>
 	                    </div>
 	
-	                    <button type="button" class="burger-right">
+<!-- 	                    <button type="button" class="burger-right">
 	                        <i class="font-icon-menu-addl"></i>
-	                    </button>
+	                    </button> -->
 	                </div><!--.site-header-shown-->
 	
 	        </div><!--.site-header-content-->

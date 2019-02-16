@@ -37,7 +37,8 @@ return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
     }
 
     public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template tarif laut.xlsx";
+         // $file= base_path()."/../public_html/file/template tarif laut.xlsx";
+         $file= "file/template tarif laut.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );

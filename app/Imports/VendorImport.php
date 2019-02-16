@@ -24,7 +24,7 @@ if($dtlam > 0){
                     'vendor'=>$row['nama_vendor'],
                     'telp'=>$row['telp'],
                     'alamat' => $row['alamat'],
-                    'cabang' => $row['cabang']
+                    'cabang' => $row['status']
                     ]);
     	}
       }

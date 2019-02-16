@@ -68,7 +68,7 @@
                                                <img src="{{asset('img/import_export/vendor.JPG')}}">
                                                <br><br>
                                                <div class="alert alert-danger">
-                                                <b>NB</b> : Untuk Cabang masukan <b>Y</b> <i>jika Cabang</i> Dan <b>N</b> <i> jika Bukan Cabang</i>. 
+                                                <b>NB</b> : Untuk Cabang masukan <b>Y</b> <i>jika Cabang</i> Dan <b>N</b> <i> jika Bukan Cabang (Y dan N Harus <b>besar</b>)</i>. 
                                                </div><br>
                                                <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
                                                <img src="{{asset('img/import_export/001.JPG')}}"  width="100%" height="100%"><p>

@@ -41,7 +41,8 @@ $setting = DB::table('setting')->get();
     }
 
     public function downloadtemplate(){
-         $file= base_path()."/../public_html/file/template tarif darat.xlsx";
+         // $file= base_path()."/../public_html/file/template tarif darat.xlsx";
+         $file="file/template tarif darat.xlsx";
             $headers = array(
               'Content-Type: application/excel',
             );
