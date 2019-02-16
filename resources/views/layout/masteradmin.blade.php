@@ -21,8 +21,8 @@
 	<header class="site-header">
 	    <div class="container-fluid">
 	        <a href="#" class="site-logo">
-	            <img class="hidden-md-down" src="{{asset('img/LOGO2.PNG')}}" alt="">
-	            <img class="hidden-lg-down" src="{{asset('img/LOGO2.PNG')}}" alt="">
+	            <img class="hidden-md-down" src="{{asset('img/LOGO2.png')}}" alt="">
+	            <img class="hidden-lg-down" src="{{asset('img/LOGO2.png')}}" alt="">
 	        </a>
 	
 	        <button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
@@ -113,7 +113,7 @@
 	            </span>
 	             <ul>
 	             	<li>
-	                	<a href="{{url('Manual')}}"><span class="lbl">Resi Manual</span></a>
+	                	<a href="{{url('Manual')}}"><span class="lbl">Input Manual</span></a>
 	                </li>
                 	<li>
                 		<a href="{{url('/resipengirimandarat')}}"><span class="lbl">Pengiriman Darat</span></a>

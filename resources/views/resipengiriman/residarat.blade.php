@@ -63,7 +63,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume"  value="0">
+								<input 
+								type="text" 
+								class="form-control" 
+								id="volume" 
+								value="0" 
+								onChange="calculate(1)" 
+								onkeypress="return isNumberKey2(event)">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -84,7 +90,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey2(event)">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -1083,7 +1089,16 @@
 @section('otherjs')
 <script src="{{asset('assets/js/resi.js')}}"></script>
 <script type="text/javascript">
-     function isNumberKey(evt)
+     function isNumberKey2(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+      function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
          if (charCode > 31 && (charCode < 48 || charCode > 57))

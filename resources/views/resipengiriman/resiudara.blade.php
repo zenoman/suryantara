@@ -76,7 +76,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume" onkeypress="return isNumberKey(event)"  value="0">
+								<input type="text" class="form-control" id="volume" onkeypress="return isNumberKey2(event)"  value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -97,7 +97,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey(event)" value="0">
+								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey2(event)" value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -1148,7 +1148,15 @@
 
          return true;
       }
+      function isNumberKey2(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+            return false;
 
+         return true;
+      }
 </script>
 
 @endsection

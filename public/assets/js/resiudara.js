@@ -146,7 +146,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			$("#volume").val(total);
+			var vt = parseFloat(total);
+			$("#volume").val(vt.toFixed(2));
 			}
 			
 		})
@@ -157,7 +158,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			$("#volume").val(total);
+			var vt = parseFloat(total);
+			$("#volume").val(vt.toFixed(2));
 			}
 			
 		})
@@ -168,7 +170,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			$("#volume").val(total);
+			var vt = parseFloat(total);
+			$("#volume").val(vt.toFixed(2));
 			}
 			
 		})
