@@ -187,9 +187,11 @@ $(document).ready(function(){
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
-			$('#nama_barang').focus();
 			$('#satuan').val('kg');
+			$("#alamat_pengirim").val('');
+			$("#alamat_penerima").val('');
 			$('#metode').val('cash');
+			$('#nama_barang').focus();
 			satuan='kg';
 			kotatujuan ='';
 			noresi = '';
@@ -215,11 +217,13 @@ $(document).ready(function(){
 			var biaya_kirim	= $("#biaya_kirim").val();
 			var biaya_packing = $("#biaya_packing").val();
 			var biaya_asu 	= $("#biaya_asuransi").val();
+			var a_pengirim 	= $("#alamat_pengirim").val();
+			var a_penerima	= $("#alamat_penerima").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var satuan		= $('#satuan').val();
-			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
+			if(a_penerima =='' || a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    				
    			}else{
@@ -238,6 +242,15 @@ $(document).ready(function(){
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_tujuan3").html(kotatujuan);
 			$("#cetak_kota_tujuan4").html(kotatujuan);
+			$("#cetak_alamat_pengirim").html($("#alamat_pengirim").val());
+			$("#cetak_alamat_pengirim2").html($("#alamat_pengirim").val());
+			$("#cetak_alamat_pengirim3").html($("#alamat_pengirim").val());
+			$("#cetak_alamat_pengirim4").html($("#alamat_pengirim").val());
+			$("#cetak_alamat_penerima").html($("#alamat_penerima").val());
+			$("#cetak_alamat_penerima2").html($("#alamat_penerima").val());
+			$("#cetak_alamat_penerima3").html($("#alamat_penerima").val());
+			$("#cetak_alamat_penerima4").html($("#alamat_penerima").val());
+
 			$("#cetak_kota_asal").html($("#kota_asal").val());
 			if(satuan=='koli'){
 			$("#cetak_jumlah_barang").html($("#jumlah").val()+" "+satuan);
@@ -343,6 +356,8 @@ $(document).ready(function(){
 			var t_pengirim	= $("#t_pengirim").val();
 			var n_penerima	= $("#n_penerima").val();
 			var t_penerima 	= $("#t_penerima").val();
+			var a_pengirim 	= $("#alamat_pengirim").val();
+			var a_penerima	= $("#alamat_penerima").val();
 			var biaya_kirim	= $("#biaya_kirim").val();
 			var biaya_packing = $("#biaya_packing").val();
 			var biaya_asu 	= $("#biaya_asuransi").val();
@@ -352,7 +367,7 @@ $(document).ready(function(){
 			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var satuan		= $('#satuan').val();
 			var metode		= $("#metode").val();
-			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
+			if(a_penerima=='' || a_pengirim=='' || iduser==''|| nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    				
    			}else{
@@ -383,7 +398,9 @@ $(document).ready(function(){
                 	'total_biaya'	: total_biaya,
                 	'satuan'		: satuan,
                 	'metode'		: metode,
-                	'ppn'			: ppn
+                	'ppn'			: ppn,
+                	'alamat_pengirim' : a_pengirim,
+                	'alamat_penerima' : a_penerima
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

@@ -232,7 +232,9 @@
 	                        <li>
 	                        	<a href="{{url('/laporanpengeluaranlainya')}}"><span class="lbl">Lainya</span></a>
 	                        </li>
-	                        
+	                        <li>
+	                        	<a href="{{url('/pajak')}}"><span class="lbl">Pajak</span></a>
+	                        </li>
 	                    </ul>
 	                </li>
 	                <li>

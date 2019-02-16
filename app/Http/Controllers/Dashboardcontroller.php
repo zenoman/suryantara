@@ -51,7 +51,9 @@ class Dashboardcontroller extends Controller
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"ny");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"ny");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
-                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan;
+                $pajak = $pemasukan*1/100;
+                $totalpajak = $this->cari_pajaktahunan(date('Y'));
+                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan - $pajak;
                 
                 $insert = DB::table('omset')
                 ->insert([
@@ -61,7 +63,22 @@ class Dashboardcontroller extends Controller
                     'pengeluaran'=>$pengeluaran,
                     'pengeluaran_lainya'=>$pengeluaran_lain,
                     'laba'=>$laba,
-                    'gaji_karyawan'=>$gajikaryawan
+                    'gaji_karyawan'=>$gajikaryawan,
+                    'pajak'=>$pajak
+                ]);
+                DB::table('pajak')
+                ->insert([
+                    'bulan'=>12,
+                    'tahun'=>$tahun-1,
+                    'nama_pajak'=>'pajak',
+                    'total'=>$pajak
+                ]);
+                DB::table('pajak')
+                ->insert([
+                    'tahun'=>$tahun-1,
+                    'nama'=>'total_pajak',
+                    'total'=>$totalpajak,
+                    'status'=>'tahunan'
                 ]);
 
             }else{
@@ -70,7 +87,8 @@ class Dashboardcontroller extends Controller
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"y");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"y");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
-                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan;
+                $pajak = $pemasukan*1/100;
+                $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan - $pajak;
                 $insert = DB::table('omset')
                 ->insert([
                     'bulan'=>date('m')-1,
@@ -79,7 +97,15 @@ class Dashboardcontroller extends Controller
                     'pengeluaran'=>$pengeluaran,
                     'pengeluaran_lainya'=>$pengeluaran_lain,
                     'laba'=>$laba,
-                    'gaji_karyawan'=>$gajikaryawan
+                    'gaji_karyawan'=>$gajikaryawan,
+                    'pajak'=>$pajak
+                ]);
+                DB::table('pajak')
+                ->insert([
+                    'bulan'=>date('m')-1,
+                    'tahun'=>$tahun,
+                    'nama_pajak'=>'pajak',
+                    'total'=>$pajak
                 ]);    
             }
             DB::table('setting')
@@ -90,7 +116,17 @@ class Dashboardcontroller extends Controller
         }
 
     }
-
+    function cari_pajaktahunan($tahun){
+        $tahun -= 1;
+         $data = DB::table('pajak')
+        ->select(DB::raw('SUM(total) as totalnya'))
+        ->where(['tahun','=',$tahun],['status','=','bulanan'])
+        ->get();
+        foreach ($data as $row) {
+            $newdata = $row->totalnya;
+        }
+        return $newdata;
+    }
     function cari_pemasukan($bulan,$tahun,$status){
         if($status=="ny"){
             $tahun -=1;

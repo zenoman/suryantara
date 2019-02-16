@@ -149,7 +149,9 @@ class Manualcontroller extends Controller
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
-        'metode_input'  =>'manual'
+        'metode_input'  =>'manual',
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
@@ -180,7 +182,9 @@ class Manualcontroller extends Controller
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
-        'metode_input'  =>'manual'
+        'metode_input'  =>'manual',
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
@@ -213,7 +217,9 @@ class Manualcontroller extends Controller
         'biaya_ppn'     => $request->ppn,
         'no_smu'        => $request->nosmu,
         'biaya_charge'  =>$request->charge,
-        'metode_input'  =>'manual'
+        'metode_input'  =>'manual',
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }

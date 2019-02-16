@@ -16,7 +16,7 @@ class backupomset implements FromCollection, WithHeadings
     public function collection()
     {
          return DB::table('omset')
-        ->select(DB::raw('bulan,tahun,pemasukan,pengeluaran,pengeluaran_lainya,laba'))
+        ->select(DB::raw('bulan,tahun,pemasukan,pengeluaran,pengeluaran_lainya,pajak,laba'))
         ->get();    
     }
     public function headings(): array
@@ -27,6 +27,7 @@ class backupomset implements FromCollection, WithHeadings
             'Pemasukan',
             'Pengeluaran Vendor',
             'Pengeluaran Lainya',
+            'Pajak',
             'Laba'
         ];
     }

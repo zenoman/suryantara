@@ -185,7 +185,7 @@
 		<br>	
 		<span style="font-size: 18;margin-bottom: 20px;">PT. KADIRI LOGISTIK CARGO</span>
 		<br>	
-		<span style="font-size: 15;">JLN RAYA DADAPAN, SUMBEREJO, NGASEM, KEDIRI</span>
+		<span style="font-size: 15;">Jln Raya Dadapan - Sumberejo Kab. Kediri</span>
 	</h2>
 			</td>
 			<td width="20%"></td>

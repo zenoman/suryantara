@@ -145,7 +145,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 			$("#volume").val(total);
 			}
 			
@@ -156,7 +156,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 			$("#volume").val(total);
 			}
 			
@@ -167,7 +167,7 @@ $(document).ready(function(){
 			var panjang = $("#d_panjang").val();
 			var lebar = $("#d_lebar").val();
 			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
+			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 			$("#volume").val(total);
 			}
 			
@@ -224,7 +224,14 @@ $(document).ready(function(){
 	})
 	//=================================================
 	function tempelresi(){
-
+		$("#cetak_alamat_pengirim").html($("#alamat_pengirim").val());
+		$("#cetak_alamat_pengirim2").html($("#alamat_pengirim").val());
+		$("#cetak_alamat_pengirim3").html($("#alamat_pengirim").val());
+		$("#cetak_alamat_pengirim4").html($("#alamat_pengirim").val());
+		$("#cetak_alamat_penerima").html($("#alamat_penerima").val());
+		$("#cetak_alamat_penerima2").html($("#alamat_penerima").val());
+		$("#cetak_alamat_penerima3").html($("#alamat_penerima").val());
+		$("#cetak_alamat_penerima4").html($("#alamat_penerima").val());
 		$("#cetak_kota_tujuan").html(kotatujuan);
 		$("#cetak_kota_tujuan2").html(kotatujuan);
 		$("#cetak_kota_tujuan3").html(kotatujuan);
@@ -336,6 +343,8 @@ $(document).ready(function(){
 			var t_penerima 	= $("#t_penerima").val();
 			var biaya_kirim	= $("#biaya_kirim").val();
 			var biaya_smu = $("#biaya_smu").val();
+			var a_pengirim 	= $("#alamat_pengirim").val();
+			var a_penerima	= $("#alamat_penerima").val();
 			var biaya_karantina = $("#biaya_karantina").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
@@ -343,7 +352,7 @@ $(document).ready(function(){
 			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
 			var total_biaya = parseInt(ppn) + parseInt(biaya_smu) +  parseInt(biaya_karantina) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
-		if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
+		if(a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
 				telahvalid = 'n';		
    		}else{
    			telahvalid = 'y';
@@ -380,7 +389,9 @@ $(document).ready(function(){
 			var total_biaya = parseInt(change) + parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 			var nosmu 		= $('#nomer_smu').val();
-			if(iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
+			var a_pengirim 	= $("#alamat_pengirim").val();
+			var a_penerima	= $("#alamat_penerima").val();
+			if(a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var l = Ladda.create(this);
@@ -412,7 +423,9 @@ $(document).ready(function(){
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'nosmu'			: nosmu,
-                	'charge'		: change
+                	'charge'		: change,
+                	'alamat_pengirim' : a_pengirim,
+                	'alamat_penerima' : a_penerima
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -454,7 +467,9 @@ $(document).ready(function(){
 			$('#satuan').val('kg');
 			$('#kategori').val('');
 			$('#nomer_smu').val('');
-			$("#metode").val('cash');
+			$("#alamat_pengirim").val('');
+			$("#alamat_penerima").val('');
+			$('#metode').val('cash');
 			$('#nama_barang').focus();
 			kotatujuan ='';
 			noresi = '';

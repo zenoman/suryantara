@@ -79,8 +79,7 @@
 				</header>
 				<br>
 				<div class="form-group row">
-						
-						<div class="col-md-9 col-sm-9">
+					<div class="col-md-9 col-sm-9">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -139,9 +138,7 @@
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
-						
 					</div>
-
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
@@ -157,7 +154,7 @@
 					</div>
 					<hr>
 					<div class="row">
-						<div class="col-md-6 col-sm-6">
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
 							<div class="input-group">
@@ -170,6 +167,14 @@
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_darat" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim_darat">
 							</div>
 						</div>
 					</div>
@@ -186,6 +191,14 @@
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_darat" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima_darat">
 							</div>
 						</div>
 					</div>
@@ -355,6 +368,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-md-4 col-sm-6">
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
 						<select class="select2" id="kota_tujuan_laut"></select>
@@ -378,6 +392,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim_laut">
+							</div>
+						</div>
+					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
@@ -391,6 +413,14 @@
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_laut" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima_laut">
 							</div>
 						</div>
 					</div>
@@ -610,6 +640,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim_udara">
+							</div>
+						</div>
+					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
@@ -623,6 +661,14 @@
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima_udara">
 							</div>
 						</div>
 					</div>

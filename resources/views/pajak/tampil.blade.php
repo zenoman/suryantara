@@ -22,36 +22,37 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Omset Bulanan</h2>
+							@if($tahunya=='semua')
+							<h2>Laporan Pajak </h2>
+							@else
+							<h2>Laporan Pajak Tahun {{$tahunya}}</h2>
+							@endif
 						</div>
 					</div>
 				</div>
 			</header>
 			<section class="card">
 				<div class="card-block">
+					
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Bulan</th>
-							<th>Pemasukan</th>
-							<th>Pengeluaran</th>
-							<th>Pengeluaran Gaji karyawan</th>
-							<th>Pengeluaran lainya</th>
-							<th>Pajak</th>
-							<th>Laba</th>
+							@if($tahunya=='semua')
+								<th>bulan</th>
+							@endif
+							<th>tahun</th>
+							<th>Subtotal</th>
 						</tr>
 						</thead>
 						<tfoot>
-						<tr> 
+						<tr>
 							<th>No</th>
-							<th>Bulan</th>
-							<th>Pemasukan</th>
-							<th>Pengeluaran</th>
-							<th>Pengeluaran Gaji karyawan</th>
-							<th>Pengeluaran lainya</th>
-							<th>Pajak</th>
-							<th>Laba</th>
+							@if($tahunya=='semua')
+								<th>bulan</th>
+							@endif
+							<th>tahun</th>
+							<th>Subtotal</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -60,24 +61,30 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->pajak,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>
+                            @if($tahunya=='semua')
+                            <td>{{$row->bulan}}</td>
+                            @endif
+                            <td>{{$row->tahun}}</td>
+                            <td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>
 					</table>
-					<br>
-					<div class="text-right">
-<a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
+				</div>
+			</section>
+
+	
+			@foreach($total as $ttl)
+			<section class="card">
+				<div class="card-block">
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+					<div class="pull-right">
+<!-- <a href="#" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
 							<button type="button" class="btn btn-primary" onclick="cetak()">
 								cetak
-							</button>
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
+							</button>	
+							&nbsp;&nbsp;
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
 								Kembali
 							</button>
 						
@@ -85,9 +92,8 @@
 					</div>
 				</div>
 			</section>
-
 	
-			
+			@endforeach
 			
 		</div>
 	</div>
@@ -98,7 +104,11 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-						Omset Bulanan
+						@if($tahunya=='semua')
+						Laporan Pajak
+						@else
+						Laporan Pajak Tahun {{$tahunya}}
+						@endif
 						
 					</b>
 				</td>
@@ -115,15 +125,13 @@
 		</table>
 		<table border="1" style="width: 100%">
 						<thead>
-						<tr> 
+						<tr>
 							<th>No</th>
-							<th>Bulan</th>
-							<th>Pemasukan</th>
-							<th>Pengeluaran</th>
-							<th>Pengeluaran Gaji karyawan</th>
-							<th>Pengeluaran lainya</th>
-							<th>Pajak</th>
-							<th>Laba</th>
+							@if($tahunya=='semua')
+								<th>bulan</th>
+							@endif
+							<th>tahun</th>
+							<th>Subtotal</th>
 						</tr>
 						</thead>
 						
@@ -133,17 +141,16 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->pajak,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>
+                            @if($tahunya=='semua')
+                            <td>{{$row->bulan}}</td>
+                            @endif
+                            <td>{{$row->tahun}}</td>
+                            <td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>
 					</table>
+					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
 			</div>
 	@endsection
 		@section('js')
@@ -152,7 +159,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 
