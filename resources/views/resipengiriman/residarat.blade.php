@@ -250,10 +250,10 @@
 				</td>
 				<td style="width: 30%">
 				<p align="center">
-					<b>Office :</b><br>
-					Jalan Pamenang No. 10 Sukorejo <br>
-					Gurah, Kediri <br>
-					081 216 933 775 <br>
+					<b>Kator :</b><br>
+					Jln. Raya Dadapan - sumberejo <br>
+					Kab. Kediri <br>
+					0354-4545192<br>
 					suryantara.cargo17@gmail.com	
 				</p>
 				</td>
@@ -460,10 +460,10 @@
 				</td>
 				<td style="width: 30%">
 				<p align="center">
-					<b>Office :</b><br>
-					Jalan Pamenang No. 10 Sukorejo <br>
-					Gurah, Kediri <br>
-					081 216 933 775 <br>
+					<b>Kator :</b><br>
+					Jln. Raya Dadapan - sumberejo <br>
+					Kab. Kediri <br>
+					0354-4545192<br>
 					suryantara.cargo17@gmail.com	
 				</p>
 				</td>
@@ -666,10 +666,10 @@
 				</td>
 				<td style="width: 30%">
 				<p align="center">
-					<b>Office :</b><br>
-					Jalan Pamenang No. 10 Sukorejo <br>
-					Gurah, Kediri <br>
-					081 216 933 775 <br>
+					<b>Kator :</b><br>
+					Jln. Raya Dadapan - sumberejo <br>
+					Kab. Kediri <br>
+					0354-4545192<br>
 					suryantara.cargo17@gmail.com	
 				</p>
 				</td>
@@ -872,10 +872,10 @@
 				</td>
 				<td style="width: 30%">
 				<p align="center">
-					<b>Office :</b><br>
-					Jalan Pamenang No. 10 Sukorejo <br>
-					Gurah, Kediri <br>
-					081 216 933 775 <br>
+					<b>Kator :</b><br>
+					Jln. Raya Dadapan - sumberejo <br>
+					Kab. Kediri <br>
+					0354-4545192<br>
 					suryantara.cargo17@gmail.com	
 				</p>
 				</td>
