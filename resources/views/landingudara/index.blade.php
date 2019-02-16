@@ -20,7 +20,7 @@
     <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
     <link href="{{asset('asset_user/css/select2user.css')}}" rel="stylesheet">
   </head>
@@ -190,7 +190,7 @@
     <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
     <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
   
   <script type="text/javascript">

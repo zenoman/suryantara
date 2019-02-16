@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     
     <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
@@ -215,7 +215,7 @@
    
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
     
   <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
   <script>

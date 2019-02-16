@@ -110,7 +110,7 @@
                             <td>
 <form action="{{url('/vendor/delete')}}"  method="post">
 <a href="{{url('/vendor/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
-
+ 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>

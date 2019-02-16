@@ -26,7 +26,7 @@
 
     <!-- Custom styles for this template -->
     <!-- Custom styles for this template -->
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
     <link href="{{asset('asset_user/css/select2user.css')}}" rel="stylesheet">
 
@@ -174,7 +174,7 @@
     <script src="asset_user/js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="asset_user/js/freelancer.min.js"></script>
+    <script src="asset_user/js/freelancer.js"></script>
     <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 
   <script type="text/javascript">

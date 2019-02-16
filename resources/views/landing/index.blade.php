@@ -23,7 +23,7 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
 
   </head>
 
@@ -196,7 +196,7 @@
     <script src="{{asset('asset_user/js/main.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
 
   </body>
 

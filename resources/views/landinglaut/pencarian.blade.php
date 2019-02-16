@@ -25,7 +25,7 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('asset_user/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     
     <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
@@ -185,7 +185,7 @@
     <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.min.js')}}"></script>
+    <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
     
   <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
   <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
