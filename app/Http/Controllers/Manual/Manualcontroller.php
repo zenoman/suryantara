@@ -86,12 +86,15 @@ class Manualcontroller extends Controller
             }else{
                 $final = $data[$i];
             }
+        $caridata = DB::table('resi_pengiriman')->where('no_resi',$final)->count();
+        if ($caridata == 0) {
         Manualmodel::create([
             'pemegang' => $request->pemegang,
             'no_resi'  => $final,
             'metode_input'=>'manual'
 
         ]);
+        }
         }
         return redirect('Manual')->with('status','Input Data Sukses');
     }

@@ -36,7 +36,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar_darat").val();
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
-			$("#volume_darat").val(total);
+			var vt = parseFloat(total);
+			$("#volume_darat").val(vt.toFixed(2));
 			}
 			
 		})
@@ -47,7 +48,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar_darat").val();
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
-			$("#volume_darat").val(total);
+			var vt = parseFloat(total);
+			$("#volume_darat").val(vt.toFixed(2));
 			}
 			
 		})
@@ -58,7 +60,8 @@ $(document).ready(function(){
 			var lebar = $("#d_lebar_darat").val();
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
-			$("#volume_darat").val(total);
+			var vt = parseFloat(total);
+			$("#volume_darat").val(vt.toFixed(2));
 			}
 			
 		})
@@ -260,7 +263,8 @@ $(document).ready(function(){
 			var lebar_laut = $("#d_lebar_laut").val();
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
-			$("#volume_laut").val(total_laut);
+			var vt = parseFloat(total_laut);
+			$("#volume_laut").val(vt.toFixed(2));
 			}
 			
 		})
@@ -271,7 +275,8 @@ $(document).ready(function(){
 			var lebar_laut = $("#d_lebar_laut").val();
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
-			$("#volume_laut").val(total_laut);
+			var vt = parseFloat(total_laut);
+			$("#volume_laut").val(vt.toFixed(2));
 			}
 			
 		})
@@ -282,7 +287,8 @@ $(document).ready(function(){
 			var lebar_laut = $("#d_lebar_laut").val();
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
-			$("#volume_laut").val(total_laut);
+			var vt = parseFloat(total_laut);
+			$("#volume_laut").val(vt.toFixed(2));
 			}
 			
 		})
@@ -572,7 +578,8 @@ $(document).ready(function(){
 			var lebar_udara = $("#d_lebar_udara").val();
 			var tinggi_udara = $("#d_tinggi_udara").val();
 			var total_udara =  (parseInt(panjang_udara) *  parseInt(lebar_udara) *  parseInt(tinggi_udara))/6000;
-			$("#volume_udara").val(total_udara);
+			var vt = parseFloat(total_udara);
+			$("#volume_udara").val(vt.toFixed(2));
 			}
 			
 		})
@@ -583,7 +590,8 @@ $(document).ready(function(){
 			var lebar_udara = $("#d_lebar_udara").val();
 			var tinggi_udara = $("#d_tinggi_udara").val();
 			var total_udara =  (parseInt(panjang_udara) *  parseInt(lebar_udara) *  parseInt(tinggi_udara))/6000;
-			$("#volume_udara").val(total_udara);
+			var vt = parseFloat(total_udara);
+			$("#volume_udara").val(vt.toFixed(2));
 			}
 			
 		})
@@ -594,7 +602,8 @@ $(document).ready(function(){
 			var lebar_udara = $("#d_lebar_udara").val();
 			var tinggi_udara = $("#d_tinggi_udara").val();
 			var total_udara =  (parseInt(panjang_udara) *  parseInt(lebar_udara) *  parseInt(tinggi_udara))/6000;
-			$("#volume_udara").val(total_udara);
+			var vt = parseFloat(total_udara);
+			$("#volume_udara").val(vt.toFixed(2));
 			}
 			
 		})
