@@ -83,7 +83,7 @@
 							<th>Heavy cargo</th>
 							<th>Berat Minimal</th>
 							<th class="text-center">Aksi</th>
-							<th class="text-center">#</th>
+							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -97,7 +97,7 @@
 							<th>Heavy cargo</th>
 							<th>Berat Minimal</th>
 							<th class="text-center">Aksi</th>
-							<th class="text-center">#</th>
+							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -129,6 +129,11 @@
 					</table>
 						{{csrf_field()}}
 						<div class="text-right">
+&nbsp;&nbsp;
+<a href="{{url('/trfudara/hapussemua')}}" class="btn btn-danger">
+Kosongkan Data
+</a>	
+&nbsp;&nbsp;
 <input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
 						</div>
                         </form>
@@ -147,5 +152,11 @@
             "paging":false
         });
 		});
+		function toggle(source) {
+	  checkboxes = document.getElementsByName('pilihid[]');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+	    checkboxes[i].checked = source.checked;
+	  }
+	  }
 	</script>
 	@endsection

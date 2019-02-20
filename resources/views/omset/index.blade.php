@@ -74,9 +74,12 @@
 					<br>
 					<div class="text-right">
 <a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
-							<button type="button" class="btn btn-primary" onclick="cetak()">
-								cetak
-							</button>
+							&nbsp;&nbsp;
+								<a href="{{url('/printimset')}}" target="_blank()" class="btn btn-primary">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>	
+							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali
 							</button>
@@ -91,60 +94,6 @@
 			
 		</div>
 	</div>
-	
-
-		<div id="hidden_div" style="display: none;">
-		<table style="width: 100%">
-			<tr>
-				<td colspan="2" align="center">
-					<b>
-						Omset Bulanan
-						
-					</b>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Tanggal Cetak : {{date('d-m-Y')}}	
-				</td>
-				<td align="right">
-					Pencetak : {{Session::get('username')}}
-				</td>
-
-			</tr>
-		</table>
-		<table border="1" style="width: 100%">
-						<thead>
-						<tr> 
-							<th>No</th>
-							<th>Bulan</th>
-							<th>Pemasukan</th>
-							<th>Pengeluaran</th>
-							<th>Pengeluaran Gaji karyawan</th>
-							<th>Pengeluaran lainya</th>
-							<th>Pajak</th>
-							<th>Laba</th>
-						</tr>
-						</thead>
-						
-						<tbody>
-						<?php $i = 1;?>
-                            @foreach($data as $row)
-                            <?php $no = $i++;?>
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->pengeluaran_lainya,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->pajak,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->laba,0,',','.')}}</td>
-                        </tr>
-						@endforeach
-						</tbody>
-					</table>
-			</div>
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
@@ -157,16 +106,5 @@
 		});
 
 		
-	</script>
-	@endsection
-	@section('otherjs')
-	<script>
-		function cetak(){
-		var divToPrint=document.getElementById('hidden_div');
-		var newWin=window.open('','Print-Window');
-		newWin.document.open();
-		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-		newWin.document.close();
-		}
 	</script>
 	@endsection

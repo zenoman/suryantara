@@ -80,9 +80,11 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 <!-- <a href="#" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-							<button type="button" class="btn btn-primary" onclick="cetak()">
-								cetak
-							</button>	
+							&nbsp;&nbsp;
+								<a href="{{url('/printpajak/'.$tahunya.'')}}" target="_blank()" class="btn btn-primary">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>	
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
 								Kembali
@@ -97,61 +99,6 @@
 			
 		</div>
 	</div>
-	
-
-		<div id="hidden_div" style="display: none;">
-		<table style="width: 100%">
-			<tr>
-				<td colspan="2" align="center">
-					<b>
-						@if($tahunya=='semua')
-						Laporan Pajak
-						@else
-						Laporan Pajak Tahun {{$tahunya}}
-						@endif
-						
-					</b>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Tanggal Cetak : {{date('d-m-Y')}}	
-				</td>
-				<td align="right">
-					Pencetak : {{Session::get('username')}}
-				</td>
-
-			</tr>
-		</table>
-		<table border="1" style="width: 100%">
-						<thead>
-						<tr>
-							<th>No</th>
-							@if($tahunya=='semua')
-								<th>bulan</th>
-							@endif
-							<th>tahun</th>
-							<th>Subtotal</th>
-						</tr>
-						</thead>
-						
-						<tbody>
-						<?php $i = 1;?>
-                            @foreach($data as $row)
-                            <?php $no = $i++;?>
-                        <tr>
-                            <td>{{$no}}</td>
-                            @if($tahunya=='semua')
-                            <td>{{$row->bulan}}</td>
-                            @endif
-                            <td>{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
-                        </tr>
-						@endforeach
-						</tbody>
-					</table>
-					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
-			</div>
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>

@@ -194,5 +194,10 @@ public function haphapus(Request $request)
         }
 return back()->with('status','Hapus Data Sukses');
 }
-
+public function hapusall()
+    {
+        Trf_daratmodel::truncate();
+        return back()->with('status','Hapus Data Sukses');
+        //
+    }
 }

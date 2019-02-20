@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Input;
 //==============================================pajak
 Route::get('/pajak','pajak\pajakcontroller@index');
 Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
+Route::get('/printpajak/{tahunya}','pajak\pajakcontroller@cetakpajak');
 //==============================================backup
 Route::get('/selesai','backup\backupController@selesai');
 Route::get('/printomset/{bulan}/{tahun}','backup\backupController@cetakomset');
@@ -24,6 +25,7 @@ Route::get('/printgajikaryawan/{bulan}/{tahun}','backup\backupController@cetakgj
 Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgjkw');
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
+Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
 Route::get('/omset/export','omset\omsetController@export');
 
@@ -72,12 +74,16 @@ Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 //=====================================================laporan
 Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran'); 
+Route::get('/printlaporanpengeluaran/{bulanya}/{vendor}','laporan\laporanController@cetakpengeluaran');
 Route::get('/laporanpengeluarangjkw','laporan\laporanController@pilihpengeluarangajikaryawan'); 
 Route::get('/tampillaporanpengeluarangjkw','laporan\laporanController@tampilpengeluarangjkw');
+Route::get('/printlaporangpengeluaranjkw/{tglnya}/{kodejabatan}','laporan\laporanController@cetakpengeluarangjkw');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
+Route::get('/printpengeluaranlainya/{bulanya}/{kategori}','laporan\laporanController@cetaklaporanpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
+Route::get('/printpemasukan/{bulanya}/{jalur}','laporan\laporanController@cetakpemasukan');
 //---------------------------------------------------export Laporan
 Route::get('/export_laporan_pemasukan/{bulanya}/{jalur}','laporan\laporanController@exsportlaporanpemasukan');
 Route::get('/export_laporan_pengeluaran_vendor/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
@@ -119,6 +125,7 @@ Route::get('/trfudara/{id}/edit','Trfudara\Trfudaracontroller@edit');
 Route::put('/trfudara/{id}','Trfudara\Trfudaracontroller@update');
 Route::post('/trfudara/delete','Trfudara\Trfudaracontroller@destroy');
 Route::post('/trfudara/hapuspilihan','Trfudara\Trfudaracontroller@haphapus');
+Route::get('/trfudara/hapussemua','Trfudara\Trfudaracontroller@hapusall');
 Route::get('trfudara/cari','Trfudara\Trfudaracontroller@caridata');
 //-----------------------export import
 Route::get('/trfudara/importexcel','Trfudara\Trfudaracontroller@importexcel');
@@ -134,6 +141,7 @@ Route::put('/trfdarat/{id}','Trfdarat\Trf_daratcontroller@update');
 Route::post('/trfdarat/delete','Trfdarat\Trf_daratcontroller@destroy');
 Route::post('/trfdarat/hapuspilihan','Trfdarat\Trf_daratcontroller@haphapus');
 Route::get('/trfdarat/{id}/delete','Trfdarat\Trf_daratcontroller@hapus');
+Route::get('/trfdarat/hapussemua','Trfdarat\Trf_daratcontroller@hapusall');
 Route::get('trfdarat/cari','Trfdarat\Trf_daratcontroller@caridata');
 //------------------------export import
 Route::get('/trfdarat/importexcel','Trfdarat\Trf_daratcontroller@importexcel');
@@ -148,6 +156,7 @@ Route::get('/trflaut/{id}/edit','Trf_laut\Trf_lautcontroller@edit');
 Route::put('/trflaut/{id}','Trf_laut\Trf_lautcontroller@update');
 Route::post('/trflaut/delete','Trf_laut\Trf_lautcontroller@destroy');
 Route::post('/trflaut/hapuspilihan','Trf_laut\Trf_lautcontroller@haphapus');
+Route::get('/trflaut/hapussemua','Trf_laut\Trf_lautcontroller@hapusall');
 Route::get('trflaut/cari','Trf_laut\Trf_lautcontroller@caridata');
 //------------------------export import
 Route::get('/trflaut/importexcel','Trf_laut\Trf_lautcontroller@importexcel');

@@ -86,9 +86,11 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 <a href="{{url('/export_laporan_pengeluaran_vendor/'.$bulanya.'/'.$vendor.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
-							<button type="button" class="btn btn-primary" onclick="cetak()">
-								cetak
-							</button>	
+							&nbsp;&nbsp;
+								<a href="{{url('/printlaporanpengeluaran/'.$bulanya.'/'.$vendor.'')}}" target="_blank()" class="btn btn-primary">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>	
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
 								Kembali
@@ -104,67 +106,6 @@
 		</div>
 	</div>
 	
-
-		<div id="hidden_div" style="display: none;">
-		<table style="width: 100%">
-			<tr>
-				<td colspan="2" align="center">
-					<b>
-						@if($vendor=='semua')
-						Laporan Pengeluaran Bulan {{$bulanya}}
-						@else
-						Laporan Pengeluaran {{$vendor}} Bulan {{$bulanya}}
-						@endif
-						
-					</b>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Tanggal Cetak : {{date('d-m-Y')}}	
-				</td>
-				<td align="right">
-					Pencetak : {{Session::get('username')}}
-				</td>
-
-			</tr>
-		</table>
-		<table border="1" style="width: 100%">
-						<thead>
-						<tr>
-							<th>No</th>
-							<th>Kode</th>
-							<th>tanggal</th>
-								@if($vendor=='semua')
-									<th>vendor</th>
-								@endif
-							<th>admin</th>
-							<th>Subtotal</th>
-						</tr>
-						</thead>
-						
-						<tbody>
-						<?php $i = 1;?>
-                            @foreach($data2 as $row)
-                            <?php $no = $i++;?>
-                        <tr>
-                            <td align="center">{{$no}}</td>
-                            <td align="center">{{$row->kode}}</td>
-                            <td align="center">{{$row->tgl}}</td>
-                            	@if($vendor=='semua')
-								 <td align="center">{{$row->tujuan}}</td>
-                            	@endif
-                            <td align="center">{{$row->admin}}</td>
-                           
-							<td align="center">{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
-                          
-						</tr>
-						@endforeach
-						
-						</tbody>
-					</table>
-					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
-			</div>
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
@@ -177,16 +118,5 @@
 		});
 
 		
-	</script>
-	@endsection
-	@section('otherjs')
-	<script>
-		function cetak(){
-		var divToPrint=document.getElementById('hidden_div');
-		var newWin=window.open('','Print-Window');
-		newWin.document.open();
-		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-		newWin.document.close();
-		}
 	</script>
 	@endsection

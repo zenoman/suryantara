@@ -79,7 +79,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
-							<th  class="text-center">#</th>
+							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -91,7 +91,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Aksi</th>
-							<th  class="text-center">#</th>
+							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</tfoot> 
 						<tbody>
@@ -121,6 +121,11 @@
 						</tbody>
 					</table>
 					<div class="text-right">
+&nbsp;&nbsp;
+<a href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger">
+Kosongkan Data
+</a>	
+&nbsp;&nbsp;
 <input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
 					</div>
 						{{csrf_field()}}
@@ -142,5 +147,11 @@
             "paging":false
         });
 		});
+	  function toggle(source) {
+	  checkboxes = document.getElementsByName('pilihid[]');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+	    checkboxes[i].checked = source.checked;
+	  }
+	  }
 	</script>
 	@endsection

@@ -91,12 +91,15 @@
 <a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$tglnya.'/'.$kodejabatan)}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
                         @else
                         
-<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$tglnya.'/'.$kodejabatan)}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
+<a href="{{url('/export_laporan_pengeluaran_gaji_karyawan/'.$tglnya.'/'.$kodejabatan.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
 						
 						@endif
-							<button type="button" class="btn btn-primary" onclick="cetak()">
-								cetak
-							</button>
+							&nbsp;&nbsp;
+								<a href="{{url('/printlaporangpengeluaranjkw/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-primary">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>	
+							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali
 							</button>
@@ -110,67 +113,7 @@
 	</div>
 	
 
-		<div id="hidden_div" style="display: none;">
-		<table style="width: 100%">
-			<tr>
-				<td colspan="2" align="center">
-					<b>
-						@if($jabatan == 'semua')
-						Laporan Pengeluaran Gaji Karyawan Bulan {{$bulanya}} Tahun {{$tahunya}}
-						@else
-						Laporan Pengeluaran Gaji {{$jabatan}} Bulan {{$bulanya}} Tahun {{$tahunya}}
-						@endif
-						
-					</b>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Tanggal Cetak : {{date('d-m-Y')}}	
-				</td>
-				<td align="right">
-					Pencetak : {{Session::get('username')}}
-				</td>
 
-			</tr>
-		</table>
-		<table border="1" style="width: 100%">
-						<thead>
-						<tr>
-							<th>No</th>
-							<th>Kode Karyawan</th>
-							<th>Nama Karyawan</th>
-							<th>Jabatan</th>
-							<th>Gaji Pokok</th>
-							<th>Uang Makan</th>
-							<th>Tambahan</th>
-							<th>Total</th>
-						</tr>
-						</thead>
-						
-						<tbody>
-						<?php $i = 1;?>
-                            @foreach($data2 as $row)
-                            <?php $no = $i++;?>
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->kode_karyawan}}</td>
-                            <td>{{$row->nama_karyawan}}</td>
-                            <td>{{$row->jabatan}}</td>
-							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
-							
-							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
-                        </tr>
-						@endforeach
-						
-						</tbody>
-					</table>
-					@foreach($total as $tot)
-					<p>Total <b>{{"Rp ".number_format($tot->totalnya,0,',','.')}}</b></p>
-					@endforeach
-			</div>
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>

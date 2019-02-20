@@ -170,4 +170,11 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
         }
 return back()->with('status','Hapus Data Sukses');
 }
+public function hapusall()
+    {
+        $udara='tarif_udara';
+        Trfudaramodel::truncate();
+        return back()->with('status','Hapus Data Sukses');
+        //
+    }
 }
