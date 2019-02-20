@@ -328,7 +328,7 @@ $(document).ready(function(){
 	}
 	//===============================================
 	function valid(){
-		var telahvalid = '';
+			var telahvalid 	= '';
 			var no_resi		= $('#noresi').val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();

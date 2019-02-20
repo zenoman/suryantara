@@ -31,6 +31,7 @@ Route::get('/omset/export','omset\omsetController@export');
 Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
 
 //================================================resi pengiriman
+Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdataresi');
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
