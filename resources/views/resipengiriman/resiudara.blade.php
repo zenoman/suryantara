@@ -12,6 +12,27 @@
 @endforeach
 @endsection
 @section('content')
+<script>
+	function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57)){
+         	return false;
+         }else{
+         	return true;
+         	
+         }
+        
+      } function isNumberKey2(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+</script>
 <div class="page-content" id="printdiv">
 		<div class="container-fluid">
 		
@@ -61,13 +82,45 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah" value="1" readonly>
+								<select class="form-control" id="satuan">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					
+
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="kota_asal" >
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+
+					<div class="row">
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi" value="0">
+								<input 
+								type="text" 
+								onkeypress="return isNumberKey(event)"
+								class="col-sm-4 col-md-4 form-control volume" id="d_panjang1" value="0" data-no="1" onchange="hayy(1)">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)"
+								onchange="hayy(1)" class="col-sm-4 col-md-4 form-control volume" id="d_lebar1" value="0"data-no="1">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)"
+								onchange="hayy(1)" class="col-sm-4 col-md-4 form-control volume" id="d_tinggi1" value="0" data-no="1">
 									
 							</div>
 						</div>
@@ -76,20 +129,9 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume" onkeypress="return isNumberKey2(event)"  value="0">
+								<input type="text" class="form-control" id="volume1" onkeypress="return isNumberKey2(event)"  value="0" data-no="1">
 								<div class="input-group-addon">Kg</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="jumlah" onkeypress="return isNumberKey(event)">
-								<select class="form-control" id="satuan">
-								<option value="kg">&nbsp;</option>
-								<option value="koli">koli</option>
-							</select>
+								
 							</div>
 						</div>
 					</div>
@@ -101,9 +143,19 @@
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
-						<input type="hidden" id="min_heavy" value="0">
 					</div>
-
+					</div>
+				<div id="kolomjumlah">
+					
+				</div>
+				<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<button type="button" id="tambahjumlah" class="btn btn-warning pull-right"><i class="fa fa-plus"></i> Tambah Jumlah</button>
+						</div>
+				
+				</div>
+				<hr>
+				<div class="row">
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
@@ -115,8 +167,9 @@
 					<div class="col-md-8 col-sm-8">
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
 						<select class="select2" id="kota_tujuan"></select>
+						<input type="hidden" id="min_heavy" value="0">
 					</div>
-					<div class="col-md-4 col-sm-6">
+					<!-- <div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Status</label>
 							<div class="input-group">
@@ -124,7 +177,7 @@
 								
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nomer SMU (Boleh Kosong)</label>
@@ -1140,23 +1193,7 @@
 @section('otherjs')
 <script src="{{asset('assets/js/resiudara.js')}}"></script>
 <script type="text/javascript">
-     function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
-      function isNumberKey2(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode != 46 && charCode > 31 
-            && (charCode < 48 || charCode > 57))
-            return false;
-
-         return true;
-      }
+     
 </script>
 
 @endsection

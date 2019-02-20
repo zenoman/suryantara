@@ -4,7 +4,72 @@ $(document).ready(function(){
 	var satuan = 'kg';
 	var kotatujuan ='';
 	var kategori='biasa';
+	var jumlahbarang =1;
 	carikode();
+
+	function hayy(nomer){
+		var panjang = Number(document.getElementById('d_panjang'+nomer).value);
+		var lebar = Number(document.getElementById('d_lebar'+nomer).value);
+		var tinggi = Number(document.getElementById('d_tinggi'+nomer).value);
+		var total =  (panjang * lebar * tinggi)/6000;
+		var vt = parseFloat(total);
+		$('#volume'+nomer).val(vt.toFixed(2));
+	}
+	window.hayy=hayy;
+	//=============================================tambah jumlah
+	$("#tambahjumlah").click(function(){
+		jumlahbarang +=1;
+		$('#jumlah').val(jumlahbarang);
+		$("#kolomjumlah").append(
+			'<div class="row">'+
+			'<div class="col-md-4 col-sm-6">'+
+						'<div class="form-group">'+
+							'<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>'+
+							'<div class="input-group">'+
+								'<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang'+jumlahbarang+'" onchange="hayy('+jumlahbarang+')" value="0">&nbsp;'+
+								'<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar'+jumlahbarang+'" onchange="hayy('+jumlahbarang+')" value="0">&nbsp;'+
+								'<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi'+jumlahbarang+'" onchange="hayy('+jumlahbarang+')" value="0">'+
+									
+							'</div>'+
+						'</div>'+
+					'</div>'+
+			'<div class="col-md-4 col-sm-6">'+
+						'<div class="form-group">'+
+							'<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>'+
+							'<div class="input-group">'+
+								'<input type="text" class="form-control" id="volume'+jumlahbarang+'" onkeypress="return isNumberKey2(event)"  value="0">'+
+								'<div class="input-group-addon">Kg</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="col-md-3 col-sm-5">'+
+						'<div class="form-group">'+
+							'<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>'+
+							'<div class="input-group">'+
+								'<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey2(event)" value="0">'+
+								'<div class="input-group-addon">Kg</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="col-md-1 col-sm-1 removejumlah">'+
+						'<div class="form-group">'+
+							'<label class="form-label" for="exampleInputDisabled">&nbsp;</label>'+
+							'<div class="input-group">'+
+								'<button class="btn btn-danger btn-block" type="button">-</button>'+
+							'</div>'+
+						'</div>'+
+					'</div><br>'+
+					'</div>'
+					);
+	});
+	//=============================================hapus jumlah
+	$('#kolomjumlah').on('click', '.removejumlah', function(e) {
+    jumlahbarang -=1;
+	$('#jumlah').val(jumlahbarang);
+    e.preventDefault();
+	$(this).parent().remove();
+	});
+	//=============================================fokus nama barang
 	$('#nama_barang').focus();
 	//=============================================ganti satuan	
 	$('#satuan').on('change',function(e){
@@ -14,6 +79,7 @@ $(document).ready(function(){
 	$('#kategori').on('change',function(e){
 		kategori = this.value;
 	})
+
 	//===========================================
 	function carikode(){
 			$.ajax({
@@ -139,42 +205,42 @@ $(document).ready(function(){
 		}
 			return rupiah;
 		}
-	//============================================ hitung volumetrik
-		$("#d_panjang").keydown( function(e){
-			if(e.keyCode == 9 && !e.shiftKey){
-			var panjang = $("#d_panjang").val();
-			var lebar = $("#d_lebar").val();
-			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
-			}
+	// //============================================ hitung volumetrik
+	// 	$('input[id^="d_panjang"]').keydown( function(e){
+	// 		if(e.keyCode == 9 && !e.shiftKey){
+	// 		var panjang = this.value;
+	// 		var lebar = $('input[id^="d_lebar"]').val();
+	// 		var tinggi = $('input[id^="d_tinggi"]').val();
+	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
+	// 		var vt = parseFloat(total);
+	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		}
 			
-		})
-	//============================================ hitung volumetrik
-		$("#d_lebar").keydown( function(e){
-			if(e.keyCode == 9 && !e.shiftKey){
-			var panjang = $("#d_panjang").val();
-			var lebar = $("#d_lebar").val();
-			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
-			}
+	// 	})
+	// //============================================ hitung volumetrik
+	// 	$('input[id^="d_lebar"]').keydown( function(e){
+	// 		if(e.keyCode == 9 && !e.shiftKey){
+	// 		var panjang = $('input[id^="d_panjang"]').val();
+	// 		var lebar = this.value;
+	// 		var tinggi = $('input[id^="d_tinggi"]').val();
+	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
+	// 		var vt = parseFloat(total);
+	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		}
 			
-		})
-	//============================================ hitung volumetrik
-		$("#d_tinggi").keydown( function(e){
-			if(e.keyCode == 9 && !e.shiftKey){
-			var panjang = $("#d_panjang").val();
-			var lebar = $("#d_lebar").val();
-			var tinggi = $("#d_tinggi").val();
-			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
-			}
+	// 	})
+	// //============================================ hitung volumetrik
+	// 	$('input[id^="d_tinggi"]').keydown( function(e){
+	// 		if(e.keyCode == 9 && !e.shiftKey){
+	// 		var panjang = $('input[id^="d_panjang"]').val();
+	// 		var lebar = $('input[id^="d_lebar"]').val();
+	// 		var tinggi = this.value;
+	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
+	// 		var vt = parseFloat(total);
+	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		}
 			
-		})
+	// 	})
 	//==============================================
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
@@ -328,7 +394,7 @@ $(document).ready(function(){
 	}
 	//===============================================
 	function valid(){
-		var telahvalid = '';
+			var telahvalid 	= '';
 			var no_resi		= $('#noresi').val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();

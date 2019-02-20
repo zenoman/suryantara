@@ -72,6 +72,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
+							<th>Aksi</th>
 						</tr>
 						</thead>
 						
@@ -318,6 +319,21 @@
                             @endif
 	                            
                             </td>
+                            <td class="text-center">
+                            	@if($row->kode_jalan=='')
+                            	<form action="{{ url('/Manual/delete')}}" method="post">
+                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
+                                <i class="fa fa-pencil"></i>
+                            	</a>
+                                {{csrf_field()}}
+                                <input type="hidden" name="aid" value="{{$row->id}}">
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                <i class="fa fa-remove"></i></button>
+                                </form>
+                                @else
+                                -
+                                @endif
+                            </td>
 						</tr>
 						@endforeach
 						</tbody>
@@ -332,6 +348,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
+							<th>Aksi</th>
 						</tr>
 						</tfoot>
 					</table>

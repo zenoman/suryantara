@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
+    public function editdataresi($id){
+        $data = DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->get();
+        $kategori = DB::table('kategori_barang')->get();
+        $setting = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman/edit',['data'=>$data,'title'=>$setting,'kategori'=>$kategori]);
+    }
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
