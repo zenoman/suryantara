@@ -113,14 +113,3 @@
 		
 	</script>
 	@endsection
-	@section('otherjs')
-	<script>
-		function cetak(){
-		var divToPrint=document.getElementById('hidden_div');
-		var newWin=window.open('','Print-Window');
-		newWin.document.open();
-		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-		newWin.document.close();
-		}
-	</script>
-	@endsection
