@@ -71,40 +71,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-4">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="metode">
-								<option value="cash">cash</option>
-								<option value="bt">BT</option>
-							</select>
-							</div>
-						</div>
-					</div>
 					
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="jumlah" value="1" readonly>
-								<select class="form-control" id="satuan">
-								<option value="kg">&nbsp;</option>
-								<option value="koli">koli</option>
-							</select>
-							</div>
-						</div>
-					</div>
 					
-
-					<div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal" >
-							</div>
-						</div>
-					</div>
 					</div>
 					<hr>
 
@@ -129,7 +97,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume1" onkeypress="return isNumberKey2(event)"  value="0" data-no="1">
+								<input type="text" class="form-control" id="volume1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" value="0" data-no="1">
 								<div class="input-group-addon">Kg</div>
 								
 							</div>
@@ -139,7 +107,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey2(event)" value="0">
+								<input type="text" class="form-control" id="berat1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" value="0">
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -149,8 +117,45 @@
 					
 				</div>
 				<div class="row">
-						<div class="col-md-12 col-sm-12">
-							<button type="button" id="tambahjumlah" class="btn btn-warning pull-right"><i class="fa fa-plus"></i> Tambah Jumlah</button>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="metode">
+								<option value="cash">cash</option>
+								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4 col-sm-4">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah" value="1" readonly>
+								<select class="form-control" id="satuan">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Total</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="totalberat" value="0" readonly>
+							</div>
+						</div>
+					</div>
+						<div class="col-md-1 col-sm-1">
+							<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">&nbsp;</label>
+							<div class="input-group">
+							<button type="button" id="tambahjumlah" class="btn btn-warning"> Tambah Jumlah</button>
+								</div>
+							</div>
 						</div>
 				
 				</div>
