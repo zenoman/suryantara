@@ -65,7 +65,7 @@
 								<select class="form-control" id="kategori">
 								<option value="biasa"></option>
 								@foreach($kategori as $kat)
-								<option value="{{$kat->charge}}">{{$kat->spesial_cargo}}</option>
+								<option value="{{$kat->charge}}">{{$kat->spesial_cargo}} ({{$kat->charge}}%)</option>
 								@endforeach
 							</select>
 							</div>
@@ -76,7 +76,7 @@
 					</div>
 					<hr>
 
-					<div class="row">
+					<div class="row" id="rowjumlah1">
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
@@ -157,8 +157,11 @@
 								</div>
 							</div>
 						</div>
-				
+						<div class="col-md-12 col-sm-12">
+				<p id="msgheavy" class="text-danger"></p>
+			</div>
 				</div>
+
 				<hr>
 				<div class="row">
 					<div class="col-md-4 col-sm-6">
@@ -174,16 +177,25 @@
 						<select class="select2" id="kota_tujuan"></select>
 						<input type="hidden" id="min_heavy" value="0">
 					</div>
-					<!-- <div class="col-md-4 col-sm-6">
+					<div class="col-md-3 col-sm-3">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status</label>
+							<label class="form-label" for="exampleInputDisabled">Biaya Per<b>Kg</b></label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="status" readonly>
+								<input type="text" class="form-control" id="bpk" value="0" readonly>
 								
 							</div>
 						</div>
-					</div> -->
-					<div class="col-md-12 col-sm-12">
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Min. Heavy Cargo</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="tmh" value="0" readonly>
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nomer SMU (Boleh Kosong)</label>
 							<div class="input-group">
