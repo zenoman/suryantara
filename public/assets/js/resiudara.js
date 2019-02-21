@@ -5,8 +5,26 @@ $(document).ready(function(){
 	var kotatujuan ='';
 	var kategori='biasa';
 	var jumlahbarang =1;
+	var totalberat=0;
 	carikode();
+	function hitungberat(){
+		totalberat=0;
+		for (var i = 1; i <= jumlahbarang; i++) { 
+  			var volume = Number(document.getElementById('volume'+i).value);
+		var berataktual = Number(document.getElementById('berat'+i).value);
+		if(volume > berataktual){
 
+			totalberat += parseFloat(volume);
+			
+		}else{
+			totalberat += parseFloat(berataktual);
+			
+		}
+		}
+		$('#totalberat').val(totalberat.toFixed(2));
+	}
+	window.hitungberat=hitungberat;
+	//===================================================
 	function hayy(nomer){
 		var panjang = Number(document.getElementById('d_panjang'+nomer).value);
 		var lebar = Number(document.getElementById('d_lebar'+nomer).value);
@@ -14,6 +32,7 @@ $(document).ready(function(){
 		var total =  (panjang * lebar * tinggi)/6000;
 		var vt = parseFloat(total);
 		$('#volume'+nomer).val(vt.toFixed(2));
+		hitungberat();
 	}
 	window.hayy=hayy;
 	//=============================================tambah jumlah
@@ -37,7 +56,7 @@ $(document).ready(function(){
 						'<div class="form-group">'+
 							'<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>'+
 							'<div class="input-group">'+
-								'<input type="text" class="form-control" id="volume'+jumlahbarang+'" onkeypress="return isNumberKey2(event)"  value="0">'+
+								'<input type="text" class="form-control" id="volume'+jumlahbarang+'" onchange="hitungberat()" onkeypress="return isNumberKey2(event)"  value="0">'+
 								'<div class="input-group-addon">Kg</div>'+
 							'</div>'+
 						'</div>'+
@@ -46,12 +65,12 @@ $(document).ready(function(){
 						'<div class="form-group">'+
 							'<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>'+
 							'<div class="input-group">'+
-								'<input type="text" class="form-control" id="berat" onkeypress="return isNumberKey2(event)" value="0">'+
+								'<input type="text" class="form-control" id="berat'+jumlahbarang+'" onchange="hitungberat()" onkeypress="return isNumberKey2(event)" value="0">'+
 								'<div class="input-group-addon">Kg</div>'+
 							'</div>'+
 						'</div>'+
 					'</div>'+
-					'<div class="col-md-1 col-sm-1 removejumlah">'+
+					'<div class="col-md-1 col-sm-1 removejumlah" data-nomer="'+jumlahbarang+'">'+
 						'<div class="form-group">'+
 							'<label class="form-label" for="exampleInputDisabled">&nbsp;</label>'+
 							'<div class="input-group">'+
@@ -66,6 +85,18 @@ $(document).ready(function(){
 	$('#kolomjumlah').on('click', '.removejumlah', function(e) {
     jumlahbarang -=1;
 	$('#jumlah').val(jumlahbarang);
+	var nomor = $(this).data("nomer");
+		var volume = Number(document.getElementById('volume'+nomor).value);
+		var berataktual = Number(document.getElementById('berat'+nomor).value);
+		if(volume > berataktual){
+
+			totalberat -= parseFloat(volume);
+			
+		}else{
+			totalberat -= parseFloat(berataktual);
+			
+		}
+	$('#totalberat').val(totalberat.toFixed(2));
     e.preventDefault();
 	$(this).parent().remove();
 	});
