@@ -15,7 +15,6 @@ $(document).ready(function(){
 		var barangheavy = carihevy($('#tmh').val());
 		var neperkg =  $('#bpk').val().replace(/\./g,'');
 		var perkg = Number(neperkg);
-		alert(newberat);
 		if(perkg > 0){
 			if(satuan == 'kg'){
 				if(barangheavy > 0){
@@ -505,15 +504,14 @@ $(document).ready(function(){
 	//===============================================
 	function valid(){
 			var telahvalid 	= '';
-			var no_resi		= $('#noresi').val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
-			var d_panjang	= $("#d_panjang").val();
-			var d_tinggi	= $("#d_tinggi").val();
-			var d_lebar		= $("#d_lebar").val();
-			var volume		= $("#volume").val();
+			var d_panjang	= $("#d_panjang1").val();
+			var d_tinggi	= $("#d_tinggi1").val();
+			var d_lebar		= $("#d_lebar1").val();
+			var volume		= $("#volume1").val();
 			var jumlah		= $("#jumlah").val();
-			var berat		= $("#berat").val();
+			var berat		= $("#totalberat").val();
 			var kota_asal	= $("#kota_asal").val();
 			var kota_tujuan = $("#cetak_kota_tujuan").html();
 			var n_pengirim 	= $("#n_pengirim").val();
@@ -526,13 +524,24 @@ $(document).ready(function(){
 			var a_penerima	= $("#alamat_penerima").val();
 			var biaya_karantina = $("#biaya_karantina").val();
 			var keterangan 	= $.trim($("#keterangan").val());
-			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
-			var satuan		= $('#satuan').val();
-			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
-			var total_biaya = parseInt(ppn) + parseInt(biaya_smu) +  parseInt(biaya_karantina) +  parseInt(biaya_karantina);
-			var metode		= $("#metode").val();
-		if(a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
-				telahvalid = 'n';		
+			
+		if(
+			   a_penerima==''
+			|| a_pengirim==''
+			|| iduser==''
+			|| nama_barang == '' 
+			|| berat== '' 
+			|| kota_asal=='' 
+			|| kota_tujuan=='' 
+			|| n_pengirim=='' 
+			|| t_pengirim=='' 
+			|| n_penerima=='' 
+			|| t_penerima=='' 
+			|| biaya_kirim==0 
+			|| biaya_smu=='' 
+			|| biaya_karantina =='' 
+			|| keterangan==''){
+			telahvalid = 'n';		
    		}else{
    			telahvalid = 'y';
    		}
@@ -545,9 +554,9 @@ $(document).ready(function(){
 			var no_resi		= noresi;
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
-			var d_panjang	= $("#d_panjang").val();
-			var d_tinggi	= $("#d_tinggi").val();
-			var d_lebar		= $("#d_lebar").val();
+			var d_panjang	= $("#d_panjang1").val();
+			var d_tinggi	= $("#d_tinggi1").val();
+			var d_lebar		= $("#d_lebar1").val();
 			if (jumlahbarang >1) {
 			var volume		="-";
 			}else{
