@@ -10,10 +10,12 @@ $(document).ready(function(){
 	carikode();
 	//===================================
 	function hitungbiayakirim(berat){
-		var newberat = parseFloat(berat);
+		var newberat = Number(berat);
+
 		var barangheavy = carihevy($('#tmh').val());
 		var neperkg =  $('#bpk').val().replace(/\./g,'');
-		var perkg = parseInt(neperkg);
+		var perkg = Number(neperkg);
+		alert(newberat);
 		if(perkg > 0){
 			if(satuan == 'kg'){
 				if(barangheavy > 0){
@@ -58,8 +60,8 @@ $(document).ready(function(){
 		}else{
 			totalberat += parseFloat(berataktual);}
 		}
-		$('#totalberat').val(totalberat.toFixed(2));
-		hitungbiayakirim(totalberat.toFixed(2));
+		$('#totalberat').val(totalberat.toFixed(1));
+		hitungbiayakirim(totalberat.toFixed(1));
 	}
 	window.hitungberat=hitungberat;
 	//===================================================
@@ -69,7 +71,7 @@ $(document).ready(function(){
 		var tinggi = Number(document.getElementById('d_tinggi'+nomer).value);
 		var total =  (panjang * lebar * tinggi)/6000;
 		var vt = parseFloat(total);
-		$('#volume'+nomer).val(vt.toFixed(2));
+		$('#volume'+nomer).val(vt.toFixed(1));
 		hitungberat();
 	}
 	window.hayy=hayy;
@@ -134,7 +136,7 @@ $(document).ready(function(){
 	// 		totalberat -= parseFloat(berataktual);
 			
 	// 	}
-	// $('#totalberat').val(totalberat.toFixed(2));
+	// $('#totalberat').val(totalberat.toFixed(1));
 	hitungberat();
     e.preventDefault();
 	$(this).parent().remove();
@@ -248,7 +250,7 @@ $(document).ready(function(){
 								if (kategori=='biasa'){
 									
 									var berat = $('#totalberat').val();
-									var jumlah  = item.perkg*berat;
+									var jumlah  = Number(item.perkg)*Number(berat);
 									var ppn		= (jumlah*1)/100;
 									$('#b_charge').html(0);
 									$('#biaya_kirim').val(jumlah);
@@ -257,7 +259,7 @@ $(document).ready(function(){
 								}else{
 									
 									var berat = $('#totalberat').val();
-									var jumlah  = item.perkg*berat;
+									var jumlah  = Number(item.perkg)*Number(berat);
 									var ppn		= (jumlah*1)/100;
 									var totalcarge = (jumlah*kategori)/100;
 									$('#b_charge').html(rupiah(totalcarge));
@@ -321,7 +323,7 @@ $(document).ready(function(){
 	// 		var tinggi = $('input[id^="d_tinggi"]').val();
 	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		$('input[id^="volume"]').val(vt.toFixed(1));
 	// 		}
 			
 	// 	})
@@ -333,7 +335,7 @@ $(document).ready(function(){
 	// 		var tinggi = $('input[id^="d_tinggi"]').val();
 	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		$('input[id^="volume"]').val(vt.toFixed(1));
 	// 		}
 			
 	// 	})
@@ -345,7 +347,7 @@ $(document).ready(function(){
 	// 		var tinggi = this.value;
 	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
 	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(2));
+	// 		$('input[id^="volume"]').val(vt.toFixed(1));
 	// 		}
 			
 	// 	})

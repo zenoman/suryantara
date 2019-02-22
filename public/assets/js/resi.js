@@ -120,7 +120,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
@@ -132,7 +132,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
@@ -144,7 +144,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
