@@ -402,6 +402,18 @@ $(document).ready(function(){
 	})
 	//=================================================
 	function tempelresi(){
+		var rows ='';
+		for (var i = 1; i <= jumlahbarang; i++) {
+		rows = rows + '<tr>';
+                rows = rows + '<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center">'+$('#d_panjang'+i).val()+'cm x '+$('#d_lebar'+i).val()+'cm x '+$('#d_tinggi'+i).val()+'cm</td>';
+                rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#volume'+i).val()+'Kg</td>';
+                rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#berat'+i).val()+'Kg</td>';
+                rows = rows + '</tr>';
+		}
+		$("#listbarang").html(rows);
+		$("#listbarang2").html(rows);
+		$("#listbarang3").html(rows);
+		$("#listbarang4").html(rows);
 		$("#cetak_alamat_pengirim").html($("#alamat_pengirim").val());
 		$("#cetak_alamat_pengirim2").html($("#alamat_pengirim").val());
 		$("#cetak_alamat_pengirim3").html($("#alamat_pengirim").val());
@@ -428,13 +440,13 @@ $(document).ready(function(){
 
 		}
 		
-		$("#cetak_berat").html($("#berat").val()+" Kg");
+		$("#cetak_berat").html($("#totalberat").val()+" Kg");
 		$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
 		$("#cetak_volumetrik").html($("#volume").val()+" Kg");
 		$("#cetak_pengirim").html($("#n_pengirim").val());
-		$("#cetak_telp_pengirim").html("No. Telp : "+$("#t_pengirim").val());
+		$("#cetak_telp_pengirim").html($("#t_pengirim").val());
 		$("#cetak_penerima").html($("#n_penerima").val());
-		$("#cetak_telp_penerima").html("No. Telp : "+$("#t_penerima").val());
+		$("#cetak_telp_penerima").html($("#t_penerima").val());
 		$("#cetak_isi_paket").html($("#nama_barang").val());
 		$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu').html("Rp. "+rupiah($('#biaya_smu').val()));
@@ -451,13 +463,13 @@ $(document).ready(function(){
 		$('#cetak_nosmu').html($('#nomer_smu').val());
 		//================file 2======================================
 		$("#cetak_kota_asal2").html($("#kota_asal").val());
-		$("#cetak_berat2").html($("#berat").val()+" Kg");
+		$("#cetak_berat2").html($("#totalberat").val()+" Kg");
 		$("#cetak_dimensi2").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
 		$("#cetak_volumetrik2").html($("#volume").val()+" Kg");
 		$("#cetak_pengirim2").html($("#n_pengirim").val());
-		$("#cetak_telp_pengirim2").html("No. Telp : "+$("#t_pengirim").val());
+		$("#cetak_telp_pengirim2").html($("#t_pengirim").val());
 		$("#cetak_penerima2").html($("#n_penerima").val());
-		$("#cetak_telp_penerima2").html("No. Telp : "+$("#t_penerima").val());
+		$("#cetak_telp_penerima2").html($("#t_penerima").val());
 		$("#cetak_isi_paket2").html($("#nama_barang").val());
 		$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu2').html("Rp. "+rupiah($('#biaya_smu').val()));
@@ -468,13 +480,13 @@ $(document).ready(function(){
 		$('#cetak_nosmu2').html($('#nomer_smu').val());
 		//================file 3============================
 		$("#cetak_kota_asal3").html($("#kota_asal").val());
-		$("#cetak_berat3").html($("#berat").val()+" Kg");
+		$("#cetak_berat3").html($("#totalberat").val()+" Kg");
 		$("#cetak_dimensi3").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
 		$("#cetak_volumetrik3").html($("#volume").val()+" Kg");
 		$("#cetak_pengirim3").html($("#n_pengirim").val());
-		$("#cetak_telp_pengirim3").html("No. Telp : "+$("#t_pengirim").val());
+		$("#cetak_telp_pengirim3").html($("#t_pengirim").val());
 		$("#cetak_penerima3").html($("#n_penerima").val());
-		$("#cetak_telp_penerima3").html("No. Telp : "+$("#t_penerima").val());
+		$("#cetak_telp_penerima3").html($("#t_penerima").val());
 		$("#cetak_isi_paket3").html($("#nama_barang").val());
 		$("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu3').html("Rp. "+rupiah($('#biaya_smu').val()));
@@ -485,13 +497,13 @@ $(document).ready(function(){
 		$('#cetak_nosmu3').html($('#nomer_smu').val());
 		//=====================file 4 ========================
 		$("#cetak_kota_asal4").html($("#kota_asal").val());
-		$("#cetak_berat4").html($("#berat").val()+" Kg");
+		$("#cetak_berat4").html($("#totalberat").val()+" Kg");
 		$("#cetak_dimensi4").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
 		$("#cetak_volumetrik4").html($("#volume").val()+" Kg");
 		$("#cetak_pengirim4").html($("#n_pengirim").val());
-		$("#cetak_telp_pengirim4").html("No. Telp : "+$("#t_pengirim").val());
+		$("#cetak_telp_pengirim4").html($("#t_pengirim").val());
 		$("#cetak_penerima4").html($("#n_penerima").val());
-		$("#cetak_telp_penerima4").html("No. Telp : "+$("#t_penerima").val());
+		$("#cetak_telp_penerima4").html($("#t_penerima").val());
 		$("#cetak_isi_paket4").html($("#nama_barang").val());
 		$("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu4').html("Rp. "+rupiah($('#biaya_smu').val()));
@@ -506,41 +518,22 @@ $(document).ready(function(){
 			var telahvalid 	= '';
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
-			var d_panjang	= $("#d_panjang1").val();
-			var d_tinggi	= $("#d_tinggi1").val();
-			var d_lebar		= $("#d_lebar1").val();
-			var volume		= $("#volume1").val();
 			var jumlah		= $("#jumlah").val();
 			var berat		= $("#totalberat").val();
 			var kota_asal	= $("#kota_asal").val();
-			var kota_tujuan = $("#cetak_kota_tujuan").html();
+			var kota_tujuan = kotatujuan;
 			var n_pengirim 	= $("#n_pengirim").val();
 			var t_pengirim	= $("#t_pengirim").val();
 			var n_penerima	= $("#n_penerima").val();
 			var t_penerima 	= $("#t_penerima").val();
 			var biaya_kirim	= $("#biaya_kirim").val();
-			var biaya_smu = $("#biaya_smu").val();
+			var biaya_smu 	= $("#biaya_smu").val();
 			var a_pengirim 	= $("#alamat_pengirim").val();
 			var a_penerima	= $("#alamat_penerima").val();
 			var biaya_karantina = $("#biaya_karantina").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			
-		if(
-			   a_penerima==''
-			|| a_pengirim==''
-			|| iduser==''
-			|| nama_barang == '' 
-			|| berat== '' 
-			|| kota_asal=='' 
-			|| kota_tujuan=='' 
-			|| n_pengirim=='' 
-			|| t_pengirim=='' 
-			|| n_penerima=='' 
-			|| t_penerima=='' 
-			|| biaya_kirim==0 
-			|| biaya_smu=='' 
-			|| biaya_karantina =='' 
-			|| keterangan==''){
+		if(iduser==''||nama_barang==''||jumlah==''||berat==0||kota_asal==''||kota_tujuan==''||n_pengirim==''||t_pengirim==''||a_pengirim==''||n_penerima==''||t_penerima==''||a_penerima==''||biaya_kirim==0||biaya_kirim==''||biaya_smu==''||biaya_karantina==''||keterangan==''){
 			telahvalid = 'n';		
    		}else{
    			telahvalid = 'y';

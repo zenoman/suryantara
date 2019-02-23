@@ -361,7 +361,7 @@
 				</td>
 				<td style="width: 30%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi"></p> 
-								<p style="margin-left: 35% " align="right">Pengiriman Via : Darat</p> 
+								<p style="margin-left: 35% " align="right">Pengiriman Via : Udara</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
 			</tr>
@@ -428,21 +428,31 @@
 				<tr>
 					<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 6;" border="1">
+						<thead>
 						<tr>
 							<td style="border-right: 1px solid black;" align="center">Ukuran Dimensi</td>
 							<td align="center">Ukuran Volume</td>
 							<td align="center">Berat Aktual</td>
-						</tr>
-						<!-- <tr>
-							<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center" id="cetak_dimensi"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_volumetrik"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_be"></td>
-						</tr> -->
+						</tr>	
+						</thead>
+						<tbody  id="listbarang">
+							
+						</tbody>
 					</table>
 				</td>
 				</tr>
-						<tr>
-					<td>
+					</table>
+				</td>
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 4; padding-left: 7px;padding-top: 5px;">
+						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
+						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
+						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
+						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
+						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
+						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
+						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
+						
+					</ol><hr>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
 							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
@@ -478,20 +488,6 @@
 							</td>
 						</tr>
 					</table>
-					</td>
-				</tr>
-					</table>
-				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
-						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
-						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
-						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
-						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
-						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
-						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
-						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
-						
-					</ol>
 				</td>
 			</tr>
 			<tr> 
@@ -565,7 +561,7 @@
 				</td>
 				<td style="width: 30%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi2"></p> 
-								<p style="margin-left: 35% " align="right">Pengiriman Via : Darat</p> 
+								<p style="margin-left: 35% " align="right">Pengiriman Via : Udara</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
 			</tr>
@@ -632,21 +628,33 @@
 				<tr>
 					<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 6;" border="1">
-						<tr>
+						<thead>
+							<tr>
 							<td style="border-right: 1px solid black;" align="center">Ukuran Dimensi</td>
 							<td align="center">Ukuran Volume</td>
 							<td align="center">Berat Aktual</td>
 						</tr>
-						<!-- <tr>
-							<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center" id="cetak_dimensi"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_volumetrik"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_be"></td>
-						</tr> -->
+						</thead>
+						<tbody id="listbarang2">
+							
+						</tbody>
+						
 					</table>
 				</td>
 				</tr>
-						<tr>
-					<td>
+				
+					</table>
+				</td>
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 4; padding-left: 7px;padding-top: 5px;">
+						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
+						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
+						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
+						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
+						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
+						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
+						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
+						
+					</ol><hr>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
 							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
@@ -682,20 +690,6 @@
 							</td>
 						</tr>
 					</table>
-					</td>
-				</tr>
-					</table>
-				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
-						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
-						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
-						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
-						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
-						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
-						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
-						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
-						
-					</ol>
 				</td>
 			</tr>
 			<tr> 
@@ -770,7 +764,7 @@
 				</td>
 				<td style="width: 30%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi3"></p> 
-								<p style="margin-left: 35% " align="right">Pengiriman Via : Darat</p> 
+								<p style="margin-left: 35% " align="right">Pengiriman Via : Udara</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
 			</tr>
@@ -837,21 +831,31 @@
 				<tr>
 					<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 6;" border="1">
+						<thead>
 						<tr>
 							<td style="border-right: 1px solid black;" align="center">Ukuran Dimensi</td>
 							<td align="center">Ukuran Volume</td>
 							<td align="center">Berat Aktual</td>
-						</tr>
-						<!-- <tr>
-							<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center" id="cetak_dimensi"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_volumetrik"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_be"></td>
-						</tr> -->
+						</tr>	
+						</thead>
+						<tbody id="listbarang3">
+							
+						</tbody>
 					</table>
 				</td>
 				</tr>
-						<tr>
-					<td>
+					</table>
+				</td>
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 4; padding-left: 7px;padding-top: 5px;">
+						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
+						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
+						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
+						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
+						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
+						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
+						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
+						
+					</ol><hr>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
 							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
@@ -887,20 +891,6 @@
 							</td>
 						</tr>
 					</table>
-					</td>
-				</tr>
-					</table>
-				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
-						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
-						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
-						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
-						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
-						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
-						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
-						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
-						
-					</ol>
 				</td>
 			</tr>
 			<tr> 
@@ -969,7 +959,7 @@
 				</td>
 				<td style="width: 30%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi4"></p> 
-								<p style="margin-left: 35% " align="right">Pengiriman Via : Darat</p> 
+								<p style="margin-left: 35% " align="right">Pengiriman Via : Udara</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
 			</tr>
@@ -1036,21 +1026,31 @@
 				<tr>
 					<td style="width:40%;">
 					<table style="width: 100%;border-collapse:collapse; font-size: 6;" border="1">
+						<thead>
 						<tr>
 							<td style="border-right: 1px solid black;" align="center">Ukuran Dimensi</td>
 							<td align="center">Ukuran Volume</td>
 							<td align="center">Berat Aktual</td>
 						</tr>
-						<!-- <tr>
-							<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center" id="cetak_dimensi"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_volumetrik"></td>
-							<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center" id="cetak_be"></td>
-						</tr> -->
+						</thead>
+						<tbody  id="listbarang4">
+							
+						</tbody>
 					</table>
 				</td>
 				</tr>
-						<tr>
-					<td>
+					</table>
+				</td>
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 4; padding-left: 7px;padding-top: 5px;">
+						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
+						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
+						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
+						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
+						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
+						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
+						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
+						
+					</ol><hr>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
 							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
@@ -1086,20 +1086,6 @@
 							</td>
 						</tr>
 					</table>
-					</td>
-				</tr>
-					</table>
-				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
-						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
-						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
-						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
-						<li>Isi tidak diperiksa, apabila isi kiriman/paket tidak sesuai dengan pengakuan pengirim maka segala resiko bukan menjadi tanggung jawab kami.</li>
-						<li>Kami tidak bertanggung jawab/terima klaim atas kebocoran/kerusakan untuk jenis barang berupa kaca/pecah belah,cairan,cream dan elektronik.</li>
-						<li>Kami tidak bertanggung jawab atas kerugian dalam bentuk apapun yang di akibatkan oleh keterlambatan pengiriman atau penyampaian barang, serta hilang, tertukar atau tidak kembalinya resi pengiriman barang.</li>
-						<li>Bilamana dalam waktu 3 (tiga) hari setelah terima barang tidak ada teguran, bukan menjadi tanggung jawab kami.</li>
-						
-					</ol>
 				</td>
 			</tr>
 			<tr> 
