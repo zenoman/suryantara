@@ -261,25 +261,28 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Deskripsi</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Syarat-syarat</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Deskripsi</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Syarat-syarat</td>
 				
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_pengirim"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_pengirim"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_pengirim"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_pengirim"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_pengirim"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_pengirim"></td>
 						</tr>
 					</table>
 				</td>
@@ -289,20 +292,27 @@
 					<td>
 						<table border="0" style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Isi Paket</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_isi_paket"></span></td>
+							<td style="width: 25%;font-size: 10;">Isi Paket</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_isi_paket"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Jumlah</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_jumlah_barang"></span></td>
+							<td style="width: 25%;font-size: 10;">Jumlah</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_jumlah_barang"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_asal"></span> 
+							<td colspan="3" style="width: 25%;font-size: 10;">
+								<table>
+									<tr>
+										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
+										<td id="cetak_kota_asal" style="font-size: 10;"></td>
+										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 10;" id="cetak_kota_tujuan"></td>
+									</tr>
+								</table>
 							</td>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_tujuan"></span> 
-							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -327,29 +337,29 @@
 					<td>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Packing</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Packing</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Asuransi</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Asuransi</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">PPN</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;">
+							<td align="right" style="font-size: 10;">
 								<b id="cetak_total"></b>
 							</td>
 						</tr>
@@ -358,7 +368,7 @@
 				</tr>
 					</table>
 				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 8;padding-left: 10px;padding-top: 5px;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -371,58 +381,61 @@
 				</td>
 			</tr>
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Penerima</td>
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_penerima"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_penerima"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_penerima"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_penerima"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_penerima"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_penerima"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 35%;">
-							<p style="margin-left: 1%;margin-right: 1%;font-size: 8;">
+							<p style="margin-left: 1%;margin-right: 1%;font-size: 10;">
 							Pengirim dengan ini menyatakan bahwa keterangan yang ada pada resi ini benar dan telah memenuhi syarat.
 							</p>
 							<br>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 8;" id="cetak_tanggal"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal"></p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
 							</td>
 							<td style="border-left: 1px solid black; width: 35%;">
-								<p style="font-size: 8;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
+								<p style="font-size: 10;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
 									Tanggal&nbsp;&nbsp;:........................................ 
 									<br><br>								Jam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:........................................
 								</p>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 			</tr>
 		</table>
 	</div>
-	<p style="font-size: 8;">pengirim</p>
+	<p style="font-size: 10;">pengirim</p>
 	<hr>
 	<!-- ================================================ -->	
-	 <div>
+	<div>
 		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
@@ -446,25 +459,28 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Deskripsi</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Syarat-syarat</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Deskripsi</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Syarat-syarat</td>
 				
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_pengirim2"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_pengirim2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_pengirim2"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_pengirim2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_pengirim2"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_pengirim2"></td>
 						</tr>
 					</table>
 				</td>
@@ -474,20 +490,27 @@
 					<td>
 						<table border="0" style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Isi Paket</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_isi_paket2"></span></td>
+							<td style="width: 25%;font-size: 10;">Isi Paket</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_isi_paket2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Jumlah</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_jumlah_barang2"></span></td>
+							<td style="width: 25%;font-size: 10;">Jumlah</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_jumlah_barang2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_asal2"></span> 
+							<td colspan="3" style="width: 25%;font-size: 10;">
+								<table>
+									<tr>
+										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
+										<td id="cetak_kota_asal2" style="font-size: 10;"></td>
+										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 10;" id="cetak_kota_tujuan2"></td>
+									</tr>
+								</table>
 							</td>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_tujuan2"></span> 
-							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -512,29 +535,29 @@
 					<td>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim2"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Packing</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Packing</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing2"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Asuransi</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Asuransi</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu2"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">PPN</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn2"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;">
+							<td align="right" style="font-size: 10;">
 								<b id="cetak_total2"></b>
 							</td>
 						</tr>
@@ -543,7 +566,7 @@
 				</tr>
 					</table>
 				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 8;padding-left: 10px;padding-top: 5px;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -556,58 +579,62 @@
 				</td>
 			</tr>
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Penerima</td>
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_penerima2"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_penerima2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_penerima2"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_penerima2"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_penerima2"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_penerima2"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 35%;">
-							<p style="margin-left: 1%;margin-right: 1%;font-size: 8;">
+							<p style="margin-left: 1%;margin-right: 1%;font-size: 10;">
 							Pengirim dengan ini menyatakan bahwa keterangan yang ada pada resi ini benar dan telah memenuhi syarat.
 							</p>
 							<br>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 8;" id="cetak_tanggal2"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal2"></p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
 							</td>
 							<td style="border-left: 1px solid black; width: 35%;">
-								<p style="font-size: 8;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
+								<p style="font-size: 10;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
 									Tanggal&nbsp;&nbsp;:........................................ 
 									<br><br>								Jam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:........................................
 								</p>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 			</tr>
 		</table>
 	</div>
-	<p style="font-size: 8;">arsip</p>
+	<p style="font-size: 10;">asal</p>
 	<hr>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<!-- ================================================= -->
+	<hr>
 	<div>
 		<table style="width: 100%;" border="0">
 			<tr>
@@ -632,25 +659,28 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Deskripsi</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Syarat-syarat</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Deskripsi</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Syarat-syarat</td>
 				
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_pengirim3"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_pengirim3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_pengirim3"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_pengirim3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_pengirim3"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_pengirim3"></td>
 						</tr>
 					</table>
 				</td>
@@ -660,20 +690,27 @@
 					<td>
 						<table border="0" style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Isi Paket</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_isi_paket3"></span></td>
+							<td style="width: 25%;font-size: 10;">Isi Paket</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_isi_paket3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Jumlah</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_jumlah_barang3"></span></td>
+							<td style="width: 25%;font-size: 10;">Jumlah</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_jumlah_barang3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_asal3"></span> 
+							<td colspan="3" style="width: 25%;font-size: 10;">
+								<table>
+									<tr>
+										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
+										<td id="cetak_kota_asal3" style="font-size: 10;"></td>
+										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 10;" id="cetak_kota_tujuan3"></td>
+									</tr>
+								</table>
 							</td>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_tujuan3"></span> 
-							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -698,30 +735,30 @@
 					<td>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim3"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Packing</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Packing</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing3"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Asuransi</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Asuransi</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu3"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">PPN</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn3"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;">
-								<b id="cetak_total3"></b>
+							<td align="right" style="font-size: 10;">
+								<b>-</b>
 							</td>
 						</tr>
 					</table>
@@ -729,7 +766,7 @@
 				</tr>
 					</table>
 				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 8;padding-left: 10px;padding-top: 5px;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -742,55 +779,58 @@
 				</td>
 			</tr>
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Penerima</td>
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_penerima3"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_penerima3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_penerima3"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_penerima3"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_penerima3"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_penerima3"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 35%;">
-							<p style="margin-left: 1%;margin-right: 1%;font-size: 8;">
+							<p style="margin-left: 1%;margin-right: 1%;font-size: 10;">
 							Pengirim dengan ini menyatakan bahwa keterangan yang ada pada resi ini benar dan telah memenuhi syarat.
 							</p>
 							<br>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 8;" id="cetak_tanggal3"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal3"></p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
 							</td>
 							<td style="border-left: 1px solid black; width: 35%;">
-								<p style="font-size: 8;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
+								<p style="font-size: 10;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
 									Tanggal&nbsp;&nbsp;:........................................ 
 									<br><br>								Jam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:........................................
 								</p>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 			</tr>
 		</table>
 	</div>
-	<p style="font-size: 8;">asal</p>
+	<p style="font-size: 10;">tujuan</p>
 	<hr>
 	<!-- ================================================= -->
 	<div>
@@ -817,25 +857,28 @@
 	<div>
 		<table style="width: 100%;border-collapse:collapse;border: 1px solid black;">
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Pengirim</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Deskripsi</td>
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Syarat-syarat</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Pengirim</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Deskripsi</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Syarat-syarat</td>
 				
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_pengirim4"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_pengirim4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_pengirim4"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_pengirim4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_pengirim4"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_pengirim4"></td>
 						</tr>
 					</table>
 				</td>
@@ -845,20 +888,27 @@
 					<td>
 						<table border="0" style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Isi Paket</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_isi_paket4"></span></td>
+							<td style="width: 25%;font-size: 10;">Isi Paket</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_isi_paket4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Jumlah</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_jumlah_barang4"></span></td>
+							<td style="width: 25%;font-size: 10;">Jumlah</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_jumlah_barang4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_asal4"></span> 
+							<td colspan="3" style="width: 25%;font-size: 10;">
+								<table>
+									<tr>
+										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
+										<td id="cetak_kota_asal4" style="font-size: 10;"></td>
+										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 10;" id="cetak_kota_tujuan4"></td>
+									</tr>
+								</table>
 							</td>
-							<td style="width: 25%;font-size: 8;">
-								Kota asal&nbsp;:&nbsp;<span id="cetak_kota_tujuan4"></span> 
-							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -883,30 +933,30 @@
 					<td>
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Biaya Kirim</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_kirim4"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Packing</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Packing</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_packing4"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">Asuransi</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">Asuransi</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu4"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;padding-top: 0;padding-bottom: 0;">PPN</td>
+							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn4"></td>
+							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;"><b>Total Biaya</b></td>
+							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 8;">
-								<b id="cetak_total4"></b>
+							<td align="right" style="font-size: 10;">
+								<b>-</b>
 							</td>
 						</tr>
 					</table>
@@ -914,7 +964,7 @@
 				</tr>
 					</table>
 				</td>
-				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 6;">
+				<td rowspan="3" align="center" style="border: 1px solid black;width: 40%;"><ol align="left" style="font-size: 8;padding-left: 10px;padding-top: 5px;">
 						<li>Barang-barang yang tidak di asuransikan apabila terjadi kehilangan hanya dapat di ganti maximum Rp. 1.000.000 (Satu juta rupiah).</li>
 						<li>Barang yang nilainya diatas 1 juta rupiah harus di asuransikan, jika tidak diasuransikan bukan menjadi tanggung jawab kami.</li>
 						<li>Barang-barang yang dikemas dengan tidak sempurna, tidak ditanggung kerusakannya.</li>
@@ -927,55 +977,58 @@
 				</td>
 			</tr>
 			<tr> 
-				<td style="width:30%;border: 1px solid black; font-size: 8;" align="center">Penerima</td>
+				<td style="width:30%;border: 1px solid black; font-size: 10;" align="center">Penerima</td>
 			</tr>
 			<tr >
 				<td align="center" style="border: 1px solid black; width: 20%;">
 					<table style="width: 96%;margin-top: 1%;margin-bottom: 1%;  margin-left: 2%;margin-right: 2%;" border="0">
 						<tr>
-							<td style="width: 25%;font-size: 8;">Nama</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_penerima4"></span></td>
+							<td style="width: 25%;font-size: 10;">Nama</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_penerima4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">Alamat</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_alamat_penerima4"></span></td>
+							<td style="width: 25%;font-size: 10;">Alamat</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_alamat_penerima4"></td>
 						</tr>
 						<tr>
-							<td style="width: 25%;font-size: 8;">No.telp</td>
-							<td style="font-size: 8;">&nbsp;:&nbsp;<span id="cetak_telp_penerima4"></span></td>
+							<td style="width: 25%;font-size: 10;">No.telp</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" id="cetak_telp_penerima4"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 35%;">
-							<p style="margin-left: 1%;margin-right: 1%;font-size: 8;">
+							<p style="margin-left: 1%;margin-right: 1%;font-size: 10;">
 							Pengirim dengan ini menyatakan bahwa keterangan yang ada pada resi ini benar dan telah memenuhi syarat.
 							</p>
 							<br>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 8;" id="cetak_tanggal4"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal4"></p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
 							</td>
 							<td style="border-left: 1px solid black; width: 35%;">
-								<p style="font-size: 8;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
+								<p style="font-size: 10;margin-left: 1%;">Penerima telah menerima barang dalam keadaan baik pada <br><br>
 									Tanggal&nbsp;&nbsp;:........................................ 
 									<br><br>								Jam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:........................................
 								</p>
-							<hr><p style="font-size: 8;" align="center">
+							<hr><p style="font-size: 10;" align="center">
 								(Tanda tangan/Cap/Nama jelas)
 							</p>
 							</td>
 			</tr>
 		</table>
 	</div>
-	<p style="font-size: 8;">penerima</p>
+	<p style="font-size: 10;">penerima</p>
 	<hr>
     </div>
 	</div>
