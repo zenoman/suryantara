@@ -161,7 +161,7 @@ $(document).ready(function(){
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
-                totalkg += value.berat;
+                totalkg += Number(value.berat);
 
                 rows2 = rows2 + '<tr align="center">';
                 rows2 = rows2 + '<td>'+no+'</td>';
@@ -319,7 +319,7 @@ $(document).ready(function(){
     //============================================ cetak resi
         
         $("#btncetak").click(function(){
-            if($('#telpvendor').val()=='' || $('#biaya_sj').val()==''){
+            if($('#telpvendor').val()==''){
                 notie.alert(3, 'Maaf, Data Vendor Harus Di Isi', 2);
             }else{
         if($('#cabang').val()=='Y'){
@@ -357,7 +357,7 @@ $(document).ready(function(){
     if(foo=='bar'){
      var isgood = confirm('Apakah Anda Yakin Data Sudah Benar ?');
      if(isgood == true){
-        if($('#telpvendor').val()=='' || $('#biaya_sj').val()==''){
+        if($('#telpvendor').val()==''){
                 notie.alert(3, 'Maaf, Data Vendor Dan Biaya Harus Di Isi', 2);
             }else{
                 var noresi = $("#noresi").html();
@@ -383,8 +383,7 @@ $(document).ready(function(){
                         'totalkg' : totalkg,
                         'totalkoli' : totalkoli,
                         'totalcash' : totalcash,
-                        'totalbt'   : totalbt,
-                        'biaya'     : $('#biaya_sj').val()
+                        'totalbt'   : totalbt
                 },
                 success: function() {
                      notie.alert(1, 'Data Disimpan', 2);
@@ -392,7 +391,7 @@ $(document).ready(function(){
                       $("#carivendor").val(null).trigger('change');
                       $('#alamatvendor').val('');
                       $('#telpvendor').val('');
-                      $('#biaya_sj').val('');
+                      //$('#biaya_sj').val('');
                      carikode();
                     getdata();
                     $('#carivendor').focus();

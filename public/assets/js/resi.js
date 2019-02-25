@@ -120,7 +120,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
@@ -132,7 +132,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
@@ -144,7 +144,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(2));
+			$("#volume").val(vt.toFixed(1));
 			}
 			
 		})
@@ -227,20 +227,25 @@ $(document).ready(function(){
 			var satuan		= $('#satuan').val();
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			
-			if(a_penerima =='' || a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
-				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
-   			}else{
+			// if(a_penerima =='' || a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+			// 	notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+   // 			}else{
 		tempelresi();
 
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
-		newWin.document.close();}
+		newWin.document.close();
+		//}
 		});
 	//============================================ tempel variabel
 		function tempelresi(){
 			carikode();
+			$("#cetak_metode").html($("#metode").val());
+			$("#cetak_metode2").html($("#metode").val());
+			$("#cetak_metode3").html($("#metode").val());
+			$("#cetak_metode4").html($("#metode").val());
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_tujuan3").html(kotatujuan);
@@ -271,9 +276,9 @@ $(document).ready(function(){
 			$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim").html($("#n_pengirim").val());
-			$("#cetak_telp_pengirim").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_telp_pengirim").html($("#t_pengirim").val());
 			$("#cetak_penerima").html($("#n_penerima").val());
-			$("#cetak_telp_penerima").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_telp_penerima").html($("#t_penerima").val());
 			$("#cetak_isi_paket").html($("#nama_barang").val());
 			$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			$("#cetak_biaya_packing").html("Rp. "+rupiah($("#biaya_packing").val()));
@@ -298,9 +303,9 @@ $(document).ready(function(){
 			$("#cetak_dimensi2").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik2").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim2").html($("#n_pengirim").val());
-			$("#cetak_telp_pengirim2").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_telp_pengirim2").html($("#t_pengirim").val());
 			$("#cetak_penerima2").html($("#n_penerima").val());
-			$("#cetak_telp_penerima2").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_telp_penerima2").html($("#t_penerima").val());
 			$("#cetak_isi_paket2").html($("#nama_barang").val());
 			$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			$("#cetak_biaya_packing2").html("Rp. "+rupiah($("#biaya_packing").val()));
@@ -313,14 +318,14 @@ $(document).ready(function(){
 			$("#cetak_dimensi3").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik3").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim3").html($("#n_pengirim").val());
-			$("#cetak_telp_pengirim3").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_telp_pengirim3").html($("#t_pengirim").val());
 			$("#cetak_penerima3").html($("#n_penerima").val());
-			$("#cetak_telp_penerima3").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_telp_penerima3").html($("#t_penerima").val());
 			$("#cetak_isi_paket3").html($("#nama_barang").val());
-			$("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
-			$("#cetak_biaya_packing3").html("Rp. "+rupiah($("#biaya_packing").val()));
-			$("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			$("#cetak_total3").html("Rp. "+rupiah(totalnya));
+			// $("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			// $("#cetak_biaya_packing3").html("Rp. "+rupiah($("#biaya_packing").val()));
+			// $("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			// $("#cetak_total3").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal3").html("Kediri, "+tanggal);
 		//============================================================
 			$("#cetak_kota_asal4").html($("#kota_asal").val());
@@ -328,14 +333,14 @@ $(document).ready(function(){
 			$("#cetak_dimensi4").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x "+$("#d_tinggi").val()+" cm");
 			$("#cetak_volumetrik4").html($("#volume").val()+" Kg");
 			$("#cetak_pengirim4").html($("#n_pengirim").val());
-			$("#cetak_telp_pengirim4").html("No. Telp : "+$("#t_pengirim").val());
+			$("#cetak_telp_pengirim4").html($("#t_pengirim").val());
 			$("#cetak_penerima4").html($("#n_penerima").val());
-			$("#cetak_telp_penerima4").html("No. Telp : "+$("#t_penerima").val());
+			$("#cetak_telp_penerima4").html($("#t_penerima").val());
 			$("#cetak_isi_paket4").html($("#nama_barang").val());
-			$("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
-			$("#cetak_biaya_packing4").html("Rp. "+rupiah($("#biaya_packing").val()));
-			$("#cetak_biaya_asu4").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			$("#cetak_total4").html("Rp. "+rupiah(totalnya));
+			// $("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
+			// $("#cetak_biaya_packing4").html("Rp. "+rupiah($("#biaya_packing").val()));
+			// $("#cetak_biaya_asu4").html("Rp. "+rupiah($("#biaya_asuransi").val()));
+			// $("#cetak_total4").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
 	//============================================ simpan transaksi

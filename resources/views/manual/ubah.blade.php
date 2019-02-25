@@ -36,7 +36,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Edit Resi Manual</h2>
+							<h2>Ubah Resi Manual</h2>
 						</div>
 					</div>
 				</div>
@@ -69,9 +69,9 @@
 							<label class="form-label" for="exampleInputDisabled">Jalur Pengiriman</label>
 							<div class="input-group">
 								<select class="form-control" id="metode">
-								<option value="darat">Jalur Darat</option>
-								<option value="laut">Jalur Laut</option>
-								<option value="udara">Jalur Udara</option>
+								<option value="darat" @if($row->pengiriman_via=='darat')selected @endif>Jalur Darat</option>
+								<option value="laut" @if($row->pengiriman_via=='laut')selected @endif>Jalur Laut</option>
+								<option value="udara" @if($row->pengiriman_via=='udara')selected @endif>Jalur Udara</option>
 							</select>
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 
 
 
-			<div class="box-typical box-typical-padding" id="formdarat">
+			<div class="box-typical box-typical-padding" id="formdarat" @if($row->pengiriman_via!='darat')style="display: none;" @endif>
 				<header class="card-header card-header-xl">
 					Jalur Darat
 				</header>
@@ -299,7 +299,7 @@
 
 
 
-			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;">
+			<div class="box-typical box-typical-padding" id="formlaut" @if($row->pengiriman_via!='laut')style="display: none;" @endif>
 				<header class="card-header card-header-xl">
 					Jalur Laut
 				</header>
@@ -518,7 +518,7 @@
 
 
 <!-- ================================================================= -->
-			<div class="box-typical box-typical-padding" id="formudara" style="display: none;" >
+			<div class="box-typical box-typical-padding" id="formudara" @if($row->pengiriman_via!='udara')style="display: none;" @endif>
 			<header class="card-header card-header-xl">
 					Jalur Udara
 				</header>
@@ -529,7 +529,9 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang_udara">
+								<input type="text" class="form-control" id="nama_barang_udara"
+								@if($row->pengiriman_via=='udara')value="{{$row->nama_barang}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -551,8 +553,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara1" value="0" onchange="hayy(1)">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara1" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" onchange="hayy(1)" value="0">&nbsp;
 								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara1" value="0">
 									
 							</div>
@@ -589,8 +591,16 @@
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
 								<select class="form-control" id="metode_udara">
-								<option value="cash">cash</option>
-								<option value="bt">BT</option>
+								<option value="cash"
+								@if($row->pengiriman_via=='udara')
+									@if($row->metode_bayar=='cash')selected
+									@endif
+								@endif>cash</option>
+								<option value="bt"
+								@if($row->pengiriman_via=='udara')
+									@if($row->metode_bayar=='bt')selected
+									@endif
+								@endif>BT</option>
 							</select>
 							</div>
 						</div>
@@ -599,10 +609,20 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="jumlah_udara" onkeypress="return isNumberKey(event)" readonly value="1">
+								<input type="text" class="form-control" id="jumlah_udara" onkeypress="return isNumberKey(event)" readonly @if($row->pengiriman_via=='udara')value="{{$row->jumlah}}" @else value="1"
+								@endif>
 								<select class="form-control" id="satuan_udara">
-								<option value="kg">&nbsp;</option>
-								<option value="koli">koli</option>
+								<option 
+								value="kg"
+								@if($row->pengiriman_via=='udara')
+									@if($row->metode_bayar=='kg')selected
+									@endif
+								@endif>&nbsp;</option>
+								<option value="koli"
+								@if($row->pengiriman_via=='udara')
+									@if($row->metode_bayar=='koli')selected
+									@endif
+								@endif>koli</option>
 							</select>
 							</div>
 						</div>
@@ -612,7 +632,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Total</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="totalberat" value="0" readonly>
+								<input type="text" class="form-control" id="totalberat" readonly @if($row->pengiriman_via=='udara')value="{{$row->berat}}" @else value="0"
+								@endif>
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -633,13 +654,18 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_udara" >
+								<input type="text" class="form-control" id="kota_asal_udara" @if($row->pengiriman_via=='udara')value="{{$row->kota_asal}}"
+								@endif>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-8 col-sm-8">
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
-						<select class="select2" id="kota_tujuan_udara"></select>
+						<select class="select2" id="kota_tujuan_udara">
+						@if($row->pengiriman_via=='udara')
+						<option value="{{$row->kode_tujuan}}">{{$row->kode_tujuan}}</option>
+						@endif
+						</select>
 					</div>
 					<!-- <div class="col-md-4 col-sm-6">
 						<div class="form-group">
@@ -674,7 +700,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nomer SMU (Boleh Kosong)</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nomer_smu_udara">
+								<input type="text" class="form-control" id="nomer_smu_udara" @if($row->pengiriman_via=='udara')value="{{$row->no_smu}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -685,7 +712,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="n_pengirim_udara">
+								<input type="text" class="form-control" id="n_pengirim_udara" @if($row->pengiriman_via=='udara')value="{{$row->nama_pengirim}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -693,7 +721,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_udara" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_udara" @if($row->pengiriman_via=='udara')value="{{$row->telp_pengirim}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -701,7 +730,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="alamat_pengirim_udara">
+								<input type="text" class="form-control" id="alamat_pengirim_udara" @if($row->pengiriman_via=='udara')value="{{$row->alamat_pengirim}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -709,7 +739,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="n_penerima_udara" >
+								<input type="text" class="form-control" id="n_penerima_udara" @if($row->pengiriman_via=='udara')value="{{$row->nama_penerima}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -717,7 +748,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" >
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" @if($row->pengiriman_via=='udara')value="{{$row->telp_penerima}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -725,7 +757,8 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="alamat_penerima_udara">
+								<input type="text" class="form-control" id="alamat_penerima_udara" @if($row->pengiriman_via=='udara')value="{{$row->alamat_penerima}}"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -737,7 +770,10 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_kirim_udara" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_kirim_udara" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='udara')value="{{$row->biaya_kirim}}"
+								@else
+								value="0"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -745,7 +781,10 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya SMU</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_smu_udara" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_smu_udara" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='udara')value="{{$row->biaya_smu}}"
+								@else
+								value="0"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -753,7 +792,10 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Karantina</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_karantina_udara" value="0" onkeypress="return isNumberKey(event)">
+								<input type="text" class="form-control" id="biaya_karantina_udara" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='udara')value="{{$row->biaya_karantina}}"
+								@else
+								value="0"
+								@endif>
 							</div>
 						</div>
 					</div>
@@ -768,27 +810,50 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim_udara">0</td>
+										<td id="b_kirim_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_kirim}}
+										@else
+										0
+										@endif
+									</td>
 									</tr>
 									<tr>
 										<td>Biaya SMU</td>
-										<td id="b_smu_udara">0</td>
+										<td id="b_smu_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_smu}}
+										@else
+										0
+										@endif</td>
 									</tr>
 									<tr>
 										<td>Biaya Karantina</td>
-										<td id="b_karantina_udara">0</td>
+										<td id="b_karantina_udara">
+											@if($row->pengiriman_via=='udara'){{$row->biaya_karantina}}
+										@else
+										0
+										@endif
+										</td>
 									</tr>
 									<tr>
 										<td>PPN</td>
-										<td id="b_ppn_udara">0</td>
+										<td id="b_ppn_udara">
+											@if($row->pengiriman_via=='udara'){{$row->biaya_ppn}}
+										@else
+										0
+										@endif
+										</td>
 									</tr>
 									<tr>
 										<td>Charge</td>
-										<td id="b_charge_udara">0</td>
+										<td id="b_charge_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_charge}}
+										@else
+										0
+										@endif</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="text-center">
-											<h3 id="total_udara">0</h3>
+											<h3 id="total_udara">@if($row->pengiriman_via=='udara'){{$row->total_biaya}}
+										@else
+										0
+										@endif</h3>
 										</td>
 									</tr>
 								</tbody>
@@ -801,7 +866,11 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
 							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan_udara"></textarea>
+								<textarea rows="4" class="form-control" id="keterangan_udara">
+									@if($row->pengiriman_via=='udara'){{$row->keterangan}}
+										
+										@endif
+								</textarea>
 							</div>
 						</div>
 					</div>

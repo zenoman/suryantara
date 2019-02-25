@@ -76,6 +76,7 @@
 						<tr>
 							<th>No</th>
 							<th>Resi</th>
+                            <th>Resi/SMU</th>
                             <th>Tanggal</th>
                             <th>Jalur</th>
                             <th>Tujuan</th>
@@ -89,6 +90,7 @@
 						<tr>
 							<th>No</th>
                             <th>Resi</th>
+                            <th>Resi/SMU</th>
                             <th>Tanggal</th>
                             <th>Jalur</th>
                             <th>Tujuan</th>
@@ -105,6 +107,17 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->no_resi}}</td>
+                            <td>
+                                @if($row->no_smu=='')
+                                @if($row->total_biaya != 0)
+                                <span class="label label-danger">
+                                kosong
+                                </span>
+                                @endif
+                                @else
+                                {{$row->no_smu}}
+                                @endif
+                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>
@@ -144,9 +157,8 @@
                             	@endif
                             </td>
                             <td class="text-center">
-                                @if($row->total_biaya > 0)
-                                
-                                <div class="modal fade bd-example-modal-lg{{$row->id}}"
+                 @if($row->total_biaya > 0)
+                 <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
                      aria-labelledby="myLargeModalLabel"
@@ -165,12 +177,9 @@
                     <div class="row">
                         <div class="col-lg-6 company-info text-left">
                             
-                            @if($row->pengiriman_via=='udara')
                             <h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
-                            <p>No. SMU : {{$row->no_smu}}</p>
-                            @else
-                            <h5>Isi paket : {{$row->nama_barang}}</h5>
-                            @endif
+                            <p>No. Resi/SMU : {{$row->no_smu}}</p>
+                            
 
                             <p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -307,12 +316,10 @@
                         </div>
                         
                     </div>
-                    @if($row->pengiriman_via=='udara')
-                        @if($row->no_smu=='')
                         <br>    
                             <div class="row text-left">
                                 <form action="tambahsmu" method="post">
-                                    <label>Tambahkan No. SMU</label>
+                                    <label>Ubah No.Resi/SMU</label>
                                     <div class="input-group input-group-sm">
                                         <input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
                                         <input type="hidden" name="kode" value="{{$row->id}}">
@@ -323,8 +330,6 @@
                                     </div>
                                 </form>
                             </div>
-                        @endif
-                    @endif
                 </div>
                             </div>
                             <div class="modal-footer">
@@ -353,12 +358,14 @@
                 <button class="btn btn-sm btn-info"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button"><i class="fa fa-wrench"></i></button>           
+                        type="button"><i class="fa fa-eye"></i></button>
+                <!-- <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-wrench"></i></a> -->           
                                 
                                             {{csrf_field()}}
                                             
                                             <input type="hidden" name="aid" value="{{$row->id}}">
-                                @if(Session::get('level')!='admin')
+                                @if($row->kode_jalan=='')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
                                         @endif
@@ -370,10 +377,8 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-                                @if(Session::get('level')!='admin')
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                               <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
-                                @endif
                     					</form>
                                         @endif
                             </td>

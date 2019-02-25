@@ -126,6 +126,17 @@ class Manualcontroller extends Controller
         $kategori = DB::table('kategori_barang')->get();
         return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
     }
+    public function ubah($id){
+        $karyawan = DB::table('karyawan')->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.id','=',$id]])
+        ->get();
+        $kategori = DB::table('kategori_barang')->get();
+        return view('manual/ubah',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
+    }
     public function simpandarat(Request $request){
         $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)

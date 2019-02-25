@@ -58,6 +58,7 @@ Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara'
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 
 //==========================================================surat jalan
+Route::get('/bayarsuratjalan/{id}','suratjalan\suratjalanController@bayarsuratjalan');
 Route::get('/carisuratjalan','suratjalan\suratjalanController@caridata');
 Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');
 Route::post('/bayarsj','suratjalan\suratjalanController@bayar');
@@ -206,6 +207,7 @@ Route::get('/Manual','Manual\Manualcontroller@index');
 Route::post('/Manual','Manual\Manualcontroller@store');
 Route::get('/Manual/create','Manual\Manualcontroller@create');
 Route::get('/Manual/{id}/edit','Manual\Manualcontroller@edit');
+//Route::get('/Manual/{id}/ubah','Manual\Manualcontroller@ubah');
 Route::put('/Manual/{id}','Manual\Manualcontroller@update');
 Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
 Route::post('/Manual/hapuspilihan','Manual\Manualcontroller@haphapus');
