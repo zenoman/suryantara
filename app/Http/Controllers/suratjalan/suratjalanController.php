@@ -14,26 +14,42 @@ class suratjalanController extends Controller
         return view('suratjalan/bayar_suratjalan',['data'=>$data,'title'=>$webinfo]);
     }
     public function bayar(Request $request){
-        if($request->biaya_baru==''){
+        $data = DB::table('resi_pengiriman')
+        ->where('id',$request->nomer)
+        ->update([
+            'biaya_suratjalan'=>$request->jumlah
+        ]);
+        $datasj = DB::table('surat_jalan')->where('kode',$request->kode)->get();
+        //=======================================
+        foreach ($datasj as $row) {
+            $biayanya = $row->biaya+$request->jumlah;
             DB::table('surat_jalan')
-            ->where('id',$request->id_sj)
+            ->where('kode',$request->kode)
             ->update([
-                'status'=>'P'
+                'biaya'=>$biayanya
             ]);
-        }else{
+        }
+        //=======================================
+        $jumlahresi = DB::table('resi_pengiriman')
+        ->where([['kode_jalan','=',$request->kode],['biaya_suratjalan','=',0]])
+        ->count();
+        if ($jumlahresi>0) {
             DB::table('surat_jalan')
-            ->where('id',$request->id_sj)
+            ->where('kode',$request->kode)
             ->update([
-                'biaya'=>$request->biaya_baru,
                 'status'=>'P'
             ]);
         }
-        return back()->with('status','Berhasil Membayar Surat Jalan');
+        //========================================
+        return back()->
+        with('status','Berhasil Membayar Surat Jalan');
     }
+    //==========================================================
     public function index(){
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
     }
+    //==========================================================
     public function carikode(){
         $kodeuser = sprintf("%02s",session::get('id'));
         $tanggal  = date('dmy');

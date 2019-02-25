@@ -259,7 +259,7 @@
 										@endif
 									</td>
 									<td>
-										@if($row->totalbt>0)
+										@if($row->biaya>0)
 										Rp. {{number_format($row->biaya,0,',','.')}}
 										@endif
 									</td>
@@ -283,11 +283,7 @@
 					</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->status != 'P')
-								<button type="submit" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Surat Jalan Ini Telah Di Lunasi ?')">Bayar</button>
-								</form>
-								@endif
-								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
