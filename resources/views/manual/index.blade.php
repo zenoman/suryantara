@@ -177,12 +177,9 @@
                     <div class="row">
                         <div class="col-lg-6 company-info text-left">
                             
-                            @if($row->pengiriman_via=='udara')
                             <h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
-                            <p>No. SMU : {{$row->no_smu}}</p>
-                            @else
-                            <h5>Isi paket : {{$row->nama_barang}}</h5>
-                            @endif
+                            <p>No. Resi/SMU : {{$row->no_smu}}</p>
+                            
 
                             <p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -362,13 +359,13 @@
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
                         type="button"><i class="fa fa-eye"></i></button>
-                <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-wrench"></i></a>           
+                <!-- <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-wrench"></i></a> -->           
                                 
                                             {{csrf_field()}}
                                             
                                             <input type="hidden" name="aid" value="{{$row->id}}">
-                                @if(Session::get('level')!='admin')
+                                @if($row->kode_jalan=='')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
                                         @endif
@@ -380,10 +377,8 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-                                @if(Session::get('level')!='admin')
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                               <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
-                                @endif
                     					</form>
                                         @endif
                             </td>
