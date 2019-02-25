@@ -241,6 +241,10 @@ $(document).ready(function(){
 	//============================================ tempel variabel
 		function tempelresi(){
 			carikode();
+			$("#cetak_metode").html($("#metode").val());
+			$("#cetak_metode2").html($("#metode").val());
+			$("#cetak_metode3").html($("#metode").val());
+			$("#cetak_metode4").html($("#metode").val());
 			$("#cetak_kota_tujuan").html(kotatujuan);
 			$("#cetak_kota_tujuan2").html(kotatujuan);
 			$("#cetak_kota_tujuan3").html(kotatujuan);

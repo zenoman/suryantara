@@ -414,6 +414,10 @@ $(document).ready(function(){
 		$("#listbarang2").html(rows);
 		$("#listbarang3").html(rows);
 		$("#listbarang4").html(rows);
+		$("#cetak_metode").html($("#metode").val());
+			$("#cetak_metode2").html($("#metode").val());
+			$("#cetak_metode3").html($("#metode").val());
+			$("#cetak_metode4").html($("#metode").val());
 		$("#cetak_alamat_pengirim").html($("#alamat_pengirim").val());
 		$("#cetak_alamat_pengirim2").html($("#alamat_pengirim").val());
 		$("#cetak_alamat_pengirim3").html($("#alamat_pengirim").val());

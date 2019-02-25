@@ -313,13 +313,30 @@
 							<td style="font-size: 10;" id="cetak_jumlah_barang"></td>
 						</tr>
 						<tr>
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" >
+								<b>
+									<span id="cetak_metode"></span>
+								</b>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
-										<td id="cetak_kota_asal" style="font-size: 10;"></td>
-										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 10;" id="cetak_kota_tujuan"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal"></span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan"></span>
+											</b>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -511,13 +528,28 @@
 							<td style="font-size: 10;" id="cetak_jumlah_barang2"></td>
 						</tr>
 						<tr>
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span  id="cetak_metode2">
+									
+								</span></b>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
-										<td id="cetak_kota_asal2" style="font-size: 10;"></td>
-										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 10;" id="cetak_kota_tujuan2"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b><span id="cetak_kota_asal2" ></span></b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan2"></span>
+											</b>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -711,13 +743,32 @@
 							<td style="font-size: 10;" id="cetak_jumlah_barang3"></td>
 						</tr>
 						<tr>
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span id="cetak_metode3">
+									
+								</span></b>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
-										<td id="cetak_kota_asal3" style="font-size: 10;"></td>
-										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 10;" id="cetak_kota_tujuan3"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal3">
+												</span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan3">
+												</span>
+											</b>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -909,13 +960,32 @@
 							<td style="font-size: 10;" id="cetak_jumlah_barang4"></td>
 						</tr>
 						<tr>
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;" >
+								<b><span id="cetak_metode4">
+									
+								</span></b>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 10;">Kota asal&nbsp;:&nbsp;</td>
-										<td id="cetak_kota_asal4" style="font-size: 10;"></td>
-										<td style="font-size: 10;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 10;" id="cetak_kota_tujuan4"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+											<span  id="cetak_kota_asal4">
+											</span>	
+											</b>
+											
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan4"> </span>
+											</b>
+										</td>
 									</tr>
 								</table>
 							</td>

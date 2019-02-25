@@ -422,16 +422,32 @@
 							<td style="font-size: 10;" id="cetak_nosmu"></td>
 						</tr>
 						<tr>
-							<td colspan="3" style="width: 25%;">
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span id="cetak_metode"></span></b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 9;">Kota asal&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_asal"></td>
-										<td style="font-size: 9;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_tujuan"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal"></span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan"></span>
+											</b>
+										</td>
 									</tr>
-								</table> 
+								</table>
 							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -636,16 +652,32 @@
 							<td style="font-size: 10;" id="cetak_nosmu2"></td>
 						</tr>
 						<tr>
-							<td colspan="3" style="width: 25%;">
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span id="cetak_metode2"></span></b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 9;">Kota asal&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_asal2"></td>
-										<td style="font-size: 9;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_tujuan2"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal2"></span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan2"></span>
+											</b>
+										</td>
 									</tr>
-								</table> 
+								</table>
 							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -853,16 +885,32 @@
 							<td style="font-size: 10;" id="cetak_nosmu3"></td>
 						</tr>
 						<tr>
-							<td colspan="3" style="width: 25%;">
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span id="cetak_metode3"></span></b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 9;">Kota asal&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_asal3"></td>
-										<td style="font-size: 9;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_tujuan3"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal3"></span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan3"></span>
+											</b>
+										</td>
 									</tr>
-								</table> 
+								</table>
 							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>
@@ -1062,16 +1110,32 @@
 							<td style="font-size: 10;" id="cetak_nosmu4"></td>
 						</tr>
 						<tr>
-							<td colspan="3" style="width: 25%;">
+							<td style="width: 25%;font-size: 10;">Metode</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td style="font-size: 10;">
+								<b><span id="cetak_metode4"></span></b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 9;">Kota asal&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_asal4"></td>
-										<td style="font-size: 9;">Tujuan&nbsp;:&nbsp;</td>
-										<td style="font-size: 9;" id="cetak_kota_tujuan4"></td>
+										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_asal4"></span>
+											</b>
+										</td>
+										<td style="font-size: 11;">Tujuan&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">
+											<b>
+												<span id="cetak_kota_tujuan4"></span>
+											</b>
+										</td>
 									</tr>
-								</table> 
+								</table>
 							</td>
+							<td></td>
 						</tr>
 					</table>
 					</td>

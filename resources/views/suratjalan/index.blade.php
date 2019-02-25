@@ -150,13 +150,13 @@
 			<input type="hidden" id="totalcash">
 			<input type="hidden" id="totalbt">
 		
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya</label>
 							<div class="input-group">
 								<div class="input-group-addon">Rp</div>
 								<input type="text" class="form-control" onkeypress="return isNumberKey(event)" id="biaya_sj">
 							</div>
-						</div>
+						</div> -->
 					
 			<hr>
 					<small class="text-muted">

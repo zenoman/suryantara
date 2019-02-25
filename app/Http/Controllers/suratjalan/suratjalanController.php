@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class suratjalanController extends Controller
 {
+    public function bayarsuratjalan($id){
+        $data = DB::table('surat_jalan')->where('id',$id)->get();
+         $webinfo = DB::table('setting')->limit(1)->get();
+        return view('suratjalan/bayar_suratjalan',['data'=>$data,'title'=>$webinfo]);
+    }
     public function bayar(Request $request){
         if($request->biaya_baru==''){
             DB::table('surat_jalan')
@@ -149,7 +154,6 @@ class suratjalanController extends Controller
                 'totalkoli' => $request->totalkoli,
                 'totalcash' => $request->totalcash,
                 'totalbt'   => $request->totalbt,
-                'biaya'     => $request->biaya,
                 'status' =>'Y',
                 'tgl'=>date('Y-m-d'),
                 'admin'=> session::get('username')
@@ -164,7 +168,6 @@ class suratjalanController extends Controller
                 'totalkoli' => $request->totalkoli,
                 'totalcash' => $request->totalcash,
                 'totalbt'   => $request->totalbt,
-                'biaya'     => $request->biaya,
                 'status' =>'Y',
                 'tgl'=>date('Y-m-d'),
                 'admin'=> session::get('username')
