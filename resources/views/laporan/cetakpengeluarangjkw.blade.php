@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak Pemasukan Bulan {{$bulanya}} Tahun {{$tahunya}}</title>
+	<title>Cetak Pengeluaran Gaji Karyawan Bulan {{$bulanya}} Tahun {{$tahunya}}</title>
 </head>
 <body onload="window.print()">
 		<table style="width: 100%">

@@ -41,6 +41,8 @@ Route::get('/uangkembali/{id}','resipengiriman\resipengirimanController@uangkemb
 Route::get('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
 Route::get('/carilistresi/{id}','resipengiriman\resipengirimanController@carilistresi');
 
+Route::get('/cariresipengiriman_smukosong','resipengiriman\resipengirimanController@caridataresi_smukosong');
+Route::get('/listpengiriman_smukosong','resipengiriman\resipengirimanController@tampilsmukosong');
 Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@carihasillaut');
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
@@ -54,6 +56,7 @@ Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@resid
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
+
 //==========================================================surat jalan
 Route::get('/carisuratjalan','suratjalan\suratjalanController@caridata');
 Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');

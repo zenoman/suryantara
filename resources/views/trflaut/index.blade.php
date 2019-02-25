@@ -127,7 +127,7 @@
 						{{csrf_field()}}
 						<div class="text-right">
 &nbsp;&nbsp;
-<a href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger">
+<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger">
 Kosongkan Data
 </a>	
 &nbsp;&nbsp;

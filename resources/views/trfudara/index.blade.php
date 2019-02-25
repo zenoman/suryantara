@@ -130,13 +130,15 @@
 						{{csrf_field()}}
 						<div class="text-right">
 &nbsp;&nbsp;
-<a href="{{url('/trfudara/hapussemua')}}" class="btn btn-danger">
+<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfudara/hapussemua')}}" class="btn btn-danger">
 Kosongkan Data
 </a>	
 &nbsp;&nbsp;
 <input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
 						</div>
                         </form>
+                        {{ $trf_udara->links() }}
+
 				</div>
 			</section>
 		</div><!--.container-fluid-->

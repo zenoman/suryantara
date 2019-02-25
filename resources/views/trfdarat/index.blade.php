@@ -122,7 +122,7 @@
 					</table>
 					<div class="text-right">
 &nbsp;&nbsp;
-<a href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger">
+<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger">
 Kosongkan Data
 </a>	
 &nbsp;&nbsp;

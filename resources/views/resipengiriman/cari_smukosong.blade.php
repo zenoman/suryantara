@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Pengiriman</h2>
+							<h2>List Pengiriman Resi/Smu kosong</h2>
 							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							<td>Aksi</td>
+							<th>Aksi</th>
 						</tr>
 						</thead>
 						
@@ -59,7 +59,7 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            	<button class="btn btn-sm btn-primary"
+                            	<button class="btn btn-sm btn-warning"
 						data-toggle="modal"
 						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
 

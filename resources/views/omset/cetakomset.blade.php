@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak pmset Bulanan</title>
+	<title>Cetak omset Bulanan</title>
 </head>
 <body onload="window.print()">
 		<table style="width: 100%">
