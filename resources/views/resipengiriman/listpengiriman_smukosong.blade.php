@@ -21,7 +21,6 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>List Pengiriman</h2>
-							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -35,12 +34,39 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                     
+                     <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
+                     <i class="fa fa-search"></i> Cari Data</button>
+
+                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
+                                        </div>
+                                        
+
+                                        <div class="modal-body">
+                                           <form method="get" action="{{url('cariresipengiriman_smukosong')}}">
+                                            <div class="form-group">
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi/ Tanggal/ Jalur/ Tujuan/ Admin" required>
+                                            </div>
+                                           {{csrf_field()}}
+                                            <input type="submit" class="btn btn-info" value="Cari Data">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            
+                                            </form>
+                                        </div>
+                                 
+                                    </div>
+                                </div>
+                            </div>
+
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -48,7 +74,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							<td>Aksi</td>
+							<th>Aksi</th>
 						</tr>
 						</thead>
 						
@@ -59,10 +85,9 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            	<button class="btn btn-sm btn-primary"
+                            	<button class="btn btn-sm btn-warning"
 						data-toggle="modal"
 						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
@@ -81,13 +106,10 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
-							
-							@if($row->pengiriman_via=='udara')
+							<!-- ini -->
+
 							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
 							<p>No. SMU : {{$row->no_smu}}</p>
-							@else
-							<h5>Isi paket : {{$row->nama_barang}}</h5>
-							@endif
 
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -174,6 +196,10 @@
 										<td class="text-right">Biaya Karantina</td>
 										<td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
 									</tr>
+									<tr>
+										<td class="text-right">Biaya Charge</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+									</tr>
 								@else
 									<tr>
 										<td class="text-right">Biaya Packing</td>
@@ -259,6 +285,7 @@
 					</div>
 				</div><!--.modal-->
                             </td>
+                            <td>{{$row->no_smu}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -313,6 +340,7 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -324,7 +352,7 @@
 						</tr>
 						</tfoot>
 					</table>
-					<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+					{{ $datakirim->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -338,7 +366,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":true
+            "paging":false
         });
 		});
 

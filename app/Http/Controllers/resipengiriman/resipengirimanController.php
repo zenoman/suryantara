@@ -28,6 +28,19 @@ class resipengirimanController extends Controller
         
         return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+    public function caridataresi_smukosong(Request $request){
+        $cari = $request->cari;
+        $datakirim = DB::table('resi_pengiriman')
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
+        
+        return view('resipengiriman/cari_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
     public function tambahnosmu(Request $request){
         DB::table('resi_pengiriman')
         ->where('id',$request->kode)
@@ -110,6 +123,15 @@ class resipengirimanController extends Controller
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
+    }
+        public function tampilsmukosong(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $datakirim = DB::table('resi_pengiriman')
+        ->where('metode_input','otomatis')
+        ->whereNull('no_smu')
+        ->orderby('id','desc')
+        ->paginate(50);
+        return view('resipengiriman/listpengiriman_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     public function residarat()
     {

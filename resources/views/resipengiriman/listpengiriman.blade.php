@@ -37,6 +37,10 @@
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 
+                     <a href="listpengiriman_smukosong"><button class="btn btn-secondary">
+                     <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
+                     </a>
+
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -60,11 +64,14 @@
                                     </div>
                                 </div>
                             </div> 
+
+                    
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -83,10 +90,15 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
+                            	@if($row->no_smu == null)
+                            	<button class="btn btn-sm btn-warning"
+						data-toggle="modal"
+						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            	@else
                             	<button class="btn btn-sm btn-primary"
 						data-toggle="modal"
 						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-
+								@endif
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
@@ -105,13 +117,10 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
-							
-							@if($row->pengiriman_via=='udara')
+							<!-- ini -->
+
 							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
 							<p>No. SMU : {{$row->no_smu}}</p>
-							@else
-							<h5>Isi paket : {{$row->nama_barang}}</h5>
-							@endif
 
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -287,6 +296,7 @@
 					</div>
 				</div><!--.modal-->
                             </td>
+                            <td>{{$row->no_smu}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -341,6 +351,7 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
