@@ -21,6 +21,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>List Pengiriman</h2>
+							<h5>Berdasarkan No.Resi/SMU kosong</h5>
 						</div>
 					</div>
 				</div>
@@ -36,7 +37,7 @@
                     @endif
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
-
+						<br><br>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -242,12 +243,10 @@
 						</div>
 						
 					</div>
-					@if($row->pengiriman_via=='udara')
-						@if($row->no_smu=='')
 						<br>	
 							<div class="row text-left">
 								<form action="tambahsmu" method="post">
-									<label>Tambahkan No. SMU</label>
+									<label>Ubah No. SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
 										<input type="hidden" name="kode" value="{{$row->id}}">
@@ -258,8 +257,6 @@
 									</div>
 								</form>
 							</div>
-						@endif
-					@endif
 				</div>
 							</div>
 							<div class="modal-footer">
@@ -353,6 +350,7 @@
 						</tfoot>
 					</table>
 					{{ $datakirim->links() }}
+					<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -366,7 +364,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 

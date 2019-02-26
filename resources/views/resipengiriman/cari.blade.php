@@ -41,6 +41,7 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -216,12 +217,10 @@
 						</div>
 						
 					</div>
-					@if($row->pengiriman_via=='udara')
-						@if($row->no_smu=='')
 						<br>	
 							<div class="row text-left">
 								<form action="tambahsmu" method="post">
-									<label>Tambahkan No. SMU</label>
+									<label>Ubah No. SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
 										<input type="hidden" name="kode" value="{{$row->id}}">
@@ -232,8 +231,6 @@
 									</div>
 								</form>
 							</div>
-						@endif
-					@endif
 				</div>
 							</div>
 							<div class="modal-footer">
@@ -259,6 +256,7 @@
 					</div>
 				</div><!--.modal-->
                             </td>
+                            <td>{{$row->no_smu}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -313,6 +311,7 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -320,7 +319,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							<th>Aksi</th>
+							<td>Aksi</td>
 						</tr>
 						</tfoot>
 					</table>
