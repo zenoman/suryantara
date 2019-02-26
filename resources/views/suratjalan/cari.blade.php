@@ -101,9 +101,9 @@
                             <td>
 
                             	@if($row->status=='Y')
-                            	<button class="btn btn-warning btn-sm"
-									data-toggle="modal"
-									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Bayar Sekarang</button>
+                            	<a href="{{url('/bayarsuratjalan/'.$row->id)}}" class="btn btn-warning btn-sm">
+                            	Bayar Sekarang
+                            	</a>
                             	@else
                             	<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
@@ -182,6 +182,7 @@
 										<th>Berat</th>
 										<th>Cash</th>
 										<th>BT</th>
+										<th>Biaya</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -197,12 +198,15 @@
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
 										@if($resi->metode_bayar=='cash')
-										<td>Rp. {{number_format($resi->total_biaya,2,',','.')}}</td>
+										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										<td> </td>
 										@else
 										<td> </td>
-										<td>Rp. {{number_format($resi->total_biaya,2,',','.')}}</td>
+										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										@endif
+										<td>
+										Rp. {{number_format($resi->biaya_suratjalan,0,',','.')}}
+										</td>
 									</tr>
 								@endforeach
 								<tr>
@@ -217,12 +221,17 @@
 									</td>
 									<td>
 										@if($row->totalcash>0)
-										Rp. {{number_format($row->totalcash,2,',','.')}}
+										Rp. {{number_format($row->totalcash,0,',','.')}}
 										@endif
 									</td>
 									<td>
 										@if($row->totalbt>0)
-										Rp. {{number_format($row->totalbt,2,',','.')}}
+										Rp. {{number_format($row->totalbt,0,',','.')}}
+										@endif
+									</td>
+									<td>
+										@if($row->biaya>0)
+										Rp. {{number_format($row->biaya,0,',','.')}}
 										@endif
 									</td>
 								</tr>
@@ -239,23 +248,13 @@
 							@else
 							Surat Jalan Telah Lunas
 							@endif
-							<h4>Perkiraan Biaya : Rp. {{number_format($row->biaya,2,',','.')}}</h4>
-							@if($row->status != 'P')
-							<form action="bayarsj" method="post">
-								<label for="biaya_baru">Perubahan Biaya</label>
-								<input type="text" name="biaya_baru" class="form-control" placeholder="Opsional, Tergantung Apakah Ada Perubahan Biaya">
-								<input type="hidden" name="id_sj" value="{{$row->id}}">
-								{{csrf_field()}}
-							@endif
+							
 						</div>
 						
 					</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->status != 'P')
-								<button type="submit" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Surat Jalan Ini Telah Di Lunasi ?')">Bayar</button>
-								</form>
-								@endif
+								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>

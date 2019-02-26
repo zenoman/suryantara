@@ -98,11 +98,11 @@
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
 										@if($resi->metode_bayar=='cash')
-										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										<td> </td>
 										@else
 										<td> </td>
-										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										
 										@endif
 										<td>
