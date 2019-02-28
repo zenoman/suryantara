@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Data manual</h2>
+							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -35,46 +36,12 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
-                    @elseif(session('statuserror'))
-                    <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('statuserror') }}
-                    </div>
                     @endif
-					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                                        <i class="fa fa-search"></i> Cari Data</button>
-                    <a href="{{url('manual_smukosong')}}"><button class="btn btn-secondary">
-                     <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
-                     </a>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('/Manual/cari')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+                    <a href="{{url('/manual_smukosong')}}" class="btn btn-danger">Kembali</a>
+					
                     <br><br>
-                    <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+					<form action="{{url('/Manual/hapuspilihan')}}" method="post">
+					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
@@ -86,7 +53,9 @@
 							<th>Pemegang</th>
 							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
-                           
+                            @if(Session::get('level') != 'admin')
+							<th class="text-center">#</th>
+                            @endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -100,7 +69,9 @@
                             <th>Pemegang</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
-                             
+                            @if(Session::get('level') != 'admin')
+                            <th class="text-center">#</th>
+                            @endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -110,28 +81,12 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                @if($row->no_smu == null)
-                                <i class="btn btn-sm btn-warning"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
-                                @else
-                                <i class="btn btn-sm btn-primary"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                <i class="btn btn-sm btn-warning">{{$row->no_resi}}</i>
                                 <!-- <i class="btn btn-sm btn-primary"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
-                                @endif
                             </td>
-                            <td>
-                                @if($row->no_smu=='')
-                                @if($row->total_biaya != 0)
-                                <span class="label label-danger">
-                                kosong
-                                </span>
-                                @endif
-                                @else
-                                {{$row->no_smu}}
-                                @endif
-                            </td>
+                            <td> <span class="label label-danger">kosong</span></td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>
@@ -171,8 +126,12 @@
                             	@endif
                             </td>
                             <td class="text-center">
-                 @if($row->total_biaya > 0)
-                 <div class="modal fade bd-example-modal-lg{{$row->id}}"
+                                @if($row->total_biaya > 0)
+                                <button class="btn btn-sm btn-info"
+                        data-toggle="modal"
+                        data-target=".bd-example-modal-lg{{$row->id}}"
+                        type="button"><i class="fa fa-wrench"></i></button>
+                                <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
                      aria-labelledby="myLargeModalLabel"
@@ -191,9 +150,12 @@
                     <div class="row">
                         <div class="col-lg-6 company-info text-left">
                             
+                            @if($row->pengiriman_via=='udara')
                             <h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
-                            <p>No. Resi/SMU : {{$row->no_smu}}</p>
-                            
+                            <p>No. SMU : {{$row->no_smu}}</p>
+                            @else
+                            <h5>Isi paket : {{$row->nama_barang}}</h5>
+                            @endif
 
                             <p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -330,10 +292,12 @@
                         </div>
                         
                     </div>
+                    @if($row->pengiriman_via=='udara')
+                        @if($row->no_smu=='')
                         <br>    
                             <div class="row text-left">
                                 <form action="tambahsmu" method="post">
-                                    <label>Ubah No.Resi/SMU</label>
+                                    <label>Tambahkan No. SMU</label>
                                     <div class="input-group input-group-sm">
                                         <input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
                                         <input type="hidden" name="kode" value="{{$row->id}}">
@@ -344,6 +308,8 @@
                                     </div>
                                 </form>
                             </div>
+                        @endif
+                    @endif
                 </div>
                             </div>
                             <div class="modal-footer">
@@ -368,22 +334,6 @@
                         </div>
                     </div>
                 </div><!--.modal-->
-                <form action="{{ url('/Manual/delete')}}" method="post">                     
-                <button class="btn btn-sm btn-info"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button"><i class="fa fa-eye"></i></button>
-                <!-- <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-wrench"></i></a> -->           
-                                
-                                            {{csrf_field()}}
-                                            
-                                            <input type="hidden" name="aid" value="{{$row->id}}">
-                                @if($row->kode_jalan=='')
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i></button>
-                                        @endif
-                                        </form>
                                 @else
                               <form action="{{ url('/Manual/delete')}}" method="post">                            	
                             	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
@@ -391,34 +341,42 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-                               <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
                     					</form>
                                         @endif
                             </td>
-                             
+                            @if(Session::get('level') != 'admin')
+                            <td class="text-center"><input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}">
+                            </td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
 					{{csrf_field()}}
-                   
+                    @if(Session::get('level') != 'admin')
+					<div class="text-right">
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+					</div>
+                    @endif
 					
-					 {{ $manual->links() }}
+                        </form>
+					 
 				</div>
 			</section>
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 	@endsection
 
-		@section('js')
+			@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 	</script>

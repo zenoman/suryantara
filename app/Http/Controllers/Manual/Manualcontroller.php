@@ -39,6 +39,30 @@ class Manualcontroller extends Controller
             $setting = DB::table('setting')->get();
         return view('manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
     }
+    public function tampilmanualsmukosong()
+    {
+        $setting = DB::table('setting')->get();
+        $datmanual = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where('resi_pengiriman.metode_input','manual')
+        ->whereNull('no_smu')
+        ->orderby('resi_pengiriman.id','desc')
+        ->paginate(20);
+        return view('manual/manual_smukosong',['manual'=>$datmanual,'title'=>$setting]);
+    }
+        public function carismukosong(Request $request)
+    {
+        $cari=$request->cari;
+        $datmanual = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null]])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null]])
+        ->get();
+            $setting = DB::table('setting')->get();
+        return view('manual/cari_smukosong', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
+    }
     //=========================================================
     public function importexcel(){
         $setting = DB::table('setting')->get();

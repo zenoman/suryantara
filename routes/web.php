@@ -212,6 +212,8 @@ Route::put('/Manual/{id}','Manual\Manualcontroller@update');
 Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
 Route::post('/Manual/hapuspilihan','Manual\Manualcontroller@haphapus');
 Route::get('/Manual/cari','Manual\Manualcontroller@caridata');
+Route::get('/manual_smukosong','Manual\Manualcontroller@tampilmanualsmukosong');
+Route::get('/carismukos','Manual\Manualcontroller@carismukosong');
 //---------------------------------export import
 Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');

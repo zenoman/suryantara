@@ -41,13 +41,8 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
-                    <a href="{{url('manual_smukosong')}}"><button class="btn btn-secondary">
-                     <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
-                     </a>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -57,7 +52,7 @@
                                         
 
                                         <div class="modal-body">
-                                           <form method="get" action="{{url('/Manual/cari')}}">
+                                           <form method="get" action="{{url('carismukos')}}">
                                             <div class="form-group">
                                                 <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
                                             </div>
@@ -110,27 +105,15 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                @if($row->no_smu == null)
-                                <i class="btn btn-sm btn-warning"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
-                                @else
-                                <i class="btn btn-sm btn-primary"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                <i class="btn btn-sm btn-warning">{{$row->no_resi}}</i>
                                 <!-- <i class="btn btn-sm btn-primary"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
-                                @endif
                             </td>
                             <td>
-                                @if($row->no_smu=='')
-                                @if($row->total_biaya != 0)
                                 <span class="label label-danger">
                                 kosong
                                 </span>
-                                @endif
-                                @else
-                                {{$row->no_smu}}
-                                @endif
                             </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>

@@ -37,7 +37,7 @@
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 
-                     <a href="listpengiriman_smukosong"><button class="btn btn-secondary">
+                     <a href="{{url('listpengiriman_smukosong')}}"><button class="btn btn-secondary">
                      <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
                      </a>
 

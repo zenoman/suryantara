@@ -45,7 +45,8 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Resi</th>
+                            <th>Resi</th>
+							<th>Resi/SMU</th>
                             <th>Tanggal</th>
                             <th>Jalur</th>
                             <th>Tujuan</th>
@@ -61,6 +62,7 @@
 						<tr>
 							<th>No</th>
                             <th>Resi</th>
+                            <th>Resi/SMU</th>
                             <th>Tanggal</th>
                             <th>Jalur</th>
                             <th>Tujuan</th>
@@ -78,7 +80,29 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->no_resi}}</td>
+                            <td>
+                                @if($row->no_smu == null)
+                                <i class="btn btn-sm btn-warning"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                @else
+                                <i class="btn btn-sm btn-primary"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                <!-- <i class="btn btn-sm btn-primary"
+                        data-toggle="modal"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
+                                @endif
+                            </td>
+                            <td>
+                                @if($row->no_smu=='')
+                                @if($row->total_biaya != 0)
+                                <span class="label label-danger">
+                                kosong
+                                </span>
+                                @endif
+                                @else
+                                {{$row->no_smu}}
+                                @endif
+                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>
