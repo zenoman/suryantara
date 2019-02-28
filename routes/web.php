@@ -58,7 +58,9 @@ Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara'
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 
 //==========================================================surat jalan
+Route::get('/resisuratjalan','suratjalan\suratjalanController@resisuratjalan');
 Route::get('/bayarsuratjalan/{id}','suratjalan\suratjalanController@bayarsuratjalan');
+Route::get('/cariresisuratjalan','suratjalan\suratjalanController@cariresidata');
 Route::get('/carisuratjalan','suratjalan\suratjalanController@caridata');
 Route::post('/hapuslistsj','suratjalan\suratjalanController@destroy');
 Route::post('/bayarsj','suratjalan\suratjalanController@bayar');

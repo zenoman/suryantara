@@ -40,7 +40,8 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>No.Resi</th>
+							<th>Resi</th>
+							<th>No.Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -216,8 +217,6 @@
 						</div>
 						
 					</div>
-					@if($row->pengiriman_via=='udara')
-						@if($row->no_smu=='')
 						<br>	
 							<div class="row text-left">
 								<form action="tambahsmu" method="post">
@@ -232,8 +231,6 @@
 									</div>
 								</form>
 							</div>
-						@endif
-					@endif
 				</div>
 							</div>
 							<div class="modal-footer">
@@ -259,6 +256,7 @@
 					</div>
 				</div><!--.modal-->
                             </td>
+                            <td>{{$row->no_smu}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -312,7 +310,8 @@
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>No.Resi</th>
+							<th>Resi</th>
+							<th>No.Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>

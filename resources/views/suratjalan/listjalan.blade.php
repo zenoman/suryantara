@@ -42,7 +42,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					
+					<a href="{{url('/resisuratjalan')}}" class="btn btn-primary"><i class="fa fa-eye"></i> Tampil Berdasarkan Resi</a>
 					 <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 

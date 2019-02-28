@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class suratjalanController extends Controller
 {
+    public function resisuratjalan(){
+        $data = DB::table('resi_pengiriman')
+        ->where('kode_jalan','!=',null)
+        ->paginate(30);
+
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('suratjalan/resi',['data'=>$data,'webinfo'=>$webinfo]);
+    }
     public function bayarsuratjalan($id){
         $data = DB::table('surat_jalan')->where('id',$id)->get();
          $webinfo = DB::table('setting')->limit(1)->get();
@@ -209,7 +217,18 @@ class suratjalanController extends Controller
         }
         
     }
-
+    public function cariresidata(Request $request){
+        $cari = $request->cari;
+            $listdata = DB::table('resi_pengiriman')
+            ->where('no_resi','like','%'.$cari.'%')
+            ->orwhere('no_smu','like','%'.$cari.'%')
+            ->orwhere('kode_jalan','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->get();
+         
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('suratjalan/cariresi',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
     public function caridata(Request $request){      
         $cari = $request->cari;
             $listdata = DB::table('surat_jalan')

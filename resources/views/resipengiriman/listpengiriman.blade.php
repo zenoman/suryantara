@@ -253,12 +253,10 @@
 						</div>
 						
 					</div>
-					@if($row->pengiriman_via=='udara')
-						@if($row->no_smu=='')
 						<br>	
 							<div class="row text-left">
 								<form action="tambahsmu" method="post">
-									<label>Tambahkan No. SMU</label>
+									<label>Ubah No.Resi/SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
 										<input type="hidden" name="kode" value="{{$row->id}}">
@@ -269,8 +267,6 @@
 									</div>
 								</form>
 							</div>
-						@endif
-					@endif
 				</div>
 							</div>
 							<div class="modal-footer">
