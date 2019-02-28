@@ -389,6 +389,10 @@
                    
 					
 					 {{ $manual->links() }}
+                     <div class="text-right">
+                     <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>    
+                     </div>
+                     
 				</div>
 			</section>
 		</div><!--.container-fluid-->
