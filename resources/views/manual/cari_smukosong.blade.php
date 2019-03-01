@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2 class = "page-header">Hasil Pencarian</h2>
+							<h2 class = "page-header">List manual No.Resi/SMU kosong</h2>
 							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>

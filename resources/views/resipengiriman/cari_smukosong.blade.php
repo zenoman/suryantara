@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Pengiriman Resi/Smu kosong</h2>
+							<h2>List Pengiriman No.Resi/Smu kosong</h2>
 							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
@@ -29,13 +29,15 @@
 
 			<section class="card">
 				<div class="card-block">
+
 					@if (session('status'))
                     <div class="alert alert-success alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
                     @endif
-                     
+                     <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+                     <p>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>

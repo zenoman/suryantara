@@ -37,6 +37,7 @@
                     @endif
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
+                     <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 						<br><br>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

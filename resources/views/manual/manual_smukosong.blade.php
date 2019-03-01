@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Data manual</h2>
+							<h2>List manual</h2>
+                            <h5>Berdasarkan No.Resi/SMU kosong</h5>
 						</div>
 					</div>
 				</div>
@@ -43,6 +44,7 @@
                     @endif
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
+                                        <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
