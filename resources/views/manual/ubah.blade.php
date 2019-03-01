@@ -517,7 +517,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="alamat_pengirim_laut" @if($row->pengiriman_via) value="{{$row->alamat_pengirim}}" @endif>
+								<input type="text" class="form-control" id="alamat_pengirim_laut" @if($row->pengiriman_via=='laut') value="{{$row->alamat_pengirim}}" @endif>
 							</div>
 						</div>
 					</div>
@@ -681,12 +681,21 @@
 					</div>
 					
 					<div class="col-md-4 col-sm-6">
+						@php
+						if($row->pengiriman_via=='udara'){
+						$dimensi = $row->dimensi;
+							if($dimensi!='-'){
+								$dmn = preg_split('/ x /',$dimensi,-1,PREG_SPLIT_NO_EMPTY);
+							}
+						
+						}
+						@endphp
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
 							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara1" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" onchange="hayy(1)" value="0">&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara1" value="0">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara1" @if($dimensi!='-')value="{{$dmn[0]}}" @else value="0"@endif>&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" onchange="hayy(1)" @if($dimensi!='-')value="{{$dmn[1]}}" @else value="0"@endif>&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara1" @if($dimensi!='-')value="{{$dmn[2]}}" @else value="0"@endif>
 									
 							</div>
 						</div>
@@ -695,7 +704,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume_udara1" onkeypress="return isNumberKey2(event)"  value="0" onchange="hitungberat()">
+								<input type="text" class="form-control" id="volume_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()"  @if($row->pengiriman_via=='udara')
+									@if($row->ukuran_volume!='-')
+										value="{{$row->ukuran_volume}}"
+									@else
+									  value="0"
+									@endif
+								@endif>
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -705,7 +720,13 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat_udara1" onkeypress="return isNumberKey2(event)" value="0" onchange="hitungberat()">
+								<input type="text" class="form-control" id="berat_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" @if($row->pengiriman_via=='udara')
+									@if($row->ukuran_volume!='-')
+										value="{{$row->berat}}"
+									@else
+									  value="0"
+									@endif
+								@endif>
 								<div class="input-group-addon">Kg</div>
 							</div>
 						</div>
@@ -797,6 +818,7 @@
 						<option value="{{$row->kode_tujuan}}">{{$row->kode_tujuan}}</option>
 						@endif
 						</select>
+						<input type="hidden" id="kta_tujuan_udara" @if($row->pengiriman_via=='udara')value="{{$row->kode_tujuan}}"@endif>
 					</div>
 					<!-- <div class="col-md-4 col-sm-6">
 						<div class="form-group">
@@ -1028,5 +1050,5 @@
 <script src="{{asset('assets/js/lib/ladda-button/ladda.min.js')}}"></script>
 @endsection
 @section('otherjs')
-<script src="{{asset('assets/js/resimanual.js')}}"></script>
+<script src="{{asset('assets/js/editresimanual.js')}}"></script>
 @endsection

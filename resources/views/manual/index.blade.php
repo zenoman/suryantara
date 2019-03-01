@@ -373,13 +373,14 @@
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
                         type="button"><i class="fa fa-eye"></i></button>
-                <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-wrench"></i></a>           
+                          
                                 
                                             {{csrf_field()}}
                                             
                                             <input type="hidden" name="aid" value="{{$row->id}}">
                                 @if($row->kode_jalan=='')
+                                <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-wrench"></i></a> 
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                         <i class="fa fa-remove"></i></button>
                                         @endif
