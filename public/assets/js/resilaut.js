@@ -238,9 +238,32 @@ $(document).ready(function(){
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();}
 		});
+	//===============================================
+	function cetakresi(){
+		tempelresi();
+
+		var divToPrint=document.getElementById('hidden_div');
+		var newWin=window.open('','Print-Window');
+		newWin.document.open();
+		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
+		newWin.document.close();
+	}
+	//==========================================selesai transaksi
+		$('#btnselesai').click(function(e){
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			var foo = "bar";
+    if(foo=="bar"){
+    	var isgood = confirm('Apakah anda yakin transaksi telah selesai ?');
+    	if(isgood){
+    		bersih();
+           carikode();	
+    	}
+    }
+		});
 	//============================================ tempel variabel
 		function tempelresi(){
-			carikode();
+			// carikode();
 			$("#cetak_metode").html($("#metode").val());
 			$("#cetak_metode2").html($("#metode").val());
 			$("#cetak_metode3").html($("#metode").val());
@@ -411,9 +434,9 @@ $(document).ready(function(){
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
-                	
-                	bersih();
-                	carikode();
+                	cetakresi();
+                	// bersih();
+                	// carikode();
                 },
             }).always(
             function() {
