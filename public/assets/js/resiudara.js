@@ -124,18 +124,6 @@ $(document).ready(function(){
 	$('#kolomjumlah').on('click', '.removejumlah', function(e) {
     jumlahbarang -=1;
 	$('#jumlah').val(jumlahbarang);
-	// var nomor = $(this).data("nomer");
-	// 	var volume = Number(document.getElementById('volume'+nomor).value);
-	// 	var berataktual = Number(document.getElementById('berat'+nomor).value);
-	// 	if(volume > berataktual){
-
-	// 		totalberat -= parseFloat(volume);
-			
-	// 	}else{
-	// 		totalberat -= parseFloat(berataktual);
-			
-	// 	}
-	// $('#totalberat').val(totalberat.toFixed(1));
 	hitungberat();
     e.preventDefault();
 	$(this).parent().remove();
@@ -275,6 +263,10 @@ $(document).ready(function(){
 								$('#b_charge').html(0);
 							}
 							kotatujuan = item.tujuan;
+							$("#cetak_kota_tujuan").html(kotatujuan);
+							$("#cetak_kota_tujuan2").html(kotatujuan);
+							$("#cetak_kota_tujuan3").html(kotatujuan);
+							$("#cetak_kota_tujuan4").html(kotatujuan);
 							$('#biaya_smu').val(item.biaya_dokumen);
 							$('#b_smu').html(rupiah(item.biaya_dokumen));
 							$('#bpk').val(rupiah(item.perkg));
@@ -314,42 +306,7 @@ $(document).ready(function(){
 		}
 			return rupiah;
 		}
-	// //============================================ hitung volumetrik
-	// 	$('input[id^="d_panjang"]').keydown( function(e){
-	// 		if(e.keyCode == 9 && !e.shiftKey){
-	// 		var panjang = this.value;
-	// 		var lebar = $('input[id^="d_lebar"]').val();
-	// 		var tinggi = $('input[id^="d_tinggi"]').val();
-	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(1));
-	// 		}
-			
-	// 	})
-	// //============================================ hitung volumetrik
-	// 	$('input[id^="d_lebar"]').keydown( function(e){
-	// 		if(e.keyCode == 9 && !e.shiftKey){
-	// 		var panjang = $('input[id^="d_panjang"]').val();
-	// 		var lebar = this.value;
-	// 		var tinggi = $('input[id^="d_tinggi"]').val();
-	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(1));
-	// 		}
-			
-	// 	})
-	// //============================================ hitung volumetrik
-	// 	$('input[id^="d_tinggi"]').keydown( function(e){
-	// 		if(e.keyCode == 9 && !e.shiftKey){
-	// 		var panjang = $('input[id^="d_panjang"]').val();
-	// 		var lebar = $('input[id^="d_lebar"]').val();
-	// 		var tinggi = this.value;
-	// 		var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/6000;
-	// 		var vt = parseFloat(total);
-	// 		$('input[id^="volume"]').val(vt.toFixed(1));
-	// 		}
-			
-	// 	})
+	
 	//==============================================
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
@@ -386,20 +343,27 @@ $(document).ready(function(){
 			
 		})
 	//================================================
-	$("#btncetak").click(function(){
-		var validasi = valid();
-		if(validasi=='y'){
-			tempelresi();
+	$('#btnselesai').click(function(e){
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			var foo = "bar";
+    if(foo=="bar"){
+    	var isgood = confirm('Apakah anda yakin transaksi telah selesai ?');
+    	if(isgood){
+    		bersih();
+           carikode();	
+    	}
+    }
+		});
+	//================================================
+	function cetakresi(){
+		tempelresi();
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();
-		}else{
-			notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
-		}
-		
-	})
+	}
 	//=================================================
 	function tempelresi(){
 		var rows ='';
@@ -517,33 +481,7 @@ $(document).ready(function(){
 		$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		$('#cetak_nosmu4').html($('#nomer_smu').val());
 	}
-	//===============================================
-	function valid(){
-			var telahvalid 	= '';
-			var iduser		= $("#iduser").val();
-			var nama_barang	= $("#nama_barang").val();
-			var jumlah		= $("#jumlah").val();
-			var berat		= $("#totalberat").val();
-			var kota_asal	= $("#kota_asal").val();
-			var kota_tujuan = kotatujuan;
-			var n_pengirim 	= $("#n_pengirim").val();
-			var t_pengirim	= $("#t_pengirim").val();
-			var n_penerima	= $("#n_penerima").val();
-			var t_penerima 	= $("#t_penerima").val();
-			var biaya_kirim	= $("#biaya_kirim").val();
-			var biaya_smu 	= $("#biaya_smu").val();
-			var a_pengirim 	= $("#alamat_pengirim").val();
-			var a_penerima	= $("#alamat_penerima").val();
-			var biaya_karantina = $("#biaya_karantina").val();
-			var keterangan 	= $.trim($("#keterangan").val());
-			
-		if(iduser==''||nama_barang==''||jumlah==''||berat==0||kota_asal==''||kota_tujuan==''||n_pengirim==''||t_pengirim==''||a_pengirim==''||n_penerima==''||t_penerima==''||a_penerima==''||biaya_kirim==0||biaya_kirim==''||biaya_smu==''||biaya_karantina==''||keterangan==''){
-			telahvalid = 'n';		
-   		}else{
-   			telahvalid = 'y';
-   		}
-   		return telahvalid;
-	}
+	
 	//========================================================
 	$("#btnsimpan").click(function(e){
 			e.preventDefault();
@@ -622,8 +560,9 @@ $(document).ready(function(){
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
-                	bersih();
-                	carikode();
+                    cetakresi();
+                	// bersih();
+                	// carikode();
                 },
             }).always(
             function() {

@@ -335,8 +335,40 @@ class resipengirimanController extends Controller
     }
      public function simpanudara(Request $request)
     {
-
-       $simpan = DB::table('resi_pengiriman')
+         $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
+        if ($jumlah > 0) {
+        $simpan = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+       ->update([
+        'admin'         => $request->iduser,
+        'nama_barang'   => $request->nama_barang,
+        'pengiriman_via'=> 'udara',
+        'kota_asal'     => $request->kota_asal,
+        'kode_tujuan'   => $request->kota_tujuan,
+        'tgl'           =>  date('Y-m-d'),
+        'jumlah'        => $request->jumlah,
+        'berat'         => $request->berat,
+        'dimensi'       => $request->dimensi,
+        'ukuran_volume' => $request->ukuran_volume,
+        'nama_pengirim' => $request->n_pengirim,
+        'nama_penerima' => $request->n_penerima,
+        'telp_pengirim' => $request->t_pengirim,
+        'telp_penerima' => $request->t_penerima,
+        'biaya_kirim'   => $request->biaya_kirim,
+        'biaya_smu'     => $request->biaya_smu,
+        'biaya_karantina' => $request->biaya_karantina,
+        'total_biaya'   => $request->total_biaya,
+        'keterangan'    => $request->keterangan,
+        'satuan'        => $request->satuan,
+        'metode_bayar'  => $request->metode,
+        'biaya_ppn'     => $request->ppn,
+        'no_smu'        => $request->nosmu,
+        'biaya_charge'  =>$request->charge,
+        'alamat_pengirim'=>$request->alamat_pengirim,
+        'alamat_penerima'=>$request->alamat_penerima
+       ]);
+        }else{
+        $simpan = DB::table('resi_pengiriman')
        ->insert([
         'no_resi'       => $request->noresi,
         'admin'         => $request->iduser,
@@ -365,7 +397,7 @@ class resipengirimanController extends Controller
         'biaya_charge'  =>$request->charge,
         'alamat_pengirim'=>$request->alamat_pengirim,
         'alamat_penerima'=>$request->alamat_penerima
-       ]);
+       ]);}
         return response()->json($simpan);
     }
 
