@@ -160,11 +160,14 @@
 					
 			<hr>
 					<small class="text-muted">
-								<button class="btn btn-success" type="button" id="btncetak"> Cetak</button>
-								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
 								
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan" type="button"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
 								
-								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+								<div class="pull-right">
+									<button class="btn btn-success ladda-button" data-style="zoom-out" id="btnselesai" type="button"><span class="ladda-label"> Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div></button>
+									<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+								</div>
+								
 					</small>
 				</form>
 			</div>

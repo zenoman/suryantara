@@ -41,7 +41,7 @@ class suratjalanController extends Controller
         $jumlahresi = DB::table('resi_pengiriman')
         ->where([['kode_jalan','=',$request->kode],['biaya_suratjalan','=',0]])
         ->count();
-        if ($jumlahresi>0) {
+        if ($jumlahresi==0) {
             DB::table('surat_jalan')
             ->where('kode',$request->kode)
             ->update([

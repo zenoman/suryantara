@@ -316,16 +316,7 @@ $(document).ready(function(){
     }
     }
     window.halo=halo;
-    //============================================ cetak resi
-        
-        $("#btncetak").click(function(){
-            if($('#telpvendor').val()==''){
-                notie.alert(3, 'Maaf, Data Vendor Harus Di Isi', 2);
-            }else{
-            }
-        
-        });
-    //===========================
+//===========================
     function cetakresi(){
         if($('#cabang').val()=='Y'){
             var divToPrint=document.getElementById('hidden_divcabang');
@@ -354,6 +345,16 @@ $(document).ready(function(){
 
             return rupiah;
         }
+    //======================================================
+    $('#btnselesai').click(function(){
+         var l = Ladda.create(this);
+        $("#carivendor").val(null).trigger('change');
+        $('#alamatvendor').val('');
+        $('#telpvendor').val('');
+        carikode();
+        getdata();
+        l.stop();
+    });
     //======================================================
     $('#btnsimpan').click(function(){
         var foo='bar';
@@ -391,12 +392,7 @@ $(document).ready(function(){
                 success: function() {
                      notie.alert(1, 'Data Disimpan', 2);
                      bersihdetail();
-                      // $("#carivendor").val(null).trigger('change');
-                      // $('#alamatvendor').val('');
-                      // $('#telpvendor').val('');
-                      //$('#biaya_sj').val('');
-                    //  carikode();
-                    // getdata();
+                      
                     cetakresi();
                     $('#carivendor').focus();
                 },
