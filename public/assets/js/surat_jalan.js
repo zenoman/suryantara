@@ -322,6 +322,11 @@ $(document).ready(function(){
             if($('#telpvendor').val()==''){
                 notie.alert(3, 'Maaf, Data Vendor Harus Di Isi', 2);
             }else{
+            }
+        
+        });
+    //===========================
+    function cetakresi(){
         if($('#cabang').val()=='Y'){
             var divToPrint=document.getElementById('hidden_divcabang');
         }else{
@@ -333,10 +338,8 @@ $(document).ready(function(){
         newWin.document.open();
         newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
         newWin.document.close();  
-            }
         
-        });
-    
+    }
     //==================================================
         function rupiah(bilangan){
             var number_string = bilangan.toString(),
@@ -388,12 +391,13 @@ $(document).ready(function(){
                 success: function() {
                      notie.alert(1, 'Data Disimpan', 2);
                      bersihdetail();
-                      $("#carivendor").val(null).trigger('change');
-                      $('#alamatvendor').val('');
-                      $('#telpvendor').val('');
+                      // $("#carivendor").val(null).trigger('change');
+                      // $('#alamatvendor').val('');
+                      // $('#telpvendor').val('');
                       //$('#biaya_sj').val('');
-                     carikode();
-                    getdata();
+                    //  carikode();
+                    // getdata();
+                    cetakresi();
                     $('#carivendor').focus();
                 },
             }).always(
