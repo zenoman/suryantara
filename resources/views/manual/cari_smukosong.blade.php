@@ -75,10 +75,16 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                <i class="btn btn-sm btn-warning">{{$row->no_resi}}</i>
+                                @if($row->status=='Y')
+                                    <i class="btn btn-sm btn-success"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                @elseif($row->no_smu == null)
+                                <i class="btn btn-sm btn-primary"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
                                 <!-- <i class="btn btn-sm btn-primary"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
+                                @endif
                             </td>
                             <td> <span class="label label-danger">kosong</span></td>
                             <td>{{$row->tgl}}</td>
@@ -228,43 +234,43 @@
                                     <tr>
                                         
                                         <td class="text-right">Biaya Kirim</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_kirim,0,',','.')}}</td>
                                         
                                     </tr>
                                 @if($row->pengiriman_via=='udara')
                                     <tr>
                                         <td class="text-right">Biaya SMU</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_smu,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_smu,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Karantina</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Charge</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
                                     </tr>
                                 @else
                                     <tr>
                                         <td class="text-right">Biaya Packing</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_packing,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Asuransi</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
                                     </tr>
                                 @endif
                                     
                                     <tr>
                                         
                                         <td class="text-right">PPN</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
                                         
                                     </tr>
                                     <tr>
                                         <td><h4>Total</h4></td>
                                         <td class="text-right"><h4>
-                                            Rp. {{number_format($row->total_biaya,2,',','.')}}
+                                            Rp. {{number_format($row->total_biaya,0,',','.')}}
                                         </h4></td>
                                     </tr>
                                     
