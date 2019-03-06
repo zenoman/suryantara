@@ -20,30 +20,24 @@ $(document).ready(function(){
 				if(barangheavy > 0){
 					$('#biaya_kirim').val(0);
 					$('#b_kirim').html(0);
-					$('#b_ppn').html(0);
 					$('#b_charge').html(0);
 				}else{
 					if (kategori=='biasa'){
 						var jumlah  = perkg*newberat;
-						var ppn		= (jumlah*1)/100;
 						$('#b_charge').html(0);
 						$('#biaya_kirim').val(jumlah);
 						$('#b_kirim').html(rupiah(jumlah));
-						$('#b_ppn').html(rupiah(ppn));
 					}else{
 						var jumlah  = perkg*newberat;
-						var ppn		= (jumlah*1)/100;
 						var totalcarge = (jumlah*kategori)/100;
 						$('#b_charge').html(rupiah(totalcarge));
 						$('#biaya_kirim').val(jumlah);
 						$('#b_kirim').html(rupiah(jumlah));
-						$('#b_ppn').html(rupiah(ppn));
 						}
 					}
 					}else{
 					$('#biaya_kirim').val(0);
 					$('#b_kirim').html(0);
-					$('#b_ppn').html(0);
 					$('#b_charge').html(0);}
 					hitung_total();
 		}
@@ -231,35 +225,30 @@ $(document).ready(function(){
 								
 								$('#biaya_kirim').val(0);
 								$('#b_kirim').html(0);
-								$('#b_ppn').html(0);
 								$('#b_charge').html(0);
 							}else{
 								if (kategori=='biasa'){
 									
 									var berat = $('#totalberat').val();
 									var jumlah  = Number(item.perkg)*Number(berat);
-									var ppn		= (jumlah*1)/100;
 									$('#b_charge').html(0);
 									$('#biaya_kirim').val(jumlah);
 									$('#b_kirim').html(rupiah(jumlah));
-									$('#b_ppn').html(rupiah(ppn));
+									
 								}else{
 									
 									var berat = $('#totalberat').val();
 									var jumlah  = Number(item.perkg)*Number(berat);
-									var ppn		= (jumlah*1)/100;
 									var totalcarge = (jumlah*kategori)/100;
 									$('#b_charge').html(rupiah(totalcarge));
 									$('#biaya_kirim').val(jumlah);
 									$('#b_kirim').html(rupiah(jumlah));
-									$('#b_ppn').html(rupiah(ppn));
 								}
 								
 							}
 							}else{
 								$('#biaya_kirim').val(0);
 								$('#b_kirim').html(0);
-								$('#b_ppn').html(0);
 								$('#b_charge').html(0);
 							}
 							kotatujuan = item.tujuan;
@@ -288,9 +277,8 @@ $(document).ready(function(){
 		var biaya_kirim = parseInt($('#biaya_kirim').val());
 		var biaya_dokumen = parseInt($('#biaya_smu').val());
 		var biaya_karantina = parseInt($('#biaya_karantina').val());
-		var biaya_ppn 		= parseInt($('#b_ppn').text().replace(/\./g,''));
 		var biaya_charge = parseInt($('#b_charge').text().replace(/\./g,''));
-		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_ppn +biaya_charge;
+		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina +biaya_charge;
 		$('#total').html(rupiah(jumlah));
 	}
 	//==============================================
@@ -311,7 +299,6 @@ $(document).ready(function(){
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_kirim = $("#biaya_kirim").val();
-			var ppn = (biaya_kirim*1)/100;
 			if (kategori!='biasa') {
 			var charge = (biaya_kirim*kategori)/100;	
 			$('#b_charge').html(rupiah(charge));
@@ -319,7 +306,6 @@ $(document).ready(function(){
 			$('#b_charge').html(0);
 			}
 			$("#b_kirim").html(rupiah(biaya_kirim));
-			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
 			}
 			
@@ -401,10 +387,10 @@ $(document).ready(function(){
 			$("#cetak_jumlah_barang3").html($("#jumlah").val()+" "+satuan);
 			$("#cetak_jumlah_barang4").html($("#jumlah").val()+" "+satuan);
 		}else{
-			$("#cetak_jumlah_barang").html($("#jumlah").val());
-			$("#cetak_jumlah_barang2").html($("#jumlah").val());
-			$("#cetak_jumlah_barang3").html($("#jumlah").val());
-			$("#cetak_jumlah_barang4").html($("#jumlah").val());
+			$("#cetak_jumlah_barang").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang2").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang3").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang4").html($("#jumlah").val()+" paket");
 
 		}
 		
@@ -419,7 +405,6 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_ppn').html("Rp. "+$('#b_ppn').html());
 		$('#cetak_biaya_charge').html("Rp. "+$('#b_charge').html());
 		$('#cetak_biaya_charge2').html("Rp. "+$('#b_charge').html());
 		$('#cetak_biaya_charge3').html("Rp. "+$('#b_charge').html());
@@ -442,7 +427,6 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu2').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina2').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_ppn2').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total2").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal2").html("Kediri, "+tanggal);
 		$('#cetak_nosmu2').html($('#nomer_smu').val());
@@ -459,7 +443,6 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu3').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina3').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_ppn3').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total3").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal3").html("Kediri, "+tanggal);
 		$('#cetak_nosmu3').html($('#nomer_smu').val());
@@ -476,7 +459,6 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu4').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina4').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_ppn4').html("Rp. "+$('#b_ppn').html());
 		$("#cetak_total4").html("Rp. " +$('#total').html());
 		$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		$('#cetak_nosmu4').html($('#nomer_smu').val());
@@ -515,9 +497,9 @@ $(document).ready(function(){
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			}
 			var satuan		= $('#satuan').val();
-			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
+			var ppn 		= 0;
 			var change		= $('#b_charge').text().replace(/\./g,'');
-			var total_biaya = parseInt(change) + parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
+			var total_biaya = parseInt(change) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode").val();
 			var nosmu 		= $('#nomer_smu').val();
 			var a_pengirim 	= $("#alamat_pengirim").val();
@@ -597,7 +579,6 @@ $(document).ready(function(){
 			$("#b_kirim").html(0);
 			$("#b_smu").html(0);
 			$("#b_karantina").html(0);
-			$("#b_ppn").html(0);
 			$("#b_charge").html(0);
 			$("#total").html(0);
 			$('#satuan').val('kg');

@@ -258,7 +258,7 @@
 			<td>
 				<p>Diserahkan Oleh</p>
 				<br>
-				<p>Koordinat Cabang Asal</p>
+				<p>Koordinator Cabang Asal</p>
 			</td>
 			<td>
 				<p>Diantar Oleh</p>
@@ -268,7 +268,7 @@
 			<td>
 				<p>Diterima Oleh</p>
 				<br>
-				<p>Koordinat Cabang Tujuan</p>
+				<p>Koordinator Cabang Tujuan</p>
 			</td>
 		</tr>
 	</table>

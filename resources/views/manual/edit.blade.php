@@ -259,10 +259,7 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi_darat">0</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_darat">0</td>
-									</tr>
+									
 									<tr>
 										<td colspan="2" class="text-center">
 											<h3 id="total_darat">0</h3>
@@ -481,10 +478,7 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi_laut">0</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_laut">0</td>
-									</tr>
+									
 									<tr>
 										<td colspan="2" class="text-center">
 											<h3 id="total_laut">0</h3>
@@ -778,10 +772,7 @@
 										<td>Biaya Karantina</td>
 										<td id="b_karantina_udara">0</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_udara">0</td>
-									</tr>
+									
 									<tr>
 										<td>Charge</td>
 										<td id="b_charge_udara">0</td>

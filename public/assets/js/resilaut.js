@@ -86,19 +86,15 @@ $(document).ready(function(){
 			var berat = $("#berat").val();
 			if(berat!=''){
 			var jumlah  = harga*berat;
-			var ppn		= (jumlah*1)/100;
 			$("#biaya_kirim").val(jumlah);
 			$("#b_kirim").html(rupiah(jumlah));
-			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
 		}}
 	//============================================ hitung total
 		$("#biaya_kirim").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_kirim = $("#biaya_kirim").val();
-			var ppn 		= (biaya_kirim*1)/100;
 			$("#b_kirim").html(rupiah(biaya_kirim));
-			$("#b_ppn").html(rupiah(ppn));
 			hitung_total();		
 			}
 			
@@ -162,8 +158,7 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var b_ppn		= $("#b_ppn").text().replace(/\./g,'');
-			var totalnya = parseInt(b_ppn) + parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#total").html(rupiah(totalnya));
 		}
 	//============================================ bersih
@@ -186,7 +181,6 @@ $(document).ready(function(){
 			$("#biaya_asuransi").val(0);
 			$("#keterangan").val('');
 			$("#b_kirim").html(0);
-			$("#b_ppn").html(0);
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);
 			$("#total").html(0);
@@ -288,10 +282,10 @@ $(document).ready(function(){
 			$("#cetak_jumlah_barang3").html($("#jumlah").val()+" "+satuan);
 			$("#cetak_jumlah_barang4").html($("#jumlah").val()+" "+satuan);
 			}else{
-			$("#cetak_jumlah_barang").html($("#jumlah").val());
-			$("#cetak_jumlah_barang2").html($("#jumlah").val());
-			$("#cetak_jumlah_barang3").html($("#jumlah").val());
-			$("#cetak_jumlah_barang4").html($("#jumlah").val());
+			$("#cetak_jumlah_barang").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang2").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang3").html($("#jumlah").val()+" paket");
+			$("#cetak_jumlah_barang4").html($("#jumlah").val()+" paket");
 			}
 			$("#cetak_berat").html($("#berat").val()+" Kg");
 			$("#cetak_dimensi").html($("#d_panjang").val()+" cm x "+$("#d_lebar").val()+" cm x"+$("#d_tinggi").val()+" cm");
@@ -304,12 +298,12 @@ $(document).ready(function(){
 			$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			$("#cetak_biaya_packing").html("Rp. "+rupiah($("#biaya_packing").val()));
 			$("#cetak_biaya_asu").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			$("#cetak_biaya_ppn").html("Rp. "+$("#b_ppn").html());
+			
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
-			var b_ppn		= $("#b_ppn").text().replace(/\./g,'');
-			var totalnya = parseInt(b_ppn)+parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+			
+			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
 			$("#cetak_total").html("Rp. "+rupiah(totalnya));
 
 			var d = new Date();
@@ -329,7 +323,7 @@ $(document).ready(function(){
 			$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			$("#cetak_biaya_packing2").html("Rp. "+rupiah($("#biaya_packing").val()));
 			$("#cetak_biaya_asu2").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			$("#cetak_biaya_ppn2").html("Rp. "+$("#b_ppn").html());
+			
 			$("#cetak_total2").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal2").html("Kediri, "+tanggal);
 			//==============================================================
@@ -346,7 +340,6 @@ $(document).ready(function(){
 			// $("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			// $("#cetak_biaya_packing3").html("Rp. "+rupiah($("#biaya_packing").val()));
 			// $("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			// $("#cetak_biaya_ppn3").html("Rp. "+$("#b_ppn").html());
 			// $("#cetak_total3").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal3").html("Kediri, "+tanggal);
 			//==============================================================
@@ -363,7 +356,6 @@ $(document).ready(function(){
 			// $("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
 			// $("#cetak_biaya_packing4").html("Rp. "+rupiah($("#biaya_packing").val()));
 			// $("#cetak_biaya_asu4").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			// $("#cetak_biaya_ppn4").html("Rp. "+$("#b_ppn").html());
 			// $("#cetak_total4").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
@@ -393,8 +385,8 @@ $(document).ready(function(){
 			var biaya_asu 	= $("#biaya_asuransi").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
-			var ppn 		= $('#b_ppn').text().replace(/\./g,'');
-			var total_biaya = parseInt(ppn) + parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
+			var ppn 		= 0;
+			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var satuan		= $('#satuan').val();
 			var metode		= $("#metode").val();
 			if(a_penerima=='' || a_pengirim=='' || iduser==''|| nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){

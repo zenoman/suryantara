@@ -322,13 +322,7 @@
 										0		 
 										@endif</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_darat">@if($row->pengiriman_via=='darat'){{$row->biaya_ppn}}
-										@else
-										0		 
-										@endif</td>
-									</tr>
+									
 									<tr>
 										<td colspan="2" class="text-center">
 											<h3 id="total_darat">@if($row->pengiriman_via=='darat'){{$row->total_biaya}}
@@ -603,13 +597,7 @@
 										0 
 										@endif</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_laut">@if($row->pengiriman_via=='laut'){{$row->biaya_ppn}}
-										@else
-										0 
-										@endif</td>
-									</tr>
+									
 									<tr>
 										<td colspan="2" class="text-center">
 											<h3 id="total_laut">@if($row->pengiriman_via=='laut'){{$row->total_biaya}}
@@ -985,15 +973,7 @@
 										@endif
 										</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn_udara">
-											@if($row->pengiriman_via=='udara'){{$row->biaya_ppn}}
-										@else
-										0
-										@endif
-										</td>
-									</tr>
+									
 									<tr>
 										<td>Charge</td>
 										<td id="b_charge_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_charge}}
