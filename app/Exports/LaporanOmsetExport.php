@@ -28,7 +28,7 @@ class LaporanOmsetExport implements FromCollection,WithHeadings, ShouldAutoSize
             'jumlah pengeluaran gaji karyawan',
 			'jumlah pengeluaran lainya',
             'pajak',
-			'jumlah laba'
+			'jumlah saldo'
         ];
     }
 }

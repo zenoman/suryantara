@@ -32,7 +32,7 @@
 							<th>Pengeluaran Gaji karyawan</th>
 							<th>Pengeluaran lainya</th>
 							<th>Pajak</th>
-							<th>Laba</th>
+							<th>Saldo</th>
 						</tr>
 						</thead>
 						

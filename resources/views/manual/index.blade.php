@@ -8,12 +8,10 @@
 @endforeach
 @endsection
 
-
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
-
 
 @section('content')
 	<div class="page-content">
@@ -110,15 +108,15 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                @if($row->no_smu == null)
-                                <i class="btn btn-sm btn-warning"
+                                @if($row->status=='Y')
+                                    <i class="btn btn-sm btn-success"
+                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
+                                @elseif($row->no_smu == null)
+                                <i class="btn btn-sm btn-primary"
                         data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
                                 @else
                                 <i class="btn btn-sm btn-primary"
                         data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
-                                <!-- <i class="btn btn-sm btn-primary"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
                                 @endif
                             </td>
                             <td>
@@ -192,7 +190,13 @@
                         <div class="col-lg-6 company-info text-left">
                             
                             <h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
-                            <p>No. Resi/SMU : {{$row->no_smu}}</p>
+                            <p>No. Resi/SMU :
+                                @if($row->no_smu == null)
+                                <b>-</b>
+                                @else
+                             {{$row->no_smu}}
+                                @endif
+                            </p>
                             
 
                             <p>Pengiriman Via : {{$row->pengiriman_via}}</p>
@@ -272,43 +276,43 @@
                                     <tr>
                                         
                                         <td class="text-right">Biaya Kirim</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_kirim,0,',','.')}}</td>
                                         
                                     </tr>
                                 @if($row->pengiriman_via=='udara')
                                     <tr>
                                         <td class="text-right">Biaya SMU</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_smu,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_smu,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Karantina</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Charge</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
                                     </tr>
                                 @else
                                     <tr>
                                         <td class="text-right">Biaya Packing</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_packing,0,',','.')}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right">Biaya Asuransi</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
                                     </tr>
                                 @endif
                                     
                                     <tr>
                                         
                                         <td class="text-right">PPN</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
                                         
                                     </tr>
                                     <tr>
                                         <td><h4>Total</h4></td>
                                         <td class="text-right"><h4>
-                                            Rp. {{number_format($row->total_biaya,2,',','.')}}
+                                            Rp. {{number_format($row->total_biaya,0,',','.')}}
                                         </h4></td>
                                     </tr>
                                     

@@ -90,8 +90,12 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            	@if($row->no_smu == null)
-                            	<button class="btn btn-sm btn-warning"
+                            	@if($row->status=='Y')
+                            	<button class="btn btn-sm btn-success"
+						data-toggle="modal"
+						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            	@elseif($row->no_smu == null)
+                            	<button class="btn btn-sm btn-primary"
 						data-toggle="modal"
 						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
                             	@else
@@ -195,43 +199,43 @@
 									<tr>
 										
 										<td class="text-right">Biaya Kirim</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_kirim,0,',','.')}}</td>
 										
 									</tr>
 								@if($row->pengiriman_via=='udara')
 									<tr>
 										<td class="text-right">Biaya SMU</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_smu,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_smu,0,',','.')}}</td>
 									</tr>
 									<tr>
 										<td class="text-right">Biaya Karantina</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
 									</tr>
 									<tr>
 										<td class="text-right">Biaya Charge</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
 									</tr>
 								@else
 									<tr>
 										<td class="text-right">Biaya Packing</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_packing,0,',','.')}}</td>
 									</tr>
 									<tr>
 										<td class="text-right">Biaya Asuransi</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
 									</tr>
 								@endif
 									
 									<tr>
 										
 										<td class="text-right">PPN</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
 										
 									</tr>
 									<tr>
 										<td><h4>Total</h4></td>
 										<td class="text-right"><h4>
-											Rp. {{number_format($row->total_biaya,2,',','.')}}
+											Rp. {{number_format($row->total_biaya,0,',','.')}}
 										</h4></td>
 									</tr>
 									
@@ -292,7 +296,17 @@
 					</div>
 				</div><!--.modal-->
                             </td>
-                            <td>{{$row->no_smu}}</td>
+                            <td>
+                            @if($row->no_smu=='')
+                                @if($row->total_biaya != 0)
+                                <span class="label label-danger">
+                                kosong
+                                </span>
+                                @endif
+                                @else
+                                {{$row->no_smu}}
+                                @endif
+                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -303,14 +317,14 @@
                             <td class="text-center">
                             @if($row->pengiriman_via=='udara')
                             	@if($row->no_smu=='')
-                            	<span class="label label-danger">Menunggu</span>
+                            	<span class="label label-warning">Menunggu</span>
                             	@else
                             	@if($row->status=='Y')
 		                            <span class="label label-success">
 										Sukses
 									</span>
 	                            @else
-									<span class="label label-danger">Menunggu</span>
+									<span class="label label-warning">Menunggu</span>
 	                        	@endif
                             	@endif
                             	
@@ -320,7 +334,7 @@
 										Sukses
 									</span>
 	                            @else
-									<span class="label label-danger">Menunggu</span>
+									<span class="label label-warning">Menunggu</span>
 	                        	@endif
                             @endif
 	                            

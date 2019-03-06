@@ -39,7 +39,7 @@
 							<th>Pengeluaran Gaji karyawan</th>
 							<th>Pengeluaran lainya</th>
 							<th>Pajak</th>
-							<th>Laba</th>
+							<th>Saldo</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -51,7 +51,7 @@
 							<th>Pengeluaran Gaji karyawan</th>
 							<th>Pengeluaran lainya</th>
 							<th>Pajak</th>
-							<th>Laba</th>
+							<th>Saldo</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -75,7 +75,7 @@
 					<div class="text-right">
 <a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
 							&nbsp;&nbsp;
-								<a href="{{url('/printimset')}}" target="_blank()" class="btn btn-primary">
+								<a href="{{url('/printomset')}}" target="_blank()" class="btn btn-primary">
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>	
