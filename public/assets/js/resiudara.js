@@ -278,7 +278,7 @@ $(document).ready(function(){
 		var biaya_dokumen = parseInt($('#biaya_smu').val());
 		var biaya_karantina = parseInt($('#biaya_karantina').val());
 		var biaya_charge = parseInt($('#b_charge').text().replace(/\./g,''));
-		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina +biaya_charge;
+		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_charge;
 		$('#total').html(rupiah(jumlah));
 	}
 	//==============================================
