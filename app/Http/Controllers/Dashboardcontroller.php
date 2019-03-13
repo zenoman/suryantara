@@ -51,7 +51,7 @@ class Dashboardcontroller extends Controller
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"ny");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"ny");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
-                $pajak = $pemasukan*1/100;
+                $pajak = $pemasukan * 0.5/100;
                 $totalpajak = $this->cari_pajaktahunan(date('Y'));
                 $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan - $pajak;
                 
@@ -87,7 +87,7 @@ class Dashboardcontroller extends Controller
                 $pengeluaran_lain = $this->cari_pengeluaranlain($bulan,date('Y'),"y");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"y");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
-                $pajak = $pemasukan*1/100;
+                $pajak = $pemasukan * 0.5/100;
                 $laba = $pemasukan - $pengeluaran - $pengeluaran_lain - $gajikaryawan - $pajak;
                 $insert = DB::table('omset')
                 ->insert([

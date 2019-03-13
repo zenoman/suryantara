@@ -199,10 +199,7 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi">0</td>
 									</tr>
-									<tr>
-										<td>PPN</td>
-										<td id="b_ppn">0</td>
-									</tr>
+									
 									<tr>
 										<td colspan="2" class="text-center">
 											<h3 id="total">0</h3>
@@ -245,16 +242,16 @@
 		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO1.png')}}" alt="" width="30%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
 				</td>
-				<td style="width: 30%">
-				<p align="center" style="font-size: 10;">
-					Jln. Raya Dadapan - sumberejo <br>
-					Kab. Kediri <br>
-					0354-4545192	
+				<td style="width: 50%">
+				<p style="font-size:10;" align="center">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
 				</p>
 				</td>
-				<td style="width: 30%;font-size: 9;">
+				<td style="width: 25%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi"></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
@@ -372,11 +369,7 @@
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu"></td>
 						</tr>
-						<tr>
-							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
-							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn"></td>
-						</tr>
+						
 						<tr>
 							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
@@ -460,16 +453,16 @@
 		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO1.png')}}" alt="" width="30%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
 				</td>
-				<td style="width: 30%">
-				<p align="center" style="font-size: 10;">
-					Jln. Raya Dadapan - sumberejo <br>
-					Kab. Kediri <br>
-					0354-4545192	
+				<td style="width: 50%" align="center">
+				<p style="font-size:10;">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
 				</p>
 				</td>
-				<td style="width: 30%;font-size: 9;">
+				<td style="width: 25%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi2"></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
@@ -587,11 +580,7 @@
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_asu2"></td>
 						</tr>
-						<tr>
-							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
-							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;" id="cetak_biaya_ppn2"></td>
-						</tr>
+						
 						<tr>
 							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
@@ -677,16 +666,16 @@
 		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO1.png')}}" alt="" width="30%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
 				</td>
-				<td style="width: 30%">
-				<p align="center" style="font-size: 10;">
-					Jln. Raya Dadapan - sumberejo <br>
-					Kab. Kediri <br>
-					0354-4545192	
+				<td style="width: 50%">
+				<p style="font-size:10;">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
 				</p>
 				</td>
-				<td style="width: 30%;font-size: 9;">
+				<td style="width: 25%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi3"></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
@@ -802,11 +791,7 @@
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
-						<tr>
-							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
-							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
-						</tr>
+						
 						<tr>
 							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
@@ -890,16 +875,16 @@
 		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
-					<img src="{{asset('img/LOGO1.png')}}" alt="" width="30%">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
 				</td>
-				<td style="width: 30%">
-				<p align="center" style="font-size: 10;">
-					Jln. Raya Dadapan - sumberejo <br>
-					Kab. Kediri <br>
-					0354-4545192	
+				<td style="width: 50%" align="center">
+				<p style="font-size:10;">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
 				</p>
 				</td>
-				<td style="width: 30%;font-size: 9;">
+				<td style="width: 25%;font-size: 9;">
 								<p style="margin-left: 35% " align="right" id="cetak_resi4"></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
@@ -1015,11 +1000,7 @@
 							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
 							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
 						</tr>
-						<tr>
-							<td style="width: 25%;font-size: 10;padding-top: 0;padding-bottom: 0;">PPN</td>
-							<td style="padding-top: 0;padding-bottom: 0;">&nbsp;:&nbsp;</td>
-							<td align="right" style="font-size: 10;padding-top: 0;padding-bottom: 0;">-</td>
-						</tr>
+						
 						<tr>
 							<td style="width: 25%;font-size: 10;"><b>Total</b></td>
 							<td>&nbsp;:&nbsp;</td>
