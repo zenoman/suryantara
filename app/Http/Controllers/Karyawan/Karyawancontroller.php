@@ -73,26 +73,15 @@ class Karyawancontroller extends Controller
 
     public function create()
     {
-        $table="karyawan";
-        $tut="kode";
-        $q=DB::table($table)->max($tut);
-        if(!$q){
-            $finalkode = "Karyawan-000001";
-        }else{
-            $newkode    = explode("-", $q);
-            $nomer      = sprintf("%06s",$newkode [1]+1);
-            $finalkode  = "Karyawan-".$nomer;
-        }
-// dd($finalkode);
         $setting = DB::table('setting')->get();
         $jabat = DB::table('jabatan')->get();
-        return view('karyawan/create',['title'=>$setting,'kode'=>$finalkode,'jabatan'=>$jabat]);
+        return view('karyawan/create',['title'=>$setting,'jabatan'=>$jabat]);
     }
 
     public function store(Request $request)
     {
         $rules = [
-                    // 'kode'  =>'required',
+                    'kode'  =>'required',
                     'nama'  => 'required',
                     'jabatan'=>'required',
                     'telp'  => 'required|numeric',
@@ -106,26 +95,9 @@ class Karyawancontroller extends Controller
         'email'     => 'Maaf, data harus email'
     ];
         $this->validate($request,$rules,$customMessages);
-        //
-                $table="karyawan";
-        $tut="kode";
-        $q=DB::table($table)->max($tut);
-        if(!$q){
-            $finalkode = "Karyawan-000001";
-        }else{
-            $newkode    = explode("-", $q);
-            $nomer      = sprintf("%06s",$newkode [1]+1);
-            $finalkode  = "Karyawan-".$nomer;
-        }
-        //
-                    $kode=$request->kode;
-                    // dd($kode);
-$dtlam= DB::table('karyawan')->where('kode',$kode)->count();
-if($dtlam > 0){
-    return redirect('karyawan/create')->with('status','Kode Karyawan Yang anda masukan sudah ada!!');
-}else{
+
         Karyawanmodel::create([
-            'kode'  => $finalkode,
+            'kode'  => $request->kode,
             'nama'  => $request->nama,
             'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
@@ -134,7 +106,6 @@ if($dtlam > 0){
         ]);
         
         return redirect('karyawan')->with('status','Input Data Sukses');
-}
     }
 
     /**
@@ -192,8 +163,8 @@ if($dtlam > 0){
 
          ];
         $this->validate($request,$rules,$customMessages);
-        $kode =$request->kodess;
         Karyawanmodel::find($id)->update([
+            'kode' => $request->kodess,
             'nama'  => $request->nama,
             'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
@@ -201,7 +172,7 @@ if($dtlam > 0){
             ]);
         // dd($kode);
         DB::table('gaji_karyawan')
-            ->where('kode_karyawan',$kode)
+            ->where('id',$id)
             ->update([
                 'nama_karyawan'  => $request->nama
             ]);

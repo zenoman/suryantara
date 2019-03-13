@@ -39,10 +39,16 @@
 				<form action="{{ url('karyawan') }}" role="form" method="POST">
 					
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Kode Karyawan</label>
+						<label class="col-sm-2 form-control-label semibold">Id Karyawan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<input type="text" class="form-control" disabled placeholder="Masukkan Kode Karyawan" name="kode" value="{{$kode}}">
+								<input type="text" class="form-control" placeholder="Masukkan Kode Karyawan" name="kode" required>
+								<p>
+									@if($errors->has('kode'))
+                            	<div class="alert alert-danger">
+                            		{{ $errors->first('kode')}}
+                            	</div>
+                           @endif
 						</div>
 					</div>
 					<div class="form-group row">

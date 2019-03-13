@@ -70,7 +70,7 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Kode karyawan</th>
+							<th>Id karyawan</th>
 							<th>Nama</th>
 							<th>Jabatan</th>
 							<th>Telp</th>
@@ -81,7 +81,7 @@
 						<tfoot>
 						<tr>
 							<th>No</th>
-							<th>kode karyawan</th>
+							<th>Id karyawan</th>
 							<th>Nama</th>
 							<th>Jabatan</th>
 							<th>Telp</th>

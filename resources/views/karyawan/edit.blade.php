@@ -35,10 +35,10 @@
 
 				
 	<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Kode Karyawan</label>
+						<label class="col-sm-2 form-control-label semibold">Id Karyawan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" disabled id="inputPassword" placeholder="Text"  value="{{$ro->kode}}">
-								<input type="hidden" class="form-control" name ="kodess" id="inputPassword" placeholder="Text"  value="{{$ro->kode}}">
+							<p class="form-control-static">
+								<input type="text" class="form-control" name ="kodess" id="inputPassword" placeholder="Id karyawan"  value="{{$ro->kode}}">
 						</div>
 	</div>
 					<div class="form-group row">
