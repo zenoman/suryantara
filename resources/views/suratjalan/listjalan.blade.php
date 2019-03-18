@@ -113,9 +113,9 @@
                             	{{$newtujuan[0]}}
                             </td>
                             <td>{{$row->tgl}}</td>
-                            <td>@if($row->status=='Y')
-                            	
-								<span class="label label-danger">
+                            <td>
+                            	@if($row->status=='Y')
+                            	<span class="label label-danger">
 								Belum Lunas
 								</span>
                             	@else

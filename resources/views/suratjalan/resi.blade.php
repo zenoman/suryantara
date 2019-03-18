@@ -114,6 +114,9 @@
                             <td>{{$row->kode_jalan}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>
+                            	@if($row->cabang=='Y')
+                            	Rp. {{number_format($row->biaya_suratjalan,0,',','.')}}
+                            	@else
                             	@if($row->biaya_suratjalan>0)
                             	Rp. {{number_format($row->biaya_suratjalan,0,',','.')}}
                             	@else
@@ -121,8 +124,181 @@
 								Belum Lunas
 								</span>
                             	@endif
+                            	@endif
                             </td>
                            <td>
+                           	@if($row->cabang=='Y')
+                           	<button class="btn btn-sm btn-primary"
+						data-toggle="modal"
+						data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-eye"></i></button>
+
+                            <div class="modal fade bd-example-modal-lg{{$row->id}}"
+					 tabindex="-1"
+					 role="dialog"
+					 aria-labelledby="myLargeModalLabel"
+					 aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+									<i class="font-icon-close-2"></i>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Detail Resi</h4>
+							</div>
+							<div class="modal-body">
+				
+				<div class="card-block invoice">
+					<div class="row">
+						<div class="col-lg-6 company-info text-left">
+							
+							@if($row->pengiriman_via=='udara')
+							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
+							<p>No. SMU : {{$row->no_smu}}</p>
+							@else
+							<h5>Isi paket : {{$row->nama_barang}}</h5>
+							@endif
+
+							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
+
+							<div class="invoice-block">
+								<div>Pengirim : {{$row->nama_pengirim}}</div>
+								<div>No.Telpon : {{$row->telp_pengirim}}</div>
+								<div>Alamat : {{$row->alamat_pengirim}}</div>
+							</div>
+							<br>
+							<div class="invoice-block">
+								<div>Penerima : {{$row->nama_penerima}}</div>
+								<div>No.Telpon : {{$row->telp_penerima}}</div>
+								<div>Alamat : {{$row->alamat_penerima}}</div>
+							</div>
+							<br>
+							<div class="invoice-block">
+							<div>Tanggal : {{$row->tgl}}</div>
+								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
+								<div>Metode Bayar : {{$row->metode_bayar}}</div>
+							</div>
+							<br>
+							<!-- <div class="invoice-block">
+								<h5>Invoice To:</h5>
+								<div>Rebeca Manes</div>
+								<div>
+									Normand axis LTD <br>
+									3 Goodman street
+								</div>
+							</div> -->
+						</div>
+						<div class="col-lg-6 clearfix invoice-info">
+							<div class="text-lg-right">
+								<h5>{{$row->no_resi}}</h5>
+								
+								<table class="pull-right table-sm">
+									<tr>
+										<td>Operator</td>
+										<td>{{$row->admin}}</td>
+									</tr>
+									<tr>
+										<td>Berat Aktual</td>
+										<td>{{$row->berat}} Kg</td>
+									</tr>
+									<tr>
+										<td>Berat Volumetrik</td>
+										<td>{{$row->ukuran_volume}} Kg</td>
+									</tr>
+									<tr>
+										<td>Dimensi</td>
+										<td>{{$row->dimensi}}</td>
+									</tr>
+									<tr>
+										<td>Jumlah</td>
+										<td>{{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								<br>
+								
+							</div>
+							
+						</div>
+					</div>
+					<div class="row table-details">
+						<div class="col-lg-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Detail Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										
+										<td class="text-right">Biaya Kirim</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_kirim,2,',','.')}}</td>
+										
+									</tr>
+								@if($row->pengiriman_via=='udara')
+									<tr>
+										<td class="text-right">Biaya SMU</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_smu,2,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Karantina</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_karantina,2,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Charge</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,2,',','.')}}</td>
+									</tr>
+								@else
+									<tr>
+										<td class="text-right">Biaya Packing</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_packing,2,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Asuransi</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_asuransi,2,',','.')}}</td>
+									</tr>
+								@endif
+									
+									<tr>
+										
+										<td class="text-right">PPN</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_ppn,2,',','.')}}</td>
+										
+									</tr>
+									<tr>
+										<td><h4>Total</h4></td>
+										<td class="text-right"><h4>
+											Rp. {{number_format($row->total_biaya,2,',','.')}}
+										</h4></td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<br>
+						<div class="col-lg-12 terms-and-conditions">
+							<strong>Status : 
+							 @if($row->status=='N')
+								Menunggu Pengembalian Resi / Uang
+                            @else
+								Pengiriman Sukses
+                        	@endif
+							</strong>
+							
+						</div>
+						
+					</div>
+				</div>
+							</div>
+							<div class="modal-footer">
+							
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div> 
+				@else
                            	@if($row->biaya_suratjalan>0)
                            	<button class="btn btn-sm btn-primary"
 						data-toggle="modal"
@@ -355,6 +531,7 @@
                                     </div>
                                 </div>
                             </div>
+                           	@endif
                            	@endif
                            </td>
 						</tr>

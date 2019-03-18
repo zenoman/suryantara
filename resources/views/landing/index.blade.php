@@ -76,29 +76,26 @@
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-md-6 col-lg-4">
-            <a class="d-block mx-auto">
+            <a class="d-block mx-auto" href="{{url('landdarat')}}">
               <div class="my-auto w-100 text-center">
               <img class="img-fluid" src="asset_user/img/darat.png" alt="">
               </div>
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landdarat')}}">
+              
               <h3 class="text-secondary text-center">Tarif Darat</h3>
-              </a>
+              
             </a>
           </div>
-          <div class="col-md-6 col-lg-4">
-            <a>
+          <div class="col-md-6 col-lg-4" >
+            <a class="d-block mx-auto" href="{{url('landlaut')}}">
               <img class="img-fluid" src="asset_user/img/laut.png" alt="">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landlaut')}}">
               <h3 class="text-secondary text-center">Tarif Laut</h3>
-              </a>
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
-            <a>
+             <a class="d-block mx-auto" href="{{url('landudara')}}">
               <img class="img-fluid" src="asset_user/img/udara.png" alt="">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('landudara')}}">
+              
               <h3 class="text-secondary text-center ">Tarif Udara</h3>
-              </a>
             </a>
           </div>                  
        </div>
