@@ -36,6 +36,7 @@
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
+							<th>Status</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -52,6 +53,13 @@
                             	@if($vendor=='semua')
 								 <td align="center">{{$row->tujuan}}</td>
                             	@endif
+                            <td>
+                            	@if($row->status!='Y')
+                            	Belum Lunas
+                            	@else
+                            	Lunas
+                            	@endif
+                            </td>
                             <td align="center">{{$row->admin}}</td>
                            
 							<td align="center">{{"Rp ".number_format($row->biaya,0,',','.')}}</td>

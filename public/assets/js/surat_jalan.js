@@ -362,7 +362,7 @@ $(document).ready(function(){
      var isgood = confirm('Apakah Anda Yakin Data Sudah Benar ?');
      if(isgood == true){
         if($('#telpvendor').val()==''){
-                notie.alert(3, 'Maaf, Data Vendor Dan Biaya Harus Di Isi', 2);
+                notie.alert(3, 'Maaf, Data Vendor Di Isi', 2);
             }else{
                 var noresi = $("#noresi").html();
                 var dats = $('#carivendor').select2('data');
@@ -373,7 +373,7 @@ $(document).ready(function(){
                 var totalkoli = $('#totaljumlah').html();
                 var totalcash = $('#totalcash').val();
                 var totalbt    =$('#totalbt').val();
-
+                var cabang = $('#cabang').val();
                 var l = Ladda.create(this);
                 l.start();
                 $.ajax({
@@ -387,7 +387,8 @@ $(document).ready(function(){
                         'totalkg' : totalkg,
                         'totalkoli' : totalkoli,
                         'totalcash' : totalcash,
-                        'totalbt'   : totalbt
+                        'totalbt'   : totalbt,
+                        'cabang'    : cabang
                 },
                 success: function() {
                      notie.alert(1, 'Data Disimpan', 2);

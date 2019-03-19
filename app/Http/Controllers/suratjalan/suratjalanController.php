@@ -10,9 +10,11 @@ class suratjalanController extends Controller
 {
     public function resisuratjalan(){
         $data = DB::table('resi_pengiriman')
-        ->where('kode_jalan','!=',null)
+        ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.kode_jalan','!=',null)
+        ->orderby('resi_pengiriman.id','desc')
         ->paginate(30);
-
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/resi',['data'=>$data,'webinfo'=>$webinfo]);
     }
@@ -166,6 +168,11 @@ class suratjalanController extends Controller
     }
 
     public function store(Request $request){
+        if ($request->cabang=='Y') {
+            $status='P';
+        }else{
+            $status='Y';
+        }
         $jumlahdata = DB::table('surat_jalan')
         ->where('kode',$request->noresi)->count();
         if($jumlahdata>0){
@@ -178,7 +185,8 @@ class suratjalanController extends Controller
                 'totalkoli' => $request->totalkoli,
                 'totalcash' => $request->totalcash,
                 'totalbt'   => $request->totalbt,
-                'status' =>'Y',
+                'cabang'    => $request->cabang,
+                'status' =>$status,
                 'tgl'=>date('Y-m-d'),
                 'admin'=> session::get('username')
             ]);
@@ -192,7 +200,8 @@ class suratjalanController extends Controller
                 'totalkoli' => $request->totalkoli,
                 'totalcash' => $request->totalcash,
                 'totalbt'   => $request->totalbt,
-                'status' =>'Y',
+                'cabang'    => $request->cabang,
+                'status' =>$status,
                 'tgl'=>date('Y-m-d'),
                 'admin'=> session::get('username')
             ]);
@@ -220,10 +229,12 @@ class suratjalanController extends Controller
     public function cariresidata(Request $request){
         $cari = $request->cari;
             $listdata = DB::table('resi_pengiriman')
-            ->where('no_resi','like','%'.$cari.'%')
-            ->orwhere('no_smu','like','%'.$cari.'%')
-            ->orwhere('kode_jalan','like','%'.$cari.'%')
-            ->orwhere('tgl','like','%'.$cari.'%')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.no_resi','like','%'.$cari.'%')
+            ->orwhere('resi_pengiriman.no_smu','like','%'.$cari.'%')
+            ->orwhere('resi_pengiriman.kode_jalan','like','%'.$cari.'%')
+            ->orwhere('resi_pengiriman.tgl','like','%'.$cari.'%')
             ->get();
          
         $webinfo = DB::table('setting')->limit(1)->get();
