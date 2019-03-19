@@ -19,11 +19,11 @@ class ManualImport implements ToCollection, WithHeadingRow{
         $dtlam = DB::table('resi_pengiriman')
         ->where('no_resi',$kode)->count();
         
-        if($dtlam == 0){
+        if($dtlam == 0){ 
     	 DB::table('resi_pengiriman')
          ->insert([
             'no_resi'=>$row['no_resi'],
-            'pemegang'=>$row['id_karyawan'],
+            'pemegang'=>$row['id'],
             'metode_input'=>'manual'
             ]);
         }

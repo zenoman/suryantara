@@ -17,7 +17,7 @@ class Trfudaracontroller extends Controller
     public function index()
     {
         //
-        $udara = Trfudaramodel::paginate(20r);
+        $udara = Trfudaramodel::paginate(20);
     $setting = DB::table('setting')->get();
         return view('trfudara/index',['trf_udara'=>$udara,'title'=>$setting]);
     }

@@ -1,4 +1,4 @@
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 
 
 @section('header')
@@ -10,6 +10,10 @@
 
 @section('css')
 <link href="{{asset('assets/css/lib/charts-c3js/c3.min.css')}}" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="{{asset('assets/css/lib/lobipanel/lobipanel.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/lobipanel.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/lib/jqueryui/jquery-ui.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/pages/widgets.min.css')}}">
 @endsection
 
