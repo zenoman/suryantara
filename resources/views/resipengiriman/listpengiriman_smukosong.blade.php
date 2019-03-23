@@ -1,4 +1,4 @@
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 @section('header')
 @foreach($webinfo as $info)
 <title>{{$info->namaweb}}</title>

@@ -1,4 +1,4 @@
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 
 
 @section('header')

@@ -1,4 +1,4 @@
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/elements/steps.min.css')}}">
 @endsection

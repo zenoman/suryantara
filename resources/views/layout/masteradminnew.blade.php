@@ -49,7 +49,6 @@
 	        <div class="site-header-content">
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
-	                    	
 	                    <div class="dropdown user-menu">
 	                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
@@ -61,7 +60,33 @@
 	                        </div>
 	                    </div>
 	                </div><!--.site-header-shown-->
-	
+	                	<div class="dropdown">
+	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <i class="glyphicon glyphicon-list-alt"></i>
+	                            </button>
+	                            <div class="dropdown-menu" aria-labelledby="dd-header-add">
+	                                <a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Laporan Pemasukan </a>
+	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Laporan Pengeluaran</span>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
+				<a class="dropdown-item" href="{{url('/pajak')}}">Pajak</a>
+			</div>
+
+	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>
+	                            </div>
+	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
+	                                <i class="glyphicon glyphicon-cloud-download"></i>
+	                            </button></a>
+	                            <a href="{{url('setting')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-expanded="false">
+	                                <i class="font-icon font-icon-cogwheel"></i>
+	                            </button></a>
+	                            @endif
+	                        </div>
+
+
 	            </div><!--site-header-content-in-->
 	        </div><!--.site-header-content-->
 	    </div><!--.container-fluid-->
@@ -126,6 +151,7 @@
 		<li class="nav-item">
 			<a class="nav-link" href="{{url('pengeluaranlain')}}">Pengeluaran Lainya</a>
 		</li>
+		<!--
  		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Laporan</a>
 			<div class="dropdown-menu">
@@ -140,7 +166,6 @@
 			<a class="dropdown-item" href="{{url('/omset')}}">Omset</a>
 			</div>
 		</li>
-		<!--
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 		<li class="nav-item">
 			<a class="nav-link" href="{{url('backup')}}">Backup</a>
@@ -261,8 +286,7 @@
 		});
 	</script>
 		@yield('js')
-
-
-<script src="{{asset('assets/js/app.js')}}"></script>
+	<script src="{{asset('assets/js/app.js')}}"></script>
+		@yield('otherjs')
 </body>
 </html>

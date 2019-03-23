@@ -1,5 +1,5 @@
 
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 
 @section('css')
 	<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">

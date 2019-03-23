@@ -1,4 +1,4 @@
-@extends('layout.masteradmin')
+@extends('layout.masteradminnew')
 @section('css')
 <meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
