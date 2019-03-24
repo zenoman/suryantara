@@ -125,7 +125,29 @@ class Manualcontroller extends Controller
     public function destroy(Request $request)
     {
         $id = $request->aid;
-        Manualmodel::destroy($id);
+        $data = Manualmodel::find($id);
+        $kodejalan = $data->kode_jalan;
+        if($data->kode_jalan!=''){
+            $datasj = DB::table('surat_jalan')->where('kode',$data->kode_jalan)->get();
+            foreach($datasj as $row){
+                $biaya = $row->biaya - $data->biaya_suratjalan;
+                DB::table('surat_jalan')
+                ->where('kode',$data->kode_jalan)
+                ->update([
+                    'biaya'=>$biaya
+                ]);
+                }
+        }
+        $hapusresi=Manualmodel::destroy($id);
+
+        $hitungsj = 
+        DB::table('resi_pengiriman')
+        ->where('kode_jalan',$kodejalan)
+        ->count();
+        if($hitungsj == 0 ){
+            DB::table('surat_jalan')->where('kode',$kodejalan)->delete();
+        }
+        
         return back()->with('status','Hapus Data Sukses');
     }
     public function haphapus(Request $request)
