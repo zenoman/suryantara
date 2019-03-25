@@ -101,7 +101,8 @@ Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','lapo
 Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
 //===========================================
-
+Route::post('/login/bukakunci','Login\Logincontroller@bukakunci');
+Route::get('/lockscreen','Login\Logincontroller@lockscreen');
 Route::get('/login','Login\Logincontroller@index');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/','landing\landingcontroller@index');
