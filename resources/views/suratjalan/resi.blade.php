@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Resi Surat Jalan</h2>
+							<h2>List Resi Manifes</h2>
 						</div>
 					</div>
 				</div>

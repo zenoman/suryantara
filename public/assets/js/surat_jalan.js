@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	var noresisj ;
+	var noresisj;
+    var jumlahbarang=0;
 		carikode();
         $("#carivendor").focus();
 //=============================================cari resi
@@ -220,7 +221,7 @@ $(document).ready(function(){
                     }
                 rows3 = rows3 + '<td>-</td>';
                 rows3 = rows3 + '</tr>';
-
+                jumlahbarang+=1;
             });
             $("#tubuh").html(rows);
             $("#list_cetak").html(rows2);
@@ -235,6 +236,7 @@ $(document).ready(function(){
             $('#totalbt').val(totalbt);
             $('#cetak_totalcashnya').html("Rp. "+rupiah(totalcash));
             $('#cetak_totalbtnya').html("Rp. "+rupiah(totalbt));
+
         }
     //============================================================
     $("#btntambah").click(function(e){
@@ -347,22 +349,21 @@ $(document).ready(function(){
         }
     //======================================================
     $('#btnselesai').click(function(){
-         var l = Ladda.create(this);
         $("#carivendor").val(null).trigger('change');
         $('#alamatvendor').val('');
         $('#telpvendor').val('');
+        jumlahbarang=0;
         carikode();
         getdata();
-        l.stop();
     });
     //======================================================
     $('#btnsimpan').click(function(){
-        var foo='bar';
+    var foo='bar';
     if(foo=='bar'){
      var isgood = confirm('Apakah Anda Yakin Data Sudah Benar ?');
      if(isgood == true){
-        if($('#telpvendor').val()==''){
-                notie.alert(3, 'Maaf, Data Vendor Di Isi', 2);
+        if($('#telpvendor').val()=='' || jumlahbarang==0){
+                notie.alert(3, 'Maaf, Data Harus Lengkap', 2);
             }else{
                 var noresi = $("#noresi").html();
                 var dats = $('#carivendor').select2('data');
