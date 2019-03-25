@@ -43,7 +43,7 @@
 
 		function resetTimer(){
 			clearTimeout(t);
-			t = setTimeout(logout,120000);
+			t = setTimeout(logout,180000);
 			}
 
 		}
@@ -147,10 +147,10 @@
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Surat Jalan</a>
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifes</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Suarat Jalan</a>
-				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Surat Jalan</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifes</a>
+				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifes</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown">
@@ -171,7 +171,7 @@
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" href="{{url('pengeluaranlain')}}">Pengeluaran Lainya</a>
+			<a class="nav-link" href="{{url('pengeluaranlain')}}">Pembukuan</a>
 		</li>
 		<!--
  		<li class="nav-item dropdown">

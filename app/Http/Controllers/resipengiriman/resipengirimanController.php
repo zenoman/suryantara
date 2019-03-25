@@ -7,6 +7,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
+    public function batalpengiriman($id){
+        $dataresi = DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($dataresi as $row) {
+            $biaya = $row->total_biaya*30/100;
+            $biayalama = $row->total_biaya;
+        }
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'total_biaya'=>$biaya,
+            'biaya_cancel'=>$biayalama,
+            'batal'=>'Y'
+        ]);
+        return back()->with('status','resi berhasil dibatalkan');
+    }
+    //==================================================================
     public function editdataresi($id){
         $data = DB::table('resi_pengiriman')
         ->where('id',$id)
@@ -15,6 +31,7 @@ class resipengirimanController extends Controller
         $setting = DB::table('setting')->limit(1)->get();
         return view('resipengiriman/edit',['data'=>$data,'title'=>$setting,'kategori'=>$kategori]);
     }
+    //====================================================================
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
@@ -28,6 +45,7 @@ class resipengirimanController extends Controller
         
         return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+    //================================================================
     public function caridataresi_smukosong(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
@@ -41,6 +59,7 @@ class resipengirimanController extends Controller
         
         return view('resipengiriman/cari_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+    //===================================================================
     public function tambahnosmu(Request $request){
         DB::table('resi_pengiriman')
         ->where('id',$request->kode)
@@ -49,11 +68,13 @@ class resipengirimanController extends Controller
         ]);
         return back()->with('status','No SMU Di Simpan');
     }
+    //===================================================================
     public function resiudara(){
     $webinfo = DB::table('setting')->limit(1)->get();
     $kategori = DB::table('kategori_barang')->get();
     return view('resipengiriman/resiudara',['webinfo'=>$webinfo,'kategori'=>$kategori]);
     }
+    //====================================================================
     public function uangkembali($id){
          $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
@@ -72,6 +93,7 @@ class resipengirimanController extends Controller
         ]);
         return back()->with('status','Status Berhasil Diubah');
     }
+    //====================================================================
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
@@ -92,12 +114,13 @@ class resipengirimanController extends Controller
         ]);
         return back()->with('status','Status Berhasil Diubah');
     }
+    //===================================================================
     public function carilistresi($id){
         $data = DB::table('resi_pengiriman')
         ->where('id',$id);
         return response()->json($data);
     }
-
+    //==================================================================
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -115,11 +138,11 @@ class resipengirimanController extends Controller
         }
         return response()->json($finalkode);
     }
-
+    //===================================================================
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where('metode_input','otomatis')
+        ->where([['metode_input','otomatis'],['batal','N']])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);

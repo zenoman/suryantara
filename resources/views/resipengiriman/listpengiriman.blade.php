@@ -333,39 +333,26 @@
                             </td>
                             <td class="text-center">
                             @if(Session::get('level')!='admin')
-                            @if($row->kode_jalan=='')
-                            	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
-                                </form>
-                                @else
-                                <form action="{{ url('/Manual/delete')}}" method="post">
-                            	{{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
-                                </form>
-                                @endif
-                            @else
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
                             	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
+                            	
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                 <i class="fa fa-remove"></i></button>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 </form>
                                 @else
                                 -
                                 @endif
-                               @endif
+                            @else
+                            -
+                            @endif
                             </td>
 						</tr>
 						@endforeach
