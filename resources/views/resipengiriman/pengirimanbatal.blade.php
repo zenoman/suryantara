@@ -212,7 +212,20 @@
 						</div>
 						
 					</div>
-						
+						<br>	
+							<div class="row text-left">
+								<form action="tambahsmu" method="post">
+									<label>Ubah No.Resi/SMU</label>
+									<div class="input-group input-group-sm">
+										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
+										<input type="hidden" name="kode" value="{{$row->id}}">
+										{{csrf_field()}}
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="submit">Simpan</button>
+										</span>
+									</div>
+								</form>
+							</div>	
 						</div>
 							</div>
 							<div class="modal-footer">

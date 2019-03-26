@@ -78,7 +78,7 @@
 							<th>Resi/SMU</th>
 							<th>No. Surat Jalan</th>
 							<th>Tanggal</th>
-							<th>Status</th>
+							<th>Status / Biaya</th>
 							<th class="no-sort">#</th>
 							
 						</tr>
@@ -90,7 +90,7 @@
 							<th>Resi/SMU</th>
 							<th>No. Surat Jalan</th>
 							<th>Tanggal</th>
-							<th>Status</th>
+							<th>Status / Biaya</th>
 							<th class="no-sort">#</th>
 							</tr>
 							
@@ -101,7 +101,15 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->no_resi}}</td>
+                            <td>
+                            	@if($row->batal=='N')
+                            	{{$row->no_resi}}
+                            	@else
+                            	<span class="text-danger">
+                            		{{$row->no_resi}}
+                            	</span>
+                            	@endif
+                            </td>
                             <td>
                             	@if($row->no_smu=='')
                             	<span class="label label-danger">

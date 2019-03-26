@@ -31,9 +31,7 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							@if($tahunya=='semua')
-								<th>bulan</th>
-							@endif
+							<th>bulan</th>
 							<th>tahun</th>
 							<th>Subtotal</th>
 						</tr>
@@ -44,12 +42,10 @@
                             @foreach($data as $row)
                             <?php $no = $i++;?>
                         <tr>
-                            <td>{{$no}}</td>
-                            @if($tahunya=='semua')
-                            <td>{{$row->bulan}}</td>
-                            @endif
-                            <td>{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
+                            <td align="center">{{$no}}</td>
+                            <td align="center">{{$row->bulan}}</td>
+                            <td align="center">{{$row->tahun}}</td>
+                            <td align="right">{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>

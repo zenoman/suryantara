@@ -38,21 +38,17 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							@if($tahunya=='semua')
-								<th>bulan</th>
-							@endif
+							<th>bulan</th>
 							<th>tahun</th>
-							<th>Subtotal</th>
+							<th class="text-right">Subtotal</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
-							@if($tahunya=='semua')
-								<th>bulan</th>
-							@endif
+							<th>bulan</th>
 							<th>tahun</th>
-							<th>Subtotal</th>
+							<th class="text-right">Subtotal</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -61,11 +57,9 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            @if($tahunya=='semua')
                             <td>{{$row->bulan}}</td>
-                            @endif
                             <td>{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
+                            <td class="text-right">{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>
@@ -79,7 +73,6 @@
 				<div class="card-block">
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
-<!-- <a href="#" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
 							&nbsp;&nbsp;
 								<a href="{{url('/printpajak/'.$tahunya.'')}}" target="_blank()" class="btn btn-primary">
 								<i class="fa fa-print"></i>

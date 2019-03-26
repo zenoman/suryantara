@@ -40,7 +40,6 @@
                     <a href="{{url('/manual_smukosong')}}" class="btn btn-danger">Kembali</a>
 					
                     <br><br>
-					<form action="{{url('/Manual/hapuspilihan')}}" method="post">
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -76,61 +75,18 @@
                             <td>{{$no}}</td>
                             <td>
                                 @if($row->status=='Y')
-                                    <i class="btn btn-sm btn-success"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
-                                @elseif($row->no_smu == null)
-                                <i class="btn btn-sm btn-primary"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i>
-                                <!-- <i class="btn btn-sm btn-primary"
+                                    <button class="btn btn-sm btn-info"
                         data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</i> -->
-                                @endif
-                            </td>
-                            <td> <span class="label label-danger">kosong</span></td>
-                            <td>{{$row->tgl}}</td>
-                            <td>{{$row->pengiriman_via}}</td>
-                            <td>
-                                @if($row->total_biaya > 0)
-                                {{$row->kota_asal}}-{{$row->kode_tujuan}}
-                                @endif
-                            </td>
-                            <td>{{$row->nama}}</td>
-                            <td class="text-center">
-                            	@if($row->total_biaya > 0)
-                                    @if($row->pengiriman_via=='udara')
-                                @if($row->no_smu=='')
-                                <span class="label label-warning">Menunggu</span>
-                                @else
-                                @if($row->status=='Y')
-                                    <span class="label label-success">
-                                        Sukses
-                                    </span>
-                                @else
-                                    <span class="label label-warning">Menunggu</span>
-                                @endif
-                                @endif
-                                
-                            @else
-                                @if($row->status=='Y')
-                                    <span class="label label-success">
-                                        Sukses
-                                    </span>
-                                @else
-                                    <span class="label label-warning">Menunggu</span>
-                                @endif
-                            @endif
-                            	@else
-                            	<span class="label label-danger">
-                            	Belum Diisi
-                            	</span>
-                            	@endif
-                            </td>
-                            <td class="text-center">
-                                @if($row->total_biaya > 0)
+                        data-target=".bd-example-modal-lg{{$row->id}}"
+                        type="button">{{$row->no_resi}}</button>
+                                @elseif($row->no_smu == null)
                                 <button class="btn btn-sm btn-info"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button"><i class="fa fa-wrench"></i></button>
+                        type="button">{{$row->no_resi}}</button>
+                                @endif
+
+                            @if($row->total_biaya > 0)
                                 <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
@@ -177,14 +133,6 @@
                                 <div>Metode Bayar : {{$row->metode_bayar}}</div>
                             </div>
                             <br>
-                            <!-- <div class="invoice-block">
-                                <h5>Invoice To:</h5>
-                                <div>Rebeca Manes</div>
-                                <div>
-                                    Normand axis LTD <br>
-                                    3 Goodman street
-                                </div>
-                            </div> -->
                         </div>
                         <div class="col-lg-6 clearfix invoice-info">
                             <div class="text-lg-right">
@@ -292,10 +240,9 @@
                         </div>
                         
                     </div>
-                    @if($row->pengiriman_via=='udara')
-                        @if($row->no_smu=='')
                         <br>    
-                            <div class="row text-left">
+                            <div class="row">
+                                <div class="col-lg-6 text-left">
                                 <form action="tambahsmu" method="post">
                                     <label>Tambahkan No. SMU</label>
                                     <div class="input-group input-group-sm">
@@ -308,8 +255,7 @@
                                     </div>
                                 </form>
                             </div>
-                        @endif
-                    @endif
+                            </div>
                 </div>
                             </div>
                             <div class="modal-footer">
@@ -334,26 +280,79 @@
                         </div>
                     </div>
                 </div><!--.modal-->
+                               
+                            @endif
+                            </td>
+                            <td> <span class="label label-danger">kosong</span></td>
+                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->pengiriman_via}}</td>
+                            <td>
+                                @if($row->total_biaya > 0)
+                                {{$row->kota_asal}}-{{$row->kode_tujuan}}
+                                @endif
+                            </td>
+                            <td>{{$row->nama}}</td>
+                            <td class="text-center">
+                            	@if($row->total_biaya > 0)
+                                    @if($row->pengiriman_via=='udara')
+                                @if($row->no_smu=='')
+                                <span class="label label-warning">Menunggu</span>
                                 @else
-                              <form action="{{ url('/Manual/delete')}}" method="post">                            	
-                            	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i></a>
-                                        	{{csrf_field()}}
-                                        	
-                                        	<input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i></button>
-                    					</form>
-                                        @endif
+                                @if($row->status=='Y')
+                                    <span class="label label-success">
+                                        Sukses
+                                    </span>
+                                @else
+                                    <span class="label label-warning">Menunggu</span>
+                                @endif
+                                @endif
+                                
+                            @else
+                                @if($row->status=='Y')
+                                    <span class="label label-success">
+                                        Sukses
+                                    </span>
+                                @else
+                                    <span class="label label-warning">Menunggu</span>
+                                @endif
+                            @endif
+                            	@else
+                            	<span class="label label-danger">
+                            	Belum Diisi
+                            	</span>
+                            	@endif
+                            </td>
+                           <td class="text-center">
+                
+                @if($row->total_biaya > 0)
+                @if(Session::get('level')!='admin')
+                <form action="{{ url('/Manual/delete')}}" method="post"> {{csrf_field()}}
+                 <input type="hidden" name="aid" value="{{$row->id}}">
+                   
+                        <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                </form>
+                 @else
+                -
+                @endif
+                @else
+                <form action="{{ url('/Manual/delete')}}" method="post">   <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                    <i class="fa fa-pencil"></i></a>
+                        {{csrf_field()}}
+                    <input type="hidden" name="aid" value="{{$row->id}}">
+                    <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                </form>
+                @endif
+               
                             </td>
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
-					{{csrf_field()}}
-					
-                        </form>
 					 
 				</div>
 			</section>

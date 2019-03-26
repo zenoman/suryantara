@@ -21,7 +21,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['batal','Y']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','Y']])
         ->orderby('resi_pengiriman.id','desc')
         ->get();
         return view('manual/manualbatal',
@@ -34,7 +34,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['batal','N']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N']])
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
         return view('manual/index',['manual'=>$datmanual,'title'=>$setting]);
@@ -46,8 +46,8 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%']])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.batal','N']])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['resi_pengiriman.batal','N']])
         ->get();
             $setting = DB::table('setting')->get();
         return view('manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
@@ -58,7 +58,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where('resi_pengiriman.metode_input','manual')
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N']])
         ->whereNull('no_smu')
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
@@ -70,8 +70,8 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null]])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null]])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N']])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N']])
         ->get();
             $setting = DB::table('setting')->get();
         return view('manual/cari_smukosong', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
