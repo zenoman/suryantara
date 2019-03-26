@@ -23,7 +23,7 @@ class ManualImport implements ToCollection, WithHeadingRow{
     	 DB::table('resi_pengiriman')
          ->insert([
             'no_resi'=>$row['no_resi'],
-            'pemegang'=>$row['id'],
+            'pemegang'=>$row['id_karyawan'],
             'metode_input'=>'manual'
             ]);
         }

@@ -61,9 +61,6 @@ class resipengirimanController extends Controller
             'totalbt'=>$newbiayasj
         ]);
         }
-        
-
-        
         }else{
         DB::table('resi_pengiriman')
         ->where('id',$id)

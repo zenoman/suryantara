@@ -15,18 +15,31 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 class Manualcontroller extends Controller
 {
+    public function manualbatal()
+    {
+        $setting = DB::table('setting')->get();
+        $datmanual = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
+        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
+        ->where([['resi_pengiriman.metode_input','manual'],['batal','Y']])
+        ->orderby('resi_pengiriman.id','desc')
+        ->get();
+        return view('manual/manualbatal',
+            ['manual'=>$datmanual,'title'=>$setting]);
+    }
+    //==========================================================
     public function index()
     {
         $setting = DB::table('setting')->get();
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where('resi_pengiriman.metode_input','manual')
+        ->where([['resi_pengiriman.metode_input','manual'],['batal','N']])
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
         return view('manual/index',['manual'=>$datmanual,'title'=>$setting]);
     }
-//------------------------------------
+    //==============================================================
     public function caridata(Request $request)
     {
         $cari=$request->cari;

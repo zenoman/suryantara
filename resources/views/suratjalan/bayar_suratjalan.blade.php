@@ -113,7 +113,7 @@
 										<td class="text-right">Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										
 										@endif
-										<td>
+										<td class="text-right">
 										Rp. {{number_format($resi->biaya_suratjalan,0,',','.')}}
 										</td>
 										<td class="text-center">
@@ -194,17 +194,17 @@
 									<td>
 										{{$row->totalkg}} Kg
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->totalcash>0)
 										Rp. {{number_format($row->totalcash,0,',','.')}}
 										@endif
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->totalbt>0)
 										Rp. {{number_format($row->totalbt,0,',','.')}}
 										@endif
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->biaya>0)
 										Rp. {{number_format($row->biaya,0,',','.')}}
 										@endif

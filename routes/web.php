@@ -208,6 +208,7 @@ Route::get('/karyawan/karyawanexport','Karyawan\Karyawancontroller@exsportexcel'
 Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt');
 Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
 //==============================================================resi manual
+Route::get('/manualbatal','Manual\Manualcontroller@manualbatal');
 Route::post('/simpanmanualdarat','Manual\Manualcontroller@simpandarat');
 Route::post('/simpanmanuallaut','Manual\Manualcontroller@simpanlaut');
 Route::post('/simpanmanualudara','Manual\Manualcontroller@simpanudara');

@@ -26,7 +26,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Tambah Data Pengeluaran Lain</h2>
+							<h2>Tambah Data Pembukuan</h2>
 						</div>
 					</div>
 				</div>
