@@ -324,28 +324,40 @@
                             </td>
                            <td class="text-center">
                 
-                @if($row->total_biaya > 0)
-                @if(Session::get('level')!='admin')
-                <form action="{{ url('/Manual/delete')}}" method="post"> {{csrf_field()}}
-                 <input type="hidden" name="aid" value="{{$row->id}}">
-                   
-                        <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                            <i class="fa fa-remove"></i>
-                        </button>
-                </form>
-                 @else
-                -
-                @endif
-                @else
-                <form action="{{ url('/Manual/delete')}}" method="post">   <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                    <i class="fa fa-pencil"></i></a>
-                        {{csrf_field()}}
-                    <input type="hidden" name="aid" value="{{$row->id}}">
-                    <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                </form>
-                @endif
+                     @if($row->total_biaya > 0)
+                        @if(Session::get('level')!='admin')
+
+                                <form action="{{ url('/Manual/delete')}}" method="post">
+                                {{csrf_field()}}
+                                <input type="hidden" name="aid" value="{{$row->id}}">
+                                <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                                </a> 
+                                @if($row->kode_jalan=='')
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                                @endif
+                            </form>
+                        @else
+                        -
+                        @endif
+                    @else
+                            <form action="{{ url('/Manual/delete')}}" method="post">                                
+                                <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                {{csrf_field()}}
+                                            
+                                <input type="hidden" name="aid" value="{{$row->id}}">
+                               <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                            </form>
+                    @endif
                
                             </td>
 						</tr>

@@ -302,8 +302,8 @@
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
-                                <i class="fa fa-pencil"></i>
+                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
                             	</a>
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
