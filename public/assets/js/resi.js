@@ -383,8 +383,6 @@ $(document).ready(function(){
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
                 	cetakresi();
-                	// bersih();
-                	// carikode();
                 },
             }).always(
             function() {

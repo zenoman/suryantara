@@ -50,7 +50,13 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td align="center">{{$no}}</td>
-                            <td align="center">{{$row->no_resi}}</td>
+                            <td align="center">
+                            @if($row->batal=='N')
+                            	{{$row->no_resi}}
+                            @else
+                            	{{$row->no_resi}}*
+                            @endif
+                            </td>
                             <td align="center">{{$row->tgl}}</td>
                             <td align="center">{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
                             	@if($jalur=='semua')

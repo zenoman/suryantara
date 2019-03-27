@@ -51,7 +51,13 @@
 		@foreach($data as $row)
 		<tr>
 			<td>{{$row->tgl}}</td>
-			<td>{{$row->no_resi}}</td>
+			<td>
+				@if($row->batal=='N')
+				{{$row->no_resi}}
+				@else
+				{{$row->no_resi}}*
+				@endif
+			</td>
 			<td>{{$row->no_smu}}</td>
 			<td>{{$row->kode_jalan}}</td>
 			<td>{{$row->admin}}</td>

@@ -210,16 +210,16 @@
 						</div>
 					</div>
 					<hr>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan"></textarea>
-							</div>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman laut" class="form-control" id="keterangan">
+							<!--</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 					{{csrf_field()}}
 							<small class="text-muted">
 								<!-- <button class="btn btn-success" type="button" id="btncetak"> Cetak</button> -->
@@ -252,7 +252,7 @@
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
-								<p style="margin-left: 35% " align="right" id="cetak_resi"></p> 
+								<p style="margin-left: 35%;font-size: 10; " align="right"><b id="cetak_resi"></b></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
@@ -463,7 +463,7 @@
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
-								<p style="margin-left: 35% " align="right" id="cetak_resi2"></p> 
+								<p style="margin-left: 35%;font-size: 10; " align="right"><b id="cetak_resi2"></b></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
@@ -676,7 +676,8 @@
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
-								<p style="margin-left: 35% " align="right" id="cetak_resi3"></p> 
+								<p style="margin-left: 35%;font-size: 10; " align="right"><b id="cetak_resi3"></b></p> 
+								 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
@@ -885,7 +886,7 @@
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
-								<p style="margin-left: 35% " align="right" id="cetak_resi4"></p> 
+								<p style="margin-left: 35%;font-size: 10; " align="right"><b id="cetak_resi4"></b></p> 
 								<p style="margin-left: 35% " align="right">Pengiriman Via : Laut</p> 
 								<p style="margin-right: 7px;" align="right">Tanggal : <?php echo date('d-m-Y');?></p> 
 				</td>
