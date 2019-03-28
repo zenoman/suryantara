@@ -173,43 +173,16 @@
 		<li class="nav-item">
 			<a class="nav-link" href="{{url('pengeluaranlain')}}">Pembukuan</a>
 		</li>
-		<!--
- 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Laporan</a>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventaris</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Laporan Pemasukan</a>
-	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Laporan Pengeluaran</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
-				<a class="dropdown-item" href="{{url('/pajak')}}">Pajak</a>
+				<a class="dropdown-item" href="{{url('armada')}}">Armada</a>
 			</div>
-			<a class="dropdown-item" href="{{url('/omset')}}">Omset</a>
 			</div>
 		</li>
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
-		<li class="nav-item">
-			<a class="nav-link" href="{{url('backup')}}">Backup</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="{{url('setting')}}">Setting</a>
-		</li>
-		@endif -->
 	</ul>
 
 @yield('content')
-	
-	<!-- <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
-	<script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
-	<script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
-	<script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
-	<script src="{{asset('assets/js/plugins.js')}}"></script>
-
-	<script type="text/javascript" src="{{asset('assets/js/lib/jqueryui/jquery-ui.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('assets/js/lib/lobipanel/lobipanel.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('assets/js/lib/match-height/jquery.matchHeight.min.js')}}"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 	<script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
 	<script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>

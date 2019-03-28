@@ -1,5 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//==============================================armada
+Route::get('/armada/{id}/delete','Armada\Armadacontroller@delete');
+Route::put('/armada/{id}','Armada\Armadacontroller@update');
+Route::get('/armada/{id}','Armada\Armadacontroller@edit');
+Route::post('/armada','Armada\Armadacontroller@store');
+Route::get('/armada','Armada\Armadacontroller@index');
+Route::get('/armada/create','Armada\Armadacontroller@create');
 //==============================================pajak
 Route::get('/pajak','pajak\pajakcontroller@index');
 Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
