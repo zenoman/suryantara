@@ -65,6 +65,9 @@
                             <td>{{$row->nopol}}</td>
                             <td>{{$row->warna}}</td>
                             <td class="text-center">
+                            	<a href="{{url('armada/'.$row->id.'/bayarpajak')}}" class="btn btn-success btn-sm">
+								<i class="fa fa-money"></i>
+                            	</a>
                              	<a 
                              	href="#" 
                              	class="btn btn-info btn-sm edit-modal" 

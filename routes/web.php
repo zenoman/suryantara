@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
 //==============================================armada
+Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
+Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
 Route::get('/armada/{id}/delete','Armada\Armadacontroller@delete');
 Route::put('/armada/{id}','Armada\Armadacontroller@update');
 Route::get('/armada/{id}/edit','Armada\Armadacontroller@edit');

@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class Armadacontroller extends Controller
 {
+    public function aksibayarpajak(Request $request){
+        dd(['tgl bayar'=>$request->tglbayar,'tgl kadaluarsa'=>$request->tglkadaluarsa]);
+    }
+    //========================================================
+    public function bayarpajak($id){
+        $webset = DB::table('setting')->limit(1)->get();
+        $data = DB::table('armada')->where('id',$id)->get();
+        return view('Armada/bayarpajak',['title'=>$webset,'armada'=>$data]);
+    }
+    //===========================================================
     public function index(){
     	$webset = DB::table('setting')->limit(1)->get();
     	$data = DB::table('armada')->orderby('id','desc')->paginate(20);
