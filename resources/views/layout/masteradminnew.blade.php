@@ -93,7 +93,7 @@
 				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
 				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
 				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
-				<a class="dropdown-item" href="{{url('/pajak')}}">Pajak</a>
+				<a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a>
 			</div>
 
 	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>

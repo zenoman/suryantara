@@ -5,11 +5,58 @@ namespace App\Http\Controllers\Armada;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Armadacontroller extends Controller
 {
     public function aksibayarpajak(Request $request){
-        dd(['tgl bayar'=>$request->tglbayar,'tgl kadaluarsa'=>$request->tglkadaluarsa]);
+        $tk = date('Y-m-d', strtotime('-7 day', strtotime($request->tglkadaluarsa)));
+        if($request->hasFile('gambar')){
+            $namagambar=$request->file('gambar')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namagambar);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namagambar=time().'-'.$replace_space;
+            //$destination=base_path('../public_html/img/nota');
+            $destination=public_path().'/img/nota/';
+            $request->file('gambar')->move($destination,$namagambar);
+            
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>Session::get('username'),
+                'kategori'=>'pajak_armada',
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->total,
+                'tgl'=>$request->tglbayar,
+                'gambar'=>$namagambar
+            ]);
+            DB::table('armada')
+            ->where('id',$request->kodeunit)
+            ->update([
+                'tgl_bayar'=>$request->tglbayar,
+                'tgl_kadaluarsa'=>$request->tglkadaluarsa,
+                'tgl_peringatan'=>$tk
+            ]);
+
+        }else{
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>Session::get('username'),
+                'kategori'=>'pajak_armada',
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->total,
+                'tgl'=>$request->tglbayar
+            ]);
+            DB::table('armada')
+            ->where('id',$request->kodeunit)
+            ->update([
+                'tgl_bayar'=>$request->tglbayar,
+                'tgl_kadaluarsa'=>$request->tglkadaluarsa,
+                'tgl_peringatan'=>$tk
+            ]);
+        }
+
+        return redirect('/armada')->with('status','Berhasil Menambah Data');
     }
     //========================================================
     public function bayarpajak($id){

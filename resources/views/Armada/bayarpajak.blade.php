@@ -31,7 +31,7 @@
 			</header>
 			<div class="box-typical box-typical-padding">
 				@foreach($armada as $row)
-				<form action="{{ url('pajakarmada') }}" role="form" method="POST">
+				<form action="{{ url('pajakarmada') }}" role="form" method="POST" enctype="multipart/form-data">
 					<div class="form-group row">
 						<div class="col-sm-4">
 							<label class="form-control-label semibold">Pembuat</label>
@@ -135,6 +135,7 @@
 								<input
 								type="text"
 								class="form-control"
+								name="total"
 								onkeypress="return isNumberKey(event)"
 								required
 								>
@@ -145,6 +146,7 @@
 							<div class="input-group">
 								<input
 								type="file"
+								name="gambar"
 								class="form-control"
 								accept="image/*"
 								id="photo"
@@ -157,7 +159,7 @@
 						<div class="col-sm-12">
 							<label class="form-control-label semibold">Keterangan</label>
 							<div class="input-group">
-								<textarea class="form-control" rows="5">
+								<textarea class="form-control" rows="5" name="keterangan">
 									
 								</textarea>
 							</div>
