@@ -61,7 +61,20 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->nama}}</td>
+                            <td>
+                            	<?php
+                            	$now = date('Y-m-d');
+                            	?>
+                            	@if(strtotime($row->tgl_peringatan) < strtotime($now))
+                            	<span class='label label-danger'>
+                            	 	{{$row->nama}}
+                            	</span>
+                            	@else
+                            	<span class='label label-primary'>
+                            	 	{{$row->nama}}
+                            	</span>
+                            	@endif
+                            </td>
                             <td>{{$row->nopol}}</td>
                             <td>{{$row->warna}}</td>
                             <td class="text-center">

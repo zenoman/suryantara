@@ -31,6 +31,51 @@
                     </div>
                 </div>
                     @endif
+                @if($jumlahpajakarmada > 0)
+                    <div class="col-xl-12 dahsboard-column">
+	                <section class="card card-red">
+				<header class="card-header">
+					Peringatan Pajak Kendaraan
+				</header>
+				<div class="card-block">
+					<table id="table-edit" class="table table-bordered table-hover">
+				<thead>
+				<tr>
+					<th>No</th>
+					<th>Nama Unit</th>
+					<th>Warna</th>
+					<th>No. Polisi</th>
+					<th>Jatuh Tempo</th>
+				</thead>
+				<tbody>
+					@php
+					$nopja = 1;
+					@endphp
+					@foreach($pajakarmada as $row)
+					@php
+					$newnopja = $nopja++;
+					@endphp
+					<tr>
+						<td>{{$newnopja}}</td>
+						<td>{{$row->nama}}</td>
+						<td>{{$row->warna}}</td>
+						<td>{{$row->nopol}}</td>
+						<td>{{$row->tgl_kadaluarsa}}</td>
+					</tr>
+					@endforeach
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5">
+							<a href="{{url('/armada')}}" class="btn btn-success btn-block"><i class="fa fa-money"></i> Bayar Pajak Unit</a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+				</div>
+			</section>
+	            </div>
+	            @endif
 	        	<div class="col-xl-4 dahsboard-column">
 	        		@foreach($uanghariini as $rows)
 					<section class="widget widget-simple-sm-fill">

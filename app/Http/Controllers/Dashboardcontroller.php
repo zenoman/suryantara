@@ -9,11 +9,21 @@ class Dashboardcontroller extends Controller
 {
     public function index()
     {
+        $pajakarmada = 
+        DB::table('armada')
+        ->wheredate('tgl_peringatan','<',date('Y-m-d'))
+        ->get();
+        //============================================
+        $jumlahpajakarmada = 
+        DB::table('armada')
+        ->wheredate('tgl_peringatan','<',date('Y-m-d'))
+        ->count();
+        //============================================
         $this->hitung_omset();
         $listsj = DB::table('surat_jalan')
         ->where('status','=','Y')
         ->get();
-
+        //============================================
         $resi = DB::table('resi_pengiriman')
         ->where([['status','!=','Y'],['total_biaya','>',0]])
         ->get();
@@ -28,7 +38,7 @@ class Dashboardcontroller extends Controller
         ->where('status','=','Y')
         ->count();
         $setting = DB::table('setting')->get();
-        return view('dashboard/index',['title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj]);
+        return view('dashboard/index',['title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada]);
     }
 
     function hitung_omset(){
