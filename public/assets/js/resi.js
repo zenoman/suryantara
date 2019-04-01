@@ -179,7 +179,6 @@ $(document).ready(function(){
 			$("#biaya_kirim").val(0);
 			$("#biaya_packing").val(0);
 			$("#biaya_asuransi").val(0);
-			$("#keterangan").val('');
 			$("#b_kirim").html(0);
 			$("#b_packing").html(0);
 			$("#b_asuransi").html(0);

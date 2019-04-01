@@ -336,8 +336,7 @@ $(document).ready(function(){
     if(foo=="bar"){
     	var isgood = confirm('Apakah anda yakin transaksi telah selesai ?');
     	if(isgood){
-    		bersih();
-           carikode();	
+    		location.reload();	
     	}
     }
 		});
@@ -575,7 +574,6 @@ $(document).ready(function(){
 			$("#biaya_kirim").val(0);
 			$("#biaya_smu").val(0);
 			$("#biaya_karantina").val(0);
-			$("#keterangan").val('');
 			$("#b_kirim").html(0);
 			$("#b_smu").html(0);
 			$("#b_karantina").html(0);
