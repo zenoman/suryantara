@@ -18,11 +18,12 @@
 @endsection
 
 @section('content')
-<div class="page-content">
+<div class="page-content"  id="halinput">
 	    <div class="container-fluid">
 	       
 	
 	        <div class="row">
+
 	        	<div class="col-xl-4 dahsboard-column">
 	        		@foreach($uanghariini as $rows)
 					<section class="widget widget-simple-sm-fill">
@@ -51,6 +52,22 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
+	        	@if($jmlkarya == $jmlabsen)
+	        	
+	        	@else
+	        	<div class="col-xl-4 dahsboard-column">
+	        		<section class="widget widget-simple-sm-fill green">
+								<div class="widget-simple-sm-icon">
+									<i class="font-icon font-icon-users"></i>
+								</div>
+								<div class="widget-simple-sm-fill-caption">{{$jmlabsen}} Karyawan Sudah Absen </div>
+	        	<a href="{{url('/absen')}}" type="button" class="btn btn-inline btn-success">
+	        		Klik Untuk Absen
+	        	</a>
+					</section>
+	        	</div>
+	        	@endif
+
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
             <header class="card-header">
@@ -60,7 +77,7 @@
                 <div id="bar-chart"></div>
             </div>
         </section>
-    </div>
+    			</div>
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
@@ -121,7 +138,6 @@
 	                       
 	                    </div><!--.box-typical-body-->
 	                </section><!--.box-typical-dashboard-->
-	                
 	            </div><!--.col-->
 	        </div>
 	    </div><!--.container-fluid-->
@@ -131,6 +147,9 @@
 @section('js')
 <script src="{{asset('assets/js/lib/d3/d3.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/charts-c3js/c3.min.js')}}"></script>
+
+
+<!-- <script src="{{asset('assets/js/custom/absen.js')}}"></script> -->
 
 <script>
 	$(document).ready(function() {

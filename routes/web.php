@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+
 //==============================================pajak
 Route::get('/pajak','pajak\pajakcontroller@index');
 Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
@@ -238,4 +239,18 @@ Route::get('/kat_bar/create','Katbar\Katbarcontroller@create');
 Route::get('/kat_bar/{id}/edit','Katbar\Katbarcontroller@edit');
 Route::put('/kat_bar/{id}','Katbar\Katbarcontroller@update');
 Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
+//=======================================================Absensi
+Route::get('/absen','Absensi\AbsensiController@index');
+Route::post('/tamabsen','Absensi\AbsensiController@tambahdataabsen');
 
+Route::get('/pilihabsensiharian','Absensi\AbsensiController@pilihabsenhari'); 
+Route::get('/pilihabsensibulanan','Absensi\AbsensiController@pilihabsenbulan'); 
+Route::get('/tampilabsensiharian','Absensi\AbsensiController@tampilabsenharian');
+Route::get('/tampilabsensibulanan','Absensi\AbsensiController@tampilabsenbulanan');
+
+//---------------------------------------------------export absensi
+Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensiharian');
+Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
+
+Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
+Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');

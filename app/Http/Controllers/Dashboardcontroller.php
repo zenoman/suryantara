@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class Dashboardcontroller extends Controller
 {
+
     public function index()
     {
         $this->hitung_omset();
@@ -16,7 +16,7 @@ class Dashboardcontroller extends Controller
 
         $resi = DB::table('resi_pengiriman')
         ->where([['status','!=','Y'],['total_biaya','>',0]])
-        ->get();
+        ->get(); 
         $uanghariini = DB::table('resi_pengiriman')
         ->select(DB::raw('SUM(total_biaya) as total'))
         ->where('tgl',date('Y-m-d'))
@@ -27,8 +27,15 @@ class Dashboardcontroller extends Controller
         $jumlahsj = DB::table('surat_jalan')
         ->where('status','=','Y')
         ->count();
+        $dattgl=date('Y-m-d');
+        $dataabsensi=DB::table('absensi')
+        ->where('tanggal','=',$dattgl)
+        ->count();
+        $datakaryawan=DB::table('karyawan')
+        ->count();
+
         $setting = DB::table('setting')->get();
-        return view('dashboard/index',['title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj]);
+        return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj]);
     }
 
     function hitung_omset(){
@@ -228,4 +235,9 @@ class Dashboardcontroller extends Controller
         }
         return $newdata;
     }
+
+
+
+
+
 }

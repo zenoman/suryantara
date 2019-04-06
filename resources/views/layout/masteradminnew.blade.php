@@ -75,6 +75,9 @@
 			</div>
 
 	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>
+	                                
+									<a class="dropdown-item" href="{{url('/pilihabsensiharian')}}">Absensi Harian</a>
+									<a class="dropdown-item" href="{{url('/pilihabsensibulanan')}}">Absensi Bulanan</a>
 	                            </div>
 	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
@@ -94,7 +97,7 @@
 	<div class="mobile-menu-left-overlay"></div>
 	<ul class="main-nav nav nav-inline">
 		<li class="nav-item">
-			<a class="nav-link active" href="{{url('dashboard')}}">Home</a>
+			<a class="nav-link" href="{{url('dashboard')}}">Home</a>
 		</li>
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 		<li class="nav-item">
