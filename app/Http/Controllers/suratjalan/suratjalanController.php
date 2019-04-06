@@ -27,7 +27,8 @@ class suratjalanController extends Controller
         $data = DB::table('resi_pengiriman')
         ->where('id',$request->nomer)
         ->update([
-            'biaya_suratjalan'=>$request->jumlah
+            'biaya_suratjalan'=>$request->jumlah,
+            'tgl_bayar'=>date('Y-m-d')
         ]);
         $datasj = DB::table('surat_jalan')->where('kode',$request->kode)->get();
         //=======================================

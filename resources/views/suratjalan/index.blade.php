@@ -10,7 +10,12 @@
 <link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
+@section('css')
+
+@endsection
 @section('content')
+<link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
+
 <div class="page-content" id="printdiv">
 		<div class="container-fluid">
 		
@@ -18,11 +23,12 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Manifes</h2>
+							<h2>Buat Manifest</h2>
 						</div>
 					</div>
 				</div>
 			</header>
+			<div class="loading-div" id="panelnya">
 			<div class="box-typical box-typical-padding">
 					<p>No. Surat : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
@@ -171,7 +177,7 @@
 					</small>
 				</form>
 			</div>
-		
+		</div>
 		</div>
 
 	</div>
@@ -382,6 +388,7 @@
 
 @endsection
 @section('otherjs')
+<script src="{{asset('assets/js/loading.js')}}"></script>
 <script src="{{asset('assets/js/surat_jalan.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey(evt)

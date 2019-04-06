@@ -25,7 +25,7 @@ $(document).ready(function(){
 			cache: true
 		}
 	});
-        //=============================================cari vendor
+    //=============================================cari vendor
         $('#carivendor').select2({
         placeholder: 'Cari vendor',
         ajax:{
@@ -49,6 +49,7 @@ $(document).ready(function(){
     });
 		//=================================================
 		$('#carinoresi').on('select2:select',function(e){
+            $('#panelnya').loading('toggle');
 			var isi = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -59,11 +60,14 @@ $(document).ready(function(){
 					cariitem(item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
-			},
+			},complete:function(){
+                $('#panelnya').loading('stop');
+            }
             });
 		});
     //=================================================
         $('#carivendor').on('select2:select',function(e){
+            $('#panelnya').loading('toggle');
             var id = $(this).val();
             $.ajax({
                 type: 'GET',
@@ -81,7 +85,9 @@ $(document).ready(function(){
                         $('#carinoresi').focus();
                     })
                 }
-            },
+            },complete:function(){
+                $('#panelnya').loading('stop');
+            }
             });
         });
 	//===================================================
@@ -100,6 +106,7 @@ $(document).ready(function(){
 	}
 	//========================================================
 	function carikode(){
+        $('#panelnya').loading('toggle');
 			$.ajax({
 			url:'/carikodesj',
 			dataType:'json',
@@ -135,7 +142,10 @@ $(document).ready(function(){
                     },error:function(){
                         console.log(data);
                         alert('error');
-                    }
+                    },complete:function(){
+                
+                $('#panelnya').loading('stop');
+             }
                 });
            }
     //==========================================================
@@ -246,7 +256,8 @@ $(document).ready(function(){
                var foo='bar';
     if(foo=='bar'){
      var isgood = confirm('Tambahkan Resi Kesurat Jalan ? ');
-     if(isgood == true){ 
+     if(isgood == true){
+     $('#panelnya').loading('toggle'); 
         var l = Ladda.create(this);
         l.start();
         var penerima = $("#penerima").val();
@@ -272,7 +283,10 @@ $(document).ready(function(){
                      notie.alert(1, 'Data Disimpan', 2);
                      bersihdetail();
                     getdata();
-                },
+                },complete:function(){
+                
+                $('#panelnya').loading('stop');
+             }
             }).always(
             function() {
                 l.stop();
@@ -302,6 +316,7 @@ $(document).ready(function(){
     if(foo=='bar'){
      var isgood = confirm('hapus ? ');
      if(isgood == true){
+        $('#panelnya').loading('toggle');
            $.ajax({
                     type:'GET',
                     dataType:'json',
@@ -348,14 +363,17 @@ $(document).ready(function(){
             return rupiah;
         }
     //======================================================
-    $('#btnselesai').click(function(){
-        $("#carivendor").val(null).trigger('change');
-        $('#alamatvendor').val('');
-        $('#telpvendor').val('');
-        jumlahbarang=0;
-        carikode();
-        getdata();
-    });
+    $('#btnselesai').click(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var foo = "bar";
+    if(foo=="bar"){
+        var isgood = confirm('Apakah anda yakin surat jalan telah benar ?');
+        if(isgood){
+            location.reload();  
+        }
+    }
+        });
     //======================================================
     $('#btnsimpan').click(function(){
     var foo='bar';
