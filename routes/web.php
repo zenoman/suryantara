@@ -1,8 +1,7 @@
+
 <?php
 use Illuminate\Support\Facades\Input;
-<<<<<<< HEAD
 
-=======
 //==============================================armada
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
 Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
@@ -12,7 +11,7 @@ Route::get('/armada/{id}/edit','Armada\Armadacontroller@edit');
 Route::post('/armada','Armada\Armadacontroller@store');
 Route::get('/armada','Armada\Armadacontroller@index');
 Route::get('/armada/create','Armada\Armadacontroller@create');
->>>>>>> master
+
 //==============================================pajak
 Route::get('/pajak','pajak\pajakcontroller@index');
 Route::get('/tampilpajak','pajak\pajakcontroller@tampil');

@@ -3,6 +3,7 @@
 
 .loading-overlay {
   display: table;
+  position: absolute;
   opacity: 0.7;
 }
 
