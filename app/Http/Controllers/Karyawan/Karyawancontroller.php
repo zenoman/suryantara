@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Response;
 class Karyawancontroller extends Controller
 {
     public function index()
-    {
+    { 
         
         $setting = DB::table('setting')->get();
         $datKaryawan = DB::table('karyawan')
