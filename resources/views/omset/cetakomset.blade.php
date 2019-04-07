@@ -27,6 +27,7 @@
 						<tr> 
 							<th>No</th>
 							<th>Bulan</th>
+							<th>Omset Awal</th>
 							<th>Pemasukan</th>
 							<th>Pengeluaran</th>
 							<th>Pengeluaran Gaji karyawan</th>
@@ -43,6 +44,7 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->bulan}}-{{$row->tahun}}</td>
+                            <td>{{"Rp ".number_format($row->omset_awal,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pemasukan,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->pengeluaran,0,',','.')}}</td>
                             <td>{{"Rp ".number_format($row->gaji_karyawan,0,',','.')}}</td>

@@ -524,6 +524,7 @@ INSERT INTO `admins` (`id`, `username`, `password`, `nama`, `telp`, `email`) VAL
 	(6, 'abiihsan', '12345678', 'abi ihsan fadli', '086754537756', 'abiihsanfasdli@mersl.xci');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 
+<<<<<<< HEAD
 -- membuang struktur untuk table davina.roles
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -540,6 +541,31 @@ DELETE FROM `roles`;
 -- membuang struktur untuk table davina.settings
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
+=======
+-- Dumping structure for table kargo.armada
+DROP TABLE IF EXISTS `armada`;
+CREATE TABLE IF NOT EXISTS `armada` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(60) DEFAULT NULL,
+  `nopol` varchar(60) DEFAULT NULL,
+  `nomor_rangka` varchar(60) DEFAULT NULL,
+  `nomor_mesin` varchar(60) DEFAULT NULL,
+  `warna` varchar(60) DEFAULT NULL,
+  `tgl_bayar` date DEFAULT NULL,
+  `tgl_kadaluarsa` date DEFAULT NULL,
+  `tgl_peringatan` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.armada: ~0 rows (approximately)
+DELETE FROM `armada`;
+/*!40000 ALTER TABLE `armada` DISABLE KEYS */;
+/*!40000 ALTER TABLE `armada` ENABLE KEYS */;
+
+-- Dumping structure for table kargo.gaji_karyawan
+DROP TABLE IF EXISTS `gaji_karyawan`;
+CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
+>>>>>>> master
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `webName` varchar(100) DEFAULT NULL,
   `kontak1` varchar(45) DEFAULT NULL,
@@ -552,12 +578,76 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 -- Membuang data untuk tabel davina.settings: ~1 rows (lebih kurang)
 DELETE FROM `settings`;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
 INSERT INTO `settings` (`id`, `webName`, `kontak1`, `kontak2`, `kontak3`, `email`, `ico`, `logo`, `meta`) VALUES
 	(3, 'davinaa', '085676786', '085644345', '085677982', 'abihsan@gmail.com', '1538233958-mane-image.jpg', '1538233958-no_image-512qq.png', 'fgkgugyurkghjgv  6tghgf');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
+=======
+-- Dumping data for table kargo.gaji_karyawan: ~56 rows (approximately)
+DELETE FROM `gaji_karyawan`;
+/*!40000 ALTER TABLE `gaji_karyawan` DISABLE KEYS */;
+INSERT INTO `gaji_karyawan` (`id`, `kode_karyawan`, `nama_karyawan`, `id_jabatan`, `gaji_pokok`, `uang_makan`, `gaji_tambahan`, `total`, `bulan`, `tahun`) VALUES
+	(1, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 42246, 472246, 2, 2019),
+	(2, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(3, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(4, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(5, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(6, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(7, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(8, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(9, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(10, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(11, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(12, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(13, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(14, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(15, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(16, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(17, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(18, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(19, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(20, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(21, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(22, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(23, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(24, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(25, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(26, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(27, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(28, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(29, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(30, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(31, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(32, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(33, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(34, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(35, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(36, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(37, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(38, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(39, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(40, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(41, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(42, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(43, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(44, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(45, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(46, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(47, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(48, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(49, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(50, 'Karyawan-000001', 'abi ihsan', 1, 400000, 30000, 28941, 458941, 2, 2019),
+	(51, 'Karyawan-000005', 'hari anto', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(52, 'Karyawan-000006', 'herman', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(53, 'Karyawan-000007', 'dina', 24, 400000, 30000, NULL, 430000, 2, 2019),
+	(54, 'Karyawan-000003', 'fadli', 25, 500000, 30000, NULL, 530000, 2, 2019),
+	(55, 'Karyawan-000002', 'abi ihsan singo', 26, 400000, 30000, NULL, 430000, 2, 2019),
+	(56, 'Karyawan-000004', 'singo', 26, 400000, 30000, NULL, 430000, 2, 2019);
+/*!40000 ALTER TABLE `gaji_karyawan` ENABLE KEYS */;
+>>>>>>> master
 
 -- membuang struktur untuk table davina.tb_barangouts
 DROP TABLE IF EXISTS `tb_barangouts`;
@@ -644,12 +734,23 @@ CREATE TABLE IF NOT EXISTS `tb_kodes` (
   `barang` varchar(100) DEFAULT NULL,
   `gambar` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel davina.tb_kodes: ~0 rows (lebih kurang)
 DELETE FROM `tb_kodes`;
 /*!40000 ALTER TABLE `tb_kodes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_kodes` ENABLE KEYS */;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.omset: ~1 rows (approximately)
+DELETE FROM `omset`;
+/*!40000 ALTER TABLE `omset` DISABLE KEYS */;
+INSERT INTO `omset` (`id`, `bulan`, `tahun`, `pemasukan`, `pengeluaran`, `pengeluaran_lainya`, `gaji_karyawan`, `pajak`, `laba`) VALUES
+	(1, 2, 2019, 2894085, 107000, NULL, 9430128, 28941, -6671984);
+/*!40000 ALTER TABLE `omset` ENABLE KEYS */;
+>>>>>>> master
 
 -- membuang struktur untuk table davina.tb_stokawals
 DROP TABLE IF EXISTS `tb_stokawals`;
@@ -660,12 +761,23 @@ CREATE TABLE IF NOT EXISTS `tb_stokawals` (
   `jumlah` int(11) DEFAULT NULL,
   `tgl` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel davina.tb_stokawals: ~0 rows (lebih kurang)
 DELETE FROM `tb_stokawals`;
 /*!40000 ALTER TABLE `tb_stokawals` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_stokawals` ENABLE KEYS */;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.pajak: ~1 rows (approximately)
+DELETE FROM `pajak`;
+/*!40000 ALTER TABLE `pajak` DISABLE KEYS */;
+INSERT INTO `pajak` (`id`, `bulan`, `tahun`, `nama_pajak`, `total`, `status`) VALUES
+	(1, 2, 2019, 'pajak', 42246, 'bulanan');
+/*!40000 ALTER TABLE `pajak` ENABLE KEYS */;
+>>>>>>> master
 
 -- membuang struktur untuk table davina.tb_tambahstoks
 DROP TABLE IF EXISTS `tb_tambahstoks`;
@@ -695,6 +807,7 @@ CREATE TABLE IF NOT EXISTS `tb_transaksis` (
   `diskon` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   `admin` varchar(100) DEFAULT NULL,
+<<<<<<< HEAD
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -702,6 +815,51 @@ CREATE TABLE IF NOT EXISTS `tb_transaksis` (
 DELETE FROM `tb_transaksis`;
 /*!40000 ALTER TABLE `tb_transaksis` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_transaksis` ENABLE KEYS */;
+=======
+  `nama_barang` text,
+  `pengiriman_via` enum('darat','laut','udara') DEFAULT NULL,
+  `kota_asal` varchar(40) DEFAULT NULL,
+  `kode_tujuan` text,
+  `tgl` date DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `berat` varchar(100) DEFAULT NULL,
+  `dimensi` varchar(200) DEFAULT NULL,
+  `ukuran_volume` varchar(100) DEFAULT NULL,
+  `nama_pengirim` varchar(70) DEFAULT NULL,
+  `nama_penerima` varchar(70) DEFAULT NULL,
+  `telp_pengirim` varchar(20) DEFAULT NULL,
+  `telp_penerima` varchar(20) DEFAULT NULL,
+  `alamat_pengirim` text,
+  `alamat_penerima` text,
+  `biaya_kirim` int(11) DEFAULT '0',
+  `biaya_packing` int(11) DEFAULT '0',
+  `biaya_asuransi` int(11) DEFAULT '0',
+  `biaya_ppn` int(11) DEFAULT '0',
+  `biaya_smu` int(11) DEFAULT '0',
+  `biaya_karantina` int(11) DEFAULT '0',
+  `biaya_charge` int(11) DEFAULT '0',
+  `total_biaya` int(11) DEFAULT '0',
+  `biaya_cancel` int(11) DEFAULT '0',
+  `biaya_suratjalan` int(11) DEFAULT '0',
+  `keterangan` text,
+  `status` enum('Y','N','US','RS') DEFAULT 'N',
+  `satuan` varchar(10) DEFAULT NULL,
+  `metode_bayar` enum('cash','bt') DEFAULT 'cash',
+  `metode_input` enum('manual','otomatis') DEFAULT 'otomatis',
+  `pemegang` varchar(90) DEFAULT NULL,
+  `batal` enum('Y','N') DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.resi_pengiriman: ~3 rows (approximately)
+DELETE FROM `resi_pengiriman`;
+/*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
+INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `total_biaya`, `biaya_cancel`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`) VALUES
+	(1, '12345-003', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'N', NULL, 'cash', 'manual', '1', 'N'),
+	(2, '12345-010', NULL, NULL, 'devasatrio', 'jkhjkhjkh', 'darat', 'kediri', 'pare', '2019-03-27', 1, '2', '20 x 10 x 20', '1.0', 'asdjfklsjadf', 'ksladjfklsa', '90829034890', '290384902', 'ksajdfkl sadkfj klasdfklsadjfkl;as', 'jklasdjf askdlfjklasdf sakldfj', 50000, 2000, 1000, 0, 0, 0, 0, 15900, 53000, 0, 'pengiriman darat', 'N', 'kg', 'cash', 'manual', '1', 'Y'),
+	(3, 'KDR270319-06-000001', NULL, NULL, 'devasatrio', 'jilbab pubg mobile', 'darat', 'kediri', 'pare', '2019-03-27', 1, '1', '20 x 20 x 20', '2.0', 'asdkljklsd', 'klsadfjkl asd', '9238490238', '90238490', 'jklasd skdjf klasdfjklasd fkl', 'jklsadfjklsf', 25000, 2000, 1000, 0, 0, 0, 0, 28000, 0, 0, 'pengiriman darat', 'Y', 'kg', 'cash', 'otomatis', NULL, 'N');
+/*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
+>>>>>>> master
 
 -- membuang struktur untuk table davina.tb_users
 DROP TABLE IF EXISTS `tb_users`;
@@ -741,6 +899,7 @@ CREATE TABLE IF NOT EXISTS `tb_nama` (
   `nama` varchar(50) NOT NULL,
   `sex` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel db_abi.tb_nama: ~2 rows (lebih kurang)
@@ -750,6 +909,14 @@ INSERT INTO `tb_nama` (`id`, `nama`, `sex`) VALUES
 	(5, '12', 'Laki-laki'),
 	(6, '23', 'Laki-laki');
 /*!40000 ALTER TABLE `tb_nama` ENABLE KEYS */;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.surat_jalan: ~0 rows (approximately)
+DELETE FROM `surat_jalan`;
+/*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
+>>>>>>> master
 
 
 -- Membuang struktur basisdata untuk db_perpustakaan

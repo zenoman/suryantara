@@ -8,12 +8,10 @@
 @endforeach
 @endsection
 
-
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
-
 
 @section('content')
 	<div class="page-content">
@@ -22,8 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List manual</h2>
-                            <h5>Berdasarkan No.Resi/SMU kosong</h5>
+							<h2>List Resi Manual Dibatalkan</h2>
 						</div>
 					</div>
 				</div>
@@ -42,35 +39,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                                        <i class="fa fa-search"></i> Cari Data</button>
-                                        <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('carismukos')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                    <br><br>
+					
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -81,8 +50,7 @@
                             <th>Jalur</th>
                             <th>Tujuan</th>
 							<th>Pemegang</th>
-							<th class="text-center">Status</th>
-							<th class="text-center">Aksi</th>
+							<th>Pembatal</th>
                            
 						</tr>
 						</thead>
@@ -95,8 +63,7 @@
                             <th>Jalur</th>
                             <th>Tujuan</th>
                             <th>Pemegang</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
+                            <th>Pembatal</th>
                              
 						</tr>
 						</tfoot>
@@ -107,8 +74,8 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                 @if($row->status=='Y')
-                                    <button class="btn btn-sm btn-info"
+                                @if($row->status=='Y')
+                                <button class="btn btn-sm btn-info"
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
                         type="button">{{$row->no_resi}}</button>
@@ -117,9 +84,14 @@
                         data-toggle="modal"
                         data-target=".bd-example-modal-lg{{$row->id}}"
                         type="button">{{$row->no_resi}}</button>
-                              @endif
-                                @if($row->total_biaya > 0)
-                                <div class="modal fade bd-example-modal-lg{{$row->id}}"
+                                @else
+                                <button class="btn btn-sm btn-info"
+                        data-toggle="modal"
+                        data-target=".bd-example-modal-lg{{$row->id}}"
+                        type="button">{{$row->no_resi}}</button>
+                                @endif
+                            @if($row->total_biaya > 0)
+                <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
                      aria-labelledby="myLargeModalLabel"
@@ -133,13 +105,18 @@
                                 <h4 class="modal-title" id="myModalLabel">Detail Resi</h4>
                             </div>
                             <div class="modal-body">
-                
-                <div class="card-block invoice">
+                    <div class="card-block invoice">
                     <div class="row">
                         <div class="col-lg-6 company-info text-left">
                             
                             <h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
-                            <p>No. Resi/SMU : {{$row->no_smu}}</p>
+                            <p>No. Resi/SMU :
+                                @if($row->no_smu == null)
+                                <b>-</b>
+                                @else
+                             {{$row->no_smu}}
+                                @endif
+                            </p>
                             
 
                             <p>Pengiriman Via : {{$row->pengiriman_via}}</p>
@@ -173,7 +150,7 @@
                                         <td>{{$row->nama}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Operator</td>
+                                        <td>Pembatal</td>
                                         <td>{{$row->admin}}</td>
                                     </tr>
                                     <tr>
@@ -240,8 +217,8 @@
                                     
                                     <tr>
                                         
-                                        <td class="text-right">PPN</td>
-                                        <td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
+                                        <td class="text-right">Subtotal</td>
+                                        <td class="text-right">Rp. {{number_format($row->biaya_cancel,0,',','.')}}</td>
                                         
                                     </tr>
                                     <tr>
@@ -258,21 +235,15 @@
                     <div class="row">
                         <br>
                         <div class="col-lg-12 terms-and-conditions">
-                            <strong>Status : 
-                             @if($row->status=='N')
-                                Menunggu Pengembalian Resi / Uang
-                            @else
-                                Pengiriman Sukses
-                            @endif
-                            </strong>
+                            <strong>Status : Total berasal dari 30% subtotal</strong>
                             
                         </div>
                         
                     </div>
-                        <br>    
+                       <br>    
                             <div class="row text-left">
                                 <form action="tambahsmu" method="post">
-                                    <label>Ubah No.Resi/SMU</label>
+                                    <label>Tambahkan No. SMU</label>
                                     <div class="input-group input-group-sm">
                                         <input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
                                         <input type="hidden" name="kode" value="{{$row->id}}">
@@ -283,36 +254,26 @@
                                     </div>
                                 </form>
                             </div>
-                </div>
+                    </div>
                             </div>
                             <div class="modal-footer">
-                            
-                                @if($row->metode_bayar=='cash')
-                                    @if($row->status=='N')
-                                    <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-                                    @endif
-                                @else
-                                    @if($row->status=='N')
-                                    <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-                                    <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-                                    @elseif($row->status=='US')
-                                    <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-                                    @elseif($row->status=='RS')
-                                    <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-                                    @endif
-                                @endif
-                                
-                                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                </div><!--.modal-->
-                                @endif
+                </div>
+                            @endif
                             </td>
                             <td>
+                                @if($row->no_smu=='')
+                                @if($row->total_biaya != 0)
                                 <span class="label label-danger">
                                 kosong
                                 </span>
+                                @endif
+                                @else
+                                {{$row->no_smu}}
+                                @endif
                             </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
@@ -322,91 +283,27 @@
                                 @endif
                             </td>
                             <td>{{$row->nama}}</td>
-                            <td class="text-center">
-                            	@if($row->total_biaya > 0)
-                                    @if($row->pengiriman_via=='udara')
-                                @if($row->no_smu=='')
-                                <span class="label label-warning">Menunggu</span>
-                                @else
-                                @if($row->status=='Y')
-                                    <span class="label label-success">
-                                        Sukses
-                                    </span>
-                                @else
-                                    <span class="label label-warning">Menunggu</span>
-                                @endif
-                                @endif
-                                
-                            @else
-                                @if($row->status=='Y')
-                                    <span class="label label-success">
-                                        Sukses
-                                    </span>
-                                @else
-                                    <span class="label label-warning">Menunggu</span>
-                                @endif
-                            @endif
-                            	@else
-                            	<span class="label label-danger">
-                            	Belum Diisi
-                            	</span>
-                            	@endif
+                            <td>
+                            {{$row->admin}}
                             </td>
-                            <td class="text-center">
-                
-                     @if($row->total_biaya > 0)
-                        @if(Session::get('level')!='admin')
-
-                                <form action="{{ url('/Manual/delete')}}" method="post">
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                                </a> 
-                                @if($row->kode_jalan=='')
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-remove"></i>
-                                </button>
-                                @endif
-                            </form>
-                        @else
-                        -
-                        @endif
-                    @else
-                            <form action="{{ url('/Manual/delete')}}" method="post">                                
-                                <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                {{csrf_field()}}
-                                            
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                               <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-remove"></i>
-                                </button>
-                            </form>
-                    @endif
-               
-                            </td>
+                           
                              
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
-                   
-					
-					 {{ $manual->links() }}
-                     <div class="text-right">
-                     <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>    
-                     </div>
-                     
+                    <div class="pull-right">
+                    <a href="{{url('listpengiriman')}}">
+                     <button class="btn btn-danger">
+                     Kembali
+                     </button>
+                     </a>
+                    </div>
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 		@section('js')
@@ -415,7 +312,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 	</script>

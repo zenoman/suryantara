@@ -336,19 +336,16 @@
 						</div>
 					</div>
 					<hr>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan_darat">
-									@if($row->pengiriman_via=='darat'){{$row->keterangan}}
-									@endif
-								</textarea>
-							</div>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman darat" class="form-control" id="keterangan_darat">
+							<!--</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -611,19 +608,16 @@
 						</div>
 					</div>
 					<hr>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan_laut">
-									@if($row->pengiriman_via=='laut'){!!$row->keterangan!!}
-								@endif
-								</textarea>
-							</div>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman laut" class="form-control" id="keterangan_laut">
+							<!--</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_laut" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -994,20 +988,16 @@
 						</div>
 					</div>
 					<hr>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">
-								<textarea rows="4" class="form-control" id="keterangan_udara">
-									@if($row->pengiriman_via=='udara'){{$row->keterangan}}
-										
-										@endif
-								</textarea>
-							</div>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman udara" class="form-control" id="keterangan_udara">
+							<!--</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_udara"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>

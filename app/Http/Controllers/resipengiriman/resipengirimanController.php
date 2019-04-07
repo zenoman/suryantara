@@ -7,6 +7,74 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
+    public function listpengirimanbatal(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $datakirim = DB::table('resi_pengiriman')
+        ->where([['metode_input','otomatis'],['batal','Y']])
+        ->orderby('id','desc')
+        ->get();
+        return view('resipengiriman/pengirimanbatal',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
+    }
+    //==============================================================
+    public function batalpengiriman($id){
+        $dataresi = DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($dataresi as $row) {
+            $biaya = $row->total_biaya*30/100;
+            $biayalama = $row->total_biaya;
+            $kodejalan = $row->kode_jalan;
+            $metode = $row->metode_bayar;
+        }
+
+        if($kodejalan!=''){
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'total_biaya'=>$biaya,
+            'biaya_cancel'=>$biayalama,
+            'batal'=>'Y',
+            'admin'=>Session::get('username')]);
+
+        $datasj = 
+        DB::table('surat_jalan')
+        ->where('kode',$kodejalan)
+        ->get();
+        
+        if($metode=='cash'){
+            foreach ($datasj as $row){
+            $biayasj = $row->totalcash;
+            $newbiayasj = $biayasj - $biayalama + $biaya;}
+    
+        DB::table('surat_jalan')
+        ->where('kode',$kodejalan)
+        ->update([
+            'totalcash'=>$newbiayasj
+        ]);
+
+        }else{
+        foreach($datasj as $row){
+            $biayasj = $row->totalbt;
+            $newbiayasj = $biayasj - $biayalama + $biaya;}
+    
+        DB::table('surat_jalan')
+        ->where('kode',$kodejalan)
+        ->update([
+            'totalbt'=>$newbiayasj
+        ]);
+        }
+        }else{
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'total_biaya'=>$biaya,
+            'biaya_cancel'=>$biayalama,
+            'batal'=>'Y',
+            'admin'=>Session::get('username')
+        ]);
+        }
+        
+        return back()->with('status','resi berhasil dibatalkan');
+    }
+    //==================================================================
     public function editdataresi($id){
         $data = DB::table('resi_pengiriman')
         ->where('id',$id)
@@ -15,32 +83,35 @@ class resipengirimanController extends Controller
         $setting = DB::table('setting')->limit(1)->get();
         return view('resipengiriman/edit',['data'=>$data,'title'=>$setting,'kategori'=>$kategori]);
     }
+    //====================================================================
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis']])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis']])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis']])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis']])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis']])
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N']])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N']])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N']])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N']])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N']])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
         return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+    //================================================================
     public function caridataresi_smukosong(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null]])
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
         return view('resipengiriman/cari_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+    //===================================================================
     public function tambahnosmu(Request $request){
         DB::table('resi_pengiriman')
         ->where('id',$request->kode)
@@ -49,29 +120,28 @@ class resipengirimanController extends Controller
         ]);
         return back()->with('status','No SMU Di Simpan');
     }
+    //===================================================================
     public function resiudara(){
     $webinfo = DB::table('setting')->limit(1)->get();
     $kategori = DB::table('kategori_barang')->get();
     return view('resipengiriman/resiudara',['webinfo'=>$webinfo,'kategori'=>$kategori]);
     }
+    //====================================================================
     public function uangkembali($id){
          $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
-            
-                if($row->status=='N'){
-                    $status = "US";
-                }else{
-                    $status = "Y";
-                }
-            
-
-        }
+            if($row->status=='N'){
+                $status = "US";
+            }else{
+                $status = "Y";
+            }}
         DB::table('resi_pengiriman')->where('id',$id)
         ->update([
         'status'=>$status
         ]);
         return back()->with('status','Status Berhasil Diubah');
     }
+    //====================================================================
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
@@ -92,12 +162,13 @@ class resipengirimanController extends Controller
         ]);
         return back()->with('status','Status Berhasil Diubah');
     }
+    //===================================================================
     public function carilistresi($id){
         $data = DB::table('resi_pengiriman')
         ->where('id',$id);
         return response()->json($data);
     }
-
+    //==================================================================
     public function carikode(){
         $tanggal    = date('dmy');
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -115,19 +186,20 @@ class resipengirimanController extends Controller
         }
         return response()->json($finalkode);
     }
-
+    //===================================================================
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where('metode_input','otomatis')
+        ->where([['metode_input','otomatis'],['batal','N']])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
+    //===================================================================
         public function tampilsmukosong(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where('metode_input','otomatis')
+        ->where([['metode_input','otomatis'],['batal','=','N']])
         ->whereNull('no_smu')
         ->orderby('id','desc')
         ->paginate(50);

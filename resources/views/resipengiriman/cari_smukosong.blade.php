@@ -5,14 +5,10 @@
 <link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
-
-
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
-
-
 @section('content')
 	<div class="page-content">
 		<div class="container-fluid">
@@ -36,7 +32,6 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                     <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
                      <p>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -304,19 +299,32 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
-                                <i class="fa fa-pencil"></i>
+                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
                             	</a>
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
+                                <i class="fa fa-remove"></i>
+                            	</button>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 </form>
                                 @else
-                                -
+                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
+                            	</a>
+                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 @endif
+                            @else
+                            -
+                            @endif
                             </td>
 						</tr>
 						@endforeach

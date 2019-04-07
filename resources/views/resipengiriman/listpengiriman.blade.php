@@ -37,8 +37,13 @@
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 
-                     <a href="{{url('listpengiriman_smukosong')}}"><button class="btn btn-secondary">
+                     <a href="{{url('listpengiriman_smukosong')}}">
+                     <button class="btn btn-secondary">
                      <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
+                     </a>
+                     <a href="{{url('listpengirimanbatal')}}">
+                     <button class="btn btn-danger">
+                     <i class="font-icon font-icon-list-square"></i> Resi Dibatalkan </button>
                      </a>
 
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -146,14 +151,6 @@
 								<div>Metode Bayar : {{$row->metode_bayar}}</div>
 							</div>
 							<br>
-							<!-- <div class="invoice-block">
-								<h5>Invoice To:</h5>
-								<div>Rebeca Manes</div>
-								<div>
-									Normand axis LTD <br>
-									3 Goodman street
-								</div>
-							</div> -->
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
@@ -340,19 +337,32 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
                             	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
+                            	
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                 <i class="fa fa-remove"></i></button>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 </form>
                                 @else
-                                -
+                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
+                            	</a>
+                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 @endif
+                            @else
+                            -
+                            @endif
                             </td>
 						</tr>
 						@endforeach

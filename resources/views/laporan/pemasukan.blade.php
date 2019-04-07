@@ -69,7 +69,15 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->no_resi}}</td>
+                            <td>
+                            	@if($row->batal=='N')
+                            	{{$row->no_resi}}
+                            	@else
+                            	<span class="text-danger">
+                            		{{$row->no_resi}}
+                            	</span>
+                            	@endif
+                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
                             	@if($jalur=='semua')

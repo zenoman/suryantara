@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Data Pengeluaran Lain</h2>
+							<h2>Data Pembukuan</h2>
 						</div>
 					</div>
 				</div>

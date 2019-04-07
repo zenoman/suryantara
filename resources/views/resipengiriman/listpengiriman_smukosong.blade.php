@@ -5,14 +5,10 @@
 <link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
-
-
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
-
-
 @section('content')
 	<div class="page-content">
 		<div class="container-fluid">
@@ -31,14 +27,14 @@
 				<div class="card-block">
 					@if (session('status'))
                     <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+                        </button>
+                        {{ session('status') }}
                     </div>
                     @endif
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
-                     <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
-						<br><br>
+                     	<br><br>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -331,19 +327,32 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
-                                <i class="fa fa-pencil"></i>
+                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
                             	</a>
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
+                                <i class="fa fa-remove"></i>
+                            	</button>
+                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 </form>
                                 @else
-                                -
+                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
+                            	</a>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                                 @endif
+                            @else
+                            -
+                            @endif
                             </td>
 						</tr>
 						@endforeach
@@ -368,8 +377,8 @@
 					<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 

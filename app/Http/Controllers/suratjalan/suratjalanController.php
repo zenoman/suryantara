@@ -27,7 +27,8 @@ class suratjalanController extends Controller
         $data = DB::table('resi_pengiriman')
         ->where('id',$request->nomer)
         ->update([
-            'biaya_suratjalan'=>$request->jumlah
+            'biaya_suratjalan'=>$request->jumlah,
+            'tgl_bayar'=>date('Y-m-d')
         ]);
         $datasj = DB::table('surat_jalan')->where('kode',$request->kode)->get();
         //=======================================
@@ -106,7 +107,7 @@ class suratjalanController extends Controller
             
             $data = DB::table('resi_pengiriman')
                     ->select('no_resi','id')
-                    ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0]])
+                    ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0],['batal','=','N']])
                     ->whereNull('kode_jalan')
                     ->get();
             
@@ -231,10 +232,10 @@ class suratjalanController extends Controller
             $listdata = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
             ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
-            ->where('resi_pengiriman.no_resi','like','%'.$cari.'%')
-            ->orwhere('resi_pengiriman.no_smu','like','%'.$cari.'%')
-            ->orwhere('resi_pengiriman.kode_jalan','like','%'.$cari.'%')
-            ->orwhere('resi_pengiriman.tgl','like','%'.$cari.'%')
+            ->where([['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([['resi_pengiriman.no_smu','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([['resi_pengiriman.tgl','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
             ->get();
          
         $webinfo = DB::table('setting')->limit(1)->get();

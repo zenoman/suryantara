@@ -15,7 +15,7 @@ class LaporanOmsetExport implements FromCollection,WithHeadings, ShouldAutoSize
     public function collection()
     {
         return DB::table('omset')
-        ->select(DB::raw('bulan,tahun,pemasukan,pengeluaran,gaji_karyawan,pengeluaran_lainya,pajak,laba'))
+        ->select(DB::raw('bulan,tahun,omset_awal,pemasukan,pengeluaran,gaji_karyawan,pengeluaran_lainya,pajak,laba'))
         ->get();;
     }
     public function headings(): array
@@ -23,6 +23,7 @@ class LaporanOmsetExport implements FromCollection,WithHeadings, ShouldAutoSize
         return [
 			'bulan',
 			'tahun',
+            'omset awal',
 			'jumlah pemasukan',
 			'jumlah pengeluaran',
             'jumlah pengeluaran gaji karyawan',

@@ -37,7 +37,7 @@ class backupController extends Controller
     }
     public function cetakpendapatan(int $bulan,int $tahun){
     	$data = DB::table('resi_pengiriman')
-        ->select(DB::raw('tgl,no_resi,no_smu,kode_jalan,admin,nama_barang,pengiriman_via,kota_asal,kode_tujuan,jumlah,berat,dimensi,ukuran_volume,nama_pengirim,telp_pengirim,nama_penerima,telp_penerima,biaya_kirim,biaya_packing,biaya_asuransi,biaya_smu,biaya_karantina,biaya_ppn,total_biaya,metode_bayar,satuan,keterangan,biaya_charge'))
+        ->select(DB::raw('tgl,no_resi,no_smu,kode_jalan,admin,nama_barang,pengiriman_via,kota_asal,kode_tujuan,jumlah,berat,dimensi,ukuran_volume,nama_pengirim,telp_pengirim,nama_penerima,telp_penerima,biaya_kirim,biaya_packing,biaya_asuransi,biaya_smu,biaya_karantina,biaya_ppn,total_biaya,metode_bayar,satuan,keterangan,biaya_charge,batal'))
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
         ->get();
@@ -110,14 +110,14 @@ class backupController extends Controller
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
         ->delete();
-    	return back();
+    	return back()->with('status','Data Pendapatan Berhasil Dihapus');
     }
     public function hapuspengeluaran($bulan, $tahun){
     	$data = DB::table('surat_jalan')
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
         ->delete();
-    	return back();
+    	return back()->with('status','Data Pengeluaran Vendor Berhasil Dihapus');
     }
     public function hapuspengeluaranlain($bulan, $tahun){
         $data = DB::table('pengeluaran_lain')
@@ -133,13 +133,13 @@ class backupController extends Controller
         ->whereMonth('tgl',$bulan)
         ->whereYear('tgl',$tahun)
         ->delete();
-        return back();
+        return back()->with('status','Data Pengeluaran Lain Berhasil Di hapus');
     }
     public function hapusgjkw($bulan, $tahun){
         $data = DB::table('gaji_karyawan')
         ->where([['gaji_karyawan.bulan','=',$bulan],['gaji_karyawan.tahun','=',$tahun]])
         ->delete();
-        return back();
+        return back()->with('status','Data Pengeluaran Gaji Karyawan Berhasil Dihapus');
     }
     public function selanjutnya(){
     	$newstep = Session::get('backup_step')+1; 

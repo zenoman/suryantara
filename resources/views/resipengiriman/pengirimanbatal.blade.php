@@ -20,8 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Pengiriman</h2>
-							<h5>Hasil Pencarian "{{$cari}}"</h5>
+							<h2>List Pengiriman Dibatalkan</h2>
 						</div>
 					</div>
 				</div>
@@ -35,7 +34,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                     
+                   <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -47,9 +46,7 @@
 							<th>Isi Paket</th>
 							<th>Tujuan</th>
 							<th>Pengirim</th>
-							<th>Admin</th>
-							<th>Status</th>
-							<td>Aksi</td>
+							<th>Pembatal</th>
 						</tr>
 						</thead>
 						
@@ -73,7 +70,6 @@
 						data-toggle="modal"
 						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
 								@endif
-
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
@@ -92,13 +88,10 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
-							
-							@if($row->pengiriman_via=='udara')
+							<!-- ini -->
+
 							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
 							<p>No. SMU : {{$row->no_smu}}</p>
-							@else
-							<h5>Isi paket : {{$row->nama_barang}}</h5>
-							@endif
 
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -120,14 +113,6 @@
 								<div>Metode Bayar : {{$row->metode_bayar}}</div>
 							</div>
 							<br>
-							<!-- <div class="invoice-block">
-								<h5>Invoice To:</h5>
-								<div>Rebeca Manes</div>
-								<div>
-									Normand axis LTD <br>
-									3 Goodman street
-								</div>
-							</div> -->
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
@@ -135,7 +120,7 @@
 								
 								<table class="pull-right table-sm">
 									<tr>
-										<td>Operator</td>
+										<td>Pembatal</td>
 										<td>{{$row->admin}}</td>
 									</tr>
 									<tr>
@@ -185,6 +170,10 @@
 										<td class="text-right">Biaya Karantina</td>
 										<td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
 									</tr>
+									<tr>
+										<td class="text-right">Biaya Charge</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
+									</tr>
 								@else
 									<tr>
 										<td class="text-right">Biaya Packing</td>
@@ -198,8 +187,8 @@
 									
 									<tr>
 										
-										<td class="text-right">PPN</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
+										<td class="text-right">Subtotal</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_cancel,0,',','.')}}</td>
 										
 									</tr>
 									<tr>
@@ -213,15 +202,11 @@
 							</table>
 						</div>
 					</div>
+					<br>
 					<div class="row">
-						<br>
+						
 						<div class="col-lg-12 terms-and-conditions">
-							<strong>Status : 
-							 @if($row->status=='N')
-								Menunggu Pengembalian Resi / Uang
-                            @else
-								Pengiriman Sukses
-                        	@endif
+							<strong>NB : Total adalah hasil penghitungan dari 30% subtotal.
 							</strong>
 							
 						</div>
@@ -230,7 +215,7 @@
 						<br>	
 							<div class="row text-left">
 								<form action="tambahsmu" method="post">
-									<label>Ubah No. SMU</label>
+									<label>Ubah No.Resi/SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
 										<input type="hidden" name="kode" value="{{$row->id}}">
@@ -240,33 +225,18 @@
 										</span>
 									</div>
 								</form>
-							</div>
-				</div>
+							</div>	
+						</div>
 							</div>
 							<div class="modal-footer">
-							
-								@if($row->metode_bayar=='cash')
-									@if($row->status=='N')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@endif
-								@else
-									@if($row->status=='N')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='US')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='RS')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									@endif
-								@endif
-								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
-				</div><!--.modal-->
+				</div>
                             </td>
-                            <td>@if($row->no_smu=='')
+                            <td>
+                            @if($row->no_smu=='')
                                 @if($row->total_biaya != 0)
                                 <span class="label label-danger">
                                 kosong
@@ -274,7 +244,8 @@
                                 @endif
                                 @else
                                 {{$row->no_smu}}
-                                @endif</td>
+                                @endif
+                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -282,60 +253,7 @@
                             </td>
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->admin}}</td>
-                            <td class="text-center">
-                            @if($row->pengiriman_via=='udara')
-                            	@if($row->no_smu=='')
-                            	<span class="label label-warning">Menunggu</span>
-                            	@else
-                            	@if($row->status=='Y')
-		                            <span class="label label-success">
-										Sukses
-									</span>
-	                            @else
-									<span class="label label-warning">Menunggu</span>
-	                        	@endif
-                            	@endif
-                            	
-                            @else
-                            	@if($row->status=='Y')
-		                            <span class="label label-success">
-										Sukses
-									</span>
-	                            @else
-									<span class="label label-warning">Menunggu</span>
-	                        	@endif
-                            @endif
-	                            
-                            </td>
-                            <td class="text-center">
-                            @if(Session::get('level')!='admin')
-                            	@if($row->kode_jalan=='')
-                            	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
-                                <i class="fa fa-pencil"></i>
-                            	</a>
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i>
-                            	</button>
-                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                </form>
-                                @else
-                                 <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                @endif
-                            @else
-                            -
-                            @endif
-                            </td>
-						</tr>
+                        </tr>
 						@endforeach
 						</tbody>
 						<tfoot>
@@ -348,17 +266,23 @@
 							<th>Isi Paket</th>
 							<th>Tujuan</th>
 							<th>Pengirim</th>
-							<th>Admin</th>
-							<th>Status</th>
-							<td>Aksi</td>
+							<th>Pembatal</th>
 						</tr>
 						</tfoot>
+						
 					</table>
-					<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+					<div class="pull-right">
+					<a href="{{url('listpengiriman')}}">
+                     <button class="btn btn-danger">
+                     Kembali
+                 	 </button>
+                     </a>
+					</div>
+					
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 

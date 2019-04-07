@@ -30,6 +30,12 @@
 			<div class="row">
 				
 				<div class="col-xl-12">
+					@if (session('status'))
+                    <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('status') }}
+                    </div>
+                    @endif
 					<section class="box-typical steps-icon-block">
 						<div class="steps-icon-progress">
 							<ul>

@@ -25,7 +25,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Bayar Surat Jalan</h2>
+							<h2>Bayar Manifes</h2>
 						</div>
 					</div>
 				</div>
@@ -92,7 +92,15 @@
 								@endphp
 								@foreach($dataresi as $resi)
 									<tr>
-										<td>{{$resi->no_resi}}</td>
+										<td>
+											@if($resi->batal=='N')
+											{{$resi->no_resi}}
+											@else
+											<span class="text-danger">
+												{{$resi->no_resi}}
+											</span>
+											@endif
+										</td>
 										<td>{{$resi->no_smu}}</td>
 										<td>{{$resi->nama_barang}}</td>
 										<td>{{$resi->jumlah}} Koli</td>
@@ -105,7 +113,7 @@
 										<td class="text-right">Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										
 										@endif
-										<td>
+										<td class="text-right">
 										Rp. {{number_format($resi->biaya_suratjalan,0,',','.')}}
 										</td>
 										<td class="text-center">
@@ -186,17 +194,17 @@
 									<td>
 										{{$row->totalkg}} Kg
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->totalcash>0)
 										Rp. {{number_format($row->totalcash,0,',','.')}}
 										@endif
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->totalbt>0)
 										Rp. {{number_format($row->totalbt,0,',','.')}}
 										@endif
 									</td>
-									<td>
+									<td class="text-right">
 										@if($row->biaya>0)
 										Rp. {{number_format($row->biaya,0,',','.')}}
 										@endif

@@ -1,6 +1,18 @@
 <?php
 use Illuminate\Support\Facades\Input;
+<<<<<<< HEAD
 
+=======
+//==============================================armada
+Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
+Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
+Route::get('/armada/{id}/delete','Armada\Armadacontroller@delete');
+Route::put('/armada/{id}','Armada\Armadacontroller@update');
+Route::get('/armada/{id}/edit','Armada\Armadacontroller@edit');
+Route::post('/armada','Armada\Armadacontroller@store');
+Route::get('/armada','Armada\Armadacontroller@index');
+Route::get('/armada/create','Armada\Armadacontroller@create');
+>>>>>>> master
 //==============================================pajak
 Route::get('/pajak','pajak\pajakcontroller@index');
 Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
@@ -34,6 +46,8 @@ Route::get('/omset/export','omset\omsetController@export');
 Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
 
 //================================================resi pengiriman
+Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
+Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
 Route::post('/simpanubahlaut','resipengiriman\resipengirimanController@simpanubahlaut');
 Route::post('/simpanubahdarat','resipengiriman\resipengirimanController@simpanubahdarat');
 Route::post('/simpanubahudara','resipengiriman\resipengirimanController@simpanubahudara');
@@ -102,7 +116,8 @@ Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','lapo
 Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
 //===========================================
-
+Route::post('/login/bukakunci','Login\Logincontroller@bukakunci');
+Route::get('/lockscreen','Login\Logincontroller@lockscreen');
 Route::get('/login','Login\Logincontroller@index');
 Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 Route::get('/','landing\landingcontroller@index');
@@ -206,6 +221,7 @@ Route::get('/karyawan/karyawanexport','Karyawan\Karyawancontroller@exsportexcel'
 Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt');
 Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
 //==============================================================resi manual
+Route::get('/manualbatal','Manual\Manualcontroller@manualbatal');
 Route::post('/simpanmanualdarat','Manual\Manualcontroller@simpandarat');
 Route::post('/simpanmanuallaut','Manual\Manualcontroller@simpanlaut');
 Route::post('/simpanmanualudara','Manual\Manualcontroller@simpanudara');
