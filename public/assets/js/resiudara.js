@@ -46,15 +46,19 @@ $(document).ready(function(){
 	function hitungberat(){
 		totalberat=0;
 		for (var i = 1; i <= jumlahbarang; i++) { 
-  			var volume = Number(document.getElementById('volume'+i).value);
+  		var volume = Number(document.getElementById('volume'+i).value);
 		var berataktual = Number(document.getElementById('berat'+i).value);
 		if(volume > berataktual){
 			totalberat += parseFloat(volume);
+			beratbaru = parseFloat(berataktual);
 		}else{
-			totalberat += parseFloat(berataktual);}
+			totalberat += parseFloat(berataktual);
+			beratbaru = parseFloat(berataktual);
 		}
-		$('#totalberat').val(totalberat.toFixed(1));
-		hitungbiayakirim(totalberat.toFixed(1));
+		$('#berat'+i).val(beratbaru.toFixed());
+		}
+		$('#totalberat').val(totalberat.toFixed());
+		hitungbiayakirim(totalberat.toFixed());
 	}
 	window.hitungberat=hitungberat;
 	//===================================================
@@ -64,7 +68,7 @@ $(document).ready(function(){
 		var tinggi = Number(document.getElementById('d_tinggi'+nomer).value);
 		var total =  (panjang * lebar * tinggi)/6000;
 		var vt = parseFloat(total);
-		$('#volume'+nomer).val(vt.toFixed(1));
+		$('#volume'+nomer).val(vt.toFixed());
 		hitungberat();
 	}
 	window.hayy=hayy;
@@ -174,6 +178,7 @@ $(document).ready(function(){
 	}
 	//===========================================
 	function carikode(){
+		$('#panelnya').loading('toggle');
 			$.ajax({
 			url:'/carikode',
 			dataType:'json',
@@ -184,7 +189,9 @@ $(document).ready(function(){
 				$("#cetak_resi2").html(data);
 				$("#cetak_resi3").html(data);
 				$("#cetak_resi4").html(data);
-			}
+			},complete:function(){
+                $('#panelnya').loading('stop');
+            }
 		});
 		}
 	//===========================================
@@ -210,6 +217,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	$('#kota_tujuan').on('select2:select',function(e){
+		$('#panelnya').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -265,7 +273,9 @@ $(document).ready(function(){
 					})
 				}
 				
-			},
+			},complete:function(){
+                $('#panelnya').loading('stop');
+            }
             });
 		});
 	//============================================ fokus input pengirim 	

@@ -40,7 +40,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume_darat").val(vt.toFixed(1));
+			$("#volume_darat").val(vt.toFixed());
 			}
 			
 		})
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume_darat").val(vt.toFixed(1));
+			$("#volume_darat").val(vt.toFixed());
 			}
 			
 		})
@@ -64,7 +64,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi_darat").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume_darat").val(vt.toFixed(1));
+			$("#volume_darat").val(vt.toFixed());
 			}
 			
 		})
@@ -91,6 +91,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	$('#kota_tujuan_darat').on('select2:select',function(e){
+		$('#formdarat').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -107,9 +108,29 @@ $(document).ready(function(){
 							}
 					})
 				}
-			},
+			},complete:function(){
+                $('#formdarat').loading('stop');
+            }
             });
 		});
+	//================================================
+	$("#berat_laut").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var berat = $("#berat_laut").val();
+			var vt = parseFloat(berat);
+			$("#berat_laut").val(vt.toFixed());
+			}
+			
+		})
+	//================================================
+	$("#berat_darat").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var berat = $("#berat_darat").val();
+			var vt = parseFloat(berat);
+			$("#berat_darat").val(vt.toFixed());
+			}
+			
+		})
 	//============================================ hitung estimasi tujuan
 		function hitung(harga,tujuan){
 			var berat = $("#berat_darat").val();
@@ -186,8 +207,8 @@ $(document).ready(function(){
 			var jumlah		= $("#jumlah_darat").val();
 			var berat		= $("#berat_darat").val();
 			var kota_asal	= $("#kota_asal_darat").val();
-			var dats = $('#kota_tujuan_darat').select2('data');
-			var kota_tujuan = dats[0].text;
+			var isi_kota_tujuan = $('#kota_tujuan_darat').val();
+			
 			var a_pengirim 	= $("#alamat_pengirim_darat").val();
 			var a_penerima	= $("#alamat_penerima_darat").val();
 			var n_pengirim 	= $("#n_pengirim_darat").val();
@@ -203,9 +224,11 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_darat").val();
-			if(a_penerima=='' || a_pengirim=='' || nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+			if(a_penerima=='' || a_pengirim=='' || nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
+   				var dats = $('#kota_tujuan_darat').select2('data');
+				var kota_tujuan = dats[0].text;
    				var l = Ladda.create(this);
                 l.start();
 				$.ajax({
@@ -381,7 +404,7 @@ $(document).ready(function(){
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
 			var vt = parseFloat(total_laut);
-			$("#volume_laut").val(vt.toFixed(1));
+			$("#volume_laut").val(vt.toFixed());
 			}
 			
 		})
@@ -393,7 +416,7 @@ $(document).ready(function(){
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
 			var vt = parseFloat(total_laut);
-			$("#volume_laut").val(vt.toFixed(1));
+			$("#volume_laut").val(vt.toFixed());
 			}
 			
 		})
@@ -405,7 +428,7 @@ $(document).ready(function(){
 			var tinggi_laut = $("#d_tinggi_laut").val();
 			var total_laut =  (parseInt(panjang_laut) *  parseInt(lebar_laut) *  parseInt(tinggi_laut))/4000;
 			var vt = parseFloat(total_laut);
-			$("#volume_laut").val(vt.toFixed(1));
+			$("#volume_laut").val(vt.toFixed());
 			}
 			
 		})
@@ -432,6 +455,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	$('#kota_tujuan_laut').on('select2:select',function(e){
+			$('#formlaut').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -448,7 +472,9 @@ $(document).ready(function(){
 							}
 					})
 				}
-			},
+			},complete:function(){
+                $('#formlaut').loading('stop');
+            }
             });
 		});
 	//============================================ hitung estimasi tujuan
@@ -513,8 +539,7 @@ $(document).ready(function(){
 			var jumlah		= $("#jumlah_laut").val();
 			var berat		= $("#berat_laut").val();
 			var kota_asal	= $("#kota_asal_laut").val();
-			var dats = $('#kota_tujuan_laut').select2('data');
-			var kota_tujuan = dats[0].text;
+			var isi_kota_tujuan = $('#kota_tujuan_laut').val();
 			var a_pengirim 	= $("#alamat_pengirim_laut").val();
 			var a_penerima	= $("#alamat_penerima_laut").val();
 			var n_pengirim 	= $("#n_pengirim_laut").val();
@@ -530,9 +555,11 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_laut").val();
-			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || isi_kota_tujuan==null || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
+   				var dats = $('#kota_tujuan_laut').select2('data');
+				var kota_tujuan = dats[0].text;
    				var l = Ladda.create(this);
                 l.start();
 				$.ajax({
@@ -767,11 +794,15 @@ $(document).ready(function(){
 		var berataktual = Number(document.getElementById('berat_udara'+i).value);
 		if(volume > berataktual){
 			totalberat += parseFloat(volume);
+			beratbaru = parseFloat(berataktual);
 		}else{
-			totalberat += parseFloat(berataktual);}
+			totalberat += parseFloat(berataktual);
+			beratbaru = parseFloat(berataktual);
 		}
-		$('#totalberat').val(totalberat.toFixed(1));
-		hitungbiayakirim(totalberat.toFixed(1));
+		$('#berat_udara'+i).val(beratbaru.toFixed());
+		}
+		$('#totalberat').val(totalberat.toFixed());
+		hitungbiayakirim(totalberat.toFixed());
 		$('#jumlah_udara').val(jumlahbarang);
 	}
 	window.hitungberat=hitungberat;
@@ -782,7 +813,7 @@ $(document).ready(function(){
 		var tinggi = Number(document.getElementById('d_tinggi_udara'+nomer).value);
 		var total =  (panjang * lebar * tinggi)/6000;
 		var vt = parseFloat(total);
-		$('#volume_udara'+nomer).val(vt.toFixed(1));
+		$('#volume_udara'+nomer).val(vt.toFixed());
 		hitungberat();
 	}
 	window.hayy=hayy;
@@ -801,7 +832,7 @@ $(document).ready(function(){
 	// 		totalberat -= parseFloat(berataktual);
 			
 	// 	}
-	// $('#totalberat').val(totalberat.toFixed(1));
+	// $('#totalberat').val(totalberat.toFixed());
 	hitungberat();
     e.preventDefault();
 	$(this).parent().remove();
@@ -898,6 +929,7 @@ $(document).ready(function(){
 	});
 		//=================================================
 	$('#kota_tujuan_udara').on('select2:select',function(e){
+		$('#formudara').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -946,7 +978,9 @@ $(document).ready(function(){
 					})
 				}
 				
-			},
+			},complete:function(){
+                $('#formudara').loading('stop');
+            }
             });
 		});
 	//============================================ fokus input pengirim 	
@@ -1108,6 +1142,10 @@ $(document).ready(function(){
 		$("#listbarang2").html(rows);
 		$("#listbarang3").html(rows);
 		$("#listbarang4").html(rows);
+		$("#cetak_resi_udara").html($("#koderesinya").val());
+		$("#cetak_resi_udara2").html($("#koderesinya").val());
+		$("#cetak_resi_udara3").html($("#koderesinya").val());
+		$("#cetak_resi_udara4").html($("#koderesinya").val());
 		$("#cetak_metode_udara").html($("#metode_udara").val());
 		$("#cetak_metode_udara2").html($("#metode_udara").val());
 		$("#cetak_metode_udara3").html($("#metode_udara").val());

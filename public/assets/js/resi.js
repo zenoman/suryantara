@@ -33,6 +33,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	$('#kota_tujuan').on('select2:select',function(e){
+		$('#panelnya').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -59,7 +60,9 @@ $(document).ready(function(){
 							}
 					})
 				}
-			},
+			},complete:function(){
+                $('#panelnya').loading('stop');
+            }
             });
 		});
 	//============================================ fokus input pengirim 	
@@ -68,6 +71,7 @@ $(document).ready(function(){
 		});
 	//============================================ cari kode
 		function carikode(){
+			$('#panelnya').loading('toggle');
 			$.ajax({
 			url:'/carikode',
 			dataType:'json',
@@ -78,7 +82,9 @@ $(document).ready(function(){
 				$("#cetak_resi2").html(data);
 				$("#cetak_resi3").html(data);
 				$("#cetak_resi4").html(data);
-			}
+			},complete:function(){
+                $('#panelnya').loading('stop');
+            }
 		});
 		}
 	//============================================ hitung estimasi tujuan
@@ -116,7 +122,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(1));
+			$("#volume").val(vt.toFixed());
 			}
 			
 		})
@@ -128,7 +134,16 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(1));
+			$("#volume").val(vt.toFixed());
+			}
+			
+		})
+	//================================================
+	$("#berat").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var berat = $("#berat").val();
+			var vt = parseFloat(berat);
+			$("#berat").val(vt.toFixed());
 			}
 			
 		})
@@ -140,7 +155,7 @@ $(document).ready(function(){
 			var tinggi = $("#d_tinggi").val();
 			var total =  (parseInt(panjang) *  parseInt(lebar) *  parseInt(tinggi))/4000;
 			var vt = parseFloat(total);
-			$("#volume").val(vt.toFixed(1));
+			$("#volume").val(vt.toFixed());
 			}
 			
 		})
@@ -303,18 +318,17 @@ $(document).ready(function(){
 			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
 		//==========================================selesai transaksi
-		$('#btnselesai').click(function(e){
-			e.preventDefault();
-			e.stopImmediatePropagation();
-			var foo = "bar";
+		 $('#btnselesai').click(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var foo = "bar";
     if(foo=="bar"){
-    	var isgood = confirm('Apakah anda yakin transaksi telah selesai ?');
-    	if(isgood){
-    		bersih();
-           carikode();	
-    	}
+        var isgood = confirm('Apakah anda yakin transaksi telah selesai ?');
+        if(isgood){
+            location.reload();  
+        }
     }
-		});
+        });
 	//============================================ simpan transaksi
 		$("#btnsimpan").click(function(e){
 			e.preventDefault();

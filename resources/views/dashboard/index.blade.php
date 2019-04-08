@@ -23,9 +23,7 @@
 	       
 	
 	        <div class="row">
-<<<<<<< HEAD
 
-=======
 	        	 @if (session('status'))
 	        	 <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-success alert-dismissable">
@@ -79,7 +77,6 @@
 			</section>
 	            </div>
 	            @endif
->>>>>>> master
 	        	<div class="col-xl-4 dahsboard-column">
 	        		@foreach($uanghariini as $rows)
 					<section class="widget widget-simple-sm-fill">
@@ -108,21 +105,21 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
-	        	@if($jmlkarya == $jmlabsen)
+	        	<!-- if($jmlkarya == $jmlabsen)
 	        	
-	        	@else
+	        	else
 	        	<div class="col-xl-4 dahsboard-column">
 	        		<section class="widget widget-simple-sm-fill green">
 								<div class="widget-simple-sm-icon">
 									<i class="font-icon font-icon-users"></i>
 								</div>
-								<div class="widget-simple-sm-fill-caption">{{$jmlabsen}} Karyawan Sudah Absen </div>
+								<div class="widget-simple-sm-fill-caption">$jmlabsen Karyawan Sudah Absen </div>
 	        	<a href="{{url('/absen')}}" type="button" class="btn btn-inline btn-success">
 	        		Klik Untuk Absen
 	        	</a>
 					</section>
 	        	</div>
-	        	@endif
+	        	endif -->
 
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">

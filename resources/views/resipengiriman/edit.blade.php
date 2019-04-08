@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
 @section('content')
+<link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 <script type="text/javascript">
      function isNumberKey(evt)
       {var charCode = (evt.which) ? evt.which : event.keyCode
@@ -79,7 +80,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="box-typical box-typical-padding" id="formdarat" @if($row->pengiriman_via!='darat')style="display: none;" @endif>
+			<div class="box-typical box-typical-padding loading-div" id="formdarat" @if($row->pengiriman_via!='darat')style="display: none;" @endif>
 				<header class="card-header card-header-xl">
 					Jalur Darat
 				</header>
@@ -361,7 +362,7 @@
 								
 							</small>
 			</div>
-			<div class="box-typical box-typical-padding" id="formlaut" @if($row->pengiriman_via!='laut')style="display: none;" @endif>
+			<div class="box-typical box-typical-padding loading-div" id="formlaut" @if($row->pengiriman_via!='laut')style="display: none;" @endif>
 				<header class="card-header card-header-xl">
 					Jalur Laut
 				</header>
@@ -551,7 +552,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_kirim_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut') value="{{$row->biaya_kirim}}" @endif>
+								<input type="text" class="form-control" id="biaya_kirim_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut') value="{{$row->biaya_kirim}}" @else value="0" @endif>
 							</div>
 						</div>
 					</div>
@@ -559,7 +560,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_packing_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut')value="{{$row->biaya_packing}}" @endif>
+								<input type="text" class="form-control" id="biaya_packing_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut')value="{{$row->biaya_packing}}" @else value="0" @endif>
 							</div>
 						</div>
 					</div>
@@ -567,7 +568,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="biaya_asuransi_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut')value="{{$row->biaya_asuransi}}" @endif>
+								<input type="text" class="form-control" id="biaya_asuransi_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut')value="{{$row->biaya_asuransi}}" @else value="0" @endif>
 							</div>
 						</div>
 					</div>
@@ -644,7 +645,7 @@
 
 
 <!-- ================================================================= -->
-			<div class="box-typical box-typical-padding" id="formudara" @if($row->pengiriman_via!='udara')style="display: none;" @endif>
+			<div class="box-typical box-typical-padding loading-div" id="formudara" @if($row->pengiriman_via!='udara')style="display: none;" @endif>
 			<header class="card-header card-header-xl">
 					Jalur Udara
 				</header>
@@ -2768,6 +2769,7 @@
 @endsection
 
 @section('js')
+<script src="{{asset('assets/js/loading.js')}}"></script>
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>

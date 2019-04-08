@@ -12,6 +12,7 @@
 @endforeach
 @endsection
 @section('content')
+<link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 <script>
 	function isNumberKey(evt)
       {
@@ -45,6 +46,7 @@
 					</div>
 				</div>
 			</header>
+			<div class="loading-div" id="panelnya">
 			<div class="box-typical box-typical-padding">
 					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
@@ -343,7 +345,7 @@
 							</small>
 				</form>
 			</div>
-		
+		</div>
 		</div>
 	<div id="hidden_div" style="display: none;">
 		<div>
@@ -1250,6 +1252,8 @@
 	</div>
         @endsection
 @section('js')
+<script src="{{asset('assets/js/loading.js')}}"></script>
+
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/notie/notie-init.js')}}"></script>

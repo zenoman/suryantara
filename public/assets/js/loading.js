@@ -43,7 +43,7 @@
      * target's z-index
      * Has no effect if a custom overlay is defined
      */
-    zIndex: undefined,
+    zIndex: 3,
 
     /**
      * Message to be rendered on the overlay content
@@ -61,7 +61,7 @@
      *
      * Has no effect if a custom overlay is defined
      */
-    theme: 'light',
+    theme: 'dark',
 
     /**
      * Class(es) to be applied to the overlay element when the loading state is started

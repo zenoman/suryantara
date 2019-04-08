@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
 @section('content')
+<link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 <script type="text/javascript">
      function isNumberKey(evt)
       {var charCode = (evt.which) ? evt.which : event.keyCode
@@ -81,7 +82,7 @@
 
 
 
-			<div class="box-typical box-typical-padding" id="formdarat">
+			<div class="box-typical box-typical-padding loading-div" id="formdarat">
 				<header class="card-header card-header-xl">
 					Jalur Darat
 				</header>
@@ -296,7 +297,7 @@
 
 
 
-			<div class="box-typical box-typical-padding" id="formlaut" style="display: none;">
+			<div class="box-typical box-typical-padding loading-div" id="formlaut" style="display: none;">
 				<header class="card-header card-header-xl">
 					Jalur Laut
 				</header>
@@ -512,7 +513,7 @@
 
 
 <!-- ================================================================= -->
-			<div class="box-typical box-typical-padding" id="formudara" style="display: none;" >
+			<div class="box-typical box-typical-padding loading-div" id="formudara" style="display: none;" >
 			<header class="card-header card-header-xl">
 					Jalur Udara
 				</header>
@@ -819,5 +820,6 @@
 <script src="{{asset('assets/js/lib/ladda-button/ladda.min.js')}}"></script>
 @endsection
 @section('otherjs')
+<script src="{{asset('assets/js/loading.js')}}"></script>
 <script src="{{asset('assets/js/resimanual.js')}}"></script>
 @endsection
