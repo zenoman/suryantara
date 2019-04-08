@@ -21,7 +21,7 @@ class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
             'Id',
             'Id Karyawan',
             'Nama Karyawan',
-            'telp ',
+            'Telp',
             'Alamat',
             'Jabatan',
         ];

@@ -1,11 +1,6 @@
-
 <?php
 use Illuminate\Support\Facades\Input;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 //==============================================armada
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
 Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');

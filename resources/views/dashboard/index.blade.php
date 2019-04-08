@@ -77,6 +77,17 @@
 			</section>
 	            </div>
 	            @endif
+	        	@if($jmlkarya != $jmlabsen)
+	        	<div class="col-xl-12 dahsboard-column">
+	        		<section class="widget widget-simple-sm-fill green">
+								<div class="widget-simple-sm-icon">
+									<i class="font-icon font-icon-users"></i>
+								</div>
+								<div class="widget-simple-sm-fill-caption">{{$jmlabsen}} Karyawan Sudah Absen </div>
+				<a href="{{url('/absen')}}" class="btn btn-rounded btn-inline btn-success-outline">Klik Untuk Absen</a>
+					</section>
+	        	</div>
+	        	@endif
 	        	<div class="col-xl-4 dahsboard-column">
 	        		@foreach($uanghariini as $rows)
 					<section class="widget widget-simple-sm-fill">
@@ -105,22 +116,6 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
-	        	<!-- if($jmlkarya == $jmlabsen)
-	        	
-	        	else
-	        	<div class="col-xl-4 dahsboard-column">
-	        		<section class="widget widget-simple-sm-fill green">
-								<div class="widget-simple-sm-icon">
-									<i class="font-icon font-icon-users"></i>
-								</div>
-								<div class="widget-simple-sm-fill-caption">$jmlabsen Karyawan Sudah Absen </div>
-	        	<a href="{{url('/absen')}}" type="button" class="btn btn-inline btn-success">
-	        		Klik Untuk Absen
-	        	</a>
-					</section>
-	        	</div>
-	        	endif -->
-
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
             <header class="card-header">

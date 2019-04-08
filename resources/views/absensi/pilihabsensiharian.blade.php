@@ -18,18 +18,15 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Lihat data absensi karyawan perhari</h2>
+							<h2>Absensi Harian</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
-				@if (session('status'))
-                    <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('status') }}
-                    </div>
-                    @endif
+				<a href="{{url('/pilihabsensiharian')}}" class="btn btn-primary">Absensi Harian</a>
+				<a href="{{url('/pilihabsensibulanan')}}" class="btn btn-success">Absensi Bulanan</a>
+				<p><br></p>
 				<form action="{{url('tampilabsensiharian') }}" role="form" method="GET">
 					
 					<div class="form-group row">
