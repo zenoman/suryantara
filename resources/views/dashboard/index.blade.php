@@ -112,7 +112,7 @@
 								<div class="widget-simple-sm-icon">
 									<i class="font-icon font-icon-users"></i>
 								</div>
-								<div class="widget-simple-sm-fill-caption">$jmlabsen Karyawan Sudah Absen </div>
+								<div class="widget-simple-sm-fill-caption">{{$jmlabsen}} Karyawan Sudah Absen </div>
 	        	<a href="{{url('/absen')}}" type="button" class="btn btn-inline btn-success">
 	        		Klik Untuk Absen
 	        	</a>
