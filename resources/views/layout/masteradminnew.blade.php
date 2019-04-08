@@ -150,10 +150,10 @@
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifes</a>
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifes</a>
-				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifes</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest</a>
+				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
 			</div>
 		</li>
 		<li class="nav-item dropdown">
