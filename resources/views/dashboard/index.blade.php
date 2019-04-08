@@ -105,9 +105,8 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
-	        	<!-- if($jmlkarya == $jmlabsen)
+	        	@if($jmlkarya != $jmlabsen)
 	        	
-	        	else
 	        	<div class="col-xl-4 dahsboard-column">
 	        		<section class="widget widget-simple-sm-fill green">
 								<div class="widget-simple-sm-icon">
@@ -119,7 +118,7 @@
 	        	</a>
 					</section>
 	        	</div>
-	        	endif -->
+	        	@endif
 
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
