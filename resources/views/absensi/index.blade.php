@@ -110,7 +110,7 @@
                                                 <input type="text" name="ketizin" class="form-control" placeholder="Masukan Alasan" required>
                                             </div>
                                            {{csrf_field()}}
-                                            <button type="submit" class="btn btn-rounded btn-inline btn-info" id="tidak_masuk">Tidak Masuk</button>
+                                            <button type="submit" class="btn btn-info">Simpan</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                             
                                             </form>

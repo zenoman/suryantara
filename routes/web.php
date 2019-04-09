@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Input;
+
 //==============================================armada
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
 Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
