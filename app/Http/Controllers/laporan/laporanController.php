@@ -73,14 +73,19 @@ class laporanController extends Controller{
     }
     //============================================
     public function pilihpengeluaran(){
-        $bulan = DB::table('surat_jalan')
-        ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        $bulan = DB::table('resi_pengiriman')
+        ->select(DB::raw('MONTH(resi_pengiriman.tgl_bayar) as bulan, YEAR(resi_pengiriman.tgl_bayar) as tahun,surat_jalan.tujuan'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.tgl_bayar','!=',NULL)
         ->groupby('bulan')
         ->groupby('tahun')
-        ->orderby('tgl','desc')
+        ->orderby('resi_pengiriman.tgl_bayar','desc')
         ->get();
 
-        $vendor = DB::table('surat_jalan')
+        $vendor = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.kode_jalan,surat_jalan.*'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.tgl_bayar','!=',NULL)
         ->groupby('tujuan')
         ->get();
         $webinfo = DB::table('setting')->limit(1)->get();

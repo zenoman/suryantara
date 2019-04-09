@@ -76,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `armada` (
   `tgl_kadaluarsa` date DEFAULT NULL,
   `tgl_peringatan` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.armada: ~0 rows (approximately)
+-- Dumping data for table kargo.armada: ~2 rows (approximately)
 DELETE FROM `armada`;
 /*!40000 ALTER TABLE `armada` DISABLE KEYS */;
 /*!40000 ALTER TABLE `armada` ENABLE KEYS */;
@@ -305,46 +305,48 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `pemegang` varchar(90) DEFAULT NULL,
   `batal` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.resi_pengiriman: ~34 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`) VALUES
-	(1, 'KDR291218-06-000001', NULL, 'SJ291218-06-000002', 'devasatrio', 'sepatu bola', 'darat', 'kediri', 'malang', '2018-12-29', NULL, 1, '8', '20 x 30 x 50', '7.5', 'deni', 'hadi', '0932749', '02934890', NULL, NULL, 24000, 2000, 60, 240, 0, 0, 0, 0, 26300, 0, 'halo halo', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(2, 'KDR291218-06-000002', '4354345', 'SJ291218-06-000001', 'devasatrio', 'jkhjkhc', 'udara', 'hghghj', 'alor', '2018-12-29', NULL, 1, '3', '20 x 30 x 20', '3', 'ewre', 'werwer', '56456', '7687', NULL, NULL, 120000, 0, 0, 1200, 25000, 40000, 0, 0, 186200, 0, 'dfsfd', 'Y', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(3, 'KDR291218-06-000003', NULL, 'SJ291218-06-000002', 'devasatrio', 'sepatu bola', 'laut', 'kediri', 'kalimantan', '2018-12-28', NULL, 1, '3', '30 x 10 x 30', '2.25', 'hari', 'dini', '027348628734678', '873248927389247', NULL, NULL, 120000, 8000, 800, 1200, 0, 0, 0, 0, 130000, 0, 'halo halo', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(1, 'KDR291218-06-000001', NULL, 'SJ291218-06-000002', 'devasatrio', 'sepatu bola', 'darat', 'kediri', 'malang', '2018-12-29', '2019-04-09', 1, '8', '20 x 30 x 50', '7.5', 'deni', 'hadi', '0932749', '02934890', NULL, NULL, 24000, 2000, 60, 240, 0, 0, 0, 0, 26300, 4000, 'halo halo', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
+	(2, 'KDR291218-06-000002', '4354345', 'SJ291218-06-000001', 'devasatrio', 'jkhjkhc', 'udara', 'hghghj', 'alor', '2018-12-29', '2019-04-09', 1, '3', '20 x 30 x 20', '3', 'ewre', 'werwer', '56456', '7687', NULL, NULL, 120000, 0, 0, 1200, 25000, 40000, 0, 0, 186200, 8000, 'dfsfd', 'Y', 'kg', 'bt', 'otomatis', NULL, 'N'),
+	(3, 'KDR291218-06-000003', NULL, 'SJ291218-06-000002', 'devasatrio', 'sepatu bola', 'laut', 'kediri', 'kalimantan', '2018-12-28', '2019-04-09', 1, '3', '30 x 10 x 30', '2.25', 'hari', 'dini', '027348628734678', '873248927389247', NULL, NULL, 120000, 8000, 800, 1200, 0, 0, 0, 0, 130000, 3000, 'halo halo', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(4, 'KDR020119-06-000001', NULL, 'SJ020119-06-000001', 'devasatrio', 'sepatu kuda', 'darat', 'kediri', 'malang', '2019-01-02', NULL, 1, '3', '20 x 30 x 20', '3', 'heri', 'marno', '02348920', '039485903', NULL, NULL, 9000, 1010, 900, 90, 0, 0, 0, 0, 11000, 0, 'cepet ya', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
 	(5, 'KDR020119-06-000002', NULL, 'SJ020119-06-000001', 'devasatrio', 'rokok surya', 'laut', 'kediri', 'sumatra', '2019-01-02', NULL, 1, '4', '30 x 50 x 10', '3.75', 'hasan', 'fulan', '093284902', '289048290', NULL, NULL, 120000, 800, 1000, 1200, 0, 0, 0, 0, 123000, 0, 'cepet ya', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(6, 'KDR020119-06-000003', '256 - 8981290', 'SJ020119-06-000001', 'devasatrio', 'hanger baju', 'udara', 'kediri', 'balikpapan', '2019-01-02', NULL, 1, '3', '20 x 30 x 20', '3', 'indah', 'sari', '092384902', '0293480', NULL, NULL, 69000, 0, 0, 690, 25000, 4000, 0, 0, 98690, 0, 'cepet ya gan', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
 	(7, 'KDR020119-06-000004', NULL, 'SJ020119-06-000002', 'devasatrio', 'koper', 'darat', 'kediri', 'nganjuk', '2019-01-02', NULL, 1, '3', '20 x 30 x 20', '3', 'hendri', 'dini', '902384902', '029384902', NULL, NULL, 7500, 2500, 25, 75, 0, 0, 0, 0, 10100, 0, 'asdf', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(8, 'KDR020119-06-000005', NULL, 'SJ020119-06-000002', 'devasatrio', 'casing hp', 'darat', 'kediri', 'malang', '2019-01-02', NULL, 1, '1', '30 x 20 x 10', '1.5', 'hina', 'hiwa', '0923489290', '093484590', NULL, NULL, 20000, 800, 0, 200, 0, 0, 0, 0, 21000, 0, 'celkawj', 'N', 'koli', 'bt', 'otomatis', NULL, 'N'),
-	(9, 'KDR020219-06-000001', NULL, NULL, 'devasatrio', 'sepatu', 'udara', 'kediri', 'udara0001', '2019-02-02', NULL, 1, '3', '20 x 30 x 20', '3', 'deni', 'hari', '039480209', '02938402980', NULL, NULL, 60000, 0, 0, 600, 5000, 2000, 30000, 0, 97600, 0, 'askldfj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(9, 'KDR020219-06-000001', NULL, 'SJ090419-06-000001', 'devasatrio', 'sepatu', 'udara', 'kediri', 'udara0001', '2019-02-02', NULL, 1, '3', '20 x 30 x 20', '3', 'deni', 'hari', '039480209', '02938402980', NULL, NULL, 60000, 0, 0, 600, 5000, 2000, 30000, 0, 97600, 0, 'askldfj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(10, 'KDR020219-06-000002', NULL, 'SJ020219-06-000001', 'devasatrio', 'parfum', 'darat', 'kediri', 'malang kidul', '2019-02-02', NULL, 1, '3', '20 x 30 x 20', '3', 'heri', 'hendro', '023890230', '092384902890', NULL, NULL, 102000, 1000, 2000, 1020, 0, 0, 0, 0, 106020, 0, 'askldfj', 'Y', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(11, 'KDR020219-06-000003', NULL, 'SJ020219-06-000001', 'devasatrio', 'spiker', 'laut', 'kediri', 'laut04', '2019-02-02', NULL, 1, '1', '20 x 10 x 20', '1', 'heri', 'juki', '0238902390', '092384902830', NULL, NULL, 34000, 2000, 2000, 340, 0, 0, 0, 0, 38340, 0, 'aslkfj', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
 	(12, 'KDR020219-06-000004', NULL, NULL, 'devasatrio', 'bakso kikil', 'udara', 'kediri', 'udara0002', '2019-02-02', NULL, 1, '3', '20 x 30 x 20', '3', 'diko', 'nur', '0938190890', '293902890', NULL, NULL, 60000, 0, 0, 600, 5000, 1000, 30000, 0, 96600, 0, 'sadfasdf', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(13, 'KDR020219-06-000005', NULL, 'SJ140219-06-000001', 'devasatrio', 'kambing qurban', 'udara', 'kediri', 'udara0003', '2019-02-02', NULL, 1, '3', '20 x 30 x 20', '3', 'heri', 'hadi', '02398490', '9238490809', NULL, NULL, 60000, 0, 0, 600, 5000, 2000, 60000, 0, 127600, 0, 'asdf', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(14, 'KDR020219-06-000006', NULL, NULL, 'devasatrio', 'tas cewek', 'udara', 'kediri', 'udara0001', '2019-02-02', NULL, 1, '1', '20 x 10 x 20', '1', 'hadi', 'heri', '2390482903', '90384902', NULL, NULL, 20000, 0, 0, 200, 5000, 300, 0, 0, 25500, 0, 'sjkadlfj', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(18, '12345-001', '3423-0004', NULL, 'devasatrio', 'asdfasfdasdfsf', 'udara', 'kediri', 'kalimantan', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '1.3333333333333333', 'adfasdklfj', 'aklsjfklasd', '90312849023890', '029384902309', 'jklasdfjkasdfjkl aksldjfklas dfkllsa fklasjdfkls adflasdkjfklsad f', 'askdjklasf asfjklaf asdfjsafas asidweaf sadkasdf', 40000, 0, 0, 400, 5000, 1000, 0, 0, 46400, 0, 'kasdjfkl', 'Y', 'kg', 'cash', 'manual', '1', 'N'),
+	(18, '12345-001', '3423-0004', 'SJ090419-06-000003', 'devasatrio', 'asdfasfdasdfsf', 'udara', 'kediri', 'kalimantan', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '1.3333333333333333', 'adfasdklfj', 'aklsjfklasd', '90312849023890', '029384902309', 'jklasdfjkasdfjkl aksldjfklas dfkllsa fklasjdfkls adflasdkjfklsad f', 'askdjklasf asfjklaf asdfjsafas asidweaf sadkasdf', 40000, 0, 0, 400, 5000, 1000, 0, 0, 46400, 0, 'kasdjfkl', 'Y', 'kg', 'cash', 'manual', '1', 'N'),
 	(19, '12345-002', NULL, NULL, 'devasatrio', 'aklsdf akdlfjklasf', 'laut', 'kediri', 'laut04', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'akdjsflaksd', 'asdfjkklasdfj', '092903489023490', '9028349082390', 'askfdjklasdf asdjfkladf kasjdfklasd fklajsdfklasdf aksdfjklasdf', 'kalsdfjlk asdlkfjklasdf klasdjfklasd fkasjdf', 68000, 1000, 1000, 680, 0, 0, 0, 0, 70680, 0, 'alskdfj', 'N', 'kg', 'cash', 'manual', '1', 'N'),
 	(20, '12345-003', NULL, NULL, 'devasatrio', 'hp samsung', 'darat', 'kediri', 'malang kidul', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'klajsf', 'akdlfjaklsdf', '908290482030', '9238402934890', 'asdfasdf asdfasdf asdfasdf asdfasdf asdfasdf', 'adfs asdadsfas asdfasdf asdfasdf asdfasd fasdfasdf', 68000, 2000, 1000, 680, 0, 0, 0, 0, 71680, 0, 'asdfasdf', 'N', 'kg', 'cash', 'manual', '1', 'N'),
-	(22, '12345-004', NULL, 'SJ140219-06-000001', 'devasatrio', 'asbak', 'darat', 'kediri', 'kediri lor', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'askldfjklasdf', '9akdfjkasdfasdf;asdf', '092839049023890', '2934290348902', NULL, NULL, 68000, 1000, 2000, 680, 0, 0, 0, 0, 71680, 0, 'askdf', 'N', 'kg', 'cash', 'manual', '2', 'N'),
-	(24, '12345-006', '123 - 098394888', NULL, 'devasatrio', 'nasi padang', 'udara', 'kediri', 'bali', '2019-02-08', NULL, 1, '3', '20 x 30 x 20', '3', 'aslkdfjskdl', 'sadkfljklsadf', '9320482093203', '293482309409', NULL, NULL, 60000, 0, 0, 600, 5000, 2000, 0, 0, 67600, 0, 'asdfkjlasf', 'Y', 'kg', 'bt', 'manual', '2', 'N'),
-	(25, 'KDR080219-06-000001', NULL, NULL, 'devasatrio', 'asdfsa', 'darat', 'kediri', 'malang kidul', '2019-02-08', NULL, 1, '3', '20 x 30 x 20', '3', 'skdjaf', 'skdafja', '9283908290', '038294890', NULL, NULL, 102000, 2000, 1000, 1020, 0, 0, 0, 0, 106020, 0, 'aslkdfjakl', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(22, '12345-004', NULL, 'SJ140219-06-000001', 'devasatrio', 'asdfasdfsdf', 'darat', 'kediri', 'kediri lor', '2019-04-08', NULL, 1, '2', '20 x 20 x 20', '2', 'askldfjklasdf', '9akdfjkasdfasdf;asdf', '092839049023890', '2934290348902', 'asdfsfd', 'asdfasfd', 68000, 1000, 2000, 0, 0, 0, 0, 0, 71000, 0, 'pengiriman darat', 'N', 'kg', 'cash', 'manual', '2', 'N'),
+	(24, '12345-006', '123 - 098394888', 'SJ090419-06-000003', 'devasatrio', 'nasi padang', 'udara', 'kediri', 'bali', '2019-04-08', NULL, 1, '3', '20 x 30 x 20', '3', 'aslkdfjskdl', 'sadkfljklsadf', '9320482093203', '293482309409', 'sadfasdfasdf', 'sadfasdfasdf', 60000, 0, 0, 0, 5000, 2000, 0, 0, 67000, 0, 'pengiriman udara', 'Y', 'kg', 'bt', 'manual', '2', 'N'),
+	(25, 'KDR080219-06-000001', NULL, 'SJ090419-06-000001', 'devasatrio', 'asdfsa', 'darat', 'kediri', 'malang kidul', '2019-02-08', NULL, 1, '3', '20 x 30 x 20', '3', 'skdjaf', 'skdafja', '9283908290', '038294890', NULL, NULL, 102000, 2000, 1000, 1020, 0, 0, 0, 0, 106020, 0, 'aslkdfjakl', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(26, 'KDR080219-06-000002', NULL, NULL, 'devasatrio', 'asdfasdf', 'laut', 'kediri', 'laut01', '2019-02-08', NULL, 1, '2', '20 x 30 x 10', '1.5', 'asjfklajf', 'skdfjksfj', '98293048290389', '028349283900', NULL, NULL, 68000, 2000, 20, 680, 0, 0, 0, 0, 70700, 0, 'salkdfjaskldfj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
-	(27, 'KDR080219-06-000003', '112', NULL, 'devasatrio', 'jlkjkljlk', 'udara', 'kediri', 'bandung betet', '2019-02-08', NULL, 1, '4', '20 x 30 x 30', '4.5', 'kljkljkljkl', 'lkjkljkl', '09890890', '79878989', NULL, NULL, 80000, 0, 0, 800, 5000, 2000, 40000, 0, 127800, 0, ';skl;kl;', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(27, 'KDR080219-06-000003', '112', 'SJ090419-06-000002', 'devasatrio', 'jlkjkljlk', 'udara', 'kediri', 'bandung betet', '2019-02-08', NULL, 1, '4', '20 x 30 x 30', '4.5', 'kljkljkljkl', 'lkjkljkl', '09890890', '79878989', NULL, NULL, 80000, 0, 0, 800, 5000, 2000, 40000, 0, 127800, 0, ';skl;kl;', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(28, 'KDR080219-06-000004', '20382', NULL, 'devasatrio', 'asfasdf', 'udara', 'kediri', 'bandung betet', '2019-02-08', NULL, 1, '4', '30 x 20 x 30', '4.5', 'aksldfj', 'kjsadklfj', '20389230', '92389290', NULL, NULL, 80000, 0, 0, 800, 5000, 2000, 40000, 0, 127800, 0, 'sadfasdf', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(29, 'KDR080219-06-000005', NULL, NULL, 'devasatrio', 'sadfsadfsaf', 'udara', 'kediri', 'bandung betet', '2019-02-08', NULL, 1, '3', '20 x 30 x 20', '3', 'asldkfjaskld', 'lksjflk', '098293890', '928390289', NULL, NULL, 60000, 0, 0, 600, 5000, 1000, 60000, 0, 126600, 0, 'aksldj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(29, 'KDR080219-06-000005', NULL, 'SJ090419-06-000002', 'devasatrio', 'sadfsadfsaf', 'udara', 'kediri', 'bandung betet', '2019-02-08', '2019-04-09', 1, '3', '20 x 30 x 20', '3', 'asldkfjaskld', 'lksjflk', '098293890', '928390289', NULL, NULL, 60000, 0, 0, 600, 5000, 1000, 60000, 0, 126600, 4000, 'aksldj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(30, 'KDR080219-06-000006', '123 - 0983948', NULL, 'devasatrio', 'asdfasdf', 'udara', 'kediri', 'bandung betet', '2019-02-08', NULL, 1, '7', '30 x 30 x 30', '6.75', 'asdfklajs', 'klajskfl', '90829038490', '98293048209', NULL, NULL, 140000, 0, 0, 1400, 5000, 2000, 0, 0, 148400, 0, 'asdfasdf', 'Y', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(31, 'KDR140219-06-000001', NULL, NULL, 'devasatrio', 'spiker aktiv', 'darat', 'kediri', 'malang kidul', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'hari anto', 'dian ade setiawan', '0852387468238', '08502398490230', 'magersari gurah kediri, jln pga no 1 rw 01 rt 01', 'mungkung loceret no 07 nganjuk, jln suro pati 01 rt 01 rw 01', 68000, 1000, 2000, 680, 0, 0, 0, 0, 71680, 0, 'aklsdfj', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(32, 'KDR140219-06-000002', NULL, NULL, 'devasatrio', 'sepatu bola', 'darat', 'kediri', 'kediri lor', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'hari anto', 'dendi', '09349023890', '90123940', 'magersari gurah kediri, jln pga no 1 rw 01 rt 01', 'mungkung loceret no 07 nganjuk, jln suro pati 01 rt 01 rw 01', 68000, 100, 1000, 680, 0, 0, 0, 0, 69780, 0, 'jasdlfk', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(31, 'KDR140219-06-000001', NULL, 'SJ090419-06-000002', 'devasatrio', 'spiker aktiv', 'darat', 'kediri', 'malang kidul', '2019-02-14', '2019-04-09', 1, '2', '20 x 20 x 20', '2', 'hari anto', 'dian ade setiawan', '0852387468238', '08502398490230', 'magersari gurah kediri, jln pga no 1 rw 01 rt 01', 'mungkung loceret no 07 nganjuk, jln suro pati 01 rt 01 rw 01', 68000, 1000, 2000, 680, 0, 0, 0, 0, 71680, 5000, 'aklsdfj', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
+	(32, 'KDR140219-06-000002', NULL, 'SJ090419-06-000001', 'devasatrio', 'sepatu bola', 'darat', 'kediri', 'kediri lor', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'hari anto', 'dendi', '09349023890', '90123940', 'magersari gurah kediri, jln pga no 1 rw 01 rt 01', 'mungkung loceret no 07 nganjuk, jln suro pati 01 rt 01 rw 01', 68000, 100, 1000, 680, 0, 0, 0, 0, 69780, 0, 'jasdlfk', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(33, 'KDR140219-06-000003', NULL, NULL, 'devasatrio', 'tas level 3', 'laut', 'kediri', 'laut03', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '2', 'heru dian', 'dini sito', '08309238490', '09238402390', 'jln saguling no 1 rt 01 rw 01 malang kota', 'magersari gurah kediri rt 01 rw 01 desa konoha', 68000, 2000, 2000, 680, 0, 0, 0, 0, 72680, 0, 'asd', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(34, 'KDR140219-06-000004', '123-8934989', NULL, 'devasatrio', 'kevlar level 3', 'udara', 'kediri', 'bali', '2019-02-14', NULL, 1, '2', '20 x 20 x 20', '1.3333333333333333', 'hari anto', 'klkl', '085029348290340', '08502398490230', 'askldfjlkasd asjdflkasdjfklasdjklf', 'skladjfk klajdfk aklsdf klasdjfl0we;pasd kasdjflasdfj', 40000, 0, 0, 400, 5000, 1000, 40000, 0, 86400, 0, 'sadklfjlsd', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(35, 'KDR160219-06-000001', NULL, NULL, 'devasatrio', 'asdfsadf sadfasdf', 'darat', 'kediri', 'malang kidul', '2019-02-16', NULL, 1, '2', '5 x 5 x 5', '0.03', 'sadfsdf', 'kkasjfklasf', '023894092380', '09849023840', 'jasldkfj asdjfkls dfksjadfkls fjaklsfj', 'akjsdfj askdjfka sdfjksaldfj safj', 51000, 1000, 1000, 510, 0, 0, 0, 0, 53510, 0, 'ksjf', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(36, 'KDR160219-06-000002', NULL, NULL, 'devasatrio', 'sadf', 'laut', 'kediri', 'manado', '2019-02-16', NULL, 1, '4', '5 x 5 x 5', '0.03', 'safasdf', 'klasjfklasdf', '2039840923890', '0928340982340', 'asklfjaskldfj', 'jkkaldsfjklsdaf', 140000, 2000, 2000, 1400, 0, 0, 0, 0, 145400, 0, 'sdf', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
 	(37, 'KDR160219-06-000003', NULL, NULL, 'devasatrio', 'asdfasdf', 'laut', 'kediri', 'manado', '2019-02-16', NULL, 1, '3.5', '5 x 5 x 5', '0.03', 'aklsjfkals', 'akjfkalsdjf', '098290482930', '09238490209283', 'klsadjf aksjdfk asdfkjaksdfjka', 'asdklfjaskdf asdjfklasf askfjkas', 140000, 1000, 1000, 1400, 0, 0, 0, 0, 143400, 0, 'klsadfj', 'N', 'kg', 'bt', 'otomatis', NULL, 'N'),
-	(38, 'KDR160219-06-000004', '123-2304982390', NULL, 'devasatrio', 'asdklasdfj', 'udara', 'kediri', 'kalimantan', '2019-02-16', NULL, 1, '1.5', '20 x 20 x 20', '1.33', 'aslkdfjaksldf', 'kalsdjfaskdf', '093849028390', '092834908230', 'klsajdfkl asdjfklasfd sadf asjdfklsa dfsajdflk', 'kasldfj askldjfksaldf kjasd fksdjdf asdfj', 30000, 0, 0, 300, 5000, 1000, 0, 0, 36300, 0, 'asklfj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
-	(39, 'KDR160219-06-000005', '123 - 0983948', NULL, 'devasatrio', 'asdfsadf', 'udara', 'kediri', 'kalimantan', '2019-02-16', NULL, 1, '1.5', '20 x 20 x 20', '1.33', 'sakldfjskldf', 'asklfjaskdf', '93289402390', '098490284902', 'jsakldfjklasd askdfjkasd fskdjf sadfjkasdf', 'jaksl asjfas fkjasf askjflas', 30000, 0, 0, 300, 5000, 1000, 0, 0, 36300, 0, 'asdf', 'Y', 'kg', 'cash', 'otomatis', NULL, 'N');
+	(38, 'KDR160219-06-000004', '123-2304982390', 'SJ090419-06-000002', 'devasatrio', 'asdklasdfj', 'udara', 'kediri', 'kalimantan', '2019-02-16', '2019-04-09', 1, '1.5', '20 x 20 x 20', '1.33', 'aslkdfjaksldf', 'kalsdjfaskdf', '093849028390', '092834908230', 'klsajdfkl asdjfklasfd sadf asjdfklsa dfsajdflk', 'kasldfj askldjfksaldf kjasd fksdjdf asdfj', 30000, 0, 0, 300, 5000, 1000, 0, 0, 36300, 5000, 'asklfj', 'N', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(39, 'KDR160219-06-000005', '123 - 0983948', NULL, 'devasatrio', 'asdfsadf', 'udara', 'kediri', 'kalimantan', '2019-02-16', NULL, 1, '1.5', '20 x 20 x 20', '1.33', 'sakldfjskldf', 'asklfjaskdf', '93289402390', '098490284902', 'jsakldfjklasd askdfjkasd fskdjf sadfjkasdf', 'jaksl asjfas fkjasf askjflas', 30000, 0, 0, 300, 5000, 1000, 0, 0, 36300, 0, 'asdf', 'Y', 'kg', 'cash', 'otomatis', NULL, 'N'),
+	(40, '2222', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'N', NULL, 'cash', 'manual', '4', 'N'),
+	(41, '44444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'N', NULL, 'cash', 'manual', '4', 'N');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
@@ -368,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.setting: ~1 rows (approximately)
+-- Dumping data for table kargo.setting: ~0 rows (approximately)
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `desk_udara`, `desk_laut`, `desk_darat`, `bulan_sekarang`) VALUES
@@ -390,19 +392,23 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `totalbt` int(11) DEFAULT NULL,
   `biaya` int(11) DEFAULT NULL,
   `alamat_tujuan` varchar(70) DEFAULT NULL,
+  `cabang` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.surat_jalan: ~6 rows (approximately)
+-- Dumping data for table kargo.surat_jalan: ~9 rows (approximately)
 DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
-INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`) VALUES
-	(1, 'devasatrio', 'SJ291218-06-000001', 'PT Iwak Enak-083223336313', '2018-12-29', 'P', 3, 1, 0, 186200, 50000, 'mungkung loceret nganjuk'),
-	(2, 'devasatrio', 'SJ291218-06-000002', 'PT tani mundur jaya-085552344556', '2018-12-29', 'P', 11, 2, 130000, 26300, 80000, 'Jln saguling no 1 malang'),
-	(3, 'devasatrio', 'SJ020119-06-000001', 'PT Moro Dadi-082122272212', '2019-01-02', 'P', 10, 3, 123000, 109690, 30000, 'Jln badut ulang tahun no 3 magelang'),
-	(4, 'devasatrio', 'SJ020119-06-000002', 'PT tani mundur jaya-085552344556', '2019-01-02', 'P', 4, 2, 10100, 21000, 25000, 'Jln saguling no 1 malang'),
-	(5, 'devasatrio', 'SJ020219-06-000001', 'PT Iwak Enak-083223336313', '2019-02-02', 'Y', 4, 2, 106020, 38340, 30000, 'mungkung loceret nganjuk'),
-	(6, 'devasatrio', 'SJ140219-06-000001', 'PT Iwak Enak-083223336313', '2019-02-14', 'Y', 5, 2, 199280, 0, 20000, 'mungkung loceret nganjuk');
+INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`, `cabang`) VALUES
+	(1, 'devasatrio', 'SJ291218-06-000001', 'PT Iwak Enak-083223336313', '2018-12-29', 'P', 3, 1, 0, 186200, 58000, 'mungkung loceret nganjuk', 'N'),
+	(2, 'devasatrio', 'SJ291218-06-000002', 'PT tani mundur jaya-085552344556', '2018-12-29', 'P', 11, 2, 130000, 26300, 87000, 'Jln saguling no 1 malang', 'N'),
+	(3, 'devasatrio', 'SJ020119-06-000001', 'PT Moro Dadi-082122272212', '2019-01-02', 'P', 10, 3, 123000, 109690, 30000, 'Jln badut ulang tahun no 3 magelang', 'N'),
+	(4, 'devasatrio', 'SJ020119-06-000002', 'PT tani mundur jaya-085552344556', '2019-01-02', 'P', 4, 2, 10100, 21000, 25000, 'Jln saguling no 1 malang', 'N'),
+	(5, 'devasatrio', 'SJ020219-06-000001', 'PT Iwak Enak-083223336313', '2019-02-02', 'Y', 4, 2, 106020, 38340, 30000, 'mungkung loceret nganjuk', 'N'),
+	(6, 'devasatrio', 'SJ140219-06-000001', 'PT Iwak Enak-083223336313', '2019-02-14', 'Y', 5, 2, 199280, 0, 20000, 'mungkung loceret nganjuk', 'N'),
+	(7, 'devasatrio', 'SJ090419-06-000001', 'PT tani mundur jaya-085552344556', '2019-04-09', 'P', 8, 3, 273400, 0, NULL, 'Jln saguling no 1 malang', 'Y'),
+	(8, 'devasatrio', 'SJ090419-06-000002', 'PT Moro Dadi-082122272212', '2019-04-09', 'Y', 11, 4, 290700, 71680, 14000, 'Jln badut ulang tahun no 3 magelang', 'N'),
+	(9, 'devasatrio', 'SJ090419-06-000003', 'pt pubg-2303849023890', '2019-04-09', 'P', 5, 2, 46400, 67000, NULL, 'gurah kediri', 'Y');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_darat
@@ -540,15 +546,16 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   `alamat` varchar(100) DEFAULT NULL,
   `cabang` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.vendor: ~3 rows (approximately)
+-- Dumping data for table kargo.vendor: ~4 rows (approximately)
 DELETE FROM `vendor`;
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`) VALUES
 	(3, 'vendor001', 'PT tani mundur jaya', '085552344556', 'Jln saguling no 1 malang', 'Y'),
 	(4, 'vendor002', 'PT Iwak Enak', '083223336313', 'mungkung loceret nganjuk', 'N'),
-	(5, 'vendor003', 'PT Moro Dadi', '082122272212', 'Jln badut ulang tahun no 3 magelang', 'N');
+	(5, 'vendor003', 'PT Moro Dadi', '082122272212', 'Jln badut ulang tahun no 3 magelang', 'N'),
+	(6, 'vendor0013', 'pt pubg', '2303849023890', 'gurah kediri', 'Y');
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 
 -- Dumping structure for trigger kargo.editadmin
