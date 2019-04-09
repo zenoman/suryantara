@@ -1,6 +1,3 @@
-/* This CSS file just define some default styles and loaders */
-/* You don't need to include it if you're working with your custom overlay loader element */
-
 .loading-overlay {
   display: table;
   position: absolute;
