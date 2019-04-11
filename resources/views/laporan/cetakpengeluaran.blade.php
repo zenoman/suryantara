@@ -32,11 +32,11 @@
 						<tr>
 							<th>No</th>
 							<th>Kode</th>
+							<th>No.Resi</th>
 							<th>tanggal</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
-							<th>Status</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -49,20 +49,14 @@
                         <tr>
                             <td align="center">{{$no}}</td>
                             <td align="center">{{$row->kode}}</td>
+                            <td align="center">{{$row->no_resi}}</td>
                             <td align="center">{{$row->tgl}}</td>
                             	@if($vendor=='semua')
 								 <td align="center">{{$row->tujuan}}</td>
                             	@endif
-                            <td>
-                            	@if($row->status!='Y')
-                            	Belum Lunas
-                            	@else
-                            	Lunas
-                            	@endif
-                            </td>
                             <td align="center">{{$row->admin}}</td>
                            
-							<td align="center">{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
+							<td align="center">{{"Rp ".number_format($row->biaya_suratjalan,0,',','.')}}</td>
                           
 						</tr>
 						@endforeach
