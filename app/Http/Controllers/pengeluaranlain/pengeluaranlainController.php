@@ -41,7 +41,8 @@ class pengeluaranlainController extends Controller
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
                 'tgl'=>date('Y-m-d'),
-                'gambar'=>$namagambar
+                'gambar'=>$namagambar,
+                'tgl'=>$request->tgl
             ]);
 
         }else{
@@ -51,7 +52,8 @@ class pengeluaranlainController extends Controller
                 'kategori'=>$request->kategori,
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
-                'tgl'=>date('Y-m-d')
+                'tgl'=>date('Y-m-d'),
+                'tgl'=>$request->tgl
             ]);
         }
 
