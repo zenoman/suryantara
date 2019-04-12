@@ -2,6 +2,10 @@
 use Illuminate\Support\Facades\Input;
 
 //==============================================armada
+Route::get('/caripajakunit/{id}','Armada\Armadacontroller@caripajakunit');
+Route::get('/hapuspajakunit/{id}','Armada\Armadacontroller@hapuspajakunit');
+Route::post('/tambahpajakunit','Armada\Armadacontroller@tambahpajakunit');
+Route::post('/editpajakunit','Armada\Armadacontroller@editpajakunit');
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
 Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
 Route::get('/armada/{id}/delete','Armada\Armadacontroller@delete');

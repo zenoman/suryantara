@@ -103,7 +103,17 @@
 					{{csrf_field()}}
 					<hr>
 					<div class="form-group row">
-						<div class="col-sm-6">
+						<div class="col-sm-4">
+							<label class="form-control-label semibold">Pilih Pajak</label>
+							<div class="input-group">
+								<select name="pajak" class="form-control">
+									@foreach($datapajak as $dp)
+										<option value="{{$dp->id}}">{{$dp->nama_pajak}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-4">
 							<label class="form-control-label semibold">Tanggal Bayar</label>
 							<div class="input-group">
 								<input
@@ -115,7 +125,7 @@
 								>
 							</div>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<label class="form-control-label semibold">Tanggal Kadaluarsa</label>
 							<div class="input-group">
 								<input

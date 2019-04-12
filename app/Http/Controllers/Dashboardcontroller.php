@@ -10,12 +10,14 @@ class Dashboardcontroller extends Controller
     public function index()
     {
         $pajakarmada = 
-        DB::table('armada')
+        DB::table('pajak_armada')
+        ->select(DB::raw('pajak_armada.*,armada.*'))
+        ->leftjoin('armada','armada.id','=','pajak_armada.id_armada')
         ->wheredate('tgl_peringatan','<',date('Y-m-d'))
         ->get();
         //============================================
         $jumlahpajakarmada = 
-        DB::table('armada')
+        DB::table('pajak_armada')
         ->wheredate('tgl_peringatan','<',date('Y-m-d'))
         ->count();
         //============================================
