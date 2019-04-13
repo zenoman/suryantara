@@ -98,7 +98,7 @@
 
 	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>
 	                                
-									<a class="dropdown-item" href="{{url('/pilihabsensiharian')}}">Laporan Absensi</a>
+									<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
 	                            </div>
 	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">

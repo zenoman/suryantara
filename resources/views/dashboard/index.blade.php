@@ -116,24 +116,7 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
-<<<<<<< HEAD
-=======
-	        	@if($jmlkarya != $jmlabsen)
-	        	
-	        	<div class="col-xl-4 dahsboard-column">
-	        		<section class="widget widget-simple-sm-fill green">
-								<div class="widget-simple-sm-icon">
-									<i class="font-icon font-icon-users"></i>
-								</div>
-								<div class="widget-simple-sm-fill-caption">{{$jmlabsen}} Karyawan Sudah Absen </div>
-	        	<a href="{{url('/absen')}}" type="button" class="btn btn-inline btn-success">
-	        		Klik Untuk Absen
-	        	</a>
-					</section>
-	        	</div>
-	        	@endif
 
->>>>>>> master
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
             <header class="card-header">

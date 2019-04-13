@@ -110,8 +110,15 @@ class laporanController extends Controller{
     	->groupby('tahun')
     	->orderby('tgl','desc')
     	->get();
+        $harian = DB::table('resi_pengiriman')
+        ->select(DB::raw('DAY(tgl) as tanggal,MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('tanggal')
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('tgl','desc')
+        ->get();
     	$webinfo = DB::table('setting')->limit(1)->get();
-    	return view('laporan/pilihpemasukan',['title'=>$webinfo,'bulan'=>$bulan]);
+    	return view('laporan/pilihpemasukan',['title'=>$webinfo,'bulan'=>$bulan,'hari'=>$harian]);
     }
     //================================================
     public function tampilpemasukan(Request $request){
@@ -607,7 +614,110 @@ class laporanController extends Controller{
         return view('laporan/cetakpengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'bulan'=>$bln,'tahun'=>$thn,'kategori'=>$kategori,'bulanya'=>$bulanya,'data2'=>$data2]);
     }
 
+//=======================================================Hari
+    public function tampilpemasukanhari(Request $request){
+        $rules = [
+            'tanggal' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+        $jalur = $request->jalur;
+        $tanggal = explode('-', $request->tanggal);
+        $tgl = $tanggal[0];
+        $bln = $tanggal[1];
+        $thn = $tanggal[2];
 
+        if($jalur=='darat'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->get();
+        }elseif ($jalur=='laut') {
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->get();
+        }elseif ($jalur=='udara'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->get();
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'data3'=>$data->appends(request()->input())]);
+    }
 
 
 }

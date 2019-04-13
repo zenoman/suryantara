@@ -19,7 +19,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Pilih Laporan Pemasukan</h2>
+							<h2>Pilih Laporan Absnsi</h2>
 							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 								<a class="nav-link active" href="#tabs-1-tab-1" role="tab" data-toggle="tab">
 									<span class="nav-link-in">
 										<!-- <i class="font-icon font-icon-notebook-bird"></i> -->
-										Penasukan Harian
+										Absensi Harian
 									</span>
 								</a>
 							</li>
@@ -42,7 +42,7 @@
 								<a class="nav-link" href="#tabs-1-tab-2" role="tab" data-toggle="tab">
 									<span class="nav-link-in">
 										<!-- <span class="glyphicon glyphicon-import"></span> -->
-										Penasukan Bulanan
+										Absensi Bulanan
 									</span>
 								</a>
 							</li>
@@ -54,52 +54,45 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-               <form action="{{url('tampillaporanpemasukanharian') }}" role="form" method="GET">
+               <form action="{{url('tampilabsensiharian') }}" role="form" method="GET">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tanggal</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
 								<select class="select2" name="tanggal">
-								@foreach($hari as $row)
-								<option value="{{$row->tanggal.'-'.$row->bulan.'-'.$row->tahun}}">
-									{{$row->tanggal.'-'.$row->bulan.'-'.$row->tahun}}
+								@foreach($tgl as $row)
+								<option value="{{$row->tanggal}}">
+									{{$row->tanggal}}
 								</option>
 								@endforeach
 							</select>
 							</p>
-							 @if($errors->has('bulan'))
+							@if($errors->has('tanggal'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('bulan')}}
+                                        {{ $errors->first('tanggal')}}
                                          </div>
                                        @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Jalur</label>
+						<label class="col-sm-2 form-control-label semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<div class="radio">
-								<input type="radio" id="radio-1" value="darat" name="jalur">
-								<label for="radio-1">Jalur Darat </label>
-								&nbsp;&nbsp; 
-								<input type="radio" name="jalur" id="radio-2" value="udara">
-								<label for="radio-2">Jalur Udara </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-3" value="laut">
-								<label for="radio-3">Jalur Laut </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-4" value="semua" checked="">
-								<label for="radio-4">Semua Jalur </label>
-							</div>
+								<select class="select2" name="jabatan">
+								<option value="semua">Semua</option>
+								@foreach($absen as $vn)
+								<option value="{{$vn->id_jabatan."-".$vn->jabatan}}">
+									{{$vn->jabatan}}
+								</option>
+								@endforeach
+							</select>
 							</p>
 						</div>
 					</div>
-					
 						{{csrf_field()}}
 							<small class="text-muted text-right">
-								
-								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Data Absensi Harian?')" value="Lanjut">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>
@@ -107,52 +100,46 @@
 
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<br>
-				<form action="{{url('tampillaporanpemasukan') }}" role="form" method="GET">
-					
+				<form action="{{url('/tampilabsensibulanan') }}" role="form" method="GET">
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="bulan">
-								@foreach($bulan as $row)
-								<option value="{{$row->bulan."-".$row->tahun}}">
-									{{$row->bulan."-".$row->tahun}}
+								<select class="select2" name="tanggal">
+								@foreach($bln as $row)
+								<option value="{{$row->tahun.'-'.$row->bulan}}">
+									{{$row->bulan.'-'.$row->tahun}}
 								</option>
 								@endforeach
 							</select>
 							</p>
-							 @if($errors->has('bulan'))
+							 @if($errors->has('tanggal'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('bulan')}}
+                                        {{ $errors->first('tanggal')}}
                                          </div>
                                        @endif
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Jalur</label>
+						<label class="col-sm-2 form-control-label semibold">Jabatan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<div class="radio">
-								<input type="radio" id="radio-1" value="darat" name="jalur">
-								<label for="radio-1">Jalur Darat </label>
-								&nbsp;&nbsp; 
-								<input type="radio" name="jalur" id="radio-2" value="udara">
-								<label for="radio-2">Jalur Udara </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-3" value="laut">
-								<label for="radio-3">Jalur Laut </label>
-								&nbsp;&nbsp;
-								<input type="radio" name="jalur" id="radio-4" value="semua" checked="">
-								<label for="radio-4">Semua Jalur </label>
-							</div>
+								<select class="select2" name="jabatan">
+								<option value="semua">Semua</option>
+								@foreach($absen as $vn)
+								<option value="{{$vn->id_jabatan."-".$vn->jabatan}}">
+									{{$vn->jabatan}}
+								</option>
+								@endforeach
+							</select>
 							</p>
+							 
 						</div>
 					</div>
-					
 						{{csrf_field()}}
 							<small class="text-muted text-right">
 								
-								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Pemasukan ?')" value="Lanjut">
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Tampil Data Absensi Bulanan ?')" value="Lanjut">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>
 				</form>

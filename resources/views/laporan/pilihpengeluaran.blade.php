@@ -24,6 +24,9 @@
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
+				<a href="{{url('/')}}" class="btn btn-primary">Pengeluaran Harian</a>
+				<a href="{{url('/')}}" class="btn btn-success">Pengeluaran Bulanan</a>
+				<p></p>
 				<form action="{{url('tampillaporanpengeluaran') }}" role="form" method="GET">
 					
 					<div class="form-group row">

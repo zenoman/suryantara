@@ -1,10 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Input;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 //==============================================armada
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');
 Route::get('armada/{id}/bayarpajak','Armada\Armadacontroller@bayarpajak');
@@ -109,6 +104,7 @@ Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluar
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
 Route::get('/printpengeluaranlainya/{bulanya}/{kategori}','laporan\laporanController@cetaklaporanpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
+Route::get('/tampillaporanpemasukanharian','laporan\laporanController@tampilpemasukanhari');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 Route::get('/printpemasukan/{bulanya}/{jalur}','laporan\laporanController@cetakpemasukan');
 //---------------------------------------------------export Laporan
@@ -260,8 +256,7 @@ Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
 //=======================================================Absensi
 Route::get('/absen','Absensi\AbsensiController@index');
 Route::post('/tamabsen','Absensi\AbsensiController@tambahdataabsen');
-Route::get('/pilihabsensiharian','Absensi\AbsensiController@pilihabsenhari'); 
-Route::get('/pilihabsensibulanan','Absensi\AbsensiController@pilihabsenbulan'); 
+Route::get('/pilihabsensi','Absensi\AbsensiController@pilihabsensi');
 Route::get('/tampilabsensiharian','Absensi\AbsensiController@tampilabsenharian');
 Route::get('/tampilabsensibulanan','Absensi\AbsensiController@tampilabsenbulanan');
 //---------------------------------------------------export absensi
