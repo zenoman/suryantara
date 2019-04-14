@@ -30,13 +30,21 @@ CREATE TABLE IF NOT EXISTS `absensi` (
   `keterangan_izin` varchar(50) DEFAULT '0',
   `uang_makan` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.absensi: ~1 rows (approximately)
+-- Dumping data for table kargo.absensi: ~9 rows (approximately)
 DELETE FROM `absensi`;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 INSERT INTO `absensi` (`id`, `id_karyawan`, `id_jabatan`, `tanggal`, `masuk`, `tidak_masuk`, `izin`, `keterangan_izin`, `uang_makan`) VALUES
-	(27, 1, 1, '2019-04-06', 1, 0, 0, '-', '');
+	(27, 1, 1, '2019-04-06', 1, 0, 0, '-', ''),
+	(28, 1, 1, '2019-04-12', 1, 0, 0, '-', NULL),
+	(29, 2, 26, '2019-04-12', 0, 1, 0, '-', NULL),
+	(30, 3, 25, '2019-04-12', 1, 0, 0, '-', NULL),
+	(31, 4, 26, '2019-04-12', 1, 0, 0, '-', NULL),
+	(32, 6, 24, '2019-04-12', 1, 0, 0, '-', NULL),
+	(33, 7, 24, '2019-04-12', 1, 0, 0, '-', NULL),
+	(34, 8, 25, '2019-04-12', 1, 0, 0, '-', NULL),
+	(35, 5, 24, '2019-04-12', 1, 0, 0, '-', NULL);
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.admin
@@ -72,15 +80,15 @@ CREATE TABLE IF NOT EXISTS `armada` (
   `nomor_rangka` varchar(60) DEFAULT NULL,
   `nomor_mesin` varchar(60) DEFAULT NULL,
   `warna` varchar(60) DEFAULT NULL,
-  `tgl_bayar` date DEFAULT NULL,
-  `tgl_kadaluarsa` date DEFAULT NULL,
-  `tgl_peringatan` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.armada: ~2 rows (approximately)
 DELETE FROM `armada`;
 /*!40000 ALTER TABLE `armada` DISABLE KEYS */;
+INSERT INTO `armada` (`id`, `nama`, `nopol`, `nomor_rangka`, `nomor_mesin`, `warna`) VALUES
+	(1, 'gran max', '203482390', 'skdfjw8r', 'kljfdflkswe8r', 'merah'),
+	(4, 'pajero', '028492', 'i34ui43o', '9034', 'hitam');
 /*!40000 ALTER TABLE `armada` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.gaji_karyawan
@@ -238,6 +246,29 @@ INSERT INTO `pajak` (`id`, `bulan`, `tahun`, `nama_pajak`, `total`, `status`) VA
 	(4, 3, 2019, 'pajak', 0, 'bulanan');
 /*!40000 ALTER TABLE `pajak` ENABLE KEYS */;
 
+-- Dumping structure for table kargo.pajak_armada
+DROP TABLE IF EXISTS `pajak_armada`;
+CREATE TABLE IF NOT EXISTS `pajak_armada` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_armada` int(11) DEFAULT '0',
+  `nama_pajak` varchar(50) DEFAULT '0',
+  `tgl_bayar` date DEFAULT NULL,
+  `tgl_kadaluarsa` date DEFAULT NULL,
+  `tgl_peringatan` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.pajak_armada: ~1 rows (approximately)
+DELETE FROM `pajak_armada`;
+/*!40000 ALTER TABLE `pajak_armada` DISABLE KEYS */;
+INSERT INTO `pajak_armada` (`id`, `id_armada`, `nama_pajak`, `tgl_bayar`, `tgl_kadaluarsa`, `tgl_peringatan`) VALUES
+	(1, 4, 'pajak tahunan', '2019-04-12', '2019-05-15', '2019-05-08'),
+	(10, 4, 'pajak 5 tahun', '2019-04-12', '2019-05-15', '2019-05-08'),
+	(11, 4, 'pajak KIR', NULL, NULL, NULL),
+	(12, 1, 'pajak tahunan', '2019-04-12', '2019-05-13', '2019-05-07'),
+	(13, 1, 'pajak KIR', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `pajak_armada` ENABLE KEYS */;
+
 -- Dumping structure for table kargo.pengeluaran_lain
 DROP TABLE IF EXISTS `pengeluaran_lain`;
 CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
@@ -249,9 +280,9 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   `tgl` date DEFAULT NULL,
   `gambar` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.pengeluaran_lain: ~6 rows (approximately)
+-- Dumping data for table kargo.pengeluaran_lain: ~8 rows (approximately)
 DELETE FROM `pengeluaran_lain`;
 /*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
 INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah`, `tgl`, `gambar`) VALUES
@@ -260,7 +291,14 @@ INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah
 	(10, 'devasatrio', 'tol', 'bayar tol surabaya', 3000, '2019-02-03', '1546482244-img-20181126-wa0003.jpg'),
 	(11, 'devasatrio', 'parkir', 'parkir jet', 40000, '2018-12-03', '1546484974-img-20181023-wa0023.jpg'),
 	(12, 'devasatrio', 'parkir', 'parkir mobil putih', 2000, '2019-01-04', '1546576232-favicon.png'),
-	(13, 'devasatrio', 'atk', 'untuk beli alat tulis', 20000, '2019-02-15', '1550231029-500_f_212165279_5nn4hrmazulxpsbbcyutb7kn7f667gu2.jpg');
+	(13, 'devasatrio', 'atk', 'untuk beli alat tulis', 20000, '2019-02-15', '1550231029-500_f_212165279_5nn4hrmazulxpsbbcyutb7kn7f667gu2.jpg'),
+	(14, 'devasatrio', 'bbm', 'halo halo', 20000, '2019-02-06', '1554960625-kaos3.jpg'),
+	(15, 'devasatrio', 'bbm', 'alskjfklasfdj', 30000, '2019-06-27', '1554960686-client.png'),
+	(16, 'devasatrio', 'pajak_armada', 'asdfasdfasfasfsf', 20000, '2019-04-12', '1555062448-1548762928-kemeja5.jpg'),
+	(17, 'devasatrio', 'pajak_armada', 'aasfasdf', 40000, '2019-04-12', '1555063100-admin.png'),
+	(18, 'devasatrio', 'pajak_armada', 'aadasdklfj aajsdfkljasdfk', 40000, '2019-04-12', '1555072139-client.png'),
+	(19, 'devasatrio', 'pajak_armada', 'sdafk', 30000, '2019-04-12', '1555072654-kaos4.jpg'),
+	(20, 'devasatrio', 'pajak_armada', 'asdf', 20000, '2019-04-12', '1555072691-kaos1.jpeg');
 /*!40000 ALTER TABLE `pengeluaran_lain` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_pengiriman

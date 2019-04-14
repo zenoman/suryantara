@@ -33,7 +33,7 @@
 							<th>No</th>
 							<th>Kode</th>
 							<th>No.Resi</th>
-							<th>tanggal</th>
+							<th>Tanggal Bayar</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
@@ -50,9 +50,12 @@
                             <td align="center">{{$no}}</td>
                             <td align="center">{{$row->kode}}</td>
                             <td align="center">{{$row->no_resi}}</td>
-                            <td align="center">{{$row->tgl}}</td>
+                            <td align="center">{{$row->tgl_bayar}}</td>
                             	@if($vendor=='semua')
-								 <td align="center">{{$row->tujuan}}</td>
+								 <td align="center">
+								 <?php $vendor=explode('-',$row->tujuan);?>
+								 	{{$vendor[0]}}
+								 </td>
                             	@endif
                             <td align="center">{{$row->admin}}</td>
                            

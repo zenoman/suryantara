@@ -65,15 +65,9 @@
                             	<?php
                             	$now = date('Y-m-d');
                             	?>
-                            	@if(strtotime($row->tgl_peringatan) < strtotime($now))
-                            	<span class='label label-danger'>
+                            	<!-- <span class='label label-danger'> -->
                             	 	{{$row->nama}}
-                            	</span>
-                            	@else
-                            	<span class='label label-primary'>
-                            	 	{{$row->nama}}
-                            	</span>
-                            	@endif
+                            	<!-- </span> -->
                             </td>
                             <td>{{$row->nopol}}</td>
                             <td>{{$row->warna}}</td>
@@ -89,8 +83,8 @@
                              	data-nopol="{{$row->nopol}}"
                              	data-mesin="{{$row->nomor_mesin}}"
                              	data-rangka="{{$row->nomor_rangka}}"
-                             	data-tglbayar="{{$row->tgl_bayar}}"
-                             	data-tempo="{{$row->tgl_kadaluarsa}}">
+                             	data-idunit="{{$row->id}}"
+                             	>
                              		<i class="fa fa-eye"></i>
                              	</a>
                             	<a href="{{url('/armada/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm"><i class="fa fa-wrench"></i></a>
@@ -102,7 +96,6 @@
 						@endforeach
 						</tbody>
 					</table>
-					 {{ $armada->links() }}
 				</div>
 			</section>
 		</div>
@@ -141,10 +134,30 @@
 								<br>
 								<strong>No. Rangka :</strong> <span id="norangkanya"></span>
 								<br>
-								<strong>Terakhir Bayar Pajak :</strong> <span id="lastpajak"></span>
-								<br>
-								<strong>Jatuh Tempo Pajak :</strong> <span id="limitpajak"></span>
+								
 							</div>
+						</div>
+						<hr>
+						<div class="col-lg-12">
+							<table id="table-sm" class="table table-bordered table-hover table-sm">
+				<thead>
+				<tr>
+					<th class="text-center">
+						#
+					</th>
+					<th class="text-center">Nama Pajak</th>
+					<th class="text-center">Tanggal Bayar</th>
+					<th class="text-center">Tanggal Kadaluarsa</th>
+				</tr>
+				</thead>
+				<tbody id="tubuhnya">
+				<tr>
+					<td colspan="4">
+						<span class="text-muted text-center">Loading...</span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
 						</div>
 					</div>
 				</div>
@@ -164,25 +177,46 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 		$(document).on('click', '.edit-modal', function() {
+			$('#tubuhnya').html('<tr><td colspan="4" align="center"><span class="text-muted text-center">Loading...</span></td></tr>');
           	$('#namanya').html($(this).data('nama'));
             $('#warnanya').html($(this).data('warna'));
             $('#nopolnya').html($(this).data('nopol'));
             $('#nomesinnya').html($(this).data('mesin'));
             $('#norangkanya').html($(this).data('rangka'));
-            if($(this).data('tglbayar')==''){
-            	$('#lastpajak').html('-');
-            }else{
-				$('#lastpajak').html($(this).data('tglbayar'));
-            }
-            if($(this).data('tempo')==''){
-            	$('#limitpajak').html('-');
-            }else{
-				$('#limitpajak').html($(this).data('tempo'));
-            }
+             $.ajax({
+                type:'GET',
+                dataType:'json',
+                url: 'caripajakunit/'+$(this).data('idunit'),
+                success:function(data){
+                var rows ='';
+                var no=0;
+                    $.each(data,function(key, value){
+
+                    	var tgl_bayar ='' 
+                        no +=1;
+                        rows = rows + '<tr>';
+                        rows = rows + '<td class="text-center">' +no+'</td>';
+                        rows = rows + '<td class="text-center">' +value.nama_pajak+'</td>';
+                        if (value.tgl_bayar==null) {
+                    	rows = rows + '<td class="text-center">-</td>';
+                    	}else{
+                    	rows = rows + '<td class="text-center">'+value.tgl_bayar+'</td>';	
+                    	}
+                        if (value.tgl_kadaluarsa==null) {
+                        rows = rows + '<td class="text-center">-</td>';
+                        }else{
+                        rows = rows + '<td class="text-center">'+value.tgl_kadaluarsa+'</td>';	
+                        }
+                        
+                        rows = rows + '</tr>';
+                });
+                     $('#tubuhnya').html(rows);
+                }
+            });
             $('.bd-example-modal-lg').modal('show');
         });
 	</script>

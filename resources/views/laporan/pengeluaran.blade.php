@@ -38,7 +38,7 @@
 							<th>No</th>
 							<th>Kode</th>
 							<th>No.Resi</th>
-							<th>tanggal</th>
+							<th>Tanggal Bayar</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
@@ -51,7 +51,7 @@
 							<th>No</th>
 							<th>Kode</th>
 							<th>No.Resi</th>
-							<th>tanggal</th>
+							<th>Tanggal Bayar</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
@@ -67,10 +67,15 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->no_resi}}</td>
-                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->tgl_bayar}}</td>
                            
                             	@if($vendor=='semua')
-								  <td>{{$row->tujuan}}</td>
+								  <td>
+								  	<?php
+								  		$vendornya = explode('-',$row->tujuan);
+								  	?>
+								  	{{$vendornya[0]}}
+								  </td>
                             	@endif
                             <td>{{$row->admin}}</td>
 							<td>{{"Rp ".number_format($row->biaya_suratjalan,0,',','.')}}</td>
