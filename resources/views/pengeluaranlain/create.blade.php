@@ -96,7 +96,23 @@
                                     @endif
 						</div>
 					</div>
-
+					
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tanggal
+						</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input
+								type="date"
+								class="form-control"
+								value="{{date('Y-m-d')}}"
+								name="tgl"
+								required
+								>
+							</div>
+						</div>
+					</div>
+					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Foto
 						</label>

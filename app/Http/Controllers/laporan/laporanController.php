@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
 use App\Exports\LaporanPemasukanExport;
 use App\Exports\LaporanPengeluaranVendorExport;
 use App\Exports\LaporanPengeluaranGajiKaryawanExport;
@@ -16,7 +15,6 @@ use Illuminate\Support\Facades\Response;
 
 
 class laporanController extends Controller{
-
     public function tampilpengeluaran(Request $request){
         $rules = [
             'bulan' => 'required',
@@ -30,57 +28,76 @@ class laporanController extends Controller{
         $bln = $bulan[0];
         $thn = $bulan[1];
         if($vendor=='semua'){
-            $data = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->orderby('tgl','desc')
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode,surat_jalan.biaya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->paginate(40);
-            $data2 = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->orderby('tgl','desc')
+            
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->get();
-            $total = DB::table('surat_jalan')
-            ->select(DB::raw('SUM(biaya) as totalnya'))
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(biaya_suratjalan) as totalnya'))
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
             ->get();
 
         }else{
-             $data = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
-            ->orderby('tgl','desc')
+             $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->paginate(40);
-            $data2 = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
-            ->orderby('tgl','desc')
+
+             $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->get();
 
-            $total = DB::table('surat_jalan')
-            ->select(DB::raw('SUM(biaya) as totalnya'))
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
+             $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
             ->get();
-
         }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
     }
     //============================================
     public function pilihpengeluaran(){
-        $bulan = DB::table('surat_jalan')
-        ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        $bulan = DB::table('resi_pengiriman')
+        ->select(DB::raw('MONTH(resi_pengiriman.tgl_bayar) as bulan, YEAR(resi_pengiriman.tgl_bayar) as tahun,surat_jalan.tujuan'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.tgl_bayar','!=',NULL)
         ->groupby('bulan')
         ->groupby('tahun')
-        ->orderby('tgl','desc')
+        ->orderby('resi_pengiriman.tgl_bayar','desc')
         ->get();
 
-        $vendor = DB::table('surat_jalan')
+        $vendor = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.kode_jalan,surat_jalan.*'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.tgl_bayar','!=',NULL)
         ->groupby('tujuan')
         ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -479,43 +496,41 @@ class laporanController extends Controller{
         $bln = $bulan[0];
         $thn = $bulan[1];
         if($vendor=='semua'){
-            $data = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->orderby('tgl','desc')
-            ->paginate(40);
-            $data2 = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->orderby('tgl','desc')
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode,surat_jalan.biaya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->get();
-            $total = DB::table('surat_jalan')
-            ->select(DB::raw('SUM(biaya) as totalnya'))
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
             ->get();
         }else{
-             $data = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
-            ->orderby('tgl','desc')
-            ->paginate(40);
-            $data2 = DB::table('surat_jalan')
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
-            ->orderby('tgl','desc')
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
             ->get();
-            $total = DB::table('surat_jalan')
-            ->select(DB::raw('SUM(biaya) as totalnya'))
-            ->whereMonth('tgl',$bln)
-            ->whereYear('tgl',$thn)
-            ->where('tujuan',$vendor)
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+             ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/cetakpengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulan'=>$bln,'tahun'=>$thn,'vendor'=>$vendor,'data2'=>$data2]);
+        return view('laporan/cetakpengeluaran',['title'=>$webinfo,'total'=>$total,'bulan'=>$bln,'tahun'=>$thn,'vendor'=>$vendor,'data2'=>$data2]);
     }
         public function cetakpengeluarangjkw($tglnya,$jabatan){
         $namajabatan =$jabatan;

@@ -23,25 +23,28 @@ class LaporanPengeluaranVendorExport implements FromCollection,WithHeadings, Sho
     {
         $vdr=$this->vdr;
         if($vdr != 'semua'){
-            return DB::table('surat_jalan')
-            ->select(DB::raw('admin,kode,tujuan,tgl,status,totalkg,totalkoli,totalcash,totalbt,biaya,alamat_tujuan'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
-            ->where('tujuan',$this->vdr)
-            ->get();;
+            return DB::table('resi_pengiriman')
+            ->select(DB::raw('surat_jalan.kode,resi_pengiriman.no_resi,surat_jalan.tujuan,resi_pengiriman.tgl_bayar,resi_pengiriman.biaya_suratjalan'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereMonth('resi_pengiriman.tgl_bayar',$this->bulan)
+            ->whereYear('resi_pengiriman.tgl_bayar',$this->tahun)
+            ->where([['surat_jalan.tujuan',$this->vdr],['resi_pengiriman.tgl_bayar','!=',null]])
+            ->get();
         }else{
-            return DB::table('surat_jalan')
-            ->select(DB::raw('admin,kode,tujuan,tgl,status,totalkg,totalkoli,totalcash,totalbt,biaya,alamat_tujuan'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
-            ->get();;
+            return DB::table('resi_pengiriman')
+            ->select(DB::raw('surat_jalan.kode,resi_pengiriman.no_resi,surat_jalan.tujuan,resi_pengiriman.tgl_bayar,resi_pengiriman.biaya_suratjalan'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereMonth('resi_pengiriman.tgl_bayar',$this->bulan)
+            ->whereYear('resi_pengiriman.tgl_bayar',$this->tahun)
+            ->where('resi_pengiriman.tgl_bayar','!=',null)
+            ->get();
         }
         //
     }
         public function headings(): array
     {
         return [
-            'admin','kode','tujuan','tgl','status','totalkg','totalkoli','totalcash','totalbt','biaya','alamat_tujuan',
+            'kode','resi','tujuan','tgl_bayar','biaya'
         ];
     }
 }

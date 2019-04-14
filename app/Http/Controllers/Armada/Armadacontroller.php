@@ -9,6 +9,37 @@ use Illuminate\Support\Facades\Session;
 
 class Armadacontroller extends Controller
 {
+    public function caripajakunit($id){
+        $data = DB::table('pajak_armada')->where('id_armada',$id)->get();
+
+        return response()->json($data);
+    }
+    //========================================================
+    public function hapuspajakunit($id){
+    DB::table('pajak_armada')
+        ->where('id',$id)
+        ->delete();
+        return back()->with('status','Data Berhasil Dihapus');
+    }
+    //=======================================================
+    public function tambahpajakunit(Request $request){
+        DB::table('pajak_armada')
+        ->insert([
+            'id_armada'=>$request->idunit,
+            'nama_pajak'=>$request->namapajak
+        ]);
+        return back()->with('status','Data Berhasil Disimpan');
+    }
+    //=============================================================
+    public function editpajakunit(Request $request){
+        DB::table('pajak_armada')
+        ->where('id',$request->idpajak)
+        ->update([
+            'nama_pajak'=>$request->namapajak
+        ]);
+        return back()->with('status','Data Berhasil Di edit');
+    }
+    //=============================================================
     public function aksibayarpajak(Request $request){
         $tk = date('Y-m-d', strtotime('-7 day', strtotime($request->tglkadaluarsa)));
         if($request->hasFile('gambar')){
@@ -30,8 +61,8 @@ class Armadacontroller extends Controller
                 'tgl'=>$request->tglbayar,
                 'gambar'=>$namagambar
             ]);
-            DB::table('armada')
-            ->where('id',$request->kodeunit)
+            DB::table('pajak_armada')
+            ->where('id',$request->pajak)
             ->update([
                 'tgl_bayar'=>$request->tglbayar,
                 'tgl_kadaluarsa'=>$request->tglkadaluarsa,
@@ -62,12 +93,13 @@ class Armadacontroller extends Controller
     public function bayarpajak($id){
         $webset = DB::table('setting')->limit(1)->get();
         $data = DB::table('armada')->where('id',$id)->get();
-        return view('Armada/bayarpajak',['title'=>$webset,'armada'=>$data]);
+        $datapajak = DB::table('pajak_armada')->where('id_armada',$id)->get();
+        return view('Armada/bayarpajak',['title'=>$webset,'armada'=>$data,'datapajak'=>$datapajak]);
     }
     //===========================================================
     public function index(){
     	$webset = DB::table('setting')->limit(1)->get();
-    	$data = DB::table('armada')->orderby('id','desc')->paginate(20);
+    	$data = DB::table('armada')->orderby('id','desc')->get();
     	return view('Armada/index',['title'=>$webset,'armada'=>$data]);
     }
     //=================================================================
@@ -77,6 +109,7 @@ class Armadacontroller extends Controller
     }
     //=================================================================
     public function store(Request $request){
+
     	DB::table('armada')
     	->insert([
     		'nama'			=> $request->nama,
@@ -85,13 +118,29 @@ class Armadacontroller extends Controller
     		'nomor_mesin'	=> $request->nomesin,
     		'warna'			=> $request->warna
     	]);
+
+        $data=$request->pajak;
+        for ($i=0; $i < count($data) ; $i++){ 
+            if($i == count($data)-1){
+                $final = $data[$i];
+            }else{
+                $final = $data[$i];
+            }
+        $idarmada = DB::getPdo()->lastInsertId();
+        DB::table('pajak_armada')
+        ->insert([
+            'id_armada' =>$idarmada,
+            'nama_pajak' => $final,
+            ]);
+        }
     	return redirect('armada')->with('status','Data Berhasil Di simpan');
     }
     //====================================================================
     public function edit($id){
     	$data = DB::table('armada')->where('id',$id)->get();
+        $datapajak = DB::table('pajak_armada')->where('id_armada',$id)->get();
     	$webset = DB::table('setting')->limit(1)->get();
-    	return view('Armada/edit',['armada'=>$data,'title'=>$webset]);
+    	return view('Armada/edit',['armada'=>$data,'title'=>$webset,'datapajak'=>$datapajak]);
     }
     //==================================================================
     public function update($id, Request $request){
@@ -110,6 +159,7 @@ class Armadacontroller extends Controller
     //=====================================================================
     public function delete($id){
     	DB::table('armada')->where('id',$id)->delete();
+        DB::table('pajak_armada')->where('id_armada',$id)->delete();
     	return redirect('armada')->with('status','Data Berhasil Di hapus');
     }
 

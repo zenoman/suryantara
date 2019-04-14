@@ -37,11 +37,11 @@
 						<tr>
 							<th>No</th>
 							<th>Kode</th>
-							<th>tanggal</th>
+							<th>No.Resi</th>
+							<th>Tanggal Bayar</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
-							<th>Status</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -50,11 +50,11 @@
 						<tr> 
 							<th>No</th>
 							<th>Kode</th>
-							<th>tanggal</th>
+							<th>No.Resi</th>
+							<th>Tanggal Bayar</th>
 								@if($vendor=='semua')
 									<th>vendor</th>
 								@endif
-							<th>Status</th>
 							<th>admin</th>
 							<th>Subtotal</th>
 						</tr>
@@ -66,20 +66,19 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
-                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->no_resi}}</td>
+                            <td>{{$row->tgl_bayar}}</td>
                            
                             	@if($vendor=='semua')
-								  <td>{{$row->tujuan}}</td>
+								  <td>
+								  	<?php
+								  		$vendornya = explode('-',$row->tujuan);
+								  	?>
+								  	{{$vendornya[0]}}
+								  </td>
                             	@endif
-                            <td>
-                            	@if($row->status!='P')
-                            	Belum Lunas
-                            	@else
-                            	Lunas
-                            	@endif
-                            </td>
                             <td>{{$row->admin}}</td>
-							<td>{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
+							<td>{{"Rp ".number_format($row->biaya_suratjalan,0,',','.')}}</td>
                         </tr>
 						@endforeach
 						</tbody>

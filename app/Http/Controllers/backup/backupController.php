@@ -45,11 +45,14 @@ class backupController extends Controller
     }
     
     public function cetakpengeluaran(int $bulan,int $tahun){
-    	$data = DB::table('surat_jalan')
-       ->select(DB::raw('tgl,kode,tujuan,totalkg,totalkoli,totalcash,totalbt,biaya,alamat_tujuan,admin'))
-        ->whereMonth('tgl',$bulan)
-        ->whereYear('tgl',$tahun)
-        ->get();
+    	$data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode,surat_jalan.biaya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereMonth('tgl_bayar',$bulan)
+            ->whereYear('tgl_bayar',$tahun)
+            ->orderby('tgl_bayar','desc')
+            ->get();
     	return view('backup/cetakpengeluaran',['data'=>$data,'bulan'=>$bulan,'tahun'=>$tahun]);
     }
     public function cetakpengeluaranlain(int $bulan,int $tahun){

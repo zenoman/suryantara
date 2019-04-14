@@ -25,30 +25,31 @@
 	
 	<table border="1" style="width: 100%">
 		<tr>
-			<td>Tanggal</td>
-            <td>Nomor surat jalan</td>
-            <td>Tujuan</td>
-            <td>Total berat(Kg)</td>
-            <td>Total jumlah(Koli)</td>
-            <td>Total Cash</td>
-            <td>Total BT</td>
-            <td>Biaya</td>
-            <td>Alamat tujuan</td>
-            <td>Pembuat</td>
+			<tr>
+							<th>No</th>
+							<th>Kode</th>
+							<th>No.Resi</th>
+							<th>Tanggal Bayar</th>
+							<th>vendor</th>
+							<th>admin</th>
+							<th>Subtotal</th>
+						</tr>
 		</tr>
+		<?php $no=1;?>
 		@foreach($data as $row)
-		<tr>
-			<td>{{$row->tgl}}</td>
-			<td>{{$row->kode}}</td>
-			<td>{{$row->tujuan}}</td>
-			<td>{{$row->totalkg}}</td>
-			<td>{{$row->totalkoli}}</td>
-			<td>{{"Rp ".number_format($row->totalcash,0,',','.')}}</td>
-			<td>{{"Rp ".number_format($row->totalbt,0,',','.')}}</td>
-			<td>{{"Rp ".number_format($row->biaya,0,',','.')}}</td>
-			<td>{{$row->alamat_tujuan}}</td>
-			<td>{{$row->admin}}</td>
-		</tr>
+		 <tr>
+                            <td align="center">{{$no++}}</td>
+                            <td align="center">{{$row->kode}}</td>
+                            <td align="center">{{$row->no_resi}}</td>
+                            <td align="center">{{$row->tgl_bayar}}</td>
+                           	<td align="center">
+                           		 <?php $vendor=explode('-',$row->tujuan);?>
+								 	{{$vendor[0]}}
+                           	</td>
+                        	<td align="center">{{$row->admin}}</td>
+                           <td align="center">{{"Rp ".number_format($row->biaya_suratjalan,0,',','.')}}</td>
+                          
+						</tr>
 		@endforeach
 	</table>
 </body>
