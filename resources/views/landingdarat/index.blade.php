@@ -70,7 +70,7 @@
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
-              <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
+              <input type="text" class="form-control" name="kota_asal" value="KEDIRI" readonly>
             </div>
           </div>
           <div class="col-sm-4 col-sm-offset-1">
@@ -78,7 +78,7 @@
               <label>Kota Tujuan<small> :</small></label>
               <select id="kota_tujuan" class="select2" name="tujuan">
                 @foreach($tujuan as $row)
-                <option>{{$row->tujuan}}</option>
+                <option><?php echo strtoupper($row->tujuan)?></option>
                 @endforeach
               </select>
               

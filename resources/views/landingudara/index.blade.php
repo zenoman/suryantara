@@ -69,7 +69,7 @@
           <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
-              <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
+              <input type="text" class="form-control" name="kota_asal" value="KEDIRI" readonly>
             </div>
           </div>
           <div class="col-sm-4 col-sm-offset-1">
@@ -78,7 +78,7 @@
               <select id="kota_tujuan" class="select2" name="kota_tujuan">
                 <option></option>
                 @foreach($tujuan as $row)
-                <option>{{$row->tujuan}}</option>
+                <option><?php echo strtoupper($row->tujuan)?></option>
                 @endforeach
               </select>
               
@@ -98,11 +98,13 @@
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Maskapai<small> :</small></label>
-              <select id="exampleSelect" name="psw" class="form-control">
-                <option value="semua">semua maskapai</option>
-                <!-- @foreach($select as $row)
-                <option>{{$row->airlans}}</option>
-                @endforeach -->
+              <select id="exampleSelect" name="psw" class="form-control">             
+                <option value="semua" >semua maskapai</option>
+               
+                <!--@foreach($select as $row)               
+                <option><?php echo strtoupper($row->airlans)?></option>
+                 @endforeach-->
+                
               </select>
             </div>
           </div>
