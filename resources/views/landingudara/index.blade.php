@@ -99,7 +99,7 @@
             <div class="form-group">
               <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">             
-                <option value="semua" >semua maskapai</option>
+                <option value="semua">semua maskapai</option>
                
                 <!--@foreach($select as $row)               
                 <option><?php echo strtoupper($row->airlans)?></option>
@@ -221,7 +221,7 @@
     $('#exampleSelect')
          .append($("<option></option>")
                     .attr("value",item.airlans)
-                    .text(item.airlans)); 
+                    .text(item.airlans.toUpperCase())); 
     })
    }
 </script>
