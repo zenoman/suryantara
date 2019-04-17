@@ -55,7 +55,7 @@
 												<br>
 
                <form action="{{url('tampillaporanpemasukanharian') }}" role="form" method="GET">
-					
+					<input type="hidden" name="habu" value="harian">
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tanggal</label>
 						<div class="col-sm-10">
@@ -108,7 +108,7 @@
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<br>
 				<form action="{{url('tampillaporanpemasukan') }}" role="form" method="GET">
-					
+					<input type="hidden" name="habu" value="bulanan">
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
 						<div class="col-sm-10">

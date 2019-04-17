@@ -100,22 +100,26 @@ Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
 //=====================================================laporan
 Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');
 Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran'); 
-Route::get('/printlaporanpengeluaran/{bulanya}/{vendor}','laporan\laporanController@cetakpengeluaran');
 Route::get('/laporanpengeluarangjkw','laporan\laporanController@pilihpengeluarangajikaryawan'); 
 Route::get('/tampillaporanpengeluarangjkw','laporan\laporanController@tampilpengeluarangjkw');
 Route::get('/printlaporangpengeluaranjkw/{tglnya}/{kodejabatan}','laporan\laporanController@cetakpengeluarangjkw');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
-Route::get('/printpengeluaranlainya/{bulanya}/{kategori}','laporan\laporanController@cetaklaporanpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
-Route::get('/tampillaporanpemasukanharian','laporan\laporanController@tampilpemasukanhari');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
-Route::get('/printpemasukan/{bulanya}/{jalur}','laporan\laporanController@cetakpemasukan');
-//---------------------------------------------------export Laporan
-Route::get('/export_laporan_pemasukan/{bulanya}/{jalur}','laporan\laporanController@exsportlaporanpemasukan');
-Route::get('/export_laporan_pengeluaran_vendor/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
+//-----------hari
+Route::get('/tampillaporanpemasukanharian','laporan\laporanController@tampilpemasukanhari');
+Route::get('/tampillaporanpengeluaranharian','laporan\laporanController@tampilpengeluaranhari');
+Route::get('/tampillaporanpengeluarangjkwharian','laporan\laporanController@tampilpengeluarangjkwhari');
+//---------------------------------------------------cetak && export Laporan
+Route::get('/printpemasukan/{habu}/{bulanya}/{jalur}','laporan\laporanController@cetakpemasukan');
+Route::get('/printpengeluaranlainya/{habu}/{bulanya}/{kategori}','laporan\laporanController@cetaklaporanpengeluaranlain');
+Route::get('/printlaporanpengeluaran/{habu}/{bulanya}/{vendor}','laporan\laporanController@cetakpengeluaran');
+
+Route::get('/export_laporan_pemasukan/{habu}/{bulanya}/{jalur}','laporan\laporanController@exsportlaporanpemasukan');
+Route::get('/export_laporan_pengeluaran_lain/{habu}/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
+Route::get('/export_laporan_pengeluaran_vendor/{habu}/{bulanya}/{vendor}','laporan\laporanController@exsportlaporanpengluaranvendor');
 Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','laporan\laporanController@exsportlaporanpengluarangjkw');
-Route::get('/export_laporan_pengeluaran_lain/{bulanya}/{kategori}','laporan\laporanController@exsportlaporanpengeluaranlain');
 
 //===========================================
 Route::post('/login/bukakunci','Login\Logincontroller@bukakunci');

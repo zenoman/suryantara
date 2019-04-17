@@ -8,10 +8,18 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
+						@if($haribulan == 'harian')
+						@if($jalur=='semua')
+						Laporan Pemasukan tanggal {{$tanggal}}-{{$bulan}}-{{$tahun}}
+						@else
+						Laporan Pemasukan {{$jalur}} tanggal {{$tanggal}}-{{$bulan}}-{{$tahun}}
+						@endif
+						@else
 						@if($jalur=='semua')
 						Laporan Pemasukan Bulan {{$bulan}}-{{$tahun}}
 						@else
 						Laporan Pemasukan {{$jalur}} Bulan {{$bulan}}-{{$tahun}}
+						@endif
 						@endif
 						
 					</b>
