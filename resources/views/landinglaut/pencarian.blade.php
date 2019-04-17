@@ -80,7 +80,7 @@
               <?php $no = $i++;?>
               <tr>
                 <td class="text-center">{{$no}}</td>
-                <td class="text-center">{{$row->tujuan}}</td>
+                <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
                 <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}</td>
                 <td class="text-center">
 
