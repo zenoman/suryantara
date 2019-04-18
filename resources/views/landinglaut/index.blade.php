@@ -72,7 +72,7 @@
               <label>Kota Tujuan<small> :</small></label>
               <select id="kota_tujuan" class="select2" name="tujuan">
                 @foreach($tujuan as $row)
-                <option>{{$row->tujuan}}</option>
+                <option><?php echo strtoupper($row->tujuan)?></option>
                 @endforeach
               </select>
               

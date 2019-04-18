@@ -20,6 +20,7 @@ class landingdaratcontroller extends Controller
     
     public function index()
     {
+
      $tarif_darat=Landingdaratmodel::paginate(10);
       $desk=DB::table('setting')->get();
       $tujuan=DB::table('tarif_darat')->groupBy('tujuan')->get();

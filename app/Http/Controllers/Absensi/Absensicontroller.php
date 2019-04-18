@@ -65,34 +65,24 @@ class Absensicontroller extends Controller
         return redirect('absen')->with('status','Input Data Sukses');
     }
     //--------------------------------
-    public function pilihabsenhari()
-    {
-        $setting = DB::table('setting')->get();
-            $ambiltgl = DB::table('absensi')
-            ->groupby('tanggal')
-            ->get();
-        $datAbsensi = DB::table('absensi')
-                ->select('absensi.*','jabatan.jabatan')
-                ->leftjoin('jabatan', 'jabatan.id', '=', 'absensi.id_jabatan')
-                ->groupby('jabatan')
-                ->paginate(20);
-                return view('absensi/pilihabsensiharian',['absen'=>$datAbsensi,'title'=>$setting,'tgl'=>$ambiltgl]);
-    }
-    public function pilihabsenbulan()
+    public function pilihabsensi()
     {
         $setting = DB::table('setting')->get();
         $ambiltgl = DB::table('absensi')
+        ->groupby('tanggal')
+        ->get();
+        $ambilbln = DB::table('absensi')
         ->select(DB::raw('MONTH(tanggal) as bulan, YEAR(tanggal) as tahun'))
         ->groupby('bulan')
         ->groupby('tahun')
         ->get();
-        // $dattgl=date('Y-m-d');
-        // dd($ambiltgl);
         $datAbsensi = DB::table('absensi')
                 ->select('absensi.*','jabatan.jabatan')
                 ->leftjoin('jabatan', 'jabatan.id', '=', 'absensi.id_jabatan')
-                ->paginate(20);
-                return view('absensi/pilihabsensibulanan',['absen'=>$datAbsensi,'title'=>$setting,'tgl'=>$ambiltgl]);
+                ->groupby('jabatan')
+                ->paginate(60);
+
+                return view('absensi/pilihabsensi',['absen'=>$datAbsensi,'title'=>$setting,'tgl'=>$ambiltgl,'bln'=>$ambilbln]);
     }
 
     public function tampilabsenharian(Request $request){

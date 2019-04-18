@@ -6,11 +6,11 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoSize
+class LaporanPemasukanhariExport implements FromCollection,WithHeadings, ShouldAutoSize
 {
-    public function __construct(int $bln,int $thn,string $jalur)
+    public function __construct(int $tgl,int $bln,int $thn,string $jalur)
     {
-
+        $this->tanggal = $tgl;
         $this->bulan = $bln;
         $this->tahun = $thn;
         $this->jalur = $jalur;
@@ -18,10 +18,11 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
 
     public function collection()
     {
-        $jlr=$this->jalur;
+     $jlr=$this->jalur;
         if($jlr=='darat' || $jlr =='laut'){
             return DB::table('resi_pengiriman')
             ->select(DB::raw('no_resi,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereDay('tgl',$this->tanggal)
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->where('pengiriman_via',$this->jalur)
@@ -30,6 +31,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
         }elseif ($jlr == 'udara') {
             return DB::table('resi_pengiriman')
             ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereDay('tgl',$this->tanggal)
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->where('pengiriman_via',$this->jalur)
@@ -38,10 +40,12 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
         }else {
             return DB::table('resi_pengiriman')
             ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereDay('tgl',$this->tanggal)
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->get();
         }
+
         // dd($data);
     	        //
 

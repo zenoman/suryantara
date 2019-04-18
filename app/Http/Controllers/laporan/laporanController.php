@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Response;
 class laporanController extends Controller{
     public function tampilpengeluaran(Request $request){
         $rules = [
+            'habu' =>'required',
             'bulan' => 'required',
                 ];
          $customMessages = [
         'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
          ];
         $this->validate($request,$rules,$customMessages);
+        $bulaan = $request->habu;
         $vendor = $request->vendor;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
@@ -81,10 +83,20 @@ class laporanController extends Controller{
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
+        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->bulan,'vendor'=>$vendor,'data2'=>$data2,'habu'=>$bulaan,'data3'=>$data->appends(request()->input())]);
     }
     //============================================
     public function pilihpengeluaran(){
+        $tgl = DB::table('resi_pengiriman')
+        ->select(DB::raw('DAY(resi_pengiriman.tgl_bayar) as tanggal,MONTH(resi_pengiriman.tgl_bayar) as bulan, YEAR(resi_pengiriman.tgl_bayar) as tahun,surat_jalan.tujuan'))
+        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+        ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+        ->groupby('tanggal')
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('resi_pengiriman.tgl_bayar','desc')
+        ->get();
+
         $bulan = DB::table('resi_pengiriman')
         ->select(DB::raw('MONTH(resi_pengiriman.tgl_bayar) as bulan, YEAR(resi_pengiriman.tgl_bayar) as tahun,surat_jalan.tujuan'))
         ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
@@ -101,7 +113,7 @@ class laporanController extends Controller{
         ->groupby('tujuan')
         ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pilihpengeluaran',['title'=>$webinfo,'bulan'=>$bulan,'vendor'=>$vendor]);
+        return view('laporan/pilihpengeluaran',['title'=>$webinfo,'bulan'=>$bulan,'tanggal'=>$tgl,'vendor'=>$vendor]);
     }
     //============================================gjkw
     public function pilihpengeluarangajikaryawan(){
@@ -127,19 +139,27 @@ class laporanController extends Controller{
     	->groupby('tahun')
     	->orderby('tgl','desc')
     	->get();
+        $harian = DB::table('resi_pengiriman')
+        ->select(DB::raw('DAY(tgl) as tanggal,MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('tanggal')
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('tgl','desc')
+        ->get();
     	$webinfo = DB::table('setting')->limit(1)->get();
-    	return view('laporan/pilihpemasukan',['title'=>$webinfo,'bulan'=>$bulan]);
+    	return view('laporan/pilihpemasukan',['title'=>$webinfo,'bulan'=>$bulan,'hari'=>$harian]);
     }
     //================================================
     public function tampilpemasukan(Request $request){
         $rules = [
+            'habu' => 'required',
             'bulan' => 'required',
                 ];
          $customMessages = [
         'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
          ];
         $this->validate($request,$rules,$customMessages);
-
+        $bulaan = $request->habu; 
     	$jalur = $request->jalur;
     	$bulan = explode('-', $request->bulan);
     	$bln = $bulan[0];
@@ -224,11 +244,18 @@ class laporanController extends Controller{
     	$webinfo = DB::table('setting')->limit(1)->get();
 
 
-    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'data3'=>$data->appends(request()->input())]);
+    	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'habu'=>$bulaan,'data3'=>$data->appends(request()->input())]);
     }
     public function pilihpengeluaranlain(){
         $bulan = DB::table('pengeluaran_lain')
         ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('bulan')
+        ->groupby('tahun')
+        ->orderby('tgl','desc')
+        ->get();
+        $tgl = DB::table('pengeluaran_lain')
+        ->select(DB::raw('DAY(tgl) as tanggal','MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->groupby('tanggal')
         ->groupby('bulan')
         ->groupby('tahun')
         ->orderby('tgl','desc')
@@ -238,17 +265,18 @@ class laporanController extends Controller{
         ->groupby('kategori')
         ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pilihpengeluaranlain',['title'=>$webinfo,'bulan'=>$bulan,'kategori'=>$kategori]);
+        return view('laporan/pilihpengeluaranlain',['title'=>$webinfo,'bulan'=>$bulan,'tanggal'=>$tgl,'kategori'=>$kategori]);
     }
     public function tampilpengeluaranlain(Request $request){
         $rules = [
+            'habu' => 'required',
             'bulan' => 'required',
                 ];
          $customMessages = [
         'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
          ];
         $this->validate($request,$rules,$customMessages);
-
+        $bulaan = $request->habu;;
         $kategori = $request->kategori;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
@@ -291,7 +319,7 @@ class laporanController extends Controller{
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->bulan,'data2'=>$data2,'data3'=>$data->appends(request()->input())]);
+        return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->bulan,'data2'=>$data2,'habu'=>$bulaan,'data3'=>$data->appends(request()->input())]);
     }
     //------------------------------------------------------------
     public function tampilpengeluarangjkw(Request $request){
@@ -348,36 +376,61 @@ class laporanController extends Controller{
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporan/pengeluarangajikaryawan',[
+        return view('laporan/pengeluarangajikaryawan',[
         'data'=>$data,'tglnya'=>$request->bulan,'title'=>$webinfo,'total'=>$total,'bulanya'=>$bln,'tahunya'=>$thn,'jabatan'=>$jabat,'data2'=>$data2,'kodejabatan'=>$idjabatan,'data3'=>$data->appends(request()->input())
-    ]);
+        ]);
     }
     //-------------------------------------------------------------
-    public function exsportlaporanpemasukan($bulannya, $jalur){
+    public function exsportlaporanpemasukan($habu,$bulannya, $jalur){
+        if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+            if ($jalur !='semua') {
+        $namafile = "Export laporan pemasukan ".$bulannya." di jalur ".$jalur.".xlsx";
+            }else{
+        $namafile = "Export laporan pemasukan ".$bulannya." di ".$jalur." jalur.xlsx";
+            }
+        return Excel::download(new LaporanPemasukanhariExport($tgl,$bln,$thn,$jalur),$namafile);
+        }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
-
             if ($jalur !='semua') {
-        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di jalur ".$jalur.".xlsx";
+        $namafile = "Export laporan pemasukan ".$bulannya." di jalur ".$jalur.".xlsx";
             }else{
-        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di ".$jalur." jalur.xlsx";
+        $namafile = "Export laporan pemasukan ".$bulannya." di ".$jalur." jalur.xlsx";
             }
         return Excel::download(new LaporanPemasukanExport($bln,$thn,$jalur),$namafile);
+        }
 
     }
-    public function exsportlaporanpengluaranvendor($bulannya, $vendor){
+    public function exsportlaporanpengluaranvendor($habu,$bulannya, $vendor){
+            if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if ($vendor !='semua') {
+            $namafile = "Export laporan pengeluaran ".$bulannya." vendor ".$vendor.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran ".$bulannya." di ".$vendor." vendor.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranVendorhariExport($tgl,$bln,$thn,$vendor),$namafile);
+            }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($vendor !='semua') {
-            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." vendor ".$vendor.".xlsx";
+            $namafile = "Export laporan pengeluaran ".$bulannya." vendor ".$vendor.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." di ".$vendor." vendor.xlsx";
+            $namafile = "Export laporan pengeluaran ".$bulannya." di ".$vendor." vendor.xlsx";
         }
         return Excel::download(new LaporanPengeluaranVendorExport($bln,$thn,$vendor),$namafile);
+            }
     }
-        public function exsportlaporanpengluarangjkw($bulannya, $jabatan){
+    public function exsportlaporanpengluarangjkw($bulannya, $jabatan){
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
@@ -385,22 +438,128 @@ class laporanController extends Controller{
         
         return Excel::download(new LaporanPengeluaranGajiKaryawanExport($bln,$thn,$jabatan),$namafile);
     }
-        public function exsportlaporanpengeluaranlain($bulannya, $kategori){
+    public function exsportlaporanpengeluaranlain($habu,$bulannya, $kategori){
+            if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if ($kategori !='semua') {
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." dengan kategori ".$kategori.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." di ".$kategori." kategori.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranLainhariExport($tgl,$bln,$thn,$kategori),$namafile);
+            }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($kategori !='semua') {
-            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." dengan kategori ".$kategori.".xlsx";
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." dengan kategori ".$kategori.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." di ".$kategori." kategori.xlsx";
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." di ".$kategori." kategori.xlsx";
         }
         return Excel::download(new LaporanPengeluaranLainExport($bln,$thn,$kategori),$namafile);
-
+            }
     }
 //=======================================================================cetak pemasukan
-    public function cetakpemasukan($bulanya, $jalur){
+    public function cetakpemasukan($habu,$bulanya, $jalur){
 
-        // $jalur = $jalur;
+        if($habu == 'harian'){
+$bulan = explode('-', $bulanya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+
+        if($jalur=='darat'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->get();
+        }elseif ($jalur=='laut') {
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->get();
+        }elseif ($jalur=='udara'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->get();
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/cetakpemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'haribulan'=>$habu,'tanggal'=>$tgl,'bulan'=>$bln,'tahun'=>$thn,'total'=>$total,'jalur'=>$jalur]);
+        }else{
         $bulan = explode('-', $bulanya);
         $bln = $bulan[0];
         $thn = $bulan[1];
@@ -480,10 +639,57 @@ class laporanController extends Controller{
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-        return view('laporan/cetakpemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulan'=>$bln,'tahun'=>$thn,'total'=>$total,'jalur'=>$jalur]);
+        return view('laporan/cetakpemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'haribulan'=>$habu,'bulan'=>$bln,'tahun'=>$thn,'total'=>$total,'jalur'=>$jalur]);
+        }
     }
-//-----------------------------------------------------
-        public function cetakpengeluaran($bulanya, $vendor){
+    public function cetakpengeluaran($habu,$bulanya, $vendor){
+        if($habu =='harian'){
+        $vendor = $vendor;
+        $bulan = explode('-', $bulanya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if($vendor=='semua'){
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode,surat_jalan.biaya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->get();
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
+            ->get();
+        }else{
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->get();
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+             ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/cetakpengeluaran',['title'=>$webinfo,'total'=>$total,'tanggal'=>$tgl,'bulan'=>$bln,'tahun'=>$thn,'vendor'=>$vendor,'data2'=>$data2]);
+        }else{
         $vendor = $vendor;
         $bulan = explode('-', $bulanya);
         $bln = $bulan[0];
@@ -524,8 +730,9 @@ class laporanController extends Controller{
         }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/cetakpengeluaran',['title'=>$webinfo,'total'=>$total,'bulan'=>$bln,'tahun'=>$thn,'vendor'=>$vendor,'data2'=>$data2]);
+        }
     }
-        public function cetakpengeluarangjkw($tglnya,$jabatan){
+    public function cetakpengeluarangjkw($tglnya,$jabatan){
         $namajabatan =$jabatan;
         $bulan = explode('-',$tglnya);
         $bln = $bulan[0];
@@ -572,11 +779,63 @@ class laporanController extends Controller{
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporan/cetakpengeluarangjkw',[
+        return view('laporan/cetakpengeluarangjkw',[
         'data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$bln,'tahunya'=>$thn,'jabatan'=>$jabat,'data2'=>$data2,'kodejabatan'=>$idjabatan
-    ]);
+        ]);
     }
-    public function cetaklaporanpengeluaranlain($bulanya,$kategori){
+    public function cetaklaporanpengeluaranlain($habu,$bulanya,$kategori){
+        if($habu =='harian'){
+        $kategori = $kategori;
+        $bulan = explode('-', $bulanya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+
+        if($kategori=='semua'){
+            $data = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+             $data2 = DB::table('pengeluaran_lain')
+             ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }else{
+            $data = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/cetakpengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'tanggal'=>$tgl,'bulan'=>$bln,'tahun'=>$thn,'kategori'=>$kategori,'bulanya'=>$bulanya,'data2'=>$data2]);
+        }else{
         $kategori = $kategori;
         $bulan = explode('-', $bulanya);
         $bln = $bulan[0];
@@ -620,7 +879,285 @@ class laporanController extends Controller{
         }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/cetakpengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'bulan'=>$bln,'tahun'=>$thn,'kategori'=>$kategori,'bulanya'=>$bulanya,'data2'=>$data2]);
+        }
     }
+
+//=======================================================Hari
+public function tampilpemasukanhari(Request $request){
+        $rules = [
+            'habu' => 'required',
+            'tanggal' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+        $hari =$request->habu;
+        $jalur = $request->jalur;
+        $tanggal = explode('-', $request->tanggal);
+        $tgl = $tanggal[0];
+        $bln = $tanggal[1];
+        $thn = $tanggal[2];
+        if($jalur=='darat'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','darat')
+            ->get();
+        }elseif ($jalur=='laut') {
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','laut')
+            ->get();
+        }elseif ($jalur=='udara'){
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('pengiriman_via','udara')
+            ->get();
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('resi_pengiriman')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(total_biaya) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->tanggal,'total'=>$total,'jalur'=>$jalur,'habu'=>$hari,'data3'=>$data->appends(request()->input())]);
+    }
+public function tampilpengeluaranhari(Request $request){
+        $rules = [
+            'habu' => 'required',
+            'tgl' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+        $hari = $request->habu;;
+        $vendor = $request->vendor;
+        $bulan = explode('-', $request->tgl);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if($vendor=='semua'){
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode,surat_jalan.biaya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->paginate(40);
+            
+            $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->get();
+
+            $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(biaya_suratjalan) as totalnya'))
+            ->where('resi_pengiriman.tgl_bayar','!=',NULL)
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->get();
+
+        }else{
+             $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->paginate(40);
+
+             $data2 = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.tujuan,surat_jalan.kode'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereDay('tgl_bayar',$tgl)
+            ->whereMonth('tgl_bayar',$bln)
+            ->whereYear('tgl_bayar',$thn)
+            ->orderby('tgl_bayar','desc')
+            ->get();
+
+             $total = DB::table('resi_pengiriman')
+            ->select(DB::raw('SUM(resi_pengiriman.biaya_suratjalan) as totalnya'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([['resi_pengiriman.tgl_bayar','!=',NULL],['surat_jalan.tujuan','=',$vendor]])
+            ->whereDay('resi_pengiriman.tgl_bayar',$tgl)
+            ->whereMonth('resi_pengiriman.tgl_bayar',$bln)
+            ->whereYear('resi_pengiriman.tgl_bayar',$thn)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pengeluaran',['data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$request->tgl,'vendor'=>$vendor,'data2'=>$data2,'habu'=>$hari,'data3'=>$data->appends(request()->input())]);
+    }
+public function tampilpengeluaranlainhari(Request $request){
+        $rules = [
+            'habu' =>'required',
+            'tanggal' => 'required',
+                ];
+         $customMessages = [
+        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
+         ];
+        $this->validate($request,$rules,$customMessages);
+        $hari =$request->habu;
+        $kategori = $request->kategori;
+        $bulan = explode('-', $request->tanggal);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+
+        if($kategori=='semua'){
+            $data = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+             $data2 = DB::table('pengeluaran_lain')
+             ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->get();
+        }else{
+            $data = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
+            ->paginate(40);
+            $data2 = DB::table('pengeluaran_lain')
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->orderby('tgl','desc')
+            ->get();
+            $total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->whereDay('tgl',$tgl)
+            ->whereMonth('tgl',$bln)
+            ->whereYear('tgl',$thn)
+            ->where('kategori',$kategori)
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/pengeluaranlain',['title'=>$webinfo,'data'=>$data,'total'=>$total,'kategori'=>$kategori,'bulanya'=>$request->tanggal,'data2'=>$data2,'habu'=>$hari,'data3'=>$data->appends(request()->input())]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
