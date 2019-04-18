@@ -381,28 +381,54 @@ class laporanController extends Controller{
         ]);
     }
     //-------------------------------------------------------------
-    public function exsportlaporanpemasukan($bulannya, $jalur){
+    public function exsportlaporanpemasukan($habu,$bulannya, $jalur){
+        if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+            if ($jalur !='semua') {
+        $namafile = "Export laporan pemasukan ".$bulannya." di jalur ".$jalur.".xlsx";
+            }else{
+        $namafile = "Export laporan pemasukan ".$bulannya." di ".$jalur." jalur.xlsx";
+            }
+        return Excel::download(new LaporanPemasukanhariExport($tgl,$bln,$thn,$jalur),$namafile);
+        }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
-
             if ($jalur !='semua') {
-        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di jalur ".$jalur.".xlsx";
+        $namafile = "Export laporan pemasukan ".$bulannya." di jalur ".$jalur.".xlsx";
             }else{
-        $namafile = "Export laporan pemasukan bulan ".$bln." tahun ".$thn." di ".$jalur." jalur.xlsx";
+        $namafile = "Export laporan pemasukan ".$bulannya." di ".$jalur." jalur.xlsx";
             }
         return Excel::download(new LaporanPemasukanExport($bln,$thn,$jalur),$namafile);
+        }
+
     }
-    public function exsportlaporanpengluaranvendor($bulannya, $vendor){
+    public function exsportlaporanpengluaranvendor($habu,$bulannya, $vendor){
+            if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if ($vendor !='semua') {
+            $namafile = "Export laporan pengeluaran ".$bulannya." vendor ".$vendor.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran ".$bulannya." di ".$vendor." vendor.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranVendorhariExport($tgl,$bln,$thn,$vendor),$namafile);
+            }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($vendor !='semua') {
-            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." vendor ".$vendor.".xlsx";
+            $namafile = "Export laporan pengeluaran ".$bulannya." vendor ".$vendor.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran bulan ".$bln." tahun ".$thn." di ".$vendor." vendor.xlsx";
+            $namafile = "Export laporan pengeluaran ".$bulannya." di ".$vendor." vendor.xlsx";
         }
         return Excel::download(new LaporanPengeluaranVendorExport($bln,$thn,$vendor),$namafile);
+            }
     }
     public function exsportlaporanpengluarangjkw($bulannya, $jabatan){
         $bulan = explode('-', $bulannya);
@@ -412,16 +438,29 @@ class laporanController extends Controller{
         
         return Excel::download(new LaporanPengeluaranGajiKaryawanExport($bln,$thn,$jabatan),$namafile);
     }
-    public function exsportlaporanpengeluaranlain($bulannya, $kategori){
+    public function exsportlaporanpengeluaranlain($habu,$bulannya, $kategori){
+            if($habu == 'harian' ){
+        $bulan = explode('-', $bulannya);
+        $tgl = $bulan[0];
+        $bln = $bulan[1];
+        $thn = $bulan[2];
+        if ($kategori !='semua') {
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." dengan kategori ".$kategori.".xlsx";
+        }else{
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." di ".$kategori." kategori.xlsx";
+        }
+        return Excel::download(new LaporanPengeluaranLainhariExport($tgl,$bln,$thn,$kategori),$namafile);
+            }else{
         $bulan = explode('-', $bulannya);
         $bln = $bulan[0];
         $thn = $bulan[1];
         if ($kategori !='semua') {
-            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." dengan kategori ".$kategori.".xlsx";
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." dengan kategori ".$kategori.".xlsx";
         }else{
-            $namafile = "Export laporan pengeluaran lain bulan ".$bln." tahun ".$thn." di ".$kategori." kategori.xlsx";
+            $namafile = "Export laporan pengeluaran lain ".$bulannya." di ".$kategori." kategori.xlsx";
         }
         return Excel::download(new LaporanPengeluaranLainExport($bln,$thn,$kategori),$namafile);
+            }
     }
 //=======================================================================cetak pemasukan
     public function cetakpemasukan($habu,$bulanya, $jalur){
@@ -1027,7 +1066,7 @@ public function tampilpengeluaranhari(Request $request){
     }
 public function tampilpengeluaranlainhari(Request $request){
         $rules = [
-            'habu' =>
+            'habu' =>'required',
             'tanggal' => 'required',
                 ];
          $customMessages = [

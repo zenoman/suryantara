@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class LaporanPengeluaranLainExport implements FromCollection,WithHeadings, ShouldAutoSize
+class LaporanPengeluaranLainhariExport implements FromCollection,WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-        public function __construct(int $bln,int $thn,string $kategori)
+        public function __construct(int $tgl,int $bln,int $thn,string $kategori)
     {
+        $this->tanggal = $tgl;
         $this->bulan = $bln;
         $this->tahun = $thn;
         $this->kate = $kategori;
@@ -21,10 +22,11 @@ class LaporanPengeluaranLainExport implements FromCollection,WithHeadings, Shoul
     public function collection()
     {
         //
-         $kate=$this->kate;
+             $kate=$this->kate;
         if($kate !='semua'){
             return DB::table('pengeluaran_lain')
             ->select(DB::raw('admin,kategori,keterangan,jumlah,tgl'))
+            ->whereDay('tgl',$this->tanggal)
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->where('kategori',$this->kate)
@@ -32,6 +34,7 @@ class LaporanPengeluaranLainExport implements FromCollection,WithHeadings, Shoul
         }else{
             return DB::table('pengeluaran_lain')
             ->select(DB::raw('admin,kategori,keterangan,jumlah,tgl'))
+            ->whereDay('tgl',$this->tanggal)
             ->whereMonth('tgl',$this->bulan)
             ->whereYear('tgl',$this->tahun)
             ->get();
