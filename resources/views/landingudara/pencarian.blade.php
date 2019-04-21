@@ -66,7 +66,7 @@
             <tr>
               <th>No</th>
               <th>Kota Tujuan</th>
-              <th>Berat Mininmal</th>
+              <th>Berat</th>
               <th>Pesawat</th>
               <th>Biaya</th>
               <th>Estimasi Biaya</th>
@@ -80,7 +80,7 @@
               <tr>
                 <td class="text-center">{{$no}}</td>
                 <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
-                <td class="text-center">{{$row->berat_minimal." Kg"}}</td>
+                <td class="text-center">{{$brt." Kg"}}</td>
                 <td class="text-center"><?php echo strtoupper($row->airlans)?></td>
                 <td class="text-center">{{"Rp ". number_format($row->perkg,0,',','.')}}</td>
                 <td>
