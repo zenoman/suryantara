@@ -1051,7 +1051,7 @@ $(document).ready(function(){
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;	
 			}
 			var jumlah		= $("#jumlah_udara").val();
-			var berat		= $("#totalberat").val();
+			var berat		= $('#totalberat').val();
 			var kota_asal	= $("#kota_asal_udara").val();
 			var kota_tujuan = $('#kta_tujuan_udara').val();
 			var n_pengirim 	= $("#n_pengirim_udara").val();
@@ -1174,7 +1174,7 @@ $(document).ready(function(){
 			$("#cetak_jumlah_barang_udara3").html($("#jumlah_udara").val());
 			$("#cetak_jumlah_barang_udara4").html($("#jumlah_udara").val());
 		}
-		$("#cetak_berat_udara").html($("#totalberat").val()+" Kg");
+		$("#cetak_berat_udara").html($('#totalberat').val()+" Kg");
 		$("#cetak_pengirim_udara").html($("#n_pengirim_udara").val());
 		$("#cetak_telp_pengirim_udara").html($("#t_pengirim_udara").val());
 		$("#cetak_penerima_udara").html($("#n_penerima_udara").val());
@@ -1187,7 +1187,7 @@ $(document).ready(function(){
 		$('#cetak_biaya_charge_udara2').html("Rp. "+$('#b_charge_udara').html());
 		$('#cetak_biaya_charge_udara3').html("Rp. "+$('#b_charge_udara').html());
 		$('#cetak_biaya_charge_udara4').html("Rp. "+$('#b_charge_udara').html());
-		$("#cetak_total_udara").html("Rp. " +$('#total_udara').html());
+		$("#cetak_total_udara").html("Rp. " +rupiah($('#total_udara').html()));
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
 		$("#cetak_tanggal_udara").html("Kediri, "+tanggal);
@@ -1203,12 +1203,12 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara2").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara2').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara2').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara2").html("Rp. " +$('#total_udara').html());
+		$("#cetak_total_udara2").html("Rp. " +rupiah($('#total_udara').html()));
 		$("#cetak_tanggal_udara2").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara2').html($('#nomer_smu_udara').val());
 		//================file 3============================
 		$("#cetak_kota_asal_udara3").html($("#kota_asal_udara").val());
-		$("#cetak_berat_udara3").html($("#totalberat_udara").val()+" Kg");
+		$("#cetak_berat_udara3").html($("#totalberat").val()+" Kg");
 		$("#cetak_pengirim_udara3").html($("#n_pengirim_udara").val());
 		$("#cetak_telp_pengirim_udara3").html($("#t_pengirim_udara").val());
 		$("#cetak_penerima_udara3").html($("#n_penerima_udara").val());
@@ -1217,12 +1217,12 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara3").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara3').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara3').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara3").html("Rp. " +$('#total_udara').html());
+		$("#cetak_total_udara3").html("Rp. " +rupiah($('#total_udara').html()));
 		$("#cetak_tanggal_udara3").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara3').html($('#nomer_smu_udara').val());
 		//=====================file 4 ========================
 		$("#cetak_kota_asal_udara4").html($("#kota_asal_udara").val());
-		$("#cetak_berat_udara4").html($("#totalberat_udara").val()+" Kg");
+		$("#cetak_berat_udara4").html($("#totalberat").val()+" Kg");
 		$("#cetak_pengirim_udara4").html($("#n_pengirim_udara").val());
 		$("#cetak_telp_pengirim_udara4").html($("#t_pengirim_udara").val());
 		$("#cetak_penerima_udara4").html($("#n_penerima_udara").val());
@@ -1231,7 +1231,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara4").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara4').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara4').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara4").html("Rp. " +$('#total_udara').html());
+		$("#cetak_total_udara4").html("Rp. " +rupiah($('#total_udara').html()));
 		$("#cetak_tanggal_udara4").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara4').html($('#nomer_smu_udara').val());
 	}

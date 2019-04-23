@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `armada` (
   `nomor_mesin` varchar(60) DEFAULT NULL,
   `warna` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.armada: ~2 rows (approximately)
 DELETE FROM `armada`;
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `pajak_armada` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.pajak_armada: ~1 rows (approximately)
+-- Dumping data for table kargo.pajak_armada: ~5 rows (approximately)
 DELETE FROM `pajak_armada`;
 /*!40000 ALTER TABLE `pajak_armada` DISABLE KEYS */;
 INSERT INTO `pajak_armada` (`id`, `id_armada`, `nama_pajak`, `tgl_bayar`, `tgl_kadaluarsa`, `tgl_peringatan`) VALUES
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.pengeluaran_lain: ~8 rows (approximately)
+-- Dumping data for table kargo.pengeluaran_lain: ~13 rows (approximately)
 DELETE FROM `pengeluaran_lain`;
 /*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
 INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah`, `tgl`, `gambar`) VALUES
@@ -345,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~34 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~36 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`) VALUES
@@ -408,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.setting: ~0 rows (approximately)
+-- Dumping data for table kargo.setting: ~1 rows (approximately)
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `desk_udara`, `desk_laut`, `desk_darat`, `bulan_sekarang`) VALUES
@@ -586,7 +586,7 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.vendor: ~3 rows (approximately)
+-- Dumping data for table kargo.vendor: ~4 rows (approximately)
 DELETE FROM `vendor`;
 /*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`) VALUES

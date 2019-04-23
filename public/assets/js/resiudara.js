@@ -414,11 +414,11 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_charge').html("Rp. "+$('#b_charge').html());
-		$('#cetak_biaya_charge2').html("Rp. "+$('#b_charge').html());
-		$('#cetak_biaya_charge3').html("Rp. "+$('#b_charge').html());
-		$('#cetak_biaya_charge4').html("Rp. "+$('#b_charge').html());
-		$("#cetak_total").html("Rp. " +$('#total').html());
+		$('#cetak_biaya_charge').html("Rp. "+rupiah($('#b_charge').html()));
+		$('#cetak_biaya_charge2').html("Rp. "+rupiah($('#b_charge').html()));
+		$('#cetak_biaya_charge3').html("Rp. "+rupiah($('#b_charge').html()));
+		$('#cetak_biaya_charge4').html("Rp. "+rupiah($('#b_charge').html()));
+		$("#cetak_total").html("Rp. " +rupiah($('#total').html()));
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
 		$("#cetak_tanggal").html("Kediri, "+tanggal);
@@ -436,7 +436,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim2").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu2').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina2').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$("#cetak_total2").html("Rp. " +$('#total').html());
+		$("#cetak_total2").html("Rp. " +rupiah($('#total').html()));
 		$("#cetak_tanggal2").html("Kediri, "+tanggal);
 		$('#cetak_nosmu2').html($('#nomer_smu').val());
 		//================file 3============================
@@ -452,7 +452,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu3').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina3').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$("#cetak_total3").html("Rp. " +$('#total').html());
+		$("#cetak_total3").html("Rp. " +rupiah($('#total').html()));
 		$("#cetak_tanggal3").html("Kediri, "+tanggal);
 		$('#cetak_nosmu3').html($('#nomer_smu').val());
 		//=====================file 4 ========================
@@ -468,7 +468,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu4').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina4').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$("#cetak_total4").html("Rp. " +$('#total').html());
+		$("#cetak_total4").html("Rp. " +rupiah($('#total').html()));
 		$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		$('#cetak_nosmu4').html($('#nomer_smu').val());
 	}
