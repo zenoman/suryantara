@@ -64,6 +64,39 @@ class Absensicontroller extends Controller
         
         return redirect('absen')->with('status','Input Data Sukses');
     }
+    public function tambahabsenselesai(Request $request){
+         $datKaryawan = DB::table('karyawan')
+                ->get();
+                $dattgl=date('Y-m-d');
+        $datAbsensi = DB::table('absensi')
+                ->where('tanggal','=',$dattgl)
+                ->get();
+
+        foreach ($datKaryawan as $row) {
+            foreach ($datAbsensi as $ro) {
+                if ($row->id == $ro->id_karyawan) {
+                    
+                }else{
+            $masuk=0;
+            $bolos=1;
+            $izin=0;
+            $ketiz="-";
+                    Absensimodel::create([
+                        'id_karyawan'  => $row->id,
+                        'id_jabatan'  => $row->id_jabatan,
+                        'tanggal' =>$dattgl,
+                        'masuk'=>$masuk,
+                        'izin'=>$izin,
+                        'keterangan_izin'=>$ketiz,
+                        'tidak_masuk'=>$bolos
+                        ]);
+                }
+            }
+        }
+                // dd($datKaryawan);
+        
+        return redirect('absen')->with('status','Input Data Sukses');
+    }
     //--------------------------------
     public function pilihabsensi()
     {

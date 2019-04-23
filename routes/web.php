@@ -264,6 +264,7 @@ Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
 //=======================================================Absensi
 Route::get('/absen','Absensi\AbsensiController@index');
 Route::post('/tamabsen','Absensi\AbsensiController@tambahdataabsen');
+Route::post('/tamabsensel','Absensi\AbsensiController@tambahabsenselesai');
 Route::get('/pilihabsensi','Absensi\AbsensiController@pilihabsensi');
 Route::get('/tampilabsensiharian','Absensi\AbsensiController@tampilabsenharian');
 Route::get('/tampilabsensibulanan','Absensi\AbsensiController@tampilabsenbulanan');

@@ -99,15 +99,13 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="myModalLabel">Alasan Tisak Masuk</h4>
                                         </div>
-                                        
-
                                         <div class="modal-body">
                                            <form method="POST"  action="{{url('/tamabsen')}}">
                                             <div class="form-group">
 	                        		<input type="hidden" name="id_karyawan" id="id_karyawan" value="{{$row->id}}">
 	                        		<input type="hidden" name="id_jabatan" id="id_jabatan" value="{{$row->id_jabatan}}">
 	                        		<input type="hidden" name="tanggal" id="tanggal" value="{{$tanggal}}">
-                                                <input type="text" name="ketizin" class="form-control" placeholder="Masukan Alasan" required>
+                                               <input type="text" name="ketizin" class="form-control" placeholder="Masukan Alasan" required>
                                             </div>
                                            {{csrf_field()}}
                                             <button type="submit" class="btn btn-info">Simpan</button>
@@ -138,6 +136,33 @@
 						</tbody>
 					</table>
 					 {{ $karyawan->links() }}
+<small class="text-muted text-right">
+								
+<!-- <input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Tampil Data Absensi Bulanan ?')" value="Lanjut"> -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selesai">Selesai</button>
+<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+</small>
+<div class="modal fade" id="selesai" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">Penting</h4>
+</div>
+<div class="modal-body">
+<form method="POST"  action="{{url('/tamabsensel')}}">
+<div class="form-group">
+dengan menekan tombol selesai Karyawan yg belum absen hari ini akan dinyatakan tidak masuk.<br>
+Apakah anda yakin ingin melanjutkanya?
+</div>
+{{csrf_field()}}
+<hr>
+<button type="submit" class="btn btn-info">Lanjutkan</button>
+<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+</form>
+</div>
+</div>
+</div>
+</div>
 				</div>
 			</section>
 		</div><!--.container-fluid-->
