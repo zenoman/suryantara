@@ -540,12 +540,16 @@ $(document).ready(function(){
 			var berat		= $("#berat_laut").val();
 			var kota_asal	= $("#kota_asal_laut").val();
 			var isi_kota_tujuan = $('#kota_tujuan_laut').val();
+			
 			var a_pengirim 	= $("#alamat_pengirim_laut").val();
 			var a_penerima	= $("#alamat_penerima_laut").val();
+
 			var n_pengirim 	= $("#n_pengirim_laut").val();
 			var t_pengirim	= $("#t_pengirim_laut").val();
+
 			var n_penerima	= $("#n_penerima_laut").val();
 			var t_penerima 	= $("#t_penerima_laut").val();
+
 			var biaya_kirim	= $("#biaya_kirim_laut").val();
 			var biaya_packing = $("#biaya_packing_laut").val();
 			var biaya_asu 	= $("#biaya_asuransi_laut").val();
@@ -1128,6 +1132,7 @@ $(document).ready(function(){
 	}
 	//=================================================
 	function tempelresiudara(){
+		hitung_total_udara();
 		var dats = $('#kota_tujuan_udara').select2('data');
 		var kota_tujuan = dats[0].text;
 		var rows ='';
@@ -1187,7 +1192,7 @@ $(document).ready(function(){
 		$('#cetak_biaya_charge_udara2').html("Rp. "+$('#b_charge_udara').html());
 		$('#cetak_biaya_charge_udara3').html("Rp. "+$('#b_charge_udara').html());
 		$('#cetak_biaya_charge_udara4').html("Rp. "+$('#b_charge_udara').html());
-		$("#cetak_total_udara").html("Rp. " +rupiah($('#total_udara').html()));
+		$("#cetak_total_udara").html("Rp. " +$('#total_udara').html());
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
 		$("#cetak_tanggal_udara").html("Kediri, "+tanggal);
@@ -1203,7 +1208,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara2").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara2').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara2').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara2").html("Rp. " +rupiah($('#total_udara').html()));
+		$("#cetak_total_udara2").html("Rp. " +$('#total_udara').html());
 		$("#cetak_tanggal_udara2").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara2').html($('#nomer_smu_udara').val());
 		//================file 3============================
@@ -1217,7 +1222,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara3").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara3').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara3').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara3").html("Rp. " +rupiah($('#total_udara').html()));
+		$("#cetak_total_udara3").html("Rp. " +$('#total_udara').html());
 		$("#cetak_tanggal_udara3").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara3').html($('#nomer_smu_udara').val());
 		//=====================file 4 ========================
@@ -1231,7 +1236,7 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim_udara4").html("Rp. "+rupiah($("#biaya_kirim_udara").val()));
 		$('#cetak_biaya_smu_udara4').html("Rp. "+rupiah($('#biaya_smu_udara').val()));
 		$('#cetak_biaya_karantina_udara4').html("Rp. "+rupiah($('#biaya_karantina_udara').val()));
-		$("#cetak_total_udara4").html("Rp. " +rupiah($('#total_udara').html()));
+		$("#cetak_total_udara4").html("Rp. " +$('#total_udara').html());
 		$("#cetak_tanggal_udara4").html("Kediri, "+tanggal);
 		$('#cetak_nosmu_udara4').html($('#nomer_smu_udara').val());
 	}

@@ -524,7 +524,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="n_penerima_laut" @if($row->pengiriman_via=='laut')value="{{$row->nama_pengirim}}"@endif>
+								<input type="text" class="form-control" id="n_penerima_laut" @if($row->pengiriman_via=='laut')value="{{$row->nama_penerima}}"@endif>
 							</div>
 						</div>
 					</div>
