@@ -132,9 +132,13 @@ class Dashboardcontroller extends Controller
                     'total'=>$pajak
                 ]);    
             }
+                    $dattgl=date('Y-m-d');
+        $bulan = explode('-', $dattgl);
+         $thn = $bulan[0];
+        $bln = $bulan[1];
             DB::table('setting')
             ->update([
-                'bulan_sekarang'=>date('m')
+                'bulan_sekarang'=>$bln
             ]);
 
         }
@@ -219,19 +223,28 @@ class Dashboardcontroller extends Controller
         ->get();
 
         foreach ($datakaryawan as $row) {
+            $uang_makan= DB::table('absensi')
+            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
+            ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
+            ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
+            ->whereMonth('absensi.tanggal',$bulan-1)
+            ->whereYear('absensi.tanggal',$tahun)
+            ->where('absensi.id_karyawan','=',$row->id)
+            ->sum('absensi.uang_makan');
+// dd($uang_makan);
             if ($row->id_jabatan==1) {
                 $gajitambahan = $pemasukan*1/100;
-                $totalgaji = $row->gaji_pokok + $row->uang_makan +$gajitambahan;
+                $totalgaji = $row->gaji_pokok + $uang_makan +$gajitambahan;
                 DB::table('gaji_karyawan')
                 ->insert([
                     'kode_karyawan'=>$row->kode,
                     'nama_karyawan'=>$row->nama,
                     'id_jabatan'=>$row->id_jabatan,
                     'gaji_pokok'=>$row->gaji_pokok,
-                    'uang_makan'=>$row->uang_makan,
+                    'uang_makan'=>$uang_makan,
                     'gaji_tambahan'=>$gajitambahan,
                     'total'=>$totalgaji,
-                    'bulan'=>$bulan,
+                    'bulan'=>$bulan-1,
                     'tahun'=>$tahun
                 ]);    
             }else{
@@ -242,12 +255,13 @@ class Dashboardcontroller extends Controller
                     'nama_karyawan'=>$row->nama,
                     'id_jabatan'=>$row->id_jabatan,
                     'gaji_pokok'=>$row->gaji_pokok,
-                    'uang_makan'=>$row->uang_makan,
+                    'uang_makan'=>$uang_makan,
                     'total'=>$totalgaji,
-                    'bulan'=>$bulan,
+                    'bulan'=>$bulan-1,
                     'tahun'=>$tahun
                 ]);
             }
+
         }
     }
 

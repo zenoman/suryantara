@@ -273,3 +273,4 @@ Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiControll
 Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
 Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
 Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');
+Route::get('/print/','Absensi\AbsensiController@cetak');

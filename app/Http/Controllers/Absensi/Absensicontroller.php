@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Absensi;
 ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
@@ -20,7 +19,10 @@ class Absensicontroller extends Controller
     {  
         $dattgl=date('Y-m-d');
         $datKaryawan = DB::table('karyawan')
-                ->select('karyawan.id','karyawan.kode','karyawan.nama','karyawan.id_jabatan','absensi.id_karyawan')
+                ->select(DB::raw('karyawan.*,jabatan.uang_makan,absensi.id_karyawan'))
+                ->leftJoin('jabatan',function($joon){
+                    $joon->on('jabatan.id','=','karyawan.id_jabatan');
+                })
                 ->leftJoin('absensi',function ($join) {
                 $join->on('absensi.id_karyawan', '=' , 'karyawan.id') ;
                 $join->where('absensi.tanggal','=', date('Y-m-d')) ;
@@ -29,7 +31,11 @@ class Absensicontroller extends Controller
         $setting = DB::table('setting')->get();
         // dd($datKaryawan);
         return view('absensi/index',['karyawan'=>$datKaryawan,'title'=>$setting,'tanggal'=>$dattgl]);
-
+      }
+    public function cetak()
+    {  
+             $setting = DB::table('setting')->get();
+        return view('absensi/cetak',['title'=>$setting]);
       }
 //-------------------------
         public function tambahdataabsen(Request $request)
@@ -40,16 +46,19 @@ class Absensicontroller extends Controller
             $bolos=0;
             $izin=0;
             $ketiz="-";
+            $makan=$request->uangmaem;
         }elseif($ma_tima == 'tidak_masuk') {
             $masuk=0;
             $bolos=1;
             $izin=0;
             $ketiz="-";
+            $makan="-";
         }else{
             $masuk = 0;
             $bolos = 0;
             $izin = 1;
             $ketiz = $request->ketizin;
+            $makan="-";
         }
         Absensimodel::create([
             'id_karyawan'  => $request->id_karyawan,
@@ -58,7 +67,8 @@ class Absensicontroller extends Controller
             'masuk'=>$masuk,
             'izin'=>$izin,
             'keterangan_izin'=>$ketiz,
-            'tidak_masuk'=>$bolos
+            'tidak_masuk'=>$bolos,
+            'uang_makan'=>$makan
 
         ]);
         
@@ -95,7 +105,7 @@ class Absensicontroller extends Controller
         }
                 // dd($datKaryawan);
         
-        return redirect('absen')->with('status','Input Data Sukses');
+        return redirect('/')->with('status','Input Data Sukses');
     }
     //--------------------------------
     public function pilihabsensi()

@@ -84,6 +84,7 @@
 	                        	<form method="POST" action="{{url('/tamabsen')}}" role="form" class="form-horizontal form-bordered" id="forminput">
 	                        		<input type="hidden" name="id_karyawan" id="id_karyawan" value="{{$row->id}}">
 	                        		<input type="hidden" name="id_jabatan" id="id_jabatan" value="{{$row->id_jabatan}}">
+	                        		<input type="hidden" name="uangmaem" id="uangmaem" value="{{$row->uang_makan}}">
 	                        		<input type="hidden" name="tanggal" id="tanggal" value="{{$tanggal}}">
 	                        		<input type="hidden" name="ma_tima" id="tahun" value="masuk">
 	                        		{{csrf_field()}}
