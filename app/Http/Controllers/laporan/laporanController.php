@@ -246,6 +246,7 @@ class laporanController extends Controller{
 
     	return view('laporan/pemasukan',['title'=>$webinfo,'data'=>$data,'data2'=>$data2,'bulanya'=>$request->bulan,'total'=>$total,'jalur'=>$jalur,'habu'=>$bulaan,'data3'=>$data->appends(request()->input())]);
     }
+    //benerun error
     public function pilihpengeluaranlain(){
         $bulan = DB::table('pengeluaran_lain')
         ->select(DB::raw('MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
@@ -254,7 +255,7 @@ class laporanController extends Controller{
         ->orderby('tgl','desc')
         ->get();
         $tgl = DB::table('pengeluaran_lain')
-        ->select(DB::raw('DAY(tgl) as tanggal','MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
+        ->select(DB::raw('DAY(tgl) as tanggal,MONTH(tgl) as bulan, YEAR(tgl) as tahun'))
         ->groupby('tanggal')
         ->groupby('bulan')
         ->groupby('tahun')
@@ -780,6 +781,57 @@ $bulan = explode('-', $bulanya);
         }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/cetakpengeluarangjkw',[
+        'data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$bln,'tahunya'=>$thn,'jabatan'=>$jabat,'data2'=>$data2,'kodejabatan'=>$idjabatan
+        ]);
+    }
+    public function cetakslipgjkw($tglnya,$jabatan){
+        $namajabatan =$jabatan;
+        $bulan = explode('-',$tglnya);
+        $bln = $bulan[0];
+        $thn = $bulan[1];
+        
+        if($namajabatan=='semua'){
+            $idjabatan = 'semua';
+            $jabat = 'semua';
+            $data = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->paginate(40);
+
+            $data2 = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->get();
+
+            $total = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as totalnya'))
+            ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->get();
+        }else{
+        $jabatan = explode('-',$jabatan);
+        $idjabatan = $jabatan[0];
+        $jabat = $jabatan[1];
+        $data = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->paginate(40);
+
+            $data2 = DB::table('gaji_karyawan')
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->get();
+
+            $total = DB::table('gaji_karyawan')
+            ->select(DB::raw('SUM(total) as totalnya'))
+            ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->get();
+        }
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('laporan/cetakslipgjkw',[
         'data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$bln,'tahunya'=>$thn,'jabatan'=>$jabat,'data2'=>$data2,'kodejabatan'=>$idjabatan
         ]);
     }

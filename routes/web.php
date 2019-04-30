@@ -103,6 +103,7 @@ Route::get('/laporanpengeluaran','laporan\laporanController@pilihpengeluaran');
 Route::get('/laporanpengeluarangjkw','laporan\laporanController@pilihpengeluarangajikaryawan'); 
 Route::get('/tampillaporanpengeluarangjkw','laporan\laporanController@tampilpengeluarangjkw');
 Route::get('/printlaporangpengeluaranjkw/{tglnya}/{kodejabatan}','laporan\laporanController@cetakpengeluarangjkw');
+Route::get('/printslipgajikaryawan/{tglnya}/{kodejabatan}','laporan\laporanController@cetakslipgjkw');
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
@@ -273,4 +274,3 @@ Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiControll
 Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
 Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
 Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');
-Route::get('/print/','Absensi\AbsensiController@cetak');

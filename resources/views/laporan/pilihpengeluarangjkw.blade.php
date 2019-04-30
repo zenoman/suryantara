@@ -24,9 +24,9 @@
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
-				<a href="{{url('/')}}" class="btn btn-primary">Pengeluaran gaji karyawan Harian</a>
+<!-- 				<a href="{{url('/')}}" class="btn btn-primary">Pengeluaran gaji karyawan Harian</a>
 				<a href="{{url('/')}}" class="btn btn-success">Pengeluaran gaji karyawan Bulanan</a>
-				<p></p>
+				<p></p> -->
 				@if (session('status'))
                     <div class="alert alert-success alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -95,10 +95,14 @@
 						
 						@endif
 							&nbsp;&nbsp;
-								<a href="{{url('/printlaporangpengeluaranjkw/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-primary">
+							<a href="{{url('/printlaporangpengeluaranjkw/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-primary">
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>	
+							<a href="{{url('/printslipgajikaryawan/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-info">
+								<i class="font-icon font-icon-player-subtitres"></i>
+								Slip Gaji
+							</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali

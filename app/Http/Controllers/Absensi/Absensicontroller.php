@@ -32,11 +32,7 @@ class Absensicontroller extends Controller
         // dd($datKaryawan);
         return view('absensi/index',['karyawan'=>$datKaryawan,'title'=>$setting,'tanggal'=>$dattgl]);
       }
-    public function cetak()
-    {  
-             $setting = DB::table('setting')->get();
-        return view('absensi/cetak',['title'=>$setting]);
-      }
+
 //-------------------------
         public function tambahdataabsen(Request $request)
     {
