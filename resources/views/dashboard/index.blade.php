@@ -66,8 +66,6 @@
 				</table>
 	                    </div>
 	                </section>
-
-			  	
 				<br>
 			</div>
 			  	@endif
