@@ -29,7 +29,7 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
-						<div class="col-md-9 col-sm-9">
+						<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -44,6 +44,17 @@
 								<select class="form-control" id="metode">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -315,7 +326,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal"></span>
@@ -526,7 +537,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal2"></span>
@@ -738,7 +749,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal3"></span>
@@ -947,7 +958,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal4"></span>

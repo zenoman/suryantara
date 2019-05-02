@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
+
 @section('content')
 <link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 <script type="text/javascript">
@@ -304,7 +305,7 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim_darat">@if($row->pengiriman_via=='darat'){{$row->biaya_kirim}}
+										<td id="b_kirim_darat">@if($row->pengiriman_via=='darat'){{number_format($row->biaya_kirim,0,',','.')}}
 										@else
 										0		 
 										@endif
@@ -312,14 +313,14 @@
 									</tr>
 									<tr>
 										<td>Biaya Packing</td>
-										<td id="b_packing_darat">@if($row->pengiriman_via=='darat'){{$row->biaya_packing}}
+										<td id="b_packing_darat">@if($row->pengiriman_via=='darat'){{number_format($row->biaya_packing,0,',','.')}}
 										@else
 										0		 
 										@endif</td>
 									</tr>
 									<tr>
 										<td>Biaya Asuransi</td>
-										<td id="b_asuransi_darat">@if($row->pengiriman_via=='darat'){{$row->biaya_asuransi}}
+										<td id="b_asuransi_darat">@if($row->pengiriman_via=='darat'){{number_format($row->biaya_asuransi,0,',','.')}}
 										@else
 										0		 
 										@endif</td>
@@ -583,21 +584,21 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim_laut">@if($row->pengiriman_via=='laut'){{$row->biaya_kirim}}
+										<td id="b_kirim_laut">@if($row->pengiriman_via=='laut'){{number_format($row->biaya_kirim,0,',','.')}}
 										@else
 										0 
 										@endif</td>
 									</tr>
 									<tr>
 										<td>Biaya Packing</td>
-										<td id="b_packing_laut">@if($row->pengiriman_via=='laut'){{$row->biaya_packing}}
+										<td id="b_packing_laut">@if($row->pengiriman_via=='laut'){{number_format($row->biaya_packing,0,',','.')}}
 										@else
 										0 
 										@endif</td>
 									</tr>
 									<tr>
 										<td>Biaya Asuransi</td>
-										<td id="b_asuransi_laut">@if($row->pengiriman_via=='laut'){{$row->biaya_asuransi}}
+										<td id="b_asuransi_laut">@if($row->pengiriman_via=='laut'){{number_format($row->biaya_asuransi,0,',','.')}}
 										@else
 										0 
 										@endif</td>
@@ -950,7 +951,7 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_kirim}}
+										<td id="b_kirim_udara">@if($row->pengiriman_via=='udara'){{number_format($row->biaya_kirim,0,',','.')}}
 										@else
 										0
 										@endif
@@ -958,7 +959,7 @@
 									</tr>
 									<tr>
 										<td>Biaya SMU</td>
-										<td id="b_smu_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_smu}}
+										<td id="b_smu_udara">@if($row->pengiriman_via=='udara'){{number_format($row->biaya_smu,0,',','.')}}
 										@else
 										0
 										@endif</td>
@@ -966,7 +967,7 @@
 									<tr>
 										<td>Biaya Karantina</td>
 										<td id="b_karantina_udara">
-											@if($row->pengiriman_via=='udara'){{$row->biaya_karantina}}
+											@if($row->pengiriman_via=='udara'){{number_format($row->biaya_karantina,0,',','.')}}
 										@else
 										0
 										@endif
@@ -975,7 +976,8 @@
 									
 									<tr>
 										<td>Charge</td>
-										<td id="b_charge_udara">@if($row->pengiriman_via=='udara'){{$row->biaya_charge}}
+										<td id="b_charge_udara">@if($row->pengiriman_via=='udara'){{number_format($row->biaya_charge,0,',','.')}}
+
 										@else
 										0
 										@endif</td>
@@ -1095,7 +1097,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal"></span>
@@ -1306,7 +1308,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b><span id="cetak_kota_asal2" ></span></b>
 										</td>
@@ -1517,7 +1519,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal3">
@@ -1730,7 +1732,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 											<span  id="cetak_kota_asal4">
@@ -1953,7 +1955,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal_udara"></span>
@@ -2179,7 +2181,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal_udara2"></span>
@@ -2407,7 +2409,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal_udara3"></span>
@@ -2628,7 +2630,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal_udara4"></span>

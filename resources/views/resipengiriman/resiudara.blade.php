@@ -130,8 +130,18 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="col-md-4 col-sm-4">
+					<div class="col-md-2 col-sm-2">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
@@ -143,7 +153,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-2 col-sm-2">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Total</label>
 							<div class="input-group">
@@ -435,7 +445,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal"></span>
@@ -662,7 +672,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal2"></span>
@@ -892,7 +902,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal3"></span>
@@ -1114,7 +1124,7 @@
 							<td colspan="3" style="width: 25%;font-size: 10;">
 								<table>
 									<tr>
-										<td style="font-size: 11;">Kota asal&nbsp;:&nbsp;</td>
+										<td style="font-size: 11;">Asal&nbsp;:&nbsp;</td>
 										<td style="font-size: 11;">
 											<b>
 												<span id="cetak_kota_asal4"></span>
