@@ -99,10 +99,14 @@
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>	
+							@foreach($title as $ss)
+							@if($ss->status = 'Y')
 							<a href="{{url('/printslipgajikaryawan/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-info">
 								<i class="font-icon font-icon-player-subtitres"></i>
 								Slip Gaji
 							</a>
+							@endif
+							@endforeach
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali

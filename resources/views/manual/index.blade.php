@@ -39,8 +39,10 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif 
+
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
+
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                     <i class="fa fa-search"></i> Cari Data
                     </button>
