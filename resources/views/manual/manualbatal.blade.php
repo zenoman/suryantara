@@ -294,7 +294,7 @@
 						
 					</table>
                     <div class="pull-right">
-                    <a href="{{url('listpengiriman')}}">
+                    <a href="{{url('Manual')}}">
                      <button class="btn btn-danger">
                      Kembali
                      </button>

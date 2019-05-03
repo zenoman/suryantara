@@ -42,10 +42,10 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
+					<!-- <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
-                                        <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a> -->
+                                <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -66,10 +66,10 @@
                                         </div>
                                  
                                     </div>
-                                    <!-- /.modal-content -->
+                                    
                                 </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+                                
+                            </div> -->
                     <br><br>
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -398,7 +398,7 @@
 					</table>
                    
 					
-					 {{ $manual->links() }}
+					 
                      <div class="text-right">
                      <a href="{{url('Manual')}}" class="btn btn-danger">Kembali</a>    
                      </div>
@@ -415,7 +415,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 	</script>

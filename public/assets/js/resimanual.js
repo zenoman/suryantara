@@ -41,6 +41,17 @@ $(document).ready(function(){
 			}
 			
 		})
+	//=============================================ganti metode	
+	$('#metode_darat').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar_darat').val('belum_lunas');
+			$('#status_bayar_darat').prop('disabled','disabled');
+		}else{
+			$('#status_bayar_darat').val('lunas');
+			$('#status_bayar_darat').prop('disabled', false);
+		}
+	})
 	//============================================ hitung volumetrik
 		$("#d_panjang_darat").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
@@ -214,6 +225,7 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_darat").val();
+			var status_bayar = $('#status_bayar_darat').val();
 			if(a_penerima=='' || a_pengirim=='' || nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -248,7 +260,8 @@ $(document).ready(function(){
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar' : status_bayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -276,6 +289,17 @@ $(document).ready(function(){
 			}
 			
 		})
+	//=============================================ganti metode	
+	$('#metode_laut').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar_laut').val('belum_lunas');
+			$('#status_bayar_laut').prop('disabled','disabled');
+		}else{
+			$('#status_bayar_laut').val('lunas');
+			$('#status_bayar_laut').prop('disabled', false);
+		}
+	})
 	//============================================ hitung volumetrik
 		$("#d_panjang_laut").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
@@ -435,6 +459,7 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_laut").val();
+			var status_bayar = $('#status_bayar_laut').val();
 			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -469,7 +494,8 @@ $(document).ready(function(){
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar':status_bayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -488,7 +514,6 @@ $(document).ready(function(){
 	//===================================
 	function hitungbiayakirim(berat){
 		var newberat = Number(berat);
-
 		var barangheavy = carihevy($('#min_heavy').val());
 		var neperkg =  $('#bpk').val().replace(/\./g,'');
 		var perkg = Number(neperkg);
