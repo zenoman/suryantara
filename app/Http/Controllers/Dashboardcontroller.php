@@ -138,7 +138,8 @@ class Dashboardcontroller extends Controller
         $bln = $bulan[1];
             DB::table('setting')
             ->update([
-                'bulan_sekarang'=>$bln
+                'bulan_sekarang'=>$bln,
+                'status'=>'Y'
             ]);
 
         }

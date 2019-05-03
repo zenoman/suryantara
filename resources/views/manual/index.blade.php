@@ -40,7 +40,7 @@
                     </div>
                     @endif 
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i>Absensi Harian</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i>Absensi Bulanan</a>
+					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i>import</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                     <i class="fa fa-search"></i> Cari Data
                     </button>

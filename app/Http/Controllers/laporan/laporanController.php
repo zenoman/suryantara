@@ -779,6 +779,11 @@ $bulan = explode('-', $bulanya);
             ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
             ->get();
         }
+        DB::table('setting')
+            ->update([
+                'status'=>'N'
+            ])
+            ->where('bulan','!=',$bln);
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('laporan/cetakpengeluarangjkw',[
         'data'=>$data,'title'=>$webinfo,'total'=>$total,'bulanya'=>$bln,'tahunya'=>$thn,'jabatan'=>$jabat,'data2'=>$data2,'kodejabatan'=>$idjabatan
