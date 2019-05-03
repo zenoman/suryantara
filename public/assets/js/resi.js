@@ -7,6 +7,17 @@ $(document).ready(function(){
 	$('#satuan').on('change',function(e){
 		satuan = this.value;
 	})
+	//=============================================ganti metode	
+	$('#metode').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar').val('belum_lunas');
+			$('#status_bayar').prop('disabled','disabled');
+		}else{
+			$('#status_bayar').val('lunas');
+			$('#status_bayar').prop('disabled', false);
+		}
+	})
 	//=============================================cari kode
 		carikode();
 
@@ -359,6 +370,7 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode").val();
+			var status_bayar = $('#status_bayar').val();
 			if(a_penerima==''|| a_pengirim =='' || iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -391,7 +403,8 @@ $(document).ready(function(){
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

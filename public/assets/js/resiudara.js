@@ -7,6 +7,17 @@ $(document).ready(function(){
 	var totalberat=0;
 	var jumlahbaranghevy =0;
 	carikode();
+	//=============================================ganti metode	
+	$('#metode').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar').val('belum_lunas');
+			$('#status_bayar').prop('disabled','disabled');
+		}else{
+			$('#status_bayar').val('lunas');
+			$('#status_bayar').prop('disabled', false);
+		}
+	})
 	//===================================
 	function hitungbiayakirim(berat){
 		var newberat = Number(berat);
@@ -413,10 +424,10 @@ $(document).ready(function(){
 		$("#cetak_biaya_kirim").html("Rp. "+rupiah($("#biaya_kirim").val()));
 		$('#cetak_biaya_smu').html("Rp. "+rupiah($('#biaya_smu').val()));
 		$('#cetak_biaya_karantina').html("Rp. "+rupiah($('#biaya_karantina').val()));
-		$('#cetak_biaya_charge').html("Rp. "+rupiah($('#b_charge').html()));
-		$('#cetak_biaya_charge2').html("Rp. "+rupiah($('#b_charge').html()));
-		$('#cetak_biaya_charge3').html("Rp. "+rupiah($('#b_charge').html()));
-		$('#cetak_biaya_charge4').html("Rp. "+rupiah($('#b_charge').html()));
+		$('#cetak_biaya_charge').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge2').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge3').html("Rp. "+$('#b_charge').html());
+		$('#cetak_biaya_charge4').html("Rp. "+$('#b_charge').html());
 		$("#cetak_total").html("Rp. " +$('#total').html());
 		var d = new Date();
 		var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
@@ -512,6 +523,7 @@ $(document).ready(function(){
 			var nosmu 		= $('#nomer_smu').val();
 			var a_pengirim 	= $("#alamat_pengirim").val();
 			var a_penerima	= $("#alamat_penerima").val();
+			var status_bayar = $('#status_bayar').val();
 			if(a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || jumlah=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -546,7 +558,8 @@ $(document).ready(function(){
                 	'nosmu'			: nosmu,
                 	'charge'		: change,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

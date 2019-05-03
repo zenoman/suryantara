@@ -60,18 +60,36 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            	@if($row->status=='Y')
-                            	<button class="btn btn-sm btn-success"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-                            	@elseif($row->no_smu == null)
-                            	<button class="btn btn-sm btn-primary"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-                            	@else
-                            	<button class="btn btn-sm btn-primary"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            	@if($row->tgl_lunas !=null)
+									@if($row->status=='Y')
+                            			<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+									@endif
+
+								@else
+
+									@if($row->status=='Y')
+										<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            		<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+									@endif
 								@endif
 
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
@@ -217,7 +235,7 @@
 						<br>
 						<div class="col-lg-12 terms-and-conditions">
 							<strong>Status : 
-							 @if($row->status=='N')
+							 @if($row->status!='Y')
 								Menunggu Pengembalian Resi / Uang
                             @else
 								Pengiriman Sukses
@@ -244,11 +262,15 @@
 				</div>
 							</div>
 							<div class="modal-footer">
-							
 								@if($row->metode_bayar=='cash')
-									@if($row->status=='N')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@endif
+										@if($row->status=='N')
+										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+										@elseif($row->status=='US')
+										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+										@elseif($row->status=='RS')
+										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+										@endif
 								@else
 									@if($row->status=='N')
 									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
@@ -311,8 +333,8 @@
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-rimary btn-sm">
-                                <i class="fa fa-pencil"></i>
+                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-wrench"></i>
                             	</a>
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
