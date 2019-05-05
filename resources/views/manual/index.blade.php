@@ -70,7 +70,7 @@
                                         <div class="modal-body">
                                            <form method="get" action="{{url('/Manual/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang/Jalur" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
@@ -204,15 +204,15 @@
                             <div class="invoice-block">
                             <div>Tanggal : {{$row->tgl}}</div>
                                 <div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-                                <div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
-                                <div>
-                                  @if($row->tgl_lunas!=null)
+                                <div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif
+                            </div>
+                            <div>
+                                @if($row->tgl_lunas!=null)
                                 Tanggal Pelunasan : {{$row->tgl_lunas}}
                                 @else
                                 Tanggal Pelunasan : -
                                 @endif  
-                                </div>
-                                
+                            </div>
                             </div>
                             <br>
                         </div>
@@ -290,12 +290,9 @@
                                         <td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
                                     </tr>
                                 @endif
-                                    
                                     <tr>
-                                        
                                         <td class="text-right">PPN</td>
                                         <td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
-                                        
                                     </tr>
                                     <tr>
                                         <td><h4>Total</h4></td>
@@ -419,11 +416,9 @@
                             	@endif
                             </td>
                             <td class="text-center">
-                
-                     @if($row->total_biaya > 0)
+                    @if($row->total_biaya > 0)
                         @if(Session::get('level')!='admin')
-
-                                <form action="{{ url('/Manual/delete')}}" method="post">
+                            <form action="{{ url('/Manual/delete')}}" method="post">
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
@@ -442,12 +437,10 @@
                         -
                         @endif
                     @else
-                            <form action="{{ url('/Manual/delete')}}" method="post">                            	
-                            	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                            <form action="{{ url('/Manual/delete')}}" method="post">    <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 {{csrf_field()}}
-                                        	
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                     <i class="fa fa-remove"></i>
@@ -462,13 +455,11 @@
 						
 					</table>
 					{{csrf_field()}}
-                   
-					
-					 {{ $manual->links() }}
+                    {{ $manual->links() }}
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 		@section('js')

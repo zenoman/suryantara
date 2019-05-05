@@ -544,6 +544,17 @@ $(document).ready(function(){
 					hitung_total_udara();
 		}
 	}
+	//=============================================ganti metode	
+	$('#metode_udara').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar_udara').val('belum_lunas');
+			$('#status_bayar_udara').prop('disabled','disabled');
+		}else{
+			$('#status_bayar_udara').val('lunas');
+			$('#status_bayar_udara').prop('disabled', false);
+		}
+	})
 	//=================================================
 	function carihevy(nomer){
 		if (nomer>0) {
@@ -853,6 +864,7 @@ $(document).ready(function(){
 			var total_biaya = parseInt(change) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode_udara").val();
 			var nosmu 		= $('#nomer_smu_udara').val();
+			var status_bayar = $('#status_bayar_udara').val();
 			if(a_pengirim==''||a_penerima==''||nama_barang == '' || jumlah=='' || berat=='' || berat==0 || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -887,7 +899,8 @@ $(document).ready(function(){
                 	'nosmu'			: nosmu,
                 	'charge'		: change,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar':status_bayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

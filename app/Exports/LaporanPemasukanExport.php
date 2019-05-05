@@ -21,25 +21,25 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
         $jlr=$this->jalur;
         if($jlr=='darat' || $jlr =='laut'){
             return DB::table('resi_pengiriman')
-            ->select(DB::raw('no_resi,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,keterangan,status,satuan,metode_bayar,total_biaya'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
+            ->select(DB::raw('no_resi,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,tgl_lunas,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereMonth('tgl_lunas',$this->bulan)
+            ->whereYear('tgl_lunas',$this->tahun)
             ->where('pengiriman_via',$this->jalur)
             ->get();
 
         }elseif ($jlr == 'udara') {
             return DB::table('resi_pengiriman')
-            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
+            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,tgl_lunas,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereMonth('tgl_lunas',$this->bulan)
+            ->whereYear('tgl_lunas',$this->tahun)
             ->where('pengiriman_via',$this->jalur)
             ->get();
 
         }else {
             return DB::table('resi_pengiriman')
-            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
-            ->whereMonth('tgl',$this->bulan)
-            ->whereYear('tgl',$this->tahun)
+            ->select(DB::raw('no_resi,no_smu,kode_jalan,admin,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,pengiriman_via,kota_asal,kode_tujuan,nama_barang,tgl,tgl_lunas,jumlah,berat,dimensi,ukuran_volume,biaya_kirim,biaya_packing,biaya_asuransi,biaya_ppn,biaya_smu,biaya_karantina,biaya_charge,keterangan,status,satuan,metode_bayar,total_biaya'))
+            ->whereMonth('tgl_lunas',$this->bulan)
+            ->whereYear('tgl_lunas',$this->tahun)
             ->get();
         }
         // dd($data);
@@ -63,6 +63,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
                 'Tujuan',
                 'Nama Barang',
                 'Tgl Pembuatan Resi',
+                'Tgl Pelunasan',
                 'Jumlah',
                 'Berat',
                 'Dimensi',
@@ -91,6 +92,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
             'Tujuan',
             'Nama Barang',
             'Tgl Pembuatan Resi',
+            'Tgl Pelunasan',
             'Jumlah',
             'Berat',
             'Dimensi',
@@ -121,6 +123,7 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
                 'Tujuan',
                 'Nama Barang',
                 'Tgl Pembuatan Resi',
+                'Tgl Pelunasan',
                 'Jumlah',
                 'Berat',
                 'Dimensi',

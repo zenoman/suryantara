@@ -34,7 +34,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                   <br><br>
+                  
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -129,8 +129,15 @@
 							<div class="invoice-block">
 							<div>Tanggal : {{$row->tgl}}</div>
 								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-								<div>Metode Bayar : {{$row->metode_bayar}}</div>
+								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
 							</div>
+							<div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                                </div>
 							<br>
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">

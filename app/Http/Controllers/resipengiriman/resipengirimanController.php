@@ -146,14 +146,10 @@ class resipengirimanController extends Controller
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
-            if($row->metode_bayar=='cash'){
-                $status = "Y";
+            if($row->status=='N'){
+                $status = "RS";
             }else{
-                if($row->status=='N'){
-                    $status = "RS";
-                }else{
-                    $status = "Y";
-                }
+                $status = "Y";
             }
 
         }
