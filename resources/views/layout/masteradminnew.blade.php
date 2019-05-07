@@ -135,6 +135,14 @@
 			</div>
 		</li>
 		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Antaran</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Tambah Data</a>
+				<a class="dropdown-item" href="{{url('/listantaran')}}">List Antaran</a>
+				
+			</div>
+		</li>
+		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('Manual')}}">Input Manual</a>

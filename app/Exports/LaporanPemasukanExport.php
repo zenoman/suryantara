@@ -144,4 +144,3 @@ class LaporanPemasukanExport implements FromCollection,WithHeadings, ShouldAutoS
         }
     }
 }
-// no_resi,no_smu,kode_jalan,==admin,nama_barang,pengiriman_via,kota_asal,kode_tujuan,tgl,jumlah,berat,dimensi,ukuran_volume,nama_pengirim,nama_penerima,telp_pengirim,telp_penerima,biaya_kirim,biaya_packing,biaya_asuransi,==,biaya_ppn,biaya_smu,biaya_karantina,total_biaya,keterangan,status,satuan,metode_bayar

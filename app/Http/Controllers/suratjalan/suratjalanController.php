@@ -109,6 +109,7 @@ class suratjalanController extends Controller
                     ->select('no_resi','id')
                     ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0],['batal','=','N']])
                     ->whereNull('kode_jalan')
+                    ->whereNull('kode_antar')
                     ->get();
             
             return response()->json($data);
@@ -126,6 +127,8 @@ class suratjalanController extends Controller
             return response()->json($data);
         }
     }
+
+    //========================================================
     public function hasilresi($id){
     	$data = DB::table('resi_pengiriman')
                     ->select('nama_barang','no_resi','jumlah','berat','id','nama_pengirim','nama_penerima','kode_tujuan')
@@ -134,6 +137,8 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
+
+    //========================================================
     public function hasilvendor($id){
         $data = DB::table('vendor')
                     ->select('vendor','id','alamat','telp','cabang')
@@ -142,6 +147,8 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
+
+    //========================================================
     public function tambahdetail(Request $request){
         $kode = $request->kode;
         $carikode = DB::table('surat_jalan')->where('kode',$kode)->count();
@@ -160,6 +167,8 @@ class suratjalanController extends Controller
             'kode_jalan'=>$request->kode,
         ]);
     }
+
+    //========================================================
     public function hapusdetail($id){
         DB::table('resi_pengiriman')
         ->where('id',$id)
@@ -168,6 +177,7 @@ class suratjalanController extends Controller
         ]);
     }
 
+    //========================================================
     public function store(Request $request){
         if ($request->cabang=='Y') {
             $status='P';

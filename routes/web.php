@@ -1,7 +1,18 @@
 <?php
 use Illuminate\Support\Facades\Input;
-//==============================================armada
-Route::get('/caripajakunit/{id}','Armada\Armadacontroller@caripajakunit');
+//==============================================antaran
+Route::get('/tambahantaran','Antaran\antarancontroller@create');
+Route::get('/listantaran','Antaran\antarancontroller@index');
+Route::get('/carikodeantar','Antaran\antarancontroller@carikode');
+Route::get('/caridetailsa/{kode}','Antaran\antarancontroller@caridetail');
+Route::get('/caripengirimpa','Antaran\antarancontroller@caripengirim');
+Route::get('/caripengirimpa/{id}','Antaran\antarancontroller@caridetailpengirim');
+Route::get('/carinoresisa','Antaran\antarancontroller@carinoresi');
+Route::post('/tambahdetailsa','Antaran\antarancontroller@tambahdetail');
+Route::get('/hapusdetailsa/{id}','Antaran\antarancontroller@hapusdetail');
+Route::post('/tambahkansa','Antaran\antarancontroller@simpansa');
+
+//=======================================================armada
 Route::get('/hapuspajakunit/{id}','Armada\Armadacontroller@hapuspajakunit');
 Route::post('/tambahpajakunit','Armada\Armadacontroller@tambahpajakunit');
 Route::post('/editpajakunit','Armada\Armadacontroller@editpajakunit');
