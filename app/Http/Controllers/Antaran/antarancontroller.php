@@ -159,4 +159,62 @@ class antarancontroller extends Controller
         
         return view('antaran/index',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
+    
+    //=============================================================
+    public function hapus(Request $request){
+    	 $delid = $request->delid;
+        if(!$delid){
+            return back()->with('statuserror','Maaf, Tidak Ada Data Yang Dipilih');
+        }else{
+          $nc = count($delid);
+        
+        for($i=0;$i<$nc;$i++)
+        {
+            $did = $delid[$i];
+            DB::table('surat_antar')->where('id',$did)->delete();
+
+        }
+        return back()->with('status','Data Berhasil Dihapus');  
+        }
+    }
+
+    //=============================================================
+    public function detail($id){
+    	$data = DB::table('surat_antar')
+    	->where('id',$id)
+    	->get();
+
+    	$webinfo = 
+    	DB::table('setting')
+    	->limit(1)
+    	->get();
+
+    	return view('antaran/detail',['data'=>$data, 'title'=>$webinfo]);
+    }
+
+    //===================================================================
+    public function resiantar(){
+    	$webinfo = 
+    	DB::table('setting')
+    	->limit(1)
+    	->get();
+
+    	$data = DB::table('resi_pengiriman')
+    	->where([['kode_antar','!=',null],['status_antar','!=','N']])
+    	->orderby('id','desc')
+    	->paginate(1);
+
+    	return view('antaran/resiantar',['data'=>$data,'webinfo'=>$webinfo]);
+    }
+
+    //=====================================================================
+    public function suksesantar($id){
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'status_antar'=>'Y',
+            'status_pengiriman'=>'paket telah sampai'
+        ]);
+        return back()->with('status','Resi Berhasil Di Update');
+    }
 }

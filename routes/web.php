@@ -11,6 +11,10 @@ Route::get('/carinoresisa','Antaran\antarancontroller@carinoresi');
 Route::post('/tambahdetailsa','Antaran\antarancontroller@tambahdetail');
 Route::get('/hapusdetailsa/{id}','Antaran\antarancontroller@hapusdetail');
 Route::post('/tambahkansa','Antaran\antarancontroller@simpansa');
+Route::post('/hapuslistsa','Antaran\antarancontroller@hapus');
+Route::get('/detailsa/{id}','Antaran\antarancontroller@detail');
+Route::get('/resisuratantar','Antaran\antarancontroller@resiantar');
+Route::get('/suksesantar/{id}','Antaran\antarancontroller@suksesantar');
 
 //=======================================================armada
 Route::get('/hapuspajakunit/{id}','Armada\Armadacontroller@hapuspajakunit');

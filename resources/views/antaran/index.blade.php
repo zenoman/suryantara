@@ -42,7 +42,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					<a href="{{url('/resisuratjalan')}}" class="btn btn-primary"><i class="fa fa-eye"></i> Tampil Berdasarkan Resi</a>
+					<a href="{{url('/resisuratantar')}}" class="btn btn-primary"><i class="fa fa-eye"></i> Tampil Berdasarkan Resi</a>
 					 <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
 
@@ -70,7 +70,7 @@
                                 </div>
                             </div> 
                     <br><br>
-                    <form action="hapuslistsj" method="post">
+                    <form action="hapuslistsa" method="post">
                     	{{csrf_field()}}
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -112,9 +112,13 @@
                            <td>{{$row->tgl}}</td>
                            <td>
                            		@if($row->status!='S')
+                           		<span class="label label-danger">
                            		Belum Sukses
+                           		</span>
                            		@else
+                           		<span class="label label-success">
                            		Sukses
+                           		</span>
                            		@endif	
                            </td>
                             <td>
@@ -157,7 +161,7 @@
 								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
 									<i class="font-icon-close-2"></i>
 								</button>
-								<h4 class="modal-title" id="myModalLabel">Detail Surat Jalan</h4>
+								<h4 class="modal-title" id="myModalLabel">Detail Surat Antar</h4>
 							</div>
 				<div class="modal-body">
 					<div class="row">
@@ -183,6 +187,7 @@
 										<th>Isi Paket</th>
 										<th>Jumlah</th>
 										<th>Berat</th>
+										<th>Status</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -197,7 +202,17 @@
 										<td>{{$resi->nama_barang}}</td>
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
-										
+										<td>
+											@if($resi->status_antar!='Y')
+												<span class="label label-danger">
+                           						Belum Sukses
+                           						</span>
+											@else
+												<span class="label label-success">
+                           						Sukses
+                           						</span>
+											@endif
+										</td>
 									</tr>
 								@endforeach
 								
@@ -220,7 +235,10 @@
 					</div>
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+							@if($row->status!='S')
+							<a href="{{url('/detailsa/'.$row->id)}}" class="btn btn-rounded btn-primary">Ubah Status</a>
+							@endif
+							<button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
