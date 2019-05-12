@@ -109,9 +109,12 @@
 													<a href="{{url('/suksesantar/'.$resi->id.'/'.$resi->kode_antar)}}" class="btn btn-success btn-sm" onclick="return confirm('Apakah Resi Sudah Sampai Di Tujuan ?')">
 													<i class="fa fa-check"></i>
 													</a>
-													<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal{{$resi->id}}">
+													<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal{{$resi->id}}">
                      								<i class="fa fa-close"></i>
                      								</button>
+                     								<a href="{{url('/returresi/'.$resi->id.'/'.$resi->kode_antar)}}" class="btn btn-danger btn-sm" onclick="return confirm('Retur Resi ?')">
+													<i class="fa fa-ban"></i>
+													</a>
 												@endif
 												
                      						@endif

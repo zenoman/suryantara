@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>List Resi Manifes Antar</h2>
+							<p>Hasil Pencarian "{{$cari}}"</p>
 						</div>
 					</div>
 				</div>
@@ -42,30 +43,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-                    <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-							<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('cariresisuratantar')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi / no. surat antar / Pemegang / Tanggal" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-                    <br><br>
+                    
                    
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -121,13 +99,9 @@
                             		<span class="label label-warning">
                             		{{$row->status_pengiriman}}
                             		</span>
-                            	@elseif($row->status_pengiriman=='dikembalikan ke pengirim')
-                            		<span class="label label-danger">
-                            			{{$row->status_pengiriman}}
-                            		</span>
                             	@else
                             		<span class="label label-success">
-                            			{{$row->status_pengiriman}}
+                            		{{$row->status_pengiriman}}
                             		</span>
                             	@endif
                             </td>
@@ -137,13 +111,10 @@
 										<a href="{{url('/suksesantar/'.$row->id.'/'.$row->kode_antar)}}" class="btn btn-success btn-sm" onclick="return confirm('Apakah Resi Sudah Sampai Di Tujuan ?')"><i class="fa fa-check"></i>
 										</a>
 
-										<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal{{$row->id}}">
+										<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal{{$row->id}}">
                      					<i class="fa fa-close"></i>
                      					</button>
-                     					<a href="{{url('/returresi/'.$row->id.'/'.$row->kode_antar)}}" class="btn btn-danger btn-sm" onclick="return confirm('Retur Resi ?')"><i class="fa fa-ban"></i>
-										</a>
-
-                     			<div class="modal fade" id="Modal{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     					<div class="modal fade" id="Modal{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -203,7 +174,7 @@
                                  	</div>
                                 </div>
 									@else
-										<button class="btn btn-sm btn-primary"
+					<button class="btn btn-sm btn-primary"
 										data-toggle="modal"
 										data-target=".bd-example-modal-lg{{$row->id}}">
 										<i class="fa fa-eye"></i>
@@ -368,12 +339,7 @@
 					</div>
 				</div> 
 									@endif
-								
-                           
-
-                          
-				
-                           </td>
+							</td>
 						</tr>
 						
 						@endforeach
@@ -384,7 +350,6 @@
 					<a href="{{url('/listantaran')}}" class="btn btn-danger">Kembali</a>
 					</div>
 					
-					 {{ $data->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -397,7 +362,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false,
+            "paging":true,
             "columnDefs": [ {
           "targets": 'no-sort',
           "orderable": false,

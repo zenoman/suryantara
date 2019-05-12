@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Resi Manifes Antar</h2>
+							<h2>List Retur Resi Manifes Antar</h2>
 						</div>
 					</div>
 				</div>
@@ -42,31 +42,6 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-                    <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-							<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('cariresisuratantar')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi / no. surat antar / Pemegang / Tanggal" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-                    <br><br>
-                   
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -113,97 +88,18 @@
                             <td>{{$row->kode_antar}}</td>
                             <td>{{$row->tgl}}</td>
                             <td>
-                            	@if($row->status_pengiriman=='menuju alamat tujuan')
-                            		<span class="label label-primary">
-                            		{{$row->status_pengiriman}}
-                            		</span>
-                            	@elseif($row->status_pengiriman=='pengantaran ulang')
-                            		<span class="label label-warning">
-                            		{{$row->status_pengiriman}}
-                            		</span>
-                            	@elseif($row->status_pengiriman=='dikembalikan ke pengirim')
-                            		<span class="label label-danger">
+                            	<span class="label label-danger">
                             			{{$row->status_pengiriman}}
                             		</span>
-                            	@else
-                            		<span class="label label-success">
-                            			{{$row->status_pengiriman}}
-                            		</span>
-                            	@endif
+                            	
                             </td>
                            <td>
-                           		
-									@if($row->status_antar=='P')
-										<a href="{{url('/suksesantar/'.$row->id.'/'.$row->kode_antar)}}" class="btn btn-success btn-sm" onclick="return confirm('Apakah Resi Sudah Sampai Di Tujuan ?')"><i class="fa fa-check"></i>
-										</a>
-
-										<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal{{$row->id}}">
-                     					<i class="fa fa-close"></i>
-                     					</button>
-                     					<a href="{{url('/returresi/'.$row->id.'/'.$row->kode_antar)}}" class="btn btn-danger btn-sm" onclick="return confirm('Retur Resi ?')"><i class="fa fa-ban"></i>
-										</a>
-
-                     			<div class="modal fade" id="Modal{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Pengantaran Gagal</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <form method="post" action="{{url('/cancelresiantar')}}">
-                                           	<div class="row">
-                                           		<div class="col-lg-12">
-													<fieldset class="form-group">
-														<label class="form-label semibold" for="exampleInput">No. Resi</label>
-														<input 
-														type="text"
-														class="form-control" 
-														readonly 
-														value="{{$row->no_resi}}">
-														<input type="hidden" name="kode_antar" value="{{$row->kode}}">
-														<input type="hidden" name="id_resi" value="{{$row->id}}">
-													</fieldset>
-												</div>
-												<div class="col-lg-12">
-													<fieldset class="form-group">
-														<label class="form-label semibold" for="exampleInput">Keterangan</label>
-														<select name="keterangan" class="form-control">
-															<option value="Alamat salah atau tidak lengkap">
-																Alamat salah atau tidak lengkap
-															</option>
-															<option value="Tempat penerima tutup">
-																Tempat penerima tutup
-															</option>
-															<option value="Kurir salah mengambil rute">
-																Kurir salah mengambil rute
-															</option>
-
-														</select>
-													</fieldset>
-												</div>
-												<div class="col-lg-12">
-													<fieldset class="form-group">
-														<label class="form-label semibold" for="exampleInput">Keterangan Lain</label>
-														<input type="text" name="ketlain" class="form-control">
-													</fieldset>
-												</div>
-												<div class="col-lg-12">
-													<fieldset class="form-group">
-													{{csrf_field()}}
-                                            		<input type="submit" class="btn btn-info" value="Simpan">
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
-													</fieldset>
-												</div>
-                                            
-											</div>
-											</form>
-										</div>
-                                            
-                                        </div>
-                                 	</div>
-                                </div>
-									@else
-										<button class="btn btn-sm btn-primary"
+                           	@if($row->status_pengiriman!='sudah dikembalikan')
+                           	<a href="{{url('returresinya/'.$row->id)}}" class="btn btn-sm btn-success" onclick="return confirm('Apakah Paket Telah Dikembalikan Ke Pengirim ?')">
+                           		<i class="fa fa-check"></i>
+                           	</a>
+                           	@endif
+                           	<button class="btn btn-sm btn-primary"
 										data-toggle="modal"
 										data-target=".bd-example-modal-lg{{$row->id}}">
 										<i class="fa fa-eye"></i>
@@ -367,12 +263,7 @@
 						</div>
 					</div>
 				</div> 
-									@endif
-								
-                           
-
-                          
-				
+						
                            </td>
 						</tr>
 						
@@ -383,8 +274,6 @@
 					
 					<a href="{{url('/listantaran')}}" class="btn btn-danger">Kembali</a>
 					</div>
-					
-					 {{ $data->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -397,7 +286,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false,
+            "paging":true,
             "columnDefs": [ {
           "targets": 'no-sort',
           "orderable": false,

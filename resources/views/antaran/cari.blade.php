@@ -23,6 +23,7 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>List Manifes Antar</h2>
+							<p>Hasil Pencarian "{{$cari}}"</p>
 						</div>
 					</div>
 				</div>
@@ -42,45 +43,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-                    <div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="font-icon font-icon-eye"></i>	Tampil Berdasarkan
-								</button>
-								<div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
-									<a class="dropdown-item" href="{{url('/resisuratantar')}}">
-									Resi</a>
-									<a class="dropdown-item" href="{{url('resiretur')}}">Resi Diretur</a>
-									
-								</div>
-							</div>
-					
-					 <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('carisuratantar')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Kode / Pemegang / Tanggal" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-                    <br><br>
+					          
                     <form action="hapuslistsa" method="post">
                     	{{csrf_field()}}
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -155,7 +118,7 @@
 					</div>
 					
 					</form>
-					 {{ $data->links() }}
+					 
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -222,12 +185,8 @@
                             					<span class="label label-warning">
                             					{{$resi->status_pengiriman}}
                             					</span>
-                            				@elseif($resi->status_pengiriman=='dikembalikan ke pengirim')
-                            					<span class="label label-danger">
-                            					{{$resi->status_pengiriman}}
-                            					</span>
                             				@else
-                            				<span class="label label-success">
+                            					<span class="label label-success">
                             					{{$resi->status_pengiriman}}
                             					</span>
                             				@endif
@@ -266,19 +225,19 @@
 	@endsection
 
 		@section('js')
-	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}">
+	</script>
 	<script>
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false,
+            "paging":true,
             "columnDefs": [ {
-          "targets": 'no-sort',
-          "orderable": false,
-    		} ]
-        });
+          		"targets": 'no-sort',
+          		"orderable": false,
+    		}]
+        	});
 		});
-
 	</script>
 	<script language="javascript">
     $(function(){

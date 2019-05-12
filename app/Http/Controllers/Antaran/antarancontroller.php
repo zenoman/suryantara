@@ -272,4 +272,109 @@ class antarancontroller extends Controller
         }
         return back()->with('status','Resi Berhasil Di Update');
     }
+
+    //=======================================================================
+    public function carisuratantar(Request $request){
+        $cari = $request->cari;
+        $listdata = DB::table('surat_antar')
+            ->where('kode','like','%'.$cari.'%')
+            ->orwhere('pemegang','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->get();
+         
+        $webinfo = DB::table('setting')->limit(1)->get();
+
+        return view('antaran/cari',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
+
+    //========================================================================
+    public function cariresisuratantar(Request $request){
+        $cari = $request->cari;
+        $webinfo = 
+        DB::table('setting')
+        ->limit(1)
+        ->get();
+
+        $data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+        ->where([
+            ['kode_antar','!=',null],
+            ['status_antar','!=','N'],
+            ['status_antar','!=','G'],
+            ['resi_pengiriman.tgl','like','%'.$cari.'%']
+        ])
+        ->orwhere([
+            ['kode_antar','!=',null],
+            ['status_antar','!=','N'],
+            ['status_antar','!=','G'],
+            ['no_resi','like','%'.$cari.'%']
+        ])
+        ->orwhere([
+            ['kode_antar','!=',null],
+            ['status_antar','!=','N'],
+            ['status_antar','!=','G'],
+            ['surat_antar.pemegang','like','%'.$cari.'%']
+        ])
+        ->orwhere([
+            ['kode_antar','!=',null],
+            ['status_antar','!=','N'],
+            ['status_antar','!=','G'],
+            ['kode_antar','like','%'.$cari.'%']
+        ])
+        ->orderby('id','desc')
+        ->get();
+
+        return view('antaran/cariresi',['data'=>$data,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
+
+    //=====================================================================
+    public function returresi($id,$kode){
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'status_antar'=>'G',
+            'status_pengiriman'=>'dikembalikan ke pengirim'
+        ]);
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where([['kode_antar','=',$kode],['status_antar','=','P']])
+        ->count();
+
+        if($jumlah == 0){
+            DB::table('surat_antar')
+            ->where('kode',$kode)
+            ->update([
+                'status'=>'S'
+            ]);
+        }
+        return back()->with('status','Resi Berhasil Di Update');
+    }
+
+    //=======================================================================
+    public function listretur(){
+        $webinfo = 
+        DB::table('setting')
+        ->limit(1)
+        ->get();
+
+        $data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+        ->where([['kode_antar','!=',null],['status_antar','=','G']])
+        ->orderby('id','desc')
+        ->get();
+
+        return view('antaran/returresi',['data'=>$data,'webinfo'=>$webinfo]);
+    }
+
+    //==========================================================================
+    public function returresinya($id){
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'status_pengiriman'=>'sudah dikembalikan'
+        ]);
+        return back()->with('status','Resi Berhasil Di Update');
+    }
 }

@@ -16,6 +16,11 @@ Route::get('/detailsa/{id}','Antaran\antarancontroller@detail');
 Route::get('/resisuratantar','Antaran\antarancontroller@resiantar');
 Route::get('/suksesantar/{id}/{kode}','Antaran\antarancontroller@suksesantar');
 Route::post('/cancelresiantar','Antaran\antarancontroller@cancelresiantar');
+Route::get('/carisuratantar','Antaran\antarancontroller@carisuratantar');
+Route::get('/cariresisuratantar','Antaran\antarancontroller@cariresisuratantar');
+Route::get('/returresi/{id}/{kode}','Antaran\antarancontroller@returresi');
+Route::get('/resiretur','Antaran\antarancontroller@listretur');
+Route::get('/returresinya/{id}','Antaran\antarancontroller@returresinya');
 
 //=======================================================armada
 Route::get('/hapuspajakunit/{id}','Armada\Armadacontroller@hapuspajakunit');
