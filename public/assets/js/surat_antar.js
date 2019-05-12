@@ -119,7 +119,7 @@ $(document).ready(function(){
         }
         //=============================================cari vendor
         $('#caripengirim').select2({
-        placeholder: 'Cari vendor',
+        placeholder: 'Cari Pengirim',
         ajax:{
             url:'/caripengirimpa',
             dataType:'json',

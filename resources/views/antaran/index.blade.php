@@ -113,11 +113,11 @@
                            <td>
                            		@if($row->status!='S')
                            		<span class="label label-danger">
-                           		Belum Sukses
+                           		Belum Selesai
                            		</span>
                            		@else
                            		<span class="label label-success">
-                           		Sukses
+                           		Selesai
                            		</span>
                            		@endif	
                            </td>
@@ -203,15 +203,19 @@
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
 										<td>
-											@if($resi->status_antar!='Y')
-												<span class="label label-danger">
-                           						Belum Sukses
-                           						</span>
-											@else
-												<span class="label label-success">
-                           						Sukses
-                           						</span>
-											@endif
+											@if($resi->status_pengiriman=='menuju alamat tujuan')
+                            					<span class="label label-primary">
+                            					{{$resi->status_pengiriman}}
+                            					</span>
+                            				@elseif($resi->status_pengiriman=='pengantaran ulang')
+                            					<span class="label label-warning">
+                            					{{$resi->status_pengiriman}}
+                            					</span>
+                            				@else
+                            					<span class="label label-success">
+                            					{{$resi->status_pengiriman}}
+                            					</span>
+                            				@endif
 										</td>
 									</tr>
 								@endforeach

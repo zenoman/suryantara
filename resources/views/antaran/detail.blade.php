@@ -76,6 +76,7 @@
 										<th>Alamat Penerima</th>
 										<th>Jumlah</th>
 										<th>Berat</th>
+										<th>Status</th>
 										<th class="text-center">#</th>
 									</tr>
 								</thead>
@@ -101,23 +102,29 @@
 										<td>{{$resi->alamat_penerima}}</td>
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
+										<td>{{$resi->status_pengiriman}}</td>
 										<td class="text-center">
-												<a href="{{url('/suksesantar/'.$resi->id)}}" class="btn btn-success btn-sm" onclick="return confirm('Apakah Resi Sudah Sampai Di Tujuan ?')">
+											@if($row->status!='S')
+												@if($resi->status_antar=='P')
+													<a href="{{url('/suksesantar/'.$resi->id.'/'.$resi->kode_antar)}}" class="btn btn-success btn-sm" onclick="return confirm('Apakah Resi Sudah Sampai Di Tujuan ?')">
 													<i class="fa fa-check"></i>
-												</a>
-												<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal{{$resi->id}}">
-                     							<i class="fa fa-close"></i>
-                     							</button>
+													</a>
+													<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal{{$resi->id}}">
+                     								<i class="fa fa-close"></i>
+                     								</button>
+												@endif
+												
+                     						@endif
                      					</td>
 									</tr>
 							<div class="modal fade" id="Modal{{$resi->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Bayar Resi </h4>
+                                            <h4 class="modal-title" id="myModalLabel">Pengantaran Gagal</h4>
                                         </div>
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('/bayarsj')}}">
+                                           <form method="post" action="{{url('/cancelresiantar')}}">
                                            	<div class="row">
                                            		<div class="col-lg-12">
 													<fieldset class="form-group">
@@ -127,39 +134,49 @@
 														class="form-control" 
 														readonly 
 														value="{{$resi->no_resi}}">
+														<input type="hidden" name="kode_antar" value="{{$row->kode}}">
+														<input type="hidden" name="id_resi" value="{{$resi->id}}">
 													</fieldset>
 												</div>
 												<div class="col-lg-12">
 													<fieldset class="form-group">
-														<label class="form-label semibold" for="exampleInput">No. Resi/SMU</label>
-														<input 
-														type="text"
-														class="form-control" 
-														readonly 
-														value="{{$resi->no_smu}}">
+														<label class="form-label semibold" for="exampleInput">Keterangan</label>
+														<select name="keterangan" class="form-control">
+															<option value="Alamat salah atau tidak lengkap">
+																Alamat salah atau tidak lengkap
+															</option>
+															<option value="Tempat penerima tutup">
+																Tempat penerima tutup
+															</option>
+															<option value="Kurir salah mengambil rute">
+																Kurir salah mengambil rute
+															</option>
+
+														</select>
 													</fieldset>
 												</div>
-                                           		<div class="col-lg-12">
+												<div class="col-lg-12">
 													<fieldset class="form-group">
-														<label class="form-label semibold" for="exampleInput">Jumlah</label>
-														<input 
-														type="text" 
-														class="form-control" 
-														name="jumlah" 
-														onkeypress="return isNumberKey(event)" required>
-														<input type="hidden" name="nomer" value="{{$resi->id}}">
-														<input type="hidden" name="kode" value="{{$row->kode}}">
+														<label class="form-label semibold" for="exampleInput">Keterangan Lain</label>
+														<input type="text" name="ketlain" class="form-control">
 													</fieldset>
 												</div>
+												<div class="col-lg-12">
+													<fieldset class="form-group">
+													{{csrf_field()}}
+                                            		<input type="submit" class="btn btn-info" value="Simpan">
+													<button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+													</fieldset>
+												</div>
+                                            
 											</div>
-                                            {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Simpan">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
-                                            </form>
+											</form>
+										</div>
+                                            
                                         </div>
                                  	</div>
                                 </div>
-                            </div> 
+                            
 								@endforeach
 								
 								</tbody>

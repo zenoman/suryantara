@@ -76,9 +76,19 @@ class antarancontroller extends Controller
             
             $data = DB::table('resi_pengiriman')
                     ->select('no_resi','id')
-                    ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0],['batal','=','N']])
+                    ->where([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['kode_jalan','=',null],
+                        ['batal','=','N'],
+                        ['status_antar','=','N']
+                    ])
+                    ->orwhere([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['kode_jalan','=',null],
+                        ['batal','=','N'],
+                        ['status_antar','=','KL']
+                    ])
                     ->whereNull('kode_jalan')
-                    ->whereNull('kode_antar')
                     ->get();
             
             return response()->json($data);
@@ -102,7 +112,8 @@ class antarancontroller extends Controller
         ->where('id',$request->noresi)
         ->update([
             'kode_antar'=>$request->kode,
-            'status_antar'=>'P'
+            'status_antar'=>'P',
+            'status_pengiriman'=>'menuju alamat tujuan'
         ]);
     }
 
@@ -155,7 +166,7 @@ class antarancontroller extends Controller
         DB::table('surat_antar')
         ->where('status','!=','N')
         ->orderby('id','desc')
-        ->paginate(40);
+        ->paginate(30);
         
         return view('antaran/index',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
@@ -200,21 +211,65 @@ class antarancontroller extends Controller
     	->get();
 
     	$data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
     	->where([['kode_antar','!=',null],['status_antar','!=','N']])
     	->orderby('id','desc')
-    	->paginate(1);
+    	->paginate(30);
 
     	return view('antaran/resiantar',['data'=>$data,'webinfo'=>$webinfo]);
     }
 
     //=====================================================================
-    public function suksesantar($id){
+    public function suksesantar($id,$kode){
         DB::table('resi_pengiriman')
         ->where('id',$id)
         ->update([
             'status_antar'=>'Y',
             'status_pengiriman'=>'paket telah sampai'
         ]);
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where([['kode_antar','=',$kode],['status_antar','=','P']])
+        ->count();
+
+        if($jumlah == 0){
+            DB::table('surat_antar')
+            ->where('kode',$kode)
+            ->update([
+                'status'=>'S'
+            ]);
+        }
+        return back()->with('status','Resi Berhasil Di Update');
+    }
+
+    //=========================================================================
+    public function cancelresiantar(Request $request){
+        if($request->ketlain==''){
+            $keterangan = $request->keterangan;
+        }else{
+            $keterangan = $request->ketlain;
+        }
+
+        DB::table('resi_pengiriman')
+        ->where('id',$request->id_resi)
+        ->update([
+            'status_antar'=>'KL',
+            'status_pengiriman'=>'pengantaran ulang',
+            'keterangan'=>$keterangan
+        ]);
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where([['kode_antar','=',$request->kode_antar],['status_antar','=','P']])
+        ->count();
+
+        if($jumlah == 0){
+            DB::table('surat_antar')
+            ->where('kode',$request->kode_antar)
+            ->update([
+                'status'=>'S'
+            ]);
+        }
         return back()->with('status','Resi Berhasil Di Update');
     }
 }
