@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak Pajak perusahaan</title>
+	<title>Cetak Absensi Tanggal {{$tgl}}</title>
 </head>
 <body onload="window.print()">
 		<table style="width: 100%">
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-						Cetak Pajak perusahaan
-						
+						Absensi pada bulan {{$tgl}}
 					</b>
 				</td>
 			</tr>
@@ -27,9 +26,12 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>bulan</th>
-							<th>tahun</th>
-							<th>Subtotal</th>
+							<th>Kode Karyawan</th>
+							<th>Nama Karyawan</th>
+							<th>Jabatan</th>
+							<th>Masuk</th> 
+							<th>Izin</th>
+							<th>Tidak Masuk</th>
 						</tr>
 						</thead>
 						
@@ -38,16 +40,17 @@
                             @foreach($data as $row)
                             <?php $no = $i++;?>
                         <tr>
-                            <td align="center">{{$no}}</td>
-                            <td align="center">{{$row->bulan}}</td>
-                            <td align="center">{{$row->tahun}}</td>
-                            <td align="right">{{"Rp ".number_format($row->total,0,',','.')}}</td>
+                            <td>{{$no}}</td>
+                            <td>{{$row->kode}}</td>
+                            <td>{{$row->nama}}</td>
+                            <td>{{$row->jabatan}}</td>
+							<td>{{$row->masuk}}</td>
+							<td>{{$row->izin}}</td>
+							<td>{{$row->tidak_masuk}}</td>
                         </tr>
 						@endforeach
+						
 						</tbody>
 					</table>
-					@foreach($total as $ttl)
-					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
-					@endforeach
 </body>
 </html>

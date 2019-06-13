@@ -26,7 +26,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Tambah Data Pembukuan</h2>
+							<h2>Tambah Data Pajak Perusahaan</h2>
 						</div>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{url('/pengeluaranlain') }}" role="form" method="POST" enctype="multipart/form-data">
+				<form action="{{url('/pajak') }}" role="form" method="POST" enctype="multipart/form-data">
 					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Pembuat
@@ -49,22 +49,6 @@
 								
 							</div>
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Kategori</label>
-						<div class="col-sm-10">
-							<select id="exampleSelect" name="namkat" class="form-control">
-								<option selected disabled hidden>Pilih Kategori</option>
-								@foreach($kate as $row)
-								<option value="{{$row->kode}}">{{$row->nama}}</option>
-								@endforeach
-							</select>
-						</div>
-						@if($errors->has('namkat'))
-                                       <div class="alert alert-danger">
-                                        {{ $errors->first('namkat')}}
-                                         </div>
-                                       @endif
 					</div>
 					
 					<div class="form-group row">
@@ -88,9 +72,9 @@
 								<textarea rows="4" class="form-control" placeholder="Masukan Keterangan.." name="keterangan" required></textarea>
 								
 							</div>
-									@if($errors->has('berat_minimal'))
+									@if($errors->has('keterangan'))
                                        <div class="alert alert-danger">
-                                        {{ $errors->first('berat_minimal')}}
+                                        {{ $errors->first('keterangan')}}
                                          </div>
                                     @endif
 						</div>
@@ -111,7 +95,6 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Foto
 						</label>

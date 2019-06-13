@@ -55,13 +55,13 @@ class Armadacontroller extends Controller
             DB::table('pengeluaran_lain')
             ->insert([
                 'admin'=>Session::get('username'),
-                'kategori'=>'pajak_armada',
+                'kategori'=>'004',
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->total,
                 'tgl'=>$request->tglbayar,
                 'gambar'=>$namagambar
             ]);
-            DB::table('pajak_armada')
+            DB::table('pajak_armada')   
             ->where('id',$request->pajak)
             ->update([
                 'tgl_bayar'=>$request->tglbayar,
@@ -73,7 +73,7 @@ class Armadacontroller extends Controller
             DB::table('pengeluaran_lain')
             ->insert([
                 'admin'=>Session::get('username'),
-                'kategori'=>'pajak_armada',
+                'kategori'=>'004',
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->total,
                 'tgl'=>$request->tglbayar

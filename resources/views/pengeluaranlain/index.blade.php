@@ -24,7 +24,7 @@
 						</div>
 					</div>
 				</div>
-			</header>
+			</header> 
 			<section class="card">
 				<div class="card-block">
 					@if (session('status'))
@@ -65,7 +65,7 @@
 						<tr>
 							<td>{{$nomer++}}</td>
 							<td>{{$row->tgl}}</td>
-							<td>{{$row->kategori}}</td>
+							<td>{{$row->nama}}</td>
 							<td>{{"Rp ".number_format($row->jumlah,0,',','.')}}</td>
 							<td>
 								{{$row->admin}}

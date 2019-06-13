@@ -27,7 +27,7 @@
 							<h2>Edit Karyawan</h2>
 						</div>
 					</div>
-				</div>
+				</div> 
 			</header>
 			<div class="box-typical box-typical-padding">
 @foreach($datKaryawan as $ro)

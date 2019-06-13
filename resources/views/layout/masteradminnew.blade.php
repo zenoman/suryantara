@@ -71,6 +71,36 @@
 	        <div class="site-header-content">
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
+	                	
+	                   <div class="dropdown user-menu">
+	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <i class="glyphicon glyphicon-list-alt"></i>
+	                            </button>
+	                            <div class="dropdown-menu" aria-labelledby="dd-header-add">
+	                                <a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Laporan Pemasukan</a>
+	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Laporan Pengeluaran</span>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
+				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
+			</div><p></p>
+	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>
+									<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
+	                            </div>
+	                        </div>
+	                        
+	                        <div class="dropdown dropdown-notification messages">
+	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
+	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
+	                                <i class="glyphicon glyphicon-cloud-download"></i>
+	                            </button></a>
+	                            <a href="{{url('setting')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-expanded="false">
+	                                <i class="font-icon font-icon-cogwheel"></i>
+	                            </button></a>
+	                            @endif
+	                        </div>
+	
 	                    <div class="dropdown user-menu">
 	                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
@@ -81,36 +111,54 @@
 	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
 	                        </div>
 	                    </div>
+	
+	                    <button type="button" class="burger-right">
+	                        <i class="font-icon-menu-addl"></i>
+	                    </button>
 	                </div><!--.site-header-shown-->
-	                	<div class="dropdown">
-	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                <i class="glyphicon glyphicon-list-alt"></i>
-	                            </button>
-	                            <div class="dropdown-menu" aria-labelledby="dd-header-add">
-	                                <a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Laporan Pemasukan </a>
-	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Laporan Pengeluaran</span>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
-				<a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a>
-			</div>
-
-	                                <a class="dropdown-item" href="{{url('/omset')}}">omset</a>
-	                                
-									<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
+	
+	                <div class="mobile-menu-right-overlay"></div>
+	                <div class="site-header-collapsed" style="width: 1000px;">
+	                    <div class="site-header-collapsed-in">
+	                        <div class="dropdown dropdown-typical">
+	                            <!-- <div class="dropdown-menu" aria-labelledby="dd-header-sales">
+	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>abi ihsan fadli</a>
+	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
+	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
+	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
+	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
 	                            </div>
-	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
-	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
-	                                <i class="glyphicon glyphicon-cloud-download"></i>
-	                            </button></a>
-	                            <a href="{{url('setting')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-expanded="false">
-	                                <i class="font-icon font-icon-cogwheel"></i>
-	                            </button></a>
-	                            @endif
-	                        </div>
+	                        </div> -->
+	                        <div class="dropdown dropdown-typical">
+	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    <span class="font-icon font-icon-cogwheel"></span>
+	                    <span class="lbl">Akutansi</span>
+	                </a>
+	
+	                <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
+	                    <a class="dropdown-item" href="{{url('/kat_akut')}}">kategori Akutansi</a>
+	                    <a class="dropdown-item" href="{{url('/laporakun')}}">Laporan</a>
+	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
+	                    <a class="dropdown-item" href="{{url('/omset')}}">Neraca</a>
+	                                <!-- <div class="dropdown-divider"></div> -->
+	                    <!-- <div class="dropdown-header">Recent issues</div> -->
+	                                <!-- <div class="dropdown-more">
+	                                    <div class="dropdown-more-caption padding">more...</div>
+	                                    <div class="dropdown-more-sub">
+	                                        <div class="dropdown-more-sub-in">
+	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>Quant and Verbal</a>
+	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
+	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
+	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
+	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
+	                                        </div>
+	                                    </div>
+	                                </div> -->
+	                </div>
+	            </div>
 
-
+	                    </div><!--.site-header-collapsed-in-->
+	                </div><!--.site-header-collapsed-->
 	            </div><!--site-header-content-in-->
 	        </div><!--.site-header-content-->
 	    </div><!--.container-fluid-->
@@ -172,14 +220,18 @@
 			<a class="nav-link" href="{{url('vendor')}}">Vendor</a>
 		</li>
 		
-		<li class="nav-item">
-			<a class="nav-link" href="{{url('pengeluaranlain')}}">Pembukuan</a>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Pengeluaran Harian</a>
+				<a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
+				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
+			</div>
 		</li>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventaris</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('armada')}}">Armada</a>
-			</div>
 			</div>
 		</li>
 	</ul>

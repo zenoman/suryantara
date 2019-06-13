@@ -15,9 +15,14 @@ Route::get('/armada','Armada\Armadacontroller@index');
 Route::get('/armada/create','Armada\Armadacontroller@create');
 
 //==============================================pajak
-Route::get('/pajak','pajak\pajakcontroller@index');
-Route::get('/tampilpajak','pajak\pajakcontroller@tampil');
-Route::get('/printpajak/{tahunya}','pajak\pajakcontroller@cetakpajak');
+Route::resource('/pajak','pajak\pajakcontroller');
+// Route::get('/pajak','pajak\pajakcontroller@tampil');
+// Route::get('/printpajak/{tahunya}','pajak\pajakcontroller@cetakpajak');
+//===============================================pengeluaran lain
+Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
+//===============================================Modal Usaha
+Route::resource('/modal','modal\modalController');
+
 //==============================================backup
 Route::get('/selesai','backup\backupController@selesai');
 Route::get('/printomset/{bulan}/{tahun}','backup\backupController@cetakomset');
@@ -42,10 +47,6 @@ Route::get('/omset','omset\omsetController@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
 Route::get('/omset/export','omset\omsetController@export');
-
-//===============================================pengeluaran lain
-Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
-
 //================================================resi pengiriman
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
@@ -274,3 +275,16 @@ Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiControll
 Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
 Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
 Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');
+//==============================================================Kategori akutansi
+Route::get('/kat_akut','Kategoriakutansi\Kategoriakutansicontroller@index');
+Route::get('/kat_akut/create','Kategoriakutansi\Kategoriakutansicontroller@create');
+Route::post('/kat_akut','Kategoriakutansi\Kategoriakutansicontroller@store');
+Route::get('/kat_akut/{id}/edit','Kategoriakutansi\Kategoriakutansicontroller@edit');
+Route::put('/kat_akut/{id}','Kategoriakutansi\Kategoriakutansicontroller@update');
+Route::post('/kat_akut/delete','Kategoriakutansi\Kategoriakutansicontroller@destroy');
+//===========================================================laporan akutansi
+// Route::get('/lapakun','Laporakun/LaporakunController@index');
+Route::get('/laporakun','Laporakun\LaporakunController@pilihlapkun');
+Route::get('/tampillaporanakun','Laporakun\LaporakunController@tampilakunlapor');
+Route::get('/laporakundet','Laporakun\LaporakunDetController@pilihlapkun');
+Route::get('/tampillaporanakundet','Laporakun\LaporakunDetController@tampilakunlapor');

@@ -37,9 +37,9 @@
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="exampleInput">Nama</label>
 		<input type="text" class="form-control" id="exampleInput" placeholder="Masukan Nama Kategori Barang" name="spesial_cargo" value="{{$katbar->spesial_cargo}}"><p>
-			@if($errors->has('jabatan'))
+			@if($errors->has('nama'))
                                         <div class="alert alert-danger">
-                                        {{ $errors->first('jabatan')}}
+                                        {{ $errors->first('nama')}}
                                          </div>
                                         @endif
 						</fieldset>

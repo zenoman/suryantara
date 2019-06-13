@@ -8,65 +8,83 @@ use App\Http\Controllers\Controller;
 
 class pajakcontroller extends Controller
 {
+  //   public function index(){
+  //   	$data = DB::table('pajak')
+  //   	->select(DB::raw('tahun'))
+  //   	->where('status','=','bulanan')
+  //   	->groupby('tahun')
+		// ->get();
+		// $setting = DB::table('setting')->limit(1)->get();
+  //   	return view('pajak/index',['data'=>$data,'title'=>$setting]);
+  //   }
+
     public function index(){
-    	$data = DB::table('pajak')
-    	->select(DB::raw('tahun'))
-    	->where('status','=','bulanan')
-    	->groupby('tahun')
-		->get();
-		$setting = DB::table('setting')->limit(1)->get();
-    	return view('pajak/index',['data'=>$data,'title'=>$setting]);
-    }
-
-    public function tampil(Request $request){
-    	$rules = ['tahun' => 'required'];
-         $customMessages = [
-        'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
-         ];
-    	$this->validate($request,$rules,$customMessages);
-    	$tahun = $request->tahun;
     	$setting = DB::table('setting')->limit(1)->get();
-    	if($tahun=='semua'){
-    		$data = DB::table('pajak')
-    		->where('status','=','bulanan')
-    		->get();
-    		$total = DB::table('pajak')
-            ->select(DB::raw('SUM(total) as totalnya'))
-            ->where('status','=','bulanan')
+    		 $data = DB::table('pengeluaran_lain')
+        ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+        ->join('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+        ->where('tb_kategoriakutansi.kode','=','013')
+        ->orderby('id','desc')
+        ->paginate(40);
+    		$total = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->where('kategori','=','013')
             ->get();
-    	}else{
-    		$data = DB::table('pajak')
-    		->where([['status','=','bulanan'],['tahun','=',$tahun]])
-    		->get();
-    		$total = DB::table('pajak')
-            ->select(DB::raw('SUM(total) as totalnya'))
-            ->where([['status','=','bulanan'],['tahun','=',$tahun]])
-            ->get();
-    	}
 
-    	return view('pajak/tampil',['data'=>$data,'title'=>$setting,'tahunya'=>$tahun,'total'=>$total]);
+    	return view('pajak/tampil',['data'=>$data,'title'=>$setting,'total'=>$total]);
     }
-        public function cetakpajak($tahunya){
-        $tahun = $tahunya;
+    public function create()
+    {
         $setting = DB::table('setting')->limit(1)->get();
-        if($tahun=='semua'){
-            $data = DB::table('pajak')
-            ->where('status','=','bulanan')
-            ->get();
-            $total = DB::table('pajak')
-            ->select(DB::raw('SUM(total) as totalnya'))
-            ->where('status','=','bulanan')
-            ->get();
+        $datkatbarakutansi = DB::table('tb_kategoriakutansi')->where('kode','=','012')->get();
+        return view('pajak/create',['kate'=>$datkatbarakutansi,'title'=>$setting]);
+    }
+        public function store(Request $request)
+    {
+         if($request->hasFile('gambar')){
+            $namagambar=$request->file('gambar')->
+            getClientOriginalname();
+            $lower_file_name=strtolower($namagambar);
+            $replace_space=str_replace(' ', '-', $lower_file_name);
+            $namagambar=time().'-'.$replace_space;
+            $destination=base_path('../public_html/img/nota');
+            $request->file('gambar')->move($destination,$namagambar);
+
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>$request->admin,
+                'kategori'=>'013',
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->jumlah,
+                // 'tgl'=>date('Y-m-d'),
+                'gambar'=>$namagambar,
+                'tgl'=>$request->tgl
+            ]);
+
         }else{
-            $data = DB::table('pajak')
-            ->where([['status','=','bulanan'],['tahun','=',$tahun]])
-            ->get();
-            $total = DB::table('pajak')
-            ->select(DB::raw('SUM(total) as totalnya'))
-            ->where([['status','=','bulanan'],['tahun','=',$tahun]])
-            ->get();
+            DB::table('pengeluaran_lain')
+            ->insert([
+                'admin'=>$request->admin,
+                'kategori'=>'013',
+                'keterangan'=>$request->keterangan,
+                'jumlah'=>$request->jumlah,
+                // 'tgl'=>date('Y-m-d'),
+                'tgl'=>$request->tgl
+            ]);
         }
 
-        return view('pajak/cetakpajak',['data'=>$data,'title'=>$setting,'tahunya'=>$tahun,'total'=>$total]);
+        return redirect('/pajak')->with('status','Berhasil Menambah Data');
+    }
+        public function cetakpajak(){
+        $setting = DB::table('setting')->limit(1)->get();
+            $data = DB::table('pajak')
+            ->where('status','=','bulanan')
+            ->get();
+            $total = DB::table('pajak')
+            ->select(DB::raw('SUM(total) as totalnya'))
+            ->where('status','=','bulanan')
+            ->get();
+
+        return view('pajak/cetakpajak',['data'=>$data,'title'=>$setting,'total'=>$total]);
     }
 }

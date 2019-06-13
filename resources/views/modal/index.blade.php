@@ -1,6 +1,4 @@
 @extends('layout.masteradminnew')
-
-
 @section('header')
 @foreach($title as $row)
 <title>{{$row->namaweb}}</title>
@@ -22,11 +20,11 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan Pajak Perusahaan </h2>
+							<h2>Data Modal Usaha</h2>
 						</div>
 					</div>
 				</div>
-			</header>
+			</header> 
 			<section class="card">
 				<div class="card-block">
 					@if (session('status'))
@@ -35,8 +33,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-					<a href="{{url('pajak/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					<p></p>
+					<a href="{{url('modal/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -84,7 +81,6 @@
 								 data-ket="{{$row->keterangan}}" 
 								 data-admin="{{$row->admin}}" 
 								 data-kat="{{$row->kategori}}"
-								 data-gambar="{{$row->gambar}}"
 								 data-jumlah="{{"Rp ".number_format($row->jumlah,0,',','.')}}">
 									<i class="fa fa-eye"></i>
 								</button>
@@ -95,29 +91,10 @@
 					</table>
 					{{ $data->links() }}
 				</div>
-				<section>
-
-		</div>
-			@foreach($total as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
-					<div class="pull-right">
-							&nbsp;&nbsp;
-								<a href="{{url('/pajal/printpajak')}}" target="_blank()" class="btn btn-primary">
-								<i class="fa fa-print"></i>
-								Cetak Data
-							</a>	
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
-								Kembali
-							</button>
-						
-							
-					</div>
-				</div>
 			</section>
-			<div class="modal fade bd-example-modal-lg"
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
+	<div class="modal fade bd-example-modal-lg"
 					 tabindex="-1"
 					 role="dialog"
 					 aria-labelledby="myLargeModalLabel"
@@ -155,6 +132,7 @@
 						</div>
 					</div>
 				</div>
+				<br>
 				
 					<div class="row">
 						<div class="col-lg-12 terms-and-conditions">
@@ -175,9 +153,9 @@
 						</div>
 					</div>
 				</div><!--.modal-->
-			@endforeach
-	</div>
-	@endsection
+	@endsection 
+
+
 	@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
