@@ -146,14 +146,10 @@ class resipengirimanController extends Controller
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
-            if($row->metode_bayar=='cash'){
-                $status = "Y";
+            if($row->status=='N'){
+                $status = "RS";
             }else{
-                if($row->status=='N'){
-                    $status = "RS";
-                }else{
-                    $status = "Y";
-                }
+                $status = "Y";
             }
 
         }
@@ -299,7 +295,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -330,7 +325,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -362,7 +356,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -394,7 +387,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -433,7 +425,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -464,7 +455,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -495,7 +485,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -526,7 +515,6 @@ class resipengirimanController extends Controller
                     'biaya_packing' => $request->biaya_packing,
                     'biaya_asuransi'=> $request->biaya_asu,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -564,7 +552,6 @@ class resipengirimanController extends Controller
                     'biaya_smu'     => $request->biaya_smu,
                     'biaya_karantina' => $request->biaya_karantina,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -597,7 +584,6 @@ class resipengirimanController extends Controller
                     'biaya_smu'     => $request->biaya_smu,
                     'biaya_karantina' => $request->biaya_karantina,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -630,7 +616,6 @@ class resipengirimanController extends Controller
                     'biaya_smu'     => $request->biaya_smu,
                     'biaya_karantina' => $request->biaya_karantina,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -663,7 +648,6 @@ class resipengirimanController extends Controller
                     'biaya_smu'     => $request->biaya_smu,
                     'biaya_karantina' => $request->biaya_karantina,
                     'total_biaya'   => $request->total_biaya,
-                    'keterangan'    => $request->keterangan,
                     'satuan'        => $request->satuan,
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
@@ -699,7 +683,6 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -731,7 +714,6 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -762,7 +744,6 @@ class resipengirimanController extends Controller
         'biaya_smu' => $request->biaya_smu,
         'biaya_karantina' => $request->biaya_karantina,
         'total_biaya'   => $request->total_biaya,
-        'keterangan'    => $request->keterangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,

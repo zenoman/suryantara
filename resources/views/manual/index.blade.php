@@ -39,18 +39,26 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif 
-					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i>Absensi Harian</a>
-					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i>import</a>
+
+					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
+
+
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                     <i class="fa fa-search"></i> Cari Data
                     </button>
-                    <a href="{{url('manual_smukosong')}}"><button class="btn btn-secondary">
-                     <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
-                     </a>
-                     <a href="{{url('manualbatal')}}">
-                     <button class="btn btn-danger">
-                     <i class="font-icon font-icon-list-square"></i> Resi Dibatalkan </button>
-                     </a>
+                   
+                     <div class="btn-group">
+                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="font-icon font-icon-eye"></i> Tampil Berdasarkan
+                                </button>
+                                <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{url('manualbatal')}}">
+                                    Resi Dibatalkan</a>
+                                    <a class="dropdown-item" href="{{url('manual_smukosong')}}">Resi/Smu kosong</a>
+                                    
+                                </div>
+                            </div>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -62,7 +70,7 @@
                                         <div class="modal-body">
                                            <form method="get" action="{{url('/Manual/cari')}}">
                                             <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang" required>
+                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang/Jalur" required>
                                             </div>
                                            {{csrf_field()}}
                                             <input type="submit" class="btn btn-info" value="Cari Data">
@@ -113,23 +121,44 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>
-                                @if($row->status=='Y')
-                                <button class="btn btn-sm btn-info"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button">{{$row->no_resi}}</button>
-                                @elseif($row->no_smu == null)
-                                <button class="btn btn-sm btn-info"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button">{{$row->no_resi}}</button>
-                                @else
-                                <button class="btn btn-sm btn-info"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button">{{$row->no_resi}}</button>
-                                @endif
-                            @if($row->total_biaya > 0)
+                               @if($row->total_biaya > 0)
+                                    @if($row->tgl_lunas !=null)
+                                        @if($row->status=='Y')
+                                            <button class="btn btn-sm btn-success"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @elseif($row->no_smu == null)
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @endif
+
+                                    @else
+                                        @if($row->status=='Y')
+                                            <button class="btn btn-sm btn-success"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @elseif($row->no_smu == null)
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @endif
+                                    @endif
+                            
                 <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
@@ -175,7 +204,15 @@
                             <div class="invoice-block">
                             <div>Tanggal : {{$row->tgl}}</div>
                                 <div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-                                <div>Metode Bayar : {{$row->metode_bayar}}</div>
+                                <div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif
+                            </div>
+                            <div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                            </div>
                             </div>
                             <br>
                         </div>
@@ -253,12 +290,9 @@
                                         <td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
                                     </tr>
                                 @endif
-                                    
                                     <tr>
-                                        
                                         <td class="text-right">PPN</td>
                                         <td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
-                                        
                                     </tr>
                                     <tr>
                                         <td><h4>Total</h4></td>
@@ -302,11 +336,15 @@
                     </div>
                             </div>
                             <div class="modal-footer">
-                            
                                 @if($row->metode_bayar=='cash')
-                                    @if($row->status=='N')
-                                    <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-                                    @endif
+                                        @if($row->status=='N')
+                                        <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+                                        <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+                                        @elseif($row->status=='US')
+                                        <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+                                        @elseif($row->status=='RS')
+                                        <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+                                        @endif
                                 @else
                                     @if($row->status=='N')
                                     <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
@@ -323,6 +361,9 @@
                         </div>
                     </div>
                 </div>
+                            @else
+                                <button class="btn btn-sm btn-danger">         {{$row->no_resi}}
+                                </button>
                             @endif
                             </td>
                             <td>
@@ -375,11 +416,9 @@
                             	@endif
                             </td>
                             <td class="text-center">
-                
-                     @if($row->total_biaya > 0)
+                    @if($row->total_biaya > 0)
                         @if(Session::get('level')!='admin')
-
-                                <form action="{{ url('/Manual/delete')}}" method="post">
+                            <form action="{{ url('/Manual/delete')}}" method="post">
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <a href="{{ url('Manual/'.$row->id.'/ubah') }}" class="btn btn-warning btn-sm">
@@ -398,12 +437,10 @@
                         -
                         @endif
                     @else
-                            <form action="{{ url('/Manual/delete')}}" method="post">                            	
-                            	<a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
+                            <form action="{{ url('/Manual/delete')}}" method="post">    <a href="{{ url('Manual/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 {{csrf_field()}}
-                                        	
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                     <i class="fa fa-remove"></i>
@@ -418,13 +455,11 @@
 						
 					</table>
 					{{csrf_field()}}
-                   
-					
-					 {{ $manual->links() }}
+                    {{ $manual->links() }}
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 		@section('js')

@@ -34,7 +34,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                   <br><br>
+                  
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -57,18 +57,37 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            	@if($row->status=='Y')
-                            	<button class="btn btn-sm btn-success"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-                            	@elseif($row->no_smu == null)
-                            	<button class="btn btn-sm btn-primary"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-                            	@else
-                            	<button class="btn btn-sm btn-primary"
-						data-toggle="modal"
-						data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            	
+                            	@if($row->tgl_lunas !=null)
+									@if($row->status=='Y')
+                            			<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+									@endif
+
+								@else
+
+									@if($row->status=='Y')
+										<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            		<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+									@endif
 								@endif
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
@@ -110,8 +129,15 @@
 							<div class="invoice-block">
 							<div>Tanggal : {{$row->tgl}}</div>
 								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-								<div>Metode Bayar : {{$row->metode_bayar}}</div>
+								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
 							</div>
+							<div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                                </div>
 							<br>
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
@@ -229,6 +255,26 @@
 						</div>
 							</div>
 							<div class="modal-footer">
+								@if($row->metode_bayar=='cash')
+										@if($row->status=='N')
+										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+										@elseif($row->status=='US')
+										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+										@elseif($row->status=='RS')
+										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+										@endif
+								@else
+									@if($row->status=='N')
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+									@elseif($row->status=='US')
+									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+									@elseif($row->status=='RS')
+									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
+									@endif
+								@endif
+								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>

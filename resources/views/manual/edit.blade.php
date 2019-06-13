@@ -88,7 +88,7 @@
 				</header>
 				<br>
 				<div class="form-group row">
-					<div class="col-md-9 col-sm-9">
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -103,6 +103,17 @@
 								<select class="form-control" id="metode_darat">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar_darat">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -304,7 +315,7 @@
 				<br>
 			<div class="form-group row">
 						
-						<div class="col-md-9 col-sm-9">
+						<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -319,6 +330,17 @@
 								<select class="form-control" id="metode_laut">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar_laut">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -590,7 +612,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-6">
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar_udara">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
@@ -603,7 +636,7 @@
 						</div>
 					</div>
 					
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-2 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Total</label>
 							<div class="input-group">
@@ -620,7 +653,7 @@
 								</div>
 							</div>
 						</div>
-					<p id="msgheavy" class="text-danger"></p>
+					<p id="msgheavy" class="text-danger" style="padding-left: 16px;"></p>
 					</div>
 					<hr>
 					<div class="row">

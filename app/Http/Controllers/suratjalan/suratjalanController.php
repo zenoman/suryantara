@@ -18,11 +18,15 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/resi',['data'=>$data,'webinfo'=>$webinfo]);
     }
+
+    //=========================================================================
     public function bayarsuratjalan($id){
         $data = DB::table('surat_jalan')->where('id',$id)->get();
          $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/bayar_suratjalan',['data'=>$data,'title'=>$webinfo]);
     }
+
+    //=========================================================================
     public function bayar(Request $request){
         $data = DB::table('resi_pengiriman')
         ->where('id',$request->nomer)
@@ -31,7 +35,7 @@ class suratjalanController extends Controller
             'tgl_bayar'=>date('Y-m-d')
         ]);
         $datasj = DB::table('surat_jalan')->where('kode',$request->kode)->get();
-        //=======================================
+        //----------------------------------------------
         foreach ($datasj as $row) {
             $biayanya = $row->biaya+$request->jumlah;
             DB::table('surat_jalan')
@@ -40,7 +44,7 @@ class suratjalanController extends Controller
                 'biaya'=>$biayanya
             ]);
         }
-        //=======================================
+        //-----------------------------------------------
         $jumlahresi = DB::table('resi_pengiriman')
         ->where([['kode_jalan','=',$request->kode],['biaya_suratjalan','=',0]])
         ->count();
@@ -55,6 +59,7 @@ class suratjalanController extends Controller
         return back()->
         with('status','Berhasil Membayar Surat Jalan');
     }
+    
     //==========================================================
     public function index(){
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -87,6 +92,7 @@ class suratjalanController extends Controller
         } return response()->json($finalkode);
     }
 
+    //=========================================================================
     public function listsuratjalan(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $listdata =
@@ -97,23 +103,34 @@ class suratjalanController extends Controller
         return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
 
+    //=========================================================================
     public function caridetail($id){
         $data = DB::table('resi_pengiriman')->where('kode_jalan',$id)->get();
         return response()->json($data);
     }
+
+    //=========================================================================
     public function cariresi(Request $request){
     	if($request->has('q')){
             $cari = $request->q;
             
             $data = DB::table('resi_pengiriman')
                     ->select('no_resi','id')
-                    ->where([['no_resi','like','%'.$cari.'%'],['total_biaya','!=',0],['batal','=','N']])
+                    ->where([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['total_biaya','!=',0],
+                        ['batal','=','N'],
+                        ['status_antar','=','N']
+                    ])
                     ->whereNull('kode_jalan')
+                    ->whereNull('kode_antar')
                     ->get();
             
             return response()->json($data);
         }
     }
+
+    //=========================================================================
     public function carivendor(Request $request){
         if($request->has('q')){
             $cari = $request->q;
@@ -126,6 +143,8 @@ class suratjalanController extends Controller
             return response()->json($data);
         }
     }
+
+    //========================================================
     public function hasilresi($id){
     	$data = DB::table('resi_pengiriman')
                     ->select('nama_barang','no_resi','jumlah','berat','id','nama_pengirim','nama_penerima','kode_tujuan')
@@ -134,6 +153,8 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
+
+    //========================================================
     public function hasilvendor($id){
         $data = DB::table('vendor')
                     ->select('vendor','id','alamat','telp','cabang')
@@ -142,6 +163,8 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
+
+    //========================================================
     public function tambahdetail(Request $request){
         $kode = $request->kode;
         $carikode = DB::table('surat_jalan')->where('kode',$kode)->count();
@@ -160,6 +183,8 @@ class suratjalanController extends Controller
             'kode_jalan'=>$request->kode,
         ]);
     }
+
+    //========================================================
     public function hapusdetail($id){
         DB::table('resi_pengiriman')
         ->where('id',$id)
@@ -168,6 +193,7 @@ class suratjalanController extends Controller
         ]);
     }
 
+    //========================================================
     public function store(Request $request){
         if ($request->cabang=='Y') {
             $status='P';
@@ -210,6 +236,7 @@ class suratjalanController extends Controller
         }
     }
 
+    //=========================================================================
     public function destroy(Request $request){
         $delid = $request->delid;
         if(!$delid){
@@ -227,6 +254,8 @@ class suratjalanController extends Controller
         }
         
     }
+
+    //=========================================================================
     public function cariresidata(Request $request){
         $cari = $request->cari;
             $listdata = DB::table('resi_pengiriman')
@@ -241,6 +270,8 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/cariresi',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
+
+    //=========================================================================
     public function caridata(Request $request){      
         $cari = $request->cari;
             $listdata = DB::table('surat_jalan')

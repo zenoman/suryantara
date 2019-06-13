@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	var noresisj;
     var jumlahbarang=0;
-		carikode();
-        $("#carivendor").focus();
+	carikode();
+    $("#carivendor").focus();
+
 //=============================================cari resi
 		$('#carinoresi').select2({
 		placeholder: 'Cari nomor resi',

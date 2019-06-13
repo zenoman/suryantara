@@ -35,7 +35,8 @@
 						<tr>
 							<th>No</th>
 							<th>No resi</th>
-							<th>tanggal</th>
+							<th>Tgl. Buat</th>
+							<th>Tgl. lunas</th>
 							<th>Tujuan</th>
 								@if($jalur=='semua')
 									<th>jalur</th>
@@ -50,7 +51,8 @@
 						<tr> 
 							<th>No</th>
 							<th>No resi</th>
-							<th>tanggal</th>
+							<th>Tgl. Buat</th>
+							<th>Tgl. lunas</th>
 							<th>Tujuan</th>
 								@if($jalur=='semua')
 									<th>jalur</th>
@@ -77,6 +79,7 @@
                             	@endif
                             </td>
                             <td>{{$row->tgl}}</td>
+                            <td>{{$row->tgl_lunas}}</td>
                             <td>{{$row->kota_asal}}-{{$row->kode_tujuan}}</td>
                             	@if($jalur=='semua')
 								 <td>{{$row->pengiriman_via}}</td>

@@ -179,6 +179,13 @@
 								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
 								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
 							</div>
+							<div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                                </div>
 							<br>
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
@@ -324,7 +331,7 @@
 							</div>
 						</div>
 					</div>
-				</div><!--.modal-->
+				</div>
                             </td>
                             <td>
                             @if($row->no_smu=='')
@@ -357,7 +364,6 @@
 									<span class="label label-warning">Menunggu</span>
 	                        	@endif
                             	@endif
-                            	
                             @else
                             	@if($row->status=='Y')
 		                            <span class="label label-success">

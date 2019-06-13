@@ -70,18 +70,51 @@
 						</tfoot>
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($manual as $row)
-                            <?php $no = $i++;?>
+                        @foreach($manual as $row)
+                        <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
                             <td>
                              
-                                   <button class="btn btn-sm btn-info"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-lg{{$row->id}}"
-                        type="button">{{$row->no_resi}}</button>
+                                   @if($row->total_biaya > 0)
+                                    @if($row->tgl_lunas !=null)
+                                        @if($row->status=='Y')
+                                            <button class="btn btn-sm btn-success"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @elseif($row->no_smu == null)
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}
+                                            </button>
+                                        @endif
+
+                                    @else
+                                        
+                                        @if($row->status=='Y')
+                                            <button class="btn btn-sm btn-success"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @elseif($row->no_smu == null)
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm btn-primary"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}
+                                            </button>
+                                        @endif
+                                    @endif
                                 
-                                @if($row->total_biaya > 0)
                                  <div class="modal fade bd-example-modal-lg{{$row->id}}"
                      tabindex="-1"
                      role="dialog"
@@ -125,7 +158,15 @@
                             <div class="invoice-block">
                             <div>Tanggal : {{$row->tgl}}</div>
                                 <div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-                                <div>Metode Bayar : {{$row->metode_bayar}}</div>
+                                <div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif
+                            </div>
+                            <div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                            </div>
                             </div>
                             <br>
                         </div>
@@ -249,14 +290,18 @@
                                     </div>
                                 </form>
                             </div>
-                </div>
+                        </div>
                             </div>
                             <div class="modal-footer">
-                            
                                 @if($row->metode_bayar=='cash')
-                                    @if($row->status=='N')
-                                    <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-                                    @endif
+                                        @if($row->status=='N')
+                                        <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+                                        <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+                                        @elseif($row->status=='US')
+                                        <a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
+                                        @elseif($row->status=='RS')
+                                        <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
+                                        @endif
                                 @else
                                     @if($row->status=='N')
                                     <a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
@@ -273,7 +318,10 @@
                         </div>
                     </div>
                 </div>
-                                @endif
+                                @else
+                                <button class="btn btn-sm btn-danger">         {{$row->no_resi}}
+                                </button>
+                            @endif
                             </td>
                             <td>
                                 @if($row->no_smu=='')

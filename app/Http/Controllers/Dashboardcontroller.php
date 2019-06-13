@@ -31,7 +31,7 @@ class Dashboardcontroller extends Controller
         ->get(); 
         $uanghariini = DB::table('resi_pengiriman')
         ->select(DB::raw('SUM(total_biaya) as total'))
-        ->where('tgl',date('Y-m-d'))
+        ->where('tgl_lunas',date('Y-m-d'))
         ->get();
         $jumlahresi = DB::table('resi_pengiriman')
         ->where([['status','!=','Y'],['total_biaya','>',0]])
@@ -174,8 +174,8 @@ class Dashboardcontroller extends Controller
         }
         $data = DB::table('resi_pengiriman')
         ->select(DB::raw('SUM(total_biaya) as totalnya'))
-        ->whereMonth('tgl',$bulan)
-        ->whereYear('tgl',$tahun)
+        ->whereMonth('tgl_lunas',$bulan)
+        ->whereYear('tgl_lunas',$tahun)
         ->get();
         foreach ($data as $row) {
             $newdata = $row->totalnya;
