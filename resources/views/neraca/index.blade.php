@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan ....</h2>
+							<h2>Neraca</h2>
 						</div>
 					</div>
 				</div>
@@ -33,68 +33,49 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Admin</th>
-							<th>Kategori</th>
-							<th>tgl</th>
-							<th>jumlah</th>
+							<th>Bulan</th>
+							<th>Kas</th>
+							<th>Modal</th>
 						</tr>
 						</thead>
-						<tbody>
-						<?php $i = 1;?>
-						<?php $j = 0;?>
-                            @foreach($data as $row)
-                            <?php $no = $i++;?>
-                            <?php $n = $j++;?>
-                            @foreach($tot[$n] as $ros)
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->tgl}}</td>
-							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-                        </tr>
-						@endforeach
-						@endforeach
-						</tbody>
-						<tfoot> 
+						<tfoot>
 						<tr> 
 							<th>No</th>
-							<th>Admin</th>
-							<th>Kategori</th>
-							<th>tgl</th>
-							<th>jumlah</th>
+							<th>Bulan</th>
+							<th>Kas</th>
+							<th>Modal</th>
 						</tr>
 						</tfoot>
-						
+						<tbody>
+						<?php $i = 1;?>
+                            @foreach($data as $row)
+                            <?php $no = $i++;?>
+                        <tr>
+                            <td>{{$no}}</td>
+                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
+                            <td>{{"Rp ".number_format($row->kas,0,',','.')}}</td>
+                            <td>{{"Rp ".number_format($row->modal,0,',','.')}}</td>
+                        </tr>
+						@endforeach
+						</tbody>
 					</table>
-					{{ $data->links() }}
-				</div>
-			</section>
-
-			@foreach($tose as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->toto,0,',','.')}}</b></h2>
-					<div class="pull-right">
-							
+					<br>
+					<div class="text-right">
+<a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
 							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+								<a href="{{url('/printomset')}}" target="_blank()" class="btn btn-primary">
+								<i class="fa fa-print"></i>
+								Cetak Data
+							</a>	
+							&nbsp;&nbsp;
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
 								Kembali
 							</button>
-						
-							
 					</div>
 				</div>
 			</section>
-			@endforeach
-
-
-			
 		</div>
 	</div>
-	
-
-
 	@endsection
 		@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>

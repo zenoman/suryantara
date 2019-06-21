@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,7 +20,9 @@ class Dashboardcontroller extends Controller
         ->wheredate('tgl_peringatan','<',date('Y-m-d'))
         ->count();
         //============================================
-        $this->hitung_omset();
+        // $this->hitung_omset();
+        $this->hitung_neraca();
+        //============================================
         $listsj = DB::table('surat_jalan')
         ->where('status','=','Y')
         ->get();
@@ -51,17 +52,163 @@ class Dashboardcontroller extends Controller
         return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada]);
 
       }
+    function hitung_neraca(){
+        $omsetawal = $this->cari_omsetawal();
+        $setting = DB::table('setting')
+        ->limit(1)
+        ->get();
+        foreach ($setting as $st){
+            $bulan = $st->bulan_sekarang;
+        }
+        if($bulan != date('m')){
+            $tahun = date('Y');
+            if(date('m')==1){
+                
+                $dap = $this->hitung_pendapatan($bulan,date('Y'));
+                $lua = $this->hitung_pengeluaran($bulan,date('Y'));
+                $modal =  DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['tb_kategoriakutansi.kode','=','012']])
+            ->paginate(40);
+                $kas = $dap - $lua ;
+
+                if ($modal == null) {
+                    $mod = 0;
+                }else{
+                    $mod = $modal;
+                }
+                $insert = DB::table('tb_neraca')
+                ->insert([
+                    'bulan'=>12,
+                    'tahun'=>$tahun-1,
+                    'kas'=>$kas,
+                    'modal'=>$mod
+                ]);
+            }else{
+                $dap = $this->hitung_pendapatan($bulan,date('Y'));
+                $lua = $this->hitung_pengeluaran($bulan,date('Y'));
+                $modal = $this->cari_modal($bulan,date('Y'));
+                $kas = $dap - $lua;
+                if ($modal =null) {
+                    $mod =0;
+                }else{
+                    $mod=$modal;
+                }
+                $insert = DB::table('tb_neraca')
+                ->insert([
+                    'bulan'=>date('m')-1,
+                    'tahun'=>$tahun,
+                    'kas'=>$kas,
+                    'modal'=>$mod
+                ]);    
+            }
+            // dd($insert);
+                    $dattgl=date('Y-m-d');
+        $bulan = explode('-', $dattgl);
+         $thn = $bulan[0];
+        $bln = $bulan[1];
+            DB::table('setting')
+            ->update([
+                'bulan_sekarang'=>$bln,
+                'status'=>'Y'
+            ]);
+
+        }
+
+    }
+
+//======================================================
+    function hitung_pendapatan($bulan,$tahun){
+
+    $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
+            ->paginate(40);
+            // dd($data);
+        foreach ($data as $row) {
+            $newdata = $row->toto;
+        }
+        return $newdata;
+    }
+    function hitung_pengeluaran($bulan,$tahun){
+    $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            ->paginate(40);
+        foreach ($data as $row) {
+            $newdata = $row->toto;
+        }
+        return $newdata;
+    }
+    function cari_modal($bulan,$tahun){
+            $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['tb_kategoriakutansi.kode','=','012']])
+            ->paginate(40);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function hitung_omset(){
         $omsetawal = $this->cari_omsetawal();
         $setting = DB::table('setting')
         ->limit(1)
         ->get();
-        
         foreach ($setting as $st){
             $bulan = $st->bulan_sekarang;
         }
-
         if($bulan != date('m')){
             $tahun = date('Y');
             if(date('m')==1){

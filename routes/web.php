@@ -68,6 +68,11 @@ Route::get('/omset','omset\omsetController@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
 Route::get('/omset/export','omset\omsetController@export');
+//================================================neraca
+Route::get('/neraca','neraca\NeracaController@index');
+Route::get('/printomset','omset\omsetController@cetakomset');
+//----------------------------export omset
+Route::get('/omset/export','omset\omsetController@export');
 //================================================resi pengiriman
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');

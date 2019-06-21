@@ -75,7 +75,7 @@ class LaporakunController extends Controller
             ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
             ->get();
             
-            }
+            } 
             $totsemua = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
