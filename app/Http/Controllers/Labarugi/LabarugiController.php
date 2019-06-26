@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Laporakun;
+namespace App\Http\Controllers\Labarugi;
 ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
 use Illuminate\Support\Facades\File;
-class LaporakunDetController extends Controller
+class LabarugiController extends Controller
 {
 
     public function pilihlapkun()
@@ -25,7 +25,7 @@ class LaporakunDetController extends Controller
             ->groupby('pengeluaran_lain.kategori')
             ->get();
         
-        return view('laporakun/pilihlapkundet',['title'=>$setting,'kate'=>$kategori]);
+        return view('labarugi/pilihlabarugi',['title'=>$setting,'kate'=>$kategori]);
     }
 
     public function tampilakunlapor(Request $request){
@@ -41,6 +41,7 @@ class LaporakunDetController extends Controller
         $kate=$request->kategori;
         $tgl = $request->tgl;
         $tgl0 = $request->tgl0;
+        $tgll= $tgl. "Sampai" .$tgl0;
 
             $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
@@ -48,26 +49,33 @@ class LaporakunDetController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where('pengeluaran_lain.kategori','=',$kate)
             ->paginate(40);
-            foreach ($data as $ros) {
-                # code...
-            $total[] = DB::table('pengeluaran_lain')
-            ->select(DB::raw('SUM(jumlah) as totalnya'))
-            ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
-            ->get();
-            
-            }
-            $totsemua = DB::table('pengeluaran_lain')
+            $totdat= DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where('pengeluaran_lain.kategori','=',$kate)
             ->get();
-        
 
-        // dd($data);
+            $data0 =DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
+            ->paginate(40);
+            $totdat0 = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
+            ->get();
+        // dd($tgll);
+        // $hass= $data0 - $data;
+
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/laporharianakundet',['tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo]);
+    return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'tgl'=>$tgll]);
+    // return view('labarugi/laporlabarugi',['data0'=>$data0,'data'=>$data,'title'=>$webinfo]);
     }
 
         public function exsportabsensibulanan($tanggal, $jabatan){

@@ -139,6 +139,7 @@
 	                    <a class="dropdown-item" href="{{url('/kat_akut')}}">kategori Akutansi</a>
 	                    <a class="dropdown-item" href="{{url('/laporakun')}}">Laporan</a>
 	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
+	                    <a class="dropdown-item" href="{{url('/labarugi')}}">Laba Rugi</a>
 	                    <a class="dropdown-item" href="{{url('/neraca')}}">Neraca</a>
 	                                <!-- <div class="dropdown-divider"></div> -->
 	                    <!-- <div class="dropdown-header">Recent issues</div> -->

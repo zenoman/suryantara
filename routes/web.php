@@ -314,3 +314,17 @@ Route::get('/laporakun','Laporakun\LaporakunController@pilihlapkun');
 Route::get('/tampillaporanakun','Laporakun\LaporakunController@tampilakunlapor');
 Route::get('/laporakundet','Laporakun\LaporakunDetController@pilihlapkun');
 Route::get('/tampillaporanakundet','Laporakun\LaporakunDetController@tampilakunlapor');
+//===========================================================Laba Rugi
+Route::get('/labarugi','Labarugi\LabarugiController@pilihlapkun');
+Route::get('/tampillabarugi','Labarugi\LabarugiController@tampilakunlapor');
+
+
+
+
+
+
+
+
+
+
+
