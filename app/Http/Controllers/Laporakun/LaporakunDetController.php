@@ -67,7 +67,7 @@ class LaporakunDetController extends Controller
 
         // dd($data);
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/laporharianakundet',['tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo]);
+    return view('laporakun/laporharianakundet',['kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo]);
     }
 
         public function exsportabsensibulanan($tanggal, $jabatan){
@@ -76,35 +76,35 @@ class LaporakunDetController extends Controller
         return Excel::download(new AbsensibulananExport($tanggal,$jabatan),$namafile);
     }
 
-        public function cetakabsensibulanan($tanggal,$kodejabatan){
-        $bulan = explode('-', $tanggal);
-        $thn = $bulan[0];
-        $bln = $bulan[1];
-        $namajabatan =$kodejabatan;
-        
-        if($namajabatan=='semua'){
-            $idjabatan = 'semua';
-            $jabat = 'semua';
-            $data = DB::table('absensi')
-            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
-            ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
-            ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
-            ->whereMonth('absensi.tanggal',$bln)
-            ->whereYear('absensi.tanggal',$thn)
+        public function cetaklapakundet($kate,$tgl,$tgl0){
+        $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('pengeluaran_lain.kategori','=',$kate)
             ->paginate(40);
-        }else{
-        $data = DB::table('absensi')
-            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
-            ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
-            ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
-            ->whereMonth('absensi.tanggal',$bln)
-            ->whereYear('absensi.tanggal',$thn)
-            ->where('absensi.id_jabatan','=',$namajabatan)
-            ->paginate(20);
-        }
+            foreach ($data as $ros) {
+                # code...
+            $total[] = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
+            ->get();
+            
+            }
+            $totsemua = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('pengeluaran_lain.kategori','=',$kate)
+            ->get();
+            $katkat = DB::table('tb_kategoriakutansi')
+            ->select(DB::raw('nama'))
+            ->where('kode','=',$kate)
+            ->get();
+
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('absensi/cetakaabsensiharian',[
-     'data'=>$data,'title'=>$webinfo,'tgl'=>$tanggal,'jabatan'=>$namajabatan
+    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo
     ]);
     }
 

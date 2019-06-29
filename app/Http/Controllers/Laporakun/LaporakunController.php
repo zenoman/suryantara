@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Laporakunmodel;
 
-use App\Exports\AbsensiharianExport;
-use App\Exports\AbsensibulananExport;
+use App\Exports\LaporakunExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
@@ -88,44 +87,67 @@ class LaporakunController extends Controller
 
         // dd($total);
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/laporharianakun',['tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo]);
+    return view('laporakun/laporharianakun',['kat'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo]);
     }
 
-        public function exsportabsensibulanan($tanggal, $jabatan){
+        public function exsportabsensibulanan($kat,$tgl,$tgl0){
 
-            $namafile = "Export absensi bulanan pada bulan ".$tanggal.".xlsx";
-        return Excel::download(new AbsensibulananExport($tanggal,$jabatan),$namafile);
+            $namafile = "Export laporan ".$kat." tanggal ".$tgl." sampai ".$tgl0." .xlsx";
+        return Excel::download(new LaporakunExport($kat,$tgl,$tgl0),$namafile);
     }
 
-        public function cetakabsensibulanan($tanggal,$kodejabatan){
-        $bulan = explode('-', $tanggal);
-        $thn = $bulan[0];
-        $bln = $bulan[1];
-        $namajabatan =$kodejabatan;
-        
-        if($namajabatan=='semua'){
-            $idjabatan = 'semua';
-            $jabat = 'semua';
-            $data = DB::table('absensi')
-            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
-            ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
-            ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
-            ->whereMonth('absensi.tanggal',$bln)
-            ->whereYear('absensi.tanggal',$thn)
+        public function cetaklapakun($kat,$tgl,$tgl0){
+        if($kat=='pendapatan'){
+            $kat = 'pendapatan';
+            $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
+            ->groupby('pengeluaran_lain.tgl')
             ->paginate(40);
+            foreach ($data as $ros) {
+                # code...
+            $total[] = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->where('pengeluaran_lain.tgl','=',$ros->tgl)
+            ->get();
+            }
+            $totsemua = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
+            // ->groupby('pengeluaran_lain.tgl')
+            ->get();
         }else{
-        $data = DB::table('absensi')
-            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
-            ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
-            ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
-            ->whereMonth('absensi.tanggal',$bln)
-            ->whereYear('absensi.tanggal',$thn)
-            ->where('absensi.id_jabatan','=',$namajabatan)
-            ->paginate(20);
+        $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            ->groupby('pengeluaran_lain.tgl')
+            ->paginate(40);
+            foreach ($data as $ros) {
+                # code...
+            $total[] = DB::table('pengeluaran_lain')
+            ->select(DB::raw('SUM(jumlah) as totalnya'))
+            ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
+            ->get();
+            
+            } 
+            $totsemua = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            // ->groupby('pengeluaran_lain.tgl')
+            ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('absensi/cetakaabsensiharian',[
-     'data'=>$data,'title'=>$webinfo,'tgl'=>$tanggal,'jabatan'=>$namajabatan
+    return view('laporakun/cetaklapakun',['kat'=>$kat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo
     ]);
     }
 

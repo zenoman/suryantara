@@ -314,6 +314,9 @@ Route::get('/laporakun','Laporakun\LaporakunController@pilihlapkun');
 Route::get('/tampillaporanakun','Laporakun\LaporakunController@tampilakunlapor');
 Route::get('/laporakundet','Laporakun\LaporakunDetController@pilihlapkun');
 Route::get('/tampillaporanakundet','Laporakun\LaporakunDetController@tampilakunlapor');
+
+Route::get('/printlapoakun/{kat}/{tgl}/{tgl0}','Laporakun\LaporakunController@cetaklapakun');
+Route::get('/printlapoakundet/{kate}/{tgl}/{tgl0}','Laporakun\LaporakunDetController@cetaklapakundet');
 //===========================================================Laba Rugi
 Route::get('/labarugi','Labarugi\LabarugiController@pilihlapkun');
 Route::get('/tampillabarugi','Labarugi\LabarugiController@tampilakunlapor');
