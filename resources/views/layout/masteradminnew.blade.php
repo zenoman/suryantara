@@ -71,7 +71,7 @@
 	        <div class="site-header-content">
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
-	                	
+	                @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')	
 	                   <div class="dropdown user-menu">
 	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                <i class="glyphicon glyphicon-list-alt"></i>
@@ -89,7 +89,7 @@
 									<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
 	                            </div>
 	                        </div>
-	                        
+	                        @endif
 	                        <div class="dropdown dropdown-notification messages">
 	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
@@ -121,15 +121,8 @@
 	                <div class="site-header-collapsed" style="width: 1000px;">
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
-	                            <!-- <div class="dropdown-menu" aria-labelledby="dd-header-sales">
-	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>abi ihsan fadli</a>
-	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
-	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
-	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
-	                                <a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
-	                            </div>
-	                        </div> -->
-	                        <div class="dropdown dropdown-typical">
+	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
+	                <div class="dropdown dropdown-typical">
 	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                    <span class="font-icon font-icon-cogwheel"></span>
 	                    <span class="lbl">Akutansi</span>
@@ -141,23 +134,9 @@
 	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
 	                    <a class="dropdown-item" href="{{url('/labarugi')}}">Laba Rugi</a>
 	                    <a class="dropdown-item" href="{{url('/neraca')}}">Neraca</a>
-	                                <!-- <div class="dropdown-divider"></div> -->
-	                    <!-- <div class="dropdown-header">Recent issues</div> -->
-	                                <!-- <div class="dropdown-more">
-	                                    <div class="dropdown-more-caption padding">more...</div>
-	                                    <div class="dropdown-more-sub">
-	                                        <div class="dropdown-more-sub-in">
-	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>Quant and Verbal</a>
-	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
-	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
-	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
-	                                            <a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
-	                                        </div>
-	                                    </div>
-	                                </div> -->
 	                </div>
 	            </div>
-
+				@endif
 	                    </div><!--.site-header-collapsed-in-->
 	                </div><!--.site-header-collapsed-->
 	            </div><!--site-header-content-in-->
@@ -174,6 +153,7 @@
 			<a class="nav-link" href="{{url('admin')}}">Admin</a>
 		</li>
 		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Karyawan</a>
 			<div class="dropdown-menu">
@@ -183,14 +163,17 @@
 				<!-- <a class="dropdown-item" href="#">cokkkkkk</a> -->
 			</div>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='gudang')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Antaran</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Tambah Data</a>
 				<a class="dropdown-item" href="{{url('/listantaran')}}">List Antaran</a>
-				
 			</div>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level') == 'cs')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
 			<div class="dropdown-menu">
@@ -202,9 +185,13 @@
 				<!-- <a class="dropdown-item" href="#">cokkkkkk</a> -->
 			</div>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='cs')
 		<li class="nav-item">
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='gudang')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
@@ -212,6 +199,8 @@
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
 			</div>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tarif Pengiriman</a>
 			<div class="dropdown-menu">
@@ -224,11 +213,13 @@
 			</div>
 			</div>
 		</li>
-
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item">
 			<a class="nav-link" href="{{url('vendor')}}">Vendor</a>
 		</li>
-		
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
 			<div class="dropdown-menu">
@@ -237,12 +228,15 @@
 				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
 			</div>
 		</li>
+		@endif
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventaris</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('armada')}}">Armada</a>
 			</div>
 		</li>
+		@endif
 	</ul>
 
 @yield('content')
