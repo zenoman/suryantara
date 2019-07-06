@@ -100,7 +100,13 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->username}}</td>
-                            <td>{{$row->level}}</td>
+                            <td>
+                            	@if($row->level=='cs')
+                            	Customer Servis
+                            	@else
+                            	{{$row->level}}
+                            	@endif
+                            </td>
                             <td>
                               <form action="{{ url('/admin/delete')}}"  method="post">
                             	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">

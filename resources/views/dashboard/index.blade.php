@@ -23,7 +23,7 @@
 	       
 	
 	        <div class="row">
-
+			@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 	        	 @if (session('status'))
 	        	 <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-success alert-dismissable">
@@ -180,6 +180,7 @@
 	                    </div><!--.box-typical-body-->
 	                </section><!--.box-typical-dashboard-->
 	            </div><!--.col-->
+	        @endif
 	        </div>
 	    </div><!--.container-fluid-->
 	</div>
