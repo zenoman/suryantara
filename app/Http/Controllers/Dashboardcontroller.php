@@ -22,6 +22,7 @@ class Dashboardcontroller extends Controller
         //============================================
         // $this->hitung_omset();
         $this->hitung_neraca();
+        // $this->hitung_laba();
         //============================================
         $listsj = DB::table('surat_jalan')
         ->where('status','=','Y')
@@ -64,34 +65,40 @@ class Dashboardcontroller extends Controller
             $tahun = date('Y');
             if(date('m')==1){
                 
-                $dap = $this->hitung_pendapatan($bulan,date('Y'));
-                $lua = $this->hitung_pengeluaran($bulan,date('Y'));
-                $modal =  DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
-            ->whereYear('pengeluaran_lain.tgl',$tahun)
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['tb_kategoriakutansi.kode','=','012']])
-            ->paginate(40);
-                $kas = $dap - $lua ;
-
-                if ($modal == null) {
-                    $mod = 0;
-                }else{
-                    $mod = $modal;
-                }
+                $dap = $this->hitung_pendapatan($bulan,date('Y'),'ny');
+                $lua = $this->hitung_pengeluaran($bulan,date('Y'),'ny');
+                
+                 $jumlah = $dap - $lua ;
+                 $lba = $this->hitung_laba($bulan,date('Y'),'ny');
+                $lba0 = $this->hitung_laba0($bulan,date('Y'),'ny');
+                $lb = $lba - $lba0;
+               $modal = $this->cari_modal($bulan,date('Y'),'ny');
                 $insert = DB::table('tb_neraca')
                 ->insert([
-                    'bulan'=>12,
                     'tahun'=>$tahun-1,
-                    'kas'=>$kas,
-                    'modal'=>$mod
+                    'bulan'=>12,
+                    'kategori'=>'Kas',
+                    'status'=>'D',
+                    'total'=>$jumlah
+                ]);
+                  
+                $insert = DB::table('tb_neraca')
+                ->insert([
+                    'tahun'=>$tahun-1,
+                    'bulan'=>12,
+                    'kategori'=>'Laba',
+                    'status'=>'K',
+                    'total'=>$lb
                 ]);
             }else{
-                $dap = $this->hitung_pendapatan($bulan,date('Y'));
-                $lua = $this->hitung_pengeluaran($bulan,date('Y'));
-                $modal = $this->cari_modal($bulan,date('Y'));
-                $kas = $dap - $lua;
+                $dap = $this->hitung_pendapatan($bulan,date('Y'),'y');
+                $lua = $this->hitung_pengeluaran($bulan,date('Y'),'y');
+                
+                 $jumlah = $dap - $lua;
+                 $lba = $this->hitung_laba($bulan,date('Y'),'y');
+                $lba0 = $this->hitung_laba0($bulan,date('Y'),'y');
+                $lb = $lba - $lba0;
+                $modal = $this->cari_modal($bulan,date('Y'),'y');
                 if ($modal =null) {
                     $mod =0;
                 }else{
@@ -99,13 +106,23 @@ class Dashboardcontroller extends Controller
                 }
                 $insert = DB::table('tb_neraca')
                 ->insert([
-                    'bulan'=>date('m')-1,
                     'tahun'=>$tahun,
-                    'kas'=>$kas,
-                    'modal'=>$mod
-                ]);    
+                    'bulan'=>date('m')-1,
+                    'kategori'=>'Kas',
+                    'status'=>'D',
+                    'total'=>$jumlah
+                ]);
+                $insert = DB::table('tb_neraca')
+                ->insert([
+                    'tahun'=>$tahun,
+                    'bulan'=>date('m')-1,
+                    'kategori'=>'Laba',
+                    'status'=>'K',
+                    'total'=>$lb
+                ]);   
             }
-            // dd($insert);
+            // dd($jumlah.'->'.$lb.'->'.$modal);
+           
                     $dattgl=date('Y-m-d');
         $bulan = explode('-', $dattgl);
          $thn = $bulan[0];
@@ -123,7 +140,7 @@ class Dashboardcontroller extends Controller
 //======================================================
     function hitung_pendapatan($bulan,$tahun){
 
-    $data = DB::table('pengeluaran_lain')
+        $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
@@ -138,7 +155,7 @@ class Dashboardcontroller extends Controller
         return $newdata;
     }
     function hitung_pengeluaran($bulan,$tahun){
-    $data = DB::table('pengeluaran_lain')
+        $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
@@ -151,15 +168,78 @@ class Dashboardcontroller extends Controller
         }
         return $newdata;
     }
-    function cari_modal($bulan,$tahun){
-            $data = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+    function hitung_laba($bulan,$tahun){
+        $data =DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as tot'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
             ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['tb_kategoriakutansi.kode','=','012']])
+            ->where('tb_kategoriakutansi.status','=','pendapatan')
             ->paginate(40);
+        foreach ($data as $row) {
+            $new = $row->tot;
+        }
+        return $new;
     }
+    function hitung_laba0($bulan,$tahun){
+        $data =DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as tot'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            ->paginate(40);
+        foreach ($data as $row) {
+            $new = $row->tot;
+        }
+        return $new;
+    }
+    function cari_modal($bulan,$tahun,$thn){
+            $data = DB::table('pengeluaran_lain')
+            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
+            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as jumlah'))
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereYear('pengeluaran_lain.tgl',$tahun)
+            ->where('tb_kategoriakutansi.nama','=','Modal')
+            ->get();
+        foreach ($data as $row) {
+            $newdata = $row->jumlah;
+        }
+        if ($newdata == null) {
+                    $mod = 0;
+                }else{
+                    $mod = $newdata;
+                }
+// dd($mod);
+        if($bulan != date('m')){
+            $tahun = date('Y');
+            if(date('m')==1){
+            $insert = DB::table('tb_neraca')
+                ->insert([
+                    'tahun'=>$tahun-1,
+                    'bulan'=>12,
+                    'kategori'=>'Modal',
+                    'status'=>'K',
+                    'total'=>$mod
+                ]);
+
+        }else{
+            $insert = DB::table('tb_neraca')
+                ->insert([
+                    'tahun'=>$tahun,
+                    'bulan'=>date('m')-1,
+                    'kategori'=>'Modal',
+                    'status'=>'K',
+                    'total'=>$mod
+                ]);
+        }
+        }
+        
+    }
+
 
 
 

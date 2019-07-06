@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak {{$kat}} Tanggal {{$tgl}} Sampai {{$tgl0}}</title>
+	<title>Cetak {{$kat}} Akutansi Tanggal {{$tgl}} Sampai {{$tgl0}}</title>
 </head>
 <body onload="window.print()">
 		<table style="width: 100%">

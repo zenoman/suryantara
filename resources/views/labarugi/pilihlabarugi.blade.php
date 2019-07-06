@@ -83,6 +83,7 @@
 							<p class="form-control-static">
 								<select class="select2" name="kategori">
 							<option selected disabled hidden>Pilih Kategori</option>
+								<option value="semua">Semua Kategori</option>
 								@foreach($kate as $row)
 								<option value="{{$row->kode}}">
 									{{$row->nama}}

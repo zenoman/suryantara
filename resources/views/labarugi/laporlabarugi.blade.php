@@ -95,8 +95,8 @@
 					@endforeach
 								<p><br></p>
 								<div class="actions">
-									<button class="btn btn-rounded btn-inline">Send</button>
-									<button class="btn btn-inline btn-secondary btn-rounded">Print</button>
+									<!-- <button class="btn btn-rounded btn-inline">Send</button>
+									<button class="btn btn-inline btn-secondary btn-rounded">Print</button> -->
 								</div>
 							</div>
 						</div>
