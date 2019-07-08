@@ -13,18 +13,40 @@ class NeracaController extends Controller
 {
     public function index(){
     	$data = DB::table('tb_neraca')
-    	->orderby('tahun','desc')
+        ->where('status','=','D')
     	->orderby('bulan','desc')
     	->paginate(40);
+        $hitd = DB::table('tb_neraca')
+        ->select(DB::raw('SUM(total) as tot'))
+        ->where('status','=','D')
+        ->orderby('bulan','desc')
+        ->get();
 
-    	$data2 = DB::table('tb_neraca')
-    	->orderby('tahun','desc')
-    	->orderby('bulan','desc')
-    	->get();
+        $data0 = DB::table('tb_neraca')
+        ->where('kategori','=','Laba')
+        ->orderby('bulan','desc')
+        ->get();
+        $hitk = DB::table('tb_neraca')
+        ->select(DB::raw('SUM(total) as tot'))
+        ->where('status','=','k')
+        ->orderby('bulan','desc')
+        ->get();
+
+        $da = DB::table('tb_neraca')
+        ->where('kategori','=','Modal')
+        ->orderby('bulan','desc')
+        ->get();
+
+        $total = DB::table('tb_neraca')
+        ->where('kategori','!=','Modal')
+        ->select(DB::raw('SUM(total) as tot'))
+        ->get();
+
     	$webinfo = DB::table('setting')
     	->limit(1)
     	->get();
-    	return view('neraca/index',['data'=>$data,'title'=>$webinfo]);
+
+    	return view('neraca/index',['data'=>$data,'data0'=>$data0,'modal'=>$da,'hitd'=>$hitd,'hitk'=>$hitk,'tot'=>$total,'title'=>$webinfo]);
     }
     //-----------------------
         public function cetakomset(){

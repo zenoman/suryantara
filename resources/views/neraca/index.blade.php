@@ -27,53 +27,107 @@
 					</div>
 				</div>
 			</header>
-			<section class="card">
-				<div class="card-block">
-					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<thead>
-						<tr>
-							<th>No</th>
-							<th>Bulan</th>
-							<th>Kas</th>
-							<th>Modal</th>
-						</tr>
-						</thead>
-						<tfoot>
-						<tr> 
-							<th>No</th>
-							<th>Bulan</th>
-							<th>Kas</th>
-							<th>Modal</th>
-						</tr>
-						</tfoot>
-						<tbody>
-						<?php $i = 1;?>
-                            @foreach($data as $row)
-                            <?php $no = $i++;?>
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-                            <td>{{"Rp ".number_format($row->kas,0,',','.')}}</td>
-                            <td>{{"Rp ".number_format($row->modal,0,',','.')}}</td>
-                        </tr>
-						@endforeach
-						</tbody>
-					</table>
-					<br>
-					<div class="text-right">
-<a href="{{url('/omset/export')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan Omset</a>
-							&nbsp;&nbsp;
-								<a href="{{url('/printomset')}}" target="_blank()" class="btn btn-primary">
-								<i class="fa fa-print"></i>
-								Cetak Data
-							</a>	
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger">
-								Kembali
-							</button>
-					</div>
-				</div>
-			</section>
+			<div class="row">
+	            <div class="col-xl-6 dahsboard-column">
+	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
+	                    <header class="box-typical-header panel-heading">
+	                        <h3 class="panel-title"><b>Debit</b></h3>
+	                    </header>
+	                    <div class="box-typical-body panel-body">
+	                        <table class="tbl-typical">
+	                            <tr>
+	                                <th><div>No.</div></th>
+	                                <th align="center"><div>Nama</div></th>
+	                                <th><div>Tanggal</div></th>
+	                                <th align="center"><div>Jumlah</div></th>
+	                            </tr>
+	                            <?php $i = 1;?>
+	                            @foreach($data as $row)
+	                            <?php $no = $i++;?>
+	                            <tr>
+	                                <td>
+	                                    {{$no}}
+	                                </td>
+	                                <td>{{$row->kategori}}</td>
+	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$row->bulan}}-{{$row->tahun}}</span></td>
+	                                <td align="center">{{"Rp ".number_format($row->total,0,',','.')}}</td>
+	                            </tr>
+	                           @endforeach
+	                        </table>
+	                    </div><!--.box-typical-body-->
+	                        
+	                            	@foreach($hitd as $row)
+	                        <table class="tbl-typical">
+	                            <tr>
+	                                <td style="text-align: left;"><b><h3>Total</h3></b></font></td>
+	                                <td style="text-align: right;"><b>{{"Rp ".number_format($row->tot,0,',','.')}}</b></td>
+	                            </tr>
+	                        </table>
+	                           @endforeach
+	                </section><!--.box-typical-dashboard-->
+	            </div><!--.col-->
+	            <div class="col-xl-6 dahsboard-column">
+	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
+	                    <header class="box-typical-header panel-heading">
+	                        <h3 class="panel-title"><b>Kredit</b></h3>
+	                    </header>
+	                    <div class="box-typical-body panel-body">
+	                        <table class="tbl-typical">
+	                            <tr>
+	                                <th><div>No.</div></th>
+	                                <th align="center"><div>Nama</div></th>
+	                                <th><div>Tanggal</div></th>
+	                                <th align="center"><div>Jumlah</div></th>
+	                            </tr>
+	                            @foreach($modal as $row)
+	                            <tr>
+	                                <td>
+	                                    1
+	                                </td>
+	                                <td>{{$row->kategori}}</td>
+	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$row->bulan}}-{{$row->tahun}}</span></td>
+	                                <td align="center">{{"Rp ".number_format($row->total,0,',','.')}}</td>
+	                            </tr>
+	                            @endforeach
+	                            @foreach($data0 as $row)
+	                            @foreach($modal as $ro)
+	                            <tr>
+	                                <td>
+	                                    2
+	                                </td>
+	                                <td>{{$row->kategori}}</td>
+	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$row->bulan}}-{{$row->tahun}}</span></td>
+	                                <td align="center">{{"Rp ".number_format($row->total - $ro->total,0,',','.')}}</td>
+	                            </tr>
+	                            @endforeach
+	                            @endforeach
+	                        </table>
+	                    </div><!--.box-typical-body-->
+	                            @foreach($data0 as $row)
+	                    <table class="tbl-typical">
+	                            <tr>
+	                                <td style="text-align: left;"><b><h3>Total</h3></b></font></td>
+	                                <td style="text-align: right;"><b>{{"Rp ".number_format($row->total,0,',','.')}}</b></td>
+	                            </tr>
+	                    </table>
+	                            @endforeach
+	                </section><!--.box-typical-dashboard-->
+	            </div><!--.col-->
+	            <div class="col-xl-12 dahsboard-column">
+	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
+	                    
+	                            @foreach($tot as $row)
+	                        <table class="tbl-typical">
+	                            <tr>
+	                                <td style="text-align: left;"><b><h3>Total</h3></b></font></td>
+	                                <td style="text-align: right;"><b>{{"Rp ".number_format($row->tot,0,',','.')}}</b></td>
+	                            </tr>
+	                        </table>
+	                            @endforeach
+	                    
+	                </section><!--.box-typical-dashboard-->
+	            </div><!--.col-->
+	        </div>
 		</div>
 	</div>
 	@endsection

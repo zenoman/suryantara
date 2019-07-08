@@ -76,7 +76,7 @@
 				<div class="card-block">
 					<h2>Total <b>{{"Rp ".number_format($ttl->toto,0,',','.')}}</b></h2>
 					<div class="pull-right">
-					<a href="{{url('/export_laporakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a>
+					<!-- <a href="{{url('/export_laporakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
 					<a href="{{url('/printlapoakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;

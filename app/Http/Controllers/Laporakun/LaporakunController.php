@@ -48,7 +48,7 @@ class LaporakunController extends Controller
                 # code...
             $total[] = DB::table('pengeluaran_lain')
             ->select(DB::raw('SUM(jumlah) as totalnya'))
-            ->where('pengeluaran_lain.tgl','=',$ros->tgl)
+            ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
             ->get();
             }
             $totsemua = DB::table('pengeluaran_lain')
