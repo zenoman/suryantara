@@ -106,6 +106,8 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
+                            
+
                             	@if($row->tgl_lunas !=null)
 									@if($row->status=='Y')
                             			<button class="btn btn-sm btn-success"
@@ -376,6 +378,7 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if(Session::get('level')!='cs')	
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
@@ -399,6 +402,9 @@
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 @endif
+                            @else
+                            -
+                            @endif
                             @else
                             -
                             @endif

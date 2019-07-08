@@ -101,8 +101,14 @@ $(document).ready(function(){
 	//============================================ hitung estimasi tujuan
 		function hitung(harga,tujuan){
 			var berat = $("#berat").val();
-			if(berat!=''){
-			var jumlah  = harga*berat;
+			var volume = $("#volume").val();
+			if(berat!='' && volume!=''){
+				if(parseInt(berat)>parseInt(volume)){
+					var jumlah  = harga*berat;
+				}else{
+					var jumlah  = harga*volume;
+				}
+			
 			$("#biaya_kirim").val(jumlah);
 			$("#b_kirim").html(rupiah(jumlah));
 			hitung_total();		

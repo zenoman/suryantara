@@ -330,6 +330,7 @@
 	                            
                             </td>
                             <td class="text-center">
+                           	@if(Session::get('level')!='cs')
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
@@ -354,6 +355,9 @@
                             	</a>
                                 @endif
                             @else
+                            -
+                            @endif
+                             @else
                             -
                             @endif
                             </td>

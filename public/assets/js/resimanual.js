@@ -136,8 +136,13 @@ $(document).ready(function(){
 	//============================================ hitung estimasi tujuan
 		function hitung(harga,tujuan){
 			var berat = $("#berat_darat").val();
-			if(berat!=''){
-			var jumlah = harga*berat;
+			var volume = $("#volume_darat").val();
+			if(berat!='' && volume!=''){
+				if(parseInt(berat)>parseInt(volume)){
+					var jumlah  = harga*berat;
+				}else{
+					var jumlah  = harga*volume;
+				}
 			$("#biaya_kirim_darat").val(jumlah);
 			$("#b_kirim_darat").html(rupiah(jumlah));
 			hitung_total();		
@@ -384,8 +389,13 @@ $(document).ready(function(){
 	//============================================ hitung estimasi tujuan
 		function hitung_laut(harga,tujuan){
 			var berat = $("#berat_laut").val();
-			if(berat!=''){
-			var jumlah = harga*berat;
+			var volume = $("#volume_laut").val();
+			if(berat!='' && volume!=''){
+				if(parseInt(berat) > parseInt(volume)){
+					var jumlah = harga*berat;
+				}else{
+					var jumlah = harga*volume;
+				}
 			$("#biaya_kirim_laut").val(jumlah);
 			$("#b_kirim_laut").html(rupiah(jumlah));
 			hitung_total_laut();		
