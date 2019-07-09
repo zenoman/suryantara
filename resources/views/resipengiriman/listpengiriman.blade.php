@@ -309,6 +309,7 @@
 				</div>
 							</div>
 							<div class="modal-footer">
+								 @if(Session::get('level')!='cs')
 								@if($row->metode_bayar=='cash')
 										@if($row->status=='N')
 										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
@@ -328,7 +329,8 @@
 									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
 									@endif
 								@endif
-								
+								@else
+								@endif
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
