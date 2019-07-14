@@ -128,7 +128,7 @@
 								<option value="programer">Programer</option>
 								@endif
 								<option value="cs">Costumer Service</option>
-								<option value="gudang">Gudang</option>
+								<option value="operasional">Operasional</option>
 								<option value="admin">Admin</option>
 								<option value="superadmin">Superadmin</option>
 							</select>

@@ -147,7 +147,7 @@
 			</div>
 		</li>
 		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='gudang')
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='operasional')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Antaran</a>
 			<div class="dropdown-menu">
@@ -174,7 +174,7 @@
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
 		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='gudang')
+		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='operasional')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
