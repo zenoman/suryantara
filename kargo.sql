@@ -19,6 +19,7 @@ USE `kargo`;
 
 -- Dumping structure for table kargo.absensi
 DROP TABLE IF EXISTS `absensi`;
+
 CREATE TABLE IF NOT EXISTS `absensi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_karyawan` int(11) DEFAULT '0',
@@ -37,8 +38,9 @@ DELETE FROM `absensi`;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 
--- Dumping structure for table kargo.admin
+
 DROP TABLE IF EXISTS `admin`;
+
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -64,8 +66,8 @@ INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `emai
 	(12, 'Admin-000006', 'hardian', '74b213f68f648006a318f52713450f27', 'hardian', '2398782397892', 'harianto@gmail.com', 'gurah', 'operasional');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
--- Dumping structure for table kargo.armada
 DROP TABLE IF EXISTS `armada`;
+
 CREATE TABLE IF NOT EXISTS `armada` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(60) DEFAULT NULL,
@@ -84,7 +86,7 @@ INSERT INTO `armada` (`id`, `nama`, `nopol`, `nomor_rangka`, `nomor_mesin`, `war
 	(4, 'pajero', '028492', 'i34ui43o', '9034', 'hitam');
 /*!40000 ALTER TABLE `armada` ENABLE KEYS */;
 
--- Dumping structure for table kargo.gaji_karyawan
+
 DROP TABLE IF EXISTS `gaji_karyawan`;
 CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -105,7 +107,6 @@ DELETE FROM `gaji_karyawan`;
 /*!40000 ALTER TABLE `gaji_karyawan` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gaji_karyawan` ENABLE KEYS */;
 
--- Dumping structure for table kargo.jabatan
 DROP TABLE IF EXISTS `jabatan`;
 CREATE TABLE IF NOT EXISTS `jabatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -125,8 +126,8 @@ INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`) VALUES
 	(26, 'Staff Keuangan Cabang', '400000', '30000');
 /*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
 
--- Dumping structure for table kargo.karyawan
 DROP TABLE IF EXISTS `karyawan`;
+
 CREATE TABLE IF NOT EXISTS `karyawan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(30) NOT NULL,
@@ -145,7 +146,7 @@ INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`) VA
 	(2, '002', 'maryanto', '032489023', 'gurah', 26);
 /*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 
--- Dumping structure for table kargo.kategori_barang
+
 DROP TABLE IF EXISTS `kategori_barang`;
 CREATE TABLE IF NOT EXISTS `kategori_barang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -163,7 +164,7 @@ INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`) VALUES
 	(3, 'Meat / Frozen Food', '50');
 /*!40000 ALTER TABLE `kategori_barang` ENABLE KEYS */;
 
--- Dumping structure for table kargo.omset
+
 DROP TABLE IF EXISTS `omset`;
 CREATE TABLE IF NOT EXISTS `omset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -186,7 +187,7 @@ INSERT INTO `omset` (`id`, `bulan`, `tahun`, `pemasukan`, `pengeluaran`, `pengel
 	(1, 6, 2019, 2000000, 1000000, 400000, 500000, 10000, 50000, 0);
 /*!40000 ALTER TABLE `omset` ENABLE KEYS */;
 
--- Dumping structure for table kargo.pajak
+
 DROP TABLE IF EXISTS `pajak`;
 CREATE TABLE IF NOT EXISTS `pajak` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -210,7 +211,7 @@ INSERT INTO `pajak` (`id`, `bulan`, `tahun`, `nama_pajak`, `total`, `status`) VA
 	(6, 5, 2019, 'pajak', 30058, 'bulanan');
 /*!40000 ALTER TABLE `pajak` ENABLE KEYS */;
 
--- Dumping structure for table kargo.pajak_armada
+
 DROP TABLE IF EXISTS `pajak_armada`;
 CREATE TABLE IF NOT EXISTS `pajak_armada` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -233,7 +234,7 @@ INSERT INTO `pajak_armada` (`id`, `id_armada`, `nama_pajak`, `tgl_bayar`, `tgl_k
 	(13, 1, 'pajak KIR', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `pajak_armada` ENABLE KEYS */;
 
--- Dumping structure for table kargo.pengeluaran_lain
+
 DROP TABLE IF EXISTS `pengeluaran_lain`;
 CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -246,13 +247,53 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.pengeluaran_lain: ~0 rows (approximately)
 DELETE FROM `pengeluaran_lain`;
 /*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pengeluaran_lain` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_pengiriman
 DROP TABLE IF EXISTS `resi_pengiriman`;
+DELETE FROM `pengeluaran_lain`;
+/*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
+INSERT INTO `pengeluaran_lain` (`id`, `admin`, `kategori`, `keterangan`, `jumlah`, `tgl`, `gambar`) VALUES
+	(8, 'devasatrio', '005', 'beli bensin', 30000, '2019-07-19', '1546440740-logo.jpg'),
+	(9, 'devasatrio', '007', 'parkir mobil', 20000, '2019-07-19', '1546477524-logo.jpg'),
+	(10, 'devasatrio', '008', 'bayar tol surabaya', 3000, '2019-07-19', '1546482244-img-20181126-wa0003.jpg'),
+	(11, 'devasatrio', '007', 'parkir jet', 40000, '2019-07-19', '1546484974-img-20181023-wa0023.jpg'),
+	(12, 'devasatrio', '007', 'parkir mobil putih', 2000, '2019-07-19', '1546576232-favicon.png'),
+	(13, 'devasatrio', '009', 'untuk beli alat tulis', 20000, '2019-07-19', '1550231029-500_f_212165279_5nn4hrmazulxpsbbcyutb7kn7f667gu2.jpg'),
+	(14, 'devasatrio', '005', 'halo halo', 20000, '2019-07-07', '1554960625-kaos3.jpg'),
+	(15, 'devasatrio', '005', 'alskjfklasfdj', 30000, '2019-07-27', '1554960686-client.png'),
+	(16, 'devasatrio', '004', 'asdfasdfasfasfsf', 20000, '2019-07-12', '1555062448-1548762928-kemeja5.jpg'),
+	(17, 'devasatrio', '004', 'aasfasdf', 40000, '2019-07-12', '1555063100-admin.png'),
+	(18, 'devasatrio', '004', 'aadasdklfj aajsdfkljasdfk', 40000, '2019-07-12', '1555072139-client.png'),
+	(19, 'devasatrio', '004', 'sdafk', 30000, '2019-07-12', '1555072654-kaos4.jpg'),
+	(20, 'devasatrio', '004', 'asdf', 20000, '2019-07-12', '1555072691-kaos1.jpeg'),
+	(21, 'abiihsan', '012', 'modal usaha', 100000, '2019-07-19', NULL),
+	(24, 'abiihsan', '013', '45443', 40, '2019-07-29', '1559121450-9.jpg'),
+	(25, 'devasatrio', '004', 'asdf', 20000, '2019-07-09', '');
+/*!40000 ALTER TABLE `pengeluaran_lain` ENABLE KEYS */;
+
+-- membuang struktur untuk table kargo.penyusutan
+CREATE TABLE IF NOT EXISTS `penyusutan` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(100) DEFAULT NULL,
+  `harga` varchar(100) DEFAULT NULL,
+  `residu` bigint(100) DEFAULT NULL,
+  `umurbln` int(11) DEFAULT NULL,
+  `umurthn` int(11) DEFAULT NULL,
+  `penyusutan` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Membuang data untuk tabel kargo.penyusutan: ~2 rows (lebih kurang)
+DELETE FROM `penyusutan`;
+/*!40000 ALTER TABLE `penyusutan` DISABLE KEYS */;
+INSERT INTO `penyusutan` (`id`, `nama`, `harga`, `residu`, `umurbln`, `umurthn`, `penyusutan`) VALUES
+	(1, 'Bangunan', '1200000000', NULL, 240, NULL, 5000000),
+	(2, 'Mobil Daihatsu Gran Max', '147000000', NULL, 60, NULL, 2450000);
+/*!40000 ALTER TABLE `penyusutan` ENABLE KEYS */;
+
 CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_resi` text,
@@ -314,7 +355,7 @@ INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_an
 	(9, 'KDR140719-10-000002', NULL, 'SJ140719-12-000001', NULL, 'dinisumi', 'sepatu sapi', 'laut', 'kediri', 'laut03', '2019-07-14', NULL, '2019-07-14', 1, '30', '20 x 30 x 10', '2', 'kasldfjkl', 'skadjfkl', '9238932', '2039230', 'ksadjkl', 'jslkadfjlksdaf', 1020000, 1000, 2000, 0, 0, 0, 0, 0, 1023000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'siap dikirim', 'N');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
--- Dumping structure for table kargo.setting
+
 DROP TABLE IF EXISTS `setting`;
 CREATE TABLE IF NOT EXISTS `setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -336,14 +377,13 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.setting: ~0 rows (approximately)
+
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `desk_udara`, `desk_laut`, `desk_darat`, `status`, `bulan_sekarang`) VALUES
 	(1, 'Suryantara', 'abihsan@gmail.com', '082261110369', '1546485899-favicon.png', '1546486783-favicon.png', 'PT SURYANTARA CARGO', '1546074136-delivery.png', 'SELAMAT DATANG DI WEBSITE RESMI KAMI', 'PT SURYANTARA CARGO adalah jasa pengiriman barang yang telah terbukti kwalitas dan pelayanan nya', 'Jln PGA No.1 RW 01 RT 01 magersari gurah kediri', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya udara</li></ul>', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya laut</li></ul>', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya darat</li></ul>', 'Y', 7);
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
--- Dumping structure for table kargo.surat_antar
 DROP TABLE IF EXISTS `surat_antar`;
 CREATE TABLE IF NOT EXISTS `surat_antar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -366,7 +406,7 @@ INSERT INTO `surat_antar` (`id`, `id_karyawan`, `kode`, `tgl`, `pemegang`, `telp
 	(4, '1', 'SA140719-12-000001', '2019-07-14', 'hari', '2349023890482', 'Y');
 /*!40000 ALTER TABLE `surat_antar` ENABLE KEYS */;
 
--- Dumping structure for table kargo.surat_jalan
+
 DROP TABLE IF EXISTS `surat_jalan`;
 CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -393,7 +433,6 @@ INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `to
 	(2, NULL, 'SJ140719-12-000001', NULL, '2019-07-14', 'N', NULL, NULL, NULL, NULL, NULL, NULL, 'N');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
--- Dumping structure for table kargo.tarif_darat
 DROP TABLE IF EXISTS `tarif_darat`;
 CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -414,7 +453,6 @@ INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estima
 	(16, 'darat00004', 'etan', 40000, 3, '2');
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
--- Dumping structure for table kargo.tarif_laut
 DROP TABLE IF EXISTS `tarif_laut`;
 CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -483,8 +521,8 @@ INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimas
 	(63, 'laut0056', 'laut56', 12050, 61, '2');
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
--- Dumping structure for table kargo.tarif_udara
 DROP TABLE IF EXISTS `tarif_udara`;
+
 CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(100) DEFAULT NULL,
@@ -518,7 +556,7 @@ INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_
 	(21, 'udara0015', 'ngadiboyo', 'garuda', 30000, 50, 25000, 11);
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
--- Dumping structure for table kargo.tb_kategoriakutansi
+
 DROP TABLE IF EXISTS `tb_kategoriakutansi`;
 CREATE TABLE IF NOT EXISTS `tb_kategoriakutansi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -548,15 +586,17 @@ INSERT INTO `tb_kategoriakutansi` (`id`, `kode`, `nama`, `status`, `aksi`) VALUE
 	(13, '013', 'Pajak Perusahaan', 'pengeluaran', 'N');
 /*!40000 ALTER TABLE `tb_kategoriakutansi` ENABLE KEYS */;
 
--- Dumping structure for table kargo.tb_neraca
+
 DROP TABLE IF EXISTS `tb_neraca`;
 CREATE TABLE IF NOT EXISTS `tb_neraca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tahun` int(11) DEFAULT NULL,
   `bulan` int(11) DEFAULT NULL,
-  `kas` bigint(40) DEFAULT NULL,
-  `modal` bigint(40) DEFAULT NULL,
+  `kategori` varchar(100) DEFAULT NULL,
+  `status` enum('D','K') NOT NULL,
+  `total` bigint(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
+
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.tb_neraca: ~0 rows (approximately)
@@ -568,6 +608,7 @@ INSERT INTO `tb_neraca` (`id`, `tahun`, `bulan`, `kas`, `modal`) VALUES
 
 -- Dumping structure for table kargo.vendor
 DROP TABLE IF EXISTS `vendor`;
+
 CREATE TABLE IF NOT EXISTS `vendor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idvendor` varchar(100) DEFAULT NULL,
@@ -588,7 +629,7 @@ INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`) VA
 	(6, 'vendor0013', 'pt pubg', '2303849023890', 'gurah kediri', 'Y');
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 
--- Dumping structure for trigger kargo.editadmin
+
 DROP TRIGGER IF EXISTS `editadmin`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 DELIMITER //
@@ -599,7 +640,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger kargo.editkaryawan
+
 DROP TRIGGER IF EXISTS `editkaryawan`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -610,7 +651,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger kargo.editvendor
+
 DROP TRIGGER IF EXISTS `editvendor`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 DELIMITER //
@@ -620,7 +661,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger kargo.hapus_suratantar
+
 DROP TRIGGER IF EXISTS `hapus_suratantar`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -630,7 +671,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Dumping structure for trigger kargo.hapus_suratjalan
+
 DROP TRIGGER IF EXISTS `hapus_suratjalan`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 DELIMITER //

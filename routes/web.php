@@ -66,13 +66,12 @@ Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgj
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
-//----------------------------export omset
-Route::get('/omset/export','omset\omsetController@export');
-//================================================neraca
-Route::get('/neraca','neraca\NeracaController@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
 Route::get('/omset/export','omset\omsetController@export');
+//================================================neraca
+Route::get('/neraca','neraca\NeracaController@index'); 
+Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 //================================================resi pengiriman
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
@@ -320,6 +319,13 @@ Route::get('/printlapoakundet/{kate}/{tgl}/{tgl0}','Laporakun\LaporakunDetContro
 //===========================================================Laba Rugi
 Route::get('/labarugi','Labarugi\LabarugiController@pilihlapkun');
 Route::get('/tampillabarugi','Labarugi\LabarugiController@tampilakunlapor');
+//===============================================================penyusutan
+Route::get('/nyusut','Penyusutan\Penyusutancontroller@index');
+Route::get('/nyusut/create','Penyusutan\Penyusutancontroller@create');
+Route::post('/nyusut','Penyusutan\Penyusutancontroller@store');
+Route::get('/nyusut/{id}/edit','Penyusutan\Penyusutancontroller@edit');
+Route::put('/nyusut/{id}','Penyusutan\Penyusutancontroller@update');
+Route::post('/nyusut/delete','Penyusutan\Penyusutancontroller@destroy');
 
 
 

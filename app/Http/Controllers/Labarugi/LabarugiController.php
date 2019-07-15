@@ -47,14 +47,14 @@ class LabarugiController extends Controller
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where('pengeluaran_lain.kategori','=','pengeluaran')
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->paginate(40);
             $totdat= DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where('pengeluaran_lain.kategori','=','pengeluaran')
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->get();
 
             $data0 =DB::table('pengeluaran_lain')

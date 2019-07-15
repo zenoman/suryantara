@@ -71,25 +71,7 @@
 	        <div class="site-header-content">
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
-	                @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')	
-	                   <div class="dropdown user-menu">
-	                            <button class="btn btn-rounded dropdown-toggle" id="dd-header-add" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                <i class="glyphicon glyphicon-list-alt"></i>
-	                            </button>
-	                            <div class="dropdown-menu" aria-labelledby="dd-header-add">
-	                                <a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Laporan Pemasukan</a>
-	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Laporan Pengeluaran</span>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
-				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
-			</div><p></p>
-	                                <!-- <a class="dropdown-item" href="{{url('/omset')}}">omset</a> -->
-									<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
-	                            </div>
-	                        </div>
-	                        @endif
+	                
 	                        <div class="dropdown dropdown-notification messages">
 	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
@@ -130,6 +112,7 @@
 	
 	                <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
 	                    <a class="dropdown-item" href="{{url('/kat_akut')}}">kategori Akutansi</a>
+	                    <a class="dropdown-item" href="{{url('/nyusut')}}">Penyusutan</a>
 	                    <a class="dropdown-item" href="{{url('/laporakun')}}">Laporan</a>
 	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
 	                    <a class="dropdown-item" href="{{url('/labarugi')}}">Laba Rugi</a>
@@ -160,7 +143,7 @@
 				<a class="dropdown-item" href="{{url('jabatan')}}">Jabatan</a>
 				<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>
 				<!-- <div class="dropdown-divider"></div> -->
-				<!-- <a class="dropdown-item" href="#">cokkkkkk</a> -->
+				<!-- <a class="dropdown-item" href="#">test</a> -->
 			</div>
 		</li>
 		@endif
@@ -182,7 +165,7 @@
 				<a class="dropdown-item" href="{{url('/resipengirimanlaut')}}">Pengiriman Laut</a>
 				<a class="dropdown-item" href="{{url('/resipengirimanudara')}}">Pengiriman Udara</a>
 				<!-- <div class="dropdown-divider"></div> -->
-				<!-- <a class="dropdown-item" href="#">cokkkkkk</a> -->
+				<!-- <a class="dropdown-item" href="#">test</a> -->
 			</div>
 		</li>
 		@endif
@@ -226,6 +209,18 @@
 				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Pengeluaran Harian</a>
 				<a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
 				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
+				<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
+				<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Pemasukan</a>
+	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Pengeluaran</span>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
+				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
+				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
+			</div><p></p>
+	                                <!-- <a class="dropdown-item" href="{{url('/omset')}}">omset</a> -->
+			
 			</div>
 		</li>
 		@endif
