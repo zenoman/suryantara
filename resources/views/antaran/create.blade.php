@@ -241,14 +241,12 @@
 			<td rowspan="2">Tujuan</td>
 			<td colspan="2">Jumlah</td>
 			<td rowspan="2">Isi Paket</td>
-			<td colspan="2"> Biaya</td>
-			<td rowspan="2">Ket</td>
+			
 		</tr>
 		<tr align="center">
 			<td>Koli</td>
 			<td>Kg</td>
-			<td>Cash</td>
-			<td>BT</td>
+			
 			
 		</tr>
 		</thead>
@@ -262,9 +260,6 @@
 			<td id="cetak_subtotaljumlah" align="center"></td>
 			<td id="cetak_subtotalberat" align="center"></td>
 			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
 			
 		</tr>
 		
@@ -276,17 +271,15 @@
 			<td>
 				<p>Diserahkan Oleh</p>
 				<br>
-				<p>Koordinator Cabang Asal</p>
+				<p>oprasional cabang</p>
 			</td>
 			<td>
-				<p>Diantar Oleh</p>
-				<br>
-				<p>Sopir</p>
+				
 			</td>
 			<td>
 				<p>Diterima Oleh</p>
 				<br>
-				<p>Koordinator Cabang Tujuan</p>
+				<p id="cetak_ttdnama"></p>
 			</td>
 		</tr>
 	</table>

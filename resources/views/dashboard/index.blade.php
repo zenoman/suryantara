@@ -207,7 +207,7 @@
 			for ($i = 6; $i >= 0; $i--) {
 				$minus = strtotime("-".$i." days", $waktu);
 				$hasil = date('Y-m-d',$minus);
-				$jumlah = DB::table('resi_pengiriman')->where([['tgl',$hasil],['total_biaya','>',0]])->count();
+				$jumlah = DB::table('resi_pengiriman')->where([['tgl',$hasil]])->count();
 				echo $jumlah.",";
 			}
 			@endphp

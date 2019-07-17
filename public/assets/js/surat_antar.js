@@ -78,14 +78,7 @@ $(document).ready(function(){
                 rows2 = rows2 + '<td>' +value.jumlah+'</td>';
                 rows2 = rows2 + '<td>' +value.berat+'</td>';
                 rows2 = rows2 + '<td>' +value.nama_barang+'</td>';
-                if(value.metode_bayar=='cash'){
-                        rows2 = rows2 + '<td>-</td>';
-                        rows2 = rows2 + '<td> </td>';   
-                    }else{
-                        rows2 = rows2 + '<td> </td>'; 
-                        rows2 = rows2 + '<td>-</td>'; 
-                    }
-                rows2 = rows2 + '<td>-</td>';
+                
                 rows2 = rows2 + '</tr>';
                 
                 jumlahbarang+=1;
@@ -154,6 +147,7 @@ $(document).ready(function(){
                         $('#telpkar').val(item.telp);
                         $('#cetak_kodekar').html(":&nbsp;"+item.kode);
                         $('#cetak_namakar').html(":&nbsp;"+item.nama);
+                        $('#cetak_ttdnama').html(item.nama);
                         $('#cetak_telpkar').html(":&nbsp;"+item.telp);
                     })
                 }

@@ -79,12 +79,14 @@ class antarancontroller extends Controller
                     ->where([
                         ['no_resi','like','%'.$cari.'%'],
                         ['kode_jalan','=',null],
+                        ['total_biaya','!=',0],
                         ['batal','=','N'],
                         ['status_antar','=','N']
                     ])
                     ->orwhere([
                         ['no_resi','like','%'.$cari.'%'],
                         ['kode_jalan','=',null],
+                        ['total_biaya','!=',0],
                         ['batal','=','N'],
                         ['status_antar','=','KL']
                     ])

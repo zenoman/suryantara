@@ -372,13 +372,35 @@ $(document).ready(function(){
 	//=================================================
 	function tempelresi(){
 		var rows ='';
+		var rowpti ='';
+		var jumlahvolume=0;
+		var jumlahkg= 0;
 		for (var i = 1; i <= jumlahbarang; i++) {
 		rows = rows + '<tr>';
                 rows = rows + '<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center">'+$('#d_panjang'+i).val()+'cm x '+$('#d_lebar'+i).val()+'cm x '+$('#d_tinggi'+i).val()+'cm</td>';
                 rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#volume'+i).val()+'Kg</td>';
                 rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#berat'+i).val()+'Kg</td>';
                 rows = rows + '</tr>';
+        rowpti = rowpti + '<tr>';
+				rowpti = rowpti + '<td width="5%" align="center">1</td>';
+                rowpti = rowpti + '<td width="10%" align="center">koli</td>';
+                rowpti = rowpti + '<td width="35%" align="center">'+$("#nama_barang").val()+'</td>';
+                rowpti = rowpti + '<td width="30%" align="center">'+$('#d_panjang'+i).val()+'cm x '+$('#d_lebar'+i).val()+'cm x '+$('#d_tinggi'+i).val()+'cm</td>';
+                rowpti = rowpti + '<td width="10%" align="center">' +$('#volume'+i).val()+'Kg</td>';
+                rowpti = rowpti + '<td width="10%" align="center">' +$('#berat'+i).val()+'Kg</td>';
+                rowpti = rowpti + '</tr>';
+        jumlahvolume +=parseInt($('#volume'+i).val());
+        jumlahkg +=parseInt($('#berat'+i).val());
 		}
+
+		//pti
+		$('#cetak_pti_penerima').html($("#n_penerima").val());
+		$('#cetak_pti_alamatp').html($("#alamat_penerima").val());
+		$('#cetak_smu_pti').html($('#nomer_smu').val());
+		$('#listpti').html(rowpti);
+		$('#berat_volume_pti').html(jumlahvolume+" Kg");
+		$('#berat_total_pti').html(jumlahkg+" Kg");
+
 		$("#listbarang").html(rows);
 		$("#listbarang2").html(rows);
 		$("#listbarang3").html(rows);

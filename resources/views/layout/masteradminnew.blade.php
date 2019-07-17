@@ -164,8 +164,8 @@
 				<a class="dropdown-item" href="{{url('/resipengirimandarat')}}">Pengiriman Darat</a>
 				<a class="dropdown-item" href="{{url('/resipengirimanlaut')}}">Pengiriman Laut</a>
 				<a class="dropdown-item" href="{{url('/resipengirimanudara')}}">Pengiriman Udara</a>
-				<!-- <div class="dropdown-divider"></div> -->
-				<!-- <a class="dropdown-item" href="#">test</a> -->
+				<a class="dropdown-item" href="#">City Kurier</a>
+				
 			</div>
 		</li>
 		@endif
