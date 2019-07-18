@@ -274,6 +274,7 @@ $(document).ready(function(){
 							$("#cetak_kota_tujuan2").html(kotatujuan);
 							$("#cetak_kota_tujuan3").html(kotatujuan);
 							$("#cetak_kota_tujuan4").html(kotatujuan);
+							$('#ket_pti').html('&emsp;&emsp;Menerangkan bahwa kiriman yang diserahkan untuk diangkut oleh '+item.airlans);
 							$('#biaya_smu').val(item.biaya_dokumen);
 							$('#b_smu').html(rupiah(item.biaya_dokumen));
 							$('#bpk').val(rupiah(item.perkg));
@@ -363,11 +364,20 @@ $(document).ready(function(){
 	//================================================
 	function cetakresi(){
 		tempelresi();
+		var divToPrint2=document.getElementById('hidden_div_pti');
 		var divToPrint=document.getElementById('hidden_div');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();
+
+		var newWin2=window.open('','haloPrint-Window');
+		newWin2.document.open();
+		newWin2.document.write('<html><body onload="window.print();window.close()">'+divToPrint2.innerHTML+'</body></html>');
+		newWin2.document.close();
+		
+
+		
 	}
 	//=================================================
 	function tempelresi(){
@@ -398,8 +408,14 @@ $(document).ready(function(){
 		$('#cetak_pti_alamatp').html($("#alamat_penerima").val());
 		$('#cetak_smu_pti').html($('#nomer_smu').val());
 		$('#listpti').html(rowpti);
-		$('#berat_volume_pti').html(jumlahvolume+" Kg");
-		$('#berat_total_pti').html(jumlahkg+" Kg");
+		if(jumlahvolume>jumlahkg){
+			$('#berat_volume_pti').html(jumlahvolume+" Kg");
+			$('#berat_total_pti').html("-");
+		}else{
+			$('#berat_volume_pti').html("-");
+			$('#berat_total_pti').html(jumlahkg+" Kg");
+		}
+		
 
 		$("#listbarang").html(rows);
 		$("#listbarang2").html(rows);

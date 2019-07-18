@@ -346,7 +346,8 @@
 
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
-
+								
+								
 								<div class="pull-right">
 									<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>
 									<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
@@ -357,10 +358,10 @@
 			</div>
 		</div>
 		</div>
-	<div id="hidden_div" style="display: none;">
-		@include('cetakresi.resiudara');
+	
+		@include('cetakresi.resiudara')
 		
-	</div>
+	
 	</div>
         @endsection
 @section('js')

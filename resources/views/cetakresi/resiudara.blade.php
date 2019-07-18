@@ -1,3 +1,4 @@
+<div id="hidden_div" style="display: none;">
 <div>
 		<table style="width: 100%;" border="0">
 			<tr>
@@ -898,12 +899,8 @@
 		</table>
 	</div>
 	<p style="font-size: 10;">penerima</p>
-	<hr>
-	<br><br><br>
-	<br><br><br>
-	<br><br><br>
-	<br>
-	<br>
+	</div>
+	<div id="hidden_div_pti" style="display: none;">
 	<div>
 		<table style="width: 100%;" border="0">
 				<tr>
@@ -971,7 +968,7 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="left">
-					<p>
+					<p id="ket_pti">
 						&emsp;&emsp;Menerangkan bahwa kiriman yang diserahkan untuk diangkut oleh .......................
 					</p>
 					
@@ -1081,3 +1078,4 @@
 			</tr>
 		</table>
 	</div>
+</div>
