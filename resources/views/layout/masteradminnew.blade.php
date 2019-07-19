@@ -100,7 +100,7 @@
 	                </div><!--.site-header-shown-->
 	
 	                <div class="mobile-menu-right-overlay"></div>
-	                <!-- <div class="site-header-collapsed" style="width: 1000px;">
+	                <div class="site-header-collapsed" style="width: 1000px;">
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
@@ -122,7 +122,7 @@
 				@endif
 	                    </div>
 	                </div>
-	            </div> -->
+	            </div>
 	        </div>
 	    </div>
 	</header>
