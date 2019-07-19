@@ -98,10 +98,11 @@ Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
+Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@resicitykurier');
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
-
+Route::post('simpanubahck','resipengiriman\resipengirimanController@simpancity');
 //==========================================================surat jalan
 Route::get('/resisuratjalan','suratjalan\suratjalanController@resisuratjalan');
 Route::get('/bayarsuratjalan/{id}','suratjalan\suratjalanController@bayarsuratjalan');
