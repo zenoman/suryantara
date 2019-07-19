@@ -100,7 +100,7 @@
 	                </div><!--.site-header-shown-->
 	
 	                <div class="mobile-menu-right-overlay"></div>
-	                <div class="site-header-collapsed" style="width: 1000px;">
+	                <!-- <div class="site-header-collapsed" style="width: 1000px;">
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
@@ -120,12 +120,12 @@
 	                </div>
 	            </div>
 				@endif
-	                    </div><!--.site-header-collapsed-in-->
-	                </div><!--.site-header-collapsed-->
-	            </div><!--site-header-content-in-->
-	        </div><!--.site-header-content-->
-	    </div><!--.container-fluid-->
-	</header><!--.site-header-->
+	                    </div>
+	                </div>
+	            </div> -->
+	        </div>
+	    </div>
+	</header>
 	<div class="mobile-menu-left-overlay"></div>
 	<ul class="main-nav nav nav-inline">
 		<li class="nav-item">

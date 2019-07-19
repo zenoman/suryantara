@@ -73,12 +73,14 @@ Route::get('/omset/export','omset\omsetController@export');
 Route::get('/neraca','neraca\NeracaController@index'); 
 Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 //================================================resi pengiriman
+Route::get('/listpengirimanbatalcity','resipengiriman\resipengirimanController@listpengirimanbatalcity');
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
 Route::post('/simpanubahlaut','resipengiriman\resipengirimanController@simpanubahlaut');
 Route::post('/simpanubahdarat','resipengiriman\resipengirimanController@simpanubahdarat');
 Route::post('/simpanubahudara','resipengiriman\resipengirimanController@simpanubahudara');
 Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdataresi');
+Route::get('/cariresipengirimancity','resipengiriman\resipengirimanController@caridataresicity');
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
@@ -99,10 +101,12 @@ Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carih
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@listcity');
+Route::get('/resicitykurier','resipengiriman\resipengirimanController@resicitykurier');
 //resicitykurier
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
+Route::post('simpancity','resipengiriman\resipengirimanController@tambahcity');
 Route::post('simpanubahck','resipengiriman\resipengirimanController@simpancity');
 //==========================================================surat jalan
 Route::get('/resisuratjalan','suratjalan\suratjalanController@resisuratjalan');

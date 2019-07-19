@@ -20,7 +20,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Pengiriman City Kurier</h2>
+							<h2>List Pengiriman</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -34,47 +35,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('resicitykurier')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-                     <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-
-                    
-                     <div class="btn-group">
-								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="font-icon font-icon-eye"></i>	Tampil Berdasarkan
-								</button>
-								<div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
-									<a class="dropdown-item" href="{{url('listpengirimanbatalcity')}}">
-									Resi Dibatalkan</a>
-									
-								</div>
-							</div>
-
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('cariresipengirimancity')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi/ Tanggal/ Jalur/ Tujuan/ Admin" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-
-                    
+                     
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -88,7 +49,7 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							<th>Aksi</th>
+							<td>Aksi</td>
 						</tr>
 						</thead>
 						
@@ -99,8 +60,6 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            
-
                             	@if($row->tgl_lunas !=null)
 									@if($row->status=='Y')
                             			<button class="btn btn-sm btn-success"
@@ -132,6 +91,7 @@
 										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
 									@endif
 								@endif
+
 				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
@@ -150,10 +110,13 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
-							<!-- ini -->
-
+							
+							@if($row->pengiriman_via=='udara')
 							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
 							<p>No. SMU : {{$row->no_smu}}</p>
+							@else
+							<h5>Isi paket : {{$row->nama_barang}}</h5>
+							@endif
 
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
@@ -172,16 +135,17 @@
 							<div class="invoice-block">
 							<div>Tanggal : {{$row->tgl}}</div>
 								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
+								<div>Metode Bayar : {{$row->metode_bayar}}</div>
 							</div>
-							<div>
-                                @if($row->tgl_lunas!=null)
-                                Tanggal Pelunasan : {{$row->tgl_lunas}}
-                                @else
-                                Tanggal Pelunasan : -
-                                @endif  
-                                </div>
 							<br>
+							<!-- <div class="invoice-block">
+								<h5>Invoice To:</h5>
+								<div>Rebeca Manes</div>
+								<div>
+									Normand axis LTD <br>
+									3 Goodman street
+								</div>
+							</div> -->
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
@@ -239,10 +203,6 @@
 										<td class="text-right">Biaya Karantina</td>
 										<td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
 									</tr>
-									<tr>
-										<td class="text-right">Biaya Charge</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
-									</tr>
 								@else
 									<tr>
 										<td class="text-right">Biaya Packing</td>
@@ -287,8 +247,8 @@
 					</div>
 						<br>	
 							<div class="row text-left">
-								<!-- <form action="tambahsmu" method="post">
-									<label>Ubah No.Resi/SMU</label>
+								<form action="tambahsmu" method="post">
+									<label>Ubah No. SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
 										<input type="hidden" name="kode" value="{{$row->id}}">
@@ -297,12 +257,11 @@
 											<button class="btn btn-primary" type="submit">Simpan</button>
 										</span>
 									</div>
-								</form> -->
+								</form>
 							</div>
 				</div>
 							</div>
 							<div class="modal-footer">
-								 @if(Session::get('level')!='cs')
 								@if($row->metode_bayar=='cash')
 										@if($row->status=='N')
 										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
@@ -322,16 +281,14 @@
 									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
 									@endif
 								@endif
-								@else
-								@endif
+								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div><!--.modal-->
                             </td>
-                            <td>
-                            @if($row->no_smu=='')
+                            <td>@if($row->no_smu=='')
                                 @if($row->total_biaya != 0)
                                 <span class="label label-danger">
                                 kosong
@@ -339,8 +296,7 @@
                                 @endif
                                 @else
                                 {{$row->no_smu}}
-                                @endif
-                            </td>
+                                @endif</td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -361,6 +317,7 @@
 									<span class="label label-warning">Menunggu</span>
 	                        	@endif
                             	@endif
+                            	
                             @else
                             	@if($row->status=='Y')
 		                            <span class="label label-success">
@@ -373,34 +330,34 @@
 	                            
                             </td>
                             <td class="text-center">
-                            @if(Session::get('level')!='cs')	
+                           	@if(Session::get('level')!='cs')
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
                             	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
-                            	
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-remove"></i>
+                            	</button>
+                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 </form>
                                 @else
-                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+                                 <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
-                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 @endif
                             @else
                             -
                             @endif
-                            @else
+                             @else
                             -
                             @endif
                             </td>
@@ -419,11 +376,11 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							<th>Aksi</th>
+							<td>Aksi</td>
 						</tr>
 						</tfoot>
 					</table>
-					{{ $datakirim->links() }}
+					<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
 				</div>
 			</section>
 		</div><!--.container-fluid-->
@@ -437,7 +394,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 

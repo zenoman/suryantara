@@ -101,7 +101,7 @@ $(document).ready(function(){
 	});
 	//=================================================
 	$('#kota_tujuan_ck').on('select2:select',function(e){
-			$('#formck').loading('toggle');
+			$('#formcity').loading('toggle');
 			var kode = $(this).val();
 			$.ajax({
                 type: 'GET',
@@ -119,7 +119,7 @@ $(document).ready(function(){
 					})
 				}
 			},complete:function(){
-                $('#formck').loading('stop');
+                $('#formcity').loading('stop');
             }
             });
 		});
@@ -257,7 +257,15 @@ $(document).ready(function(){
 		});
 	//===========================================================
 	$(".btnselesai").click(function(e){
-		window.location.href = "/listpengiriman";
+		e.preventDefault();
+            e.stopImmediatePropagation();
+            var foo = "bar";
+    if(foo=="bar"){
+        var isgood = confirm('Apakah anda yakin telah selesai ?');
+        if(isgood){
+            location.reload();  
+        }
+    }
 	})
 	//=============================================================
 		function cetakresick(){

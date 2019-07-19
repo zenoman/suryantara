@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Pengiriman City Kurier</h2>
+							<h2>List Pengiriman Dibatalkan</h2>
 						</div>
 					</div>
 				</div>
@@ -34,47 +34,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('resicitykurier')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-                     <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-
-                    
-                     <div class="btn-group">
-								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="font-icon font-icon-eye"></i>	Tampil Berdasarkan
-								</button>
-								<div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
-									<a class="dropdown-item" href="{{url('listpengirimanbatalcity')}}">
-									Resi Dibatalkan</a>
-									
-								</div>
-							</div>
-
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('cariresipengirimancity')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi/ Tanggal/ Jalur/ Tujuan/ Admin" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-
-                    
+                  
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -86,9 +46,7 @@
 							<th>Isi Paket</th>
 							<th>Tujuan</th>
 							<th>Pengirim</th>
-							<th>Admin</th>
-							<th>Status</th>
-							<th>Aksi</th>
+							<th>Pembatal</th>
 						</tr>
 						</thead>
 						
@@ -99,8 +57,7 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td class="text-center">
-                            
-
+                            	
                             	@if($row->tgl_lunas !=null)
 									@if($row->status=='Y')
                             			<button class="btn btn-sm btn-success"
@@ -189,7 +146,7 @@
 								
 								<table class="pull-right table-sm">
 									<tr>
-										<td>Operator</td>
+										<td>Pembatal</td>
 										<td>{{$row->admin}}</td>
 									</tr>
 									<tr>
@@ -256,8 +213,8 @@
 									
 									<tr>
 										
-										<td class="text-right">PPN</td>
-										<td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
+										<td class="text-right">Subtotal</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_cancel,0,',','.')}}</td>
 										
 									</tr>
 									<tr>
@@ -271,15 +228,11 @@
 							</table>
 						</div>
 					</div>
+					<br>
 					<div class="row">
-						<br>
+						
 						<div class="col-lg-12 terms-and-conditions">
-							<strong>Status : 
-							 @if($row->status!='Y')
-								Menunggu Pengembalian Resi / Uang
-                            @else
-								Pengiriman Sukses
-                        	@endif
+							<strong>NB : Total adalah hasil penghitungan dari 30% subtotal.
 							</strong>
 							
 						</div>
@@ -298,11 +251,10 @@
 										</span>
 									</div>
 								</form> -->
-							</div>
-				</div>
+							</div>	
+						</div>
 							</div>
 							<div class="modal-footer">
-								 @if(Session::get('level')!='cs')
 								@if($row->metode_bayar=='cash')
 										@if($row->status=='N')
 										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
@@ -322,8 +274,7 @@
 									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
 									@endif
 								@endif
-								@else
-								@endif
+								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
@@ -348,63 +299,7 @@
                             </td>
                             <td>{{$row->nama_pengirim}}</td>
                             <td>{{$row->admin}}</td>
-                            <td class="text-center">
-                            @if($row->pengiriman_via=='udara')
-                            	@if($row->no_smu=='')
-                            	<span class="label label-warning">Menunggu</span>
-                            	@else
-                            	@if($row->status=='Y')
-		                            <span class="label label-success">
-										Sukses
-									</span>
-	                            @else
-									<span class="label label-warning">Menunggu</span>
-	                        	@endif
-                            	@endif
-                            @else
-                            	@if($row->status=='Y')
-		                            <span class="label label-success">
-										Sukses
-									</span>
-	                            @else
-									<span class="label label-warning">Menunggu</span>
-	                        	@endif
-                            @endif
-	                            
-                            </td>
-                            <td class="text-center">
-                            @if(Session::get('level')!='cs')	
-                            @if(Session::get('level')!='admin')
-                            	@if($row->kode_jalan=='')
-                            	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                            	
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                </form>
-                                @else
-                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                @endif
-                            @else
-                            -
-                            @endif
-                            @else
-                            -
-                            @endif
-                            </td>
-						</tr>
+                        </tr>
 						@endforeach
 						</tbody>
 						<tfoot>
@@ -417,17 +312,21 @@
 							<th>Isi Paket</th>
 							<th>Tujuan</th>
 							<th>Pengirim</th>
-							<th>Admin</th>
-							<th>Status</th>
-							<th>Aksi</th>
+							<th>Pembatal</th>
 						</tr>
 						</tfoot>
+						
 					</table>
-					{{ $datakirim->links() }}
+					<div class="pull-right">
+                     <button class="btn btn-danger" onclick="history.go(-1)">
+                     Kembali
+                 	 </button>
+					</div>
+					
 				</div>
 			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
+		</div>
+	</div>
 	@endsection
 
 
@@ -437,7 +336,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 
