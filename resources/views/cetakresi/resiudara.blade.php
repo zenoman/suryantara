@@ -1063,7 +1063,7 @@
 			
 			<tr>
 				<td width="80%" align="center"><b></b></td>
-				<td width="40%" align="center"><b>Kediri, 01-30-2019</b></td>
+				<td width="40%" align="center"><b>Kediri, <?php echo date('d-m-y')?></b></td>
 				
 			</tr>
 			<tr>

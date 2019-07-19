@@ -1748,3 +1748,183 @@
 	</div>
 	<p style="font-size: 10;">penerima</p>
 	</div>
+
+		<div id="hidden_div_pti" style="display: none;">
+	<div>
+		<table style="width: 100%;" border="0">
+				<tr>
+					<td style="width: 25%" align="center">
+						<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
+
+					</td>
+					<td><hr style="width: 1px;height:80px;color: black;"></td>
+					<td style="width: 75%;padding-left:10px;" align="left" >
+					<p style="font-size:10;">
+						<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+						Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+						Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					</p>
+					</td>
+					
+				</tr>
+		</table>
+		<hr width="90%">	
+	</div>
+	<div>
+		<table style="width:100%;" border="0">
+			<tr>
+				<td align="center" colspan="3">
+					<h3><b><u>KETERANGAN ISI KIRIMAN</u></b></h3>
+				</td>
+			</tr>
+			<tr>
+				<td align="left" colspan="3">
+					&emsp;&emsp;Yang bertanda tangan di bawah ini :
+				</td>
+			</tr>
+			<tr>
+				<td width="30%">
+					&nbsp;Nama
+				</td>
+				<td width="3%" align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					KLC Cabang Kediri
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;Alamat
+				</td>
+				<td align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					Kediri
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;No Telpon
+				</td>
+				<td align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					081133378240
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="left">
+					<p id="ket_pti">
+						&emsp;&emsp;Menerangkan bahwa kiriman yang diserahkan untuk diangkut oleh .......................
+					</p>
+					
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="left">
+					Yang dialamatkan kepada : 
+				</td>
+				
+			</tr>
+			<tr>
+				<td>
+					&nbsp;Nama
+				</td>
+				<td align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					<p id="cetak_pti_penerima"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;Alamat
+				</td>
+				<td align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					<p id="cetak_pti_alamatp"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;Dengan surat muatan udara no
+				</td>
+				<td align="center">
+					&nbsp;:&nbsp;
+				</td>
+				<td>
+					<p id="cetak_smu_pti"></p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p>
+						&emsp;&emsp;Berisi barang-barang seperti berikut :
+					</p>
+					
+				</td>
+			</tr>
+		</table>
+
+	</div>
+	<div align="center">
+		<table width="95%" border="1">
+			<thead>
+			<tr>
+				<td width="10%" align="center"><b>Jumlah</b></td>
+				<td width="10%" align="center"><b>Satuan</b></td>
+				<td width="40%" align="center"><b>Penjelasan isi barang</b></td>
+				<td width="20%" align="center"><b>Ukuran Volume</b></td>
+				<td width="10%" align="center"><b>Berat Volume</b></td>
+				<td width="10%" align="center"><b>Berat Kg</b></td>
+			</tr>
+			</thead>
+			<tbody id="listpti">
+				
+			</tbody>
+			
+			<tr>
+				<td colspan="4" align="right">
+					<b>Jumlah Berat</b>&nbsp;&nbsp;
+				</td>
+				<td align="center">
+					<b id="berat_volume_pti"></b>
+				</td>
+				<td align="center">
+					<b id="berat_total_pti"></b>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<p style="font-size:11;">
+		Selain dari itu, pengirim menerangkan dan mengetahui bahwa pengisian keterangan isi kiriman dengan tidak benak, dapat dihukum dengan denda dan atau pensitaan atas kiriman itu. <br>
+		Pengirim menerangkan pula bahwa ia bersedia sewaktu-waktu membayar ganti rugi yang disebabkan karena keterangan isi kiriman telah diisi tidak dengan sebenarnya.
+	</p>
+	<br>
+	<div align="center">
+		<table width="100%" border="0">
+			
+			<tr>
+				<td width="80%" align="center"><b></b></td>
+				<td width="40%" align="center"><b>Kediri, <?php echo date('d-m-Y')?></b></td>
+				
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="center">............................................ 
+					<br> 
+				(Tanda Tangan & Nama Terang)</td>
+				
+			</tr>
+		</table>
+	</div>
+</div>

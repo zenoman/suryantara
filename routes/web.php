@@ -98,7 +98,8 @@ Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
-Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@resicitykurier');
+Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@listcity');
+//resicitykurier
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');

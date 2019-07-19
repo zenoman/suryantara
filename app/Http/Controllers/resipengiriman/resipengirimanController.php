@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
+    public function listcity(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        $datakirim = DB::table('resi_pengiriman')
+        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','=','city kurier']])
+        ->orderby('id','desc')
+        ->paginate(50);
+        return view('resipengiriman/listpengirimancity',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
+    }
+    //======================================================
     public function simpancity(Request $request){
        $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)

@@ -1486,11 +1486,17 @@ $(document).ready(function(){
 	//================================================
 	function cetakresiudara(){
 		tempelresiudara();
+		var divToPrint2=document.getElementById('hidden_div_pti');
 		var divToPrint=document.getElementById('hidden_div_udara');
 		var newWin=window.open('','Print-Window');
 		newWin.document.open();
 		newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');
 		newWin.document.close();
+
+		var newWin2=window.open('','haloPrint-Window');
+		newWin2.document.open();
+		newWin2.document.write('<html><body onload="window.print();window.close()">'+divToPrint2.innerHTML+'</body></html>');
+		newWin2.document.close();
 	}
 	//=================================================
 	function tempelresiudara(){
@@ -1498,13 +1504,40 @@ $(document).ready(function(){
 		var dats = $('#kota_tujuan_udara').select2('data');
 		var kota_tujuan = dats[0].text;
 		var rows ='';
+		var rowpti ='';
+		var jumlahvolume=0;
+		var jumlahkg= 0;
 		for (var i = 1; i <= jumlahbarang; i++) {
 		rows = rows + '<tr>';
         rows = rows + '<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center">'+$('#d_panjang_udara'+i).val()+'cm x '+$('#d_lebar_udara'+i).val()+'cm x '+$('#d_tinggi_udara'+i).val()+'cm</td>';
         rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#volume_udara'+i).val()+'Kg</td>';
         rows = rows + '<td style="border-top: 1px solid black; border-left:1px solid black; border-bottom: 1px solid black; " align="center">' +$('#berat_udara'+i).val()+'Kg</td>';
         rows = rows + '</tr>';
+
+        rowpti = rowpti + '<tr>';
+				rowpti = rowpti + '<td width="5%" align="center">1</td>';
+                rowpti = rowpti + '<td width="10%" align="center">koli</td>';
+                rowpti = rowpti + '<td width="35%" align="center">'+$("#nama_barang_udara").val()+'</td>';
+                rowpti = rowpti + '<td width="30%" align="center">'+$('#d_panjang_udara'+i).val()+'cm x '+$('#d_lebar_udara'+i).val()+'cm x '+$('#d_tinggi_udara'+i).val()+'cm</td>';
+                rowpti = rowpti + '<td width="10%" align="center">' +$('#volume_udara'+i).val()+'Kg</td>';
+                rowpti = rowpti + '<td width="10%" align="center">' +$('#berat_udara'+i).val()+'Kg</td>';
+                rowpti = rowpti + '</tr>';
+        jumlahvolume +=parseInt($('#volume_udara'+i).val());
+        jumlahkg +=parseInt($('#berat_udara'+i).val());
 		}
+
+		$('#cetak_pti_penerima').html($("#n_penerima_udara").val());
+		$('#cetak_pti_alamatp').html($("#alamat_penerima_udara").val());
+		$('#cetak_smu_pti').html($('#nomer_smu_udara').val());
+		$('#listpti').html(rowpti);
+		if(jumlahvolume>jumlahkg){
+			$('#berat_volume_pti').html(jumlahvolume+" Kg");
+			$('#berat_total_pti').html("-");
+		}else{
+			$('#berat_volume_pti').html("-");
+			$('#berat_total_pti').html(jumlahkg+" Kg");
+		}
+
 		$("#listbarang").html(rows);
 		$("#listbarang2").html(rows);
 		$("#listbarang3").html(rows);
