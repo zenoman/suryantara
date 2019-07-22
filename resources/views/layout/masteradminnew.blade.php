@@ -132,30 +132,24 @@
 			<a class="nav-link" href="{{url('dashboard')}}">Home</a>
 		</li>
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
-		<li class="nav-item">
-			<a class="nav-link" href="{{url('admin')}}">Admin</a>
-		</li>
-		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Karyawan</a>
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('jabatan')}}">Jabatan</a>
+				<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
 				<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>
-				<!-- <div class="dropdown-divider"></div> -->
-				<!-- <a class="dropdown-item" href="#">test</a> -->
+				
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
+				@if(Session::get('level') == 'programer')
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
+				@endif
 			</div>
 		</li>
 		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='operasional')
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Antaran</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Tambah Data</a>
-				<a class="dropdown-item" href="{{url('/listantaran')}}">List Antaran</a>
-			</div>
-		</li>
-		@endif
+		
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level') == 'cs')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
@@ -180,6 +174,9 @@
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Buat Manifest Antar</a>
+				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Manifest Antar</a>
 			</div>
 		</li>
 		@endif
@@ -195,11 +192,6 @@
 				<a class="dropdown-item" href="{{url('kat_bar')}}">Special Charge</a>
 			</div>
 			</div>
-		</li>
-		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-		<li class="nav-item">
-			<a class="nav-link" href="{{url('vendor')}}">Vendor</a>
 		</li>
 		@endif
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')

@@ -1,5 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//=============================================cabang
+Route::resource('/cabang','cabang\cabangcontroller');
+
 //==============================================antaran
 Route::get('/tambahantaran','Antaran\antarancontroller@create');
 Route::get('/listantaran','Antaran\antarancontroller@index');
