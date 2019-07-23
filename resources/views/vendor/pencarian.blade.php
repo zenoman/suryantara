@@ -48,6 +48,7 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Vendor Cabang</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -58,6 +59,7 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Vendor Cabang</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -71,6 +73,7 @@
                             <td>{{$row->vendor}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
+                            <td>{{$row->namacabang}}</td>
                             <td>
 <form action="{{url('/vendor/delete') }}"  method="post">
 <a href="{{url('/vendor/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>

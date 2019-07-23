@@ -10,36 +10,29 @@ use App\models\Adminmodel;
 use Illuminate\Support\Facades\Session;
 class Admincontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // $admins = Adminmodel::paginate(20);
+    
+    public function index(){
         $setting = DB::table('setting')->get();
         $id=Session::get('id');
         $lev='admin';
-    if(Session::get('level') == 'programer') {
-        //________________________________________________________________
-        $datadmin = DB::table('admin')->where('id','!=',$id)->paginate(20);
-    }else{
-        //________________________________________________________________
-        $datadmin = DB::table('admin')->where('id','!=',$id)
-        ->where(function ($huft) use ($lev){
-            $huft->where('level','=',$lev);
-        })
-        ->paginate(20);
-    }
+        
+    		if(Session::get('level') == 'programer') {
+        		$datadmin = DB::table('admin')
+        		->select(DB::raw('admin.*,cabang.nama as namacabang'))
+        		->leftjoin('cabang','cabang.id','=','admin.id_cabang')
+        		->where('admin.id','!=',$id)
+        		->paginate(20);
+    		}else{
+        		$datadmin = DB::table('admin')
+        		->select(DB::raw('admin.*,cabang.nama as namacabang'))
+        		->leftjoin('cabang','cabang.id','=','admin.id_cabang')
+        		->where('admin.id','!=',$id)
+        		->where(function ($huft) use ($lev){$huft->where('admin.level','=',$lev);})
+        		->paginate(20);
+    		}
         return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //======================================================================
      public function caridata(Request $request)
     {
         $setting = DB::table('setting')->get();
@@ -47,56 +40,61 @@ class Admincontroller extends Controller
         $cari=$request->cari;
     if(Session::get('level') == 'programer') {
         //_______________________________________________
-        $datadmin = DB::table('admin')->where('id','!=',$id)
+        $datadmin = DB::table('admin')
+        ->select(DB::raw('admin.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
+        ->where('admin.id','!=',$id)
         ->where(function ($huft) use ($cari){
-            $huft->where('nama','like','%'.$cari.'%')
-            ->orwhere('kode','like','%'.$cari.'%')
-            ->orwhere('username','like','%'.$cari.'%')
-            ->orwhere('email','like','%'.$cari.'%');
+            $huft->where('admin.nama','like','%'.$cari.'%')
+            ->orwhere('admin.kode','like','%'.$cari.'%')
+            ->orwhere('admin.username','like','%'.$cari.'%')
+            ->orwhere('admin.email','like','%'.$cari.'%');
         })
         ->paginate(20);
     }else{
         //_______________________________________________
         $level='admin';
-        $datadmin = DB::table('admin')->where('id','!=',$id)
+        $datadmin = DB::table('admin')
+        ->select(DB::raw('admin.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
+        ->where('admin.id','!=',$id)
         ->where(function($huft) use ($cari){
-            $huft->where('nama','like','%'.$cari.'%')
-            ->orwhere('kode','like','%'.$cari.'%')
-            ->orwhere('username','like','%'.$cari.'%')
-            ->orwhere('email','like','%'.$cari.'%');
+            $huft->where('admin.nama','like','%'.$cari.'%')
+            ->orwhere('admin.kode','like','%'.$cari.'%')
+            ->orwhere('admin.username','like','%'.$cari.'%')
+            ->orwhere('admin.email','like','%'.$cari.'%');
         })->where(function($huft) use ($level){
-            $huft->where('level','=',$level);
+            $huft->where('admin.level','=',$level);
         })
         ->paginate(20);
     }
         return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$cari,'title'=>$setting]);
     }
 
-
-    public function create()
-    {
-        $table="admin";
+    //======================================================================
+    public function create(){
+    	$table="admin";
         $tut="kode";
+    	$cabang = DB::table('cabang')->get();
+       	$setting = DB::table('setting')->get();
         $q=DB::table($table)->max($tut);
-        if(!$q){
-            $finalkode = "Admin-000001";
-        }else{
-            $newkode    = explode("-", $q);
-            $nomer      = sprintf("%06s",$newkode [1]+1);
-            $finalkode  = "Admin-".$nomer;
-        }
-// dd($finalkode);
-        $setting = DB::table('setting')->get();
-        return view('admin/create',['title'=>$setting,'kode'=>$finalkode]);
-    }
 
-    public function changepas($id)
-    {
+        	if(!$q){
+            	$finalkode = "Admin-000001";
+        	}else{
+	            $newkode    = explode("-", $q);
+	            $nomer      = sprintf("%06s",$newkode [1]+1);
+	            $finalkode  = "Admin-".$nomer;
+        	}
+        return view('admin/create',['title'=>$setting,'kode'=>$finalkode,'cabang'=>$cabang]);
+    }
+    //======================================================================
+    public function changepas($id){
         $admin = Adminmodel::find($id);
         $setting = DB::table('setting')->get();
         return view('admin/changepas',['datadmin'=>$admin,'title'=>$setting]);
     }
-
+    //======================================================================
     public function actionchangepas(Request $request, $id){
         $rules = [
                 'konfirmasi_username'       =>  'required|min:5',
@@ -160,192 +158,143 @@ class Admincontroller extends Controller
     }
        
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $rules = [
-                    // 'kode'  =>'required',
-                    'username'  => 'required',
-                    'password'  => 'required|min:4',
-                    'nama'  => 'required',
-                    'email'  => 'required|email',
-                    'telp'  => 'required|numeric',
-                    'alamat'  => 'required|min:3',
-                    'level'=>'required'
-                    ];
+    //===================================================================
+    public function store(Request $request){
+    	$rules = [ 	
+    	'username'  => 'required',
+        'password'  => 'required|min:4',
+        'nama'  => 'required',
+        'email'  => 'required|email',
+        'telp'  => 'required|numeric',
+        'alamat'  => 'required|min:3',
+        'level'=>'required'];
 
-    $customMessages = [
+    	$customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
         'numeric'   => 'Maaf, data harus angka',
-        'email'     => 'Maaf, data harus email'
-    ];
+        'email'     => 'Maaf, data harus email'];
+
         $this->validate($request,$rules,$customMessages);
-        //
-                $table="admin";
+        $table="admin";
         $tut="kode";
         $q=DB::table($table)->max($tut);
-        if(!$q){
-            $finalkode = "Admin-000001";
-        }else{
-            $newkode    = explode("-", $q);
-            $nomer      = sprintf("%06s",$newkode [1]+1);
-            $finalkode  = "Admin-".$nomer;
-        }
-        //
-        
-        
-                    $kode=$request->kode;
-                    // dd($kode);
-$dtlam= DB::table('admin')->where('kode',$kode)->count();
-if($dtlam > 0){
-    return redirect('admin/create')->with('status','Kode admin Yang anda masukan sudah ada!!');
-}else{
-        Adminmodel::create([
-            'kode'  => $finalkode,
-            'username'  => $request->username,
-            'password'  =>md5($request->password),
-            'nama'  => $request->nama,
-            'telp'  => $request->telp,
-            'email'  => $request->email,
-            'alamat'  => $request->alamat,
-            'level' => $request->level
-
-        ]);
-        
-        return redirect('admin')->with('status','Input Data Sukses');
-}
+        	if(!$q){
+            	$finalkode = "Admin-000001";
+        	}else{
+            	$newkode    = explode("-", $q);
+            	$nomer      = sprintf("%06s",$newkode [1]+1);
+            	$finalkode  = "Admin-".$nomer;
+        	}
+        $kode=$request->kode;
+        $dtlam= DB::table('admin')->where('kode',$kode)->count();
+			if($dtlam > 0){
+    			return redirect('admin/create')
+    			->with('status','Kode admin Yang anda masukan sudah ada!!');
+			}else{
+		        Adminmodel::create([
+		            'kode'  => $finalkode,
+		            'username'  => $request->username,
+		            'password'  =>md5($request->password),
+		            'nama'  => $request->nama,
+		            'telp'  => $request->telp,
+		            'email'  => $request->email,
+		            'alamat'  => $request->alamat,
+		            'level' => $request->level,
+		        	'id_cabang'=>$request->cabang]);
+        		return redirect('admin')
+        		->with('status','Input Data Sukses');
+        	}
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //=================================================================
     public function edit($id)
     {
         $admin = Adminmodel::find($id);
+        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('admin/edit',['datadmin'=>$admin,'title'=>$setting]);
+        return view('admin/edit',['datadmin'=>$admin,'title'=>$setting,'cabang'=>$cabang]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //======================================================================
     public function update(Request $request, $id)
     {
         if(Session::get('id') == $request->id && Session::get('level') == 'admin'){
-            //_____________________________________________________________
-                    $rules = [
-                    'username'  => 'required|min:5',
-                    'nama'  => 'required',
-                    'email'  => 'required|min:5|email',
-                    'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5',
-            ];
-        $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
-        'numeric'   => 'Maaf, data harus angka',
-        'email'     => 'Maaf, data harus email'
+            $rules = [
+            'username'  => 'required|min:5',
+            'nama'  => 'required',
+            'email'  => 'required|min:5|email',
+            'telp'  => 'required|min:5|numeric',
+            'alamat'  => 'required|min:5'];
 
-         ];
-        $this->validate($request,$rules,$customMessages);
-        Adminmodel::find($id)->update([
-            'nama'  => $request->nama,
-            'username'  => $request->username,            
-            'email'  => $request->email,
-            'telp'  => $request->telp,
-            'alamat'  => $request->alamat
-            ]);
+	        $customMessages = [
+	        'required'  => 'Maaf, :attribute harus di isi',
+	        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+	        'numeric'   => 'Maaf, data harus angka',
+	        'email'     => 'Maaf, data harus email'];
+
+        	$this->validate($request,$rules,$customMessages);
+	        Adminmodel::find($id)->update([
+	            'nama'  => $request->nama,
+	            'username'  => $request->username,            
+	            'email'  => $request->email,
+	            'telp'  => $request->telp,
+	            'alamat'  => $request->alamat
+	            ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
        } else if(Session::get('id') == $request->id && Session::get('level') == 'programer' || Session::get('level') == 'superadmin' ) {
-        //_____________________________________________________________
-                    $rules = [
-                    'username'  => 'required|min:5',
-                    'nama'  => 'required',
-                    'email'  => 'required|min:5|email',
-                    'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5',
-            ];
-        $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
-        'numeric'   => 'Maaf, data harus angka',
-        'email'     => 'Maaf, data harus email'
+            $rules = [
+            'username'  => 'required|min:5',
+            'nama'  => 'required',
+            'email'  => 'required|min:5|email',
+            'telp'  => 'required|min:5|numeric',
+            'alamat'  => 'required|min:5'];
+	        $customMessages = [
+	        'required'  => 'Maaf, :attribute harus di isi',
+	        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+	        'numeric'   => 'Maaf, data harus angka',
+	        'email'     => 'Maaf, data harus email'];
 
-         ];
-        $this->validate($request,$rules,$customMessages);
-        Adminmodel::find($id)->update([
-            'nama'  => $request->nama,
-            'username'  => $request->username,            
-            'email'  => $request->email,
-            'telp'  => $request->telp,
-            'alamat'  => $request->alamat,
-            'level' =>  $request->level
-            ]);
+        	$this->validate($request,$rules,$customMessages);
+	        Adminmodel::find($id)->update([
+	            'nama'  => $request->nama,
+	            'username'  => $request->username,            
+	            'email'  => $request->email,
+	            'telp'  => $request->telp,
+	            'alamat'  => $request->alamat,
+	            'level' =>  $request->level,
+	            'id_cabang'=>$request->cabang
+	            ]);
         return redirect('/dashboard')->with('status','Edit Data Sukses');
         }else{
-            //_____________________________________________________________
-            $rules = [
-                    'username'  => 'required|min:5',
-                    'nama'  => 'required',
-                    'email'  => 'required|min:5|email',
-                    'telp'  => 'required|min:5|numeric',
-                    'alamat'  => 'required|min:5'
-            ];
-        $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
-        'numeric'   => 'Maaf, data harus angka',
-        'email'     => 'Maaf, data harus email'
+          $rules = [
+            'username'  => 'required|min:5',
+            'nama'  => 'required',
+            'email'  => 'required|min:5|email',
+            'telp'  => 'required|min:5|numeric',
+            'alamat'  => 'required|min:5'];
+	        $customMessages = [
+	        'required'  => 'Maaf, :attribute harus di isi',
+	        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
+	        'numeric'   => 'Maaf, data harus angka',
+	        'email'     => 'Maaf, data harus email'];
 
-         ];
-        $this->validate($request,$rules,$customMessages);
+        	$this->validate($request,$rules,$customMessages);
             Adminmodel::find($id)->update([
             'nama'  => $request->nama,
             'username'  => $request->username,            
             'email'  => $request->email,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat,
-            'level' => $request->level
+            'level' => $request->level,
+            'id_cabang'=>$request->cabang
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //======================================================================
     public function destroy(Request $request)
     {
         $id = $request->aid;
          Adminmodel::destroy($id);
-        // return redirect('admin')->with('status','Hapus Data Sukses');
         return back()->with('status','Hapus Data Sukses');
     }
 }

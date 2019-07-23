@@ -61,29 +61,30 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file <b>template vendor</b> excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{asset('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><p>
-                                               <li>Buka file <b>"template vendor.xlsx"</b> kemudian isi data seperti gambar dibaeah ini.
+                                               <li>Download file <b>template vendor</b> dan file <b>Data Cabang</b> pada tab <b>import Excel</b> Seperti gambar dibawah.</li><br>
+                                               <img src="{{asset('img/import_export/001.JPG')}}"  width="60%"><br><p>
+                                               <li>Buka file <b>"template vendor.xlsx"</b> kemudian isi data sesuai contoh gambar dibawah ini. untuk <b>id_cabang</b> isi sesuai data kode cabang pada file data cabang
                                                </li><br>
                                                <img src="{{asset('img/import_export/vendor.JPG')}}">
                                                <br><br>
                                                <div class="alert alert-danger">
-                                                <b>NB</b> : Untuk Cabang masukan <b>Y</b> <i>jika Cabang</i> Dan <b>N</b> <i> jika Bukan Cabang (Y dan N Harus <b>besar</b>)</i>. 
+                                                <b>NB</b> : Untuk Cabang masukan <b>Y</b> <i>jika Cabang</i> Dan <b>N</b> <i> jika Bukan Cabang (Y dan N Harus <b>besar</b>)</i>. Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris 
                                                </div><br>
-                                               <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{asset('img/import_export/001.JPG')}}"  width="100%" height="100%"><p>
+                                               <li>Kemudian save <b>template Vendor.xlsx</b> dan upload di tab bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li>
+                                               <hr>
                                                <li>Untuk export vendor sangat sederhana.Lihat gambar dibawah ini.</li><br>
-                                               <img src="{{asset('img/import_export/0055.JPG')}}"  width="100%" height="100%">
-                                               <br><p></p>
-                                               <div class="alert alert-danger">
-                                                <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
-                                               </div>
+                                               <img src="{{asset('img/import_export/0055.JPG')}}"  width="60%">
+                                               <br>
+                                               <li>klik tombol export vendor untuk mendowload data dalam bentuk excel.</li>
                                                <br></br>
 <a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
+                                    <a href="{{url('exsportcabang')}}" class="btn btn-primary">Download Data Cabang</a>
                                     <a href="{{url('vendor/download')}}" class="btn btn-info">Download Template Excel</a>
+
+                                    
                         </div>
                         <hr>
 <p></p>
@@ -99,7 +100,7 @@
                                         <div class="panel-body">
                                             <form action="{{url('/vendor/prosesimportexcel')}}" role="form" method="POST" enctype="multipart/form-data">
                                        <div class="form-group">
-                                            <label>File excel</label>
+                                            <label>&nbsp;&nbsp;&nbsp;</label>
                                             <input type="file"name="file" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                               <p class="help-block">*File excel tidak boleh kosong</p>
                                         </div>

@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 class VendorExport implements FromCollection, WithHeadings, ShouldAutoSize{
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    
     public function collection()
     {
-                return DB::table('vendor')->select('idvendor','vendor','telp','alamat','cabang')->get();;
+    return DB::table('vendor')->select('idvendor','vendor','telp','alamat','cabang','id_cabang')->get();;
     }
     public function headings(): array
     {
@@ -22,6 +20,7 @@ class VendorExport implements FromCollection, WithHeadings, ShouldAutoSize{
             'telp',
             'alamat',
             'cabang',
+            'id_cabang'
         ];
     }
 }

@@ -1,29 +1,27 @@
 <?php
-
 namespace App\Http\Controllers\cabang;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\cabangexport;
 
 class cabangcontroller extends Controller
 {
-    
-    public function index()
-    {
-      $setting = DB::table('setting')->get();
-      $datacabang = DB::table('cabang')
+    public function exsportdata(){
+        return Excel::download(new cabangexport, 'Data cabang.xlsx');
+    }
+    //====================================================================
+    public function index(){
+
+        $setting = DB::table('setting')->get();
+        $datacabang = DB::table('cabang')
                 ->orderby('id','desc')
                 ->get();
       return view('cabang/index',['datacabang'=>$datacabang,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //====================================================================
     public function create()
     {
         $setting = DB::table('setting')->get();

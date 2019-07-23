@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Input;
 //=============================================cabang
 Route::resource('/cabang','cabang\cabangcontroller');
+Route::get('/exsportcabang','cabang\cabangcontroller@exsportdata');
 
 //==============================================antaran
 Route::get('/tambahantaran','Antaran\antarancontroller@create');

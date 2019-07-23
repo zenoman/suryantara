@@ -35,7 +35,8 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Id Vendor</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" placeholder="Text" name="idvendor" value="{{$vendor->idvendor}}"></p>
+							<p class="form-control-static">
+								<input type="text" class="form-control" name="idvendor" value="{{$vendor->idvendor}}" required></p>
 						@if($errors->has('idvendor'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('idvendor')}}
@@ -46,7 +47,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Vendor</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="vendor" placeholder="Text Disabled" value="{{$vendor->vendor}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" name="vendor" value="{{$vendor->vendor}}" required></p>
 						@if($errors->has('vendor'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('vendor')}}
@@ -57,7 +58,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Telp</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="telp" required onkeypress="return isNumberKey(event)" placeholder="Text Readonly" value="{{$vendor->telp}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" name="telp" required onkeypress="return isNumberKey(event)" value="{{$vendor->telp}}"></p>
 						@if($errors->has('telp'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('telp')}}
@@ -68,7 +69,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Alamat</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" id="inputPassword" name="alamat" placeholder="Text Readonly" value="{{$vendor->alamat}}"></p>
+							<p class="form-control-static"><input type="text" class="form-control" name="alamat" value="{{$vendor->alamat}}" required></p>
 						@if($errors->has('alamat'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('alamat')}}
@@ -121,10 +122,22 @@
 							</div>
 							</div>
 						</div>
+						<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Vendor Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="idcabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}" @if($vendor->id_cabang==$row->id)
+								selected
+								@endif>{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 						
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

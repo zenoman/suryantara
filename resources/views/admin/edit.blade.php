@@ -142,18 +142,31 @@
 								@if(Session::get('level') == 'programer')
 								<option value="programer" @if($datadmin->level=='programer')selected @endif>Programer</option>
 								@endif
+								<option value="operasional_cabang" @if($datadmin->level=='operasional_cabang')selected @endif>Operasional Cabang</option>
 								<option value="operasional" @if($datadmin->level=='operasional')selected @endif>Operasional</option>
 							
 								<option value="cs" @if($datadmin->level=='cs')selected @endif>Customer Service</option>
+								<option value="admin_cabang" @if($datadmin->level=='admin_cabang')selected @endif>Admin Cabang</option>
 								<option value="admin" @if($datadmin->level=='admin')selected @endif>Admin</option>
 								<option value="superadmin" @if($datadmin->level=='superadmin')selected @endif>Superadmin</option>
 							</select>
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Penempatan</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $cb)
+								<option value="{{$cb->id}}" @if($datadmin->id_cabang==$cb->id)selected @endif>{{$cb->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 					@endif
+					
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								@if(Session::get('id') == $datadmin->id)
 								<a href="{{url('admin/'.$datadmin->id.'/changepas')}} " class="btn btn-warning">

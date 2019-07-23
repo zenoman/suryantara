@@ -128,17 +128,28 @@
 								<option value="programer">Programer</option>
 								@endif
 								<option value="cs">Costumer Service</option>
+								<option value="operasional_cabang">Operasional Cabang</option>
 								<option value="operasional">Operasional</option>
+								<option value="admin_cabang">Admin Cabang</option>
 								<option value="admin">Admin</option>
 								<option value="superadmin">Superadmin</option>
 							</select>
 						</div>
 					</div>
-
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Penempatan</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}">{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 
 
 {{csrf_field()}}
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

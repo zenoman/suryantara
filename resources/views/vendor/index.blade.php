@@ -74,6 +74,7 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Status</th>
+							<th>Vendor Cabang</th>
 							<th>Aksi</th>
 							
 						</tr>
@@ -86,6 +87,7 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Status</th>
+							<th>Vendor Cabang</th>
 							<th>Aksi</th>
 							
 						</tr>
@@ -107,6 +109,7 @@
                                 cabang
                                 @endif
                             </td>
+                            <td>{{$row->namacabang}}</td>
                             <td>
 <form action="{{url('/vendor/delete')}}"  method="post">
 <a href="{{url('/vendor/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
