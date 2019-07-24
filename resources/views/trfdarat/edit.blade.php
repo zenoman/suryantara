@@ -109,9 +109,19 @@
                                         @endif
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Tarif Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $cb)
+								<option value="{{$cb->id}}" @if($trf_drt->id_cabang==$cb->id)selected @endif>{{$cb->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								

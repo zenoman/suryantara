@@ -156,9 +156,9 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `id_jabatan` int(11) NOT NULL,
   `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.karyawan: ~2 rows (approximately)
+-- Dumping data for table kargo.karyawan: ~4 rows (approximately)
 DELETE FROM `karyawan`;
 /*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
 INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`, `id_cabang`) VALUES
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~39 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~38 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_antar`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `tgl_lunas`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`, `status_pengiriman`, `status_antar`) VALUES
@@ -458,16 +458,16 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `tarif` int(11) DEFAULT NULL,
   `berat_min` int(11) DEFAULT NULL,
   `estimasi` varchar(100) DEFAULT NULL,
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.tarif_darat: ~3 rows (approximately)
+-- Dumping data for table kargo.tarif_darat: ~2 rows (approximately)
 DELETE FROM `tarif_darat`;
 /*!40000 ALTER TABLE `tarif_darat` DISABLE KEYS */;
-INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
-	(13, 'darat00001', 'malang kidul', 34000, 3, '2'),
-	(14, 'darat00002', 'kediri lor', 34000, 3, '2'),
-	(16, 'darat00004', 'etan', 40000, 3, '2');
+INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`) VALUES
+	(13, 'darat00001', 'malang kidul', 34000, 3, '2', 1),
+	(14, 'darat00002', 'kediri lor', 34000, 3, '2', 1);
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_laut
@@ -479,64 +479,46 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `tarif` int(11) DEFAULT NULL,
   `berat_min` int(11) DEFAULT NULL,
   `estimasi` varchar(100) DEFAULT NULL,
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_laut: ~51 rows (approximately)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
-INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`) VALUES
-	(6, 'laut004', 'manado', 40000, 1, '2'),
-	(7, 'laut0009', 'laut01', 34000, 34, '2'),
-	(8, 'laut0010', 'laut02', 34000, 34, '2'),
-	(9, 'laut0011', 'laut03', 34000, 34, '2'),
-	(10, 'laut0012', 'laut04', 34000, 34, '2'),
-	(11, 'laut0013', 'laut05', 34000, 34, '2'),
-	(12, 'laut0014', 'laut06', 34000, 34, '2'),
-	(13, 'wer', 'qwer', 2334, 23, '23'),
-	(14, 'laut0001', 'laut01', 10000, 34, '2'),
-	(15, 'laut0002', 'laut02', 34000, 20, '2'),
-	(16, 'laut0003', 'laut03', 34000, 34, '2'),
-	(17, 'laut0004', 'laut04', 40000, 10, '2'),
-	(18, 'laut0005', 'laut05', 34000, 34, '2'),
-	(19, 'laut0006', 'laut06', 12000, 11, '2'),
-	(27, 'laut0020', 'laut20', 12014, 25, '2'),
-	(28, 'laut0021', 'laut21', 12015, 26, '2'),
-	(29, 'laut0022', 'laut22', 12016, 27, '2'),
-	(30, 'laut0023', 'laut23', 12017, 28, '2'),
-	(31, 'laut0024', 'laut24', 12018, 29, '2'),
-	(32, 'laut0025', 'laut25', 12019, 30, '2'),
-	(33, 'laut0026', 'laut26', 12020, 31, '2'),
-	(34, 'laut0027', 'laut27', 12021, 32, '2'),
-	(35, 'laut0028', 'laut28', 12022, 33, '2'),
-	(36, 'laut0029', 'laut29', 12023, 34, '2'),
-	(37, 'laut0030', 'laut30', 12024, 35, '2'),
-	(38, 'laut0031', 'laut31', 12025, 36, '2'),
-	(39, 'laut0032', 'laut32', 12026, 37, '2'),
-	(40, 'laut0033', 'laut33', 12027, 38, '2'),
-	(41, 'laut0034', 'laut34', 12028, 39, '2'),
-	(42, 'laut0035', 'laut35', 12029, 40, '2'),
-	(43, 'laut0036', 'laut36', 12030, 41, '2'),
-	(44, 'laut0037', 'laut37', 12031, 42, '2'),
-	(45, 'laut0038', 'laut38', 12032, 43, '2'),
-	(46, 'laut0039', 'laut39', 12033, 44, '2'),
-	(47, 'laut0040', 'laut40', 12034, 45, '2'),
-	(48, 'laut0041', 'laut41', 12035, 46, '2'),
-	(49, 'laut0042', 'laut42', 12036, 47, '2'),
-	(50, 'laut0043', 'laut43', 12037, 48, '2'),
-	(51, 'laut0044', 'laut44', 12038, 49, '2'),
-	(52, 'laut0045', 'laut45', 12039, 50, '2'),
-	(53, 'laut0046', 'laut46', 12040, 51, '2'),
-	(54, 'laut0047', 'laut47', 12041, 52, '2'),
-	(55, 'laut0048', 'laut48', 12042, 53, '2'),
-	(56, 'laut0049', 'laut49', 12043, 54, '2'),
-	(57, 'laut0050', 'laut50', 12044, 55, '2'),
-	(58, 'laut0051', 'laut51', 12045, 56, '2'),
-	(59, 'laut0052', 'laut52', 12046, 57, '2'),
-	(60, 'laut0053', 'laut53', 12047, 58, '2'),
-	(61, 'laut0054', 'laut54', 12048, 59, '2'),
-	(62, 'laut0055', 'laut55', 12049, 60, '2'),
-	(63, 'laut0056', 'laut56', 12050, 61, '2');
+INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`) VALUES
+	(6, 'laut004', 'manado', 40000, 1, '2', 1),
+	(7, 'laut0009', 'laut01', 34000, 34, '2', 1),
+	(8, 'laut0010', 'laut02', 34000, 34, '2', 1),
+	(9, 'laut0011', 'laut03', 34000, 34, '2', 1),
+	(10, 'laut0012', 'laut04', 34000, 34, '2', 1),
+	(11, 'laut0013', 'laut05', 34000, 34, '2', 1),
+	(12, 'laut0014', 'laut06', 34000, 34, '2', 1),
+	(13, 'wer', 'qwer', 2334, 23, '23', 1),
+	(14, 'laut0001', 'laut01', 10000, 34, '2', 1),
+	(15, 'laut0002', 'laut02', 34000, 20, '2', 1),
+	(16, 'laut0003', 'laut03', 34000, 34, '2', 1),
+	(17, 'laut0004', 'laut04', 40000, 10, '2', 1),
+	(18, 'laut0005', 'laut05', 34000, 34, '2', 1),
+	(19, 'laut0006', 'laut06', 12000, 11, '2', 1),
+	(27, 'laut0020', 'laut20', 12014, 25, '2', 1),
+	(28, 'laut0021', 'laut21', 12015, 26, '2', 1),
+	(29, 'laut0022', 'laut22', 12016, 27, '2', 1),
+	(30, 'laut0023', 'laut23', 12017, 28, '2', 1),
+	(31, 'laut0024', 'laut24', 12018, 29, '2', 1),
+	(32, 'laut0025', 'laut25', 12019, 30, '2', 1),
+	(33, 'laut0026', 'laut26', 12020, 31, '2', 1),
+	(34, 'laut0027', 'laut27', 12021, 32, '2', 1),
+	(35, 'laut0028', 'laut28', 12022, 33, '2', 1),
+	(36, 'laut0029', 'laut29', 12023, 34, '2', 1),
+	(37, 'laut0030', 'laut30', 12024, 35, '2', 1),
+	(38, 'laut0031', 'laut31', 12025, 36, '2', 1),
+	(39, 'laut0032', 'laut32', 12026, 37, '2', 1),
+	(40, 'laut0033', 'laut33', 12027, 38, '2', 1),
+	(41, 'laut0034', 'laut34', 12028, 39, '2', 1),
+	(42, 'laut0035', 'laut35', 12029, 40, '2', 1),
+	(43, 'laut0036', 'laut36', 12030, 41, '2', 1),
+	(44, 'laut0037', 'laut37', 12031, 42, '2', 1);
 /*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_udara

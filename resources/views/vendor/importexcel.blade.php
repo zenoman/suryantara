@@ -19,7 +19,6 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>Export Import excel</h2>
-							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
 				</div>
@@ -55,7 +54,7 @@
 							</li>
 						</ul>
 					</div>
-				</div><!--.tabs-section-nav-->
+				</div>
 
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">

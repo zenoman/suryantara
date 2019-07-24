@@ -38,6 +38,8 @@ class Dashboardcontroller extends Controller
         $jumlahresi = DB::table('resi_pengiriman')
         ->where([['status','!=','Y'],['total_biaya','>',0]])
         ->count();
+        $jumlahtotalresi = DB::table('resi_pengiriman')
+        ->count();
         $jumlahsj = DB::table('surat_jalan')
         ->where('status','=','Y')
         ->count();
@@ -50,7 +52,7 @@ class Dashboardcontroller extends Controller
 
         $setting = DB::table('setting')->get();
 
-        return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada]);
+        return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada,'jumlahtotalresi'=>$jumlahtotalresi]);
 
       }
     function hitung_neraca(){

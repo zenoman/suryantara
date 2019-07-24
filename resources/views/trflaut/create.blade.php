@@ -109,9 +109,18 @@
                                        @endif
 						</div>
 					</div>
-
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Tarif Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}">{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 {{csrf_field()}}
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 								

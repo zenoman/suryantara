@@ -32,6 +32,16 @@
                     </div>
                 </div>
                     @endif
+                  @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
+                 @if($jumlahtotalresi > 500)
+                  <div class="col-xl-12 dahsboard-column">
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Data resi sudah lebih dari 500 data segera lakukan <a href="{{url('/backup')}}">backup data</a>
+                    </div>
+                </div>
+                 @endif
+                 @endif
               	@if($jumlahpajakarmada > 0)
               	<div class="col-xl-12 dahsboard-column">
               		<section class="box-typical box-typical-dashboard panel panel-default scrollable">

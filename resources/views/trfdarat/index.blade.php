@@ -78,7 +78,8 @@
 							<th>Tarif</th>
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
-							<th>Aksi</th>
+							<th>Tarif Cabang</th>
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</thead>
@@ -90,7 +91,8 @@
 							<th>Tarif</th>
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
-							<th>Aksi</th>
+							<th>Tarif Cabang</th>
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</tfoot> 
@@ -105,14 +107,10 @@
                             <td>{{"Rp ". number_format($row->tarif,0,',','.')}}</td>
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
-                            <td>
-<form action="{{ url('/trfdarat/delete') }}"  method="post">
-<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i> Edit Data</a>
-                                        {{csrf_field()}}
-                                        	<input type="hidden" name="aid" value="{{$row->id}}">
-<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
-                    					</form>
+                            <td>{{$row->namacabang}}</td>
+                            <td class="text-center">
+							<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
+                                    
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						
@@ -122,11 +120,11 @@
 					</table>
 					<div class="text-right">
 &nbsp;&nbsp;
-<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger">
+<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger btn-sm">
 Kosongkan Data
 </a>	
 &nbsp;&nbsp;
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
 					</div>
 						{{csrf_field()}}
                         </form>

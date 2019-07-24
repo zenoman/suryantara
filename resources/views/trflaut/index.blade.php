@@ -81,7 +81,8 @@
 							<th>Tarif</th>
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
-							<th>Aksi</th>
+							<th>Tarif Cabang</th>
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</thead>
@@ -93,7 +94,8 @@
 							<th>Tarif</th>
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
-							<th>Aksi</th>
+							<th>Tarif Cabang</th>
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
 						</tfoot>
@@ -108,15 +110,9 @@
                             <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
-                            <td>
-                            	<form action="{{url('/trflaut/delete') }}"  method="post">
-                            	<a href="{{url('/trflaut/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
-                                        {{csrf_field()}}
-                                        	<input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
-                    					</form>
+                            <td>{{$row->namacabang}}</td>
+                            <td class="text-center">
+                            	<a href="{{url('/trflaut/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						</tr>
@@ -126,12 +122,12 @@
 					</table>
 						{{csrf_field()}}
 						<div class="text-right">
-&nbsp;&nbsp;
-<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger">
-Kosongkan Data
-</a>	
-&nbsp;&nbsp;
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+						&nbsp;&nbsp;
+						<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger btn-sm">
+						Kosongkan Data
+						</a>	
+						&nbsp;&nbsp;
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
 						</div>
                         </form>
 					{{ $trflaut->links() }}
