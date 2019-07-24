@@ -154,15 +154,17 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `telp` varchar(15) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `id_jabatan` int(11) NOT NULL,
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.karyawan: ~2 rows (approximately)
 DELETE FROM `karyawan`;
 /*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
-INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`) VALUES
-	(1, '001', 'hari', '2349023890482', 'gurah', 26),
-	(2, '002', 'maryanto', '032489023', 'gurah', 26);
+INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`, `id_cabang`) VALUES
+	(1, '001', 'hari', '2349023890482', 'gurah', 26, 1),
+	(2, '002', 'maryanto', '032489023', 'gurah', 26, 1),
+	(4, 'kk001', 'deni', '234789', 'gurah', 1, 1);
 /*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.kategori_barang
@@ -317,9 +319,9 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `status_pengiriman` enum('siap dikirim','handle by vendor','menuju alamat tujuan','pengantaran ulang','paket telah sampai','dikembalikan ke pengirim','sudah dikembalikan') DEFAULT 'siap dikirim',
   `status_antar` enum('N','Y','G','P','KL') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~38 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~39 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_antar`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `tgl_lunas`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`, `status_pengiriman`, `status_antar`) VALUES
@@ -359,7 +361,8 @@ INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_an
 	(34, 'KDR180719-06-000013', 'asdfasdf', NULL, NULL, 'devasatrio', 'kontlo', 'udara', 'KEDIRI', 'banten', '2019-07-19', NULL, '2019-07-18', 1, '6', '40 x 20 x 40', '5', 'skladfj', 'jaskldjf', '303928490', '09238490', 'jksaldfj', 'aksldjklas', 380000, 0, 0, 0, 5000, 2000, 0, 0, 387000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'siap dikirim', 'N'),
 	(35, 'KDR180719-06-000014', NULL, NULL, NULL, 'devasatrio', 'kljskljd sajfklsadf', 'city kurier', 'kediri', 'malang kidul', '2019-07-19', NULL, '2019-07-19', 1, '2', '20 x 30 x 10', '2', 'kasldjf', 'ksaldj', '902890', '92038490', 'jsakl sadjfklj sadklfjkl', 'sjakdlfksl', 68000, 2000, 2000, 0, 0, 0, 0, 0, 72000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'siap dikirim', 'N'),
 	(36, 'KDR180719-06-000015', NULL, NULL, 'SA190719-06-000001', 'devasatrio', 'coba city kurir', 'city kurier', 'kediri', 'kediri lor', '2019-07-18', NULL, '2019-07-18', 2, '3', '40 x 20 x 30', '6', 'hari andri', 'deni sumarni', '082592837489237', '203849023', 'askl asdfkjsklf sdf', 'hakd sdkjfskld sdjksjdkl', 250000, 4000, 1000, 0, 0, 0, 0, 0, 255000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'menuju alamat tujuan', 'P'),
-	(38, 'KDR190719-06-000001', NULL, NULL, NULL, 'devasatrio', 'halo halo', 'city kurier', 'KEDIRI', 'kediri lor', '2019-07-19', NULL, '2019-07-19', 1, '1', '10 x 10 x 30', '1', 'askdlfj', 'ksladjkl', '2849023', '90238490', 'asklfdj asdjfkl sadfjklasd', 'skalf sadkjlk', 34000, 2000, 1000, 0, 0, 0, 0, 37000, 11100, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'Y', 'siap dikirim', 'N');
+	(38, 'KDR190719-06-000001', NULL, NULL, NULL, 'devasatrio', 'halo halo', 'city kurier', 'KEDIRI', 'kediri lor', '2019-07-19', NULL, '2019-07-19', 1, '1', '10 x 10 x 30', '1', 'askdlfj', 'ksladjkl', '2849023', '90238490', 'asklfdj asdjfkl sadfjklasd', 'skalf sadkjlk', 34000, 2000, 1000, 0, 0, 0, 0, 37000, 11100, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'Y', 'siap dikirim', 'N'),
+	(39, 'KDR230719-06-000001', '23904890', NULL, NULL, 'devasatrio', 'sabu sabu', 'udara', 'KEDIRI', 'kalimantan', '2019-07-23', NULL, '2019-07-23', 1, '4', '40 x 30 x 20', '4', 'hariono', '20938490', '203890', '3849023', 'gurah kediri', 'aksldfjkl', 80000, 0, 0, 0, 5000, 1000, 0, 0, 86000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'siap dikirim', 'N');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting

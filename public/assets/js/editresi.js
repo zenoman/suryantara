@@ -1345,6 +1345,8 @@ $(document).ready(function(){
 							}
 							$('#kta_tujuan_udara').val(item.tujuan);
 							kotatujuanudara = item.tujuan;
+							$('#ket_pti').html('&emsp;&emsp;Menerangkan bahwa kiriman yang diserahkan untuk diangkut oleh '+item.airlans);
+							
 							$('#bpk').val(rupiah(item.perkg));
 							$('#biaya_smu_udara').val(item.biaya_dokumen);
 							$('#b_smu_udara').html(rupiah(item.biaya_dokumen));

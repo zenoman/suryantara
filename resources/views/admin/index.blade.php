@@ -79,7 +79,7 @@
 							<th>Username</th>
 							<th>Level</th>
                             <th>Penempatan</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -90,7 +90,7 @@
 							<th>Username</th>
 							<th>Level</th>
                             <th>Penempatan</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -110,19 +110,16 @@
                             	@endif
                             </td>
                             <td>{{$row->namacabang}}</td>
-                            <td>
+                            <td class="text-center">
                               <form action="{{ url('/admin/delete')}}"  method="post">
-                            	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">
-                                        <i class="fa fa-key"></i> Ganti Password</a>
+                            	<a href="{{url('admin/'.$row->id.'/changepas')}} " class="btn btn-warning btn-sm">Ganti Password</a>
 
                             	
-                            	<a href="{{ url('admin/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                            	<a href="{{ url('admin/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">Edit</a>
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
                             </td>
 						</tr>

@@ -9,26 +9,25 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class KaryawanImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param Collection $collection
-    */
+    
     public function collection(Collection $collection)
     {
-        //
         foreach ($collection as $row){
             $kode=$row['kode'];
-$dtlam= DB::table('karyawan')->where('kode',$kode)->count();
-if($dtlam > 0){
-
-}else{
-    	 DB::table('karyawan')->insert([
+            $dtlam= DB::table('karyawan')->where('kode',$kode)->count();
+            if($dtlam == 0){
+                $data[] = [
                     'kode'=>$row['kode'],
                     'nama'=>$row['nama'],
                     'telp'=>$row['telp'],
                     'alamat'=>$row['alamat'],
-                    'id_jabatan' => $row['id_jabatan']
-                    ]);
-}
-  }
+                    'id_jabatan' => $row['id_jabatan'],
+                    'id_cabang'=>$row['id_cabang']
+                ];
+
+    	           
+               }
+        }
+        DB::table('karyawan')->insert($data);
 	}
 }

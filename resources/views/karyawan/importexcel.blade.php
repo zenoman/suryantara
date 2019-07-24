@@ -19,7 +19,6 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>Export Import excel</h2>
-							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
 				</div>
@@ -61,19 +60,24 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file <b>jabatan</b> dan <b>template karyawan</b> di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Jabatan</b> & <b>Download Template Excel</b>.</li>
-                                               <img src="{{url('img/import_export/202.JPG')}}"  width="100%" height="100%"><br><br>
+                                               <li>Download file <b>jabatan</b> dan <b>template karyawan</b> di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Jabatan</b>, <b>Download Data Cabang</b> & <b>Download Template Excel</b>.</li>
+                                               <img src="{{url('img/import_export/202.JPG')}}"  width="60%"><br><br>
                                                <li>
                                                    Buka file <b>"template karyawan.xlsx"</b> kemudian isi data sesuai aturan di bawah ini
                                                </li>
                                                <li>
+                                                   isi <b>id_cabang</b> sesuai dengan <b>Kode Cabang</b> yang tertera di file <b>"Data Cabang.xlsx"</b>
+                                               </li>
+                                               <li>
                                                    isi <b>id_jabatan</b> sesuai dengan <b>id jabatan</b> di file <b>"jabatan.xlsx"</b>, jangan isikan id lain selain id yang tercantum pada file <b>"jabatan.xlsx"</b>. untuk lebih jelas lihat gambar di bawah ini
-                                               </li><br>
+                                               </li>
+												
+                                               <br>
                                                <img src="{{url('img/import_export/jabatan.JPG')}}">
                                                <br><br>
                                                <img src="{{url('img/import_export/karyawan.JPG')}}"><br><br>
                                                <li>
-                                                   Untuk kode <b>Harus</b> di isi dengan Karyawan-000001 jika data <b>belum ada</b> di web, jika sudah ada tinggal masukan kode sesuai urutan dari web.
+                                                   Untuk kode <b>Harus</b> di isi dengan format Karyawan-000001 jika data <b>belum ada</b> di web, jika sudah ada tinggal masukan kode sesuai urutan dari web.
                                                </li><br><br>
                                                <div class="alert alert-warning">
                                                 <b>NB</b> : Data tisak akan masuk apa bila ada kode yang sama.
@@ -93,7 +97,8 @@
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
                                     <a href="{{url('karyawan/downlod')}}" class="btn btn-info">Download jabatan</a>
-                                    <a href="{{url('karyawan/download')}}" class="btn btn-info">Download Template Excel</a>
+                                    <a href="{{url('exsportcabang')}}" class="btn btn-success">Download Data Cabang</a>
+                                    <a href="{{url('karyawan/download')}}" class="btn btn-primary">Download Template Excel</a>
                         </div>
                         <hr>
 <p></p>

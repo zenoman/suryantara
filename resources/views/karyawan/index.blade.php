@@ -75,7 +75,8 @@
 							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
-							<th>Aksi</th>
+							<th>Penempatan</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -86,7 +87,8 @@
 							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
-							<th>Aksi</th>
+							<th>Penempatan</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -100,15 +102,16 @@
                             <td>{{$row->jabatan}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
-                            <td>
+                            <td>{{$row->namacabang}}</td>
+                            <td class="text-center">
                               <form action="{{ url('/karyawan/delete')}}"  method="post">                            	
                             	<a href="{{ url('karyawan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                                        Edit</a>
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
+                                        Hapus</button>
                     					</form>
                             </td>
 						</tr>
