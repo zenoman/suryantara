@@ -49,7 +49,7 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -60,7 +60,7 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -74,13 +74,13 @@
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>{{$row->namacabang}}</td>
-                            <td>
+                            <td class="text-center">
 <form action="{{url('/vendor/delete') }}"  method="post">
-<a href="{{url('/vendor/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+<a href="{{url('/vendor/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
 
                                         {{csrf_field()}}
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i>Hapus</button>
+<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
                             </td>
 						</tr>
