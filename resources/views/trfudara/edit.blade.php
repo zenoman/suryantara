@@ -122,7 +122,7 @@
 							<div class="input-group-addon">
 									Rp.
 								</div>
-							<input type="text" class="form-control" id="inputPassword"  name="biaya_dokumen" onkeypress="return isNumberKey(event)" value="{{$row->biaya_dokumen}}">
+							<input type="text" class="form-control" id="inputPassword" name="biaya_dokumen" onkeypress="return isNumberKey(event)" value="{{$row->biaya_dokumen}}">
 							
 							</div>
 							@if($errors->has('biaya_dokumen'))
@@ -133,9 +133,19 @@
 						</div>
 					</div>
 					@endforeach
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Tarif Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row2)
+								<option value="{{$row2->id}}" @if($row->id_cabang==$row2->id)selected @endif>{{$row2->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

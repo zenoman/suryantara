@@ -17,18 +17,15 @@ class Trfudaracontroller extends Controller
     public function index()
     {
         //
-        $udara = Trfudaramodel::paginate(20);
+        $udara = DB::table('tarif_udara')
+        ->select(DB::raw('tarif_udara.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','tarif_udara.id_cabang')
+        ->orderby('cabang.id','desc')
+        ->paginate(20);
     $setting = DB::table('setting')->get();
         return view('trfudara/index',['trf_udara'=>$udara,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    //------------------------------------
-   public function importexcel (){
+    public function importexcel (){
         $setting = DB::table('setting')->get();
         return view('trfudara/importexcel',['title'=>$setting]);
     }
@@ -44,7 +41,7 @@ class Trfudaracontroller extends Controller
     }
 
 
-        public function prosesimportexcel(Request $request){
+    public function prosesimportexcel(Request $request){
         if($request->hasFile('file')){
         Excel::import(new TrfudaraImport, request()->file('file'));
         }
@@ -53,11 +50,9 @@ class Trfudaracontroller extends Controller
 
     public function exsportexcel(){
     return Excel::download(new TrfudaraExport, 'Export Tarif Udara.xlsx');
-    return redirect('trfudara/importexcel');
-
     }
-//-----------------------------------
-public function caridata(Request $request)
+    //-----------------------------------
+    public function caridata(Request $request)
     {
         $cari=$request->cari;
         $trf_udr = DB::table('tarif_udara')
@@ -70,17 +65,12 @@ public function caridata(Request $request)
     }
     public function create()
     {
-            $katebara = DB::table('kategori_barang')->get();
-            $setting = DB::table('setting')->get();
-        return view('trfudara/create',['title'=>$setting,'katbar'=>$katebara]);
+        $cabang = DB::table('cabang')->get();
+        $katebara = DB::table('kategori_barang')->get();
+        $setting = DB::table('setting')->get();
+        return view('trfudara/create',['cabang'=>$cabang,'title'=>$setting,'katbar'=>$katebara]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
@@ -108,21 +98,22 @@ if($dtlam > 0){
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
             'biaya_dokumen' => $request->biaya_dokumen,
-            'berat_minimal'=>$request->berat_min
+            'berat_minimal'=>$request->berat_min,
+            'id_cabang'=>$request->cabang
 ]);
 return redirect('trfudara')->with('status','tambah Data Sukses');
 }
     }
     public function edit($id)
     {
-        //
+        $cabang = DB::table('cabang')->get();
         $trfudara = DB::table('tarif_udara')->where('id',$id)->get();
         $trfudara = 
         DB::table('tarif_udara')
         ->where('id',$id)->get();
     $kate = DB::table('kategori_barang')->get();
     $setting = DB::table('setting')->get();
-        return view('trfudara/edit',['trfudara'=>$trfudara,'title'=>$setting,'katbar'=>$kate]); 
+        return view('trfudara/edit',['cabang'=>$cabang,'trfudara'=>$trfudara,'title'=>$setting,'katbar'=>$kate]); 
     }
     public function update(Request $request, $id)
     {
@@ -132,7 +123,7 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'airlans' => 'required',
             'biaya_perkg' => 'required',
             'minimal_heavy' => 'required',
-            'biaya_dokumen' => 'required',
+            'biaya_dokumen' => 'required'
                 ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -147,7 +138,8 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             'perkg' => $request->biaya_perkg,
             'minimal_heavy' => $request->minimal_heavy,
             'biaya_dokumen' => $request->biaya_dokumen,
-            'berat_minimal'=>$request->berat_min
+            'berat_minimal'=>$request->berat_min,
+            'id_cabang'=>$request->cabang
             ]);
         
         return redirect('trfudara')->with('status','Edit Data Sukses');

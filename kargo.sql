@@ -460,7 +460,7 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_darat: ~2 rows (approximately)
 DELETE FROM `tarif_darat`;
@@ -481,9 +481,9 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.tarif_laut: ~51 rows (approximately)
+-- Dumping data for table kargo.tarif_laut: ~32 rows (approximately)
 DELETE FROM `tarif_laut`;
 /*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
 INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`) VALUES
@@ -532,28 +532,30 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `minimal_heavy` int(11) DEFAULT '0',
   `biaya_dokumen` int(11) DEFAULT '0',
   `berat_minimal` int(11) DEFAULT NULL,
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.tarif_udara: ~15 rows (approximately)
+-- Dumping data for table kargo.tarif_udara: ~16 rows (approximately)
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
-INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`, `berat_minimal`) VALUES
-	(6, 'udara0001', 'bandung betet', 'LION', 20000, 55, 5000, 15),
-	(7, 'udara0002', 'banten', 'LION', 20000, 55, 5000, 15),
-	(8, 'udara0003', 'bali', 'LION', 20000, 55, 5000, 11),
-	(9, 'udara0004', 'bandung betet', 'garuda', 20000, 55, 5000, 11),
-	(10, 'udara0005', 'bali', 'garuda', 30000, 55, 5000, 11),
-	(11, 'udara0006', 'lampung', 'citilink', 20000, 55, 5000, 12),
-	(12, 'udara0007', 'kalimantan', 'garuda', 20000, 55, 5000, 10),
-	(13, 'udara0008', 'lampung', 'Lion NR', 30000, 55, 5000, 15),
-	(14, 'udara0009', 'udara0009', 'LION', 20000, 55, 5000, 10),
-	(15, 'udara0010', 'udara0010', 'LION', 20000, 55, 5000, 12),
-	(17, 'udara011', 'papua', 'garuda', 500000, 50, 25000, 11),
-	(18, 'udara0012', 'lombok', 'LION', 40000, 50, 25000, 11),
-	(19, 'udara0013', 'cikarang', 'LION', 45000, 40, 25000, 11),
-	(20, 'udara0014', 'situbondo', 'garuda', 50000, 30, 25000, 11),
-	(21, 'udara0015', 'ngadiboyo', 'garuda', 30000, 50, 25000, 11);
+INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`, `berat_minimal`, `id_cabang`) VALUES
+	(6, 'udara0001', 'bandung betet', 'LION', 20000, 55, 5000, 15, 1),
+	(7, 'udara0002', 'banten', 'LION', 20000, 55, 5000, 15, 1),
+	(8, 'udara0003', 'bali', 'LION', 20000, 55, 5000, 11, 1),
+	(9, 'udara0004', 'bandung betet', 'garuda', 20000, 55, 5000, 11, 1),
+	(10, 'udara0005', 'bali', 'garuda', 30000, 55, 5000, 11, 1),
+	(11, 'udara0006', 'lampung', 'citilink', 20000, 55, 5000, 12, 1),
+	(12, 'udara0007', 'kalimantan', 'garuda', 20000, 55, 5000, 10, 1),
+	(13, 'udara0008', 'lampung', 'Lion NR', 30000, 55, 5000, 15, 1),
+	(14, 'udara0009', 'udara0009', 'LION', 20000, 55, 5000, 10, 1),
+	(15, 'udara0010', 'udara0010', 'LION', 20000, 55, 5000, 12, 1),
+	(17, 'udara011', 'papua', 'garuda', 500000, 50, 25000, 11, 1),
+	(18, 'udara0012', 'lombok', 'LION', 40000, 50, 25000, 11, 1),
+	(19, 'udara0013', 'cikarang', 'LION', 45000, 405, 25000, 11, 2),
+	(20, 'udara0014', 'situbondo', 'garuda', 50000, 30, 25000, 11, 1),
+	(21, 'udara0015', 'ngadiboyo', 'garuda', 30000, 50, 25000, 11, 1),
+	(22, 'eriweir', 'gurah', 'sdklfj', 30000, 50, 4000, 2, 2);
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tb_kategoriakutansi

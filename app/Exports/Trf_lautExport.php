@@ -12,7 +12,7 @@ class Trf_lautExport implements FromCollection, WithHeadings, ShouldAutoSize{
     */
     public function collection()
     {
-                return DB::table('tarif_laut')->select('kode','tujuan','tarif','berat_min','estimasi')->get();;
+                return DB::table('tarif_laut')->select('kode','tujuan','tarif','berat_min','estimasi','id_cabang')->get();;
     }
     public function headings(): array
     {
@@ -22,6 +22,7 @@ class Trf_lautExport implements FromCollection, WithHeadings, ShouldAutoSize{
             'Tarif Laut',
             'Berat Minimal',
             'estimasi',
+            'id cabang'
         ];
     }
 }
