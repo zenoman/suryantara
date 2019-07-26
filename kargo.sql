@@ -481,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_laut: ~32 rows (approximately)
 DELETE FROM `tarif_laut`;
@@ -534,9 +534,9 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `berat_minimal` int(11) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.tarif_udara: ~16 rows (approximately)
+-- Dumping data for table kargo.tarif_udara: ~25 rows (approximately)
 DELETE FROM `tarif_udara`;
 /*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
 INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`, `berat_minimal`, `id_cabang`) VALUES
@@ -555,7 +555,16 @@ INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_
 	(19, 'udara0013', 'cikarang', 'LION', 45000, 405, 25000, 11, 2),
 	(20, 'udara0014', 'situbondo', 'garuda', 50000, 30, 25000, 11, 1),
 	(21, 'udara0015', 'ngadiboyo', 'garuda', 30000, 50, 25000, 11, 1),
-	(22, 'eriweir', 'gurah', 'sdklfj', 30000, 50, 4000, 2, 2);
+	(22, 'eriweir', 'gurah', 'sdklfj', 30000, 50, 4000, 2, 2),
+	(23, 'newu001', 'magersari', 'lion', 4000, 20, 20000, 5, 1),
+	(24, 'newu002', 'gurah', 'garuda', 5000, 10, 30000, 5, 2),
+	(25, 'newu003', 'kab.kediri', 'citylink', 7000, 10, 25000, 5, 2),
+	(26, 'newu001', 'magersari', 'lion', 4000, 20, 20000, 5, 1),
+	(27, 'newu002', 'gurah', 'garuda', 5000, 10, 30000, 5, 2),
+	(28, 'newu003', 'kab.kediri', 'citylink', 7000, 10, 25000, 5, 2),
+	(29, 'newu001', 'magersari', 'lion', 4000, 20, 20000, 5, 1),
+	(30, 'newu002', 'gurah', 'garuda', 5000, 10, 30000, 5, 2),
+	(31, 'newu003', 'kab.kediri', 'citylink', 7000, 10, 25000, 5, 2);
 /*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tb_kategoriakutansi
