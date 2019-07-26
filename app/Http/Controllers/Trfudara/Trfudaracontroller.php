@@ -6,30 +6,30 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use App\models\Trfudaramodel;
-
 use App\Imports\TrfudaraImport;
 use App\Exports\TrfudaraExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
+
 class Trfudaracontroller extends Controller
 {
     public function index()
     {
-        //
         $udara = DB::table('tarif_udara')
         ->select(DB::raw('tarif_udara.*,cabang.nama as namacabang'))
         ->leftjoin('cabang','cabang.id','=','tarif_udara.id_cabang')
-        ->orderby('cabang.id','desc')
+        ->orderby('tarif_udara.id','desc')
         ->paginate(20);
-    $setting = DB::table('setting')->get();
+        $setting = DB::table('setting')->get();
         return view('trfudara/index',['trf_udara'=>$udara,'title'=>$setting]);
     }
+    //=======================================================================
     public function importexcel (){
         $setting = DB::table('setting')->get();
         return view('trfudara/importexcel',['title'=>$setting]);
     }
-
+    //=======================================================================
     public function downloadtemplate(){
          // $file= base_path()."/../public_html/file/template tarif Udara.xlsx";
         $file="file/template tarif Udara.xlsx";
@@ -37,9 +37,8 @@ class Trfudaracontroller extends Controller
               'Content-Type: application/excel',
             );
     return Response::download($file, 'template tarif Udara.xlsx', $headers);
-    return redirect('trfudara/importexcel');
     }
-
+    //=======================================================================
 
     public function prosesimportexcel(Request $request){
         if($request->hasFile('file')){
@@ -47,22 +46,26 @@ class Trfudaracontroller extends Controller
         }
         return redirect('trfudara')->with('status','Import excel sukses');
     }
-
+    //=======================================================================
     public function exsportexcel(){
     return Excel::download(new TrfudaraExport, 'Export Tarif Udara.xlsx');
     }
-    //-----------------------------------
+    //=======================================================================
     public function caridata(Request $request)
     {
         $cari=$request->cari;
         $trf_udr = DB::table('tarif_udara')
-        ->where('tujuan','like','%'.$cari.'%')
-        ->orwhere('kode','like','%'.$cari.'%')
-        ->orwhere('airlans','like','%'.$cari.'%')
+        ->select(DB::raw('tarif_udara.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','tarif_udara.id_cabang')
+        ->where('tarif_udara.tujuan','like','%'.$cari.'%')
+        ->orwhere('tarif_udara.kode','like','%'.$cari.'%')
+        ->orwhere('tarif_udara.airlans','like','%'.$cari.'%')
+        ->orderby('tarif_udara.id','desc')
         ->get();
         $setting = DB::table('setting')->get();
         return view('trfudara/pencarian', ['trf_udr'=>$trf_udr, 'cari'=>$cari,'title'=>$setting]);
     }
+    //=======================================================================
     public function create()
     {
         $cabang = DB::table('cabang')->get();
@@ -70,10 +73,9 @@ class Trfudaracontroller extends Controller
         $setting = DB::table('setting')->get();
         return view('trfudara/create',['cabang'=>$cabang,'title'=>$setting,'katbar'=>$katebara]);
     }
-
+    //=======================================================================
     public function store(Request $request)
     {
-        //
         $rules = [
             'kode' => 'required',
             'tujuan' => 'required',
@@ -104,6 +106,7 @@ if($dtlam > 0){
 return redirect('trfudara')->with('status','tambah Data Sukses');
 }
     }
+    //=======================================================================
     public function edit($id)
     {
         $cabang = DB::table('cabang')->get();
@@ -115,6 +118,7 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
     $setting = DB::table('setting')->get();
         return view('trfudara/edit',['cabang'=>$cabang,'trfudara'=>$trfudara,'title'=>$setting,'katbar'=>$kate]); 
     }
+    //=======================================================================
     public function update(Request $request, $id)
     {
         $rules = [
@@ -144,13 +148,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
         
         return redirect('trfudara')->with('status','Edit Data Sukses');
     }
+    //=======================================================================
     public function destroy(Request $request)
     {
         $id = $request->aid;
         Trfudaramodel::destroy($id);
         return back()->with('status','Hapus Data Sukses');
-        //
     }
+    //=======================================================================
     public function haphapus(Request $request)
     {
             if(!$request->pilihid){
@@ -160,13 +165,14 @@ return redirect('trfudara')->with('status','tambah Data Sukses');
             Trfudaramodel::destroy($id);
             }
         }
-return back()->with('status','Hapus Data Sukses');
-}
-public function hapusall()
-    {
-        $udara='tarif_udara';
-        Trfudaramodel::truncate();
-        return back()->with('status','Hapus Data Sukses');
-        //
+    return back()->with('status','Hapus Data Sukses');
     }
+    //=======================================================================
+    public function hapusall()
+        {
+            $udara='tarif_udara';
+            Trfudaramodel::truncate();
+            return back()->with('status','Hapus Data Sukses');
+        }
+    //=======================================================================
 }

@@ -74,12 +74,11 @@
 	                
 	                        <div class="dropdown dropdown-notification messages">
 	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
-	                            <a href="{{url('backup')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-haspopup="true" aria-expanded="false">
+	                            <a href="{{url('backup')}}" class="btn btn-rounded">
 	                                <i class="glyphicon glyphicon-cloud-download"></i>
-	                            </button></a>
-	                            <a href="{{url('setting')}}"><button class="btn btn-rounded" id="dd-header-add" type="button" aria-expanded="false">
-	                                <i class="font-icon font-icon-cogwheel"></i>
-	                            </button></a>
+	                            </a>
+	                            <a href="{{url('setting')}}" class="btn btn-rounded">
+	                                <i class="font-icon font-icon-cogwheel"></i></a>
 	                            @endif
 	                        </div>
 	
@@ -100,7 +99,7 @@
 	                </div><!--.site-header-shown-->
 	
 	                <div class="mobile-menu-right-overlay"></div>
-	                <div class="site-header-collapsed" style="width: 1000px;">
+	                <div class="site-header-collapsed">
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
@@ -142,9 +141,16 @@
 				<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
+				<div class="dropdown-divider"></div>
+				 <span class="nav-link dropdown-toggle" data-toggle="dropdown">Inventaris</span>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('/armada')}}">Armada</a>
+				
+			</div><p></p>
 				@if(Session::get('level') == 'programer')
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
+
 				@endif
 			</div>
 		</li>
@@ -213,14 +219,6 @@
 			</div><p></p>
 	                                <!-- <a class="dropdown-item" href="{{url('/omset')}}">omset</a> -->
 			
-			</div>
-		</li>
-		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventaris</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('armada')}}">Armada</a>
 			</div>
 		</li>
 		@endif

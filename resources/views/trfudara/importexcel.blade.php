@@ -61,22 +61,22 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template excel di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini lalu klik pada bagian <b>Download Template Excel</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%">
+                                               <li>Download file template excel di tab <b>import Excel.</b> Seperti gambar dibawah ini lalu klik tombol <b>Download Template Excel</b> & <b>Download Data Cabang</b>.</li><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="60%">
                                                <p>
                                                <li>
-                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif_perkg, minimal_heavy, tarif_dokumen dan berat_minimal</b> hanyan diisi dengan angka saja.
+                                                   Buka file <b>"template tarif Udara.xlsx"</b> kemudian isi data seperti gambar dibawah perhatikan pada bagian <b>tarif_perkg, minimal_heavy, tarif_dokumen dan berat_minimal</b> hanyan diisi dengan angka saja. untuk <b>id_cabang</b> isi berdasarkan kode cabang yang berada di file data cabang.
                                                </li><br>
-                                               <img src="{{url('img/import_export/udara.JPG')}}" width="99%">
+                                               <img src="{{url('img/import_export/udara.JPG')}}" width="70%">
                                                <p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
                                                </div>
                                                <br>
                                                <li>Kemudian save <b>template tarif Udara.xlsx</b> dan upload di tab sebelah bagian <b>import Excel.</b> Seperti gambar dibawah ini, Lalu klik <b>upload file</b>.</li><br>
-                                               <img src="{{url('img/import_export/001.JPG')}}"  width="100%" height="100%"><br><br>
+                                               <img src="{{url('img/import_export/001.JPG')}}"  width="60%"><br><br>
                                                <li>Untuk export tarif udara sangat sederhana.Lihat gambar dibawah ini.</li><br>
-                                               <img src="{{url('img/import_export/004.JPG')}}"  width="100%" height="100%">
+                                               <img src="{{url('img/import_export/004.JPG')}}"  width="60%">
                                                <br><p></p>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Untuk mengurangi kesalahan saat import excel, pastikan data di excel tidak lebih dari 40 baris. 
@@ -86,6 +86,7 @@
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
+							<a href="{{url('exsportcabang')}}" class="btn btn-primary">Download Data Cabang</a>
                                             <a href="{{url('trfudara/download')}}" class="btn btn-info">Download Template Excel</a>
                         </div>
                         <hr>

@@ -56,6 +56,7 @@
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
 							<th>Berat Minimal</th>
+							<th>Tarif Cabang</th>
 							<th>Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
@@ -70,6 +71,7 @@
 							<th>Biaya documen</th>
 							<th>Min Heavy cargo</th>
 							<th>Berat Minimal</th>
+							<th>Tarif Cabang</th>
 							<th>Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
@@ -87,14 +89,9 @@
                             <td>{{"Rp ". number_format($row->biaya_dokumen,0,',','.')}}</td>
                             <td>{{$row->minimal_heavy. "kg"}}</td>
                             <td>{{$row->berat_minimal. "kg"}}</td>
-                            <td>
-<form action="{{url('/trfudara/delete') }}"  method="post">
-<a href="{{url('/trfudara/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm"><i class="fa fa-pencil"></i></a>
-
-                                        {{csrf_field()}}
-                                        	<input type="hidden" name="aid" value="{{$row->id}}">
-<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>
-                    			</form>
+                            <td>{{$row->namacabang}}</td>
+                            <td class="text-center">
+								<a href="{{url('/trfudara/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
 						</tr>
@@ -122,7 +119,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 		function toggle(source) {

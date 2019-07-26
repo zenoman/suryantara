@@ -33,7 +33,7 @@
                 </div>
                     @endif
                   @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-                 @if($jumlahtotalresi > 500)
+                 @if($jumlahtotalresi > 1000)
                   <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,6 +42,12 @@
                 </div>
                  @endif
                  @endif
+                 <div class="col-xl-12 dahsboard-column">
+                    <div class="alert alert-warning alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Dear Client, Saat ini sistem cabang sedang dikembangkan, harap tidak menginputkan barang dengan cabang klc surabaya terlebih dahulu :D
+                    </div>
+                </div>
               	@if($jumlahpajakarmada > 0)
               	<div class="col-xl-12 dahsboard-column">
               		<section class="box-typical box-typical-dashboard panel panel-default scrollable">
