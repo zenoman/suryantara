@@ -60,7 +60,17 @@
 						</fieldset>
 					</div>
 				</div>
-
+				<div class="form-group row">
+						
+						<div class="col-sm-12">
+							<label class="form-control-label  semibold">Tarif Cabang</label>
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}" @if($katbar->id_cabang==$row->id)selected @endif>{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">

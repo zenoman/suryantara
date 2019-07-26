@@ -38,7 +38,7 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			window.location.href='{{url("lockscreen")}}';
+			//window.location.href='{{url("lockscreen")}}';
 			}
 
 		function resetTimer(){

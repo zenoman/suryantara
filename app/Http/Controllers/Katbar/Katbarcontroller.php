@@ -13,61 +13,41 @@ class katbarcontroller extends Controller
 {
     public function index()
     {
-        // $katbars = katbarmodel::paginate(20);
         $setting = DB::table('setting')->get();
-        $datkatbar = DB::table('kategori_barang')->paginate(20);
-        // dd($datkatbar);
+        $datkatbar = DB::table('kategori_barang')
+        ->select(DB::raw('kategori_barang.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','kategori_barang.id_cabang')
+        ->orderby('kategori_barang.id','desc')
+        ->get();
         return view('katbar/index',['katbar'=>$datkatbar,'title'=>$setting]);
     }
     
-    public function create()
-    {
+    public function create(){
+        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('katbar/create',['title'=>$setting]);
+        return view('katbar/create',['cabang'=>$cabang,'title'=>$setting]);
     }
 
     public function store(Request $request)
     {
         Katbarmodel::create([
             'spesial_cargo' => $request->spesial_cargo,
-            'charge'  => $request->charge
+            'charge'  => $request->charge,
+            'id_cabang'=>$request->cabang
 
         ]);
         return redirect('kat_bar')->with('status','Input Data Sukses');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //========================================================
     public function edit($id)
     {
         $jab = Katbarmodel::find($id);
+        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('katbar/edit',['katbar'=>$jab,'title'=>$setting]);
+        return view('katbar/edit',['cabang'=>$cabang,'katbar'=>$jab,'title'=>$setting]);
 
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //=======================================================
     public function update(Request $request, $id)
     {
         $rules = [
@@ -82,7 +62,8 @@ class katbarcontroller extends Controller
         $this->validate($request,$rules,$customMessages);
         Katbarmodel::find($id)->update([
             'spesial_cargo'  => $request->spesial_cargo,
-            'charge'  => $request->charge
+            'charge'  => $request->charge,
+            'id_cabang'=>$request->cabang
             ]);
         return redirect('/kat_bar')->with('status','Edit Data Sukses');
  
