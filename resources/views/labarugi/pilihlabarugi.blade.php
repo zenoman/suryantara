@@ -6,7 +6,7 @@
 <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
-
+ 
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/jquery-steps.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
@@ -33,8 +33,14 @@
 							<li class="nav-item">
 								<a class="nav-link active" href="#tabs-1-tab-1" role="tab" data-toggle="tab">
 									<span class="nav-link-in">
-										<!-- <i class="font-icon font-icon-notebook-bird"></i> -->
-										Laporan Harian
+										Laba Rugi
+									</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#tabs-1-tab-2" role="tab" data-toggle="tab">
+									<span class="nav-link-in">
+										Labarugi Tahunan
 									</span>
 								</a>
 							</li>
@@ -105,6 +111,40 @@
 							</small>
 				</form>
 					</div><!--.tab-pane-->
+				<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
+						<br>
+				<form action="{{url('tampillabarugithn') }}" role="form" method="GET">
+
+					<input type="hidden" name="thn" value="tahun">
+
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Tahun</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<select class="select2" name="tahun">
+									<option>Pilih</option>
+								@foreach($thn as $row)
+								<option value="{{$row->tahun}}">
+									{{$row->tahun}}
+								</option>
+								@endforeach
+							</select>
+							</p>
+							 @if($errors->has('tahun'))
+                                       <div class="alert alert-danger">
+                                        {{ $errors->first('tahun')}}
+                                         </div>
+                                       @endif
+						</div>
+					</div>
+						{{csrf_field()}}
+							<small class="text-muted text-right">
+								
+								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Laba rugi ?')" value="Lanjut">
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+							</small>
+				</form>
+                                    </div><!--.tab-pane-->
 
 				</div><!--.tab-content-->
 			</section><!--.tabs-section-->

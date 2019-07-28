@@ -76,6 +76,8 @@ Route::get('/omset/export','omset\omsetController@export');
 //================================================neraca
 Route::get('/neraca','neraca\NeracaController@index'); 
 Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
+Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
+Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
 //================================================resi pengiriman
 Route::get('/listpengirimanbatalcity','resipengiriman\resipengirimanController@listpengirimanbatalcity');
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
@@ -329,6 +331,11 @@ Route::get('/printlapoakundet/{kate}/{tgl}/{tgl0}','Laporakun\LaporakunDetContro
 //===========================================================Laba Rugi
 Route::get('/labarugi','Labarugi\LabarugiController@pilihlapkun');
 Route::get('/tampillabarugi','Labarugi\LabarugiController@tampilakunlapor');
+Route::get('/labarugi','Labarugi\LabarugiController@pilihllaba');
+Route::get('/tampillabarugi','Labarugi\LabarugiController@tampillaba');
+Route::get('/tampillabarugithn','Labarugi\LabarugiController@tampillabathn');
+
+Route::get('/printlabarugi/{tgl}','Labarugi\LabarugiController@cetaklaba');
 //===============================================================penyusutan
 Route::get('/nyusut','Penyusutan\Penyusutancontroller@index');
 Route::get('/nyusut/create','Penyusutan\Penyusutancontroller@create');

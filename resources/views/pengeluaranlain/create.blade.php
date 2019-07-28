@@ -117,7 +117,7 @@
 						</label>
 						<div class="col-sm-10">
 							<div class="input-group">
-								<input type="file" name="gambar" required accept="image/*" id="photo">
+								<input type="file" name="gambar"  accept="image/*" id="photo">
 								
 							</div>
 						</div>
