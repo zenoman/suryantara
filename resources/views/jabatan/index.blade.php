@@ -45,7 +45,8 @@
 							<th>Jabatan</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
-							<th>Aksi</th>
+							<th>Jabatan Cabang</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -54,7 +55,8 @@
 							<th>Jabatan</th>
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
-							<th>Aksi</th>
+							<th>Jabatan Cabang</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -63,21 +65,28 @@
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->jabatan}}</td>
+                            <td>
+                            	@if($row->status=='1')
+	                            	<span class="label label-primary">
+	                            		{{$row->jabatan}}	
+	                            	</span>
+                            	@else
+                            	{{$row->jabatan}}	
+                            	@endif
+                            </td>
                             <td>{{"Rp ". number_format($row->gaji_pokok,0,',','.')}}</td>
                             <td>{{"Rp ". number_format($row->uang_makan,0,',','.')}}</td>
-                            <td>
+                            <td>{{$row->namacabang}}</td>
+                            <td class="text-center">
                               <form action="{{ url('/jabatan/delete')}}"  method="post">                            	
-                            	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                            	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">Edit</a>
                                         	{{csrf_field()}}
                                         	@if($row->id == '1')
                                         	@else
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                                         @endif
-                    					</form>
+                    		</form>
                             </td>
 						</tr>
 						@endforeach

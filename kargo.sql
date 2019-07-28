@@ -132,17 +132,20 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   `jabatan` varchar(40) NOT NULL,
   `gaji_pokok` varchar(20) NOT NULL,
   `uang_makan` varchar(20) NOT NULL,
+  `status` enum('1','0') DEFAULT '0',
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.jabatan: ~4 rows (approximately)
 DELETE FROM `jabatan`;
 /*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
-INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`) VALUES
-	(1, 'Base Managger', '400000', '30000'),
-	(24, 'Staff', '400000', '30000'),
-	(25, 'Staff Keuangan Pusat', '500000', '30000'),
-	(26, 'Staff Keuangan Cabang', '400000', '30000');
+INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`, `status`, `id_cabang`) VALUES
+	(1, 'Base Managger', '400000', '30000', '0', 1),
+	(24, 'anak psg', '400000', '30000', '1', 2),
+	(25, 'Staff Keuangan Pusat', '500000', '30000', '0', 1),
+	(26, 'Staff Keuangan Cabang', '400000', '30000', '0', 1),
+	(27, 'halo', '200000', '3000', '1', 2);
 /*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.karyawan
@@ -173,16 +176,18 @@ CREATE TABLE IF NOT EXISTS `kategori_barang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `spesial_cargo` varchar(40) NOT NULL,
   `charge` varchar(5) NOT NULL,
+  `id_cabang` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.kategori_barang: ~3 rows (approximately)
 DELETE FROM `kategori_barang`;
 /*!40000 ALTER TABLE `kategori_barang` DISABLE KEYS */;
-INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`) VALUES
-	(1, 'Hewan Hidup', '100'),
-	(2, 'Tanaman Hidup', '50'),
-	(3, 'Meat / Frozen Food', '50');
+INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`, `id_cabang`) VALUES
+	(1, 'Hewan Hidup', '100', 1),
+	(2, 'Tanaman Hidup', '50', 1),
+	(3, 'Meat / Frozen Food', '50', 1),
+	(4, 'burger king121', '19', 1);
 /*!40000 ALTER TABLE `kategori_barang` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.omset

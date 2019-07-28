@@ -11,32 +11,24 @@ use Illuminate\Support\Facades\Session;
 
 class Jabatancontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // $Jabatans = Jabatanmodel::paginate(20);
+        
         $setting = DB::table('setting')->get();
-        $datJabatan = DB::table('jabatan')->orderby('id','ASC')->paginate(20);
-        // dd($datJabatan);
+        $datJabatan = DB::table('jabatan')
+        ->select(DB::raw('jabatan.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','jabatan.id_cabang')
+        ->orderby('jabatan.id','desc')->paginate(20);
         return view('jabatan/index',['jabatan'=>$datJabatan,'title'=>$setting]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    //==================================================================
     public function create()
     {
+        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('jabatan/create',['title'=>$setting]);
+        return view('jabatan/create',['cabang'=>$cabang,'title'=>$setting]);
     }
-
+    //==================================================================
     public function store(Request $request)
     {
         $rules = [
@@ -54,46 +46,24 @@ class Jabatancontroller extends Controller
         Jabatanmodel::create([
             'jabatan'  => $request->jabatan,
             'gaji_pokok'  => $request->gaji_pokok,
-            'uang_makan'  => $request->uang_makan
+            'uang_makan'  => $request->uang_makan,
+            'id_cabang' => $request->cabang,
+            'status' => $request->bm
 
         ]);
         return redirect('jabatan')->with('status','Input Data Sukses');
         }
-        
+    //==================================================================
     
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        $cabang = DB::table('cabang')->get();
         $jab = Jabatanmodel::find($id);
         $setting = DB::table('setting')->get();
-        return view('jabatan/edit',['jabat'=>$jab,'title'=>$setting]);
+        return view('jabatan/edit',['cabang'=>$cabang,'jabat'=>$jab,'title'=>$setting]);
 
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //==================================================================
     public function update(Request $request, $id)
     {
         $rules = [
@@ -110,7 +80,9 @@ class Jabatancontroller extends Controller
         Jabatanmodel::find($id)->update([
             'jabatan'  => $request->jabatan,
             'gaji_pokok'  => $request->gaji_pokok,
-            'uang_makan'  => $request->uang_makan
+            'uang_makan'  => $request->uang_makan,
+            'id_cabang' => $request->cabang,
+            'status' => $request->bm
             ]);
         $pros=$request->gaji_pokok + $request->uang_makan;
         DB::table('gaji_karyawan')
@@ -123,11 +95,11 @@ class Jabatancontroller extends Controller
         return redirect('/jabatan')->with('status','Edit Data Sukses');
  
     }
+    //==================================================================
     public function destroy(Request $request)
     {
         $id = $request->aid;
          Jabatanmodel::destroy($id);
-        // return redirect('Jabatan')->with('status','Hapus Data Sukses');
         return back()->with('status','Hapus Data Sukses');
     }
 }

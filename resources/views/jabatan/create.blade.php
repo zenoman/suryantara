@@ -34,13 +34,13 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Nama Jabatan</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">
+							<div class="input-group">
 								<input 
 								type="text" 
 								class="form-control" 
 								placeholder="Masukan Nama Jabatan" name="jabatan"
 								required 
-								></p>
+								></div>
 							 @if($errors->has('jabatan'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('jabatan')}}
@@ -93,8 +93,28 @@
 						</div>
 					</div>
 
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}">{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Branch Manager</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="bm" class="form-control">
+								<option value="0">Tidak</option>
+								<option value="1">Ya</option>
+							</select>
+							<p class="text-muted">Jika dipilih 'Ya' maka jabatan ini akan mendapat tambahan gaji 1% dari omset cabang seperti Branch Manager</p>
+						</div>
+					</div>
 {{csrf_field()}}
-							<small class="text-muted">
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

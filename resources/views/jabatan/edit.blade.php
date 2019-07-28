@@ -76,7 +76,26 @@
                                        @endif
 						</div>
 					</div>
-
+						<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Jabatan Cabang</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="cabang" class="form-control">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}" @if($jabat->id_cabang==$row->id) selected @endif>{{$row->nama}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Branch Manager</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="bm" class="form-control">
+								<option value="0" @if($jabat->status=='0') selected @endif>Tidak</option>
+								<option value="1" @if($jabat->status=='1') selected @endif>Ya</option>
+							</select>
+							<p class="text-muted">Jika dipilih 'Ya' maka jabatan ini akan mendapat tambahan gaji 1% dari omset cabang seperti Branch Manager</p>
+						</div>
+					</div>
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
 							<small class="text-muted">
