@@ -508,7 +508,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -536,7 +537,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
             
@@ -569,7 +571,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
 
             }else{
@@ -598,7 +601,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }

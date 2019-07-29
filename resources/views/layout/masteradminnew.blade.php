@@ -87,6 +87,8 @@
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
+	                        	 <span class="dropdown-item text-center text-muted">{{Session::get('username')}}</span>
+	                        	<div class="dropdown-divider"></div>
 	                            <a class="dropdown-item" href="{{url('admin/'.Session::get('id').'/edit')}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
 
 	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>

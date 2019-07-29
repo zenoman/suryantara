@@ -44,6 +44,7 @@
 							<th>No</th>
 							<th>Nama</th>
 							<th>Alamat</th>
+							<th>Kota</th>
 							<th>Aksi</th>
 						</tr>
 						</thead>
@@ -52,6 +53,7 @@
 							<th>No</th>
 							<th>Nama</th>
 							<th>Alamat</th>
+							<th>Kota</th>
 							<th>Aksi</th>
 						</tr>
 						</tfoot>
@@ -63,15 +65,14 @@
                             <td>{{$no}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->alamat}}</td>
+                            <td>{{$row->kota}}</td>
                             <td>
                               <form action="{{ url('/cabang/'.$row->id)}}"  method="post">                            	
-                            	<a href="{{ url('cabang/'.$row->id.'') }}" class="btn btn-rimary btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit Data</a>
+                            	<a href="{{ url('cabang/'.$row->id.'') }}" class="btn btn-rimary btn-sm">Edit</a>
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="_method" value="delete">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-remove"></i>Hapus</button>
+                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
                             </td>
 						</tr>
