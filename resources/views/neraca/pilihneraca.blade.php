@@ -55,7 +55,7 @@
 						<label class="col-sm-2 form-control-label semibold">Bulan</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="bulan">
+								<select class="select2" name="tgl">
 									<option>Pilih</option>
 								@foreach($bulan as $row)
 								<option value="{{$row->bulan."-".$row->tahun}}">
@@ -81,13 +81,12 @@
 					</div><!--.tab-pane-->
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<br>
-				<form action="{{url('tampilneraca') }}" role="form" method="GET">
-					<input type="hidden" name="buta" value="tahun">
+				<form action="{{url('tampilneracathn') }}" role="form" method="GET">
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Tahun</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="tahun">
+								<select class="select2" name="tgl">
 									<option>Pilih</option>
 								@foreach($bulan as $row)
 								<option value="{{$row->tahun}}">

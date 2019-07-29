@@ -43,7 +43,7 @@
 						<?php $i = 1;?>
 						<?php $j = 0;?>
                             @foreach($data as $row)
-                            <?php $no = $i++;?>
+                            <?php $no = $i++;?> 
                             <?php $n = $j++;?>
                             @foreach($tot[$n] as $ros)
                         <tr>
