@@ -90,8 +90,6 @@
 			</section>
 			@endforeach
 
-
-			
 		</div>
 	</div>
 	

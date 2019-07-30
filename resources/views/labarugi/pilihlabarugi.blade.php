@@ -95,6 +95,21 @@
 									{{$row->nama}}
 								</option>
 								@endforeach
+								@foreach($katers as $row)
+								<option value="{{$row->kode}}">
+									{{$row->nama}}
+								</option>
+								@endforeach
+								@foreach($katesj as $row)
+								<option value="{{$row->kode}}">
+									{{$row->nama}}
+								</option>
+								@endforeach
+								@foreach($katepj as $row)
+								<option value="{{$row->kode}}">
+									{{$row->nama}}
+								</option>
+								@endforeach
 							</select>
 							</p>
 							 @if($errors->has('kategori'))
