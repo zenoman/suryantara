@@ -16,6 +16,7 @@ class Logincontroller extends Controller
         $setting = DB::table('setting')->get();
         return view('login/index',['title'=>$setting]);
     }
+    //====================================================================
     public function masuk(Request $request){
        
         $rules = [
@@ -32,14 +33,22 @@ class Logincontroller extends Controller
         $username = $request->username;
         $password =md5($request->password);
 
-        $dataadmin = DB::table('admin')->where([['username',$username],['password',$password]])->get();
+        $dataadmin = 
+        DB::table('admin')
+        ->select(DB::raw('admin.*,cabang.kop,cabang.kota,cabang.koderesi'))
+        ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
+        ->where([['admin.username',$username],['admin.password',$password]])
+        ->get();
         foreach ($dataadmin as $dataadmin) {
             $id = $dataadmin->id;
             $level=$dataadmin->level;
+            $cabang=$dataadmin->id_cabang;
+            $kop=$dataadmin->kop;
+            $kota=$dataadmin->kota;
+            $koderesi=$dataadmin->koderesi;
         }
 
         $data = DB::table('admin')->where([['username',$username],['password',$password]])->count();
-        // dd($password);
         if($data>0){
                 Session::put('username',$request->username);
                 Session::put('id',$id);
@@ -47,29 +56,37 @@ class Logincontroller extends Controller
                 Session::put('login',TRUE);
                 Session::put('password',$password);
                 Session::put('statuslogin','aktiv');
+                Session::put('cabang',$cabang);
+                Session::put('kop',$kop);
+                Session::put('kota',$kota);
+                Session::put('koderesi',$koderesi);
                 return redirect('dashboard');
         }else{
             return back()->with('status','Maaf, Username atau Password Salah');
         }
     }
+    //====================================================================
     public function refreshCaptcha()
     {
         return response()->json(['captcha'=> captcha_img()]);
     }
+    //====================================================================
     public function logout(){
         Session::flush();
         return redirect('login');
     }
+    //====================================================================
     public function validatelogin(){
         Session::flush();
         return redirect('login')->with('status','Maaf, Anda Harus Login');
     }
+    //====================================================================
     public function lockscreen(){
         Session::put('statuslogin','kunci');
         $setweb = DB::table('setting')->limit(1)->get();
         return view('login/ls',['title'=>$setweb]);
     }
-
+    //====================================================================
     public function bukakunci(Request $request){
         $password = md5($request->password);
         if($password==Session::get('password')){

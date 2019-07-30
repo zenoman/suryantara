@@ -48,6 +48,14 @@
 						</div>
 					</div>
 					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Kode Resi</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<input type="text" class="form-control" name="koderesi" value="{{$row->koderesi}}" required>
+								<p>
+						</div>
+					</div>
+					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Alamat</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
@@ -56,9 +64,25 @@
 								<p>	
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Kota</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<input type="text" class="form-control" value="{{$row->kota}}" name="kota" required>
+								<p>	
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Kop Surat</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<textarea name="kop" id="kop" class="form-control">{{$row->kop}}</textarea>
+								<p>	
+						</div>
+					</div>
 
-{{csrf_field()}}
-							<small class="text-muted">
+					{{csrf_field()}}
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

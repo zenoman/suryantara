@@ -245,11 +245,11 @@ class resipengirimanController extends Controller
         ->max('no_resi');
 
         if(!$kode){
-            $finalkode = "KDR".$tanggal."-".$kodeuser."-000001";
+            $finalkode = Session::get('koderesi').$tanggal."-".$kodeuser."-000001";
         }else{
             $newkode    = explode("-", $kode);
             $nomer      = sprintf("%06s",$newkode[2]+1);
-            $finalkode  = "KDR".$tanggal."-".$kodeuser."-".$nomer;
+            $finalkode  = Session::get('koderesi').$tanggal."-".$kodeuser."-".$nomer;
         }
         return response()->json($finalkode);
     }
@@ -257,7 +257,7 @@ class resipengirimanController extends Controller
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','!=','city kurier']])
+        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -290,7 +290,7 @@ class resipengirimanController extends Controller
             
             $data = DB::table('tarif_darat')
                     ->select('tujuan','id')
-                    ->where('tujuan','like','%'.$cari.'%')
+                    ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
                     ->get();
             
             return response()->json($data);
@@ -312,7 +312,7 @@ class resipengirimanController extends Controller
             
             $data = DB::table('tarif_laut')
                     ->select('tujuan','id')
-                    ->where('tujuan','like','%'.$cari.'%')
+                    ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
                     ->get();
             
             return response()->json($data);
@@ -508,7 +508,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -536,7 +537,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
             
@@ -569,7 +571,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
 
             }else{
@@ -598,7 +601,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }
@@ -638,7 +642,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -666,7 +671,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }else{
@@ -698,7 +704,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                  $simpan = DB::table('resi_pengiriman')
@@ -726,7 +733,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }

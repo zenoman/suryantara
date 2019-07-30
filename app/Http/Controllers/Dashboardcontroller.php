@@ -208,7 +208,21 @@ class Dashboardcontroller extends Controller {
         }
     }
 //======================================================
-   
+    // function cari_pemasukan($bulan,$tahun,$status){
+    //     if($status=="ny"){
+    //         $tahun -=1;
+    //     }
+    //     $data = DB::table('resi_pengiriman')
+    //     ->select(DB::raw('SUM(total_biaya) as totalnya'))
+    //     ->whereMonth('tgl_lunas',$bulan)
+    //     ->whereYear('tgl_lunas',$tahun)
+    //     ->get();
+    //     foreach ($data as $row) {
+    //         $newdata = $row->totalnya;
+    //     }
+    //     return $newdata;
+    // }
+    
     function masukangaji($pemasukan,$bulan,$tahun,$status){
         if($status=="ny"){
             $tahun -=1;
