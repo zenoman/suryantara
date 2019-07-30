@@ -43,18 +43,20 @@
 						<tr>
 							<th>No</th>
 							<th>Nama</th>
+							<th>Kode Resi</th>
 							<th>Alamat</th>
 							<th>Kota</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
 						<tr>
 							<th>No</th>
 							<th>Nama</th>
+							<th>Kode Resi</th>
 							<th>Alamat</th>
 							<th>Kota</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -64,9 +66,10 @@
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->nama}}</td>
+                            <td>{{$row->koderesi}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>{{$row->kota}}</td>
-                            <td>
+                            <td class="text-center">
                               <form action="{{ url('/cabang/'.$row->id)}}"  method="post">                            	
                             	<a href="{{ url('cabang/'.$row->id.'') }}" class="btn btn-rimary btn-sm">Edit</a>
                                         	{{csrf_field()}}
