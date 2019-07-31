@@ -324,7 +324,7 @@ class resipengirimanController extends Controller
             $cari = $request->q;
             $data = DB::table('tarif_udara')
                     ->select('tujuan','id','airlans')
-                    ->where('tujuan','like','%'.$cari.'%')
+                    ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
                     ->get();
             return response()->json($data);
         } 
