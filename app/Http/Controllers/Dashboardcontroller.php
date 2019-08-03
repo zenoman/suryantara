@@ -227,49 +227,51 @@ class Dashboardcontroller extends Controller {
         if($status=="ny"){
             $tahun -=1;
         }
+        //==================================================================
         $datakaryawan =
         DB::table('karyawan')
         ->select(DB::raw('karyawan.*,jabatan.gaji_pokok,jabatan.uang_makan'))
         ->join('jabatan','jabatan.id','=','karyawan.id_jabatan')
         ->get();
-        foreach ($datakaryawan as $row) {
+        //==================================================================
+        foreach ($datakaryawan as $row){
             $uang_makan= DB::table('absensi')
-            ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
+            ->select(DB::raw('absensi.*,jabatan.jabatan,jabatan.status,karyawan.nama,karyawan.kode'))
             ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
             ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
             ->whereMonth('absensi.tanggal',$bulan-1)
             ->whereYear('absensi.tanggal',$tahun)
             ->where('absensi.id_karyawan','=',$row->id)
             ->sum('absensi.uang_makan');
-            if ($row->status==1) {
-                $gajitambahan = $pemasukan*1/100;
-                $totalgaji = $row->gaji_pokok + $uang_makan +$gajitambahan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$row->kode,
-                    'nama_karyawan'=>$row->nama,
-                    'id_jabatan'=>$row->id_jabatan,
-                    'gaji_pokok'=>$row->gaji_pokok,
-                    'uang_makan'=>$uang_makan,
-                    'gaji_tambahan'=>$gajitambahan,
-                    'total'=>$totalgaji,
-                    'bulan'=>$bulan-1,
-                    'tahun'=>$tahun
-                ]);    
-            }else{
-                $totalgaji = $row->gaji_pokok + $row->uang_makan;
-                DB::table('gaji_karyawan')
-                ->insert([
-                    'kode_karyawan'=>$row->kode,
-                    'nama_karyawan'=>$row->nama,
-                    'id_jabatan'=>$row->id_jabatan,
-                    'gaji_pokok'=>$row->gaji_pokok,
-                    'uang_makan'=>$uang_makan,
-                    'total'=>$totalgaji,
-                    'bulan'=>$bulan-1,
-                    'tahun'=>$tahun
-                ]);
-            }
+            // if($row->status==1){
+            //     $gajitambahan = $pemasukan*1/100;
+            //     $totalgaji = $row->gaji_pokok + $uang_makan +$gajitambahan;
+            //     DB::table('gaji_karyawan')
+            //     ->insert([
+            //         'kode_karyawan'=>$row->kode,
+            //         'nama_karyawan'=>$row->nama,
+            //         'id_jabatan'=>$row->id_jabatan,
+            //         'gaji_pokok'=>$row->gaji_pokok,
+            //         'uang_makan'=>$uang_makan,
+            //         'gaji_tambahan'=>$gajitambahan,
+            //         'total'=>$totalgaji,
+            //         'bulan'=>$bulan-1,
+            //         'tahun'=>$tahun
+            //     ]);    
+            // }else{
+            //     $totalgaji = $row->gaji_pokok + $row->uang_makan;
+            //     DB::table('gaji_karyawan')
+            //     ->insert([
+            //         'kode_karyawan'=>$row->kode,
+            //         'nama_karyawan'=>$row->nama,
+            //         'id_jabatan'=>$row->id_jabatan,
+            //         'gaji_pokok'=>$row->gaji_pokok,
+            //         'uang_makan'=>$uang_makan,
+            //         'total'=>$totalgaji,
+            //         'bulan'=>$bulan-1,
+            //         'tahun'=>$tahun
+            //     ]);
+            // }
         }
     }
     function hitung_pendapatan($bulan,$tahun){
