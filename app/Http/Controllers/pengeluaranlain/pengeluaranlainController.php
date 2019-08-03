@@ -41,7 +41,7 @@ class pengeluaranlainController extends Controller
             DB::table('pengeluaran_lain')
             ->insert([
                 'admin'=>$request->admin,
-                'kategori'=>$request->namkat,
+                'kategori'=>$request->namkat, 
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
