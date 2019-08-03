@@ -180,7 +180,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal" value="KEDIRI">
+								<input type="text" class="form-control" id="kota_asal" value="{{session::get('kota')}}" readonly>
 							</div>
 						</div>
 					</div>

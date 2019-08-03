@@ -10,10 +10,6 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
     public function collection(Collection $roww)
     {
         foreach ($roww as $row){
-            $kode=$row['kode_tujuan'];
-            $dtlam= DB::table('tarif_udara')->where('kode',$kode)->count();
-            if($dtlam == 0){
-                foreach ($roww as $row){
                     $data[] = [
                     'kode'=>$row['kode_tujuan'],
                     'tujuan'=>$row['tujuan'],
@@ -24,10 +20,6 @@ class TrfudaraImport implements ToCollection, WithHeadingRow{
                     'berat_minimal'=>$row['berat_minimal'],
                     'id_cabang'=>$row['id_cabang']
                     ];
-    	           
-    	       }
-
-            }
         }
         DB::table('tarif_udara')->insert($data);
     }
