@@ -112,7 +112,7 @@ class Dashboardcontroller extends Controller {
                 $lba0 = $this->hitung_laba0($bulan,date('Y'),'y');
                 $lb = $lba - $lba0;
                 $modal = $this->cari_modal($bulan,date('Y'),'y');
-                if ($modal =null) {
+                if ($modal == null) {
                     $mod =0;
                 }else{
                     $mod=$modal;
@@ -146,6 +146,8 @@ class Dashboardcontroller extends Controller {
             ]);
         }
     }
+
+//====================
     function gajipjk(){
         $setting = DB::table('setting')
         ->limit(1)
@@ -163,9 +165,17 @@ class Dashboardcontroller extends Controller {
                 $totalpajak = $this->cari_pajaktahunan(date('Y'));
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>$request->admin,
-                    'kategori'=>$request->kategori,
-                    'keterangan'=>$request->keterangan,
+                    'admin'=>Session::get('username'),
+                    'kategori'=>'15',
+                    'keterangan'=>'Pajak',
+                    'jumlah'=>$request->jumlah,
+                    'tgl'=>date('Y-m-d')
+                ]);
+                DB::table('pengeluaran_lain')
+                ->insert([
+                    'admin'=>Session::get('username'),
+                    'kategori'=>'14',
+                    'keterangan'=>'Gaji Karyawan',
                     'jumlah'=>$request->jumlah,
                     'tgl'=>date('Y-m-d')
                 ]);
@@ -188,14 +198,30 @@ class Dashboardcontroller extends Controller {
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"y");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
                 $pajak = $pemasukan * 0.5/100;
+                // DB::table('pengeluaran_lain')
+                // ->insert([
+                //     'admin'=>Session::get('username'),
+                //     'kategori'=>$request->kategori,
+                //     'keterangan'=>Pajak,
+                //     'jumlah'=>$request->jumlah,
+                //     'tgl'=>date('Y-m-d')
+                //     // 'tgl'=>$request->tgl
+                // ]);
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>$request->admin,
-                    'kategori'=>$request->kategori,
-                    'keterangan'=>$request->keterangan,
+                    'admin'=>Session::get('username'),
+                    'kategori'=>'15',
+                    'keterangan'=>'Pajak',
                     'jumlah'=>$request->jumlah,
                     'tgl'=>date('Y-m-d')
-                    // 'tgl'=>$request->tgl
+                ]);
+                DB::table('pengeluaran_lain')
+                ->insert([
+                    'admin'=>Session::get('username'),
+                    'kategori'=>'14',
+                    'keterangan'=>'Gaji Karyawan',
+                    'jumlah'=>$request->jumlah,
+                    'tgl'=>date('Y-m-d')
                 ]);
                DB::table('pajak')
                 ->insert([
@@ -229,7 +255,7 @@ class Dashboardcontroller extends Controller {
         }
         $datakaryawan =
         DB::table('karyawan')
-        ->select(DB::raw('karyawan.*,jabatan.gaji_pokok,jabatan.uang_makan'))
+        ->select(DB::raw('karyawan.*,jabatan.gaji_pokok,jabatan.uang_makan,jabatan.status'))
         ->join('jabatan','jabatan.id','=','karyawan.id_jabatan')
         ->get();
         foreach ($datakaryawan as $row) {
@@ -237,11 +263,11 @@ class Dashboardcontroller extends Controller {
             ->select(DB::raw('absensi.*,jabatan.jabatan,karyawan.nama,karyawan.kode'))
             ->leftjoin('jabatan','jabatan.id','=','absensi.id_jabatan')
             ->leftjoin('karyawan','karyawan.id','=','absensi.id_karyawan')
-            ->whereMonth('absensi.tanggal',$bulan-1)
+            ->whereMonth('absensi.tanggal',$bulan)
             ->whereYear('absensi.tanggal',$tahun)
             ->where('absensi.id_karyawan','=',$row->id)
             ->sum('absensi.uang_makan');
-            if ($row->status==1) {
+            if ($row->status == 1) {
                 $gajitambahan = $pemasukan*1/100;
                 $totalgaji = $row->gaji_pokok + $uang_makan +$gajitambahan;
                 DB::table('gaji_karyawan')
@@ -277,11 +303,11 @@ class Dashboardcontroller extends Controller {
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pendapatan')
             ->paginate(40);
-            // dd($data);
+            dd($data);
         foreach ($data as $row) {
             $newdata = $row->toto;
         }
@@ -292,7 +318,7 @@ class Dashboardcontroller extends Controller {
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->paginate(40);
@@ -320,7 +346,7 @@ class Dashboardcontroller extends Controller {
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as tot'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->paginate(40);
@@ -335,7 +361,7 @@ class Dashboardcontroller extends Controller {
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as jumlah'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
+            ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.nama','=','Modal')
             ->get();
@@ -412,6 +438,19 @@ class Dashboardcontroller extends Controller {
         return $newdata;
     }
 
+    function cari_gajikaryawan($bulan,$tahun,$status){
+        if($status=="ny"){
+            $tahun -=1;
+        }
+        $data = DB::table('gaji_karyawan')
+        ->select(DB::raw('SUM(total) as totalnya'))
+        ->where([['bulan','=',$bulan],['tahun','=',$tahun]])
+        ->get();
+         foreach ($data as $row) {
+            $newdata = $row->totalnya;
+        }
+        return $newdata;
+    }
 
 
 // function hitung_omset(){
@@ -625,18 +664,5 @@ class Dashboardcontroller extends Controller {
     //     }
     // }
 
-    // function cari_gajikaryawan($bulan,$tahun,$status){
-    //     if($status=="ny"){
-    //         $tahun -=1;
-    //     }
-    //     $data = DB::table('gaji_karyawan')
-    //     ->select(DB::raw('SUM(total) as totalnya'))
-    //     ->where([['bulan','=',$bulan],['tahun','=',$tahun]])
-    //     ->get();
-    //      foreach ($data as $row) {
-    //         $newdata = $row->totalnya;
-    //     }
-    //     return $newdata;
-    // }
 
 }
