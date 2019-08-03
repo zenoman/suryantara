@@ -269,7 +269,6 @@ class Dashboardcontroller extends Controller {
             ->whereYear('absensi.tanggal',$tahun)
             ->where('absensi.id_karyawan','=',$row->id)
             ->sum('absensi.uang_makan');
-
             if ($row->status == 1) {
                 $gajitambahan = $pemasukan*1/100;
                 $totalgaji = $row->gaji_pokok + $uang_makan +$gajitambahan;
