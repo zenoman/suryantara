@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
 @endsection
 
-
 @section('content')
 	<div class="page-content">
 		<div class="container-fluid">
@@ -22,7 +21,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan {{$kate}} tgl {{$tgl}} Sampai {{$tgl0}}</h2>
+							<h2>Laporan {{$kat}} tgl {{$tgl}} Sampai {{$tgl0}}</h2>
 						</div>
 					</div>
 				</div>
@@ -42,7 +41,56 @@
 						<tbody>
 						<?php $i = 1;?>
 						<?php $j = 0;?>
-                            @foreach($data as $row)
+						@if($kat == 14)
+						@foreach($data as $row)
+                            <?php $no = $i++;?>
+                            <?php $n = $j++;?>
+						@foreach($totsurat[$n] as $ros)
+                        <tr>
+                            <td>{{$no}}</td>
+                            <td>{{$row->admin}}</td>
+                            <td>{{$row->nama}}</td>
+                            <td>{{$row->tgl}}</td>
+							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
+                        </tr>
+						@endforeach
+						@endforeach
+<!-- ===================================================== -->
+
+						@elseif($kat == 15)
+								@foreach($data as $row)
+		                            <?php $no = $i++;?>
+		                            <?php $n = $j++;?>
+								@foreach($totpajak[$n] as $ros)
+		                        <tr>
+		                            <td>{{$no}}</td>
+		                            <td>{{$row->admin}}</td>
+		                            <td>{{$row->nama}}</td>
+		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
+									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
+		                        </tr>
+								@endforeach
+								@endforeach
+<!-- ===================================================== -->
+
+						@elseif($kat == 1)
+								@foreach($data as $row)
+		                            <?php $no = $i++;?>
+		                            <?php $n = $j++;?>
+								@foreach($totresi[$n] as $ros)
+		                        <tr>
+		                            <td>{{$no}}</td>
+		                            <td>{{$row->admin}}</td>
+		                            <td>{{$row->nama}}</td>
+		                            <td>{{$row->tgl_lunas}}</td>
+									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
+		                        </tr>
+								@endforeach
+								@endforeach
+<!-- ===================================================== -->
+
+						@else
+						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
                             @foreach($tot[$n] as $ros)
@@ -55,6 +103,8 @@
                         </tr>
 						@endforeach
 						@endforeach
+
+						@endif
 						</tbody>
 						<tfoot>
 						<tr> 
@@ -71,10 +121,11 @@
 				</div>
 			</section>
 
-			@foreach($tose as $ttl)
+						@if($kat == 14)
+			@foreach($totsuratthn as $ttl)
 			<section class="card">
 				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->toto,0,',','.')}}</b></h2>
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
 					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
@@ -89,6 +140,64 @@
 				</div>
 			</section>
 			@endforeach
+						@elseif($kat == 1)
+			@foreach($totresithn as $ttl)
+			<section class="card">
+				<div class="card-block">
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+					<div class="pull-right">
+					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
+					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<i class="fa fa-print"></i>Cetak Data</a>
+							&nbsp;&nbsp;
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+								Kembali
+							</button>
+						
+							
+					</div>
+				</div>
+			</section>
+			@endforeach
+						@elseif($kat == 15)
+			@foreach($totpajakthn as $ttl)
+			<section class="card">
+				<div class="card-block">
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+					<div class="pull-right">
+					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
+					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<i class="fa fa-print"></i>Cetak Data</a>
+							&nbsp;&nbsp;
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+								Kembali
+							</button>
+						
+							
+					</div>
+				</div>
+			</section>
+			@endforeach
+						@else
+			@foreach($tose as $ttl)
+			<section class="card">
+				<div class="card-block">
+					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+					<div class="pull-right">
+					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
+					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<i class="fa fa-print"></i>Cetak Data</a>
+							&nbsp;&nbsp;
+							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+								Kembali
+							</button>
+						
+							
+					</div>
+				</div>
+			</section>
+			@endforeach
+						@endif
 
 
 			

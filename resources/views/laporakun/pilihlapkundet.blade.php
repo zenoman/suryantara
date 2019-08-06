@@ -88,6 +88,21 @@
 									{{$row->nama}}
 								</option>
 								@endforeach
+								@foreach($katers as $ro)
+								<option value="{{$ro->id}}">
+									{{$ro->nama}}
+								</option>
+								@endforeach
+								@foreach($katesj as $r)
+								<option value="{{$r->id}}">
+									{{$r->nama}}
+								</option>
+								@endforeach
+								@foreach($katepj as $rowa)
+								<option value="{{$rowa->id}}">
+									{{$rowa->nama}}
+								</option>
+								@endforeach
 							</select>
 							</p>
 							 @if($errors->has('kategori'))

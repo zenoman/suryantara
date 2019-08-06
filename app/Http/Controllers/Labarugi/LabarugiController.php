@@ -122,7 +122,7 @@ class LabarugiController extends Controller
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
-            ->whereBetween('tgl_lunas',[$tgl,$tgl0])
+            ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as toto'))
@@ -130,7 +130,7 @@ class LabarugiController extends Controller
             ->get();
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'kluar'=>$pengsj,'totkluar'=>$pengoto,'pjk'=>$pengpj,'totpjk'=>$pengotopj,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
-        }else if($kate = 14){
+        }else if($kate == 14){
             $kategor = "tdksemua";
             $peng = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama'))
@@ -147,13 +147,13 @@ class LabarugiController extends Controller
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
-            ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
+            ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as toto'))
             ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->where('resi_pengiriman.katakun','=',1)
             ->get();
             $data0 =DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
@@ -171,8 +171,9 @@ class LabarugiController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
             return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$pengoto,'data'=>$peng,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
 
-            }else if($kate=15){
+            }else if($kate==15){
                 $kategor = "pjk";
+//======================================================pajak
             $peng = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
@@ -184,17 +185,19 @@ class LabarugiController extends Controller
             ->whereBetween('tahun',[$thn,$thn0])
             ->where('pajak.katakun','=',$kate)
             ->get();
+//====================================================resi pengiriman
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
-            ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
+            ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as toto'))
             ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->where('resi_pengiriman.katakun','=',1)
             ->get();
+//==================================================== pegeluaran lain
             $data0 =DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
@@ -228,13 +231,13 @@ class LabarugiController extends Controller
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
-            ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
+            ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as toto'))
             ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',$kate)
+            ->where('resi_pengiriman.katakun','=',1)
             ->get();
 
             $data0 =DB::table('pengeluaran_lain')
@@ -347,7 +350,7 @@ class LabarugiController extends Controller
             $dapatrp = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
-            ->whereYear('tgl_lunas',$tgl)
+            ->whereYear('resi_pengiriman.tgl_lunas',$tgl)
             ->paginate(40);
             foreach ($dapatrp as $ras) {
             $totalrp[] = DB::table('resi_pengiriman')
@@ -362,6 +365,9 @@ class LabarugiController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
 return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'tgl'=>$tgl,'thn'=>$thn,'toto'=>$total,'toto0'=>$total0, 'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
     }
+
+
+    
         public function cetaklaba($tgl){
             $thn= $tgl;
             $data = DB::table('pengeluaran_lain')
@@ -447,7 +453,7 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
             ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
             ->groupby('resi_pengiriman.katakun')
-            ->whereYear('tgl_lunas',$tgl)
+            ->whereYear('resi_pengiriman.tgl_lunas',$tgl)
             ->paginate(40);
             foreach ($dapatrp as $ras) {
             $totalrp[] = DB::table('resi_pengiriman')
@@ -463,9 +469,4 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('labarugi/printlaba',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'thn'=>$thn,'toto'=>$total,'toto0'=>$total0,'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
     }
-
-
-
-
-
 }

@@ -49,13 +49,13 @@
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
-	            <form action="{{url('tampillaporanpengeluaranlainharian') }}" role="form" method="GET">
+	            <form action="{{url('tampillaporanpengeluaranlain') }}" role="form" method="GET">
 					<input type="hidden" name="habu" value="harian">
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">tanggal</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<select class="select2" name="tanggal">
+								<select class="select2" name="bulan">
 								@foreach($tanggal as $row)
 								<option value="{{$row->tanggal."-".$row->bulan."-".$row->tahun}}">
 									{{$row->tanggal."-".$row->bulan."-".$row->tahun}}

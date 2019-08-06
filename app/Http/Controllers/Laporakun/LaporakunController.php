@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Laporakunmodel;
-
-use App\Exports\LaporakunExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
 use Illuminate\Support\Facades\File;

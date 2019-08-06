@@ -272,7 +272,7 @@ class laporanController extends Controller{
     public function tampilpengeluaranlain(Request $request){
         $rules = [
             'habu' => 'required',
-            'bulan' => 'required',
+            'bulan' =>'request',
                 ];
          $customMessages = [
         'required'  => 'Maaf, Bulan Tidak Bokeh Kosong',
@@ -280,9 +280,10 @@ class laporanController extends Controller{
         $this->validate($request,$rules,$customMessages);
         $bulaan = $request->habu;;
         $kategori = $request->kategori;
-        $bulan = explode('-', $request->bulan);
-        $bln = $bulan[0];
-        $thn = $bulan[1];
+        // $bulan = explode('-', $request->bulan);
+        // $bln = $bulan[0];
+        // $thn = $bulan[1];
+        dd($request->bulan);
 
         if($kategori=='semua'){
             $data = DB::table('pengeluaran_lain')

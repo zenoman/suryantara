@@ -142,8 +142,10 @@ Route::get('/laporanpengeluarangjkw','laporan\laporanController@pilihpengeluaran
 Route::get('/tampillaporanpengeluarangjkw','laporan\laporanController@tampilpengeluarangjkw');
 Route::get('/printlaporangpengeluaranjkw/{tglnya}/{kodejabatan}','laporan\laporanController@cetakpengeluarangjkw');
 Route::get('/printslipgajikaryawan/{tglnya}/{kodejabatan}','laporan\laporanController@cetakslipgjkw');
+
 Route::get('/laporanpengeluaranlainya','laporan\laporanController@pilihpengeluaranlain');
 Route::get('/tampillaporanpengeluaranlain','laporan\laporanController@tampilpengeluaranlain');
+
 Route::get('/tampillaporanpemasukan','laporan\laporanController@tampilpemasukan');
 Route::get('/laporanpemasukan','laporan\laporanController@pilihpemasukan');
 //-----------hari

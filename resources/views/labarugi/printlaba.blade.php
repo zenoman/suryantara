@@ -22,7 +22,7 @@
 					Tanggal Cetak : {{date('d-m-Y')}}	
 				</td>
 				<td align="right">
-					Pencetak : {{Session::get('username')}}
+					Pencetak : {{Session::get('username')}} 
 				</td>
 
 			</tr> -->
