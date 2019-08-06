@@ -177,6 +177,13 @@ class LaporakunDetController extends Controller
     }
 
         public function cetaklapakundet($kate,$tgl,$tgl0){
+        $am = explode('-', $tgl);
+        $thn = $am[0];
+        $bln = $am[1];
+
+        $amb = explode('-', $tgl0);
+        $thn0 = $amb[0];
+        $bln0 = $amb[1];
             if($kate == 14){
 //============================================================================suratjalan
             $kategor = "Surat Jalan";
@@ -198,7 +205,7 @@ class LaporakunDetController extends Controller
             ->whereYear('tgl',$tgl)
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo
+    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$pengoto,'tot'=>$totalsr,'data'=>$peng,'title'=>$webinfo
     ]);
 
             }else if($kate==15){
@@ -225,7 +232,7 @@ class LaporakunDetController extends Controller
             ->whereBetween('tahun',[$thn,$thn0])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo
+    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$pengotopj,'tot'=>$totalpj,'data'=>$pengpj,'title'=>$webinfo
     ]);
 
         }else if($kate == 1){
@@ -248,7 +255,7 @@ class LaporakunDetController extends Controller
             ->whereYear('tgl_lunas',$tgl)
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$totsemua,'tot'=>$total,'data'=>$data,'title'=>$webinfo
+    return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$dapatoto,'tot'=>$totalrp,'data'=>$dapatrp,'title'=>$webinfo
     ]);
         }else{
         $data = DB::table('pengeluaran_lain')

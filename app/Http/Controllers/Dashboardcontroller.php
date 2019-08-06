@@ -165,18 +165,18 @@ class Dashboardcontroller extends Controller {
                 $totalpajak = $this->cari_pajaktahunan(date('Y'));
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>Session::get('username'),
+                    'admin'=>'Auto Insert',
                     'kategori'=>'15',
                     'keterangan'=>'Pajak',
-                    'jumlah'=>$request->jumlah,
+                    'jumlah'=>$pajak,
                     'tgl'=>date('Y-m-d')
                 ]);
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>Session::get('username'),
+                    'admin'=>'Auto Insert',
                     'kategori'=>'14',
                     'keterangan'=>'Gaji Karyawan',
-                    'jumlah'=>$request->jumlah,
+                    'jumlah'=>$gajikaryawan,
                     'tgl'=>date('Y-m-d')
                 ]);
                 DB::table('pajak')
@@ -209,18 +209,18 @@ class Dashboardcontroller extends Controller {
                 // ]);
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>Session::get('username'),
+                    'admin'=>'Auto Insert',
                     'kategori'=>'15',
                     'keterangan'=>'Pajak',
-                    'jumlah'=>$request->jumlah,
+                    'jumlah'=>$pajak,
                     'tgl'=>date('Y-m-d')
                 ]);
                 DB::table('pengeluaran_lain')
                 ->insert([
-                    'admin'=>Session::get('username'),
+                    'admin'=>'Auto Insert',
                     'kategori'=>'14',
                     'keterangan'=>'Gaji Karyawan',
-                    'jumlah'=>$request->jumlah,
+                    'jumlah'=>$gajikaryawan,
                     'tgl'=>date('Y-m-d')
                 ]);
                DB::table('pajak')
