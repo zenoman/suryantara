@@ -309,7 +309,7 @@ class Dashboardcontroller extends Controller {
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pendapatan')
             ->paginate(40);
-            dd($data);
+            // dd($data);
         foreach ($data as $row) {
             $newdata = $row->toto;
         }
@@ -330,6 +330,7 @@ class Dashboardcontroller extends Controller {
         return $newdata;
     }
     function hitung_laba($bulan,$tahun){
+        
         $data =DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.*'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as tot'))
@@ -340,8 +341,9 @@ class Dashboardcontroller extends Controller {
             ->paginate(40);
         foreach ($data as $row) {
             $new = $row->tot;
+            return $new;
         }
-        return $new;
+        
     }
     function hitung_laba0($bulan,$tahun){
         $data =DB::table('pengeluaran_lain')
