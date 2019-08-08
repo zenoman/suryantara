@@ -45,7 +45,11 @@
                             <td align="center">{{$no}}</td>
 							<td align="center">{{$row->admin}}</td>
                             <td align="center">{{$row->nama}}</td>
+                            @if($kat=='Pajak')
+                            <td align="center">{{$row->bulan}}-{{$row->tahun}}</td>
+                            @else
                             <td align="center">{{$row->tgl}}</td>
+                            @@endif
 							<td align="center">{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
                           
 						</tr>
