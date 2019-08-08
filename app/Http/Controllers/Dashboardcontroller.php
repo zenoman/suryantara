@@ -159,6 +159,7 @@ class Dashboardcontroller extends Controller {
             $tahun = date('Y');
             if(date('m')==1){
                 $pemasukan = $this->cari_pemasukan($bulan,date('Y'),"ny");
+                $pengeluaran = $this->cari_pengeluaran($bulan,date('Y'),"ny");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"ny");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
                 $pajak = $pemasukan * 0.5/100;
@@ -166,7 +167,7 @@ class Dashboardcontroller extends Controller {
                 DB::table('pengeluaran_lain')
                 ->insert([
                     'admin'=>'Auto Insert',
-                    'kategori'=>'15',
+                    'kategori'=>'211',
                     'keterangan'=>'Pajak',
                     'jumlah'=>$pajak,
                     'tgl'=>date('Y-m-d')
@@ -174,7 +175,7 @@ class Dashboardcontroller extends Controller {
                 DB::table('pengeluaran_lain')
                 ->insert([
                     'admin'=>'Auto Insert',
-                    'kategori'=>'14',
+                    'kategori'=>'244',
                     'keterangan'=>'Gaji Karyawan',
                     'jumlah'=>$gajikaryawan,
                     'tgl'=>date('Y-m-d')
@@ -195,6 +196,7 @@ class Dashboardcontroller extends Controller {
                 // ]);
             }else{
                 $pemasukan = $this->cari_pemasukan($bulan,date('Y'),"y");
+                $pengeluaran = $this->cari_pengeluaran($bulan,date('Y'),"y");
                 $this->masukangaji($pemasukan,$bulan,date('Y'),"y");
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"y");
                 $pajak = $pemasukan * 0.5/100;
@@ -210,7 +212,7 @@ class Dashboardcontroller extends Controller {
                 DB::table('pengeluaran_lain')
                 ->insert([
                     'admin'=>'Auto Insert',
-                    'kategori'=>'15',
+                    'kategori'=>'211',
                     'keterangan'=>'Pajak',
                     'jumlah'=>$pajak,
                     'tgl'=>date('Y-m-d')
@@ -218,7 +220,7 @@ class Dashboardcontroller extends Controller {
                 DB::table('pengeluaran_lain')
                 ->insert([
                     'admin'=>'Auto Insert',
-                    'kategori'=>'14',
+                    'kategori'=>'244',
                     'keterangan'=>'Gaji Karyawan',
                     'jumlah'=>$gajikaryawan,
                     'tgl'=>date('Y-m-d')
@@ -431,8 +433,8 @@ class Dashboardcontroller extends Controller {
         if($status=="ny"){
             $tahun -=1;
         }
-        $data = DB::table('resi_pengiriman')
-        ->select(DB::raw('SUM(biaya_suratjalan) as totalnya'))
+        $data = DB::table('surat_jalan')
+        ->select(DB::raw('SUM(totalcash) as totalnya'))
         ->whereMonth('tgl_bayar',$bulan)
         ->whereYear('tgl_bayar',$tahun)
         ->get();

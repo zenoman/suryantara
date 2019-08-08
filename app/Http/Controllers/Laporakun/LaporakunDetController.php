@@ -62,7 +62,7 @@ class LaporakunDetController extends Controller
         $thn0 = $amb[0];
         $bln0 = $amb[1];
 
-        if($kate == 14){
+        if($kate == 233){
 //============================================================================suratjalan
             $kategor = "Surat Jalan";
             $peng = DB::table('surat_jalan')
@@ -85,7 +85,7 @@ class LaporakunDetController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('laporakun/laporharianakundet',['kat'=>$kate,'kate'=>$kategor ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'title'=>$webinfo]);
 
-            }else if($kate==15){
+            }else if($kate==211){
 //==============================================================================pajak
                 $kategor = "pjk";
             $pengpj = DB::table('Pajak')
@@ -111,7 +111,7 @@ class LaporakunDetController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('laporakun/laporharianakundet',['kat'=>$kate,'kate'=>$kategor ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'title'=>$webinfo]);
 
-        }else if($kate == 1){
+        }else if($kate =122{
                 $kategor = "Resi Pengiriman";
             $dapatrp = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
@@ -184,7 +184,7 @@ class LaporakunDetController extends Controller
         $amb = explode('-', $tgl0);
         $thn0 = $amb[0];
         $bln0 = $amb[1];
-            if($kate == 14){
+            if($kate == 233){
 //============================================================================suratjalan
             $kategor = "Surat Jalan";
             $peng = DB::table('surat_jalan')
@@ -204,11 +204,15 @@ class LaporakunDetController extends Controller
             ->whereYear('tgl',[$tgl])
             ->whereYear('tgl',$tgl)
             ->get();
+            $katkat = DB::table('tb_kategoriakutansi')
+            ->select(DB::raw('nama'))
+            ->where('kode','=',$kate)
+            ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$pengoto,'tot'=>$totalsr,'data'=>$peng,'title'=>$webinfo
     ]);
 
-            }else if($kate==15){
+            }else if($kate==211){
 //==============================================================================pajak
                 $kategor = "pjk";
             $pengpj = DB::table('Pajak')
@@ -231,11 +235,15 @@ class LaporakunDetController extends Controller
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
             ->get();
+            $katkat = DB::table('tb_kategoriakutansi')
+            ->select(DB::raw('nama'))
+            ->where('kode','=',$kate)
+            ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$pengotopj,'tot'=>$totalpj,'data'=>$pengpj,'title'=>$webinfo
     ]);
 
-        }else if($kate == 1){
+        }else if($kate =122{
                 $kategor = "Resi Pengiriman";
             $dapatrp = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
@@ -253,6 +261,10 @@ class LaporakunDetController extends Controller
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))
             ->whereYear('tgl_lunas',$tgl)
+            ->get();
+            $katkat = DB::table('tb_kategoriakutansi')
+            ->select(DB::raw('nama'))
+            ->where('kode','=',$kate)
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
     return view('laporakun/cetaklapakundet',['kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tose'=>$dapatoto,'tot'=>$totalrp,'data'=>$dapatrp,'title'=>$webinfo
