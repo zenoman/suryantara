@@ -27,7 +27,6 @@
 						<thead>
 						<tr>
 								<th>No</th>
-								<th>No Resi</th>
 								<th>Admin</th>
 								<th>Kategori</th>
 								<th>tgl</th>
@@ -41,12 +40,11 @@
                             <?php $n = $j++;?>
                         <tr>
 								<td align="center">{{$no}}</td>
-								<td align="center">{{$row->no_resi}}</td>
 								<td align="center">{{$row->admin}}</td>
 								<td align="center">{{$row->nama}}</td>
 								<td align="center">{{$row->tgl}}</td>
-								<td align="center">{{number_format($row->total_biaya)}}</td>
-								<td align="center" class="tdtot">{{$row->total_biaya}}</td>
+								<td align="center">{{number_format($row->jumlah)}}</td>
+								<td align="center" class="tdtot">{{$row->jumlah}}</td>
 						</tr>
 						@endforeach						
 						</tbody>
@@ -75,7 +73,7 @@ $(document).ready(function(){
 		var table=document.getElementById('example'),sumval=0;
 		for(var i=1;i<table.rows.length;i++){
 			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
 		}
 		$('#toata').html(numberWithCommas(sumval));
 </script>
