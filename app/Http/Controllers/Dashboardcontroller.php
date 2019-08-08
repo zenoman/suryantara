@@ -180,14 +180,6 @@ class Dashboardcontroller extends Controller {
                     'jumlah'=>$gajikaryawan,
                     'tgl'=>date('Y-m-d')
                 ]);
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'233',
-                    'keterangan'=>'Surat Jalan',
-                    'jumlah'=>$pengeluaran,
-                    'tgl'=>date('Y-m-d')
-                ]);
                 DB::table('pajak')
                 ->insert([
                     'bulan'=>12,
@@ -231,14 +223,6 @@ class Dashboardcontroller extends Controller {
                     'kategori'=>'244',
                     'keterangan'=>'Gaji Karyawan',
                     'jumlah'=>$gajikaryawan,
-                    'tgl'=>date('Y-m-d')
-                ]);
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'233',
-                    'keterangan'=>'Surat Jalan',
-                    'jumlah'=>$pengeluaran,
                     'tgl'=>date('Y-m-d')
                 ]);
                DB::table('pajak')

@@ -89,17 +89,17 @@
 								</option>
 								@endforeach
 								@foreach($katers as $ro)
-								<option value="{{$ro->id}}">
+								<option value="{{$ro->kode}}">
 									{{$ro->nama}}
 								</option>
 								@endforeach
 								@foreach($katesj as $r)
-								<option value="{{$r->id}}">
+								<option value="{{$r->kode}}">
 									{{$r->nama}}
 								</option>
 								@endforeach
 								@foreach($katepj as $rowa)
-								<option value="{{$rowa->id}}">
+								<option value="{{$rowa->kode}}">
 									{{$rowa->nama}}
 								</option>
 								@endforeach

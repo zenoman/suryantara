@@ -41,7 +41,7 @@
 						<tbody>
 						<?php $i = 1;?>
 						<?php $j = 0;?>
-						@if($kat == 14)
+						@if($kat == 233)
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
@@ -57,7 +57,7 @@
 						@endforeach
 <!-- ===================================================== -->
 
-						@elseif($kat == 15)
+						@elseif($kat == 211)
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
@@ -73,7 +73,7 @@
 								@endforeach
 <!-- ===================================================== -->
 
-						@elseif($kat == 1)
+						@elseif($kat == 122)
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
@@ -121,7 +121,7 @@
 				</div>
 			</section>
 
-						@if($kat == 14)
+						@if($kat == 233)
 			@foreach($totsuratthn as $ttl)
 			<section class="card">
 				<div class="card-block">
@@ -140,7 +140,7 @@
 				</div>
 			</section>
 			@endforeach
-						@elseif($kat == 1)
+						@elseif($kat == 122)
 			@foreach($totresithn as $ttl)
 			<section class="card">
 				<div class="card-block">
@@ -159,7 +159,7 @@
 				</div>
 			</section>
 			@endforeach
-						@elseif($kat == 15)
+						@elseif($kat == 211)
 			@foreach($totpajakthn as $ttl)
 			<section class="card">
 				<div class="card-block">
