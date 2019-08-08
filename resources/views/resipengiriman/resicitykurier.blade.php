@@ -115,7 +115,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Daerah Asal</label>
 							<div class="input-group">
-								<input type="text" value="KEDIRI" class="form-control" id="kota_asal" >
+								<input type="text" value="{{session::get('kota')}}" readonly class="form-control" id="kota_asal" >
 							</div>
 						</div>
 					</div>
