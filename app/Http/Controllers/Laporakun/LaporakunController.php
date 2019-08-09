@@ -38,6 +38,7 @@ class LaporakunController extends Controller
             $peng=DB::table('tb_kategoriakutansi')
                 ->select(DB::raw('tb_kategoriakutansi.*,pengeluaran_lain.kategori,pengeluaran_lain.keterangan,pengeluaran_lain.admin,pengeluaran_lain.tgl,pengeluaran_lain.jumlah'))
                 ->leftjoin('pengeluaran_lain','pengeluaran_lain.kategori','=','tb_kategoriakutansi.kode')
+                ->where('tb_kategoriakutansi.status',$kat)
                 ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0]);
                 
             $data = DB::table('tb_kategoriakutansi')
