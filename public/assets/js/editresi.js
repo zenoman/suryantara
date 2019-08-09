@@ -1540,13 +1540,7 @@ $(document).ready(function(){
 		$('#cetak_pti_alamatp').html($("#alamat_penerima_udara").val());
 		$('#cetak_smu_pti').html($('#nomer_smu_udara').val());
 		$('#listpti').html(rowpti);
-		if(jumlahvolume>jumlahkg){
-			$('#berat_volume_pti').html(jumlahvolume+" Kg");
-			$('#berat_total_pti').html("-");
-		}else{
-			$('#berat_volume_pti').html("-");
-			$('#berat_total_pti').html(jumlahkg+" Kg");
-		}
+		$('#berat_pti').html($("#totalberat").val()+" Kg");
 
 		$("#listbarang").html(rows);
 		$("#listbarang2").html(rows);

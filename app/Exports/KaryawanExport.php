@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
@@ -13,7 +14,8 @@ class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
         return DB::table('karyawan')
         ->select(DB::raw('karyawan.id,karyawan.kode,karyawan.nama,karyawan.telp,karyawan.alamat,jabatan.jabatan,karyawan.id_cabang'))
         ->leftjoin('jabatan','jabatan.id','=','karyawan.id_jabatan')
-        ->get();;
+        ->where('karyawan.id_cabang','=',Session::get('cabang'))
+        ->get();
     }
     public function headings(): array
     {

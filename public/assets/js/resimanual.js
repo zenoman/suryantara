@@ -2,6 +2,7 @@ $(document).ready(function(){
 	var halaman='darat';
 	var satuan_darat = 'kg';
 	var satuan_laut = 'kg';
+	var satuan_city = 'kg';
 	var satuan_udara = 'kg';
 	var kategori_udara ='biasa';
 	var kotatujuanudara = '';
@@ -14,20 +15,266 @@ $(document).ready(function(){
 		if(halaman=='darat'){
 		 $("#formdarat").show(700);
          $("#formudara").hide(700);
-         $("#formlaut").hide(700);	
+         $("#formlaut").hide(700);
+         $("#formcity").hide(700);		
 		 $('#nama_barang_darat').focus();
 		}else if(halaman=='laut'){
 		 $("#formdarat").hide(700);
          $("#formudara").hide(700);
          $("#formlaut").show(700);
+         $("#formcity").hide(700);	
 		 $('#nama_barang_laut').focus();
-		}else{
+		}else if(halaman=='udara'){
 		 $("#formdarat").hide(700);
          $("#formudara").show(700);
          $("#formlaut").hide(700);
+         $("#formcity").hide(700);	
          $('#nama_barang_udara').focus();
+		}else{
+			$("#formdarat").hide(700);
+         $("#formudara").hide(700);
+         $("#formlaut").hide(700);
+         $("#formcity").show(700);	
 		}
 	});
+
+	//###############################halaman city
+	$('#satuan_city').on('change',function(e){
+		satuan_city = this.value;
+	})
+	//================================================
+	$("#berat_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var berat = $("#berat_city").val();
+			var vt = parseFloat(berat);
+			$("#berat_city").val(vt.toFixed());
+			}
+			
+		})
+	//=============================================ganti metode	
+	$('#metode_city').on('change',function(e){
+		var metode = this.value;
+		if(metode=='bt'){
+			$('#status_bayar_city').val('belum_lunas');
+			$('#status_bayar_city').prop('disabled','disabled');
+		}else{
+			$('#status_bayar_city').val('lunas');
+			$('#status_bayar_city').prop('disabled', false);
+		}
+	})
+	//============================================ hitung volumetrik
+		$("#d_panjang_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang_city = $("#d_panjang_city").val();
+			var lebar_city = $("#d_lebar_city").val();
+			var tinggi_city = $("#d_tinggi_city").val();
+			var total_city =  (parseInt(panjang_city) *  parseInt(lebar_city) *  parseInt(tinggi_city))/4000;
+			var vt = parseFloat(total_city);
+			$("#volume_city").val(vt.toFixed());
+			}
+			
+		})
+	//============================================ hitung volumetrik
+		$("#d_lebar_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang_city = $("#d_panjang_city").val();
+			var lebar_city = $("#d_lebar_city").val();
+			var tinggi_city = $("#d_tinggi_city").val();
+			var total_city =  (parseInt(panjang_city) *  parseInt(lebar_city) *  parseInt(tinggi_city))/4000;
+			var vt = parseFloat(total_city);
+			$("#volume_city").val(vt.toFixed());
+			}
+			
+		})
+	//============================================ hitung volumetrik
+		$("#d_tinggi_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var panjang_city = $("#d_panjang_city").val();
+			var lebar_city = $("#d_lebar_city").val();
+			var tinggi_city = $("#d_tinggi_city").val();
+			var total_city =  (parseInt(panjang_city) *  parseInt(lebar_city) *  parseInt(tinggi_city))/4000;
+			var vt = parseFloat(total_city);
+			$("#volume_city").val(vt.toFixed());
+			}
+			
+		})
+	//=============================================cari kota tujuan
+		$('#kota_tujuan_city').select2({
+		placeholder: 'Cari kota tujuan',
+		ajax:{
+			url:'/carikota',
+			dataType:'json',
+			delay:250,
+			processResults: function (data){
+				return {
+					results : $.map(data, function (item){
+						return {
+							id: item.id,
+							text: item.tujuan
+						}
+
+					})
+				}
+			},
+			cache: true
+		}
+	});
+	//=================================================
+	$('#kota_tujuan_city').on('select2:select',function(e){
+			$('#formcity').loading('toggle');
+			var kode = $(this).val();
+			$.ajax({
+                type: 'GET',
+                url: '/carihasilkota/'+kode,
+                success:function (data){
+				return {
+					results : $.map(data, function (item){
+							if(satuan_city=='kg'){
+								hitung_city(item.tarif,item.tujuan);
+							}else{
+								$("#biaya_kirim_city").val(0);
+								$("#b_kirim_city").html(0);
+								hitung_total_city();
+							}
+					})
+				}
+			},complete:function(){
+                $('#formcity').loading('stop');
+            }
+            });
+		});
+	//============================================ hitung estimasi tujuan
+		function hitung_city(harga,tujuan){
+			var berat = $("#berat_city").val();
+			var volume = $("#volume_city").val();
+			if(berat!='' && volume!=''){
+				if(parseInt(berat) > parseInt(volume)){
+					var jumlah = harga*berat;
+				}else{
+					var jumlah = harga*volume;
+				}
+			$("#biaya_kirim_city").val(jumlah);
+			$("#b_kirim_city").html(rupiah(jumlah));
+			hitung_total_city();		
+		}}
+	//============================================ hitung total biaya
+		function hitung_total_city(){
+			var b_kirim = $("#biaya_kirim_city").val();
+			var b_packing = $("#biaya_packing_city").val();
+			var b_asuransi = $("#biaya_asuransi_city").val();
+			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+			$("#total_city").html(rupiah(totalnya));
+		}
+	//============================================ hitung total biaya
+		$("#biaya_asuransi_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_asu = $("#biaya_asuransi_city").val();
+			$("#b_asuransi_city").html(rupiah(biaya_asu));
+			hitung_total_city();	
+			}
+			
+		})
+	//============================================ hitung total
+		$("#biaya_kirim_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_kirim = $("#biaya_kirim_city").val();
+			$("#b_kirim_city").html(rupiah(biaya_kirim));
+			hitung_total_city();		
+			}
+			
+		})
+	//============================================ hitung total	
+		$("#biaya_packing_city").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_pack = $("#biaya_packing_city").val();
+			$("#b_packing_city").html(rupiah(biaya_pack));
+			hitung_total_city();		
+			}
+			
+		})
+	//============================================ fokus input pengirim 	
+		$("#kota_tujuan_city").on('select2:close',function(e){
+			$('#n_pengirim_city').focus();
+		});
+	//============================================ simpan transaksi
+		$("#btnsimpan_city").click(function(e){
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			var idresi		= $("#idresi").val();
+			var iduser		= $("#iduser").val();
+			var nama_barang	= $("#nama_barang_city").val();
+			var d_panjang	= $("#d_panjang_city").val();
+			var d_tinggi	= $("#d_tinggi_city").val();
+			var d_lebar		= $("#d_lebar_city").val();
+			var volume		= $("#volume_city").val();
+			var jumlah		= $("#jumlah_city").val();
+			var berat		= $("#berat_city").val();
+			var kota_asal	= $("#kota_asal_city").val();
+			var isi_kota_tujuan = $('#kota_tujuan_city').val();
+			var a_pengirim 	= $("#alamat_pengirim_city").val();
+			var a_penerima	= $("#alamat_penerima_city").val();
+			var n_pengirim 	= $("#n_pengirim_city").val();
+			var t_pengirim	= $("#t_pengirim_city").val();
+			var n_penerima	= $("#n_penerima_city").val();
+			var t_penerima 	= $("#t_penerima_city").val();
+			var biaya_kirim	= $("#biaya_kirim_city").val();
+			var biaya_packing = $("#biaya_packing_city").val();
+			var biaya_asu 	= $("#biaya_asuransi_city").val();
+			var keterangan 	= $.trim($("#keterangan_city").val());
+			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var satuan		= $('#satuan_city').val();
+			var ppn 		= 0;
+			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
+			var metode		= $("#metode_city").val();
+			var status_bayar = $('#status_bayar_city').val();
+			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
+   			}else{
+   				var dats = $('#kota_tujuan_city').select2('data');
+				var kota_tujuan = dats[0].text;
+   				var l = Ladda.create(this);
+                l.start();
+				$.ajax({
+                type: 'POST',
+                url: '/simpanmanualcity',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'idresi'		: idresi,
+                    'iduser'		: iduser,
+                    'nama_barang'	: nama_barang,
+					'dimensi'		: dimensi,
+					'ukuran_volume'	: volume,
+					'jumlah'		: jumlah,
+					'berat'			: berat,
+					'kota_asal'		: kota_asal,
+					'kota_tujuan' 	: kota_tujuan,
+					'n_pengirim' 	: n_pengirim,
+					't_pengirim'	: t_pengirim,
+					'n_penerima'	: n_penerima,
+					't_penerima'	: t_penerima,
+					'biaya_kirim'	: biaya_kirim,
+					'biaya_packing'	: biaya_packing,
+					'biaya_asu' 	: biaya_asu,
+					'keterangan'	: keterangan,
+                	'total_biaya'	: total_biaya,
+                	'satuan'		: satuan,
+                	'metode'		: metode,
+                	'ppn'			: ppn,
+                	'alamat_pengirim' : a_pengirim,
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar':status_bayar
+                },
+                success:function(){
+                    notie.alert(1, 'Data Disimpan', 2);
+                	window.location.href = "/Manual";
+                },
+            }).always(
+            function() {
+                l.stop();
+            });
+			}
+		});
+
 	//###############################halaman darat
 	$('#satuan_darat').on('change',function(e){
 		satuan_darat = this.value;
