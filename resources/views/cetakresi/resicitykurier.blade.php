@@ -9,7 +9,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -220,7 +220,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -431,7 +431,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -644,7 +644,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">

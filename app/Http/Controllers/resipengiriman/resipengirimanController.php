@@ -10,12 +10,12 @@ class resipengirimanController extends Controller
    public function caridataresicity(Request $request){
     $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
-            ->orwhere([['nama_barang','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier']])
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['nama_barang','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
@@ -25,7 +25,7 @@ class resipengirimanController extends Controller
     public function listpengirimanbatalcity(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','=','city kurier']])
+        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->get();
         return view('resipengiriman/pengirimanbatalcity',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -34,7 +34,7 @@ class resipengirimanController extends Controller
     public function listcity(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','=','city kurier']])
+        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengirimancity',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -80,7 +80,7 @@ class resipengirimanController extends Controller
     public function listpengirimanbatal(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','!=','city kurier']])
+        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->get();
         return view('resipengiriman/pengirimanbatal',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -157,11 +157,11 @@ class resipengirimanController extends Controller
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
@@ -171,11 +171,11 @@ class resipengirimanController extends Controller
     public function caridataresi_smukosong(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier']])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N']])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier']])
+            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
@@ -266,7 +266,7 @@ class resipengirimanController extends Controller
         public function tampilsmukosong(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier']])
+        ->where([['metode_input','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
         ->whereNull('no_smu')
         ->orderby('id','desc')
         ->get();
@@ -378,7 +378,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -406,7 +407,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
             
@@ -439,7 +441,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
 
             }else{
@@ -468,7 +471,8 @@ class resipengirimanController extends Controller
                     'metode_bayar'  => $request->metode,
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }
@@ -776,7 +780,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -806,7 +811,8 @@ class resipengirimanController extends Controller
                     'no_smu'        => $request->nosmu,
                     'biaya_charge'  =>$request->charge,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }
         }else{
@@ -840,7 +846,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US'
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang')
                 ]);
             }else{
                $simpan = DB::table('resi_pengiriman')
@@ -870,7 +877,8 @@ class resipengirimanController extends Controller
                     'no_smu'        => $request->nosmu,
                     'biaya_charge'  =>$request->charge,
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang')
                 ]); 
             }
         }

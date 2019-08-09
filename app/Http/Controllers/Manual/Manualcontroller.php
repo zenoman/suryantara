@@ -21,7 +21,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','Y']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','Y'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->orderby('resi_pengiriman.id','desc')
         ->get();
         return view('manual/manualbatal',
@@ -34,7 +34,7 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(20);
         return view('manual/index',['manual'=>$datmanual,'title'=>$setting]);
@@ -46,43 +46,48 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.batal','N']])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.pengiriman_via','like','%'.$cari.'%'],['resi_pengiriman.batal','N']])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['resi_pengiriman.batal','N']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.pengiriman_via','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->get();
             $setting = DB::table('setting')->get();
         return view('manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
     }
+
+    //==============================================================
     public function tampilmanualsmukosong()
     {
         $setting = DB::table('setting')->get();
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->whereNull('no_smu')
         ->orderby('resi_pengiriman.id','desc')
         ->get();
-        //->paginate(20);
         return view('manual/manual_smukosong',['manual'=>$datmanual,'title'=>$setting]);
     }
-        public function carismukosong(Request $request)
+
+    //==============================================================
+    public function carismukosong(Request $request)
     {
         $cari=$request->cari;
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N']])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N']])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->get();
             $setting = DB::table('setting')->get();
         return view('manual/cari_smukosong', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
     }
+
     //=========================================================
     public function importexcel(){
         $setting = DB::table('setting')->get();
         return view('manual/importexcel',['title'=>$setting]);
     }
+
     //=========================================================
     public function downloadtemplate(){
          $file= "file/template resi manual.xlsx";
@@ -91,9 +96,12 @@ class Manualcontroller extends Controller
             );
     return Response::download($file, 'template resi manual.xlsx', $headers);
     }
+
+    //==============================================================
     public function dowloadkaryawan(){
         return Excel::download(new KaryawanExport, 'karyawan.xlsx');
     }
+
     //========================================================
     public function prosesimportexcel(Request $request){
         if($request->hasFile('file')){
@@ -102,6 +110,7 @@ class Manualcontroller extends Controller
         return redirect('Manual')->with('status','Import excel sukses');
     }
 
+    //==============================================================
     public function create()
     {
         $setting = DB::table('setting')->get();
@@ -109,6 +118,7 @@ class Manualcontroller extends Controller
         return view('manual/create',['title'=>$setting,'karyawan'=>$karyawan]);
     }
 
+    //==============================================================
     public function store(Request $request)
     {
         $rules = ['kode'  =>'required'];
@@ -137,6 +147,8 @@ class Manualcontroller extends Controller
         }
         return redirect('Manual')->with('status','Input Data Sukses');
     }
+
+    //==============================================================
     public function destroy(Request $request)
     {
         $id = $request->aid;
@@ -165,6 +177,8 @@ class Manualcontroller extends Controller
         
         return back()->with('status','Hapus Data Sukses');
     }
+
+    //==============================================================
     public function haphapus(Request $request)
     {
         if(!$request->pilihid){
@@ -176,6 +190,8 @@ class Manualcontroller extends Controller
         }
     return back()->with('status','Hapus Data Sukses');
     }
+
+    //==============================================================
     public function edit($id){
         $karyawan = DB::table('karyawan')->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -187,6 +203,8 @@ class Manualcontroller extends Controller
         $kategori = DB::table('kategori_barang')->get();
         return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
     }
+
+    //==============================================================
     public function ubah($id){
         $karyawan = DB::table('karyawan')->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -198,7 +216,8 @@ class Manualcontroller extends Controller
         $kategori = DB::table('kategori_barang')->get();
         return view('manual/ubah',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
     }
-//====================================================================
+
+    //================================================================
     public function simpandarat(Request $request){
         if($request->status_bayar=='lunas'){
             $simpan = DB::table('resi_pengiriman')
@@ -261,6 +280,7 @@ class Manualcontroller extends Controller
         }
         return response()->json($simpan);
     }
+
 //====================================================================
     public function simpanlaut(Request $request){
         if($request->status_bayar=='lunas'){
@@ -385,6 +405,68 @@ class Manualcontroller extends Controller
                 'biaya_ppn'     => $request->ppn,
                 'no_smu'        => $request->nosmu,
                 'biaya_charge'  =>$request->charge,
+                'metode_input'  =>'manual',
+                'alamat_pengirim'=>$request->alamat_pengirim,
+                'alamat_penerima'=>$request->alamat_penerima]);
+        }
+        return response()->json($simpan);
+    }
+    public function simpancity(Request $request){
+        if($request->status_bayar=='lunas'){
+            $simpan = DB::table('resi_pengiriman')
+                ->where('id',$request->idresi)
+                ->update([
+                'admin'      => $request->iduser,
+                'nama_barang'   => $request->nama_barang,
+                'pengiriman_via'=> 'city kurier',
+                'kota_asal'     => $request->kota_asal,
+                'kode_tujuan'   => $request->kota_tujuan,
+                'tgl'           =>  date('Y-m-d'),
+                'jumlah'        => $request->jumlah,
+                'berat'         => $request->berat,
+                'dimensi'       => $request->dimensi,
+                'ukuran_volume' => $request->ukuran_volume,
+                'nama_pengirim' => $request->n_pengirim,
+                'nama_penerima' => $request->n_penerima,
+                'telp_pengirim' => $request->t_pengirim,
+                'telp_penerima' => $request->t_penerima,
+                'biaya_kirim'   => $request->biaya_kirim,
+                'biaya_packing' => $request->biaya_packing,
+                'biaya_asuransi'=> $request->biaya_asu,
+                'total_biaya'   => $request->total_biaya,
+                'satuan'        => $request->satuan,
+                'metode_bayar'  => $request->metode,
+                'biaya_ppn'     => $request->ppn,
+                'metode_input'  =>'manual',
+                'alamat_pengirim'=>$request->alamat_pengirim,
+                'alamat_penerima'=>$request->alamat_penerima,
+                'tgl_lunas' => date('Y-m-d'),
+                'status' => 'US']);
+        }else{
+            $simpan = DB::table('resi_pengiriman')
+                ->where('id',$request->idresi)
+                ->update([
+                'admin'      => $request->iduser,
+                'nama_barang'   => $request->nama_barang,
+                'pengiriman_via'=> 'city kurier',
+                'kota_asal'     => $request->kota_asal,
+                'kode_tujuan'   => $request->kota_tujuan,
+                'tgl'           =>  date('Y-m-d'),
+                'jumlah'        => $request->jumlah,
+                'berat'         => $request->berat,
+                'dimensi'       => $request->dimensi,
+                'ukuran_volume' => $request->ukuran_volume,
+                'nama_pengirim' => $request->n_pengirim,
+                'nama_penerima' => $request->n_penerima,
+                'telp_pengirim' => $request->t_pengirim,
+                'telp_penerima' => $request->t_penerima,
+                'biaya_kirim'   => $request->biaya_kirim,
+                'biaya_packing' => $request->biaya_packing,
+                'biaya_asuransi'=> $request->biaya_asu,
+                'total_biaya'   => $request->total_biaya,
+                'satuan'        => $request->satuan,
+                'metode_bayar'  => $request->metode,
+                'biaya_ppn'     => $request->ppn,
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima]);

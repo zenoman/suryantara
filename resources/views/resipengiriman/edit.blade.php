@@ -189,7 +189,7 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_ck" @if($row->pengiriman_via=='city kurier')value="{{$row->kota_asal}}"
-								@endif>
+								@endif readonly>
 							</div>
 						</div>
 					</div>
@@ -471,7 +471,7 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_darat" @if($row->pengiriman_via=='darat')value="{{$row->kota_asal}}"
-								@endif>
+								@endif readonly>
 							</div>
 						</div>
 					</div>
@@ -762,7 +762,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_laut" @if($row->pengiriman_via=='laut')
 								value="{{$row->kota_asal}}"
-								@endif>
+								@endif readonly>
 							</div>
 						</div>
 					</div>
@@ -1087,7 +1087,7 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_udara" @if($row->pengiriman_via=='udara')value="{{$row->kota_asal}}"
-								@endif>
+								@endif readonly>
 							</div>
 						</div>
 					</div>

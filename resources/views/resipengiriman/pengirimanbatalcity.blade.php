@@ -40,7 +40,6 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
-							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -240,17 +239,7 @@
 					</div>
 						<br>	
 							<div class="row text-left">
-								<!-- <form action="tambahsmu" method="post">
-									<label>Ubah No.Resi/SMU</label>
-									<div class="input-group input-group-sm">
-										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
-										<input type="hidden" name="kode" value="{{$row->id}}">
-										{{csrf_field()}}
-										<span class="input-group-btn">
-											<button class="btn btn-primary" type="submit">Simpan</button>
-										</span>
-									</div>
-								</form> -->
+								
 							</div>	
 						</div>
 							</div>
@@ -281,17 +270,6 @@
 					</div>
 				</div>
                             </td>
-                            <td>
-                            @if($row->no_smu=='')
-                                @if($row->total_biaya != 0)
-                                <span class="label label-danger">
-                                kosong
-                                </span>
-                                @endif
-                                @else
-                                {{$row->no_smu}}
-                                @endif
-                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -306,7 +284,6 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
-							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>

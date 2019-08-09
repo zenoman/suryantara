@@ -73,6 +73,7 @@
 								<option value="darat">Jalur Darat</option>
 								<option value="laut">Jalur Laut</option>
 								<option value="udara">Jalur Udara</option>
+								<option value="city">City Kurier</option>
 							</select>
 							</div>
 						</div>
@@ -163,7 +164,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_darat" >
+								<input type="text" class="form-control" id="kota_asal_darat" value="{{session::get('kota')}}" readonly>
 							</div>
 						</div>
 					</div>
@@ -392,7 +393,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_laut" >
+								<input type="text" class="form-control" id="kota_asal_laut" value="{{session::get('kota')}}" readonly>
 							</div>
 						</div>
 					</div>
@@ -661,7 +662,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_udara" >
+								<input type="text" class="form-control" id="kota_asal_udara" value="{{session::get('kota')}}" readonly>
 							</div>
 						</div>
 					</div>
@@ -669,15 +670,6 @@
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
 						<select class="select2" id="kota_tujuan_udara"></select>
 					</div>
-					<!-- <div class="col-md-4 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="status_udara" readonly>
-								
-							</div>
-						</div>
-					</div> -->
 					<div class="col-md-3 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Biaya Per<b>Kg</b></label>
@@ -821,17 +813,8 @@
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman udara" class="form-control" id="keterangan_udara">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
-							<small class="text-muted">
+					<input type="hidden" value="pengiriman udara" class="form-control" id="keterangan_udara">
+					<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_udara"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 
@@ -839,7 +822,231 @@
 								
 							</small>
 			</div>
-		
+
+
+			<!-- ====================================================== -->
+			<div class="box-typical box-typical-padding loading-div" id="formcity" style="display: none;">
+				<header class="card-header card-header-xl">
+					City Kurier
+				</header>
+				<br>
+			<div class="form-group row">
+						
+						<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nama_barang_city">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="metode_city">
+								<option value="cash">cash</option>
+								<option value="bt">BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
+							<div class="input-group">
+								<select class="form-control" id="status_bayar_city">
+								<option value="lunas">Lunas</option>
+								<option value="belum_lunas">Belum Lunas</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_city" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_city" value="0">&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_city" value="0">
+									
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_city"  value="0" onkeypress="return isNumberKey2(event)">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah_city" onkeypress="return isNumberKey(event)">
+								<select class="form-control" id="satuan_city">
+								<option value="kg">&nbsp;</option>
+								<option value="koli">koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_city" onkeypress="return isNumberKey2(event)">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Daerah Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="kota_asal_city" value="{{session::get('kota')}}" readonly>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-6">
+						<label class="form-label" for="exampleInputDisabled">Daerah Tujuan</label>
+						<select class="select2" id="kota_tujuan_city"></select>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_pengirim_city">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_city" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim_city">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_penerima_city" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_city" >
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima_city">
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-7 col-md-7">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_kirim_city" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_packing_city" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_asuransi_city" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+					</div>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<table class="table table-bordered" id="estimasi">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Estimasi Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Biaya Kirim</td>
+										<td id="b_kirim_city">0</td>
+									</tr>
+									<tr>
+										<td>Biaya Packing</td>
+										<td id="b_packing_city">0</td>
+									</tr>
+									<tr>
+										<td>Biaya Asuransi</td>
+										<td id="b_asuransi_city">0</td>
+									</tr>
+									
+									<tr>
+										<td colspan="2" class="text-center">
+											<h3 id="total_city">0</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<hr>
+					<!-- <div class="row">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman city kurier" class="form-control" id="keterangan_city">
+							<!--</div>
+						</div>
+					</div>
+					</div> -->
+							<small class="text-muted">
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_city" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								</button>
+
+								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+								
+							</small>
+			</div>
 		</div>
 @endforeach
 </div>
