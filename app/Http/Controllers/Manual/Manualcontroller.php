@@ -140,7 +140,8 @@ class Manualcontroller extends Controller
         Manualmodel::create([
             'pemegang' => $request->pemegang,
             'no_resi'  => $final,
-            'metode_input'=>'manual'
+            'metode_input'=>'manual',
+            'id_cabang'=>Session::get('cabang')
 
         ]);
         }
