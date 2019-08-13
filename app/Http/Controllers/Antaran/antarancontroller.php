@@ -315,25 +315,29 @@ class antarancontroller extends Controller
             ['kode_antar','!=',null],
             ['status_antar','!=','N'],
             ['status_antar','!=','G'],
-            ['resi_pengiriman.tgl','like','%'.$cari.'%']
+            ['resi_pengiriman.tgl','like','%'.$cari.'%'],
+            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
         ])
         ->orwhere([
             ['kode_antar','!=',null],
             ['status_antar','!=','N'],
             ['status_antar','!=','G'],
-            ['no_resi','like','%'.$cari.'%']
+            ['no_resi','like','%'.$cari.'%'],
+            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
         ])
         ->orwhere([
             ['kode_antar','!=',null],
             ['status_antar','!=','N'],
             ['status_antar','!=','G'],
-            ['surat_antar.pemegang','like','%'.$cari.'%']
+            ['surat_antar.pemegang','like','%'.$cari.'%'],
+            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
         ])
         ->orwhere([
             ['kode_antar','!=',null],
             ['status_antar','!=','N'],
             ['status_antar','!=','G'],
-            ['kode_antar','like','%'.$cari.'%']
+            ['kode_antar','like','%'.$cari.'%'],
+            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
         ])
         ->orderby('id','desc')
         ->get();
@@ -374,7 +378,8 @@ class antarancontroller extends Controller
         $data = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
         ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
-        ->where([['kode_antar','!=',null],['status_antar','=','G']])
+        ->where([['kode_antar','!=',null],['status_antar','=','G'],
+        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->get();
 
