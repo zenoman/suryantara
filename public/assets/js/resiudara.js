@@ -383,8 +383,6 @@ $(document).ready(function(){
 	function tempelresi(){
 		var rows ='';
 		var rowpti ='';
-		var jumlahvolume=0;
-		var jumlahkg= 0;
 		for (var i = 1; i <= jumlahbarang; i++) {
 		rows = rows + '<tr>';
                 rows = rows + '<td style="border-top: 1px solid black; border-bottom: 1px solid black;" align="center">'+$('#d_panjang'+i).val()+'cm x '+$('#d_lebar'+i).val()+'cm x '+$('#d_tinggi'+i).val()+'cm</td>';
@@ -399,8 +397,6 @@ $(document).ready(function(){
                 rowpti = rowpti + '<td width="10%" align="center">' +$('#volume'+i).val()+'Kg</td>';
                 rowpti = rowpti + '<td width="10%" align="center">' +$('#berat'+i).val()+'Kg</td>';
                 rowpti = rowpti + '</tr>';
-        jumlahvolume +=parseInt($('#volume'+i).val());
-        jumlahkg +=parseInt($('#berat'+i).val());
 		}
 
 		//pti
@@ -408,13 +404,7 @@ $(document).ready(function(){
 		$('#cetak_pti_alamatp').html($("#alamat_penerima").val());
 		$('#cetak_smu_pti').html($('#nomer_smu').val());
 		$('#listpti').html(rowpti);
-		if(jumlahvolume>jumlahkg){
-			$('#berat_volume_pti').html(jumlahvolume+" Kg");
-			$('#berat_total_pti').html("-");
-		}else{
-			$('#berat_volume_pti').html("-");
-			$('#berat_total_pti').html(jumlahkg+" Kg");
-		}
+		$('#berat_pti').html($("#totalberat").val()+" Kg");
 		
 
 		$("#listbarang").html(rows);

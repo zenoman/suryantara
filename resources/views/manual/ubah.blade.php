@@ -72,11 +72,290 @@
 								<option value="darat" @if($row->pengiriman_via=='darat')selected @endif>Jalur Darat</option>
 								<option value="laut" @if($row->pengiriman_via=='laut')selected @endif>Jalur Laut</option>
 								<option value="udara" @if($row->pengiriman_via=='udara')selected @endif>Jalur Udara</option>
+								<option value="city kurier" @if($row->pengiriman_via=='city kurier')selected @endif>City Kurier</option>
 							</select>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="box-typical box-typical-padding" id="formcity" @if($row->pengiriman_via!='city kurier')style="display: none;" @endif>
+				<header class="card-header card-header-xl">
+					City Kurier
+				</header>
+				<br>
+				<div class="form-group row">
+					<div class="col-md-9 col-sm-9">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nama_barang_city" @if($row->pengiriman_via=='city kurier')value="{{$row->nama_barang}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
+							<div class="input-group">
+							<select class="form-control" id="metode_city">
+								<option value="cash" @if($row->pengiriman_via=='city kurier')
+									@if($row->metode_bayar=='cash')selected
+									@endif
+								@endif>cash</option>
+								<option value="bt" @if($row->pengiriman_via=='city kurier')
+									@if($row->metode_bayar=='bt')selected
+									@endif
+								@endif>BT</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						@php
+						if($row->pengiriman_via=='city kurier'){
+						$dimensi = $row->dimensi;
+						$dmn = preg_split('/ x /',$dimensi,-1,PREG_SPLIT_NO_EMPTY);
+						}
+						@endphp
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan CM (P, L, T)  </label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_city" @if($row->pengiriman_via=='city kurier') 
+								value="{{$dmn[0]}}"
+								@else
+								value="0"
+								@endif>&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_city" @if($row->pengiriman_via=='city kurier') 
+								value="{{$dmn[1]}}"
+								@else
+								value="0"
+								@endif>&nbsp;
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_city" @if($row->pengiriman_via=='city kurier') 
+								value="{{$dmn[2]}}"
+								@else
+								value="0"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_city" onkeypress="return isNumberKey2(event)" @if($row->pengiriman_via=='city kurier') 
+								value="{{$row->ukuran_volume}}"
+								@else
+								value="0"
+								@endif>
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="jumlah_city" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->jumlah}}"
+								@endif>
+								<select class="form-control" id="satuan_city">
+								<option value="kg" @if($row->pengiriman_via=='city kurier')
+									@if($row->satuan=='kg')selected
+									@endif
+								@endif>&nbsp;</option>
+								<option value="koli" @if($row->pengiriman_via=='city kurier')
+									@if($row->satuan=='koli')selected
+									@endif
+								@endif>koli</option>
+							</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_city" onkeypress="return isNumberKey2(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->berat}}"
+								@endif>
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="kota_asal_city" @if($row->pengiriman_via=='city kurier')value="{{$row->kota_asal}}"
+								@else
+								value="{{session::get('kota')}}"
+								@endif readonly>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
+						<select class="select2" id="kota_tujuan_city">
+							@if($row->pengiriman_via=='city kurier')
+						<option value="{{$row->kode_tujuan}}">{{$row->kode_tujuan}}</option>
+						@endif
+						</select>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_pengirim_city" @if($row->pengiriman_via=='city kurier')value="{{$row->nama_pengirim}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_city" @if($row->pengiriman_via=='city kurier')value="{{$row->telp_pengirim}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Pengirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_pengirim_city" @if($row->pengiriman_via=='city kurier')value="{{$row->alamat_pengirim}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Nama Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="n_penerima_city" @if($row->pengiriman_via=='city kurier')value="{{$row->nama_penerima}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<div class="input-group">
+								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_city" @if($row->pengiriman_via=='city kurier')value="{{$row->telp_penerima}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Alamat Penerima</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="alamat_penerima_city" @if($row->pengiriman_via=='city kurier')value="{{$row->alamat_penerima}}"
+								@endif>
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-7 col-md-7">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Kirim</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_kirim_city" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->biaya_kirim}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Packing</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_packing_city" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->biaya_packing}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Biaya Asuransi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="biaya_asuransi_city" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->biaya_asuransi}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+					</div>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<table class="table table-bordered" id="estimasi">
+								<thead>
+									<tr>
+										<th colspan="2" class="text-center">Estimasi Biaya</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Biaya Kirim</td>
+										<td id="b_kirim_city">@if($row->pengiriman_via=='city kurier'){{$row->biaya_kirim}}
+										@else
+										0		 
+										@endif
+										</td>
+									</tr>
+									<tr>
+										<td>Biaya Packing</td>
+										<td id="b_packing_city">@if($row->pengiriman_via=='city kurier'){{$row->biaya_packing}}
+										@else
+										0		 
+										@endif</td>
+									</tr>
+									<tr>
+										<td>Biaya Asuransi</td>
+										<td id="b_asuransi_city">@if($row->pengiriman_via=='city kurier'){{$row->biaya_asuransi}}
+										@else
+										0		 
+										@endif</td>
+									</tr>
+									
+									<tr>
+										<td colspan="2" class="text-center">
+											<h3 id="total_city">@if($row->pengiriman_via=='city kurier'){{$row->total_biaya}}
+										@else
+										0		 
+										@endif</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<hr>
+					<!-- <div class="row">
+						<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
+							<div class="input-group">-->
+								<input type="hidden" value="pengiriman city" class="form-control" id="keterangan_city">
+							<!--</div>
+						</div>
+					</div>
+					</div> -->
+							<small class="text-muted">
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_city" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								</button>
+
+								<a onclick="window.history.go(-1);" class="btn btn-danger pull-right">Kembali</a>
+								
+							</small>
 			</div>
 			<div class="box-typical box-typical-padding" id="formdarat" @if($row->pengiriman_via!='darat')style="display: none;" @endif>
 				<header class="card-header card-header-xl">
@@ -88,7 +367,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang_darat" @if($row->pengiriman_via=='darat')value="{{$row->alamat_penerima}}"
+								<input type="text" class="form-control" id="nama_barang_darat" @if($row->pengiriman_via=='darat')value="{{$row->nama_barang}}"
 								@endif>
 							</div>
 						</div>
@@ -185,7 +464,9 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_darat" @if($row->pengiriman_via=='darat')value="{{$row->kota_asal}}"
-								@endif>
+								@else
+								value="{{session::get('kota')}}"
+								@endif readonly>
 							</div>
 						</div>
 					</div>
@@ -470,7 +751,9 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_laut" @if($row->pengiriman_via=='laut')
 								value="{{$row->kota_asal}}"
-								@endif>
+								@else
+								value="{{session::get('kota')}}"
+								@endif readonly>
 							</div>
 						</div>
 					</div>
@@ -789,7 +1072,9 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_udara" @if($row->pengiriman_via=='udara')value="{{$row->kota_asal}}"
-								@endif>
+								@else
+								value="{{session::get('kota')}}"
+								@endif readonly>
 							</div>
 						</div>
 					</div>

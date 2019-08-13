@@ -9,7 +9,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -236,7 +236,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -466,7 +466,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -688,7 +688,7 @@
 				<p style="font-size:10;">
 					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-					Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+					{{Session::get('kop')}}
 				</p>
 				</td>
 				<td style="width: 25%;font-size: 9;">
@@ -913,7 +913,7 @@
 					<p style="font-size:10;">
 						<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
 						Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
-						Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)
+						{{Session::get('kop')}}
 					</p>
 					</td>
 					
@@ -941,7 +941,7 @@
 					&nbsp;:&nbsp;
 				</td>
 				<td>
-					KLC Cabang Kediri
+					KLC Cabang {{Session::get('kota')}}
 				</td>
 			</tr>
 			<tr>
@@ -952,7 +952,7 @@
 					&nbsp;:&nbsp;
 				</td>
 				<td>
-					Kediri
+					{{Session::get('kota')}}
 				</td>
 			</tr>
 			<tr>
@@ -1044,11 +1044,8 @@
 				<td colspan="4" align="right">
 					<b>Jumlah Berat</b>&nbsp;&nbsp;
 				</td>
-				<td align="center">
-					<b id="berat_volume_pti"></b>
-				</td>
-				<td align="center">
-					<b id="berat_total_pti"></b>
+				<td align="center" colspan="2">
+					<b id="berat_pti"></b>
 				</td>
 			</tr>
 		</table>
@@ -1063,7 +1060,7 @@
 			
 			<tr>
 				<td width="80%" align="center"><b></b></td>
-				<td width="40%" align="center"><b>Kediri, <?php echo date('d-m-y')?></b></td>
+				<td width="40%" align="center"><b>{{Session::get('kota')}}, <?php echo date('d-m-y')?></b></td>
 				
 			</tr>
 			<tr>

@@ -12,7 +12,8 @@ class suratjalanController extends Controller
         $data = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
         ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
-        ->where('resi_pengiriman.kode_jalan','!=',null)
+        ->where([['resi_pengiriman.kode_jalan','!=',null],
+                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->orderby('resi_pengiriman.id','desc')
         ->paginate(30);
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -75,7 +76,7 @@ class suratjalanController extends Controller
         ->max('kode');
 
         if($kode==''){
-            $finalkode = "SJ".$tanggal."-".$kodeuser."-000001";
+            $finalkode = "SJ".Session::get('koderesi')."".$tanggal."-".$kodeuser."-000001";
         }else{
              $caridata = DB::table('surat_jalan')
             ->where('kode',$kode)->get();
@@ -85,7 +86,7 @@ class suratjalanController extends Controller
                 }else{
                     $newkode    = explode("-", $kode);
             $nomer      = sprintf("%06s",$newkode[2]+1);
-            $finalkode  = "SJ".$tanggal."-".$kodeuser."-".$nomer; 
+            $finalkode  = "SJ".Session::get('koderesi')."".$tanggal."-".$kodeuser."-".$nomer; 
                 }
             }
            
@@ -97,7 +98,7 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         $listdata =
         DB::table('surat_jalan')
-        ->where('status','!=','N')
+        ->where([['status','!=','N'],['id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
         ->paginate(40);
         return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
@@ -105,7 +106,8 @@ class suratjalanController extends Controller
 
     //=========================================================================
     public function caridetail($id){
-        $data = DB::table('resi_pengiriman')->where('kode_jalan',$id)->get();
+        $data = DB::table('resi_pengiriman')
+        ->where('kode_jalan',$id)->get();
         return response()->json($data);
     }
 
@@ -120,7 +122,8 @@ class suratjalanController extends Controller
                         ['no_resi','like','%'.$cari.'%'],
                         ['total_biaya','!=',0],
                         ['batal','=','N'],
-                        ['status_antar','=','N']
+                        ['status_antar','=','N'],
+                        ['id_cabang','=',Session::get('cabang')]
                     ])
                     ->whereNull('kode_jalan')
                     ->whereNull('kode_antar')
@@ -137,7 +140,7 @@ class suratjalanController extends Controller
             
             $data = DB::table('vendor')
                     ->select('vendor','id')
-                    ->where('vendor','like','%'.$cari.'%')
+                    ->where([['vendor','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
                     ->get();
             
             return response()->json($data);
@@ -174,7 +177,8 @@ class suratjalanController extends Controller
             DB::table('surat_jalan')
             ->insert([
                 'kode' => $kode,
-                'tgl'  => date('Y-m-d')
+                'tgl'  => date('Y-m-d'),
+                'id_cabang' =>Session::get('cabang')
             ]);
         }
         DB::table('resi_pengiriman')
@@ -230,7 +234,8 @@ class suratjalanController extends Controller
                 'cabang'    => $request->cabang,
                 'status' =>$status,
                 'tgl'=>date('Y-m-d'),
-                'admin'=> session::get('username')
+                'admin'=> session::get('username'),
+                'id_cabang' =>Session::get('cabang')
             ]);
             
         }
@@ -261,10 +266,14 @@ class suratjalanController extends Controller
             $listdata = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
             ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
-            ->where([['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
-            ->orwhere([['resi_pengiriman.no_smu','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
-            ->orwhere([['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
-            ->orwhere([['resi_pengiriman.tgl','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->where([['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
+                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['resi_pengiriman.no_smu','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
+                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
+                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['resi_pengiriman.tgl','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
+                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
             ->get();
          
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -275,9 +284,12 @@ class suratjalanController extends Controller
     public function caridata(Request $request){      
         $cari = $request->cari;
             $listdata = DB::table('surat_jalan')
-            ->where('kode','like','%'.$cari.'%')
-            ->orwhere('tujuan','like','%'.$cari.'%')
-            ->orwhere('tgl','like','%'.$cari.'%')
+            ->where([['kode','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tujuan','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
             ->get();
          
         $webinfo = DB::table('setting')->limit(1)->get();

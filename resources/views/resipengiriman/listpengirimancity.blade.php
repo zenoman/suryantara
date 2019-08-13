@@ -80,7 +80,6 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
-							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
@@ -330,17 +329,6 @@
 					</div>
 				</div>
                             </td>
-                            <td>
-                            @if($row->no_smu=='')
-                                @if($row->total_biaya != 0)
-                                <span class="label label-danger">
-                                kosong
-                                </span>
-                                @endif
-                                @else
-                                {{$row->no_smu}}
-                                @endif
-                            </td>
                             <td>{{$row->tgl}}</td>
                             <td>{{$row->pengiriman_via}}</td>
                             <td>{{$row->nama_barang}}</td>
@@ -411,7 +399,6 @@
 						<tr>
 							<th>No</th>
 							<th>No.Resi</th>
-							<th>Resi/SMU</th>
 							<th>Tanggal</th>
 							<th>Jalur</th>
 							<th>Isi Paket</th>
