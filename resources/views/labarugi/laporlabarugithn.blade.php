@@ -43,24 +43,24 @@
 	                            </tr>
 	                            <?php $i = 1;?>
 	                            <?php $j = 0;?>
-			@foreach($data0 as $ro)
+			@foreach($resi as $ro)
 	            <?php $no = $i++;?>
 	            <?php $n = $j++;?>
-			@foreach($toto0[$n] as $roz)
+			@foreach($totresi[$n] as $roz)
 	                            <tr>
 	                                <td>
 	                                    {{$no}}
 	                                </td>
 	                                <td>{{$ro->nama}}</td>
 	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$ro->tgl}}</span></td>
-	                                <td align="center">{{"Rp ".number_format($roz->totalnya,0,',','.')}}</td>
+	                                <td align="center">{{"Rp ".number_format($roz->toto,0,',','.')}}</td>
 	                            </tr>
 	        @endforeach
 	        @endforeach
 	                        </table>
 	                    </div><!--.box-typical-body-->
 	                        
-	                            	@foreach($tot0 as $ro)
+	                            	@foreach($totresithn as $ro)
 	                        <table class="tbl-typical">
 	                            <tr>
 	                                <td style="text-align: left;"><b><h3>Total</h3></b></font></td>
@@ -97,6 +97,8 @@
 	                                <td class="color-blue-grey" nowrap align="center"><span class="semibold">{{$row->tgl}}</span></td>
 	                                <td align="center">{{"Rp ".number_format($roz0->totalnya,0,',','.')}}</td>
 	                            </tr>
+	                            @endforeach
+	                            @endforeach
 	            
 	                        </table>
 	                    </div><!--.box-typical-body-->
@@ -104,7 +106,7 @@
 	                    <table class="tbl-typical">
 	                            <tr>
 	                                <td style="text-align: left;"><b><h3>Total</h3></b></font></td>
-	                                <td style="text-align: right;"><b>{{"Rp ".number_format($ro->toto + $roa->toto + $ros->toto,0,',','.')}}</b></td>
+	                                <td style="text-align: right;"><b>{{"Rp ".number_format($ro->toto,0,',','.')}}</b></td>
 	                            </tr>
 	                    </table>
 	                            @endforeach
@@ -113,7 +115,7 @@
 	            <div class="col-xl-12 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    
-	                @foreach($tot0 as $ros)
+	                @foreach($totresithn as $ros)
 					@foreach($tot as $ro)
 	                        <table class="tbl-typical">
 	                            <tr>

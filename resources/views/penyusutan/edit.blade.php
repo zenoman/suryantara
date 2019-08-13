@@ -32,7 +32,7 @@
 								name="nama" 
 								placeholder="Masukan Nama Barang"
 								value=" {{$sut->nama}}"
-								required>
+								 >
 							</p>
 							@if($errors->has('nama'))
                             	<div class="alert alert-danger">
@@ -48,7 +48,7 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="harga" required onkeypress="return isNumberKey(event)" value="{{$sut->harga}}">
+								<input type="text" class="form-control" id="inputPassword" name="harga"   onkeypress="return isNumberKey(event)" value="{{$sut->harga}}">
 								
 							</div>
 							@if($errors->has('harga'))
@@ -65,7 +65,7 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="residu" required onkeypress="return isNumberKey(event)" value="{{$sut->residu}}">
+								<input type="text" class="form-control" id="inputPassword" name="residu"   onkeypress="return isNumberKey(event)" value="{{$sut->residu}}">
 								
 							</div>
 							@if($errors->has('residu'))
@@ -79,7 +79,7 @@
 						<label class="col-sm-2 form-control-label semibold">Umur Ekonomis Perbulan</label>
 						<div class="col-sm-10">
 								<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="umurbln" required onkeypress="return isNumberKey(event)" value="{{$sut->umurbln}}">
+								<input type="text" class="form-control" id="inputPassword" name="umurbln"   onkeypress="return isNumberKey(event)" value="{{$sut->umurbln}}">
 								<div class="input-group-addon">
 									Bln
 								</div>
@@ -96,7 +96,7 @@
 						<label class="col-sm-2 form-control-label semibold">Umur Ekonomis Pertahun</label>
 						<div class="col-sm-10">
 								<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="umurthn" required onkeypress="return isNumberKey(event)" value="{{$sut->umurthn}}">
+								<input type="text" class="form-control" id="inputPassword" name="umurthn"   onkeypress="return isNumberKey(event)" value="{{$sut->umurthn}}">
 								<div class="input-group-addon">
 									Bln
 								</div>

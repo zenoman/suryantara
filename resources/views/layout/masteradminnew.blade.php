@@ -106,7 +106,7 @@
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 	                <div class="dropdown dropdown-typical">
-	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                    <span class="font-icon font-icon-cogwheel"></span>
 	                    <span class="lbl">Akutansi</span>
 	                </a>

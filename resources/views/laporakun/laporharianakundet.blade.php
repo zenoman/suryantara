@@ -21,7 +21,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan {{$kat}} tgl {{$tgl}} Sampai {{$tgl0}}</h2>
+							<h2>Laporan @foreach($nama as $row){{$row->nama}}@endforeach tgl {{$tgl}} Sampai {{$tgl0}}</h2>
 						</div>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
@@ -147,7 +147,7 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
@@ -166,7 +166,7 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
@@ -185,7 +185,7 @@
 					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">

@@ -78,16 +78,14 @@ class Penyusutancontroller extends Controller
         $rules = [
                     'nama'  => 'required|min:2',
                     'harga'  => 'required|min:2',
-                    'residu' =>'required',
-                    'umurbln' =>'required',
-                    'umurthn' =>'required',
+                    
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
         'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
 
          ];
-        $penyusutan = $request->harga / $request->umur;
+        $penyusutan = $request->harga / $request->umurbln;
         $this->validate($request,$rules,$customMessages);
         Penyusutan::find($id)->update([
             'nama'  => $request->nama,

@@ -83,24 +83,24 @@
 							<p class="form-control-static">
 								<select class="select2" name="kategori">
 							<option selected disabled hidden>Pilih Kategori</option>
-								@foreach($kate as $row)
-								<option value="{{$row->kode}}">
-									{{$row->nama}}
-								</option>
-								@endforeach
 								@foreach($katers as $ro)
 								<option value="{{$ro->kode}}">
-									{{$ro->nama}}
+									{{$ro->nama}}hay
 								</option>
 								@endforeach
 								@foreach($katesj as $r)
 								<option value="{{$r->kode}}">
-									{{$r->nama}}
+									{{$r->nama}}hay
 								</option>
 								@endforeach
 								@foreach($katepj as $rowa)
 								<option value="{{$rowa->kode}}">
-									{{$rowa->nama}}
+									{{$rowa->nama}}hay
+								</option>
+								@endforeach
+								@foreach($kate as $row)
+								<option value="{{$row->kode}}">
+									{{$row->nama}}
 								</option>
 								@endforeach
 							</select>

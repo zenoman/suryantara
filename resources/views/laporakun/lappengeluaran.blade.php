@@ -31,7 +31,6 @@
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>No Resi</th>
 							<th>Admin</th>
 							<th>Kategori</th>
 							<th>tgl</th>
@@ -47,12 +46,11 @@
                             {{-- @foreach($tot[$n] as $ros) --}}
                         <tr>
 							<td>{{$no}}</td>
-							<td>{{$row->no_resi}}</td>
                             <td>{{$row->admin}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->tgl}}</td>
-							<td>{{number_format($row->total_biaya)}}</td>
-							<td class="tdtot">{{$row->total_biaya}}</td>
+							<td>{{number_format($row->jumlah)}}</td>
+							<td class="tdtot">{{$row->jumlah}}</td>
                         </tr>
 						{{-- @endforeach --}}
 						@endforeach
@@ -121,7 +119,7 @@
 		var table=document.getElementById('example'),sumval=0;
 		for(var i=1;i<table.rows.length;i++){
 			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
 		}
 		document.getElementById('toata').innerHTML=numberWithCommas(sumval);
 		
