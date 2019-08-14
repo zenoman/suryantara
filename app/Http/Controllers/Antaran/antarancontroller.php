@@ -121,6 +121,11 @@ class antarancontroller extends Controller
             'status_antar'=>'P',
             'status_pengiriman'=>'menuju alamat tujuan'
         ]);
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->kode,
+            'status'=>'menuju alamat tujuan'
+        ]);
     }
 
     //=============================================================

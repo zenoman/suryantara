@@ -26,7 +26,7 @@
 						<div class="tbl-cell">
 							<h2>Ganti Password </h2>
 						</div>
-					</div>
+                    </div>
 				</div>
 			</header>
 			<div class="box-typical box-typical-padding">
