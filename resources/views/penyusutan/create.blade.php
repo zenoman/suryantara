@@ -31,7 +31,7 @@
 								class="form-control"
 								name="nama" 
 								placeholder="Masukan Nama Barang"
-								required>
+								 >
 							</p>
 							@if($errors->has('nama'))
                             	<div class="alert alert-danger">
@@ -47,7 +47,7 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="harga" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								<input type="text" class="form-control" id="inputPassword" name="harga"   onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
 								
 							</div>
 							@if($errors->has('harga'))
@@ -64,7 +64,7 @@
 								<div class="input-group-addon">
 									Rp.
 								</div>
-								<input type="text" class="form-control" id="inputPassword" name="harga" required onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
+								<input type="text" class="form-control" id="inputPassword" name="harga"   onkeypress="return isNumberKey(event)" placeholder="Misal : Rp 30000">
 								
 							</div>
 							@if($errors->has('harga'))
@@ -78,7 +78,7 @@
 						<label class="col-sm-2 form-control-label semibold">Umur Ekonomis Perbulan</label>
 						<div class="col-sm-10">
 								<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="umurbln" required onkeypress="return isNumberKey(event)" placeholder="Misal : 5 bln">
+								<input type="text" class="form-control" id="inputPassword" name="umurbln"   onkeypress="return isNumberKey(event)" placeholder="Misal : 5 bln">
 								<div class="input-group-addon">
 									/Bln
 								</div>
@@ -95,7 +95,7 @@
 						<label class="col-sm-2 form-control-label semibold">Umur Ekonomis Tahun</label>
 						<div class="col-sm-10">
 								<div class="input-group">
-								<input type="text" class="form-control" id="inputPassword" name="umurthn" required onkeypress="return isNumberKey(event)" placeholder="Misal : 5 bln">
+								<input type="text" class="form-control" id="inputPassword" name="umurthn"   onkeypress="return isNumberKey(event)" placeholder="Misal : 5 bln">
 								<div class="input-group-addon">
 									/Thn
 								</div>

@@ -27,17 +27,17 @@ class LabarugiController extends Controller
             ->get();
         $kategorirs = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->groupby('resi_pengiriman.katakun')
             ->get();
         $kategorisj = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->groupby('surat_jalan.katakun')
             ->get();
         $kategoripj = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->groupby('pajak.katakun')
             ->get();
 
@@ -85,7 +85,7 @@ class LabarugiController extends Controller
             ->get();
             $pengsj = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->whereBetween('tgl',[$tgl,$tgl0])
             ->paginate(40);
 
@@ -96,32 +96,20 @@ class LabarugiController extends Controller
             ->get();
             $pengpj = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
             ->paginate(40);
+
             $pengotopj = DB::table('pajak')
             ->select(DB::raw('SUM(total) as toto'))
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
             ->get();
 
-            $data0 =DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->paginate(40);
-            $totdat0 = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->get();
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
@@ -129,12 +117,12 @@ class LabarugiController extends Controller
             ->whereBetween('tgl_lunas',[$tgl,$tgl0])
             ->get();
             $webinfo = DB::table('setting')->limit(1)->get();
-            return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'kluar'=>$pengsj,'totkluar'=>$pengoto,'pjk'=>$pengpj,'totpjk'=>$pengotopj,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
-        }else if($kate == 14){
-            $kategor = "tdksemua";
+            return view('labarugi/laporlabarugi',['tot'=>$totdat,'data'=>$data,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'kluar'=>$pengsj,'totkluar'=>$pengoto,'pjk'=>$pengpj,'totpjk'=>$pengotopj,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
+        }else if($kate == 233){
+            $kategor = "surjal";
             $peng = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->whereBetween('tgl',[$tgl,$tgl0])
             ->where('surat_jalan.katakun','=',$kate)
             ->paginate(40);
@@ -146,7 +134,7 @@ class LabarugiController extends Controller
             ->get();
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
             ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
@@ -168,15 +156,16 @@ class LabarugiController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
             ->get();
+
         $webinfo = DB::table('setting')->limit(1)->get();
             return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$pengoto,'data'=>$peng,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
 
-            }else if($kate==15){
+            }else if($kate ==211){
                 $kategor = "pjk";
 //======================================================pajak
             $peng = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->whereBetween('bulan',[$bln,$bln0])
             ->where('pajak.katakun','=',$kate)
             ->paginate(40);
@@ -188,7 +177,7 @@ class LabarugiController extends Controller
 //====================================================resi pengiriman
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
             ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
@@ -211,6 +200,7 @@ class LabarugiController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
             ->get();
+
         $webinfo = DB::table('setting')->limit(1)->get();
             return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$pengoto,'data'=>$peng,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
             }else{
@@ -228,16 +218,15 @@ class LabarugiController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where('pengeluaran_lain.kategori','=',$kate)
             ->get();
+
             $dapat = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->whereBetween('resi_pengiriman.tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',1)
             ->paginate(40);
             $dapatoto = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as toto'))
             ->whereBetween('tgl_lunas',[$tgl,$tgl0])
-            ->where('resi_pengiriman.katakun','=',1)
             ->get();
 
             $data0 =DB::table('pengeluaran_lain')
@@ -253,11 +242,12 @@ class LabarugiController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
             ->get();
+            // dd($data);
         $webinfo = DB::table('setting')->limit(1)->get();
-            return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'kat'=>$kategor]);
+            return view('labarugi/laporlabarugi',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'kate'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'ttg'=>$tgll,'dapat'=>$dapat,'totdapat'=>$dapatoto,'kat'=>$kategor]);
+
 
         }
-
     // return view('labarugi/laporlabarugi',['data0'=>$data0,'data'=>$data,'title'=>$webinfo]);
     }
 
@@ -294,31 +284,32 @@ class LabarugiController extends Controller
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->get();
 
-            $data0 =DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->groupby('pengeluaran_lain.kategori')
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->paginate(40);
-            foreach ($data0 as $ross) {
-            $total0[] = DB::table('pengeluaran_lain')
-            ->select(DB::raw('SUM(jumlah) as totalnya'))
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->where('pengeluaran_lain.kategori','=',$ross->kategori)
-            ->get();
-            }
-            $totdat0 = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->get();
+            // $data0 =DB::table('pengeluaran_lain')
+            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->groupby('pengeluaran_lain.kategori')
+            // ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
+            // ->paginate(40);
+            // dd($data0);
+            // foreach ($data0 as $ross) {
+            // $total0[] = DB::table('pengeluaran_lain')
+            // ->select(DB::raw('SUM(jumlah) as totalnya'))
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->where('pengeluaran_lain.kategori','=',$ross->kategori)
+            // ->get();
+            // }
+            // $totdat0 = DB::table('pengeluaran_lain')
+            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            // ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
+            // ->get();
 
             $peng = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->whereYear('tgl',[$tgl])
             ->paginate(40);
             foreach ($peng as $r) {
@@ -333,7 +324,7 @@ class LabarugiController extends Controller
             ->get();
             $pengpj = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->where('tahun',$tgl)
             ->paginate(40);
             foreach ($pengpj as $ra) {
@@ -349,7 +340,7 @@ class LabarugiController extends Controller
 
             $dapatrp = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->whereYear('resi_pengiriman.tgl_lunas',$tgl)
             ->paginate(40);
             foreach ($dapatrp as $ras) {
@@ -362,8 +353,10 @@ class LabarugiController extends Controller
             ->select(DB::raw('SUM(total_biaya) as toto'))
             ->whereYear('tgl_lunas',$tgl)
             ->get();
+            // dd($data0);
         $webinfo = DB::table('setting')->limit(1)->get();
-return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'tgl'=>$tgl,'thn'=>$thn,'toto'=>$total,'toto0'=>$total0, 'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
+// return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'tgl'=>$tgl,'thn'=>$thn,'toto'=>$total,'toto0'=>$total0, 'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
+return view('labarugi/laporlabarugithn',['tot'=>$totdat,'data'=>$data,'title'=>$webinfo,'tgl'=>$tgl,'thn'=>$thn,'toto'=>$total, 'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
     }
 
 
@@ -392,31 +385,31 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
             ->get();
 
-            $data0 =DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->groupby('pengeluaran_lain.kategori')
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->paginate(40);
-            foreach ($data0 as $ross) {
-            $total0[] = DB::table('pengeluaran_lain')
-            ->select(DB::raw('SUM(jumlah) as totalnya'))
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->where('pengeluaran_lain.kategori','=',$ross->kategori)
-            ->get();
-            }
-            $totdat0 = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereYear('pengeluaran_lain.tgl',$tgl)
-            ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
-            ->get();
+            // $data0 =DB::table('pengeluaran_lain')
+            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->groupby('pengeluaran_lain.kategori')
+            // ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
+            // ->paginate(40);
+            // foreach ($data0 as $ross) {
+            // $total0[] = DB::table('pengeluaran_lain')
+            // ->select(DB::raw('SUM(jumlah) as totalnya'))
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->where('pengeluaran_lain.kategori','=',$ross->kategori)
+            // ->get();
+            // }
+            // $totdat0 = DB::table('pengeluaran_lain')
+            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            // ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            // ->whereYear('pengeluaran_lain.tgl',$tgl)
+            // ->where([['tb_kategoriakutansi.status','=','pendapatan'],['pengeluaran_lain.kategori','!=','012']])
+            // ->get();
 
              $peng = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->groupby('surat_jalan.katakun')
             ->whereYear('tgl',[$tgl])
             ->paginate(40);
@@ -434,7 +427,7 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
 
             $pengpj = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->groupby('pajak.katakun')
             ->where('tahun','=',$tgl)
             ->paginate(40);
@@ -451,7 +444,7 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
 
             $dapatrp = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->groupby('resi_pengiriman.katakun')
             ->whereYear('resi_pengiriman.tgl_lunas',$tgl)
             ->paginate(40);
@@ -467,6 +460,6 @@ return view('labarugi/laporlabarugithn',['tot0'=>$totdat0,'tot'=>$totdat,'data'=
             ->whereYear('tgl_lunas',$tgl)
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-    return view('labarugi/printlaba',['tot0'=>$totdat0,'tot'=>$totdat,'data'=>$data,'data0'=>$data0,'title'=>$webinfo,'thn'=>$thn,'toto'=>$total,'toto0'=>$total0,'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
+    return view('labarugi/printlaba',['tot'=>$totdat,'data'=>$data,'title'=>$webinfo,'thn'=>$thn,'toto'=>$total,'surat'=>$peng,'totsurat'=>$totalsr,'totsuratthn'=>$pengoto,'pajak'=>$pengpj,'totpajak'=>$totalpj,'totpajakthn'=>$pengotopj,'resi'=>$dapatrp,'totresi'=>$totalrp,'totresithn'=>$dapatoto]);
     }
 }

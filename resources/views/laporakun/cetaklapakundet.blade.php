@@ -49,7 +49,7 @@
                             <td align="center">{{$row->bulan}}-{{$row->tahun}}</td>
                             @else
                             <td align="center">{{$row->tgl}}</td>
-                            @@endif
+                            @endif
 							<td align="center">{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
                           
 						</tr>
@@ -59,7 +59,7 @@
 						</tbody>
 					</table>
 					@foreach($tose as $ttl)
-					<p>Total : <b>{{"Rp ".number_format($ttl->toto,0,',','.')}}</b></p>
+					<p>Total : <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></p>
 					@endforeach
 </body>
 </html>

@@ -435,8 +435,8 @@ class Dashboardcontroller extends Controller {
         }
         $data = DB::table('surat_jalan')
         ->select(DB::raw('SUM(totalcash) as totalnya'))
-        ->whereMonth('tgl_bayar',$bulan)
-        ->whereYear('tgl_bayar',$tahun)
+        ->whereMonth('tgl',$bulan)
+        ->whereYear('tgl',$tahun)
         ->get();
          foreach ($data as $row) {
             $newdata = $row->totalnya;
