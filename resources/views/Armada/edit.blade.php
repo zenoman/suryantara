@@ -100,6 +100,20 @@
 							</div>
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Cabang</label>
+						<div class="col-sm-10">
+
+							<div class="input-group">
+							<select class="form-control" name="cabang">
+								@foreach($cabang as $row2)
+								<option value="{{$row2->id}}" @if($row->id_cabang==$row2->id) selected @endif>{{$row2->nama}}</option>
+								@endforeach
+								
+							</select>
+							</div>
+						</div>
+					</div>
 					<input type="hidden" name="_method" value="PUT">
 					{{csrf_field()}}
 					<div class="text-right">
