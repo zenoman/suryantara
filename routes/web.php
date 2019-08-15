@@ -1,5 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//=============================================tarif_citykurier
+Route::post('/trfcity/hapuspilihan','trfcity\trf_city@haphapus');
+Route::get('/trfcity/hapussemua','trfcity\trf_city@hapusall');
+Route::get('/caritrfcity','trfcity\trf_city@caridata');
+Route::resource('/trfcity','trfcity\trf_city');
+
 //=============================================cabang
 Route::resource('/cabang','cabang\cabangcontroller');
 Route::get('/exsportcabang','cabang\cabangcontroller@exsportdata');

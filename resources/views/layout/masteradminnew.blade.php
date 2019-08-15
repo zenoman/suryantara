@@ -141,14 +141,23 @@
 				
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
+
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
+
 				<div class="dropdown-divider"></div>
-				 <span class="nav-link dropdown-toggle" data-toggle="dropdown">Inventaris</span>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/armada')}}">Armada</a>
+				<a class="dropdown-item" href="{{url('trfdarat')}}">Tarif Darat</a>
+				<a class="dropdown-item" href="{{url('trfcity')}}">Tarif City Kurier</a>
+				<a class="dropdown-item" href="{{url('trflaut')}}">Tarif Laut</a>
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tarif Udara</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{{url('trfudara')}}">Tarif Udara</a>
+					<a class="dropdown-item" href="{{url('kat_bar')}}">Special Charge</a>
+				</div>
+
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
 				
-			</div><p></p>
 				@if(Session::get('level') == 'programer')
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
@@ -188,20 +197,7 @@
 			</div>
 		</li>
 		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tarif Pengiriman</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('trfdarat')}}">Tarif Darat</a>
-				<a class="dropdown-item" href="{{url('trflaut')}}">Tarif Laut</a>
-	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Udara</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('trfudara')}}">Tarif Udara</a>
-				<a class="dropdown-item" href="{{url('kat_bar')}}">Special Charge</a>
-			</div>
-			</div>
-		</li>
-		@endif
+	
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
@@ -219,9 +215,7 @@
 				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
 				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
 			</div><p></p>
-	                                <!-- <a class="dropdown-item" href="{{url('/omset')}}">omset</a> -->
-			
-			</div>
+	       	</div>
 		</li>
 		@endif
 	</ul>

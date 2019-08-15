@@ -16,6 +16,7 @@ class Trf_daratcontroller extends Controller{
         $tarif_darat=DB::table('tarif_darat')
         ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
         ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
+        ->where('tarif_darat.tarif_city','=','N')
         ->orderby('tarif_darat.id','desc')
         ->paginate(20);
 
@@ -23,8 +24,8 @@ class Trf_daratcontroller extends Controller{
         return view('trfdarat/index',['trf_drt'=>$tarif_darat,'title'=>$setting]);
     }
     //=========================================================
-   public function importexcel (){
-$setting = DB::table('setting')->get();
+    public function importexcel (){
+    $setting = DB::table('setting')->get();
         return view('trfdarat/importexcel',['title'=>$setting]);
     }
       //=========================================================
@@ -52,15 +53,15 @@ $setting = DB::table('setting')->get();
     }
     //=========================================================
 
-public function caridata(Request $request)
+    public function caridata(Request $request)
     {
         $url = $request->fullurl();
         $cari=$request->cari;
         $trf_drt = DB::table('tarif_darat')
         ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
         ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
-        ->where('tarif_darat.tujuan','like','%'.$cari.'%')
-        ->orwhere('tarif_darat.kode','like','%'.$cari.'%')
+        ->where([['tarif_darat.tujuan','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','N']])
+        ->orwhere([['tarif_darat.kode','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','N']])
         ->orderby('tarif_darat.id','desc')
         ->get();
         $setting = DB::table('setting')->get();
@@ -153,7 +154,7 @@ public function caridata(Request $request)
     //=========================================================
     public function haphapus(Request $request)
         {
-                 if(!$request->pilihid){
+            if(!$request->pilihid){
                     return back()->with('statuserror','Tidak ada data yang dipilih');
                 }else{
             foreach ($request->pilihid as $id) { 
@@ -165,7 +166,7 @@ public function caridata(Request $request)
     //=========================================================
     public function hapusall()
     {
-        Trf_daratmodel::truncate();
+        DB::table('tarif_darat')->where('tarif_city','N')->delete();
         return back()->with('status','Hapus Data Sukses');
     }
 }

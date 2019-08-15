@@ -148,21 +148,23 @@ INSERT INTO `gaji_karyawan` (`id`, `kode_karyawan`, `nama_karyawan`, `id_jabatan
 DROP TABLE IF EXISTS `jabatan`;
 CREATE TABLE IF NOT EXISTS `jabatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jabatan` varchar(40) NOT NULL,
-  `gaji_pokok` varchar(20) NOT NULL,
-  `uang_makan` varchar(20) NOT NULL,
-  `status` enum('1','0') NOT NULL DEFAULT '0',
+  `jabatan` varchar(40) DEFAULT NULL,
+  `gaji_pokok` varchar(20) DEFAULT NULL,
+  `uang_makan` varchar(20) DEFAULT NULL,
+  `status` enum('1','0') DEFAULT '0',
+  `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.jabatan: ~4 rows (approximately)
+-- Dumping data for table kargo.jabatan: ~5 rows (approximately)
 DELETE FROM `jabatan`;
 /*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
-INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`, `status`) VALUES
-	(1, 'Base Managger', '400000', '30000', '1'),
-	(24, 'Staff', '400000', '30000', '0'),
-	(25, 'Staff Keuangan Pusat', '500000', '30000', '0'),
-	(26, 'Staff Keuangan Cabang', '400000', '30000', '0');
+INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`, `status`, `id_cabang`) VALUES
+	(1, 'Base Managger', '400000', '30000', '1', 1),
+	(24, 'Staff', '400000', '30000', '0', 1),
+	(25, 'Staff Keuangan Pusat', '500000', '30000', '0', 1),
+	(26, 'Staff Keuangan Cabang', '400000', '30000', '0', 1),
+	(27, 'manager cabang', '20000', '3000', '1', 2);
 /*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.karyawan
@@ -265,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `pajak_armada` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.pajak_armada: ~5 rows (approximately)
+-- Dumping data for table kargo.pajak_armada: ~7 rows (approximately)
 DELETE FROM `pajak_armada`;
 /*!40000 ALTER TABLE `pajak_armada` DISABLE KEYS */;
 INSERT INTO `pajak_armada` (`id`, `id_armada`, `nama_pajak`, `tgl_bayar`, `tgl_kadaluarsa`, `tgl_peringatan`) VALUES
@@ -553,16 +555,20 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `berat_min` int(11) DEFAULT NULL,
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
+  `tarif_city` enum('Y','N') DEFAULT 'N',
+  `company` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_darat: ~3 rows (approximately)
 DELETE FROM `tarif_darat`;
 /*!40000 ALTER TABLE `tarif_darat` DISABLE KEYS */;
-INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`) VALUES
-	(13, 'darat00001', 'malang kidul', 34000, 3, '2', 1),
-	(14, 'darat00002', 'kediri lor', 34000, 3, '2', 2),
-	(15, 'darat00003', 'nganjuk', 50000, 3, '2', 2);
+INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`, `tarif_city`, `company`) VALUES
+	(13, 'darat00001', 'malang kidul', 34000, 3, '2', 1, 'N', 'N'),
+	(15, 'darat00003', 'nganjuk', 50000, 3, '2', 2, 'N', 'N'),
+	(16, 'cty001', 'kec. pagu', 10000, 5, '0', 1, 'Y', 'Y'),
+	(18, 'cty003', 'kec. ngancar', 2000, 1, '1', 1, 'Y', 'N'),
+	(19, 'cty004', 'kec. ngancaraar', 2000, 1, '1', 2, 'Y', 'Y');
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_laut
