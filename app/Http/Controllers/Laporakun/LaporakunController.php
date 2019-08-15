@@ -66,14 +66,14 @@ class LaporakunController extends Controller
             ->get();
             
             } 
-            $totsemua = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            // ->groupby('pengeluaran_lain.tgl')
-            ->get();
+            // $totsemua = DB::table('pengeluaran_lain')
+            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
+            // ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
+            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+            // ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+            // ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            // // ->groupby('pengeluaran_lain.tgl')
+            // ->get();
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('laporakun/lappengeluaran',['kat'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo]);
         }
@@ -105,7 +105,7 @@ class LaporakunController extends Controller
             ->get();      
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('laporakun/cetaklapakun',['kat'=>$kat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tot'=>$total,'data'=>$data,'title'=>$webinfo
-            ]);     
+            ]);   
         }else{
         $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))

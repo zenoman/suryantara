@@ -45,15 +45,16 @@
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-						@foreach($totsurat[$n] as $ros)
+						{{-- @foreach($totsurat[$n] as $ros) --}}
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->admin}}</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->tgl}}</td>
 							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
+							<td class="tdtot">{{$row->total_biaya}}</td>
                         </tr>
-						@endforeach
+						{{-- @endforeach --}}
 						@endforeach
 <!-- ===================================================== -->
 
@@ -61,7 +62,7 @@
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
-								@foreach($totpajak[$n] as $ros)
+								{{-- @foreach($totpajak[$n] as $ros) --}}
 		                        <tr>
 		                            <td>{{$no}}</td>
 		                            <td>{{$row->admin}}</td>
@@ -69,7 +70,7 @@
 		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
 									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
 		                        </tr>
-								@endforeach
+								{{-- @endforeach --}}
 								@endforeach
 <!-- ===================================================== -->
 
@@ -77,7 +78,7 @@
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
-								@foreach($totresi[$n] as $ros)
+								{{-- @foreach($totresi[$n] as $ros) --}}
 		                        <tr>
 		                            <td>{{$no}}</td>
 		                            <td>{{$row->admin}}</td>
@@ -85,7 +86,7 @@
 		                            <td>{{$row->tgl_lunas}}</td>
 									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
 		                        </tr>
-								@endforeach
+								{{-- @endforeach --}}
 								@endforeach
 <!-- ===================================================== -->
 
@@ -93,7 +94,7 @@
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-                            @foreach($tot[$n] as $ros)
+                            {{-- @foreach($tot[$n] as $ros) --}
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->admin}}</td>
@@ -101,7 +102,7 @@
                             <td>{{$row->tgl}}</td>
 							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
                         </tr>
-						@endforeach
+						{{-- @endforeach --}
 						@endforeach
 
 						@endif
@@ -216,7 +217,20 @@
             "paging":false
         });
 		});
+		$('document').ready(function(){
+			$('.tdtot').hide();
+		});
+		// Call Sum
+		function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 
+		var table=document.getElementById('example'),sumval=0;
+		for(var i=1;i<table.rows.length;i++){
+			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
+		}
+		document.getElementById('toata').innerHTML=numberWithCommas(sumval);
 		
 	</script>
 	@endsection
