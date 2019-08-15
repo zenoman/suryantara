@@ -154,6 +154,20 @@ function del(no) {
 							</div>
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Cabang</label>
+						<div class="col-sm-10">
+
+							<div class="input-group">
+							<select class="form-control" name="cabang">
+								@foreach($cabang as $row)
+								<option value="{{$row->id}}">{{$row->nama}}</option>
+								@endforeach
+								
+							</select>
+							</div>
+						</div>
+					</div>
 					{{csrf_field()}}
 					<hr>
 					<div class="form-group row">

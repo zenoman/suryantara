@@ -20,22 +20,29 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Resi Pengiriman Darat</h2>
+							<h2>Buat Resi City Kurier Company</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<div class="loading-div" id="panelnya">
 			<div class="box-typical box-typical-padding">
-					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
-						<div class="col-md-6 col-sm-6">
+						<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">No. Resi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="koderesi" autofocus>
+							</div>
+						</div>
+					</div>
+						<div class="col-md-3 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang" autofocus>
+								<input type="text" class="form-control" id="nama_barang">
 							</div>
 						</div>
 					</div>
@@ -113,14 +120,14 @@
 
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
+							<label class="form-label" for="exampleInputDisabled">Daerah Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal" value="{{session::get('kota')}}" readonly>
+								<input type="text" value="{{session::get('kota')}}" readonly class="form-control" id="kota_asal" >
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
-						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
+						<label class="form-label" for="exampleInputDisabled">Daerah Tujuan</label>
 						<select class="select2" id="kota_tujuan"></select>
 					</div>
 					</div>
@@ -250,7 +257,7 @@
 							<small class="text-muted">
 								<!-- <button class="btn btn-success" type="button" id="btncetak"> Cetak</button> -->
 
-								<button class="btn btn-primary ladda-button" type="button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 								<div class="pull-right">
 									<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>
@@ -263,7 +270,7 @@
 			</div>
 		</div>
 		</div>
-	@include('cetakresi.residarat')
+	@include('cetakresi.resicitykurier')
 	</div>
         @endsection
 @section('js')
@@ -276,7 +283,7 @@
 
 @section('otherjs')
 <script src="{{asset('assets/js/loading.js')}}"></script>
-<script src="{{asset('assets/js/resi.js')}}"></script>
+<script src="{{asset('assets/js/resicitycmp.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey2(evt)
       {

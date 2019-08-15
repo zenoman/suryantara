@@ -43,6 +43,7 @@
 							<th>Nama</th>
 							<th>Nopol</th>
 							<th>Warna</th>
+							<th>Cabang</th>
 							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
@@ -52,6 +53,7 @@
 							<th>Nama</th>
 							<th>Nopol</th>
 							<th>Warna</th>
+							<th>Cabang</th>
 							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
@@ -71,6 +73,7 @@
                             </td>
                             <td>{{$row->nopol}}</td>
                             <td>{{$row->warna}}</td>
+                            <td>{{$row->namacabang}}</td>
                             <td class="text-center">
                             	<a href="{{url('armada/'.$row->id.'/bayarpajak')}}" class="btn btn-success btn-sm">
 								<i class="fa fa-money"></i>

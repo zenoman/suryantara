@@ -76,6 +76,11 @@ class resipengirimanController extends Controller
           $webinfo = DB::table('setting')->limit(1)->get();
         return view('resipengiriman/resicitykurier',['webinfo'=>$webinfo]);
     }
+    //==============================================================
+    public function resicitykuriercmp(){
+          $webinfo = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman/resicitykuriercmp',['webinfo'=>$webinfo]);
+    }
     //=============================================================
     public function listpengirimanbatal(){
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -291,6 +296,19 @@ class resipengirimanController extends Controller
             $data = DB::table('tarif_darat')
                     ->select('tujuan','id')
                     ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
+    //===================================================================
+    public function carikotacity(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('tarif_darat')
+                    ->select('tujuan','id')
+                    ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')],['tarif_city','=','Y'],['company','=','N']])
                     ->get();
             
             return response()->json($data);

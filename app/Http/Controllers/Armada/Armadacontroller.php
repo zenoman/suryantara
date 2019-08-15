@@ -99,13 +99,17 @@ class Armadacontroller extends Controller
     //===========================================================
     public function index(){
     	$webset = DB::table('setting')->limit(1)->get();
-    	$data = DB::table('armada')->orderby('id','desc')->get();
+    	$data = DB::table('armada')
+        ->select(DB::raw('armada.*,cabang.nama as namacabang'))
+        ->leftjoin('cabang','cabang.id','=','armada.id_cabang')
+        ->orderby('armada.id','desc')->get();
     	return view('Armada/index',['title'=>$webset,'armada'=>$data]);
     }
     //=================================================================
     public function create(){
     	$webset = DB::table('setting')->limit(1)->get();
-    	return view('Armada/create',['title'=>$webset]);
+        $cabang = DB::table('cabang')->get();
+    	return view('Armada/create',['title'=>$webset,'cabang'=>$cabang]);
     }
     //=================================================================
     public function store(Request $request){
@@ -116,7 +120,8 @@ class Armadacontroller extends Controller
     		'nopol'			=> $request->nopol,
     		'nomor_rangka'	=> $request->norangka,
     		'nomor_mesin'	=> $request->nomesin,
-    		'warna'			=> $request->warna
+    		'warna'			=> $request->warna,
+            'id_cabang'     => $request->cabang
     	]);
 
         $data=$request->pajak;
@@ -139,8 +144,9 @@ class Armadacontroller extends Controller
     public function edit($id){
     	$data = DB::table('armada')->where('id',$id)->get();
         $datapajak = DB::table('pajak_armada')->where('id_armada',$id)->get();
+        $cabang = DB::table('cabang')->get();
     	$webset = DB::table('setting')->limit(1)->get();
-    	return view('Armada/edit',['armada'=>$data,'title'=>$webset,'datapajak'=>$datapajak]);
+    	return view('Armada/edit',['armada'=>$data,'title'=>$webset,'datapajak'=>$datapajak,'cabang'=>$cabang]);
     }
     //==================================================================
     public function update($id, Request $request){
@@ -151,7 +157,8 @@ class Armadacontroller extends Controller
     		'nopol'			=> $request->nopol,
     		'nomor_rangka'	=> $request->norangka,
     		'nomor_mesin'	=> $request->nomesin,
-    		'warna'			=> $request->warna
+    		'warna'			=> $request->warna,
+            'id_cabang'     => $request->cabang
     	]);
 
     return redirect('armada')->with('status','Data Berhasil Di edit');

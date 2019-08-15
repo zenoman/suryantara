@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Resi City Kurier</h2>
+							<h2>Buat Resi City Kurier Personal</h2>
 						</div>
 					</div>
 				</div>

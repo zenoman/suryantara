@@ -18,9 +18,6 @@ $(document).ready(function(){
 			$('#status_bayar').prop('disabled', false);
 		}
 	})
-	//=============================================cari kode
-		carikode();
-
 	//=============================================cari kota tujuan
 		$('#kota_tujuan').select2({
 		placeholder: 'Cari kota tujuan',
@@ -80,24 +77,7 @@ $(document).ready(function(){
 		$("#kota_tujuan").on('select2:close',function(e){
 			$('#n_pengirim').focus();
 		});
-	//============================================ cari kode
-		function carikode(){
-			$('#panelnya').loading('toggle');
-			$.ajax({
-			url:'/carikode',
-			dataType:'json',
-			success:function(data){
-				noresi = data;
-				$("#noresi").html(data);
-				$("#cetak_resi").html(data);
-				$("#cetak_resi2").html(data);
-				$("#cetak_resi3").html(data);
-				$("#cetak_resi4").html(data);
-			},complete:function(){
-                $('#panelnya').loading('stop');
-            }
-		});
-		}
+	
 	//============================================ hitung estimasi tujuan
 		function hitung(harga,tujuan){
 			var berat = $("#berat").val();
