@@ -53,7 +53,7 @@
                             <td>{{$row->tgl}}</td>
 							<td>{{number_format($row->total_biaya)}}</td>
 							<td class="tdtot">{{$row->total_biaya}}</td>
-                        </tr>
+                        </tr> 
 						{{-- @endforeach --}}
 						@endforeach
 						</tbody>

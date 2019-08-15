@@ -23,17 +23,18 @@ class LaporakunDetController extends Controller
             ->get();
         $kategorirs = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','resi_pengiriman.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','resi_pengiriman.katakun')
             ->groupby('resi_pengiriman.katakun')
             ->get();
+            // dd($kategorirs);
         $kategorisj = DB::table('surat_jalan')
             ->select(DB::raw('surat_jalan.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','surat_jalan.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','surat_jalan.katakun')
             ->groupby('surat_jalan.katakun')
             ->get();
         $kategoripj = DB::table('pajak')
             ->select(DB::raw('pajak.*,tb_kategoriakutansi.nama,tb_kategoriakutansi.kode'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.id','=','pajak.katakun')
+            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pajak.katakun')
             ->groupby('pajak.katakun')
             ->get();
         // dd($kategorirs);
@@ -71,8 +72,9 @@ class LaporakunDetController extends Controller
             ->groupby('surat_jalan.katakun')
             ->whereYear('tgl',[$tgl])
             ->paginate(40);
+            $totalsr =0;
             foreach ($peng as $r) {
-            $totalsr[] = DB::table('surat_jalan')
+            $totalsr  = DB::table('surat_jalan')
             ->select(DB::raw('SUM(totalcash) as totalnya'))
             ->where('katakun','=',$r->katakun)
             ->get();
@@ -99,8 +101,9 @@ class LaporakunDetController extends Controller
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
             ->paginate(40);
+            $totalpj=0;
             foreach ($pengpj as $ra) {
-            $totalpj[] = DB::table('pajak')
+            $totalpj  = DB::table('pajak')
             ->select(DB::raw('SUM(total) as totalnya'))
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
@@ -127,8 +130,9 @@ class LaporakunDetController extends Controller
             ->groupby('resi_pengiriman.katakun')
             ->whereYear('tgl_lunas',$tgl)
             ->paginate(40);
+            $totalrp=0;
             foreach ($dapatrp as $ras) {
-            $totalrp[] = DB::table('resi_pengiriman')
+            $totalrp  = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))
             ->whereYear('tgl_lunas',$tgl)
             ->where('katakun','=',$ras->katakun)
@@ -154,9 +158,10 @@ class LaporakunDetController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where('pengeluaran_lain.kategori','=',$kate)
             ->paginate(40);
+            $total=0;
             foreach ($data as $ros) {
                 # code...
-            $total[] = DB::table('pengeluaran_lain')
+            $total  = DB::table('pengeluaran_lain')
             ->select(DB::raw('SUM(jumlah) as totalnya'))
             ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
             ->get();
@@ -201,8 +206,9 @@ class LaporakunDetController extends Controller
             ->groupby('surat_jalan.katakun')
             ->whereYear('tgl',[$tgl])
             ->paginate(40);
+            $totalsr=0;
             foreach ($peng as $r) {
-            $totalsr[] = DB::table('surat_jalan')
+            $totalsr  = DB::table('surat_jalan')
             ->select(DB::raw('SUM(totalcash) as totalnya'))
             ->where('katakun','=',$r->katakun)
             ->get();
@@ -230,8 +236,9 @@ class LaporakunDetController extends Controller
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
             ->paginate(40);
+            $totalpj=0;
             foreach ($pengpj as $ra) {
-            $totalpj[] = DB::table('pajak')
+            $totalpj  = DB::table('pajak')
             ->select(DB::raw('SUM(total) as totalnya'))
             ->whereBetween('bulan',[$bln,$bln0])
             ->whereBetween('tahun',[$thn,$thn0])
@@ -259,8 +266,9 @@ class LaporakunDetController extends Controller
             ->groupby('resi_pengiriman.katakun')
             ->whereYear('tgl_lunas',$tgl)
             ->paginate(40);
+            $totalrp=0;
             foreach ($dapatrp as $ras) {
-            $totalrp[] = DB::table('resi_pengiriman')
+            $totalrp  = DB::table('resi_pengiriman')
             ->select(DB::raw('SUM(total_biaya) as totalnya'))
             ->whereYear('tgl_lunas',$tgl)
             ->where('katakun','=',$ras->katakun)
@@ -284,9 +292,10 @@ class LaporakunDetController extends Controller
             ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
             ->where('pengeluaran_lain.kategori','=',$kate)
             ->paginate(40);
+            $total=0;
             foreach ($data as $ros) {
                 # code...
-            $total[] = DB::table('pengeluaran_lain')
+            $total  = DB::table('pengeluaran_lain')
             ->select(DB::raw('SUM(jumlah) as totalnya'))
             ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
             ->get();

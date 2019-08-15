@@ -23,13 +23,11 @@ class backupController extends Controller
         return view('backup/index',['title'=>$webinfo]);
         }else{
             return redirect('/dashboard');
-        }
-    	
+        }    	
     }
 
     public function tampil(Request $request){
-
-    	
+	
     	$bulan = $request->bulan;
     	$tahun = $request->tahun;
     	$webinfo = DB::table('setting')->limit(1)->get();

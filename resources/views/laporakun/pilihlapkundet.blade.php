@@ -85,17 +85,17 @@
 							<option selected disabled hidden>Pilih Kategori</option>
 								@foreach($katers as $ro)
 								<option value="{{$ro->kode}}">
-									{{$ro->nama}}hay
+									{{$ro->nama}}
 								</option>
 								@endforeach
 								@foreach($katesj as $r)
 								<option value="{{$r->kode}}">
-									{{$r->nama}}hay
+									{{$r->nama}}
 								</option>
 								@endforeach
 								@foreach($katepj as $rowa)
 								<option value="{{$rowa->kode}}">
-									{{$rowa->nama}}hay
+									{{$rowa->nama}}
 								</option>
 								@endforeach
 								@foreach($kate as $row)
