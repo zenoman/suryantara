@@ -270,7 +270,6 @@
 			</div>
 		</div>
 		</div>
-	@include('cetakresi.resicitykurier')
 	</div>
         @endsection
 @section('js')

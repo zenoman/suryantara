@@ -121,6 +121,7 @@ Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
 Route::post('simpancity','resipengiriman\resipengirimanController@tambahcity');
+Route::post('simpancitycmp','resipengiriman\resipengirimanController@tambahcitycmp');
 Route::post('simpanubahck','resipengiriman\resipengirimanController@simpancity');
 //==========================================================surat jalan
 Route::get('/resisuratjalan','suratjalan\suratjalanController@resisuratjalan');

@@ -315,6 +315,19 @@ class resipengirimanController extends Controller
         }
     }
     //===================================================================
+    public function carikotacitycmd(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('tarif_darat')
+                    ->select('tujuan','id')
+                    ->where([['tujuan','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')],['tarif_city','=','Y'],['company','=','Y']])
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
+    //===================================================================
     public function carihasilkota($id){
         $data = DB::table('tarif_darat')
                     ->select('tujuan','id','tarif')
@@ -491,6 +504,143 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang')
+                ]);
+            }
+        }
+      
+        return response()->json($simpan);   
+    }
+    //===================================================================
+    public function tambahcitycmp(Request $request){
+     $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
+        if ($jumlah > 0) {
+            if($request->status_bayar == 'lunas'){
+                $simpan = DB::table('resi_pengiriman')
+                ->where('no_resi',$request->noresi)
+                ->update([
+                    'admin'      => $request->iduser,
+                    'nama_barang'   => $request->nama_barang,
+                    'pengiriman_via'=> 'city kurier',
+                    'kota_asal'     => $request->kota_asal,
+                    'kode_tujuan'   => $request->kota_tujuan,
+                    'tgl'           =>  date('Y-m-d'),
+                    'jumlah'        => $request->jumlah,
+                    'berat'         => $request->berat,
+                    'dimensi'       => $request->dimensi,
+                    'ukuran_volume' => $request->ukuran_volume,
+                    'nama_pengirim' => $request->n_pengirim,
+                    'nama_penerima' => $request->n_penerima,
+                    'telp_pengirim' => $request->t_pengirim,
+                    'telp_penerima' => $request->t_penerima,
+                    'biaya_kirim'   => $request->biaya_kirim,
+                    'biaya_packing' => $request->biaya_packing,
+                    'biaya_asuransi'=> $request->biaya_asu,
+                    'total_biaya'   => $request->total_biaya,
+                    'satuan'        => $request->satuan,
+                    'metode_bayar'  => $request->metode,
+                    'biaya_ppn'     => $request->ppn,
+                    'alamat_pengirim'=>$request->alamat_pengirim,
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'tgl_lunas' => date('Y-m-d'),
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_company'=>'Y'
+                ]);
+            }else{
+                $simpan = DB::table('resi_pengiriman')
+                ->where('no_resi',$request->noresi)
+                ->update([
+                    'admin'      => $request->iduser,
+                    'nama_barang'   => $request->nama_barang,
+                    'pengiriman_via'=> 'city kurier',
+                    'kota_asal'     => $request->kota_asal,
+                    'kode_tujuan'   => $request->kota_tujuan,
+                    'tgl'           =>  date('Y-m-d'),
+                    'jumlah'        => $request->jumlah,
+                    'berat'         => $request->berat,
+                    'dimensi'       => $request->dimensi,
+                    'ukuran_volume' => $request->ukuran_volume,
+                    'nama_pengirim' => $request->n_pengirim,
+                    'nama_penerima' => $request->n_penerima,
+                    'telp_pengirim' => $request->t_pengirim,
+                    'telp_penerima' => $request->t_penerima,
+                    'biaya_kirim'   => $request->biaya_kirim,
+                    'biaya_packing' => $request->biaya_packing,
+                    'biaya_asuransi'=> $request->biaya_asu,
+                    'total_biaya'   => $request->total_biaya,
+                    'satuan'        => $request->satuan,
+                    'metode_bayar'  => $request->metode,
+                    'biaya_ppn'     => $request->ppn,
+                    'alamat_pengirim'=>$request->alamat_pengirim,
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_company'=>'Y'
+                ]);
+            }
+            
+        }else{
+            if($request->status_bayar == 'lunas'){
+                $simpan = DB::table('resi_pengiriman')
+                ->insert([
+                    'no_resi'       => $request->noresi,
+                    'admin'      => $request->iduser,
+                    'nama_barang'   => $request->nama_barang,
+                    'pengiriman_via'=> 'city kurier',
+                    'kota_asal'     => $request->kota_asal,
+                    'kode_tujuan'   => $request->kota_tujuan,
+                    'tgl'           =>  date('Y-m-d'),
+                    'jumlah'        => $request->jumlah,
+                    'berat'         => $request->berat,
+                    'dimensi'       => $request->dimensi,
+                    'ukuran_volume' => $request->ukuran_volume,
+                    'nama_pengirim' => $request->n_pengirim,
+                    'nama_penerima' => $request->n_penerima,
+                    'telp_pengirim' => $request->t_pengirim,
+                    'telp_penerima' => $request->t_penerima,
+                    'biaya_kirim'   => $request->biaya_kirim,
+                    'biaya_packing' => $request->biaya_packing,
+                    'biaya_asuransi'=> $request->biaya_asu,
+                    'total_biaya'   => $request->total_biaya,
+                    'satuan'        => $request->satuan,
+                    'metode_bayar'  => $request->metode,
+                    'biaya_ppn'     => $request->ppn,
+                    'alamat_pengirim'=>$request->alamat_pengirim,
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'tgl_lunas' => date('Y-m-d'),
+                    'status' => 'US',
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_company'=>'Y'
+                ]);
+
+            }else{
+                $simpan = DB::table('resi_pengiriman')
+                ->insert([
+                    'no_resi'       => $request->noresi,
+                    'admin'      => $request->iduser,
+                    'nama_barang'   => $request->nama_barang,
+                    'pengiriman_via'=> 'city kurier',
+                    'kota_asal'     => $request->kota_asal,
+                    'kode_tujuan'   => $request->kota_tujuan,
+                    'tgl'           =>  date('Y-m-d'),
+                    'jumlah'        => $request->jumlah,
+                    'berat'         => $request->berat,
+                    'dimensi'       => $request->dimensi,
+                    'ukuran_volume' => $request->ukuran_volume,
+                    'nama_pengirim' => $request->n_pengirim,
+                    'nama_penerima' => $request->n_penerima,
+                    'telp_pengirim' => $request->t_pengirim,
+                    'telp_penerima' => $request->t_penerima,
+                    'biaya_kirim'   => $request->biaya_kirim,
+                    'biaya_packing' => $request->biaya_packing,
+                    'biaya_asuransi'=> $request->biaya_asu,
+                    'total_biaya'   => $request->total_biaya,
+                    'satuan'        => $request->satuan,
+                    'metode_bayar'  => $request->metode,
+                    'biaya_ppn'     => $request->ppn,
+                    'alamat_pengirim'=>$request->alamat_pengirim,
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_company'=>'Y'
                 ]);
             }
         }
