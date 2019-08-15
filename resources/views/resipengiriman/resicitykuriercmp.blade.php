@@ -20,22 +20,29 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Resi City Kurier Personal</h2>
+							<h2>Buat Resi City Kurier Company</h2>
 						</div>
 					</div>
 				</div>
 			</header>
 			<div class="loading-div" id="panelnya">
 			<div class="box-typical box-typical-padding">
-					<p>No. Resi : <span id="noresi"></span></p>
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
-						<div class="col-md-6 col-sm-6">
+						<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">No. Resi</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="koderesi" autofocus>
+							</div>
+						</div>
+					</div>
+						<div class="col-md-3 col-sm-3">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="nama_barang" autofocus>
+								<input type="text" class="form-control" id="nama_barang">
 							</div>
 						</div>
 					</div>
@@ -276,7 +283,7 @@
 
 @section('otherjs')
 <script src="{{asset('assets/js/loading.js')}}"></script>
-<script src="{{asset('assets/js/resicity.js')}}"></script>
+<script src="{{asset('assets/js/resicitycmp.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey2(evt)
       {

@@ -108,12 +108,14 @@ Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
+Route::get('/carikotacity','resipengiriman\resipengirimanController@carikotacity');
 Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
 Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@listcity');
 Route::get('/resicitykurier','resipengiriman\resipengirimanController@resicitykurier');
+Route::get('/resicitykuriercompany','resipengiriman\resipengirimanController@resicitykuriercmp');
 //resicitykurier
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');

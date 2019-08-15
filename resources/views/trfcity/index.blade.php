@@ -78,6 +78,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							<th>Status Tarif</th>
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
@@ -91,6 +92,7 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							<th>Status Tarif</th>
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
 						</tr>
@@ -107,6 +109,7 @@
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
+                            <td>@if($row->company=='Y') Company @else Personal @endif</td>
                             <td class="text-center">
 							<a href="{{url('/trfcity/'.$row->id.'/edit')}}" class="btn btn-success btn-sm">Edit</a>
                                     

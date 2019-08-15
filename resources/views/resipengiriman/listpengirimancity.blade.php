@@ -34,14 +34,21 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{url('resicitykurier')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-                     <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
+                    <div class="btn-group">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tambah Data
+								</button>
+								<div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="dropdown-item" href="{{url('resicitykurier')}}">
+									Personal</a>
+									<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
+									Company</a>
+								</div>
+							</div>
+                     <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">Cari Data</button>
 
                     
                      <div class="btn-group">
-								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="font-icon font-icon-eye"></i>	Tampil Berdasarkan
+								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tampil Berdasarkan
 								</button>
 								<div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
 									<a class="dropdown-item" href="{{url('listpengirimanbatalcity')}}">
