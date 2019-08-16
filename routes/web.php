@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//============================================mitra
+Route::resource('mitra','mitra\mitracontroller');
 //=============================================tarif_citykurier
 Route::post('/trfcity/hapuspilihan','trfcity\trf_city@haphapus');
 Route::get('/trfcity/hapussemua','trfcity\trf_city@hapusall');
@@ -109,6 +111,7 @@ Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/carikotacity','resipengiriman\resipengirimanController@carikotacity');
+Route::get('/carikotacitycmd','resipengiriman\resipengirimanController@carikotacitycmd');
 Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');

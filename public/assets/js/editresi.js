@@ -6,6 +6,11 @@ $(document).ready(function(){
 	var satuan_ck = 'kg';
 	var kategori_udara ='biasa';
 	var kotatujuanudara = '';
+	if($('#status_company').val() == 'personal'){
+	var urlcity ='/carikotacity';
+	}else{
+	var urlcity ='/carikotacitycmd';
+	}
 	var jumlahbarang =1;
 	var totalberat=0;
 	var jumlahbaranghevy=0;
@@ -80,9 +85,10 @@ $(document).ready(function(){
 		})
 	//=============================================cari kota tujuan
 		$('#kota_tujuan_ck').select2({
-		placeholder: 'Cari kota tujuan',
-		ajax:{
-			url:'/carikota',
+			
+				placeholder: 'Cari kota tujuan',
+				ajax:{
+			url:urlcity,
 			dataType:'json',
 			delay:250,
 			processResults: function (data){
@@ -98,6 +104,8 @@ $(document).ready(function(){
 			},
 			cache: true
 		}
+
+		
 	});
 	//=================================================
 	$('#kota_tujuan_ck').on('select2:select',function(e){

@@ -102,7 +102,7 @@ $(document).ready(function(){
 		$('#kota_tujuan_city').select2({
 		placeholder: 'Cari kota tujuan',
 		ajax:{
-			url:'/carikota',
+			url:'/carikotacity',
 			dataType:'json',
 			delay:250,
 			processResults: function (data){
