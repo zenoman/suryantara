@@ -144,6 +144,7 @@
 
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
+				<a class="dropdown-item" href="{{url('mitra')}}">Data Mitra</a>
 
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('trfdarat')}}">Tarif Darat</a>
