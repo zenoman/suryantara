@@ -94,7 +94,7 @@
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-                            {{-- @foreach($tot[$n] as $ros) --}
+                            {{-- @foreach($tot[$n] as $ros) --}}
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->admin}}</td>
@@ -102,20 +102,11 @@
                             <td>{{$row->tgl}}</td>
 							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
                         </tr>
-						{{-- @endforeach --}
+						{{-- @endforeach --}}
 						@endforeach
 
 						@endif
-						</tbody>
-						<tfoot>
-						<tr> 
-							<th>No</th>
-							<th>Admin</th>
-							<th>Kategori</th>
-							<th>tgl</th>
-							<th>jumlah</th>
-						</tr>
-						</tfoot>
+						</tbody>					
 						
 					</table>
 					{{ $data->links() }}

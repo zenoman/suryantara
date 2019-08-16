@@ -43,7 +43,7 @@ class LaporakunController extends Controller
                 
             $data = DB::table('tb_kategoriakutansi')
             ->select(DB::raw('tb_kategoriakutansi.*,resi_pengiriman.nama_barang,resi_pengiriman.no_resi,resi_pengiriman.admin,resi_pengiriman.tgl,resi_pengiriman.total_biaya'))
-            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.id')            
+            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.kode')            
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
             ->union($peng)
@@ -98,7 +98,7 @@ class LaporakunController extends Controller
                 ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0]);                
             $data = DB::table('tb_kategoriakutansi')
             ->select(DB::raw('tb_kategoriakutansi.*,resi_pengiriman.nama_barang,resi_pengiriman.no_resi,resi_pengiriman.admin,resi_pengiriman.tgl,resi_pengiriman.total_biaya'))
-            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.id')            
+            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.kode')            
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
             ->union($peng)
