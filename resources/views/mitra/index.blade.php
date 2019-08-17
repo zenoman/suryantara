@@ -37,33 +37,6 @@
                     @endif
 					<a href="{{url('mitra/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                                        <i class="fa fa-search"></i> Cari Data</button>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('mitra/cari')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan nama mitra dan Id mitra" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" width="100%">
 						<thead>
@@ -97,11 +70,11 @@
                             <td>{{$row->notelp}}</td>
                             <td>{{$row->namacabang}}</td>
                             <td class="text-center">
-<form action="{{url('/mitra/delete')}}"  method="post">
+<form action="{{url('/mitra/'.$row->id)}}" method="post">
 <a href="{{url('/mitra/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm">Edit</a>
  
                                         {{csrf_field()}}
-                                        	<input type="hidden" name="aid" value="{{$row->id}}">
+                                        	<input type="hidden" name="_method" value="delete">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
 						</tr>
@@ -120,7 +93,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false
+            "paging":true
         });
 		});
 	</script>

@@ -38,39 +38,27 @@ class mitracontroller extends Controller
         ]);
     return redirect('mitra')->with('status','tambah Data Sukses');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //====================================
     public function edit($id)
     {
-        //
+        
+    $cabang = DB::table('cabang')->get();
+    $vnd = DB::table('mitra')->where('id',$id)->get();
+    $setting = DB::table('setting')->get();
+    return view('mitra/edit',['mitra'=>$vnd,'title'=>$setting,'cabang'=>$cabang]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //============================================
     public function update(Request $request, $id)
     {
-        //
+        DB::table('mitra')
+        ->where('id',$id)
+        ->update([
+        'nama' => $request->nama,
+        'notelp' => $request->telp,
+        'alamat' => $request->alamat,
+        'id_cabang'=>$request->idcabang
+        ]);
+    return redirect('mitra')->with('status','edit Data Sukses');
     }
 
     /**
@@ -81,6 +69,7 @@ class mitracontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('mitra')->where('id',$id)->delete();
+        return redirect('mitra')->with('status','Data berhasil dihapus');
     }
 }

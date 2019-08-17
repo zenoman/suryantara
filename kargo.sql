@@ -213,13 +213,17 @@ CREATE TABLE IF NOT EXISTS `mitra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
   `alamat` varchar(50) DEFAULT NULL,
+  `notelp` varchar(20) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.mitra: ~0 rows (approximately)
+-- Dumping data for table kargo.mitra: ~2 rows (approximately)
 DELETE FROM `mitra`;
 /*!40000 ALTER TABLE `mitra` DISABLE KEYS */;
+INSERT INTO `mitra` (`id`, `nama`, `alamat`, `notelp`, `id_cabang`) VALUES
+	(2, 'pt iwak enak', 'gurah', '14045', 2),
+	(3, 'aaa', 'sdfqw', '23423', 1);
 /*!40000 ALTER TABLE `mitra` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.omset
@@ -497,7 +501,7 @@ CREATE TABLE IF NOT EXISTS `status_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.status_pengiriman: ~1 rows (approximately)
+-- Dumping data for table kargo.status_pengiriman: ~2 rows (approximately)
 DELETE FROM `status_pengiriman`;
 /*!40000 ALTER TABLE `status_pengiriman` DISABLE KEYS */;
 INSERT INTO `status_pengiriman` (`id`, `kode`, `status`, `tgl`, `jam`, `lokasi`) VALUES
@@ -560,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.surat_jalan: ~4 rows (approximately)
+-- Dumping data for table kargo.surat_jalan: ~3 rows (approximately)
 DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
 INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`, `cabang`, `katakun`, `id_cabang`) VALUES
@@ -583,17 +587,18 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `tarif_city` enum('Y','N') DEFAULT 'N',
   `company` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.tarif_darat: ~6 rows (approximately)
+-- Dumping data for table kargo.tarif_darat: ~5 rows (approximately)
 DELETE FROM `tarif_darat`;
 /*!40000 ALTER TABLE `tarif_darat` DISABLE KEYS */;
 INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`, `tarif_city`, `company`) VALUES
-	(13, 'darat00001', 'malang kidul', 34000, 3, '2', 1, 'N', 'N'),
-	(15, 'darat00003', 'nganjuk', 50000, 3, '2', 2, 'N', 'N'),
-	(16, 'cty001', 'kec. pagu', 10000, 5, '0', 1, 'Y', 'Y'),
-	(18, 'cty003', 'kec. ngancar', 2000, 1, '1', 1, 'Y', 'N'),
-	(19, 'cty004', 'kec. ngancaraar', 2000, 1, '1', 2, 'Y', 'N');
+	(20, 'darat001', 'gurah', 20000, 2, '2', 1, 'N', 'N'),
+	(21, 'darat002', 'magersari', 30000, 2, '2', 2, 'N', 'N'),
+	(22, 'citykdr001', 'kec. gabru', 30000, 1, '1', 1, 'Y', 'Y'),
+	(23, 'citycmpkdr002', 'kec. ngasem', 2000, 1, '1', 1, 'Y', 'N'),
+	(24, 'ctysby001', 'kec. ngancar', 2000, 1, '2', 2, 'Y', 'N'),
+	(25, 'ctycmpsby001', 'kec. pagu', 1000, 1, '1', 2, 'Y', 'Y');
 /*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_laut
