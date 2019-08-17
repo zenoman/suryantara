@@ -50,8 +50,7 @@
 						</tr>
 						@endforeach						
 						</tbody>
-					</table>
-					
+					</table>					
 					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
 					
 </body>
