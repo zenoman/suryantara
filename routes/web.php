@@ -1,5 +1,16 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//============================================ envoice
+Route::post('/tambahkanenv','envoice\envoicecontroller@store');
+Route::get('/hapusdetailen/{id}','envoice\envoicecontroller@hapusdetail');
+Route::get('/caridetailen/{id}','envoice\envoicecontroller@caridetail');
+Route::post('/tambahdetailen','envoice\envoicecontroller@tambahdetail');
+Route::get('/carinoresicmp','envoice\envoicecontroller@cariresi');
+Route::get('/carimitra/{id}','envoice\envoicecontroller@caridetailmitra');
+Route::get('/carimitra','envoice\envoicecontroller@carimitra');
+Route::get('carikodeenvoice','envoice\envoicecontroller@carikode');
+Route::get('envoice','envoice\envoicecontroller@index');
+Route::get('envoice/tambah','envoice\envoicecontroller@create');
 //============================================mitra
 Route::resource('mitra','mitra\mitracontroller');
 //=============================================tarif_citykurier
