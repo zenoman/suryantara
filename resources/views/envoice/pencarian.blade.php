@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Envoice City kurier</h2>
+							<h2>List Manifes</h2>
+							<h5>Hasil Pencarian "{{$cari}}"</h5>
 						</div>
 					</div>
 				</div>
@@ -42,34 +43,7 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
-					<a href="{{url('/envoice/tambah')}}" class="btn btn-primary"><i class="fa fa-eye"></i> Tambah Data</a>
-					 <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('carisuratenvoice')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Kode / Tujuan / Tanggal" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
-                    <br><br>
+					
                     <form action="hapuslistenv" method="post">
                     	{{csrf_field()}}
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -115,9 +89,8 @@
                             <td>{{$row->tgl}}</td>
                             <td>
                             	{{$row->pembuat}}
+                            </td>
                             <td>
-
-                            	
                             	<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
 									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
@@ -136,15 +109,13 @@
 						<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-warning">Hapus Data Terpilih
 					</button>
 					@endif
-					<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+					<button type="button" onclick="history.go(-1)" class="btn btn-danger">Kembali</button>
 					</div>
-					
 					</form>
-					 {{ $data->links() }}
 				</div>
 			</section>
-		</div>
-	</div>
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
 	 @foreach($data as $row)
 	 <div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
@@ -159,7 +130,7 @@
 								</button>
 								<h4 class="modal-title" id="myModalLabel">Detail Surat Jalan</h4>
 							</div>
-				<div class="modal-body">
+							<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-6 company-info">
 							<p>Pembuat : {{$row->pembuat}}</p>
@@ -213,7 +184,6 @@
 										@else
 										<td> </td>
 										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
-										
 										@endif
 									</tr>
 								@endforeach
@@ -245,14 +215,15 @@
 					<br>
 					<div class="row">
 						<div class="col-lg-12 terms-and-conditions">
-							
+						
 							
 						</div>
 						
 					</div>
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+								
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
@@ -266,7 +237,7 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":false,
+            "paging":true,
             "columnDefs": [ {
           "targets": 'no-sort',
           "orderable": false,

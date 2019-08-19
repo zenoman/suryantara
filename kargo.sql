@@ -106,8 +106,7 @@ DELETE FROM `cabang`;
 /*!40000 ALTER TABLE `cabang` DISABLE KEYS */;
 INSERT INTO `cabang` (`id`, `nama`, `alamat`, `kota`, `kop`, `koderesi`) VALUES
 	(1, 'KLC Cabang Kediri', 'magersari gurah kediri halo halo', 'KEDIRI', NULL, 'KDR'),
-	(2, 'KLC cabang suryabaya', 'aklsdfjkl', 'SURABAYA', 'kantor cabang : jln iwak enak no 2+2 konoha surabaya', 'SBY'),
-	(3, 'ksdlfj', 'skdjksld', 'kjf', 'Kantor Cabang : Jln. Raya Dadapan - sumberejo Kab. Kediri (081133378240)', 'HH');
+	(2, 'KLC cabang suryabaya', 'aklsdfjkl', 'SURABAYA', 'kantor cabang : jln iwak enak no 2+2 konoha surabaya', 'SBY');
 /*!40000 ALTER TABLE `cabang` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.gaji_karyawan
@@ -555,6 +554,7 @@ CREATE TABLE IF NOT EXISTS `surat_envoice` (
   `totalkg` int(11) DEFAULT 0,
   `totalkoli` int(11) DEFAULT 0,
   `totalcash` int(11) DEFAULT 0,
+  `biaya` int(11) DEFAULT 0,
   `totalbt` int(11) DEFAULT 0,
   `id_cabang` int(11) DEFAULT 1,
   `status` enum('Y','N') DEFAULT 'N',
@@ -564,8 +564,6 @@ CREATE TABLE IF NOT EXISTS `surat_envoice` (
 -- Dumping data for table kargo.surat_envoice: ~1 rows (approximately)
 DELETE FROM `surat_envoice`;
 /*!40000 ALTER TABLE `surat_envoice` DISABLE KEYS */;
-INSERT INTO `surat_envoice` (`id`, `kode`, `tujuan`, `alamat`, `tgl`, `pembuat`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `id_cabang`, `status`) VALUES
-	(2, 'ENSBY180819-06-000001', 'pt iwak enak-14045', 'gurah', '2019-08-18', 'devasatrio', 95, 2, 198000, 0, 2, 'Y');
 /*!40000 ALTER TABLE `surat_envoice` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_jalan
@@ -832,6 +830,16 @@ SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 DELIMITER //
 CREATE TRIGGER `editvendor` BEFORE UPDATE ON `vendor` FOR EACH ROW BEGIN
 update surat_jalan set tujuan=concat(new.vendor,'-',new.telp) where tujuan=concat(old.vendor,'-',old.telp);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- Dumping structure for trigger kargo.hapus_envoice
+DROP TRIGGER IF EXISTS `hapus_envoice`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `hapus_envoice` BEFORE DELETE ON `surat_envoice` FOR EACH ROW BEGIN
+delete from resi_pengiriman where resi_pengiriman.kode_envoice = old.kode;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;

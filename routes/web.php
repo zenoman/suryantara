@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
 //============================================ envoice
+Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
+Route::get('/carisuratenvoice','envoice\envoicecontroller@cari');
 Route::post('/tambahkanenv','envoice\envoicecontroller@store');
 Route::get('/hapusdetailen/{id}','envoice\envoicecontroller@hapusdetail');
 Route::get('/caridetailen/{id}','envoice\envoicecontroller@caridetail');

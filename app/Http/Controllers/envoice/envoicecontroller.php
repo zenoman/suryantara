@@ -9,6 +9,38 @@ use App\Http\Controllers\Controller;
 
 class envoicecontroller extends Controller
 {
+    public function delete(Request $request){
+        $delid = $request->delid;
+        if(!$delid){
+            return back()->with('statuserror','Maaf, Tidak Ada Data Yang Dipilih');
+        }else{
+          $nc = count($delid);
+        
+        for($i=0;$i<$nc;$i++)
+        {
+            $did = $delid[$i];
+            DB::table('surat_envoice')->where('id',$did)->delete();
+
+        }
+        return back()->with('status','Data Berhasil Dihapus');  
+        }
+    }
+    public function cari(Request $request){
+        $cari = $request->cari;
+            $listdata = DB::table('surat_envoice')
+            ->where([['kode','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tujuan','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],
+                        ['id_cabang','=',Session::get('cabang')]])
+            ->get();
+         
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('envoice/pencarian',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
+    }
+
+    //======================================================================
     public function index(){
     	$webinfo = DB::table('setting')->limit(1)->get();
         $listdata =
@@ -19,10 +51,13 @@ class envoicecontroller extends Controller
         return view('envoice/index',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
 
+    //======================================================================
     public function create(){
     	$webinfo = DB::table('setting')->limit(1)->get();
         return view('envoice/create',['webinfo'=>$webinfo]);
     }
+
+    //======================================================================
     public function carikode($value='')
     {
         $kodeuser = sprintf("%02s",session::get('id'));
@@ -49,6 +84,8 @@ class envoicecontroller extends Controller
            
         } return response()->json($finalkode);
     }
+
+    //======================================================================
     public function carimitra(Request $request){
         if($request->has('q')){
             $cari = $request->q;
@@ -61,6 +98,8 @@ class envoicecontroller extends Controller
             return response()->json($data);
         }
     }
+
+    //======================================================================
     public function caridetailmitra($id)
     {
         $data = DB::table('mitra')
@@ -70,6 +109,8 @@ class envoicecontroller extends Controller
             
             return response()->json($data);
     }
+
+    //======================================================================
     public function cariresi(Request $request){
         if($request->has('q')){
             $cari = $request->q;
@@ -93,6 +134,8 @@ class envoicecontroller extends Controller
             return response()->json($data);
         }
     }
+
+    //======================================================================
     public function tambahdetail(Request $request){
         $kode = $request->kode;
         $carikode = DB::table('surat_envoice')->where('kode',$kode)->count();
@@ -112,11 +155,15 @@ class envoicecontroller extends Controller
             'kode_envoice'=>$request->kode,
         ]);
     }
+
+    //======================================================================
     public function caridetail($id){
          $data = DB::table('resi_pengiriman')
         ->where('kode_envoice',$id)->get();
         return response()->json($data);
     }
+
+    //======================================================================
     public function hapusdetail($id){
          DB::table('resi_pengiriman')
         ->where('id',$id)
@@ -124,6 +171,8 @@ class envoicecontroller extends Controller
             'kode_envoice'=>null,
         ]);
     }
+
+    //======================================================================
     public function store(Request $request){
     	$jumlahdata = DB::table('surat_envoice')
         ->where('kode',$request->noresi)->count();
