@@ -45,7 +45,7 @@
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-						{{-- @foreach($totsurat[$n] as $ros) --}}
+						@foreach($totsurat[$n] as $ros)
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$row->admin}}</td>
@@ -54,7 +54,7 @@
 							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
 							<td class="tdtot">{{$row->total_biaya}}</td>
                         </tr>
-						{{-- @endforeach --}}
+						@endforeach
 						@endforeach
 <!-- ===================================================== -->
 
@@ -62,7 +62,7 @@
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
-								{{-- @foreach($totpajak[$n] as $ros) --}}
+								 @foreach($totpajak[$n] as $ros) 
 		                        <tr>
 		                            <td>{{$no}}</td>
 		                            <td>{{$row->admin}}</td>
@@ -70,7 +70,7 @@
 		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
 									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
 		                        </tr>
-								{{-- @endforeach --}}
+								 @endforeach 
 								@endforeach
 <!-- ===================================================== -->
 
@@ -78,7 +78,7 @@
 								@foreach($data as $row)
 		                            <?php $no = $i++;?>
 		                            <?php $n = $j++;?>
-								{{-- @foreach($totresi[$n] as $ros) --}}
+								 @foreach($totresi[$n] as $ros) 
 		                        <tr>
 		                            <td>{{$no}}</td>
 		                            <td>{{$row->admin}}</td>
@@ -86,7 +86,7 @@
 		                            <td>{{$row->tgl_lunas}}</td>
 									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
 		                        </tr>
-								{{-- @endforeach --}}
+								 @endforeach 
 								@endforeach
 <!-- ===================================================== -->
 
@@ -107,7 +107,7 @@
 
 						@endif
 						</tbody>					
-						
+
 					</table>
 					{{ $data->links() }}
 				</div>
