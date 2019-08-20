@@ -164,22 +164,6 @@ class Dashboardcontroller extends Controller {
                 $gajikaryawan = $this->cari_gajikaryawan($bulan,date('Y'),"ny");
                 $pajak = $pemasukan * 0.5/100;
                 $totalpajak = $this->cari_pajaktahunan(date('Y'));
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'211',
-                    'keterangan'=>'Pajak',
-                    'jumlah'=>$pajak,
-                    'tgl'=>date('Y-m-d')
-                ]);
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'244',
-                    'keterangan'=>'Gaji Karyawan',
-                    'jumlah'=>$gajikaryawan,
-                    'tgl'=>date('Y-m-d')
-                ]);
                 DB::table('pajak')
                 ->insert([
                     'bulan'=>12,
@@ -188,7 +172,7 @@ class Dashboardcontroller extends Controller {
                     'total'=>$pajak
                 ]);
                 // DB::table('pajak')
-                // ->insert([
+                // ->insert([ 
                 //     'tahun'=>$tahun-1,
                 //     'nama'=>'total_pajak',
                 //     'total'=>$totalpajak,
@@ -209,22 +193,7 @@ class Dashboardcontroller extends Controller {
                 //     'tgl'=>date('Y-m-d')
                 //     // 'tgl'=>$request->tgl
                 // ]);
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'211',
-                    'keterangan'=>'Pajak',
-                    'jumlah'=>$pajak,
-                    'tgl'=>date('Y-m-d')
-                ]);
-                DB::table('pengeluaran_lain')
-                ->insert([
-                    'admin'=>'Auto Insert',
-                    'kategori'=>'244',
-                    'keterangan'=>'Gaji Karyawan',
-                    'jumlah'=>$gajikaryawan,
-                    'tgl'=>date('Y-m-d')
-                ]);
+
                DB::table('pajak')
                 ->insert([
                     'bulan'=>date('m')-1,
