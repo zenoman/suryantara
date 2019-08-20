@@ -200,6 +200,7 @@ $(document).ready(function(){
 		$("#btnsimpan_city").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			var koderesi	= $('#resinya').val();
 			var idresi		= $("#idresi").val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang_city").val();
@@ -262,7 +263,8 @@ $(document).ready(function(){
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar':status_bayar
+                	'status_bayar':status_bayar,
+                	'koderesi':koderesi
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -451,6 +453,7 @@ $(document).ready(function(){
 		$("#btnsimpan_darat").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			var koderesi	= $('#resinya').val();
 			var idresi		= $("#idresi").val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang_darat").val();
@@ -513,7 +516,8 @@ $(document).ready(function(){
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar' : status_bayar
+                	'status_bayar' : status_bayar,
+                	'koderesi':koderesi
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -690,6 +694,7 @@ $(document).ready(function(){
 		$("#btnsimpan_laut").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			var koderesi	= $('#resinya').val();
 			var idresi		= $("#idresi").val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang_laut").val();
@@ -752,7 +757,8 @@ $(document).ready(function(){
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar':status_bayar
+                	'status_bayar':status_bayar,
+                	'koderesi':koderesi
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -1097,6 +1103,7 @@ $(document).ready(function(){
 			}else{
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			}
+			var koderesi	= $('#resinya').val();
 			var berat		= $("#totalberat").val();
 			var idresi		= $("#idresi").val();
 			var iduser		= $("#iduser").val();
@@ -1157,7 +1164,8 @@ $(document).ready(function(){
                 	'charge'		: change,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar':status_bayar
+                	'status_bayar':status_bayar,
+                	'koderesi':koderesi
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

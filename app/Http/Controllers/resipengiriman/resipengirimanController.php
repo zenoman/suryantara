@@ -410,7 +410,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -439,7 +440,8 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
             
@@ -473,7 +475,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -503,11 +506,19 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }
-      
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->noresi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);   
     }
     //===================================================================
@@ -544,7 +555,8 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y'
+                    'status_company'=>'Y',
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -574,7 +586,8 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y'
+                    'status_company'=>'Y',
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
             
@@ -609,7 +622,8 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y'
+                    'status_company'=>'Y',
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -640,18 +654,26 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y'
+                    'status_company'=>'Y',
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }
-      
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->noresi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);   
     }
     //===================================================================
     public function store(Request $request)
     {
         $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0) {
+        if ($jumlah > 0){
             if($request->status_bayar == 'lunas'){
                 $simpan = DB::table('resi_pengiriman')
                 ->where('no_resi',$request->noresi)
@@ -681,7 +703,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -710,7 +733,8 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
             
@@ -744,7 +768,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -774,11 +799,19 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }
-      
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->noresi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
     //===================================================================
@@ -815,7 +848,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -844,7 +878,8 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }else{
@@ -877,7 +912,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                  $simpan = DB::table('resi_pengiriman')
@@ -906,11 +942,19 @@ class resipengirimanController extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }
-      
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->noresi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
     //===================================================================
@@ -949,7 +993,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -980,7 +1025,8 @@ class resipengirimanController extends Controller
                     'biaya_charge'  =>$request->charge,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }
         }else{
@@ -1015,7 +1061,8 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]);
             }else{
                $simpan = DB::table('resi_pengiriman')
@@ -1046,10 +1093,19 @@ class resipengirimanController extends Controller
                     'biaya_charge'  =>$request->charge,
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang')
+                    'id_cabang'=>Session::get('cabang'),
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
                 ]); 
             }
         }
+         DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->noresi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
     //===================================================================

@@ -49,7 +49,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">No. Resi</label>
 							<div class="input-group">
-								<input type="text" class="form-control" value="{{$row->no_resi}}" readonly>
+								<input type="text" class="form-control" value="{{$row->no_resi}}" readonly id="resinya">
 							</div>
 						</div>
 					</div>

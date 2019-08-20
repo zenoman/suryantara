@@ -39,7 +39,7 @@ Route::post('/tambahkansa','Antaran\antarancontroller@simpansa');
 Route::post('/hapuslistsa','Antaran\antarancontroller@hapus');
 Route::get('/detailsa/{id}','Antaran\antarancontroller@detail');
 Route::get('/resisuratantar','Antaran\antarancontroller@resiantar');
-Route::get('/suksesantar/{id}/{kode}','Antaran\antarancontroller@suksesantar');
+Route::post('/suksesantar/{id}/{kode}','Antaran\antarancontroller@suksesantar');
 Route::post('/cancelresiantar','Antaran\antarancontroller@cancelresiantar');
 Route::get('/carisuratantar','Antaran\antarancontroller@carisuratantar');
 Route::get('/cariresisuratantar','Antaran\antarancontroller@cariresisuratantar');
