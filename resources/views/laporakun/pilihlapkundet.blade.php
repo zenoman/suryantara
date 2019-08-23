@@ -47,8 +47,6 @@
 												<br>
 
                <form action="{{url('tampillaporanakundet') }}" role="form" method="GET">
-					
-					
 					<div class="form-group row">
 						<label class="col-sm-1 form-control-label semibold">Dari Tanggal
 						</label>
@@ -82,22 +80,7 @@
 						<div class="col-sm-11">
 							<p class="form-control-static">
 								<select class="select2" name="kategori">
-							<option selected disabled hidden>Pilih Kategori</option>
-								@foreach($katers as $ro)
-								<option value="{{$ro->kode}}">
-									{{$ro->nama}}
-								</option>
-								@endforeach
-								@foreach($katesj as $r)
-								<option value="{{$r->kode}}">
-									{{$r->nama}}
-								</option>
-								@endforeach
-								@foreach($katepj as $rowa)
-								<option value="{{$rowa->kode}}">
-									{{$rowa->nama}}
-								</option>
-								@endforeach
+							<option selected disabled hidden>Pilih Kategori</option>							
 								@foreach($kate as $row)
 								<option value="{{$row->kode}}">
 									{{$row->nama}}

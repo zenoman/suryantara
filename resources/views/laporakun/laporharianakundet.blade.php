@@ -21,7 +21,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan @foreach($nama as $row){{$row->nama}}@endforeach tgl {{$tgl}} Sampai {{$tgl0}}</h2>
+							<h2>Laporan @foreach($kat as $row){{$row->nama}}@endforeach tgl {{$tgl}} Sampai {{$tgl0}}</h2>
 						</div>
 					</div>
 				</div>
@@ -32,95 +32,45 @@
 						<thead>
 						<tr>
 							<th>No</th>
+							<th>No Resi</th>
 							<th>Admin</th>
 							<th>Kategori</th>
 							<th>tgl</th>
-							<th>jumlah</th>
+							<th>Sub Total</th>
 						</tr>
 						</thead>
 						<tbody>
 						<?php $i = 1;?>
-						<?php $j = 0;?>
-						@if($kat == 233)
+						<?php $j = 0;?>						
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
 						{{-- @foreach($totsurat[$n] as $ros) --}}
                         <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->tgl}}</td>
-							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-							<td class="tdtot">{{$row->total_biaya}}</td>
+							<td align="center">{{$no}}</td>
+							<td align="center">{{$row->no_resi}}</td>
+							<td align="center">{{$row->admin}}</td>
+							<td align="center">{{$row->nama}}</td>
+							<td align="center">{{$row->tgl}}</td>
+							<td align="center">{{number_format($row->total_biaya)}}</td>
+							<td align="center" class="tdtot">{{$row->total_biaya}}</td>
                         </tr>
 						{{-- @endforeach --}}
 						@endforeach
-<!-- ===================================================== -->
-
-						@elseif($kat == 211)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								{{-- @foreach($totpajak[$n] as $ros) --}}
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								{{-- @endforeach --}}
-								@endforeach
-<!-- ===================================================== -->
-
-						@elseif($kat == 122)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								{{-- @foreach($totresi[$n] as $ros) --}}
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->tgl_lunas}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								{{-- @endforeach --}}
-								@endforeach
-<!-- ===================================================== -->
-
-						@else
-						@foreach($data as $row)
-                            <?php $no = $i++;?>
-                            <?php $n = $j++;?>
-                            {{-- @foreach($tot[$n] as $ros) --}}
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->tgl}}</td>
-							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-                        </tr>
-						{{-- @endforeach --}}
-						@endforeach
-
-						@endif
-						</tbody>					
-						
+						</tbody>											
 					</table>
-					{{ $data->links() }}
 				</div>
 			</section>
-
-						@if($kat == 233)
-			@foreach($totsuratthn as $ttl)
 			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
+				<div class="card-body">
+					<div class="col-md-12 col-lg-12 col-sm-12">
+						<h2><b>Total Rp. <span id="toata"></span></b></h2>
+					</div>	
+				</div>
+				<div class="card-block">							
 					<div class="pull-right">
-					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
+					<!-- <a href="{{url('/export_laporakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
+					<a href="{{url('/printlapoakundet/'.$katn.'/'.$tgl.'/'.$tgl0.'')}}"  class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
@@ -130,98 +80,33 @@
 							
 					</div>
 				</div>
-			</section>
-			@endforeach
-						@elseif($kat == 122)
-			@foreach($totresithn as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
-					<div class="pull-right">
-					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
-					<i class="fa fa-print"></i>Cetak Data</a>
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
-								Kembali
-							</button>
-						
-							
-					</div>
-				</div>
-			</section>
-			@endforeach
-						@elseif($kat == 211)
-			@foreach($totpajakthn as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
-					<div class="pull-right">
-					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
-					<i class="fa fa-print"></i>Cetak Data</a>
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
-								Kembali
-							</button>
-						
-							
-					</div>
-				</div>
-			</section>
-			@endforeach
-						@else
-			@foreach($tose as $ttl)
-			<section class="card">
-				<div class="card-block">
-					<h2>Total <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></h2>
-					<div class="pull-right">
-					<!-- <a href="{{url('/export_laporakun/'.$kate.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" target="_blank()" class="btn btn-primary">
-					<i class="fa fa-print"></i>Cetak Data</a>
-							&nbsp;&nbsp;
-							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
-								Kembali
-							</button>
-						
-							
-					</div>
-				</div>
-			</section>
-			@endforeach
-						@endif
-
-
-			
+			</section>	
 		</div>
-	</div>
-	
-
-
+	</div>	
 	@endsection
 		@section('js')
-	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	<script>
-		$(function() {
-			$('#example').DataTable({
-            responsive: true,
-            "paging":false
-        });
-		});
-		$('document').ready(function(){
-			$('.tdtot').hide();
-		});
-		// Call Sum
-		function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-
-		var table=document.getElementById('example'),sumval=0;
-		for(var i=1;i<table.rows.length;i++){
-			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
-		}
-		document.getElementById('toata').innerHTML=numberWithCommas(sumval);
-		
-	</script>
+		<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+		<script>
+			$(function() {
+				$('#example').DataTable({
+				responsive: true,
+				"paging":false
+			});
+			});
+			$('document').ready(function(){
+				$('.tdtot').hide();
+			});
+			// Call Sum
+			function numberWithCommas(x) {
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+	
+			var table=document.getElementById('example'),sumval=0;
+			for(var i=1;i<table.rows.length;i++){
+				// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
+				sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
+			}
+			document.getElementById('toata').innerHTML=numberWithCommas(sumval);
+			
+		</script>
 	@endsection

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Laporakunmodel;
 use Illuminate\Support\Facades\Response;
-
+use Session;
 use Illuminate\Support\Facades\File;
 class LaporakunController extends Controller
 {
@@ -32,32 +32,36 @@ class LaporakunController extends Controller
         $kate=$request->kategori;
         $tgl = str_replace('/','-',$request->tgl);
         $tgl0 = str_replace('/','-',$request->tgl0);
+        $idc=Session::get('cabang');        
         //  dd($tgl);
+        
         if($kate=='pendapatan'){
             $kat = 'pendapatan';                     
             $peng=DB::table('tb_kategoriakutansi')
                 ->select(DB::raw('tb_kategoriakutansi.*,pengeluaran_lain.kategori,pengeluaran_lain.keterangan,pengeluaran_lain.admin,pengeluaran_lain.tgl,pengeluaran_lain.jumlah'))
                 ->leftjoin('pengeluaran_lain','pengeluaran_lain.kategori','=','tb_kategoriakutansi.kode')
                 ->where('tb_kategoriakutansi.status',$kat)
+                ->where('id_cabang',$idc)
                 ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0]);
                 
             $data = DB::table('tb_kategoriakutansi')
             ->select(DB::raw('tb_kategoriakutansi.*,resi_pengiriman.nama_barang,resi_pengiriman.no_resi,resi_pengiriman.admin,resi_pengiriman.tgl,resi_pengiriman.total_biaya'))
-            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.kode')            
+            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.id')            
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
+            ->where('id_cabang',$idc)
             ->union($peng)
             ->get();           
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('laporakun/laporharianakun',['kat'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo]);
-        }else{
-        $data = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            ->groupby('pengeluaran_lain.tgl')
-            ->paginate(40);
+        }elseif($kate=="pengeluaran"){
+        $data = DB::table('tb_kategoriakutansi')
+        ->select(DB::raw('tb_kategoriakutansi.*,pengeluaran_lain.kategori,pengeluaran_lain.keterangan,pengeluaran_lain.admin,pengeluaran_lain.tgl,pengeluaran_lain.jumlah'))
+        ->leftjoin('pengeluaran_lain','pengeluaran_lain.kategori','=','tb_kategoriakutansi.kode')
+        ->where('tb_kategoriakutansi.status',$kate)
+        ->where('id_cabang',$idc)
+        ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+        ->get();
             foreach ($data as $ros) {
                 # code...
             $total= DB::table('pengeluaran_lain')
@@ -65,15 +69,7 @@ class LaporakunController extends Controller
             ->where([['pengeluaran_lain.tgl','=',$ros->tgl],['kategori','=',$ros->kategori]])
             ->get();
             
-            } 
-            // $totsemua = DB::table('pengeluaran_lain')
-            // ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            // ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))
-            // ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            // ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            // ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            // // ->groupby('pengeluaran_lain.tgl')
-            // ->get();
+            }            
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('laporakun/lappengeluaran',['kat'=>$kate ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo]);
         }
@@ -89,31 +85,35 @@ class LaporakunController extends Controller
     }
 
         public function cetaklapakun($kat,$tgl,$tgl0){
+            $idc=Session::get('cabang'); 
             $total=0;
         if($kat=='pendapatan'){
             $kat = 'pendapatan';
             $peng=DB::table('tb_kategoriakutansi')
                 ->select(DB::raw('tb_kategoriakutansi.*,pengeluaran_lain.kategori,pengeluaran_lain.keterangan,pengeluaran_lain.admin,pengeluaran_lain.tgl,pengeluaran_lain.jumlah'))
                 ->leftjoin('pengeluaran_lain','pengeluaran_lain.kategori','=','tb_kategoriakutansi.kode')
+                ->where('tb_kategoriakutansi.status',$kat)
+                ->where('id_cabang',$idc)
                 ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0]);                
             $data = DB::table('tb_kategoriakutansi')
             ->select(DB::raw('tb_kategoriakutansi.*,resi_pengiriman.nama_barang,resi_pengiriman.no_resi,resi_pengiriman.admin,resi_pengiriman.tgl,resi_pengiriman.total_biaya'))
-            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.kode')            
+            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.id')            
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
+            ->where('id_cabang',$idc)
             ->union($peng)
             ->get();      
             $webinfo = DB::table('setting')->limit(1)->get();
             return view('laporakun/cetaklapakun',['kat'=>$kat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'tot'=>$total,'data'=>$data,'title'=>$webinfo
             ]);   
         }else{
-        $data = DB::table('pengeluaran_lain')
-            ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
-            ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-            ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
-            ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            ->groupby('pengeluaran_lain.tgl')
-            ->paginate(40);
+        $data =  DB::table('tb_kategoriakutansi')
+        ->select(DB::raw('tb_kategoriakutansi.*,pengeluaran_lain.kategori,pengeluaran_lain.keterangan,pengeluaran_lain.admin,pengeluaran_lain.tgl,pengeluaran_lain.jumlah'))
+        ->leftjoin('pengeluaran_lain','pengeluaran_lain.kategori','=','tb_kategoriakutansi.kode')
+        ->where('tb_kategoriakutansi.status',"pengeluaran")
+        ->where('id_cabang',$idc)
+        ->whereBetween('pengeluaran_lain.tgl',[$tgl,$tgl0])
+        ->get();
             foreach ($data as $ros) {
                 # code...
             $total= DB::table('pengeluaran_lain')
