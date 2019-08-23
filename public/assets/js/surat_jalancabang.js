@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var noresisj;
     var jumlahbarang=0;
+    var idtujuan='';
 	carikode();
     $("#carivendor").focus();
 
@@ -28,9 +29,9 @@ $(document).ready(function(){
 	});
     //=============================================cari vendor
         $('#carivendor').select2({
-        placeholder: 'Cari vendor',
+        placeholder: 'Cari Cabang',
         ajax:{
-            url:'/carivendor',
+            url:'/caricabangsj',
             dataType:'json',
             delay:250,
             processResults: function (data){
@@ -39,7 +40,7 @@ $(document).ready(function(){
                         
                         return {
                             id: item.id,
-                            text: item.vendor
+                            text: item.nama
                         }
 
                     })
@@ -72,18 +73,19 @@ $(document).ready(function(){
             var id = $(this).val();
             $.ajax({
                 type: 'GET',
-                url: '/carivendor/'+id,
+                url: '/caricabangsj/'+id,
                 success:function (data){
                 return {
                     results : $.map(data, function (item){
-                        $('#telpvendor').val(item.telp);
+                        $('#telpvendor').val('');
                         $('#alamatvendor').val(item.alamat);
-                        $('#cabang').val(item.cabang);
-                        $("#cetak_tujuan").html(":&nbsp;"+item.vendor+"("+item.telp+")");
-                        $("#cetak_tujuan2").html(":&nbsp;"+item.vendor+"("+item.telp+")");
+                        $('#cabang').val('Y');
+                        $("#cetak_tujuan").html(":&nbsp;"+item.nama);
+                        $("#cetak_tujuan2").html(":&nbsp;"+item.nama);
                         $("#cetak_alamat").html(":&nbsp;"+item.alamat);
                         $("#cetak_alamat2").html(":&nbsp;"+item.alamat);
                         $('#carinoresi').focus();
+                        idtujuan=item.id
                     })
                 }
             },complete:function(){
@@ -279,7 +281,7 @@ $(document).ready(function(){
                     '_token': $('input[name=_token]').val(),
                     'kode': noresisj,
                     'noresi': noresi,
-                    'status':'handle by vendor'
+                    'status':'menuju kota tujuan'
                 },
                 success: function(data) {
                      notie.alert(1, 'Data Disimpan', 2);
@@ -388,7 +390,7 @@ $(document).ready(function(){
                 var noresi = $("#noresi").html();
                 var dats = $('#carivendor').select2('data');
 
-                var tujuan = dats[0].text+"-"+$("#telpvendor").val();
+                var tujuan = dats[0].text;
                 var alamat = $("#alamatvendor").val();
                 var totalkg = $('#totalkg').html();
                 var totalkoli = $('#totaljumlah').html();
@@ -410,7 +412,7 @@ $(document).ready(function(){
                         'totalcash' : totalcash,
                         'totalbt'   : totalbt,
                         'cabang'    : cabang,
-                        'idtujuan'  : '',
+                        'idtujuan'  : idtujuan,
                 },
                 success: function() {
                      notie.alert(1, 'Data Disimpan', 2);

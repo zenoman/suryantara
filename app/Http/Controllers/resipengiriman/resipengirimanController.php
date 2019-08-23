@@ -226,11 +226,29 @@ class resipengirimanController extends Controller
             }else{
                 $status = "Y";
             }
+            $noresi=$row->no_resi;
 
         }
+
+        //-----------------------------------------
+        $jumlahstatus = DB::table('status_pengiriman')->where([['kode','$noresi'],['status','paket telah diterima']])->count();
+        if($jumlahstatus==0){
+           DB::table('status_pengiriman')
+            ->insert([
+            'kode'=>$noresi,
+            'status'=>'paket telah diterima',
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+            ]); 
+        }
+
+        //-----------------------------------------
         DB::table('resi_pengiriman')->where('id',$id)
         ->update([
-        'status'=>$status
+        'status_antar'=>'Y',
+        'status'=>$status,
+        'status_pengiriman'=>'paket telah diterima'
         ]);
         return back()->with('status','Status Berhasil Diubah');
     }

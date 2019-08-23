@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//==============================================
+Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
 //============================================ envoice
 Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
 Route::get('/carisuratenvoice','envoice\envoicecontroller@cari');
@@ -157,8 +159,11 @@ Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
 Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
 Route::get('/carivendor','suratjalan\suratjalanController@carivendor');
+Route::get('/caricabangsj','suratjalan\suratjalanController@caricabangsj');
 Route::get('/carivendor/{id}','suratjalan\suratjalanController@hasilvendor');
+Route::get('/caricabangsj/{id}','suratjalan\suratjalanController@hasilcabang');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
+Route::get('/buatsuratjalancabang','suratjalan\suratjalanController@buatsuratjalancabang');
 
 //=====================================================laporan
 Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');

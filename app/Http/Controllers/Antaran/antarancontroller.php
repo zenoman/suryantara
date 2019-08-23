@@ -113,7 +113,8 @@ class antarancontroller extends Controller
                 'id_cabang' =>Session::get('cabang')
             ]);
         }
-        $datanya = DB::table('resi_pengiriman')->where('id',$request->noresi)->get();
+        $datanya = DB::table('resi_pengiriman')
+        ->where('id',$request->noresi)->get();
         foreach ($datanya as $row){
         if($row->status_antar=='KL'){
             $status='prosess pengantaran paket ulang';

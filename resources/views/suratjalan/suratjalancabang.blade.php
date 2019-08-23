@@ -23,7 +23,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Buat Manifest Vendor</h2>
+							<h2>Buat Manifest Cabang</h2>
 						</div>
 					</div>
 				</div>
@@ -36,19 +36,11 @@
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Cari Vendor</label>
+							<label class="form-label" for="exampleInputDisabled">Cari Cabang</label>
 						<select class="select2" id="carivendor"></select>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">No.telp</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="telpvendor" readonly>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-sm-12">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Alamat</label>
 							<div class="input-group">
@@ -195,7 +187,7 @@
 @endsection
 @section('otherjs')
 <script src="{{asset('assets/js/loading.js')}}"></script>
-<script src="{{asset('assets/js/surat_jalan.js')}}"></script>
+<script src="{{asset('assets/js/surat_jalancabang.js')}}"></script>
 <script type="text/javascript">
      function isNumberKey(evt)
       {

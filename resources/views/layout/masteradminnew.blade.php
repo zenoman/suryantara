@@ -192,7 +192,8 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalancabang')}}">Buat Manifest Cabang</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Buat Manifest Antar</a>
@@ -200,7 +201,14 @@
 			</div>
 		</li>
 		@endif
-	
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
+				<a class="dropdown-item" href="#">Transit</a>
+				
+			</div>
+		</li>
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
@@ -221,6 +229,7 @@
 	       	</div>
 		</li>
 		@endif
+		
 	</ul>
 
 @yield('content')
