@@ -75,7 +75,7 @@
 										<i class="fa fa-users"></i>
 									</div>
 									<div class="caption">Pengeluaran Gaji Karyawan</div>
-								</li>
+								</li> 
 							</ul>
 						</div>
 						<div>

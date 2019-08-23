@@ -105,7 +105,6 @@ class antarancontroller extends Controller
         $kode = $request->kode;
         $carikode = DB::table('surat_antar')->where('kode',$kode)->count();
         if($carikode > 0){
-
         }else{
             DB::table('surat_antar')
             ->insert([
@@ -114,43 +113,71 @@ class antarancontroller extends Controller
                 'id_cabang' =>Session::get('cabang')
             ]);
         }
+        $datanya = DB::table('resi_pengiriman')->where('id',$request->noresi)->get();
+        foreach ($datanya as $row){
+        if($row->status_antar=='KL'){
+            $status='prosess pengantaran paket ulang';
+        }else{
+            $status='prosess pengantaran paket';
+        }
+        DB::table('status_pengiriman')
+            ->insert([
+            'kode'=>$row->no_resi,
+            'status'=>$status,
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+            ]);
+            
+        }
         DB::table('resi_pengiriman')
         ->where('id',$request->noresi)
         ->update([
             'kode_antar'=>$request->kode,
             'status_antar'=>'P',
-            'status_pengiriman'=>'menuju alamat tujuan'
+            'status_pengiriman'=>$status
         ]);
-        $datanya = DB::table('resi_pengiriman')->where('id',$request->noresi)->get();
-        foreach ($datanya as $row){
-          DB::table('status_pengiriman')
-        ->insert([
-            'kode'=>$row->no_resi,
-            'status'=>'menuju alamat tujuan',
-            'lokasi'=>$row->kota_asal
-        ]);
-        }
+        
        
     }
 
     //=============================================================
     public function hapusdetail($id){
-    	DB::table('resi_pengiriman')
-        ->where('id',$id)
-        ->update([
-            'kode_antar'=>null,
-            'status_antar'=>'N',
-            'status_pengiriman'=>'siap dikirim'
-        ]);
-        //--------------------------------------------------
+    	
         $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($datanya as $row){
-          DB::table('status_pengiriman')
-        ->where(
-            'kode',$row->no_resi
-        )
+        if($row->status_pengiriman=='prosess pengantaran paket ulang'){
+         $status = 'pengantaran gagal';
+        }else{
+            $status = 'barang diterima cabang '.Session::get('kota');
+        }
+        DB::table('status_pengiriman')
+        ->where([['kode',$row->no_resi],['status',$row->status_pengiriman]])
+        ->orderby('id','desc')
+        ->limit(1)
         ->delete();
         }
+
+        if($status=='pengantaran gagal'){
+             DB::table('resi_pengiriman')
+            ->where('id',$id)
+            ->update([
+                'kode_antar'=>null,
+                'status_antar'=>'KL',
+                'status_pengiriman'=>$status
+            ]);
+        }else{
+             DB::table('resi_pengiriman')
+            ->where('id',$id)
+            ->update([
+                'kode_antar'=>null,
+                'status_antar'=>'N',
+                'status_pengiriman'=>$status
+            ]);
+        }
+       
+        //--------------------------------------------------
+        
     }
     
     //============================================================
@@ -251,22 +278,32 @@ class antarancontroller extends Controller
     }
 
     //=============================================================
-    public function suksesantar($id,$kode){
+    public function suksesantar(Request $request,$id,$kode){
         DB::table('resi_pengiriman')
         ->where('id',$id)
         ->update([
             'status_antar'=>'Y',
-            'status_pengiriman'=>'paket telah sampai'
+            'status_pengiriman'=>'paket telah diterima',
+            'nama_penerima_barang'=>$request->penerima
         ]);
-        DB::table('status_pengiriman')
+        
+        //-------------------------------------------------
+        $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($datanya as $row){
+          DB::table('status_pengiriman')
         ->insert([
-            'kode'=>$request->kode,
-            'status'=>'paket telah sampai'
-        ]);
+            'kode'=>$row->no_resi,
+            'status'=>'paket telah diterima',
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota'),
+            'keterangan'=>$request->penerima
+        ]);}
+        
+        //-------------------------------------------------
         $jumlah = DB::table('resi_pengiriman')
         ->where([['kode_antar','=',$kode],['status_antar','=','P']])
         ->count();
-
         if($jumlah == 0){
             DB::table('surat_antar')
             ->where('kode',$kode)
@@ -289,16 +326,19 @@ class antarancontroller extends Controller
         ->where('id',$request->id_resi)
         ->update([
             'status_antar'=>'KL',
-            'status_pengiriman'=>'pengantaran ulang',
+            'status_pengiriman'=>'pengantaran gagal',
             'keterangan'=>$keterangan
         ]);
-        $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
+        $datanya = DB::table('resi_pengiriman')->where('id',$request->id_resi)->get();
         foreach ($datanya as $row){
          DB::table('status_pengiriman')
         ->insert([
             'kode'=>$row->no_resi,
-            'status'=>'pengantaran ulang',
-            'lokasi'=>$row->kota_asal
+            'status'=>'pengantaran gagal',
+            'keterangan'=>$keterangan,
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
         ]);
         }
         

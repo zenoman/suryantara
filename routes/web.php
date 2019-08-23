@@ -1,5 +1,18 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//============================================ envoice
+Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
+Route::get('/carisuratenvoice','envoice\envoicecontroller@cari');
+Route::post('/tambahkanenv','envoice\envoicecontroller@store');
+Route::get('/hapusdetailen/{id}','envoice\envoicecontroller@hapusdetail');
+Route::get('/caridetailen/{id}','envoice\envoicecontroller@caridetail');
+Route::post('/tambahdetailen','envoice\envoicecontroller@tambahdetail');
+Route::get('/carinoresicmp','envoice\envoicecontroller@cariresi');
+Route::get('/carimitra/{id}','envoice\envoicecontroller@caridetailmitra');
+Route::get('/carimitra','envoice\envoicecontroller@carimitra');
+Route::get('carikodeenvoice','envoice\envoicecontroller@carikode');
+Route::get('envoice','envoice\envoicecontroller@index');
+Route::get('envoice/tambah','envoice\envoicecontroller@create');
 //============================================mitra
 Route::resource('mitra','mitra\mitracontroller');
 //=============================================tarif_citykurier
@@ -26,7 +39,7 @@ Route::post('/tambahkansa','Antaran\antarancontroller@simpansa');
 Route::post('/hapuslistsa','Antaran\antarancontroller@hapus');
 Route::get('/detailsa/{id}','Antaran\antarancontroller@detail');
 Route::get('/resisuratantar','Antaran\antarancontroller@resiantar');
-Route::get('/suksesantar/{id}/{kode}','Antaran\antarancontroller@suksesantar');
+Route::post('/suksesantar/{id}/{kode}','Antaran\antarancontroller@suksesantar');
 Route::post('/cancelresiantar','Antaran\antarancontroller@cancelresiantar');
 Route::get('/carisuratantar','Antaran\antarancontroller@carisuratantar');
 Route::get('/cariresisuratantar','Antaran\antarancontroller@cariresisuratantar');

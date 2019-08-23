@@ -249,7 +249,8 @@ class Manualcontroller extends Controller
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
-                'status' => 'US']);
+                'status' => 'US',
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -277,8 +278,17 @@ class Manualcontroller extends Controller
                 'biaya_ppn'     => $request->ppn,
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
-                'alamat_penerima'=>$request->alamat_penerima]);
+                'alamat_penerima'=>$request->alamat_penerima,
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->koderesi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
 
@@ -313,7 +323,8 @@ class Manualcontroller extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US']);
+                    'status' => 'US',
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -341,8 +352,17 @@ class Manualcontroller extends Controller
                     'biaya_ppn'     => $request->ppn,
                     'metode_input'  =>'manual',
                     'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima]);
+                    'alamat_penerima'=>$request->alamat_penerima,
+                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
             }
+            DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->koderesi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
 //===================================================================
@@ -378,7 +398,8 @@ class Manualcontroller extends Controller
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
-                'status' => 'US']);
+                'status' => 'US',
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -408,8 +429,17 @@ class Manualcontroller extends Controller
                 'biaya_charge'  =>$request->charge,
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
-                'alamat_penerima'=>$request->alamat_penerima]);
+                'alamat_penerima'=>$request->alamat_penerima,
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->koderesi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
     public function simpancity(Request $request){
@@ -442,7 +472,8 @@ class Manualcontroller extends Controller
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
-                'status' => 'US']);
+                'status' => 'US',
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -470,8 +501,17 @@ class Manualcontroller extends Controller
                 'biaya_ppn'     => $request->ppn,
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
-                'alamat_penerima'=>$request->alamat_penerima]);
+                'alamat_penerima'=>$request->alamat_penerima,
+                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
         }
+        DB::table('status_pengiriman')
+        ->insert([
+            'kode'=>$request->koderesi,
+            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+        ]);
         return response()->json($simpan);
     }
 }
