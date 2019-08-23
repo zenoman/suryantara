@@ -20,7 +20,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>Laporan {{$kat}} tgl {{$tgl}} Sampai {{$tgl0}}</h2>
+							<h2>Laporan {{$kat}} tgl {{$tgl}} Sampai {{$tgl0}} </h2>
 						</div>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 						<tr>
 							<th>No</th>
 							<th>Admin</th>
-							<th>Kategori</th>
+							<th>Keterangan</th>
 							<th>tgl</th>
 							<th>Sub Total</th>
 						</tr>
@@ -47,7 +47,7 @@
                         <tr>
 							<td>{{$no}}</td>
                             <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
+                            <td>{{$row->keterangan}}</td>
                             <td>{{$row->tgl}}</td>
 							<td>{{number_format($row->jumlah)}}</td>
 							<td class="tdtot">{{$row->jumlah}}</td>
@@ -55,22 +55,9 @@
 						{{-- @endforeach --}}
 						@endforeach
 						</tbody>
-						{{-- <tfoot> 
-						<tr> 
-							<th>No</th>
-							<th>No Resi</th>
-							<th>Admin</th>
-							<th>Kategori</th>
-							<th>tgl</th>
-							<th>jumlah</th>
-						</tr>
-						</tfoot> --}}
-						
 					</table>
 				</div>
-			</section>
-
-			
+			</section>			
 			<section class="card">
 				<div class="card-body">
 					<div class="col-md-12 col-lg-12 col-sm-12">

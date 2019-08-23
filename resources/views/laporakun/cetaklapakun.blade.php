@@ -5,6 +5,24 @@
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 </head>
 <body>
+<table style="width: 100%;" border="0">
+			<tr>
+				<td style="width: 25%" align="center">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
+				</td>
+				<td style="width: 50%" align="center" >
+				<p style="font-size:10;">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					{{Session::get('kop')}}
+				</p>
+				</td>
+				<td style="width: 25%;font-size: 9;">								
+				</td>
+			</tr>
+		</table>
+	</div>
+    <hr>
 		<table style="width: 100%" border="0">
 			<tr>
 				<td colspan="2" align="center">
@@ -26,12 +44,12 @@
 		<table border="1" id="example"  class="display table table-striped table-bordered" cellspacing="0">
 						<thead>
 						<tr>
-								<th>No</th>
-								<th>No Resi</th>
-								<th>Admin</th>
-								<th>Kategori</th>
-								<th>tgl</th>
-								<th>Sub Total</th>
+							<th>No</th>
+							<th>No Resi</th>
+							<th>Admin</th>
+							<th>Kategori</th>
+							<th>tgl</th>
+							<th>Sub Total</th>
 						</tr>
 						</thead>						
 						<tbody>
@@ -40,13 +58,13 @@
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
                         <tr>
-								<td align="center">{{$no}}</td>
-								<td align="center">{{$row->no_resi}}</td>
-								<td align="center">{{$row->admin}}</td>
-								<td align="center">{{$row->nama}}</td>
-								<td align="center">{{$row->tgl}}</td>
-								<td align="center">{{number_format($row->total_biaya)}}</td>
-								<td align="center" class="tdtot">{{$row->total_biaya}}</td>
+							<td align="center">{{$no}}</td>
+							<td align="center">{{$row->no_resi}}</td>
+							<td align="center">{{$row->admin}}</td>
+							<td align="center">{{$row->nama}}</td>
+							<td align="center">{{$row->tgl}}</td>
+							<td align="center">{{number_format($row->total_biaya)}}</td>
+							<td align="center" class="tdtot">{{$row->total_biaya}}</td>
 						</tr>
 						@endforeach						
 						</tbody>
