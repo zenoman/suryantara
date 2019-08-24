@@ -1,18 +1,18 @@
 @extends('layout.masteradminnew')
-@section('css')
-<meta name="_token" content="{{ csrf_token() }}"/>
-<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
-@endsection
-@section('header')
-@foreach($webinfo as $info)
-<title>{{$info->namaweb}}</title>
-<link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
-@endforeach
-@endsection
-@section('css')
 
+@section('css')
+	<meta name="_token" content="{{ csrf_token() }}"/>
+	<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/lib/ladda-button/ladda-themeless.min.css')}}">
 @endsection
+
+@section('header')
+	@foreach($webinfo as $info)
+	<title>{{$info->namaweb}}</title>
+	<link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
+	@endforeach
+@endsection
+
 @section('content')
 <link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 

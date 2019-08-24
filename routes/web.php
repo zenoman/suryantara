@@ -1,6 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Input;
-//==============================================
+//================================================transit
+Route::get('selesaitransit/{kode}','transit\transitcontroller@selesaitransit');
+Route::post('simpantransit','transit\transitcontroller@store');
+Route::get('cariresisj/{id}','transit\transitcontroller@cariresisj');
+Route::get('carisuratjln/{id}','transit\transitcontroller@caridetailsj');
+Route::get('carisuratjln','transit\transitcontroller@carisuratjalan');
+Route::get('tambahtransit','transit\transitcontroller@create');
+Route::get('listtransit','transit\transitcontroller@index');
+//==============================================penerimaan
 Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
 //============================================ envoice
 Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
