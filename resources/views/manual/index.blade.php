@@ -42,48 +42,7 @@
 
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
-
-
-					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                    <i class="fa fa-search"></i> Cari Data
-                    </button>
-                   
-                     <div class="btn-group">
-                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="font-icon font-icon-eye"></i> Tampil Berdasarkan
-                                </button>
-                                <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -6px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{url('manualbatal')}}">
-                                    Resi Dibatalkan</a>
-                                    <a class="dropdown-item" href="{{url('manual_smukosong')}}">Resi/Smu kosong</a>
-                                    
-                                </div>
-                            </div>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('/Manual/cari')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan no resi/nama pemegang/Jalur" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+                               
                     <br><br>
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -455,7 +414,6 @@
 						
 					</table>
 					{{csrf_field()}}
-                    {{ $manual->links() }}
 				</div>
 			</section>
 		</div>

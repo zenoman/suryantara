@@ -150,7 +150,7 @@ class antarancontroller extends Controller
         if($row->status_pengiriman=='prosess pengantaran paket ulang'){
          $status = 'pengantaran gagal';
         }else{
-            $status = 'barang diterima cabang '.Session::get('kota');
+            $status = 'barang diterima KLC Cabang '.Session::get('kota');
         }
         DB::table('status_pengiriman')
         ->where([['kode',$row->no_resi],['status',$row->status_pengiriman]])
@@ -432,7 +432,10 @@ class antarancontroller extends Controller
          DB::table('status_pengiriman')
         ->insert([
             'kode'=>$row->no_resi,
-            'status'=>'dikembalikan ke pengirim'
+            'status'=>'dikembalikan ke pengirim',
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
         ]);
         }
         

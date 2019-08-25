@@ -15,18 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 class Manualcontroller extends Controller
 {
-    public function manualbatal()
-    {
-        $setting = DB::table('setting')->get();
-        $datmanual = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
-        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','Y'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->orderby('resi_pengiriman.id','desc')
-        ->get();
-        return view('manual/manualbatal',
-            ['manual'=>$datmanual,'title'=>$setting]);
-    }
+    
     //==========================================================
     public function index()
     {
@@ -34,53 +23,12 @@ class Manualcontroller extends Controller
         $datmanual = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
         ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')],['resi_pengiriman.total_biaya','=','0']])
         ->orderby('resi_pengiriman.id','desc')
-        ->paginate(20);
+        ->get();
         return view('manual/index',['manual'=>$datmanual,'title'=>$setting]);
     }
-    //==============================================================
-    public function caridata(Request $request)
-    {
-        $cari=$request->cari;
-        $datmanual = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
-        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.pengiriman_via','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->get();
-            $setting = DB::table('setting')->get();
-        return view('manual/pencarian', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
-    }
 
-    //==============================================================
-    public function tampilmanualsmukosong()
-    {
-        $setting = DB::table('setting')->get();
-        $datmanual = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
-        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->whereNull('no_smu')
-        ->orderby('resi_pengiriman.id','desc')
-        ->get();
-        return view('manual/manual_smukosong',['manual'=>$datmanual,'title'=>$setting]);
-    }
-
-    //==============================================================
-    public function carismukosong(Request $request)
-    {
-        $cari=$request->cari;
-        $datmanual = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,karyawan.nama'))
-        ->leftjoin('karyawan','karyawan.id','=','resi_pengiriman.pemegang')
-        ->where([['resi_pengiriman.metode_input','manual'],['resi_pengiriman.no_resi','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->orwhere([['resi_pengiriman.metode_input','manual'],['karyawan.nama','like','%'.$cari.'%'],['no_smu','=',null],['resi_pengiriman.batal','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->get();
-            $setting = DB::table('setting')->get();
-        return view('manual/cari_smukosong', ['manual'=>$datmanual, 'cari'=>$cari,'title'=>$setting]);
-    }
 
     //=========================================================
     public function importexcel(){
@@ -250,7 +198,7 @@ class Manualcontroller extends Controller
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
                 'status' => 'US',
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -279,12 +227,12 @@ class Manualcontroller extends Controller
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->koderesi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -324,7 +272,7 @@ class Manualcontroller extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -353,12 +301,12 @@ class Manualcontroller extends Controller
                     'metode_input'  =>'manual',
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
             }
             DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->koderesi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -399,7 +347,7 @@ class Manualcontroller extends Controller
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
                 'status' => 'US',
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -430,12 +378,12 @@ class Manualcontroller extends Controller
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->koderesi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -473,7 +421,7 @@ class Manualcontroller extends Controller
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => date('Y-m-d'),
                 'status' => 'US',
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }else{
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
@@ -502,12 +450,12 @@ class Manualcontroller extends Controller
                 'metode_input'  =>'manual',
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
-                'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')]);
+                'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->koderesi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')

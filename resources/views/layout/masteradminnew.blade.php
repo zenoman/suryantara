@@ -177,7 +177,13 @@
 				<a class="dropdown-item" href="{{url('/resipengirimanlaut')}}">Pengiriman Laut</a>
 				<a class="dropdown-item" href="{{url('/resipengirimanudara')}}">Pengiriman Udara</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{{url('/resipengirimancitykurier')}}">City Kurier</a>
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">City Kurier</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{{url('resicitykurier')}}">
+									Personal</a>
+					<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
+									Company</a>
+				</div>
 				<a class="dropdown-item" href="{{url('/envoice')}}">Envoice City Kurier</a>
 				
 			</div>

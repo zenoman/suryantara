@@ -50,8 +50,7 @@
 							<th>Kode</th>
 							<th>Tujuan</th>
 							<th>Tanggal</th>
-							<th>Status</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -60,8 +59,7 @@
 							<th>kode</th>
 							<th>Tujuan</th>
 							<th>Tanggal</th>
-							<th>Status</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -78,32 +76,14 @@
                             	{{$newtujuan[0]}}
                             </td>
                             <td>{{$row->tgl}}</td>
-                            <td>
-                            	@if($row->status=='Y')
-                            	<span class="label label-danger">
-								Belum Lunas
-								</span>
-                            	@else
-                            	<span class="label label-success">
-								Lunas
-								</span>
-                            	@endif
-                            	</td>
-                            <td>
-
-                            	@if($row->status=='Y')
-                            	<a href="{{url('/bayarsuratjalan/'.$row->id)}}" class="btn btn-warning btn-sm">
-                            	Bayar Sekarang
-                            	</a>
-                            	@else
-                            	<button class="btn btn-primary btn-sm"
+                            <td class="text-center">
+								<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
 									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
-                            	@endif
-                    			
-
-						
-                            </td>
+									@if($row->status_pengiriman=='N')
+								<a href="{{url('terimasuratjalan/'.$row->kode)}}" onclick="return confirm('Apakah Surat Jalan & Paket Telah Diterima ? ')" class="btn btn-success btn-sm">Terima</a>
+								@endif
+                    		</td>
 						</tr>
 						@endforeach
 						</tbody>
@@ -223,18 +203,6 @@
 						</div>
 					</div>
 					<br>
-					<div class="row">
-						<div class="col-lg-12 terms-and-conditions">
-							<strong>Status : </strong>
-							@if($row->status=='Y')
-							Surat Jalan Belum Di lunasi
-							@else
-							Surat Jalan Telah Lunas
-							@endif
-							
-						</div>
-						
-					</div>
 							</div>
 							<div class="modal-footer">
 							<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>

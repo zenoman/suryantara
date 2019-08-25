@@ -67,7 +67,7 @@ class transitcontroller extends Controller
         DB::table('resi_pengiriman')
         ->where('kode_jalan',$request->kodejalan)
         ->update([
-            'status'=>'transit di KLC Cabang '.Session::get('kota')
+            'status_pengiriman'=>'transit di KLC Cabang '.Session::get('kota')
         ]);
 
         DB::table('surat_jalan')

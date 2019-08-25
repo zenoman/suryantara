@@ -7,38 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
-   public function caridataresicity(Request $request){
-    $cari = $request->cari;
-        $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['nama_barang','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->get();
-        $webinfo = DB::table('setting')->limit(1)->get();
-        
-        return view('resipengiriman/caricity',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
-   }
-    //===========================================================
-    public function listpengirimanbatalcity(){
-        $webinfo = DB::table('setting')->limit(1)->get();
-        $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-        ->orderby('id','desc')
-        ->get();
-        return view('resipengiriman/pengirimanbatalcity',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
-    }
-    //=======================================================
-    public function listcity(){
-        $webinfo = DB::table('setting')->limit(1)->get();
-        $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-        ->orderby('id','desc')
-        ->paginate(50);
-        return view('resipengiriman/listpengirimancity',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
-    }
+    
     //======================================================
     public function simpancity(Request $request){
        $simpan = DB::table('resi_pengiriman')
@@ -85,7 +54,7 @@ class resipengirimanController extends Controller
     public function listpengirimanbatal(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','Y'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+        ->where([['batal','Y'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
         ->orderby('id','desc')
         ->get();
         return view('resipengiriman/pengirimanbatal',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -162,11 +131,11 @@ class resipengirimanController extends Controller
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->where([['no_resi','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+            ->orwhere([['admin','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
@@ -176,11 +145,11 @@ class resipengirimanController extends Controller
     public function caridataresi_smukosong(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['admin','like','%'.$cari.'%'],['metode_input','=','otomatis'],['no_smu','=',null],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+            ->where([['no_resi','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['tgl','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([['admin','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
         
@@ -227,11 +196,13 @@ class resipengirimanController extends Controller
                 $status = "Y";
             }
             $noresi=$row->no_resi;
+            $statusp=$row->status_pengiriman;
 
         }
 
         //-----------------------------------------
-        $jumlahstatus = DB::table('status_pengiriman')->where([['kode','$noresi'],['status','paket telah diterima']])->count();
+        if($statusp!='paket telah diterima'){
+            $jumlahstatus = DB::table('status_pengiriman')->where([['kode','$noresi'],['status','paket telah diterima']])->count();
         if($jumlahstatus==0){
            DB::table('status_pengiriman')
             ->insert([
@@ -242,6 +213,8 @@ class resipengirimanController extends Controller
             'lokasi'=>Session::get('kota')
             ]); 
         }
+        }
+        
 
         //-----------------------------------------
         DB::table('resi_pengiriman')->where('id',$id)
@@ -280,16 +253,16 @@ class resipengirimanController extends Controller
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+        ->where([['batal','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     //===================================================================
-        public function tampilsmukosong(){
+    public function tampilsmukosong(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['metode_input','otomatis'],['batal','=','N'],['pengiriman_via','!=','city kurier'],['id_cabang','=',Session::get('cabang')]])
+        ->where([['batal','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
         ->whereNull('no_smu')
         ->orderby('id','desc')
         ->get();
@@ -429,7 +402,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -459,7 +432,7 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
             
@@ -494,7 +467,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -525,14 +498,14 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -574,7 +547,7 @@ class resipengirimanController extends Controller
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
                     'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -605,7 +578,7 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
                     'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
             
@@ -641,7 +614,7 @@ class resipengirimanController extends Controller
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
                     'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -673,14 +646,14 @@ class resipengirimanController extends Controller
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
                     'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -722,7 +695,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -752,7 +725,7 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
             
@@ -787,7 +760,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
 
             }else{
@@ -818,14 +791,14 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -867,7 +840,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -897,7 +870,7 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }else{
@@ -931,7 +904,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                  $simpan = DB::table('resi_pengiriman')
@@ -961,14 +934,14 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
@@ -1012,7 +985,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                 $simpan = DB::table('resi_pengiriman')
@@ -1044,7 +1017,7 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }
         }else{
@@ -1080,7 +1053,7 @@ class resipengirimanController extends Controller
                     'tgl_lunas' => date('Y-m-d'),
                     'status' => 'US',
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]);
             }else{
                $simpan = DB::table('resi_pengiriman')
@@ -1112,14 +1085,14 @@ class resipengirimanController extends Controller
                     'alamat_pengirim'=>$request->alamat_pengirim,
                     'alamat_penerima'=>$request->alamat_penerima,
                     'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima cabang '.Session::get('kota')
+                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
                 ]); 
             }
         }
          DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
-            'status'=>'barang diterima cabang '.Session::get('kota'),
+            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
