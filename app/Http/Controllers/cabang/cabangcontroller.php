@@ -24,8 +24,13 @@ class cabangcontroller extends Controller
     //====================================================================
     public function create()
     {
-        $setting = DB::table('setting')->get();
+        if(Session::get('level') == 'programer'){
+             $setting = DB::table('setting')->get();
         return view('cabang/create',['title'=>$setting]);
+        }else{
+        return redirect('dashboard');
+        }
+       
     }
     //====================================================================
     public function store(Request $request)

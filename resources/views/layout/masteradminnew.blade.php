@@ -159,7 +159,7 @@
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
 				
-				@if(Session::get('level') == 'programer')
+				@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
 

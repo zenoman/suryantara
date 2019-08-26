@@ -103,6 +103,7 @@ class Manualcontroller extends Controller
         $id = $request->aid;
         $data = Manualmodel::find($id);
         $kodejalan = $data->kode_jalan;
+        $resinya = $data->no_resi;
         if($data->kode_jalan!=''){
             $datasj = DB::table('surat_jalan')->where('kode',$data->kode_jalan)->get();
             foreach($datasj as $row){
@@ -114,8 +115,9 @@ class Manualcontroller extends Controller
                 ]);
                 }
         }
-        $hapusresi=Manualmodel::destroy($id);
 
+        $hapusresi=Manualmodel::destroy($id);
+        DB::table('resi_pengiriman')->where([['no_resi',$resinya],['duplikat','Y']])->delete();
         $hitungsj = 
         DB::table('resi_pengiriman')
         ->where('kode_jalan',$kodejalan)

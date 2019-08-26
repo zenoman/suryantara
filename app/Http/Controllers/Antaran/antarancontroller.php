@@ -280,16 +280,10 @@ class antarancontroller extends Controller
 
     //=============================================================
     public function suksesantar(Request $request,$id,$kode){
-        DB::table('resi_pengiriman')
-        ->where('id',$id)
-        ->update([
-            'status_antar'=>'Y',
-            'status_pengiriman'=>'paket telah diterima',
-            'nama_penerima_barang'=>$request->penerima
-        ]);
-        
-        //-------------------------------------------------
-        $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
+         
+        $jumdatanya = DB::table('resi_pengiriman')->where([['id',$id],['status_pengiriman','paket telah diterima']])->count();
+        if($jumdatanya==0){
+            $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($datanya as $row){
           DB::table('status_pengiriman')
         ->insert([
@@ -300,6 +294,17 @@ class antarancontroller extends Controller
             'lokasi'=>Session::get('kota'),
             'keterangan'=>$request->penerima
         ]);}
+        }
+        //-------------------------------------------------
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'status_antar'=>'Y',
+            'status_pengiriman'=>'paket telah diterima',
+            'nama_penerima_barang'=>$request->penerima
+        ]);
+        
+
         
         //-------------------------------------------------
         $jumlah = DB::table('resi_pengiriman')

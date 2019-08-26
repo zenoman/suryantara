@@ -142,13 +142,15 @@
 								@if(Session::get('level') == 'programer')
 								<option value="programer" @if($datadmin->level=='programer')selected @endif>Programer</option>
 								@endif
+								<option value="superadmin" @if($datadmin->level=='superadmin')selected @endif>Superadmin</option>
+								<option value="HRD" @if($datadmin->level=='HRD')selected @endif>HRD</option>
 								<option value="operasional_cabang" @if($datadmin->level=='operasional_cabang')selected @endif>Operasional Cabang</option>
 								<option value="operasional" @if($datadmin->level=='operasional')selected @endif>Operasional</option>
 							
 								<option value="cs" @if($datadmin->level=='cs')selected @endif>Customer Service</option>
 								<option value="admin_cabang" @if($datadmin->level=='admin_cabang')selected @endif>Admin Cabang</option>
 								<option value="admin" @if($datadmin->level=='admin')selected @endif>Admin</option>
-								<option value="superadmin" @if($datadmin->level=='superadmin')selected @endif>Superadmin</option>
+								
 							</select>
 						</div>
 					</div>

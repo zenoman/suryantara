@@ -127,12 +127,14 @@
 								@if(Session::get('level') == 'programer')
 								<option value="programer">Programer</option>
 								@endif
+								<option value="superadmin">Superadmin</option>
+								<option value="HRD">HRD</option>
 								<option value="cs">Costumer Service</option>
 								<option value="operasional_cabang">Operasional Cabang</option>
 								<option value="operasional">Operasional</option>
 								<option value="admin_cabang">Admin Cabang</option>
 								<option value="admin">Admin</option>
-								<option value="superadmin">Superadmin</option>
+								
 							</select>
 						</div>
 					</div>
