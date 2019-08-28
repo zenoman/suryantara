@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kargo.admin: ~9 rows (approximately)
+-- Dumping data for table kargo.admin: ~8 rows (approximately)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `email`, `alamat`, `level`, `id_cabang`) VALUES
@@ -414,23 +414,25 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `status_company` enum('Y','N') DEFAULT 'N',
   `duplikat` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.resi_pengiriman: ~10 rows (approximately)
+-- Dumping data for table kargo.resi_pengiriman: ~12 rows (approximately)
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_antar`, `kode_envoice`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `tgl_lunas`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `nama_penerima_barang`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`, `status_antar`, `id_cabang`, `katakun`, `status_pengiriman`, `status_company`, `duplikat`) VALUES
 	(1, 'resimanual001', NULL, 'SJSBY250819-06-000002', NULL, NULL, 'devasatrio', 'mainan', 'city kurier', 'SURABAYA', 'kec. ngancar', '2019-08-25', NULL, '2019-08-25', 1, '5', '30 x 40 x 20', '6', 'kasldfjkl', 'jaskldfjkl', NULL, '92034898', '23904890', 'jklsad asd fklasdjklasd', 'klasdfjkl asdf asdlfjaskldf', 12000, 2000, 0, 0, 0, 0, 0, 0, 14000, 0, NULL, 'Y', 'kg', 'cash', 'manual', '2', 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(2, 'resimanual002', 'h019238', 'SJSBY250819-06-000002', NULL, NULL, 'devasatrio', 'burung kaka', 'udara', 'SURABAYA', 'cikarang', '2019-08-25', NULL, '2019-08-25', 1, '3', '20 x 40 x 20', '3', 'askldfj', 'askdfljskl', NULL, '920134890', '28349890', 'sakldfjk asdklfj asdasdkfj', 'asjdfkl asdfj lsakfjklsaf', 135000, 0, 0, 0, 25000, 2000, 0, 0, 162000, 0, NULL, 'Y', 'kg', 'cash', 'manual', '2', 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(3, 'resimanual003', NULL, NULL, 'SASBY250819-06-000002', NULL, 'devasatrio', 'nasi kotak', 'laut', 'SURABAYA', 'laut02', '2019-08-25', NULL, '2019-08-25', 1, '2', '40 x 30 x 10', '3', 'asdfkj', 'skldfj12398490', NULL, '90238490', '90234890', 'jklsdja asdfjasdklf l', 'sadklfjkl sadj lasdfjkl', 102000, 2000, 0, 0, 0, 0, 0, 0, 104000, 0, NULL, 'Y', 'kg', 'cash', 'manual', '2', 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
-	(4, 'resimanual004', NULL, NULL, NULL, NULL, 'devasatrio', 'sam fuck', 'darat', 'SURABAYA', 'magersari', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 30 x 20', '5', 'hari', 'desi', NULL, '9203890', '92038490', 'jkasld asdjk lkasdjklas', 'kasldfjkl', 150000, 2000, 1000, 0, 0, 0, 0, 0, 153000, 0, NULL, 'US', 'kg', 'cash', 'manual', '2', 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N'),
+	(4, 'resimanual004', NULL, 'SJSBY270819-06-000001', NULL, NULL, 'devasatrio', 'sam fuck', 'darat', 'SURABAYA', 'magersari', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 30 x 20', '5', 'hari', 'desi', NULL, '9203890', '92038490', 'jkasld asdjk lkasdjklas', 'kasldfjkl', 150000, 2000, 1000, 0, 0, 0, 0, 0, 153000, 0, NULL, 'Y', 'kg', 'cash', 'manual', '2', 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(5, 'SBY250819-06-000001', NULL, 'SJSBY250819-06-000001', NULL, NULL, 'devasatrio', 'sepatu kuda', 'darat', 'SURABAYA', 'magersari', '2019-08-25', NULL, '2019-08-25', 1, '3', '30 x 20 x 10', '2', 'kalsdfj', 'askldfj1', NULL, '1238490', '92304890', 'jklasdf asdkfjklasdfjklasf', 'adsklas sakdf asdfksd', 90000, 2000, 0, 0, 0, 0, 0, 0, 92000, 0, NULL, 'Y', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(6, 'SBY250819-06-000002', NULL, 'SJSBY250819-06-000001', NULL, NULL, 'devasatrio', 'halo halo', 'laut', 'SURABAYA', 'laut02', '2019-08-25', NULL, '2019-08-25', 1, '2', '30 x 20 x 10', '2', 'kasdjfkl', 'skladfjkl', NULL, '90238490', '29034890', 'jaskldf asd flkasdjfklas', 'sjadfkl asdlfkl;a', 68000, 200, 1000, 0, 0, 0, 0, 0, 69200, 0, NULL, 'Y', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
-	(7, 'SBY250819-06-000003', 'h-2394890', NULL, NULL, NULL, 'devasatrio', 'burung kasut ari', 'udara', 'SURABAYA', 'cikarang', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 20 x 10', '1', 'aksldfj', 'kasldfjklasd', NULL, '902314890', '93124890', 'jsakld asdkfj askldfj', 'jskladf lkasd flsadfjasl', 45000, 0, 0, 0, 25000, 2000, 0, 0, 72000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N'),
+	(7, 'SBY250819-06-000003', 'h-2394890', 'SJSBY270819-06-000001', NULL, NULL, 'devasatrio', 'burung kasut ari', 'udara', 'SURABAYA', 'cikarang', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 20 x 10', '1', 'aksldfj', 'kasldfjklasd', NULL, '902314890', '93124890', 'jsakld asdkfj askldfj', 'jskladf lkasd flsadfjasl', 45000, 0, 0, 0, 25000, 2000, 0, 0, 72000, 0, NULL, 'Y', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(8, 'SBY250819-06-000004', NULL, NULL, 'SASBY250819-06-000001', NULL, 'devasatrio', 'halo halo', 'city kurier', 'SURABAYA', 'kec. ngancar', '2019-08-25', NULL, '2019-08-25', 1, '2', '30 x 20 x 10', '2', 'jsakldfj', 'klasdjfkl', 'mbak komari', '02934890', '2394890', 'jksadfjkl fasdf askldfjaskl', 'jsdklf sajasklf  sklaf', 4000, 2000, 100, 0, 0, 0, 0, 0, 6100, 0, NULL, 'Y', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'N'),
 	(9, 'citycompany001', NULL, NULL, 'SASBY250819-06-000002', NULL, 'devasatrio', 'kaos kaki', 'city kurier', 'SURABAYA', 'kec. pagu', '2019-08-25', NULL, '2019-08-25', 1, '3', '20 x 30 x 20', '3', 'askldfjkl', 'ksladfjkl', 'sumiarti', '92304890', '2398490', 'skaldfjkl asdlkfjklasd f', 'jskldf asdfkj askldfj', 3000, 2000, 1000, 0, 0, 0, 0, 0, 6000, 0, 'Alamat salah atau tidak lengkap', 'Y', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'Y', 'N'),
 	(10, 'SBY250819-06-000001', NULL, NULL, 'SAKDR250819-15-000001', NULL, 'devasatrio', 'sepatu kuda', 'darat', 'SURABAYA', 'magersari', '2019-08-25', NULL, '2019-08-25', 1, '3', '30 x 20 x 10', '2', 'kalsdfj', 'askldfj1', 'askldfj1', '1238490', '92304890', 'jklasdf asdkfjklasdfjklasf', 'adsklas sakdf asdfksd', 90000, 0, 0, 0, 0, 0, 0, 0, 92000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 1, 1, 'paket telah diterima', 'N', 'Y'),
-	(11, 'SBY250819-06-000002', NULL, 'SJKDR250819-15-000001', NULL, NULL, 'devasatrio', 'halo halo', 'laut', 'SURABAYA', 'laut02', '2019-08-25', NULL, '2019-08-25', 1, '2', '30 x 20 x 10', '2', 'kasdjfkl', 'skladfjkl', NULL, '90238490', '29034890', 'jaskldf asd flkasdjfklas', 'sjadfkl asdlfkl;a', 68000, 0, 0, 0, 0, 0, 0, 0, 69200, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'handle by vendor', 'N', 'Y');
+	(11, 'SBY250819-06-000002', NULL, 'SJKDR250819-15-000001', NULL, NULL, 'devasatrio', 'halo halo', 'laut', 'SURABAYA', 'laut02', '2019-08-25', NULL, '2019-08-25', 1, '2', '30 x 20 x 10', '2', 'kasdjfkl', 'skladfjkl', NULL, '90238490', '29034890', 'jaskldf asd flkasdjfklas', 'sjadfkl asdlfkl;a', 68000, 0, 0, 0, 0, 0, 0, 0, 69200, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'handle by vendor', 'N', 'Y'),
+	(12, 'resimanual004', NULL, 'SJKDR270819-15-000001', NULL, NULL, 'devasatrio', 'sam fuck', 'darat', 'SURABAYA', 'magersari', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 30 x 20', '5', 'hari', 'desi', NULL, '9203890', '92038490', 'jkasld asdjk lkasdjklas', 'kasldfjkl', 150000, 0, 0, 0, 0, 0, 0, 0, 153000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'handle by vendor', 'N', 'Y'),
+	(13, 'SBY250819-06-000003', 'h-2394890', 'SJKDR270819-15-000001', NULL, NULL, 'devasatrio', 'burung kasut ari', 'udara', 'SURABAYA', 'cikarang', '2019-08-25', NULL, '2019-08-25', 1, '1', '30 x 20 x 10', '1', 'aksldfj', 'kasldfjklasd', NULL, '902314890', '93124890', 'jsakld asdkfj askldfj', 'jskladf lkasd flsadfjasl', 45000, 0, 0, 0, 25000, 2000, 0, 0, 72000, 0, NULL, 'US', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'handle by vendor', 'N', 'Y');
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
@@ -473,9 +475,9 @@ CREATE TABLE IF NOT EXISTS `status_pengiriman` (
   `jam` time DEFAULT NULL,
   `lokasi` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.status_pengiriman: ~31 rows (approximately)
+-- Dumping data for table kargo.status_pengiriman: ~40 rows (approximately)
 DELETE FROM `status_pengiriman`;
 /*!40000 ALTER TABLE `status_pengiriman` DISABLE KEYS */;
 INSERT INTO `status_pengiriman` (`id`, `kode`, `status`, `keterangan`, `tgl`, `jam`, `lokasi`) VALUES
@@ -513,7 +515,15 @@ INSERT INTO `status_pengiriman` (`id`, `kode`, `status`, `keterangan`, `tgl`, `j
 	(35, 'SBY250819-06-000002', 'handle by vendor', NULL, '2019-08-25', '21:38:30', 'KEDIRI'),
 	(36, 'SBY250819-06-000001', 'paket telah diterima', 'askldfj1', '2019-08-25', '21:42:11', 'KEDIRI'),
 	(37, 'SBY250819-06-000002', 'paket telah diterima', NULL, '2019-08-25', '21:49:43', 'SURABAYA'),
-	(38, 'SBY250819-06-000001', 'paket telah diterima', NULL, '2019-08-25', '21:50:10', 'SURABAYA');
+	(38, 'SBY250819-06-000001', 'paket telah diterima', NULL, '2019-08-25', '21:50:10', 'SURABAYA'),
+	(39, 'resimanual004', 'menuju kota tujuan', NULL, '2019-08-27', '19:48:06', 'SURABAYA'),
+	(40, 'SBY250819-06-000003', 'menuju kota tujuan', NULL, '2019-08-27', '19:48:17', 'SURABAYA'),
+	(41, 'resimanual004', 'barang sampai di KLC Cabang KEDIRI', NULL, '2019-08-27', '19:48:59', 'KEDIRI'),
+	(42, 'SBY250819-06-000003', 'barang sampai di KLC Cabang KEDIRI', NULL, '2019-08-27', '19:48:59', 'KEDIRI'),
+	(43, 'SBY250819-06-000003', 'handle by vendor', NULL, '2019-08-27', '19:50:17', 'KEDIRI'),
+	(44, 'resimanual004', 'handle by vendor', NULL, '2019-08-27', '19:50:57', 'KEDIRI'),
+	(45, 'resimanual004', 'paket telah diterima', NULL, '2019-08-27', '19:55:08', 'SURABAYA'),
+	(46, 'SBY250819-06-000003', 'paket telah diterima', NULL, '2019-08-27', '19:55:38', 'SURABAYA');
 /*!40000 ALTER TABLE `status_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_antar
@@ -586,15 +596,17 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `status_transit` enum('Y','N') DEFAULT 'N',
   `status_pengiriman` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.surat_jalan: ~3 rows (approximately)
+-- Dumping data for table kargo.surat_jalan: ~5 rows (approximately)
 DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
 INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`, `cabang`, `katakun`, `id_cabang`, `id_cabang_tujuan`, `id_cabang_transit`, `status_transit`, `status_pengiriman`) VALUES
 	(1, 'devasatrio', 'SJSBY250819-06-000001', 'KLC Cabang Kediri', '2019-08-25', 'P', 5, 2, 161200, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
 	(2, 'devasatrio', 'SJSBY250819-06-000002', 'PT SBY sejahtera-08234723984279', '2019-08-25', 'Y', 8, 2, 176000, 0, NULL, 'jln mahoni subur 001 rt 01 cempaka surabaya', 'N', 14, 2, NULL, NULL, 'N', 'N'),
-	(3, 'damara', 'SJKDR250819-15-000001', 'PT Cahya gurah-2930849023', '2019-08-25', 'Y', 2, 1, 69200, 0, NULL, 'bringin bulurejo 001 kec.gurah kediri', 'N', 14, 1, NULL, NULL, 'N', 'N');
+	(3, 'damara', 'SJKDR250819-15-000001', 'PT Cahya gurah-2930849023', '2019-08-25', 'Y', 2, 1, 69200, 0, NULL, 'bringin bulurejo 001 kec.gurah kediri', 'N', 14, 1, NULL, NULL, 'N', 'N'),
+	(4, 'devasatrio', 'SJSBY270819-06-000001', 'KLC Cabang Kediri', '2019-08-27', 'P', 2, 2, 225000, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
+	(5, 'damara', 'SJKDR270819-15-000001', 'PT Cahya gurah-2930849023', '2019-08-27', 'Y', 2, 2, 225000, 0, NULL, 'bringin bulurejo 001 kec.gurah kediri', 'N', 14, 1, NULL, NULL, 'N', 'N');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_darat
