@@ -219,9 +219,9 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Pengeluaran Harian</a>
-				<a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
-				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
+				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Input Pembukuan (Pajak,Pengeluaran,Modal dll)</a>
+				{{-- <a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
+				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a> --}}
 				<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
 				<div class="dropdown-divider"></div>
 			<a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Pemasukan</a>

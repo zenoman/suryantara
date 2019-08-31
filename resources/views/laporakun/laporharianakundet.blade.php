@@ -44,8 +44,7 @@
 						<?php $j = 0;?>						
 						@foreach($data as $row)
                             <?php $no = $i++;?>
-                            <?php $n = $j++;?>
-						@foreach($totsurat[$n] as $ros)
+                            <?php $n = $j++;?>						
                         <tr>
 							<td align="center">{{$no}}</td>
 							<td align="center">{{$row->no_resi}}</td>
@@ -56,63 +55,8 @@
 							<td align="center" class="tdtot">{{$row->total_biaya}}</td>
                         </tr>
 						@endforeach
-						@endforeach
-<<<<<<< HEAD
-						</tbody>											
-=======
-<!-- ===================================================== -->
+						</tbody>										
 
-						@elseif($kat == 211)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								 @foreach($totpajak[$n] as $ros) 
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								 @endforeach 
-								@endforeach
-<!-- ===================================================== -->
-
-						@elseif($kat == 122)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								 @foreach($totresi[$n] as $ros) 
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->tgl_lunas}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								 @endforeach 
-								@endforeach
-<!-- ===================================================== -->
-
-						@else
-						@foreach($data as $row)
-                            <?php $no = $i++;?>
-                            <?php $n = $j++;?>
-                            {{-- @foreach($tot[$n] as $ros) --}}
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->tgl}}</td>
-							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-                        </tr>
-						{{-- @endforeach --}}
-						@endforeach
-
-						@endif
-						</tbody>					
-
->>>>>>> master
 					</table>
 				</div>
 			</section>
@@ -124,8 +68,8 @@
 				</div>
 				<div class="card-block">							
 					<div class="pull-right">
-					<!-- <a href="{{url('/export_laporakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$katn.'/'.$tgl.'/'.$tgl0.'')}}"  class="btn btn-primary">
+					<!-- <a href="{{url('/export_laporakun/'.$kat.'/'.$kh.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
+					<a href="{{url('/printlapoakundet/'.$katn.'/'.$kh.'/'.$tgl.'/'.$tgl0.'')}}"  class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">

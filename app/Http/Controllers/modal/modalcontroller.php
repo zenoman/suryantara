@@ -5,7 +5,7 @@ ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
- 
+use Session;
 class modalController extends Controller
 {
     public function index()
@@ -29,6 +29,9 @@ class modalController extends Controller
 
     public function store(Request $request)
     {
+        // get Id Cabang        
+        $idc=Session::get('cabang');  
+
             if($request->hasFile('gambar')){
             $namagambar=$request->file('gambar')->
             getClientOriginalname();
@@ -46,7 +49,8 @@ class modalController extends Controller
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
                 'gambar'=>$namagambar,
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
 
         }else{
@@ -57,7 +61,8 @@ class modalController extends Controller
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
         }
 
