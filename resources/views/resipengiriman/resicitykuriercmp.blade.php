@@ -30,7 +30,7 @@
 				<form action="#" role="form" method="POST">
 					<div class="form-group row">
 						<input type="hidden" value="{{Session::get('username')}}" id="iduser">
-						<div class="col-md-3 col-sm-3">
+						<div class="col-md-4 col-sm-4">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">No. Resi</label>
 							<div class="input-group">
@@ -38,7 +38,7 @@
 							</div>
 						</div>
 					</div>
-						<div class="col-md-3 col-sm-3">
+						<div class="col-md-4 col-sm-4">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Nama / Isi Barang</label>
 							<div class="input-group">
@@ -46,24 +46,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-4 col-sm-4">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
 								<select class="form-control" id="metode">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="status_bayar">
-								<option value="lunas">Lunas</option>
-								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -143,7 +132,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim" >
 							</div>
@@ -167,7 +156,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima" >
 							</div>
@@ -209,6 +198,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar" value="lunas">
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -230,42 +228,33 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi">0</td>
 									</tr>
-									
-
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total">0</h3>
-										</td>
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang">Kembalian/Kekurangan</td>
+										<td id="total">0</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<hr>
-					<!-- <hr>
-					<div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" class="form-control" id="keterangan" value="pengiriman darat">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
+					<input type="hidden" class="form-control" id="keterangan" value="pengiriman darat">
 					{{csrf_field()}}
-							<small class="text-muted">
-								<!-- <button class="btn btn-success" type="button" id="btncetak"> Cetak</button> -->
-
-								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
-								</button>
-								<div class="pull-right">
-									<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>
-									<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
-								</div>
-								
-								
-							</small>
+						<small class="text-muted">
+							<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+							</button>
+							<div class="pull-right">
+								<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>
+								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
+							</div>
+						</small>
 				</form>
 			</div>
 		</div>

@@ -38,7 +38,7 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			window.location.href='{{url("lockscreen")}}';
+			//window.location.href='{{url("lockscreen")}}';
 			}
 
 		function resetTimer(){
@@ -184,7 +184,7 @@
 					<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
 									Company</a>
 				</div>
-				<a class="dropdown-item" href="{{url('/envoice')}}">Envoice City Kurier</a>
+				<a class="dropdown-item" href="{{url('/envoice')}}">Invoice City Kurier</a>
 				
 			</div>
 		</li>
@@ -201,9 +201,7 @@
 				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
 				<a class="dropdown-item" href="{{url('/buatsuratjalancabang')}}">Buat Manifest Cabang</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Buat Manifest Antar</a>
-				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Manifest Antar</a>
+				
 			</div>
 		</li>
 		@endif
@@ -212,6 +210,9 @@
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
 				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Antaran</a>
+				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
 				
 			</div>
 		</li>

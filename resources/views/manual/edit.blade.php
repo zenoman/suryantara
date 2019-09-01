@@ -185,7 +185,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_darat" >
 							</div>
@@ -209,7 +209,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_darat" >
 							</div>
@@ -415,7 +415,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_laut" >
 							</div>
@@ -439,7 +439,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_laut" >
 							</div>
@@ -711,7 +711,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_udara" >
 							</div>
@@ -735,7 +735,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" >
 							</div>
@@ -931,7 +931,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_city" >
 							</div>
@@ -955,7 +955,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_city" >
 							</div>

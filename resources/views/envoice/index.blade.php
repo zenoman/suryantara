@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Envoice City kurier</h2>
+							<h2>List Invoice City kurier</h2>
 						</div>
 					</div>
 				</div>

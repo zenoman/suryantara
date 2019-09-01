@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Manifes Antar</h2>
+							<h2>Daftar Antaran</h2>
 						</div>
 					</div>
 				</div>
