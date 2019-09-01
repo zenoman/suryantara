@@ -5,7 +5,7 @@ namespace App\Http\Controllers\pajak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use Session;
 class pajakcontroller extends Controller
 {
   //   public function index(){
@@ -41,6 +41,7 @@ class pajakcontroller extends Controller
     }
         public function store(Request $request)
     {
+        $idc=Session::get('cabang');
          if($request->hasFile('gambar')){
             $namagambar=$request->file('gambar')->
             getClientOriginalname();
@@ -49,7 +50,7 @@ class pajakcontroller extends Controller
             $namagambar=time().'-'.$replace_space;
             $destination=base_path('../public_html/img/nota');
             $request->file('gambar')->move($destination,$namagambar);
-
+            
             DB::table('pengeluaran_lain')
             ->insert([
                 'admin'=>$request->admin,
@@ -58,7 +59,8 @@ class pajakcontroller extends Controller
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
                 'gambar'=>$namagambar,
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
 
         }else{
@@ -69,7 +71,8 @@ class pajakcontroller extends Controller
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
         }
 
