@@ -31,10 +31,10 @@
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
-							<th>No</th>
-							<th>No Resi</th>
+                        <th>No</th>
 							<th>Admin</th>
-							<th>Kategori</th>
+							<th>Keterangan</th>
+                            <th>Kategori</th>
 							<th>tgl</th>
 							<th>Sub Total</th>
 						</tr>
@@ -45,74 +45,17 @@
 						@foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-						@foreach($totsurat[$n] as $ros)
                         <tr>
-							<td align="center">{{$no}}</td>
-							<td align="center">{{$row->no_resi}}</td>
+                            <td align="center">{{$no}}</td>
 							<td align="center">{{$row->admin}}</td>
-							<td align="center">{{$row->nama}}</td>
+							<td align="center">{{$row->keterangan}}</td>
+                            <td align="center">{{$row->nama}}</td>
 							<td align="center">{{$row->tgl}}</td>
-							<td align="center">{{number_format($row->total_biaya)}}</td>
-							<td align="center" class="tdtot">{{$row->total_biaya}}</td>
+							<td align="center">{{number_format($row->jumlah)}}</td>
+							<td align="center" class="tdtot">{{$row->jumlah}}</td>
                         </tr>
 						@endforeach
-						@endforeach
-<<<<<<< HEAD
 						</tbody>											
-=======
-<!-- ===================================================== -->
-
-						@elseif($kat == 211)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								 @foreach($totpajak[$n] as $ros) 
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->bulan}}-{{$row->tahun}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								 @endforeach 
-								@endforeach
-<!-- ===================================================== -->
-
-						@elseif($kat == 122)
-								@foreach($data as $row)
-		                            <?php $no = $i++;?>
-		                            <?php $n = $j++;?>
-								 @foreach($totresi[$n] as $ros) 
-		                        <tr>
-		                            <td>{{$no}}</td>
-		                            <td>{{$row->admin}}</td>
-		                            <td>{{$row->nama}}</td>
-		                            <td>{{$row->tgl_lunas}}</td>
-									<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-		                        </tr>
-								 @endforeach 
-								@endforeach
-<!-- ===================================================== -->
-
-						@else
-						@foreach($data as $row)
-                            <?php $no = $i++;?>
-                            <?php $n = $j++;?>
-                            {{-- @foreach($tot[$n] as $ros) --}}
-                        <tr>
-                            <td>{{$no}}</td>
-                            <td>{{$row->admin}}</td>
-                            <td>{{$row->nama}}</td>
-                            <td>{{$row->tgl}}</td>
-							<td>{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-                        </tr>
-						{{-- @endforeach --}}
-						@endforeach
-
-						@endif
-						</tbody>					
-
->>>>>>> master
 					</table>
 				</div>
 			</section>

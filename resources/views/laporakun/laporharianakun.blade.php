@@ -57,17 +57,6 @@
 						{{-- @endforeach --}}
 						@endforeach
 						</tbody>
-						{{-- <tfoot> 
-						<tr> 
-							<th>No</th>
-							<th>No Resi</th>
-							<th>Admin</th>
-							<th>Kategori</th>
-							<th>tgl</th>
-							<th>jumlah</th>
-						</tr>
-						</tfoot> --}}
-						
 					</table>
 				</div>
 			</section>

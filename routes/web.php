@@ -1,5 +1,16 @@
 <?php
 use Illuminate\Support\Facades\Input;
+//================================================transit
+Route::get('selesaitransit/{kode}','transit\transitcontroller@selesaitransit');
+Route::post('simpantransit','transit\transitcontroller@store');
+Route::get('cariresisj/{id}','transit\transitcontroller@cariresisj');
+Route::get('carisuratjln/{id}','transit\transitcontroller@caridetailsj');
+Route::get('carisuratjln','transit\transitcontroller@carisuratjalan');
+Route::get('tambahtransit','transit\transitcontroller@create');
+Route::get('listtransit','transit\transitcontroller@index');
+//==============================================penerimaan
+Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
+Route::get('terimasuratjalan/{kode}','penerimaan\penerimaancontroller@terima');
 //============================================ envoice
 Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
 Route::get('/carisuratenvoice','envoice\envoicecontroller@cari');
@@ -100,14 +111,14 @@ Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
 Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
 //================================================resi pengiriman
-Route::get('/listpengirimanbatalcity','resipengiriman\resipengirimanController@listpengirimanbatalcity');
+
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
 Route::post('/simpanubahlaut','resipengiriman\resipengirimanController@simpanubahlaut');
 Route::post('/simpanubahdarat','resipengiriman\resipengirimanController@simpanubahdarat');
 Route::post('/simpanubahudara','resipengiriman\resipengirimanController@simpanubahudara');
 Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdataresi');
-Route::get('/cariresipengirimancity','resipengiriman\resipengirimanController@caridataresicity');
+
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
@@ -129,7 +140,7 @@ Route::get('/carilaut','resipengiriman\resipengirimanController@carilaut');
 Route::get('/carihasiludara/{id}','resipengiriman\resipengirimanController@carihasiludara');
 Route::get('/cariudara','resipengiriman\resipengirimanController@cariudara');
 Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@residarat');
-Route::get('/resipengirimancitykurier','resipengiriman\resipengirimanController@listcity');
+
 Route::get('/resicitykurier','resipengiriman\resipengirimanController@resicitykurier');
 Route::get('/resicitykuriercompany','resipengiriman\resipengirimanController@resicitykuriercmp');
 //resicitykurier
@@ -157,8 +168,11 @@ Route::get('/carikodesj','suratjalan\suratjalanController@carikode');
 Route::get('/cariresi/{id}','suratjalan\suratjalanController@hasilresi');
 Route::get('/carinoresi','suratjalan\suratjalanController@cariresi');
 Route::get('/carivendor','suratjalan\suratjalanController@carivendor');
+Route::get('/caricabangsj','suratjalan\suratjalanController@caricabangsj');
 Route::get('/carivendor/{id}','suratjalan\suratjalanController@hasilvendor');
+Route::get('/caricabangsj/{id}','suratjalan\suratjalanController@hasilcabang');
 Route::get('/buatsuratjalan','suratjalan\suratjalanController@index');
+Route::get('/buatsuratjalancabang','suratjalan\suratjalanController@buatsuratjalancabang');
 
 //=====================================================laporan
 Route::get('/tampillaporanpengeluaran','laporan\laporanController@tampilpengeluaran');
@@ -299,7 +313,6 @@ Route::get('/karyawan/karyawanexport','Karyawan\Karyawancontroller@exsportexcel'
 Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt');
 Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
 //==============================================================resi manual
-Route::get('/manualbatal','Manual\Manualcontroller@manualbatal');
 Route::post('/simpanmanualcity','Manual\Manualcontroller@simpancity');
 Route::post('/simpanmanualdarat','Manual\Manualcontroller@simpandarat');
 Route::post('/simpanmanuallaut','Manual\Manualcontroller@simpanlaut');
@@ -312,9 +325,6 @@ Route::get('/Manual/{id}/ubah','Manual\Manualcontroller@ubah');
 Route::put('/Manual/{id}','Manual\Manualcontroller@update');
 Route::post('/Manual/delete','Manual\Manualcontroller@destroy');
 Route::post('/Manual/hapuspilihan','Manual\Manualcontroller@haphapus');
-Route::get('/Manual/cari','Manual\Manualcontroller@caridata');
-Route::get('/manual_smukosong','Manual\Manualcontroller@tampilmanualsmukosong');
-Route::get('/carismukos','Manual\Manualcontroller@carismukosong');
 //---------------------------------export import
 Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');

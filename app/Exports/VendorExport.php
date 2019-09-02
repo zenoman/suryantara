@@ -10,7 +10,7 @@ class VendorExport implements FromCollection, WithHeadings, ShouldAutoSize{
     
     public function collection()
     {
-    return DB::table('vendor')->select('idvendor','vendor','telp','alamat','cabang','id_cabang')->get();;
+    return DB::table('vendor')->select('idvendor','vendor','telp','alamat','id_cabang')->get();;
     }
     public function headings(): array
     {
@@ -19,7 +19,6 @@ class VendorExport implements FromCollection, WithHeadings, ShouldAutoSize{
             'nama_vendor',
             'telp',
             'alamat',
-            'cabang',
             'id_cabang'
         ];
     }

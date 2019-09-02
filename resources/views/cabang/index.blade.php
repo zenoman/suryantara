@@ -9,11 +9,6 @@
 @endsection
 
 
-@section('css')
-<link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-@endsection
-
 
 @section('content')
 	<div class="page-content">
@@ -28,7 +23,6 @@
 				</div>
 			</header>
 			<section class="card">
-				   
 				<div class="card-block">
 					 @if (session('status'))
                     <div class="alert alert-success alert-dismissable">
@@ -36,8 +30,11 @@
                                 {{ session('status') }}
                     </div>
                     @endif
+                    @if(Session::get('level') == 'programer')
 					<a href="{{url('cabang/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<br><br>
+					@endif
+					
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -75,7 +72,9 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="_method" value="delete">
+                                        	@if(Session::get('level') == 'programer')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
+                                @endif
                     					</form>
                             </td>
 						</tr>
@@ -86,16 +85,4 @@
 			</section>
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
-	@endsection
-
-		@section('js')
-	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-	<script>
-		$(function() {
-			$('#example').DataTable({
-            responsive: true,
-            "paging":true
-        });
-		});
-	</script>
 	@endsection

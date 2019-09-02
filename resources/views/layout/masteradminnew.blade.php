@@ -38,7 +38,7 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			//window.location.href='{{url("lockscreen")}}';
+			window.location.href='{{url("lockscreen")}}';
 			}
 
 		function resetTimer(){
@@ -159,7 +159,7 @@
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
 				
-				@if(Session::get('level') == 'programer')
+				@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
 
@@ -177,7 +177,13 @@
 				<a class="dropdown-item" href="{{url('/resipengirimanlaut')}}">Pengiriman Laut</a>
 				<a class="dropdown-item" href="{{url('/resipengirimanudara')}}">Pengiriman Udara</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{{url('/resipengirimancitykurier')}}">City Kurier</a>
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">City Kurier</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{{url('resicitykurier')}}">
+									Personal</a>
+					<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
+									Company</a>
+				</div>
 				<a class="dropdown-item" href="{{url('/envoice')}}">Envoice City Kurier</a>
 				
 			</div>
@@ -192,7 +198,8 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
+				<a class="dropdown-item" href="{{url('/buatsuratjalancabang')}}">Buat Manifest Cabang</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Buat Manifest Antar</a>
@@ -200,7 +207,14 @@
 			</div>
 		</li>
 		@endif
-	
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
+				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
+				
+			</div>
+		</li>
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
@@ -221,6 +235,7 @@
 	       	</div>
 		</li>
 		@endif
+		
 	</ul>
 
 @yield('content')

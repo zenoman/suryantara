@@ -19,7 +19,6 @@ class VendorImport implements ToCollection, WithHeadingRow{
             'vendor'=>$row['nama_vendor'],
             'telp'=>$row['telp'],
             'alamat' => $row['alamat'],
-            'cabang' => $row['status'],
             'id_cabang'=>$row['id_cabang']];
     	   }
         }

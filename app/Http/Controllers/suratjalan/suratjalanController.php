@@ -23,7 +23,7 @@ class suratjalanController extends Controller
     //=========================================================================
     public function bayarsuratjalan($id){
         $data = DB::table('surat_jalan')->where('id',$id)->get();
-         $webinfo = DB::table('setting')->limit(1)->get();
+        $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/bayar_suratjalan',['data'=>$data,'title'=>$webinfo]);
     }
 
@@ -65,6 +65,11 @@ class suratjalanController extends Controller
     public function index(){
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/index',['webinfo'=>$webinfo]);
+    }
+    //==========================================================
+    public function buatsuratjalancabang(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('suratjalan/suratjalancabang',['webinfo'=>$webinfo]);
     }
     //==========================================================
     public function carikode(){
@@ -147,6 +152,19 @@ class suratjalanController extends Controller
         }
     }
 
+//=========================================================================
+    public function caricabangsj(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('cabang')
+                    ->select('nama','id')
+                    ->where([['nama','like','%'.$cari.'%'],['id','!=',Session::get('cabang')]])
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
     //========================================================
     public function hasilresi($id){
     	$data = DB::table('resi_pengiriman')
@@ -166,36 +184,82 @@ class suratjalanController extends Controller
             
             return response()->json($data);
     }
-
+    //========================================================
+    public function hasilcabang($id){
+        $data = DB::table('cabang')
+                    ->select('nama','id','alamat')
+                    ->where('id',$id)
+                    ->get();
+            
+            return response()->json($data);
+    }
+    
     //========================================================
     public function tambahdetail(Request $request){
         $kode = $request->kode;
         $carikode = DB::table('surat_jalan')->where('kode',$kode)->count();
         if($carikode > 0){
-
         }else{
             DB::table('surat_jalan')
             ->insert([
-                'kode' => $kode,
-                'tgl'  => date('Y-m-d'),
-                'id_cabang' =>Session::get('cabang')
+            'kode' => $kode,
+            'tgl'  => date('Y-m-d'),
+            'id_cabang' =>Session::get('cabang')
             ]);
         }
+        
+        //------------------------------------------------
+        $datanya = DB::table('resi_pengiriman')
+        ->where('id',$request->noresi)->get();
+        foreach ($datanya as $row){
+        DB::table('status_pengiriman')
+            ->insert([
+            'kode'=>$row->no_resi,
+            'status'=>$request->status,
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
+            ]);
+            
+        }
+
+        //-----------------------------------------------
         DB::table('resi_pengiriman')
         ->where('id',$request->noresi)
         ->update([
             'kode_jalan'=>$request->kode,
+            'status_pengiriman'=>$request->status
         ]);
     }
 
     //========================================================
     public function hapusdetail($id){
+        $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
+        foreach ($datanya as $row){
+            DB::table('status_pengiriman')
+            ->where([['kode',$row->no_resi],['status',$row->status_pengiriman]])
+            ->orderby('id','desc')
+            ->limit(1)
+            ->delete();
+
+            $resi=$row->no_resi;
+
+        }
+
+        //-------------------------------------------------------------
+        $datastatus = DB::table('status_pengiriman')
+            ->where('kode',$resi)
+            ->orderby('id','desc')
+            ->limit(1)
+            ->get();
+        foreach ($datastatus as $row2){
         DB::table('resi_pengiriman')
         ->where('id',$id)
         ->update([
             'kode_jalan'=>null,
+            'status_pengiriman'=>$row2->status
         ]);
-    }
+    }}
 
     //========================================================
     public function store(Request $request){
@@ -219,7 +283,8 @@ class suratjalanController extends Controller
                 'cabang'    => $request->cabang,
                 'status' =>$status,
                 'tgl'=>date('Y-m-d'),
-                'admin'=> session::get('username')
+                'admin'=> session::get('username'),
+                'id_cabang_tujuan'=>$request->idtujuan
             ]);
         }else{
              DB::table('surat_jalan')
@@ -235,7 +300,8 @@ class suratjalanController extends Controller
                 'status' =>$status,
                 'tgl'=>date('Y-m-d'),
                 'admin'=> session::get('username'),
-                'id_cabang' =>Session::get('cabang')
+                'id_cabang' =>Session::get('cabang'),
+                'id_cabang_tujuan'=>$request->idtujuan
             ]);
             
         }

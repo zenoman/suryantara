@@ -78,50 +78,6 @@
 						</div>
 					</div>
 					
-						   
-							<div class="form-group row">
-						<label class="col-sm-2 form-control-label semibold">Status Vendor</label>
-						<div class="col-sm-10">
-							<div class="checkbox-detailed">
-
-								<input 
-								type="radio" 
-								name="cabang" 
-								id="check-det-1" 
-								value="N" 
-								@if($vendor->cabang=='N')
-								checked
-								@endif >
-
-								<label for="check-det-1">
-								<span class="checkbox-detailed-tbl">
-									<span class="checkbox-detailed-cell">
-										<!--<span class="checkbox-detailed-title">Vendor</span>-->
-										<b>Lainya</b>
-									</span>
-								</span>
-								</label>
-							</div>
-							<div class="checkbox-detailed">
-								<input 
-								type="radio" 
-								name="cabang" 
-								id="check-det-2" 
-								value="Y" 
-								@if($vendor->cabang=='Y') 
-								checked 
-								@endif >
-								<label for="check-det-2">
-								<span class="checkbox-detailed-tbl">
-									<span class="checkbox-detailed-cell">
-										<!--<span class="checkbox-detailed-title">Vendor</span>-->
-										<b>Cabang</b>
-									</span>
-								</span>
-								</label>
-							</div>
-							</div>
-						</div>
 						<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Vendor Cabang</label>
 						<div class="col-sm-10">

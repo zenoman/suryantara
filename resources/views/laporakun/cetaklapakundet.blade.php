@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>@foreach($kat as $row)Cetak {{$row->nama}} Tanggal {{$tgl}} Sampai {{$tgl0}}@endforeach</title>
+	<title>Cetak {{$kat}} Akutansi Tanggal {{$tgl}} Sampai {{$tgl0}}</title>
+	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 </head>
-<body onload="window.print()">
-		<table style="width: 100%">
+<body>
+<table style="width: 100%;" border="0">
+			<tr>
+				<td style="width: 25%" align="center">
+					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
+				</td>
+				<td style="width: 50%" align="center" >
+				<p style="font-size:10;">
+					<b style="font-size: 20;">KADIRI LOGISTIK CARGO</b><br>
+					Kantor Pusat : Jln. Raya Dadapan - sumberejo Kab. Kediri (0354-4545192) <br>
+					{{Session::get('kop')}}
+				</p>
+				</td>
+				<td style="width: 25%;font-size: 9;">								
+				</td>
+			</tr>
+		</table>
+	</div>
+    <hr>
+		<table style="width: 100%" border="0">
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-						@foreach($kat as $row)
-						{{$row->nama}} Tanggal {{$tgl}} Sampai {{$tgl0}}
-						@endforeach
+						{{$kat}} Tanggal {{$tgl}} Sampai {{$tgl0}}
 					</b>
 				</td>
 			</tr>
@@ -24,42 +41,59 @@
 
 			</tr>
 		</table>
-		<table border="1" style="width: 100%">
+		<table border="1" id="example"  class="display table table-striped table-bordered" cellspacing="0">
 						<thead>
 						<tr>
 							<th>No</th>
+							<th>No Resi</th>
 							<th>Admin</th>
 							<th>Kategori</th>
 							<th>tgl</th>
-							<th>Subtotal</th>
+							<th>Sub Total</th>
 						</tr>
-						</thead>
-						
+						</thead>						
 						<tbody>
 						<?php $i = 1; $j = 0;?>
                             @foreach($data as $row)
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
-                            @foreach($tot[$n] as $ros)
                         <tr>
-                            <td align="center">{{$no}}</td>
+							<td align="center">{{$no}}</td>
+							<td align="center">{{$row->no_resi}}</td>
 							<td align="center">{{$row->admin}}</td>
-                            <td align="center">{{$row->nama}}</td>
-                            @if($kat=='Pajak')
-                            <td align="center">{{$row->bulan}}-{{$row->tahun}}</td>
-                            @else
-                            <td align="center">{{$row->tgl}}</td>
-                            @endif
-							<td align="center">{{"Rp ".number_format($ros->totalnya,0,',','.')}}</td>
-                          
+							<td align="center">{{$row->nama}}</td>
+							<td align="center">{{$row->tgl}}</td>
+							<td align="center">{{number_format($row->total_biaya)}}</td>
+							<td align="center" class="tdtot">{{$row->total_biaya}}</td>
 						</tr>
-						@endforeach
-						@endforeach
-						
+						@endforeach						
 						</tbody>
-					</table>
-					@foreach($tose as $ttl)
-					<p>Total : <b>{{"Rp ".number_format($ttl->totalnya,0,',','.')}}</b></p>
-					@endforeach
+					</table>					
+					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
+					
 </body>
+
+<script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+<script>	
+$(document).ready(function(){
+	$('.tdtot').hide();
+        window.print();
+        })
+        window.onafterprint = function() {
+            history.go(-1);
+        };
+	// Count Total
+	
+		// Call Sum
+		function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		var table=document.getElementById('example'),sumval=0;
+		for(var i=1;i<table.rows.length;i++){
+			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
+		}
+		$('#toata').html(numberWithCommas(sumval));
+</script>
 </html>

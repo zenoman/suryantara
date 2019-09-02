@@ -60,7 +60,7 @@ class Logincontroller extends Controller
                 Session::put('kop',$kop);
                 Session::put('kota',$kota);
                 Session::put('koderesi',$koderesi);
-                return redirect('dashboard');
+                return redirect('dashboard')->with('status','Selamat Datang '.$level.' '.$request->username);
         }else{
             return back()->with('status','Maaf, Username atau Password Salah');
         }

@@ -5,7 +5,8 @@
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 </head>
 <body>
-<table style="width: 100%;" border="0">
+<div>
+		<table style="width: 100%;" border="0">
 			<tr>
 				<td style="width: 25%" align="center">
 					<img src="{{asset('img/LOGO1.png')}}" alt="" width="50%">
@@ -44,11 +45,12 @@
 		<table border="1" id="example"  class="display table table-striped table-bordered" cellspacing="0">
 						<thead>
 						<tr>
-								<th>No</th>
-								<th>Admin</th>
-								<th>Kategori</th>
-								<th>tgl</th>
-								<th>Sub Total</th>
+							<th>No</th>
+							<th>Admin</th>
+							<th>Keterangan</th>
+                            <th>Kategori</th>
+							<th>tgl</th>
+							<th>Sub Total</th>
 						</tr>
 						</thead>						
 						<tbody>
@@ -57,17 +59,17 @@
                             <?php $no = $i++;?>
                             <?php $n = $j++;?>
                         <tr>
-								<td align="center">{{$no}}</td>
-								<td align="center">{{$row->admin}}</td>
-								<td align="center">{{$row->keterangan}}</td>
-								<td align="center">{{$row->tgl}}</td>
-								<td align="center">{{number_format($row->jumlah)}}</td>
-								<td align="center" class="tdtot">{{$row->jumlah}}</td>
+							<td align="center">{{$no}}</td>
+							<td align="center">{{$row->admin}}</td>
+							<td align="center">{{$row->keterangan}}</td>
+                            <td align="center">{{$row->nama}}</td>
+							<td align="center">{{$row->tgl}}</td>
+							<td align="center">{{number_format($row->jumlah)}}</td>
+							<td align="center" class="tdtot">{{$row->jumlah}}</td>
 						</tr>
 						@endforeach						
 						</tbody>
-					</table>
-					
+					</table>					
 					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
 					
 </body>
@@ -91,7 +93,7 @@ $(document).ready(function(){
 		var table=document.getElementById('example'),sumval=0;
 		for(var i=1;i<table.rows.length;i++){
 			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[6].innerHTML);
 		}
 		$('#toata').html(numberWithCommas(sumval));
 </script>

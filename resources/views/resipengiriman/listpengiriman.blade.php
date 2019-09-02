@@ -294,6 +294,7 @@
 					</div>
 						<br>	
 							<div class="row text-left">
+								@if($row->duplikat=='N')
 								<form action="tambahsmu" method="post">
 									<label>Ubah No.Resi/SMU</label>
 									<div class="input-group input-group-sm">
@@ -305,10 +306,12 @@
 										</span>
 									</div>
 								</form>
+								@endif
 							</div>
 				</div>
 							</div>
 							<div class="modal-footer">
+								@if($row->duplikat=='N')
 								 @if(Session::get('level')!='cs')
 								@if($row->metode_bayar=='cash')
 										@if($row->status=='N')
@@ -330,6 +333,7 @@
 									@endif
 								@endif
 								@else
+								@endif
 								@endif
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
@@ -380,6 +384,7 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if($row->duplikat=='N')
                             @if(Session::get('level')!='cs')	
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
@@ -409,6 +414,7 @@
                             @endif
                             @else
                             -
+                            @endif
                             @endif
                             </td>
 						</tr>

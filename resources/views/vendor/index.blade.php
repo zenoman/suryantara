@@ -73,7 +73,6 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
-							<th>Status</th>
 							<th>Vendor Cabang</th>
 							<th class="text-center">Aksi</th>
 							
@@ -86,7 +85,6 @@
 							<th>Vendor</th>
 							<th>Telp</th>
 							<th>Alamat</th>
-							<th>Status</th>
 							<th>Vendor Cabang</th>
 							<th class="text-center">Aksi</th>
 							
@@ -102,13 +100,6 @@
                             <td>{{$row->vendor}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
-                            <td>
-                                @if($row->cabang == 'N')
-                                Lainya
-                                @else
-                                cabang
-                                @endif
-                            </td>
                             <td>{{$row->namacabang}}</td>
                             <td class="text-center">
 <form action="{{url('/vendor/delete')}}"  method="post">

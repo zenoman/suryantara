@@ -113,7 +113,8 @@ class antarancontroller extends Controller
                 'id_cabang' =>Session::get('cabang')
             ]);
         }
-        $datanya = DB::table('resi_pengiriman')->where('id',$request->noresi)->get();
+        $datanya = DB::table('resi_pengiriman')
+        ->where('id',$request->noresi)->get();
         foreach ($datanya as $row){
         if($row->status_antar=='KL'){
             $status='prosess pengantaran paket ulang';
@@ -149,7 +150,7 @@ class antarancontroller extends Controller
         if($row->status_pengiriman=='prosess pengantaran paket ulang'){
          $status = 'pengantaran gagal';
         }else{
-            $status = 'barang diterima cabang '.Session::get('kota');
+            $status = 'barang diterima KLC Cabang '.Session::get('kota');
         }
         DB::table('status_pengiriman')
         ->where([['kode',$row->no_resi],['status',$row->status_pengiriman]])
@@ -279,16 +280,10 @@ class antarancontroller extends Controller
 
     //=============================================================
     public function suksesantar(Request $request,$id,$kode){
-        DB::table('resi_pengiriman')
-        ->where('id',$id)
-        ->update([
-            'status_antar'=>'Y',
-            'status_pengiriman'=>'paket telah diterima',
-            'nama_penerima_barang'=>$request->penerima
-        ]);
-        
-        //-------------------------------------------------
-        $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
+         
+        $jumdatanya = DB::table('resi_pengiriman')->where([['id',$id],['status_pengiriman','paket telah diterima']])->count();
+        if($jumdatanya==0){
+            $datanya = DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($datanya as $row){
           DB::table('status_pengiriman')
         ->insert([
@@ -299,6 +294,17 @@ class antarancontroller extends Controller
             'lokasi'=>Session::get('kota'),
             'keterangan'=>$request->penerima
         ]);}
+        }
+        //-------------------------------------------------
+        DB::table('resi_pengiriman')
+        ->where('id',$id)
+        ->update([
+            'status_antar'=>'Y',
+            'status_pengiriman'=>'paket telah diterima',
+            'nama_penerima_barang'=>$request->penerima
+        ]);
+        
+
         
         //-------------------------------------------------
         $jumlah = DB::table('resi_pengiriman')
@@ -431,7 +437,10 @@ class antarancontroller extends Controller
          DB::table('status_pengiriman')
         ->insert([
             'kode'=>$row->no_resi,
-            'status'=>'dikembalikan ke pengirim'
+            'status'=>'dikembalikan ke pengirim',
+            'tgl'=>date('Y-m-d'),
+            'jam'=>date('H:i:s'),
+            'lokasi'=>Session::get('kota')
         ]);
         }
         

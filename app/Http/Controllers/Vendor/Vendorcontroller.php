@@ -84,7 +84,6 @@ class Vendorcontroller extends Controller
     'vendor' => $request->vendor,
     'telp' => $request->telp,
     'alamat' => $request->alamat,
-    'cabang' => $request->cabang,
     'id_cabang'=>$request->idcabang
     ]);
     return redirect('vendor')->with('status','tambah Data Sukses');
@@ -111,7 +110,6 @@ class Vendorcontroller extends Controller
             'vendor' => $request->vendor,
             'telp' => $request->telp,
             'alamat' => $request->alamat,
-            'cabang' => $request->cabang,
             'id_cabang'=>$request->idcabang
     ]);
     return redirect('vendor')->with('status','edit Data Sukses');
