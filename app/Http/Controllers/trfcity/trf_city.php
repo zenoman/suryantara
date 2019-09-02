@@ -5,6 +5,11 @@ ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use App\Exports\trfcityexport;
+use App\Imports\trfcity;
+use Maatwebsite\Excel\Facades\Excel;
+
 class trf_city extends Controller
 {
     
@@ -109,5 +114,33 @@ class trf_city extends Controller
         ->get();
         $setting = DB::table('setting')->get();
         return view('trfcity/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$cari,'title'=>$setting,'url'=>$url]);
+    }
+
+    //=======================================================================
+    public function importexcel(){
+        $setting = DB::table('setting')->get();
+        return view('trfcity/importexcel',['title'=>$setting]);
+    }
+
+    //========================================================================
+    public function downloadtemplate(){
+        $file="file/template tarif city kurir.xlsx";
+            $headers = array(
+              'Content-Type: application/excel',
+            );
+        return Response::download($file, 'template tarif city kurir.xlsx', $headers);
+    }
+
+    //=========================================================
+    public function prosesimportexcel(Request $request){
+        if($request->hasFile('file')){
+        Excel::import(new trfcity, request()->file('file'));
+        }
+        return redirect('trfcity')->with('status','Import excel sukses');
+    }
+
+    //=================================================================
+    public function exporttarif(){
+         return Excel::download(new trfcityexport, 'Export Tarif City Kurir.xlsx');
     }
 }

@@ -221,6 +221,12 @@
 										
 									</tr>
 									<tr>
+										
+										<td class="text-right"><b>Dibayar</b></td>
+										<td class="text-right"><b>Rp. {{number_format($row->total_bayar,0,',','.')}}</b></td>
+										
+									</tr>
+									<tr>
 										<td><h4>Total</h4></td>
 										<td class="text-right"><h4>
 											Rp. {{number_format($row->total_biaya,0,',','.')}}
@@ -247,6 +253,7 @@
 					</div>
 						<br>	
 							<div class="row text-left">
+								@if($row->duplikat=='N')
 								<form action="tambahsmu" method="post">
 									<label>Ubah No. SMU</label>
 									<div class="input-group input-group-sm">
@@ -258,28 +265,18 @@
 										</span>
 									</div>
 								</form>
+								@endif
 							</div>
 				</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->metode_bayar=='cash')
+								@if($row->duplikat=='N')
+								@if(Session::get('level')!='cs')
 										@if($row->status=='N')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='US')
-										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='RS')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										@endif
-								@else
-									@if($row->status=='N')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='US')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='RS')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									@endif
+								
+								@endif
 								@endif
 								
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
@@ -330,6 +327,7 @@
 	                            
                             </td>
                             <td class="text-center">
+                            @if($row->duplikat=='N')
                            	@if(Session::get('level')!='cs')
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
@@ -359,6 +357,7 @@
                             @endif
                              @else
                             -
+                            @endif
                             @endif
                             </td>
 						</tr>

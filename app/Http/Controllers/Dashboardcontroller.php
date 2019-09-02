@@ -8,8 +8,6 @@ class Dashboardcontroller extends Controller {
     public function index()
     {
         //==========================
-        
-        //==========================
         $pajakarmada = 
         DB::table('pajak_armada')
         ->select(DB::raw('pajak_armada.*,armada.*'))
@@ -56,6 +54,7 @@ class Dashboardcontroller extends Controller {
 
         return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada,'jumlahtotalresi'=>$jumlahtotalresi]);
       }
+      
     function hitung_neraca(){
         // $omsetawal = $this->cari_omsetawal();
         $setting = DB::table('setting')

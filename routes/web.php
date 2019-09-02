@@ -30,7 +30,12 @@ Route::resource('mitra','mitra\mitracontroller');
 Route::post('/trfcity/hapuspilihan','trfcity\trf_city@haphapus');
 Route::get('/trfcity/hapussemua','trfcity\trf_city@hapusall');
 Route::get('/caritrfcity','trfcity\trf_city@caridata');
+Route::get('trfcity/importexcel','trfcity\trf_city@importexcel');
+Route::get('trfcity/downloadtemplate','trfcity\trf_city@downloadtemplate');
+Route::post('/trfcity/prosesimportexcel','trfcity\trf_city@prosesimportexcel');
+Route::get('trfcity/exporttarif','trfcity\trf_city@exporttarif');
 Route::resource('/trfcity','trfcity\trf_city');
+
 
 //=============================================cabang
 Route::resource('/cabang','cabang\cabangcontroller');
@@ -111,7 +116,7 @@ Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
 Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
 //================================================resi pengiriman
-
+Route::get('updatepembayaranresi','resipengiriman\resipengirimanController@updatepembayaran');
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
 Route::post('/simpanubahlaut','resipengiriman\resipengirimanController@simpanubahlaut');

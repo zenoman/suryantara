@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
-    
+    public function updatepembayaran(){
+        dd('update pembayaran');
+    }
     //======================================================
     public function simpancity(Request $request){
        $simpan = DB::table('resi_pengiriman')
@@ -35,8 +37,7 @@ class resipengirimanController extends Controller
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
         'alamat_pengirim'=>$request->alamat_pengirim,
-        'alamat_penerima'=>$request->alamat_penerima,
-        'dibayar'=>$request->dibayar
+        'alamat_penerima'=>$request->alamat_penerima
        ]);
         return response()->json($simpan);
     }
@@ -171,31 +172,11 @@ class resipengirimanController extends Controller
     $kategori = DB::table('kategori_barang')->get();
     return view('resipengiriman/resiudara',['webinfo'=>$webinfo,'kategori'=>$kategori]);
     }
-    //====================================================================
-    public function uangkembali($id){
-         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
-        foreach ($data as $row) {
-            if($row->status=='N'){
-                $status = "US";
-            }else{
-                $status = "Y";
-            }}
-        DB::table('resi_pengiriman')->where('id',$id)
-        ->update([
-        'status'=>$status,
-        'tgl_lunas'=>date('Y-m-d')
-        ]);
-        return back()->with('status','Status Berhasil Diubah');
-    }
+    
     //====================================================================
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
-            if($row->status=='N'){
-                $status = "RS";
-            }else{
-                $status = "Y";
-            }
             $noresi=$row->no_resi;
             $statusp=$row->status_pengiriman;
 
@@ -221,7 +202,7 @@ class resipengirimanController extends Controller
         DB::table('resi_pengiriman')->where('id',$id)
         ->update([
         'status_antar'=>'Y',
-        'status'=>$status,
+        'status'=>'Y',
         'status_pengiriman'=>'paket telah diterima'
         ]);
         return back()->with('status','Status Berhasil Diubah');
@@ -373,8 +354,10 @@ class resipengirimanController extends Controller
     public function tambahcity(Request $request){
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
             $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
 
         $data[] = [
@@ -397,7 +380,7 @@ class resipengirimanController extends Controller
             'biaya_packing'     => $request->biaya_packing,
             'biaya_asuransi'    => $request->biaya_asu,
             'total_biaya'       => $request->total_biaya,
-            'total_bayar'       => $request->dibayar,
+            'total_bayar'       => $totalbayar,
             'satuan'            => $request->satuan,
             'metode_bayar'      => $request->metode,
             'biaya_ppn'         => $request->ppn,
@@ -433,10 +416,12 @@ class resipengirimanController extends Controller
     }
     //===================================================================
     public function tambahcitycmp(Request $request){
-     if($request->status_bayar == 'lunas'){
+        if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
             $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
 
         $data[] = [
@@ -459,7 +444,7 @@ class resipengirimanController extends Controller
             'biaya_packing'     => $request->biaya_packing,
             'biaya_asuransi'    => $request->biaya_asu,
             'total_biaya'       => $request->total_biaya,
-            'total_bayar'       => $request->dibayar,
+            'total_bayar'       => $totalbayar,
             'satuan'            => $request->satuan,
             'metode_bayar'      => $request->metode,
             'biaya_ppn'         => $request->ppn,
@@ -498,8 +483,10 @@ class resipengirimanController extends Controller
     {
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
             $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
         $data[] = [
             'no_resi'       => $request->noresi,
@@ -521,7 +508,7 @@ class resipengirimanController extends Controller
             'biaya_packing' => $request->biaya_packing,
             'biaya_asuransi'=> $request->biaya_asu,
             'total_biaya'   => $request->total_biaya,
-            'total_bayar'   => $request->dibayar,
+            'total_bayar'   => $totalbayar,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
@@ -561,8 +548,10 @@ class resipengirimanController extends Controller
     {
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
             $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
         
         $data[] = [
@@ -585,7 +574,7 @@ class resipengirimanController extends Controller
             'biaya_packing' => $request->biaya_packing,
             'biaya_asuransi'=> $request->biaya_asu,
             'total_biaya'   => $request->total_biaya,
-            'total_bayar'   => $request->dibayar,
+            'total_bayar'   => $totalbayar,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
@@ -624,8 +613,10 @@ class resipengirimanController extends Controller
     {
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
             $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
         
         $data[] = [
@@ -648,7 +639,7 @@ class resipengirimanController extends Controller
             'biaya_packing' => $request->biaya_packing,
             'biaya_asuransi'=> $request->biaya_asu,
             'total_biaya'   => $request->total_biaya,
-            'total_bayar'   => $request->dibayar,
+            'total_bayar'   => $totalbayar,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
