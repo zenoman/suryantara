@@ -66,7 +66,7 @@
     <br>
         <form method="get" action="{{url('landudara/cari')}}">
         <div class="row">
-          <div class="col-sm-2 col-sm-offset-1">
+          <!-- <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
               <input type="text" class="form-control" name="kota_asal" value="KEDIRI" readonly>
@@ -83,8 +83,27 @@
               </select>
               
             </div>
+          </div> -->
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Asal<small> :</small></label>
+              <select id="kota_asal" class="select2" name="kota_asal">
+                <option ></option>
+                @foreach($asal as $row)
+                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->nama)?></option>
+                @endforeach
+              </select>
+              
+            </div>
           </div>
-
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Tujuan<small> :</small></label>
+              <select id="kota_tujuan" name="tujuan" class="select2">
+              
+              </select>
+            </div>
+          </div>
           <div class="col-sm-2 col-sm-offset-1">
             <div class="form-group">
             <label>Berat<small> :</small></label>
@@ -100,10 +119,7 @@
               <label>Maskapai<small> :</small></label>
               <select id="exampleSelect" name="psw" class="form-control">             
                 <option value="semua">semua maskapai</option>
-               
-                <!--@foreach($select as $row)               
-                <option><?php echo strtoupper($row->airlans)?></option>
-                 @endforeach-->
+                 
                 
               </select>
             </div>
@@ -195,33 +211,61 @@
     <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
     <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
   
+  
+//==============================================
   <script type="text/javascript">
-    $('#kota_tujuan').select2({
-      placeholder: "Pilih kota tujuan"
+    // $('#kota_tujuan').select2({
+    //  placeholder: "Pilih kota tujuan"
+    // });
+    $('#kota_asal').select2({
+      placeholder: "Pilih kota asal"
     });
-    //=================================================
-  $('#kota_tujuan').on('select2:select',function(e){
-      var kode = $(this).val();
+  $('#kota_asal').on('select2:select',function(e){
+      var id = $(this).val();
       $.ajax({
       type: 'GET',
-      url: '/carimaskapai/'+kode,
+      url: '/caritujuanudara/'+id,
       success:function (data){
       addoption(data);
       },
             });
     });
   function addoption(data){
+    $('#kota_tujuan option').each(function() {
+        $(this).remove();
+});
+  var newOption ='';
+  results : $.map(data, function (item){
+    $('#kota_tujuan')
+         .append($("<option></option>")
+                    .attr("value",item.tujuan)
+                    .text(item.tujuan.toUpperCase())); 
+    })
+}
+
+$('#kota_tujuan').select2();
+  $('#kota_tujuan').on('select2:select',function(e){
+      var kode = $(this).val();
+      $.ajax({
+      type: 'GET',
+      url: '/carimaskapai/'+kode,
+      success:function (dataa){
+      addoptionn(dataa);
+      },
+            });
+    });
+  function addoptionn(dataa){
     $('#exampleSelect option').each(function() {
     if ( $(this).val() != 'semua' ) {
         $(this).remove();
     }
 });
-  var newOption ='';
-  results : $.map(data, function (item){
+  var newOptionn ='';
+  results : $.map(dataa, function (itemm){
     $('#exampleSelect')
          .append($("<option></option>")
-                    .attr("value",item.airlans)
-                    .text(item.airlans.toUpperCase())); 
+                    .attr("value",itemm.airlans)
+                    .text(itemm.airlans.toUpperCase())); 
     })
    }
 </script>

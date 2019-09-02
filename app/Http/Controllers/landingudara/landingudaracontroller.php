@@ -15,23 +15,25 @@ class landingudaracontroller extends Controller
     {
      $tarif_udara=DB::table('tarif_udara')->paginate(10);
      $desk=DB::table('setting')->get();
+     $as = DB::table('cabang')->get();
      $select=DB::table('tarif_udara')->groupBy('airlans')->get();
      $tujuan=DB::table('tarif_udara')->groupBy('tujuan')->get();
-	return view('landingudara/index',['udara'=>$tarif_udara,'select'=>$select,'des'=>$desk,'tujuan'=>$tujuan]);
+	return view('landingudara/index',['udara'=>$tarif_udara,'select'=>$select,'des'=>$desk,'tujuan'=>$tujuan,'asal'=>$as]);
     }
 
     public function pencarian(Request $request)
     {
-     $kot = $request->kota_tujuan;
+     $asal= $request->kota_asal;
+     $kot = $request->tujuan;
      $brt = $request->brt;
      $psw = $request->psw;
      if ($psw=='semua') {
      $trf_udr = DB::table('tarif_udara')
-     ->where('tujuan','like','%'.$kot.'%')
+     ->where([['tujuan','like','%'.$kot.'%'],['id_cabang',$asal]])
      ->get();
      }else{
      $trf_udr = DB::table('tarif_udara')
-     ->where([['tujuan','like','%'.$kot.'%'],['airlans','like','%'.$psw.'%']])
+     ->where([['tujuan',$kot],['airlans',$psw],['id_cabang',$asal]])
      ->get();
      }
      $kat = DB::table('kategori_barang')->get();
@@ -40,11 +42,18 @@ class landingudaracontroller extends Controller
      return view('landingudara/pencarian',['trf_udr'=>$trf_udr ,'kot'=>$kot , 'brt'=>$brt , 'psw'=>$psw , 'des'=>$desk,'kat'=>$kat]);
     }
 
-    public function carimaskapai($kode){
+    public function caritujuan($id){
         $trf_udr = DB::table('tarif_udara')
-     ->where('tujuan','like','%'.$kode.'%')
+     ->where('id_cabang','like','%'.$id.'%')->groupBy('tujuan')
      ->get();
      return response()->json($trf_udr);
     }
+    public function carimaskapai($kode){
+        $trf_udrr = DB::table('tarif_udara')
+     ->where('tujuan','like','%'.$kode.'%')->groupBy('airlans')
+     ->get();
+     return response()->json($trf_udrr);
+    }
+    
 
 }

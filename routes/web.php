@@ -199,7 +199,13 @@ Route::get('/landlaut','landinglaut\landinglautcontroller@index');
 Route::get('/landlaut/cari','landinglaut\landinglautcontroller@pencarian');
 Route::get('/landudara','landingudara\landingudaracontroller@index');
 Route::get('/carimaskapai/{kode}','landingudara\landingudaracontroller@carimaskapai');
+Route::get('/caritujuan/{id}','landingdarat\landingdaratcontroller@caritujuan');
+Route::get('/caritujuanlaut/{id}','landinglaut\landinglautcontroller@caritujuan');
+Route::get('/caritujuankurir/{id}','landingkurir\landingkurircontroller@caritujuan');
+Route::get('/caritujuanudara/{id}','landingudara\landingudaracontroller@caritujuan');
 Route::get('/landudara/cari','landingudara\landingudaracontroller@pencarian');
+Route::get('/landkurir' , 'landingkurir\landingkurircontroller@index');
+Route::get('/landkurir/cari','landingkurir\landingkurircontroller@pencarian');
 Route::get('/dashboard','Dashboardcontroller@index');
 
 //===========================================admin

@@ -14,10 +14,10 @@
     @endforeach
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="asset_user/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="asset_user/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -25,11 +25,10 @@
     <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
     <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
+    <link href="{{asset('asset_user/css/select2user.css')}}" rel="stylesheet">
 
   </head>
 
@@ -38,7 +37,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        @foreach($des as $row)
+
+    @foreach($des as $row)
     <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
     @endforeach
        <!--  <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a onclick="window.history.go(-2);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
+              <a onclick="window.history.go(-1);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
               <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
             
@@ -57,65 +57,58 @@
       </div>
     </nav>
 <br>
-<br> 
-      <section class="text-center mb-0">
-        
-    <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
-    <br>
-      <div class="container">
-        <div class="card-block">
-          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead class="thead-dark text-secondary text-center" >
-            <tr>
-              <th>No</th>
-              <th>Kota Tujuan</th>
-              <th>Biaya Perkg</th>
-              <th>Estimasi Biaya</th>
-            </tr>
-            </thead>
-            
-            <tbody>
-           <?php $i = 1;?>
-              @foreach($trf_lt as $row)
-              <?php $no = $i++;?>
-              <tr>
-                <td class="text-center">{{$no}}</td>
-                <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
-                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}</td>
-                <td class="text-center">
+<br>   
 
-                  @php
-                  $estimasi = $brt*$row->tarif;
-                  @endphp
-                  {{"Rp ". number_format($estimasi,0,',','.')}}
-  
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-          </div>
-          <p></p>
+    <section class="text-center mb-0">  
+
+    <div class="container">
+    <h1 class="text-uppercase text-center mb-0">Cek Tarif Kurir</h1>
+    <br>
+    <br>
+        <form method="get" action="{{url('landkurir/cari')}}">
         <div class="row">
-  <div class="col-sm-12">
-    <div class="card">
-    <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
-  <div class="card-body text-left">
-     @foreach($des as $row)
-    {!!$row->desk_laut!!}
-    @endforeach
-  </div>
-</div>
-  </div>
-  </div>
-  <p><br></p>
-        <div class="text-right">
-          <a onclick="window.history.go(-1);" class="btn btn-danger text-white">Kembali</a>
+          <div class="col-sm-4 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Asal<small> :</small></label>
+              <select id="kota_asal" class="select2" name="kota_asal">
+                <option ></option>
+                @foreach($asal as $row)
+                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->nama)?></option>
+                @endforeach
+              </select>
+              
+            </div>
+          </div>
+          <div class="col-sm-4 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Tujuan<small> :</small></label>
+              <select id="exampleSelect" name="tujuan" class="form-control">             
+                <option value="semua">semua kota</option>
+                
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4 col-sm-offset-1">
+            <div class="form-group">
+            <label>Berat<small> :</small></label>
+            
+              <div class="input-group">
+                <input type="number" min="0" class="form-control" name="brt" placeholder="Misal : 10 kg" required>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-    
-      </section>    
-<footer class="footer text-center">
+          <div class="text-right">
+                <button type="submit" class="btn btn-info">Cari</button>
+                <a onclick="window.history.go(-1);"><button type="button" class="btn btn-danger">Kembali</button></a>
+              </div>
+        </form>
+        
+      </div>
+
+      </section>
+
+  <footer class="footer text-center">
       <div class="container">
         <div class="row">
           @foreach($des as $row)
@@ -154,7 +147,7 @@
           </div>
         </div>
       </div>
-    </footer>
+  </footer>
  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
@@ -173,36 +166,52 @@
        
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('asset_user/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="asset_user/vendor/jquery/jquery.min.js"></script>
+    <script src="asset_user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+    <script src="asset_user/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
-    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
+    <script src="asset_user/js/jqBootstrapValidation.js"></script>
+    <script src="asset_user/js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
-    
-  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
-  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/js/plugins.js')}}"></script>
+    <script src="asset_user/js/freelancer.js"></script>
+    <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
 
-  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-  <script>
-    $(function() {
-      $('#example').DataTable({
-          responsive:true,
-          "paging" : false,
-          "searching" : false,
-          "bInfo": false
-      });
+  <script type="text/javascript">
+    $('#kota_tujuan').select2();
+  </script>
+  <script type="text/javascript">
+    $('#kota_asal').select2({
+      placeholder: "Pilih kota asal"
     });
+  $('#kota_asal').on('select2:select',function(e){
+      var id = $(this).val();
+      $.ajax({
+      type: 'GET',
+      url: '/caritujuankurir/'+id,
+      success:function (data){
+      addoption(data);
+      },
+            });
+    });
+  function addoption(data){
+    $('#exampleSelect option').each(function() {
+    if ( $(this).val() != 'semua' ) {
+        $(this).remove();
+    }
+});
+  var newOption ='';
+  results : $.map(data, function (item){
+    $('#exampleSelect')
+         .append($("<option></option>")
+                    .attr("value",item.tujuan)
+                    .text(item.tujuan.toUpperCase())); 
+    })
+}
   </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>
@@ -210,3 +219,8 @@
   </body>
 
 </html>
+
+
+
+
+

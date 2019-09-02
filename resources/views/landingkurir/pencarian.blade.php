@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     @foreach($des as $row)
     <title>{{$row->namaweb}}</title>
     <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
     @endforeach
+
     <!-- Bootstrap core CSS -->
     <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -24,6 +26,10 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
 
   </head>
 
@@ -32,106 +38,85 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
+
         @foreach($des as $row)
-        <a class="navbar-brand js-scroll-trigger text-uppercase" href="#page-top">{{$row->header}}</a>
-        @endforeach
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
+    @endforeach
+        <!-- <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#biaya">
-              Cek Biaya</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hub">Lokasi Kami</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-0">
-              <a class="nav-link py-3 px-0 px-lg-0 rounded js-scroll-trigger" href="#tentang">Tentang Kami</a>
+              <a onclick="window.history.go(-2);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
+              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
             </li>
             
           </ul>
-        </div>
+        </div> -->
       </div>
     </nav>
-
-    <!-- Header -->
-    <header class="masthead bg-primary text-white text-center">
-      <div class="container">
-        @foreach($des as $row)
-        <img class="img-fluid mb-5 d-block mx-auto" src="asset_user/img/delivery.png" alt="">
+<br>
+<br> 
+      <section class="text-center mb-0">
         
-        <h1 class="text-uppercase mb-0">{{$row->header}}</h1>
-        <hr class="star-light">
-        <h2 class="font-weight-light mb-0">{{$row->sapaan}}</h2>
-        @endforeach
-      </div>
-    </header>
-    <!--LINK TABLE DARAT-->
-    <section class="portfolio" id="biaya">
+    <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
+    <br>
       <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Cek Biaya</h2>
-        <hr class="star-dark mb-5">
+        <div class="card-block">
+          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead class="thead-dark text-secondary text-center" >
+            <tr>
+              <th>No</th>
+              <th>Kota Tujuan</th>
+              <th>Biaya Perkg</th>
+              <th>Estimasi Biaya</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+           <?php $i = 1;?>
+              @foreach($trf_drt as $row)
+              <?php $no = $i++;?>
+              <tr>
+                <td class="text-center">{{$no}}</td>
+                <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
+                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}</td>
+                <td class="text-center">
+                  @php
+                  $estimasi = $brt*$row->tarif;
+                  @endphp
+                  {{"Rp ". number_format($estimasi,0,',','.')}}
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <br>
         <div class="row">
-          <div class="col-md-6 col-lg-3">
-            <a class="d-block mx-auto" href="{{url('landdarat')}}">
-              <div class="my-auto w-100 text-center">
-              <img class="img-fluid" src="asset_user/img/darat.png" alt="">
-              </div>
-              
-              <h3 class="text-secondary text-center">Tarif Darat</h3>
-              
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3" >
-            <a class="d-block mx-auto" href="{{url('landlaut')}}">
-              <img class="img-fluid" src="asset_user/img/laut.png" alt="">
-              <h3 class="text-secondary text-center">Tarif Laut</h3>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3">
-             <a class="d-block mx-auto" href="{{url('landudara')}}">
-              <img class="img-fluid" src="asset_user/img/udara.png" alt="">
-              
-              <h3 class="text-secondary text-center ">Tarif Udara</h3>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3">
-             <a class="d-block mx-auto" href="{{url('landkurir')}}">
-              <img class="img-fluid" src="asset_user/img/people.png" alt="">
-              
-              <h3 class="text-secondary text-center ">Tarif City Kurir</h3>
-            </a>
-          </div>                  
-       </div>
+  <div class="col-sm-12">
+    <div class="card">
+    <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
+  <div class="card-body text-left">
+     @foreach($des as $row)
+    {!!$row->desk_darat!!}
+    @endforeach
+  </div>
+</div>
+<p><br></p>
+  </div>
+  </div>
+        <div class="text-right">
+          <a onclick="window.history.go(-1);" class="btn btn-danger text-white">Kembali</a>
+        </div>
+        
       </div>
-    </section>
- <!--hubungi kami-->
-    <section class="portfolio" id="hub">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Lokasi Kami</h2>
-        <br>        
-        <div class="row">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15811.040748701675!2d112.0699626!3d-7.8151904!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4f4428370fac379f!2sSuryantara+Cargo!5e0!3m2!1sid!2sid!4v1547396770588" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-       </div>
-      </div>
-    </section>
-  
-  <!--tentang kami-->
-    <section class="masthead bg-primary text-white text-center mb-0" id="tentang">
-      @foreach($des as $row) 
-      <div class="container">
-        <h1 class="text-uppercase mb-0">Tentang Kami</h1>
-        <hr class="star-light">         
-        <h4>{{$row->desk}}</h4>       
-      </div>
-    </section>
-    @endforeach  
-<!-- Footer -->
-    <footer class="footer text-center">
+      </section>
+    </div><!--.container-fluid-->
+  </div><!--.page-content-->    
+<footer class="footer text-center">
       <div class="container">
         <div class="row">
           @foreach($des as $row)
@@ -155,6 +140,7 @@
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
+              
             </ul>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
@@ -170,10 +156,11 @@
         </div>
       </div>
     </footer>
-
+ 
     <div class="copyright py-4 text-center text-white">
       <div class="container">
-        <small><p>&copy; 2018 @foreach($des as $row){{$row->header}}
+        <small><p>&copy; 2018 @foreach($des as $row)
+    {{$row->header}}
     @endforeach. All Rights Reserved. <a href="#">Joyoboyo Intermedia</a></p></small>
       </div>
     </div>
@@ -197,10 +184,30 @@
     <!-- Contact Form JavaScript -->
     <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
     <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
-    <script src="{{asset('asset_user/js/main.js')}}"></script>
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
+    
+  <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/popper/popper.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/tether/tether.min.js')}}"></script>
+  <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins.js')}}"></script>
+
+  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
+  <script>
+    $(function() {
+
+      $('#example').DataTable({
+        responsive:true,
+        "paging" : false,
+        "searching" : false,
+        "bInfo": false
+      });
+    });
+  </script>
+
+<script src="{{asset('assets/js/app.js')}}"></script>
 
   </body>
 

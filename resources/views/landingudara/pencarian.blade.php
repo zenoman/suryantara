@@ -221,7 +221,10 @@
   <script>
     $(function() {
       $('#example').DataTable({
-        responsive:true
+        responsive:true,
+        "paging" : false,
+        "searching" : false,
+        "bInfo": false
       });
     });
   </script>

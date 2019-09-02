@@ -67,21 +67,31 @@
     <br>
         <form method="get" action="{{url('landdarat/cari')}}">
         <div class="row">
-          <div class="col-sm-4 col-sm-offset-1">
+          <!-- <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
               <input type="text" class="form-control" name="kota_asal" value="KEDIRI" readonly>
+            </div>
+          </div> -->
+          <div class="col-sm-4 col-sm-offset-1">
+            <div class="form-group">
+              <label>Kota Asal<small> :</small></label>
+              <select id="kota_asal" class="select2" name="kota_asal">
+                <option ></option>
+                @foreach($asal as $row)
+                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->nama)?></option>
+                @endforeach
+              </select>
+              
             </div>
           </div>
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
-              <select id="kota_tujuan" class="select2" name="tujuan">
-                @foreach($tujuan as $row)
-                <option><?php echo strtoupper($row->tujuan)?></option>
-                @endforeach
+              <select id="exampleSelect" name="tujuan" class="form-control">             
+                <option value="semua">semua kota</option>
+                
               </select>
-              
             </div>
           </div>
           <div class="col-sm-4 col-sm-offset-1">
@@ -179,6 +189,35 @@
 
   <script type="text/javascript">
     $('#kota_tujuan').select2();
+  </script>
+  <script type="text/javascript">
+    $('#kota_asal').select2({
+      placeholder: "Pilih kota asal"
+    });
+  $('#kota_asal').on('select2:select',function(e){
+      var id = $(this).val();
+      $.ajax({
+      type: 'GET',
+      url: '/caritujuan/'+id,
+      success:function (data){
+      addoption(data);
+      },
+            });
+    });
+  function addoption(data){
+    $('#exampleSelect option').each(function() {
+    if ( $(this).val() != 'semua' ) {
+        $(this).remove();
+    }
+});
+  var newOption ='';
+  results : $.map(data, function (item){
+    $('#exampleSelect')
+         .append($("<option></option>")
+                    .attr("value",item.tujuan)
+                    .text(item.tujuan.toUpperCase())); 
+    })
+}
   </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>

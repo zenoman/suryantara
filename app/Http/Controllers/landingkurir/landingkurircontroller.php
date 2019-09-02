@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\landingdarat;
+namespace App\Http\Controllers\landingkurir;
 ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\models\Landingdaratmodel;
 
 
-class landingdaratcontroller extends Controller
+class landingkurircontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,8 +24,8 @@ class landingdaratcontroller extends Controller
      $tarif_darat=Landingdaratmodel::paginate(10);
       $desk=DB::table('setting')->get();
       $as = DB::table('cabang')->get();
-      $tujuan=DB::table('tarif_darat')->where('tarif_city','!=','Y')->groupBy('tujuan')->get();
-    return view('landingdarat/index',['darat'=>$tarif_darat,'des'=>$desk,'tujuan'=>$tujuan ,'asal'=>$as]);
+      $tujuan=DB::table('tarif_darat')->where('tarif_city','!=','N')->groupBy('tujuan')->get();
+    return view('landingkurir/index',['darat'=>$tarif_darat,'des'=>$desk,'tujuan'=>$tujuan,'asal'=>$as]);
     }
 
     public function pencarian(Request $request)
@@ -34,17 +34,16 @@ class landingdaratcontroller extends Controller
      $kot = $request->tujuan;
      $asal = $request->kota_asal;
      if ($kot=='semua') {
-     $trf_drt = DB::table('tarif_darat')->where('id_cabang','like','%'.$asal.'%')->where('tarif_city','!=','Y')->get();
+     $trf_drt = DB::table('tarif_darat')->where('id_cabang','like','%'.$asal.'%')->where('tarif_city','!=','N')->get();
      }else{
       $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$kot.'%')->where('id_cabang','like','%'.$asal.'%')->get();
      }
      $desk=DB::table('setting')->get();
-    
-     return view('landingdarat/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot ,'brt'=>$brt , 'des'=>$desk]);
+     return view('landingkurir/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot ,'brt'=>$brt , 'des'=>$desk]);
     }
     public function caritujuan($id){
         $trf_drt = DB::table('tarif_darat')
-     ->where('id_cabang','like','%'.$id.'%')->where('tarif_city','!=','Y')
+     ->where('id_cabang','like','%'.$id.'%')->where('tarif_city','!=','N')
      ->get();
      return response()->json($trf_drt);
     }
