@@ -115,7 +115,10 @@ Route::get('/neraca','neraca\NeracaController@index');
 Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
 Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
+
 //================================================resi pengiriman
+Route::post('updatepembayaran','resipengiriman\resipengirimanController@aksiupdatepembayaran');
+Route::get('carinoresibelumlunas','resipengiriman\resipengirimanController@carinoresibelumlunas');
 Route::get('updatepembayaranresi','resipengiriman\resipengirimanController@updatepembayaran');
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
@@ -127,7 +130,6 @@ Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdatares
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
-Route::get('/uangkembali/{id}','resipengiriman\resipengirimanController@uangkembali');
 Route::get('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
 Route::get('/carilistresi/{id}','resipengiriman\resipengirimanController@carilistresi');
 

@@ -47,7 +47,7 @@
 									
 								</div>
 							</div>
-							<a href="{{url('updatepembayaranresi')}}" class="btn btn-success" data-toggle="modal" data-target="#searchModal">
+							<a href="{{url('updatepembayaranresi')}}" class="btn btn-success">
                      <i class="fa fa-money"></i> Update Pembayaran</a>
 
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -7,8 +7,52 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
+    public function aksiupdatepembayaran(Request $request){
+        if($request->statuslunas=='lunas'){
+            $data=[
+            'tgl_lunas'=>date('Y-m-d'),
+            'total_bayar'=>$request->totalbiaya
+            ];    
+        }else{
+            $total = $request->totalbayar + $request->inputbayar;
+            $data=[
+            'total_bayar'=>$total
+            ];    
+        }
+        //dd($data);
+    DB::table('resi_pengiriman')
+    ->where('id',$request->idresi)
+    ->update($data);
+    return redirect('updatepembayaranresi');
+    }
+
+    //======================================================
+    public function carinoresibelumlunas(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('resi_pengiriman')
+                    ->select('no_resi','id')
+                    ->where([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['total_biaya','!=',0],
+                        ['batal','=','N'],
+                        ['status_antar','=','N'],
+                        ['id_cabang','=',Session::get('cabang')],
+                    ])
+                    ->whereNull('kode_jalan')
+                    ->whereNull('kode_antar')
+                    ->whereNull('tgl_lunas')
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
+
+    //====================================================
     public function updatepembayaran(){
-        dd('update pembayaran');
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman.updatepembayaran',['webinfo'=>$webinfo]);
     }
     //======================================================
     public function simpancity(Request $request){
@@ -360,7 +404,7 @@ class resipengirimanController extends Controller
             $totalbayar = $request->dibayar;
         }
 
-        $data[] = [
+        $data = [
             'no_resi'           => $request->noresi,
             'admin'             => $request->iduser,
             'nama_barang'       => $request->nama_barang,
@@ -424,7 +468,7 @@ class resipengirimanController extends Controller
             $totalbayar = $request->dibayar;
         }
 
-        $data[] = [
+        $data = [
             'no_resi'           => $request->noresi,
             'admin'             => $request->iduser,
             'nama_barang'       => $request->nama_barang,
@@ -488,7 +532,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-        $data[] = [
+        $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
             'nama_barang'   => $request->nama_barang,
@@ -554,7 +598,7 @@ class resipengirimanController extends Controller
             $totalbayar = $request->dibayar;
         }
         
-        $data[] = [
+        $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
             'nama_barang'   => $request->nama_barang,
@@ -619,7 +663,7 @@ class resipengirimanController extends Controller
             $totalbayar = $request->dibayar;
         }
         
-        $data[] = [
+        $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
             'nama_barang'   => $request->nama_barang,
