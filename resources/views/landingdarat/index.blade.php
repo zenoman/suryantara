@@ -79,7 +79,7 @@
               <select id="kota_asal" class="select2" name="kota_asal">
                 <option ></option>
                 @foreach($asal as $row)
-                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->nama)?></option>
+                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->kota)?></option>
                 @endforeach
               </select>
               
@@ -88,7 +88,7 @@
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
-              <select id="exampleSelect" name="tujuan" class="form-control">             
+              <select id="exampleSelect" name="tujuan" class="form-control select2">             
                 <option value="semua">semua kota</option>
                 
               </select>
@@ -105,6 +105,7 @@
           </div>
         </div>
           <div class="text-right">
+                <!-- <button type="reset" class="btn btn-success">Reset</button> -->
                 <button type="submit" class="btn btn-info">Cari</button>
                 <a onclick="window.history.go(-1);"><button type="button" class="btn btn-danger">Kembali</button></a>
               </div>
@@ -193,6 +194,9 @@
   <script type="text/javascript">
     $('#kota_asal').select2({
       placeholder: "Pilih kota asal"
+    });
+    $('#exampleSelect').select2({
+      // placeholder: "Pilih kota asal"
     });
   $('#kota_asal').on('select2:select',function(e){
       var id = $(this).val();
