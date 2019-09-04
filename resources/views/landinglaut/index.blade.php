@@ -36,19 +36,7 @@
     @foreach($des as $row)
     <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
     @endforeach
-       <!--  <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a onclick="window.history.go(-1);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
-              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
-            </li>
-            
-          </ul>
-        </div> -->
+      
       </div>
     </nav>
 <br>
@@ -61,30 +49,14 @@
     <br>
         <form method="get" action="{{url('landlaut/cari') }}">
         <div class="row">
-          <!-- <div class="col-sm-4 col-sm-offset-1">
-            <div class="form-group">
-              <label>Kota Asal<small> :</small></label>
-              <input type="text" class="form-control" name="kota_asal" value="kediri" readonly>
-            </div>
-          </div>
-          <div class="col-sm-4 col-sm-offset-1">
-            <div class="form-group">
-              <label>Kota Tujuan<small> :</small></label>
-              <select id="kota_tujuan" class="select2" name="tujuan">
-                @foreach($tujuan as $row)
-                <option><?php echo strtoupper($row->tujuan)?></option>
-                @endforeach
-              </select>
-              
-            </div>
-          </div> -->
+          
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Asal<small> :</small></label>
               <select id="kota_asal" class="select2" name="kota_asal">
                 <option ></option>
                 @foreach($asal as $row)
-                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->kota)?></option>
+                <option value="{{$row->id}}">{{strtoupper($row->kota)}}</option>
                 @endforeach
               </select>
               
@@ -93,7 +65,7 @@
           <div class="col-sm-4 col-sm-offset-1">
             <div class="form-group">
               <label>Kota Tujuan<small> :</small></label>
-              <select id="exampleSelect" name="tujuan" class="form-control">             
+              <select id="exampleSelect" name="tujuan" class="form-control select2">             
                 <option value="semua">semua kota</option>
                 
               </select>
@@ -191,39 +163,35 @@
     <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
     <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
     <script src="{{asset('asset_user/js/main.js')}}"></script>
-
-  <script type="text/javascript">
-    $('#kota_tujuan').select2();
-  </script>
-  <script type="text/javascript">
+    <script type="text/javascript">
     $('#kota_asal').select2({
       placeholder: "Pilih kota asal"
     });
+    
     $('#exampleSelect').select2();
-  $('#kota_asal').on('select2:select',function(e){
+    
+    $('#kota_asal').on('select2:select',function(e){
       var id = $(this).val();
       $.ajax({
       type: 'GET',
       url: '/caritujuanlaut/'+id,
       success:function (data){
       addoption(data);
-      },
-            });
+      }});
     });
-  function addoption(data){
-    $('#exampleSelect option').each(function() {
-    if ( $(this).val() != 'semua' ) {
-        $(this).remove();
-    }
-});
-  var newOption ='';
-  results : $.map(data, function (item){
-    $('#exampleSelect')
-         .append($("<option></option>")
-                    .attr("value",item.tujuan)
-                    .text(item.tujuan.toUpperCase())); 
-    })
-}
+    function addoption(data){
+      $('#exampleSelect option').each(function() {
+      if ( $(this).val() != 'semua' ) {
+          $(this).remove();
+      }});
+    var newOption ='';
+    results : $.map(data, function (item){
+      $('#exampleSelect')
+           .append($("<option></option>")
+                      .attr("value",item.tujuan)
+                      .text(item.tujuan.toUpperCase())); 
+      })
+  }
   </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>

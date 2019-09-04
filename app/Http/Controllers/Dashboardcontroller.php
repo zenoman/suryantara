@@ -264,7 +264,7 @@ private $newdata="";
             ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pendapatan')
-            ->paginate(40);
+            ->get();
             // dd($data);
         foreach ($data as $row) {
             $newdata = $row->toto;
@@ -279,7 +279,7 @@ private $newdata="";
             ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            ->paginate(40);
+            ->get();
         foreach ($data as $row) {
             $newdata = $row->toto;
         }
@@ -294,7 +294,7 @@ private $newdata="";
             ->whereMonth('pengeluaran_lain.tgl',$bulan-1)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pendapatan')
-            ->paginate(40);
+            ->get();
         foreach ($data as $row) {
             $new = $row->tot;
             return $new;
@@ -309,7 +309,7 @@ private $newdata="";
             ->whereMonth('pengeluaran_lain.tgl',$bulan)
             ->whereYear('pengeluaran_lain.tgl',$tahun)
             ->where('tb_kategoriakutansi.status','=','pengeluaran')
-            ->paginate(40);
+            ->get();
         foreach ($data as $row) {
             $new = $row->tot;
         }
