@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class Dashboardcontroller extends Controller {
-
+private $newdata="";
     public function index()
     {
         //==========================
@@ -271,6 +271,7 @@ class Dashboardcontroller extends Controller {
         }
     }
     function hitung_pendapatan($bulan,$tahun){
+        
         $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))

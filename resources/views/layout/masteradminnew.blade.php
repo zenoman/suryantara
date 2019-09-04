@@ -38,16 +38,16 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			//window.location.href='{{url("lockscreen")}}';
+			window.location.href='{{url("lockscreen")}}';
 			}
 
-		function resetTimer(){
-			clearTimeout(t);
-			t = setTimeout(logout,180000);
-			}
+		// function resetTimer(){
+		// 	clearTimeout(t);
+		// 	t = setTimeout(logout,180000);
+		// 	}
 
-		}
-		idlelogout();
+		// }
+		// idlelogout();
 	</script>
 
 </head>
@@ -105,20 +105,7 @@
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-	                <div class="dropdown dropdown-typical">
-	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                    <span class="font-icon font-icon-cogwheel"></span>
-	                    <span class="lbl">Akutansi</span>
-	                </a>
-	
-	                <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
-	                    <a class="dropdown-item" href="{{url('/kat_akut')}}">kategori Akutansi</a>
-	                    <a class="dropdown-item" href="{{url('/nyusut')}}">Penyusutan</a>
-	                    <a class="dropdown-item" href="{{url('/laporakun')}}">Laporan</a>
-	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
-	                    <a class="dropdown-item" href="{{url('/labarugi')}}">Laba Rugi</a>
-	                    <a class="dropdown-item" href="{{url('/neraca')}}">Neraca</a>
-	                </div>
+	                <div class="dropdown dropdown-typical">	               
 	            </div>
 				@endif
 	                    </div>
@@ -234,6 +221,9 @@
 				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
 			</div><p></p>
 	       	</div>
+		</li> 
+		<li class="nav-item">
+		<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
 		</li>
 		@endif
 		

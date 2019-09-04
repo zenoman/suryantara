@@ -14,7 +14,7 @@ class pengeluaranlainController extends Controller
         $data = DB::table('pengeluaran_lain')
         ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
         ->join('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-        // ->where('tb_kategoriakutansi.aksi','!=','N')
+        // ->where('tb_kategoriakutansi.aksi','!=','N')        
         ->where('id_cabang',$idc)
         ->orderby('id','desc')
         ->paginate(40);
@@ -25,7 +25,9 @@ class pengeluaranlainController extends Controller
     public function create()
     {
         $setting = DB::table('setting')->limit(1)->get();
-        $datkatbarakutansi = DB::table('tb_kategoriakutansi')->get();
+        $datkatbarakutansi = DB::table('tb_kategoriakutansi')
+        ->where('tb_kategoriakutansi.status','=','pengeluaran')
+        ->get();
         return view('pengeluaranlain/create',['kate'=>$datkatbarakutansi,'title'=>$setting]);
     }
 
