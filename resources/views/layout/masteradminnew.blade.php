@@ -213,7 +213,7 @@
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Antaran</a>
 				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
-				
+				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 			</div>
 		</li>
 		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')

@@ -248,7 +248,7 @@
 					<input type="hidden" class="form-control" id="keterangan" value="pengiriman darat">
 					{{csrf_field()}}
 						<small class="text-muted">
-							<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+							<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 							</button>
 							<div class="pull-right">
 								<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>

@@ -242,7 +242,7 @@
 						<div class="col-lg-12 terms-and-conditions">
 							<strong>Status : 
 							 @if($row->status!='Y')
-								Menunggu Pengembalian Resi / Uang
+								Menunggu Pengembalian Resi
                             @else
 								Pengiriman Sukses
                         	@endif

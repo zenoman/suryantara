@@ -97,24 +97,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
 								<select class="form-control" id="metode_darat">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="status_bayar_darat">
-								<option value="lunas">Lunas</option>
-								<option value="belum_lunas">Belum Lunas</option>
+								
 							</select>
 							</div>
 						</div>
@@ -251,6 +241,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_darat" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_darat" value="lunas">
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -272,27 +271,24 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi_darat">0</td>
 									</tr>
-									
+										<tr>
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_darat">0</h5></td>
+									</tr>
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_darat">0</h3>
-										</td>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_darat">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_darat">Kembalian/Kekurangan</td>
+										<td id="total_darat">0</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman darat" class="form-control" id="keterangan_darat">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
+					<input type="hidden" value="pengiriman darat" class="form-control" id="keterangan_darat">
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -324,24 +320,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
 								<select class="form-control" id="metode_laut">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="status_bayar_laut">
-								<option value="lunas">Lunas</option>
-								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -481,6 +466,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_laut" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_laut" value="lunas">
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -502,11 +496,17 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi_laut">0</td>
 									</tr>
-									
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_laut">0</h3>
-										</td>
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_laut">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_laut">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_laut">Kembalian/Kekurangan</td>
+										<td id="total_laut">0</td>
 									</tr>
 								</tbody>
 							</table>
@@ -602,7 +602,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
@@ -613,18 +613,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="status_bayar_udara">
-								<option value="lunas">Lunas</option>
-								<option value="belum_lunas">Belum Lunas</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2 col-sm-6">
+					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Jumlah</label>
 							<div class="input-group">
@@ -777,6 +766,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_udara" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_udara" value="lunas">
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -804,9 +802,16 @@
 										<td id="b_charge_udara">0</td>
 									</tr>
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_udara">0</h3>
-										</td>
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_udara">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_udara">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_udara">Kembalian/Kekurangan</td>
+										<td id="total_udara">0</td>
 									</tr>
 								</tbody>
 							</table>
@@ -827,7 +832,7 @@
 			<!-- ====================================================== -->
 			<div class="box-typical box-typical-padding loading-div" id="formcity" style="display: none;">
 				<header class="card-header card-header-xl">
-					City Kurier
+					City Kurier Personal
 				</header>
 				<br>
 			<div class="form-group row">
@@ -840,24 +845,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Metode Bayar</label>
 							<div class="input-group">
 								<select class="form-control" id="metode_city">
 								<option value="cash">cash</option>
 								<option value="bt">BT</option>
-							</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Status Bayar</label>
-							<div class="input-group">
-								<select class="form-control" id="status_bayar_city">
-								<option value="lunas">Lunas</option>
-								<option value="belum_lunas">Belum Lunas</option>
 							</select>
 							</div>
 						</div>
@@ -997,6 +991,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_city" value="0" onkeypress="return isNumberKey(event)">
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_city" value="lunas">
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -1018,28 +1021,25 @@
 										<td>Biaya Asuransi</td>
 										<td id="b_asuransi_city">0</td>
 									</tr>
-									
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_city">0</h3>
-										</td>
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_city">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_city">0</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_city">Kembalian/Kekurangan</td>
+										<td id="total_city">0</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman city kurier" class="form-control" id="keterangan_city">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
-							<small class="text-muted">
+					<input type="hidden" value="pengiriman city kurier" class="form-control" id="keterangan_city">
+					<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_city" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
 

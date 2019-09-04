@@ -10,6 +10,154 @@ use Illuminate\Support\Facades\Session;
 
 class antarancontroller extends Controller
 {
+    public function updateinputpod(Request $request){
+       if($request->statusresi=='sukses'){
+            
+            $jumdatanya = DB::table('resi_pengiriman')
+            ->where([['id',$request->idresi],['status_pengiriman','paket telah diterima']])
+            ->count();
+            
+            if($jumdatanya==0){
+                $datanya = DB::table('resi_pengiriman')
+                ->where('id',$request->idresi)
+                ->get();
+                
+                foreach ($datanya as $row){
+                    DB::table('status_pengiriman')
+                    ->insert([
+                    'kode'=>$row->no_resi,
+                    'status'=>'paket telah diterima',
+                    'tgl'=>date('Y-m-d'),
+                    'jam'=>date('H:i:s'),
+                    'lokasi'=>Session::get('kota'),
+                    'keterangan'=>$request->keterangan
+                ]);}
+            }
+            //-------------------------------------------------
+            DB::table('resi_pengiriman')
+            ->where('id',$request->idresi)
+            ->update([
+                'status_antar'=>'Y',
+                'status_pengiriman'=>'paket telah diterima',
+                'nama_penerima_barang'=>$request->keterangan
+            ]);
+        
+            //-------------------------------------------------
+            $jumlah = DB::table('resi_pengiriman')
+            ->where([['kode_antar','=',$request->kodeantar],['status_antar','=','P']])
+            ->count();
+            if($jumlah == 0){
+                DB::table('surat_antar')
+                ->where('kode',$request->kodeantar)
+                ->update([
+                    'status'=>'S'
+                ]);
+            }
+            return back()->with('status','Resi Berhasil Di Update');
+
+       }elseif($request->statusresi=='gagal'){
+            
+            DB::table('resi_pengiriman')
+            ->where('id',$request->idresi)
+            ->update([
+                'status_antar'=>'KL',
+                'status_pengiriman'=>'pengantaran gagal',
+                'keterangan'=>$request->keterangan
+            ]);
+
+            $datanya = DB::table('resi_pengiriman')
+            ->where('id',$request->idresi)
+            ->get();
+
+            foreach ($datanya as $row){
+                DB::table('status_pengiriman')
+                ->insert([  
+                    'kode'=>$row->no_resi,
+                    'status'=>'pengantaran gagal',
+                    'keterangan'=>$request->keterangan,
+                    'tgl'=>date('Y-m-d'),
+                    'jam'=>date('H:i:s'),
+                    'lokasi'=>Session::get('kota')
+                ]);
+            }
+        
+            $jumlah = DB::table('resi_pengiriman')
+            ->where([['kode_antar','=',$request->kodeantar],['status_antar','=','P']])
+            ->count();
+
+            if($jumlah == 0){
+                DB::table('surat_antar')
+                ->where('kode',$request->kodeantar)
+                ->update([
+                    'status'=>'S'
+                ]);
+            }
+            return back()->with('status','Resi Berhasil Di Update');
+       }else{
+            DB::table('resi_pengiriman')
+            ->where('id',$request->idresi)
+            ->update([
+                'status_antar'=>'G',
+                'status_pengiriman'=>'dikembalikan ke pengirim'
+            ]);
+
+            $datanya = DB::table('resi_pengiriman')->where('id',$request->idresi)->get();
+            foreach ($datanya as $row){
+             DB::table('status_pengiriman')
+            ->insert([
+                'kode'=>$row->no_resi,
+                'status'=>'dikembalikan ke pengirim',
+                'tgl'=>date('Y-m-d'),
+                'jam'=>date('H:i:s'),
+                'lokasi'=>Session::get('kota')
+            ]);
+            }
+        
+            $jumlah = DB::table('resi_pengiriman')
+            ->where([['kode_antar','=',$request->kodeantar],['status_antar','=','P']])
+            ->count();
+
+            if($jumlah == 0){
+                DB::table('surat_antar')
+                ->where('kode',$request->kodeantar)
+                ->update([
+                    'status'=>'S'
+                ]);
+            }
+            return back()->with('status','Resi Berhasil Di Update');
+       }
+    }
+
+    //==================================================
+    public function carinoresipod(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            $data = DB::table('resi_pengiriman')
+                    ->select('no_resi','id')
+                    ->where([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['batal','=','N'],
+                        ['status_antar','=','P'],
+                        ['id_cabang','=',Session::get('cabang')]
+                    ])
+                    ->orwhere([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['batal','=','N'],
+                        ['status_antar','=','P'],
+                        ['id_cabang','=',Session::get('cabang')]
+                    ])
+                    ->get();
+            return response()->json($data);
+        }
+    }
+
+    //================================================
+    public function inputpod(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('antaran.inputpod',['webinfo'=>$webinfo]);
+    }
+
+    //=================================================
     public function create(){
     	$webset = DB::table('setting')->limit(1)->get();
     	return view('antaran/create',['webinfo'=>$webset]);

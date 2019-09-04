@@ -42,6 +42,9 @@ Route::resource('/cabang','cabang\cabangcontroller');
 Route::get('/exsportcabang','cabang\cabangcontroller@exsportdata');
 
 //==============================================antaran
+Route::post('/updateinputpod','Antaran\antarancontroller@updateinputpod');
+Route::get('/carinoresipod','Antaran\antarancontroller@carinoresipod');
+Route::get('/inputpod','Antaran\antarancontroller@inputpod');
 Route::get('/tambahantaran','Antaran\antarancontroller@create');
 Route::get('/listantaran','Antaran\antarancontroller@index');
 Route::get('/carikodeantar','Antaran\antarancontroller@carikode');

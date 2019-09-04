@@ -32,33 +32,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <!--  <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
-                     <i class="fa fa-search"></i> Cari Data</button>
-                     	<br><br>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Cari Data Spesifik Dari Semua Data</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('cariresipengiriman_smukosong')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="cari" class="form-control" placeholder="cari berdasarkan Resi/ Tanggal/ Jalur/ Tujuan/ Admin" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Cari Data">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> -->
-
+                   
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
@@ -243,6 +217,12 @@
 										
 									</tr>
 									<tr>
+										
+										<td class="text-right"><b>Dibayar</b></td>
+										<td class="text-right"><b>Rp. {{number_format($row->total_bayar,0,',','.')}}</b></td>
+										
+									</tr>
+									<tr>
 										<td><h4>Total</h4></td>
 										<td class="text-right"><h4>
 											Rp. {{number_format($row->total_biaya,0,',','.')}}
@@ -258,7 +238,7 @@
 						<div class="col-lg-12 terms-and-conditions">
 							<strong>Status : 
 							 @if($row->status!='Y')
-								Menunggu Pengembalian Resi / Uang
+								Menunggu Pengembalian Resi
                             @else
 								Pengiriman Sukses
                         	@endif
@@ -282,27 +262,12 @@
 				</div>
 							</div>
 							<div class="modal-footer">
+								@if($row->duplikat=='N')
 								@if(Session::get('level')!='cs')
-								@if($row->metode_bayar=='cash')
 										@if($row->status=='N')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='US')
-										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='RS')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										@endif
-								@else
-									@if($row->status=='N')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='US')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='RS')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									@endif
 								@endif
-								@else
 								@endif
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
