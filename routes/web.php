@@ -9,6 +9,9 @@ Route::get('carisuratjln','transit\transitcontroller@carisuratjalan');
 Route::get('tambahtransit','transit\transitcontroller@create');
 Route::get('listtransit','transit\transitcontroller@index');
 //==============================================penerimaan
+Route::post('/paketditerima','penerimaan\penerimaancontroller@paketditerima');
+Route::get('/carinoresipenerimaan','penerimaan\penerimaancontroller@cariresi');
+Route::get('/inputpenerimaan','penerimaan\penerimaancontroller@inputpenerimaan');
 Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
 Route::get('terimasuratjalan/{kode}','penerimaan\penerimaancontroller@terima');
 //============================================ envoice

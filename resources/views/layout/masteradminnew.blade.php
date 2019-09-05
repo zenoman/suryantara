@@ -195,6 +195,7 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
 			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('inputpenerimaan')}}">Input Penerimaan </a>
 				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
 				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
 				<div class="dropdown-divider"></div>

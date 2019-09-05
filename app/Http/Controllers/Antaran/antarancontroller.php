@@ -143,7 +143,7 @@ class antarancontroller extends Controller
                     ->orwhere([
                         ['no_resi','like','%'.$cari.'%'],
                         ['batal','=','N'],
-                        ['status_antar','=','P'],
+                        ['status_antar','=','KL'],
                         ['id_cabang','=',Session::get('cabang')]
                     ])
                     ->get();
