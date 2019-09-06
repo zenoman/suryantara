@@ -68,7 +68,7 @@ class envoicecontroller extends Controller
         ->max('kode');
 
         if($kode==''){
-            $finalkode = "EN".Session::get('koderesi')."".$tanggal."-".$kodeuser."-000001";
+            $finalkode = "IN".Session::get('koderesi')."".$tanggal."-".$kodeuser."-000001";
         }else{
              $caridata = DB::table('surat_envoice')
             ->where('kode',$kode)->get();
@@ -78,7 +78,7 @@ class envoicecontroller extends Controller
                 }else{
                     $newkode    = explode("-", $kode);
             $nomer      = sprintf("%06s",$newkode[2]+1);
-            $finalkode  = "EN".Session::get('koderesi')."".$tanggal."-".$kodeuser."-".$nomer; 
+            $finalkode  = "IN".Session::get('koderesi')."".$tanggal."-".$kodeuser."-".$nomer; 
                 }
             }
            
