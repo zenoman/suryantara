@@ -213,9 +213,7 @@
 					</div>
 							</div>
 							<div class="modal-footer">
-							@if($row->status!='S')
-							<a href="{{url('/detailsa/'.$row->id)}}" class="btn btn-rounded btn-primary">Ubah Status</a>
-							@endif
+							
 							<button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						</div>

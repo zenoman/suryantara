@@ -11,6 +11,7 @@ use App\Exports\AbsensiharianExport;
 use App\Exports\AbsensibulananExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\File;
 class Absensicontroller extends Controller
@@ -22,11 +23,13 @@ class Absensicontroller extends Controller
                 ->select(DB::raw('karyawan.*,jabatan.uang_makan,absensi.id_karyawan'))
                 ->leftJoin('jabatan',function($joon){
                     $joon->on('jabatan.id','=','karyawan.id_jabatan');
+
                 })
                 ->leftJoin('absensi',function ($join) {
                 $join->on('absensi.id_karyawan', '=' , 'karyawan.id') ;
                 $join->where('absensi.tanggal','=', date('Y-m-d')) ;
-            })
+                })
+                ->where('karyawan.id_cabang','=',Session::get('cabang'))
                 ->paginate(20);
         $setting = DB::table('setting')->get();
         // dd($datKaryawan);
@@ -48,13 +51,13 @@ class Absensicontroller extends Controller
             $bolos=1;
             $izin=0;
             $ketiz="-";
-            $makan="-";
+            $makan=0;
         }else{
             $masuk = 0;
             $bolos = 0;
             $izin = 1;
             $ketiz = $request->ketizin;
-            $makan="-";
+            $makan=0;
         }
         Absensimodel::create([
             'id_karyawan'  => $request->id_karyawan,
@@ -64,44 +67,47 @@ class Absensicontroller extends Controller
             'izin'=>$izin,
             'keterangan_izin'=>$ketiz,
             'tidak_masuk'=>$bolos,
-            'uang_makan'=>$makan
-
+            'uang_makan'=>$makan,
+            'id_cabang'=>Session::get('cabang')
         ]);
         
         return redirect('absen')->with('status','Input Data Sukses');
     }
     public function tambahabsenselesai(Request $request){
          $datKaryawan = DB::table('karyawan')
+                ->where('id_cabang',Session::get('cabang'))
                 ->get();
                 $dattgl=date('Y-m-d');
         $datAbsensi = DB::table('absensi')
                 ->where('tanggal','=',$dattgl)
                 ->get();
-
         foreach ($datKaryawan as $row) {
-            foreach ($datAbsensi as $ro) {
-                if ($row->id == $ro->id_karyawan) {
-                    
-                }else{
+            $datAbsensi = DB::table('absensi')
+                ->where([['tanggal','=',$dattgl],['id_karyawan','=',$row->id]])
+                ->count();
+            if($datAbsensi == 0){
             $masuk=0;
             $bolos=1;
             $izin=0;
             $ketiz="-";
-                    Absensimodel::create([
+            $data[] = [
                         'id_karyawan'  => $row->id,
                         'id_jabatan'  => $row->id_jabatan,
                         'tanggal' =>$dattgl,
                         'masuk'=>$masuk,
                         'izin'=>$izin,
                         'keterangan_izin'=>$ketiz,
-                        'tidak_masuk'=>$bolos
-                        ]);
-                }
+                        'tidak_masuk'=>$bolos,
+                        'uang_makan'=>0,
+                        'id_cabang'=>Session::get('cabang')
+                        ];
+                    DB::table('absensi')->insert($data);
+            
             }
+          
         }
-                // dd($datKaryawan);
-        
-        return redirect('/')->with('status','Input Data Sukses');
+           
+        return redirect('/dashboard')->with('status','Absensi karyawan selesai');
     }
     //--------------------------------
     public function pilihabsensi()

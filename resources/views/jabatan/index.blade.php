@@ -81,11 +81,8 @@
                               <form action="{{ url('/jabatan/delete')}}"  method="post">                            	
                             	<a href="{{ url('/jabatan/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">Edit</a>
                                         	{{csrf_field()}}
-                                        	@if($row->id == '1')
-                                        	@else
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
-                                        @endif
                     		</form>
                             </td>
 						</tr>
