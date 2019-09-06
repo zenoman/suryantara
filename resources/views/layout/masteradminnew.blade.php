@@ -152,7 +152,7 @@
 					<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
 									Company</a>
 				</div>
-				<a class="dropdown-item" href="{{url('/envoice')}}">Invoice City Kurier</a>
+				<!-- <a class="dropdown-item" href="{{url('/envoice')}}">Invoice City Kurier</a> -->
 				
 			</div>
 		</li>
@@ -205,7 +205,10 @@
 	       	</div>
 		</li> 
 		<li class="nav-item">
-		<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
+			<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
+		</li>
+		<li class="nav-item">
+			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
 		</li>
 		@endif
 		
