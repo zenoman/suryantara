@@ -34,9 +34,17 @@ class landingkurircontroller extends Controller
      $kot = $request->tujuan;
      $asal = $request->kota_asal;
      if ($kot=='semua') {
-     $trf_drt = DB::table('tarif_darat')->where('id_cabang','like','%'.$asal.'%')->where('tarif_city','!=','N')->get();
+     $trf_drt = DB::table('tarif_darat')
+     ->where([['id_cabang','like','%'.$asal.'%'],['tarif_city','!=','N'],['company','=','Y']])
+     ->get();
      }else{
-      $trf_drt = DB::table('tarif_darat')->where('tujuan','like','%'.$kot.'%')->where('id_cabang','like','%'.$asal.'%')->get();
+      $trf_drt = DB::table('tarif_darat')
+      ->where([
+        ['tujuan','like','%'.$kot.'%'],
+        ['id_cabang','like','%'.$asal.'%'],
+        ['tarif_city','!=','N'],
+        ['company','=','Y']])
+      ->get();
      }
      $desk=DB::table('setting')->get();
      return view('landingkurir/pencarian',['trf_drt'=>$trf_drt ,'kot'=>$kot ,'brt'=>$brt , 'des'=>$desk]);
