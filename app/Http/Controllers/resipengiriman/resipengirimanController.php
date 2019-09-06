@@ -496,6 +496,7 @@ class resipengirimanController extends Controller
             'alamat_penerima'   => $request->alamat_penerima,
             'tgl_lunas'         => $tglbayar,
             'id_cabang'         => Session::get('cabang'),
+            'status_company'	=> 'Y',
             'status_pengiriman' => 'barang diterima KLC Cabang '.Session::get('kota')
         ];
 

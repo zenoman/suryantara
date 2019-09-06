@@ -250,7 +250,7 @@ $(document).ready(function(){
             }else{
                var foo='bar';
     if(foo=='bar'){
-     var isgood = confirm('Tambahkan Resi Kesurat Jalan ? ');
+     var isgood = confirm('Tambahkan Resi Ke Envoice ? ');
      if(isgood == true){
      $('#panelnya').loading('toggle'); 
         var l = Ladda.create(this);
