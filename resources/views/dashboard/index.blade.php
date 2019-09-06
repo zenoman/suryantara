@@ -33,21 +33,29 @@
                 </div>
                     @endif
                   @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-                 @if($jumlahtotalresi > 1000)
+                 @if($jumlahtotalresi > 500)
                   <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <b>Peringatan : </b><br>
                         Data resi sudah lebih dari 500 data segera lakukan <a href="{{url('/backup')}}">backup data</a>
                     </div>
                 </div>
                  @endif
                  @endif
-                 <div class="col-xl-12 dahsboard-column">
-                    <div class="alert alert-warning alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Dear Client, Saat ini sistem cabang sedang dikembangkan, harap tidak menginputkan barang dengan cabang klc surabaya terlebih dahulu :D
-                    </div>
-                </div>
+
+                 @foreach($title as $row)
+                 	@if($row->pengumuman!='')
+	                 <div class="col-xl-12 dahsboard-column">
+	                    <div class="alert alert-warning alert-dismissable">
+	                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                                <b>Pengumuman : </b><br>
+	                                {!!$row->pengumuman!!}
+						</div>
+	                </div>
+                	@endif
+                @endforeach
+
               	@if($jumlahpajakarmada > 0)
               	<div class="col-xl-12 dahsboard-column">
               		<section class="box-typical box-typical-dashboard panel panel-default scrollable">

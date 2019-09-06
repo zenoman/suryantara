@@ -88,21 +88,27 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Pengumuman</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Pengumuman" name="pengumuman" id="pengumuman">{{$row->pengumuman}}</textarea></p>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-2 form-control-label semibold">Info Udara</label>
             <div class="col-sm-10">
-              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_udara" id="desk_udara">{{$row->desk_udara}}</textarea></p>
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="info udara" name="desk_udara" id="desk_udara">{{$row->desk_udara}}</textarea></p>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 form-control-label semibold">Info Darat</label>
             <div class="col-sm-10">
-              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_darat" id="desk_darat">{{$row->desk_darat}}</textarea></p>
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="info darat" name="desk_darat" id="desk_darat">{{$row->desk_darat}}</textarea></p>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 form-control-label semibold">Info Laut</label>
             <div class="col-sm-10">
-              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="Deskripsi website" name="desk_laut" id="desk_laut">{{$row->desk_laut}}</textarea></p>
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="info laut" name="desk_laut" id="desk_laut">{{$row->desk_laut}}</textarea></p>
             </div>
           </div>
 					 					<div class="form-group row">
@@ -140,7 +146,7 @@
 				@endforeach
 {{csrf_field()}}
 				<input type="hidden" name="_method" value="PUT">
-							<small class="text-muted"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
+							<small class="text-muted" align="right"><input class="btn btn-primary" type="submit" name="submit" value="simpan"></small>
 				</form>
 			</div>
 	</div></div>
@@ -190,6 +196,25 @@
     <script>
     ClassicEditor
     .create( document.querySelector('#desk_laut'),{
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    }
+    )
+
+    .catch( error => {
+        console.log( error );
+    });
+
+    </script>
+    <script>
+    ClassicEditor
+    .create( document.querySelector('#pengumuman'),{
         toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
         heading: {
             options: [

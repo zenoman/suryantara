@@ -58,7 +58,7 @@ class envoicecontroller extends Controller
     }
 
     //======================================================================
-    public function carikode($value='')
+    public function carikode()
     {
         $kodeuser = sprintf("%02s",session::get('id'));
         $tanggal  = date('dmy');
@@ -121,13 +121,10 @@ class envoicecontroller extends Controller
                         ['no_resi','like','%'.$cari.'%'],
                         ['total_biaya','!=',0],
                         ['batal','=','N'],
-                        ['status_antar','=','N'],
                         ['id_cabang','=',Session::get('cabang')],
                         ['pengiriman_via','=','city kurier'],
                         ['status_company','=','Y']
                     ])
-                    ->whereNull('kode_jalan')
-                    ->whereNull('kode_antar')
                     ->whereNull('kode_envoice')
                     ->get();
             

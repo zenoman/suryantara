@@ -38,16 +38,16 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			window.location.href='{{url("lockscreen")}}';
+			//window.location.href='{{url("lockscreen")}}';
 			}
 
-		// function resetTimer(){
-		// 	clearTimeout(t);
-		// 	t = setTimeout(logout,180000);
-		// 	}
+		function resetTimer(){
+			clearTimeout(t);
+			t = setTimeout(logout,180000);
+			}
 
-		// }
-		// idlelogout();
+		}
+		idlelogout();
 	</script>
 
 </head>
@@ -72,15 +72,6 @@
 	            <div class="site-header-content-in">
 	                <div class="site-header-shown">
 	                
-	                        <div class="dropdown dropdown-notification messages">
-	                            @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
-	                            <a href="{{url('backup')}}" class="btn btn-rounded">
-	                                <i class="glyphicon glyphicon-cloud-download"></i>
-	                            </a>
-	                            <a href="{{url('setting')}}" class="btn btn-rounded">
-	                                <i class="font-icon font-icon-cogwheel"></i></a>
-	                            @endif
-	                        </div>
 	
 	                    <div class="dropdown user-menu">
 	                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,29 +79,19 @@
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
 	                        	 <span class="dropdown-item text-center text-muted">{{Session::get('username')}}</span>
+	                        	 <div class="dropdown-divider"></div>
+	                        	  <a class="dropdown-item" href="{{url('backup')}}"><span class="font-icon font-icon-download"></span>Back Up Data</a>
+	                        	  <a class="dropdown-item" href="{{url('setting')}}"><span class="font-icon font-icon-cogwheel"></span>Setting Web</a>
 	                        	<div class="dropdown-divider"></div>
 	                            <a class="dropdown-item" href="{{url('admin/'.Session::get('id').'/edit')}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
 
 	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
 	                        </div>
 	                    </div>
-	
-	                    <button type="button" class="burger-right">
-	                        <i class="font-icon-menu-addl"></i>
-	                    </button>
 	                </div><!--.site-header-shown-->
 	
 	                <div class="mobile-menu-right-overlay"></div>
-	                <div class="site-header-collapsed">
-	                    <div class="site-header-collapsed-in">
-	                        <div class="dropdown dropdown-typical">
-	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-	                <div class="dropdown dropdown-typical">	               
-	            </div>
-				@endif
-	                    </div>
-	                </div>
-	            </div>
+	                
 	        </div>
 	    </div>
 	</header>
