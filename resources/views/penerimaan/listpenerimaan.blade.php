@@ -1,10 +1,8 @@
 @extends('layout.masteradminnew')
-
-
 @section('header')
-@foreach($webinfo as $row)
-<title>{{$row->namaweb}}</title>
-<link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
+@foreach($webinfo as $info)
+<title>{{$info->namaweb}}</title>
+<link href="{{asset('img/setting/'.$info->icon)}}" rel="icon" type="image/png">
 @endforeach
 @endsection
 
@@ -27,77 +25,71 @@
 					</div>
 				</div>
 			</header>
+
 			<section class="card">
-				   
 				<div class="card-block">
-					 @if (session('status'))
+					@if (session('status'))
                     <div class="alert alert-success alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
                     @endif
-                    @if (session('statuserror'))
-                    <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('statuserror') }}
-                    </div>
-                    @endif
-                    	{{csrf_field()}}
-                    <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
 							<th>No</th>
-							<th>Kode</th>
-							<th>Tujuan</th>
+							<th>No.Resi</th>
+							<th>Resi/SMU</th>
 							<th>Tanggal</th>
-							<th class="text-center">Aksi</th>
+							<th>Jalur</th>
+							<th>Isi Paket</th>
+							<th>Tujuan</th>
+							<th>Pengirim</th>
+							<th>Admin</th>
 						</tr>
 						</thead>
-						<tfoot>
-						<tr>
-							<th>No</th>
-							<th>kode</th>
-							<th>Tujuan</th>
-							<th>Tanggal</th>
-							<th class="text-center">Aksi</th>
-						</tr>
-						</tfoot>
+						
 						<tbody>
 						<?php $i = 1;?>
-                            @foreach($data as $row)
+                            @foreach($datakirim as $row)
                             <?php $no = $i++;?>
                         <tr>
                             <td>{{$no}}</td>
-                            <td>{{$row->kode}}</td>
-                            <td>
-                            @php
-                            	$newtujuan = explode("-", $row->tujuan);
-                            @endphp
-                            	{{$newtujuan[0]}}
-                            </td>
-                            <td>{{$row->tgl}}</td>
                             <td class="text-center">
-								<button class="btn btn-primary btn-sm"
-									data-toggle="modal"
-									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
-									@if($row->status_pengiriman=='N')
-								<a href="{{url('terimasuratjalan/'.$row->kode)}}" onclick="return confirm('Apakah Surat Jalan & Paket Telah Diterima ? ')" class="btn btn-success btn-sm">Terima</a>
+                            
+
+                            	@if($row->tgl_lunas !=null)
+									@if($row->status=='Y')
+                            			<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
+									@endif
+
+								@else
+
+									@if($row->status=='Y')
+										<button class="btn btn-sm btn-success"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@elseif($row->no_smu == null)
+                            		<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+                            		@else
+                            			<button class="btn btn-sm btn-primary"
+										data-toggle="modal"
+										data-target=".bd-example-modal-lg{{$row->id}}"><i class="fa fa-exclamation-triangle"></i> {{$row->no_resi}}</button>
+									@endif
 								@endif
-                    		</td>
-						</tr>
-						@endforeach
-						</tbody>
-					</table>
-					<div class="pull-right">
-					<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
-					</div>
-					
-				</div>
-			</section>
-		</div><!--.container-fluid-->
-	</div><!--.page-content-->
-	 @foreach($data as $row)
-	 <div class="modal fade bd-example-modal-lg{{$row->id}}"
+				<div class="modal fade bd-example-modal-lg{{$row->id}}"
 					 tabindex="-1"
 					 role="dialog"
 					 aria-labelledby="myLargeModalLabel"
@@ -108,120 +100,218 @@
 								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
 									<i class="font-icon-close-2"></i>
 								</button>
-								<h4 class="modal-title" id="myModalLabel">Detail Surat Jalan</h4>
+								<h4 class="modal-title" id="myModalLabel">Detail Resi</h4>
 							</div>
-				<div class="modal-body">
+							<div class="modal-body">
+				
+				<div class="card-block invoice">
 					<div class="row">
-						<div class="col-lg-6 company-info">
-							<p>Pembuat : {{$row->admin}}</p>
+						<div class="col-lg-6 company-info text-left">
+							<!-- ini -->
 
+							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
+							<p>No. SMU : {{$row->no_smu}}</p>
+
+							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
 
 							<div class="invoice-block">
-								<h5>Tujuan:</h5>
-								<div>{{$row->tujuan}}</div>
-								<div>
-									{{$row->alamat_tujuan}}
-								</div>
+								<div>Pengirim : {{$row->nama_pengirim}}</div>
+								<div>No.Telpon : {{$row->telp_pengirim}}</div>
+								<div>Alamat : {{$row->alamat_pengirim}}</div>
 							</div>
+							<br>
+							<div class="invoice-block">
+								<div>Penerima : {{$row->nama_penerima}}</div>
+								<div>No.Telpon : {{$row->telp_penerima}}</div>
+								<div>Alamat : {{$row->alamat_penerima}}</div>
+							</div>
+							<br>
+							<div class="invoice-block">
+							<div>Tanggal : {{$row->tgl}}</div>
+								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
+								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
+							</div>
+							<div>
+                                @if($row->tgl_lunas!=null)
+                                Tanggal Pelunasan : {{$row->tgl_lunas}}
+                                @else
+                                Tanggal Pelunasan : -
+                                @endif  
+                                </div>
+							<br>
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
-								<h5>{{$row->kode}}</h5>
-								<div>Tanggal: {{$row->tgl}}</div>
+								<h5>{{$row->no_resi}}</h5>
+								
+								<table class="pull-right table-sm">
+									<tr>
+										<td>Operator</td>
+										<td>{{$row->admin}}</td>
+									</tr>
+									<tr>
+										<td>Berat Aktual</td>
+										<td>{{$row->berat}} Kg</td>
+									</tr>
+									<tr>
+										<td>Berat Volumetrik</td>
+										<td>{{$row->ukuran_volume}} Kg</td>
+									</tr>
+									<tr>
+										<td>Dimensi</td>
+										<td>{{$row->dimensi}}</td>
+									</tr>
+									<tr>
+										<td>Jumlah</td>
+										<td>{{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								<br>
+								
 							</div>
-
+							
 						</div>
 					</div>
-					<br>
 					<div class="row table-details">
 						<div class="col-lg-12">
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th>Resi</th>
-										<th>Isi Paket</th>
-										<th>Jumlah</th>
-										<th>Berat</th>
-										<th>Cash</th>
-										<th>BT</th>
-										<th>Biaya</th>
+										<th colspan="2" class="text-center">Detail Biaya</th>
 									</tr>
 								</thead>
 								<tbody>
-								@php
-									$dataresi = DB::table('resi_pengiriman')
-									->where('kode_jalan',$row->kode)
-									->get();
-								@endphp
-								@foreach($dataresi as $resi)
 									<tr>
-										<td>{{$resi->no_resi}}</td>
-										<td>{{$resi->nama_barang}}</td>
-										<td>{{$resi->jumlah}} Koli</td>
-										<td>{{$resi->berat}} Kg</td>
-										@if($resi->metode_bayar=='cash')
-										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
-										<td> </td>
-										@else
-										<td> </td>
-										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										
-										@endif
-										<td>
-										Rp. {{number_format($resi->biaya_suratjalan,0,',','.')}}
-										</td>
+										<td class="text-right">Biaya Kirim</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_kirim,0,',','.')}}</td>
+										
 									</tr>
-								@endforeach
-								<tr>
-									<td colspan="2">
-										Total
-									</td>
-									<td>
-										{{$row->totalkoli}} Koli
-									</td>
-									<td>
-										{{$row->totalkg}} Kg
-									</td>
-									<td>
-										@if($row->totalcash>0)
-										Rp. {{number_format($row->totalcash,0,',','.')}}
-										@endif
-									</td>
-									<td>
-										@if($row->totalbt>0)
-										Rp. {{number_format($row->totalbt,0,',','.')}}
-										@endif
-									</td>
-									<td>
-										@if($row->biaya>0)
-										Rp. {{number_format($row->biaya,0,',','.')}}
-										@endif
-									</td>
-								</tr>
+								@if($row->pengiriman_via=='udara')
+									<tr>
+										<td class="text-right">Biaya SMU</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_smu,0,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Karantina</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_karantina,0,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Charge</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_charge,0,',','.')}}</td>
+									</tr>
+								@else
+									<tr>
+										<td class="text-right">Biaya Packing</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_packing,0,',','.')}}</td>
+									</tr>
+									<tr>
+										<td class="text-right">Biaya Asuransi</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_asuransi,0,',','.')}}</td>
+									</tr>
+								@endif
+									
+									<tr>
+										
+										<td class="text-right">PPN</td>
+										<td class="text-right">Rp. {{number_format($row->biaya_ppn,0,',','.')}}</td>
+										
+									</tr>
+									<tr>
+										
+										<td class="text-right"><b>Dibayar</b></td>
+										<td class="text-right"><b>Rp. {{number_format($row->total_bayar,0,',','.')}}</b></td>
+										
+									</tr>
+									<tr>
+										<td><h4>Total</h4></td>
+										<td class="text-right"><h4>
+											Rp. {{number_format($row->total_biaya,0,',','.')}}
+										</h4></td>
+									</tr>
+									
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<br>
+						<br>	
+							<div class="row text-left">
+								@if($row->duplikat!='Y')
+								<form action="tambahsmu" method="post">
+									<label>Ubah No.Resi/SMU</label>
+									<div class="input-group input-group-sm">
+										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
+										<input type="hidden" name="kode" value="{{$row->id}}">
+										{{csrf_field()}}
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="submit">Simpan</button>
+										</span>
+									</div>
+								</form>
+								@endif
+							</div>
+				</div>
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
-				</div><!--.modal-->
-	 @endforeach
+				</div>
+                            </td>
+                            <td>
+                            @if($row->no_smu=='')
+                                @if($row->total_biaya != 0)
+                                <span class="label label-danger">
+                                kosong
+                                </span>
+                                @endif
+                                @else
+                                {{$row->no_smu}}
+                                @endif
+                            </td>
+                            <td>{{$row->tgl}}</td>
+                            <td>{{$row->pengiriman_via}}</td>
+                            <td>{{$row->nama_barang}}</td>
+                            <td>{{$row->kota_asal}} - {{$row->kode_tujuan}}
+                            </td>
+                            <td>{{$row->nama_pengirim}}</td>
+                            <td>{{$row->admin}}</td>
+                        </tr>
+						@endforeach
+						</tbody>
+						<tfoot>
+						<tr>
+							<th>No</th>
+							<th>No.Resi</th>
+							<th>Resi/SMU</th>
+							<th>Tanggal</th>
+							<th>Jalur</th>
+							<th>Isi Paket</th>
+							<th>Tujuan</th>
+							<th>Pengirim</th>
+							<th>Admin</th>
+						</tr>
+						</tfoot>
+					</table>
+					{{ $datakirim->links() }}
+				</div>
+			</section>
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
 	@endsection
 
-		@section('js')
+
+	@section('js')
 	<script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
 	<script>
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":true
+            "paging":false
         });
 		});
 
+	
 	</script>
 	@endsection

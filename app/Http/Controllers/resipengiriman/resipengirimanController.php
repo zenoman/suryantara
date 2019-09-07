@@ -19,7 +19,6 @@ class resipengirimanController extends Controller
             'total_bayar'=>$total
             ];    
         }
-        //dd($data);
     DB::table('resi_pengiriman')
     ->where('id',$request->idresi)
     ->update($data);
@@ -177,14 +176,36 @@ class resipengirimanController extends Controller
     public function caridataresi(Request $request){
         $cari = $request->cari;
         $datakirim = DB::table('resi_pengiriman')
-            ->where([['no_resi','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
-            ->orwhere([['tgl','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
-            ->orwhere([['pengiriman_via','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
-            ->orwhere([['kode_tujuan','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
-            ->orwhere([['admin','like','%'.$cari.'%'],['batal','=','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+            ->where([
+                ['no_resi','like','%'.$cari.'%'],
+                ['batal','=','N'],['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['tgl','like','%'.$cari.'%'],
+                ['batal','=','N'],['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['pengiriman_via','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['kode_tujuan','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['admin','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-        
         return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
     //================================================================
@@ -198,7 +219,6 @@ class resipengirimanController extends Controller
             ->orwhere([['admin','like','%'.$cari.'%'],['no_smu','=',null],['batal','=','N'],['total_biaya','!=','0'],['id_cabang','=',Session::get('cabang')]])
             ->get();
         $webinfo = DB::table('setting')->limit(1)->get();
-        
         return view('resipengiriman/cari_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
     //===================================================================
@@ -223,7 +243,6 @@ class resipengirimanController extends Controller
         foreach ($data as $row) {
             $noresi=$row->no_resi;
             $statusp=$row->status_pengiriman;
-
         }
 
         //-----------------------------------------
@@ -241,7 +260,6 @@ class resipengirimanController extends Controller
         }
         }
         
-
         //-----------------------------------------
         DB::table('resi_pengiriman')->where('id',$id)
         ->update([
@@ -279,7 +297,12 @@ class resipengirimanController extends Controller
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['batal','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+        ->where([
+            ['batal','N'],
+            ['id_cabang','=',Session::get('cabang')],
+            ['total_biaya','!=','0'],
+            ['duplikat','!=','Y']
+        ])
         ->orderby('id','desc')
         ->paginate(50);
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
@@ -288,7 +311,12 @@ class resipengirimanController extends Controller
     public function tampilsmukosong(){
         $webinfo = DB::table('setting')->limit(1)->get();
         $datakirim = DB::table('resi_pengiriman')
-        ->where([['batal','N'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
+        ->where([
+            ['batal','N'],
+            ['id_cabang','=',Session::get('cabang')],
+            ['total_biaya','!=','0'],
+            ['duplikat','!=','Y']
+        ])
         ->whereNull('no_smu')
         ->orderby('id','desc')
         ->get();

@@ -86,8 +86,6 @@ class penerimaancontroller extends Controller
                     'status_pengiriman'=>'Y'
                 ]);
             }
-
-        
         return back()->with('status','Perubahan Disimpan');
     }
     //================================================
@@ -115,12 +113,15 @@ class penerimaancontroller extends Controller
     //======================================================================
     public function index(){
     	$webinfo = DB::table('setting')->limit(1)->get();
-        $listdata =
-        DB::table('surat_jalan')
-        ->where([['status','!=','N'],['id_cabang_tujuan','=',Session::get('cabang')]])
+        $datakirim = DB::table('resi_pengiriman')
+        ->where([
+            ['id_cabang','=',Session::get('cabang')],
+            ['total_biaya','!=','0'],
+            ['duplikat','=','Y']
+        ])
         ->orderby('id','desc')
-        ->get();
-        return view('penerimaan/listpenerimaan',['data'=>$listdata,'webinfo'=>$webinfo]);
+        ->paginate(50);
+        return view('penerimaan/listpenerimaan',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     //========================================================================
     public function terima($kode){

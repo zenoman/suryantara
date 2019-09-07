@@ -262,7 +262,7 @@
 				</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->duplikat=='N')
+								@if($row->duplikat!='Y')
 								@if(Session::get('level')!='cs')
 										@if($row->status=='N')
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
@@ -312,19 +312,20 @@
 	                            
                             </td>
                             <td class="text-center">
-                            	 @if(Session::get('level')!='cs')
+                            	 @if($row->duplikat!='Y')
+                            @if(Session::get('level')!='cs')	
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
                             	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
+                            	
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i>
-                            	</button>
-                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-remove"></i></button>
+                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 </form>
@@ -332,15 +333,16 @@
                                 <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-wrench"></i>
                             	</a>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 @endif
                             @else
                             -
                             @endif
-                             @else
+                            @else
                             -
+                            @endif
                             @endif
                             </td>
 						</tr>

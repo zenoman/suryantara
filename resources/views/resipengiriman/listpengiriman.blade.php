@@ -293,7 +293,7 @@
 					</div>
 						<br>	
 							<div class="row text-left">
-								@if($row->duplikat=='N')
+								@if($row->duplikat!='Y')
 								<form action="tambahsmu" method="post">
 									<label>Ubah No.Resi/SMU</label>
 									<div class="input-group input-group-sm">
@@ -310,7 +310,7 @@
 				</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->duplikat=='N')
+								@if($row->duplikat!='Y')
 								@if(Session::get('level')!='cs')
 										@if($row->status=='N')
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
@@ -366,7 +366,7 @@
 	                            
                             </td>
                             <td class="text-center">
-                            @if($row->duplikat=='N')
+                            @if($row->duplikat!='Y')
                             @if(Session::get('level')!='cs')	
                             @if(Session::get('level')!='admin')
                             	@if($row->kode_jalan=='')
