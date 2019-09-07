@@ -82,8 +82,7 @@ $(document).ready(function(){
         window.onafterprint = function() {
             history.go(-1);
         };
-	// Count Total
-	
+	// Count Total	
 		// Call Sum
 		function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

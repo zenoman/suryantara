@@ -68,7 +68,7 @@
 				<div class="card-block">							
 					<div class="pull-right">
 					<!-- <a href="{{url('/export_laporakun/'.$kat.'/'.$tgl.'/'.$tgl0.'')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Laporan</a> -->
-					<a href="{{url('/printlapoakundet/'.$katn.'/'.$tgl.'/'.$tgl0.'')}}"  class="btn btn-primary">
+					<a href="{{url('/printlapoakundet/'.$katn.'/'.$kh.'/'.$tgl.'/'.$tgl0.'')}}"  class="btn btn-primary">
 					<i class="fa fa-print"></i>Cetak Data</a>
 							&nbsp;&nbsp;
 							<button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
