@@ -84,8 +84,9 @@
 		<tfoot>
 		<tr>
 			<td colspan="7" align="right"><b>Total</b></td>
-			<td id="cetak_subtotaljumlah" align="center">{{$envo->totalkg}}</td>
 			<td id="cetak_subtotalberat" align="center">{{$envo->totalkoli}}</td>
+			<td id="cetak_subtotaljumlah" align="center">{{$envo->totalkg}}</td>
+			
 			<td id="cetak_totalcashnya" align="center">{{"Rp ". number_format($envo->totalcash,0,',','.')}}</td>
 			
 		</tr>
