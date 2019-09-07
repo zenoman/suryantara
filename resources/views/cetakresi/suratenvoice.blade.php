@@ -7,7 +7,7 @@
 			</td>
 			<td width="60%">
 				<h2 align="center">
-		ENVOICE
+		INVOICE
 		<br>	
 		<span style="font-size: 18;margin-bottom: 20px;">PT. KADIRI LOGISTIK CARGO</span>
 		<br>	
