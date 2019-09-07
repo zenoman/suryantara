@@ -20,22 +20,12 @@
                         <div class="tbl">
                             <div class="tbl-row">
                                 <div class="tbl-cell">
-                                    <h3>Halaman Saldo </h3>
+                                    <h3>Halaman Saldo</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <div class="row">
-                    <div class="col-xl-3 dahsboard-column">
-                            <section class="widget widget-simple-sm">
-                                <div class="widget-simple-sm-icon">
-                                    <i class="font-icon font-icon-player-subtitres "></i>
-                                </div>
-                                <div class="widget-simple-sm-bottom">
-                                    <a href="" class="btn btn-success btn-block">Saldo</a>
-                                </div>
-                            </section><!--.widget-simple-sm-->
-                    </div> 
+                <div class="row">                    
                     <div class="col-xl-3 dahsboard-column">
                             <section class="widget widget-simple-sm">
                                 <div class="widget-simple-sm-icon">
@@ -59,10 +49,10 @@
                     <div class="col-xl-3 dahsboard-column">
                         <section class="widget widget-simple-sm">
                             <div class="widget-simple-sm-icon">
-                                <i class="font-icon font-icon-refresh "></i>
+                                <i class="font-icon font-icon-alarm "></i>
                             </div>
                             <div class="widget-simple-sm-bottom">
-                                <a href="{{url('/kat_akut')}}" class="btn btn-success btn-block">Gaji Karyawan</a>
+                                <a href="{{url('/laporanpengeluarangjkw')}}" class="btn btn-success btn-block">Gaji Karyawan</a>
                             </div>
                         </section><!--.widget-simple-sm-->
                 </div> 

@@ -89,10 +89,11 @@ class LaporakunDetController extends Controller
          if($st=="pendapatan"){
             $data = DB::table('tb_kategoriakutansi')
             ->select(DB::raw('tb_kategoriakutansi.*,resi_pengiriman.nama_barang,resi_pengiriman.no_resi,resi_pengiriman.admin,resi_pengiriman.tgl,resi_pengiriman.total_biaya'))
-            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.id')            
+            ->leftjoin('resi_pengiriman','resi_pengiriman.katakun','=','tb_kategoriakutansi.kode')            
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
             ->where('tb_kategoriakutansi.kode',$kat)
+            ->where('resi_pengiriman.duplikat','N')
             ->where('id_cabang',$idc)
             ->get();           
             $katkat=DB::table('tb_kategoriakutansi')   
@@ -117,7 +118,7 @@ class LaporakunDetController extends Controller
                $katname=$kt->nama;
             }
             $webinfo = DB::table('setting')->limit(1)->get();
-            return view('laporakun/lapdetpengeluaran',['katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
+            return view('laporakun/lapdetpengeluaran',['kh'=>$kh,'katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
             ]);
          }
         }
@@ -181,6 +182,7 @@ class LaporakunDetController extends Controller
             ->whereBetween('resi_pengiriman.tgl',[$tgl,$tgl0])            
             ->where('resi_pengiriman.batal','!=','Y')
             ->where('tb_kategoriakutansi.kode',$kat)
+            ->where('resi_pengiriman.duplikat','N')
             ->where('id_cabang',$idc)
             ->get();           
             $katkat=DB::table('tb_kategoriakutansi')   
@@ -189,7 +191,7 @@ class LaporakunDetController extends Controller
             foreach($katkat as $kt){
                $katname=$kt->nama;
             }                
-            return view('laporakun/cetaklapakundet',['katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
+            return view('laporakun/cetaklapakundet',['kh'=>$kh,'katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
             ]);
          }elseif($st=="pengeluaran"){
             $data=DB::table('pengeluaran_lain')                       
@@ -205,7 +207,7 @@ class LaporakunDetController extends Controller
                $katname=$kt->nama;
             }
             $webinfo = DB::table('setting')->limit(1)->get();
-            return view('laporakun/cetaklapakundet',['katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
+            return view('laporakun/cetaklapakundet',['kh'=>$kh,'katn'=>$kat,'kat'=>$katkat ,'tgl'=>$tgl,'tgl0'=>$tgl0,'data'=>$data,'title'=>$webinfo
             ]);
          }
         }

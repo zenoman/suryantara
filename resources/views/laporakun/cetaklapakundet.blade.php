@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak {{$kat}} Akutansi Tanggal {{$tgl}} Sampai {{$tgl0}}</title>
+	<title>Cetak @foreach($kat as $k) {{$k->nama}} @endforeach Akutansi Tanggal {{$tgl}} Sampai {{$tgl0}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 </head>
 <body>

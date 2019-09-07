@@ -403,6 +403,8 @@ Route::post('/nyusut','Penyusutan\Penyusutancontroller@store');
 Route::get('/nyusut/{id}/edit','Penyusutan\Penyusutancontroller@edit');
 Route::put('/nyusut/{id}','Penyusutan\Penyusutancontroller@update');
 Route::post('/nyusut/delete','Penyusutan\Penyusutancontroller@destroy');
+// ==============================================================Transfer
+Route::post('simpan-tf','pembukuan\PembukuanController@simpantf');
 
 
 
