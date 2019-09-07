@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class envoicecontroller extends Controller
 {
+    public function cetakulang($kode){
+        $dataenvoice = DB::table('surat_envoice')->where('kode',$kode)->get();
+        $dataresi = DB::table('resi_pengiriman')->where('kode_envoice',$kode)->get();
+
+        return view('envoice.cetakulang',['dataenvoice'=>$dataenvoice,'dataresi'=>$dataresi]);
+    }
     public function delete(Request $request){
         $delid = $request->delid;
         if(!$delid){

@@ -15,6 +15,7 @@ Route::get('/inputpenerimaan','penerimaan\penerimaancontroller@inputpenerimaan')
 Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
 Route::get('terimasuratjalan/{kode}','penerimaan\penerimaancontroller@terima');
 //============================================ envoice
+Route::get('cetakulangenvoice/{kode}','envoice\envoicecontroller@cetakulang');
 Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
 Route::get('/carisuratenvoice','envoice\envoicecontroller@cari');
 Route::post('/tambahkanenv','envoice\envoicecontroller@store');

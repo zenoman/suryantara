@@ -80,7 +80,7 @@
 							<th>Tujuan</th>
 							<th>Tanggal</th>
 							<th>Pembuat</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 							@if(Session::get('level') != 'admin')
 							<th class="no-sort"><input type="checkbox" id="selectall"/></th>
 							@endif
@@ -93,7 +93,7 @@
 							<th>Tujuan</th>
 							<th>Tanggal</th>
 							<th>Pembuat</th>
-							<th>Aksi</th>
+							<th class="text-center">Aksi</th>
 							@if(Session::get('level') != 'admin')
 							<th>#</th>
 							@endif
@@ -115,12 +115,13 @@
                             <td>{{$row->tgl}}</td>
                             <td>
                             	{{$row->pembuat}}
-                            <td>
+                            <td align="center">
 
                             	
                             	<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
-									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
+									data-target=".bd-example-modal-lg{{$row->id}}" type="button"><i class="fa fa-eye"></i></button>
+								<a href="{{url('cetakulangenvoice/'.$row->kode)}}" class="btn btn-success btn-sm" target="blank()"><i class="fa fa-print"></i></a>
                             </td>
                             @if(Session::get('level') != 'admin')
                             <td>

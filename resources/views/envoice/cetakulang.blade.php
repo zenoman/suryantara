@@ -1,4 +1,11 @@
-<div id="hidden_div" style="display: none;">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>cetak envoice ulang</title>
+</head>
+<body onload="window.print();window.close();">
+	@foreach($dataenvoice as $envo)
+	<div id="hidden_div">
 
 	<table width="100%">
 		<tr>
@@ -20,19 +27,21 @@
 	<table>
 		<tr>
 			<td>No Envoice</td>
-			<td id="cetak_kodesj"></td>
+			<td id="cetak_kodesj">: {{$envo->kode}}</td>
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td>:&nbsp;{{date('d-m-Y')}}</td>
+			<td>: {{$envo->tgl}}</td>
 		</tr>
 		<tr>
 			<td>Kepada Yth</td>
-			<td id="cetak_tujuan"></td>
+			<td id="cetak_tujuan">
+				: {{$envo->tujuan}}
+			</td>
 		</tr>
 		<tr>
 			<td>Alamat</td>
-			<td id="cetak_alamat"></td>
+			<td id="cetak_alamat">: {{$envo->alamat}}</td>
 		</tr>
 	</table>
 	<table border="1" width="100%;" style="border-collapse:collapse;border: 1px solid black;">
@@ -56,14 +65,28 @@
 		</thead>
 		
 		<tbody id="list_cetak">
-			
+			<?php $i=1;?>
+			@foreach($dataresi as $resi)
+			<tr>
+				<td>{{$i++}}</td>
+				<td>{{$resi->no_resi}}</td>
+				<td>{{$resi->no_smu}}</td>
+				<td>{{$resi->nama_pengirim}}</td>
+				<td>{{$resi->nama_penerima}}</td>
+				<td>{{$resi->kode_tujuan}}</td>
+				<td>{{$resi->nama_barang}}</td>
+				<td align="center">{{$resi->jumlah}}</td>
+				<td align="center">{{$resi->berat}}</td>
+				<td align="center">{{"Rp ". number_format($resi->total_biaya,0,',','.')}}</td>
+			</tr>
+			@endforeach
 		</tbody>
 		<tfoot>
 		<tr>
 			<td colspan="7" align="right"><b>Total</b></td>
-			<td id="cetak_subtotaljumlah" align="center"></td>
-			<td id="cetak_subtotalberat" align="center"></td>
-			<td id="cetak_totalcashnya" align="center"></td>
+			<td id="cetak_subtotaljumlah" align="center">{{$envo->totalkg}}</td>
+			<td id="cetak_subtotalberat" align="center">{{$envo->totalkoli}}</td>
+			<td id="cetak_totalcashnya" align="center">{{"Rp ". number_format($envo->totalcash,0,',','.')}}</td>
 			
 		</tr>
 		
@@ -86,3 +109,6 @@
 		</tr>
 	</table>
 </div>
+@endforeach
+</body>
+</html>
