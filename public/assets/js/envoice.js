@@ -171,76 +171,32 @@ $(document).ready(function(){
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
                 totalkg += Number(value.berat);
-
-                rows2 = rows2 + '<tr align="center">';
-                rows2 = rows2 + '<td>'+no+'</td>';
-                rows2 = rows2 + '<td>'+value.no_resi+'</td>';
-                if(value.pengiriman_via=='udara'){
-                   if(value.no_smu==null){
-                        rows2 = rows2 + '<td align="center"> </td>';
-                    }else{
-                      rows2 = rows2 + '<td>'+value.no_smu+'</td>';
-                    }
-                }else{
-                    rows2 = rows2 + '<td align="center"> - </td>';
-                }
-                rows2 = rows2 + '<td>'+value.nama_pengirim+'</td>';
-                rows2 = rows2 + '<td>'+value.nama_penerima+'</td>';
-                rows2 = rows2 + '<td>' +value.kode_tujuan+'</td>';
-                rows2 = rows2 + '<td>' +value.jumlah+'</td>';
-                rows2 = rows2 + '<td>' +value.berat+'</td>';
-                rows2 = rows2 + '<td>' +value.nama_barang+'</td>';
-                if(value.metode_bayar=='cash'){
-                        rows2 = rows2 + '<td>-</td>';
-                        rows2 = rows2 + '<td> </td>';   
-                    }else{
-                        rows2 = rows2 + '<td> </td>'; 
-                        rows2 = rows2 + '<td>-</td>'; 
-                    }
-                rows2 = rows2 + '<td>-</td>';
-                rows2 = rows2 + '</tr>';
+                
                 //=======================================
                 rows3 = rows3 + '<tr align="center">';
                 rows3 = rows3 + '<td>'+no+'</td>';
                 rows3 = rows3 + '<td>'+value.no_resi+'</td>';
-                if(value.pengiriman_via=='udara'){
-                    if(value.no_smu==null){
-                        rows3 = rows3 + '<td align="center"> </td>';
-                    }else{
-                      rows3 = rows3 + '<td>'+value.no_smu+'</td>';
-                    }
-                }else{
-                    rows3 = rows3 + '<td align="center"> - </td>';
-                }
+                rows3 = rows3 + '<td>'+value.no_smu+'</td>';
                 rows3 = rows3 + '<td>'+value.nama_pengirim+'</td>';
                 rows3 = rows3 + '<td>'+value.nama_penerima+'</td>';
                 rows3 = rows3 + '<td>' +value.kode_tujuan+'</td>';
+                rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
                 rows3 = rows3 + '<td>' +value.jumlah+'</td>';
                 rows3 = rows3 + '<td>' +value.berat+'</td>';
-                rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
-                if(value.metode_bayar=='cash'){
-                        rows3 = rows3 + '<td align="left">'+"Rp. "+rupiah(value.total_biaya)+'</td>';
-                        rows3 = rows3 + '<td> </td>';
-                        totalcash += value.total_biaya;   
-                    }else{
-                        rows3 = rows3 + '<td> </td>'; 
-                        rows3 = rows3 + '<td align="left">'+"Rp. "+rupiah(value.total_biaya)+'</td>'; 
-                        totalbt += value.total_biaya;
-                    }
-                rows3 = rows3 + '<td>-</td>';
+                rows3 = rows3 + '<td>'+"Rp. "+rupiah(value.total_biaya)+'</td>';
+                
+                totalcash += value.total_biaya;
                 rows3 = rows3 + '</tr>';
                 jumlahbarang+=1;
             });
             $("#tubuh").html(rows);
-            $("#list_cetak").html(rows2);
+            $("#list_cetak").html(rows3);
             $("#totaljumlah").html(totaljumlah);
             $("#cetak_subtotaljumlah").html(totaljumlah);
             $("#cetak_subtotalberat").html(totalkg);
             $("#totalkg").html(totalkg);
             $('#totalcash').val(totalcash);
-            $('#totalbt').val(totalbt);
             $('#cetak_totalcashnya').html("Rp. "+rupiah(totalcash));
-            $('#cetak_totalbtnya').html("Rp. "+rupiah(totalbt));
 
         }
     //============================================================

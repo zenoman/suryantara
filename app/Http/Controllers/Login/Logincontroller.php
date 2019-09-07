@@ -35,7 +35,7 @@ class Logincontroller extends Controller
 
         $dataadmin = 
         DB::table('admin')
-        ->select(DB::raw('admin.*,cabang.kop,cabang.kota,cabang.koderesi'))
+        ->select(DB::raw('admin.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek'))
         ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
         ->where([['admin.username',$username],['admin.password',$password]])
         ->get();
@@ -46,6 +46,7 @@ class Logincontroller extends Controller
             $kop=$dataadmin->kop;
             $kota=$dataadmin->kota;
             $koderesi=$dataadmin->koderesi;
+            $norek = $dataadmin->norek;
         }
 
         $data = DB::table('admin')->where([['username',$username],['password',$password]])->count();
@@ -60,6 +61,7 @@ class Logincontroller extends Controller
                 Session::put('kop',$kop);
                 Session::put('kota',$kota);
                 Session::put('koderesi',$koderesi);
+                Session::put('norek',$norek);
                 return redirect('dashboard')->with('status','Selamat Datang '.$level.' '.$request->username);
         }else{
             return back()->with('status','Maaf, Username atau Password Salah');

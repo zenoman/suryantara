@@ -41,7 +41,8 @@ class cabangcontroller extends Controller
         	'alamat'=>$request->alamat,
             'kota'=>$request->kota,
             'kop'=>$request->kop,
-            'koderesi'=>$request->koderesi
+            'koderesi'=>$request->koderesi,
+            'norek'=>$request->norek
         ]);
         return redirect('cabang')->with('status','Data berhasil disimpan');
     }
@@ -62,7 +63,8 @@ class cabangcontroller extends Controller
         	'alamat'=>$request->alamat,
             'kota'=>$request->kota,
             'kop'=>$request->kop,
-            'koderesi'=>$request->koderesi
+            'koderesi'=>$request->koderesi,
+            'norek'=>$request->norek
         ]);
         return redirect('cabang')->with('status','Data berhasil diubah');
     }

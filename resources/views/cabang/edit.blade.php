@@ -80,7 +80,14 @@
 								<p>	
 						</div>
 					</div>
-
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">No.Rek</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<textarea name="norek" id="norek" class="form-control">{{$row->norek}}</textarea>
+								<p>	
+						</div>
+					</div>
 					{{csrf_field()}}
 							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">

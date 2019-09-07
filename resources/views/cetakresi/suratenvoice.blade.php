@@ -44,16 +44,13 @@
 			<td rowspan="2">Pengirim</td>
 			<td rowspan="2">Penerima</td>
 			<td rowspan="2">Tujuan</td>
-			<td colspan="2">Jumlah</td>
 			<td rowspan="2">Isi Paket</td>
-			<td colspan="2"> Biaya</td>
-			<td rowspan="2">Ket</td>
+			<td colspan="2">Jumlah</td>
+			<td rowspan="2"> Biaya</td>
 		</tr>
 		<tr align="center">
 			<td>Koli</td>
 			<td>Kg</td>
-			<td>Cash</td>
-			<td>BT</td>
 			
 		</tr>
 		</thead>
@@ -63,13 +60,10 @@
 		</tbody>
 		<tfoot>
 		<tr>
-			<td colspan="6" align="right"><b>Total</b></td>
+			<td colspan="7" align="right"><b>Total</b></td>
 			<td id="cetak_subtotaljumlah" align="center"></td>
 			<td id="cetak_subtotalberat" align="center"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td id="cetak_totalcashnya" align="center"></td>
 			
 		</tr>
 		
@@ -78,12 +72,13 @@
 	<br>
 	<table width="100%;">
 		<tr align="center">
-			<td>
+			<td width="30%">
+				{{Session::get('norek')}}
 			</td>
-			<td>
+			<td width="40%">
 				
 			</td>
-			<td>
+			<td width="30%">
 				<p>ADMIN CABANG</p>
 				<br>
 				<p>............</p>
