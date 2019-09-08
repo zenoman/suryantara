@@ -34,13 +34,8 @@ class resipengirimanController extends Controller
                     ->select('no_resi','id')
                     ->where([
                         ['no_resi','like','%'.$cari.'%'],
-                        ['total_biaya','!=',0],
-                        ['batal','=','N'],
-                        ['status_antar','=','N'],
                         ['id_cabang','=',Session::get('cabang')],
                     ])
-                    ->whereNull('kode_jalan')
-                    ->whereNull('kode_antar')
                     ->whereNull('tgl_lunas')
                     ->get();
             
@@ -55,6 +50,14 @@ class resipengirimanController extends Controller
     }
     //======================================================
     public function simpancity(Request $request){
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
+        }else{
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
+        }
+
        $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
        ->update([
@@ -64,6 +67,7 @@ class resipengirimanController extends Controller
         'kota_asal'     => $request->kota_asal,
         'kode_tujuan'   => $request->kota_tujuan,
         'tgl'           =>  date('Y-m-d'),
+        'tgl_lunas'     => $tglbayar,
         'jumlah'        => $request->jumlah,
         'berat'         => $request->berat,
         'dimensi'       => $request->dimensi,
@@ -76,6 +80,7 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
+        'total_bayar'   => $totalbayar,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -748,6 +753,13 @@ class resipengirimanController extends Controller
     }
     //===================================================================
     public function simpanubahlaut(Request $request){
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
+        }else{
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
+        }
         $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
        ->update([
@@ -757,6 +769,7 @@ class resipengirimanController extends Controller
         'kota_asal'     => $request->kota_asal,
         'kode_tujuan'   => $request->kota_tujuan,
         'tgl'           =>  date('Y-m-d'),
+        'tgl_lunas'     =>  $tglbayar,
         'jumlah'        => $request->jumlah,
         'berat'         => $request->berat,
         'dimensi'       => $request->dimensi,
@@ -769,6 +782,7 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
+        'total_bayar'   => $totalbayar,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -779,6 +793,13 @@ class resipengirimanController extends Controller
     }
 
     public function simpanubahdarat(Request $request){
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
+        }else{
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
+        }
         $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
        ->update([
@@ -788,6 +809,7 @@ class resipengirimanController extends Controller
         'kota_asal'     => $request->kota_asal,
         'kode_tujuan'   => $request->kota_tujuan,
         'tgl'           =>  date('Y-m-d'),
+        'tgl_lunas'     => $tglbayar,
         'jumlah'        => $request->jumlah,
         'berat'         => $request->berat,
         'dimensi'       => $request->dimensi,
@@ -800,6 +822,7 @@ class resipengirimanController extends Controller
         'biaya_packing' => $request->biaya_packing,
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
+        'total_bayar'   => $totalbayar,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -809,7 +832,14 @@ class resipengirimanController extends Controller
         return response()->json($simpan);
     }
     public function simpanubahudara(Request $request){
-         $simpan = DB::table('resi_pengiriman')
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
+        }else{
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
+        }
+        $simpan = DB::table('resi_pengiriman')
        ->where('id',$request->idresi)
        ->update([
         'admin'      => $request->iduser,
@@ -818,6 +848,7 @@ class resipengirimanController extends Controller
         'kota_asal'     => $request->kota_asal,
         'kode_tujuan'   => $request->kota_tujuan,
         'tgl'           =>  date('Y-m-d'),
+        'tgl_lunas'     => $tglbayar,
         'jumlah'        => $request->jumlah,
         'berat'         => $request->berat,
         'dimensi'       => $request->dimensi,
@@ -830,6 +861,7 @@ class resipengirimanController extends Controller
         'biaya_smu' => $request->biaya_smu,
         'biaya_karantina' => $request->biaya_karantina,
         'total_biaya'   => $request->total_biaya,
+        'total_bayar'   => $totalbayar,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,

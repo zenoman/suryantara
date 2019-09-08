@@ -197,7 +197,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_ck" @if($row->pengiriman_via=='city kurier')value="{{$row->kota_asal}}"
+								<input type="text" class="form-control" id="kota_asal_ck" @if($row->pengiriman_via=='city kurier')value="{{$row->kota_asal}}" @else value="{{Session::get('kota')}}"
 								@endif readonly>
 							</div>
 						</div>
@@ -304,6 +304,27 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_ck" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='city kurier')value="{{$row->total_bayar}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_ck" 
+						@if($row->pengiriman_via=='city kurier')
+							@if($row->tgl_lunas=='')
+								value="belum_lunas"
+							@else
+								value="lunas"
+							@endif
+						@else
+							value="lunas"
+						@endif >
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -335,13 +356,32 @@
 										0		 
 										@endif</td>
 									</tr>
-									
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_ck">@if($row->pengiriman_via=='city kurier'){{$row->total_biaya}}
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_ck">@if($row->pengiriman_via=='city kurier'){{$row->total_biaya}}
 										@else
 										0		 
-										@endif</h3>
+										@endif</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_ck">
+										@if($row->pengiriman_via=='city kurier'){{$row->total_bayar}}
+										@else
+										0		 
+										@endif		
+										</h5>
+									</td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_ck">Kembalian/Kekurangan</td>
+										<td id="total_ck">
+											@if($row->pengiriman_via=='city kurier')
+
+											{{$row->total_biaya - $row->total_bayar}}
+										@else
+										0		 
+										@endif	
 										</td>
 									</tr>
 								</tbody>
@@ -349,16 +389,6 @@
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman darat" class="form-control" id="keterangan_darat">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_ck" type="button"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -479,7 +509,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_darat" @if($row->pengiriman_via=='darat')value="{{$row->kota_asal}}"
+								<input type="text" class="form-control" id="kota_asal_darat" @if($row->pengiriman_via=='darat')value="{{$row->kota_asal}}" @else value="{{Session::get('kota')}}"
 								@endif readonly>
 							</div>
 						</div>
@@ -586,6 +616,27 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_darat" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='darat')value="{{$row->total_bayar}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_darat" 
+						@if($row->pengiriman_via=='darat')
+							@if($row->tgl_lunas=='')
+								value="belum_lunas"
+							@else
+								value="lunas"
+							@endif
+						@else
+							value="lunas"
+						@endif >
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -617,13 +668,32 @@
 										0		 
 										@endif</td>
 									</tr>
-									
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_darat">@if($row->pengiriman_via=='darat'){{$row->total_biaya}}
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_darat">@if($row->pengiriman_via=='darat'){{$row->total_biaya}}
 										@else
 										0		 
-										@endif</h3>
+										@endif</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_darat">
+										@if($row->pengiriman_via=='darat'){{$row->total_bayar}}
+										@else
+										0		 
+										@endif		
+										</h5>
+									</td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_darat">Kembalian/Kekurangan</td>
+										<td id="total_darat">
+											@if($row->pengiriman_via=='darat')
+
+											{{$row->total_biaya - $row->total_bayar}}
+										@else
+										0		 
+										@endif	
 										</td>
 									</tr>
 								</tbody>
@@ -631,16 +701,6 @@
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman darat" class="form-control" id="keterangan_darat">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_darat" type="button"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -770,7 +830,7 @@
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="kota_asal_laut" @if($row->pengiriman_via=='laut')
-								value="{{$row->kota_asal}}"
+								value="{{$row->kota_asal}}" @else value="{{Session::get('kota')}}"
 								@endif readonly>
 							</div>
 						</div>
@@ -865,6 +925,27 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_laut" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='laut')value="{{$row->total_bayar}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_laut" 
+						@if($row->pengiriman_via=='laut')
+							@if($row->tgl_lunas=='')
+								value="belum_lunas"
+							@else
+								value="lunas"
+							@endif
+						@else
+							value="lunas"
+						@endif >
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -895,13 +976,32 @@
 										0 
 										@endif</td>
 									</tr>
-									
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_laut">@if($row->pengiriman_via=='laut'){{$row->total_biaya}}
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_laut">@if($row->pengiriman_via=='laut'){{$row->total_biaya}}
 										@else
-										0 
-										@endif</h3>
+										0		 
+										@endif</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_laut">
+										@if($row->pengiriman_via=='laut') 
+										{{$row->total_bayar}}
+										@else
+										0		 
+										@endif		
+										</h5>
+									</td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_laut">Kembalian/Kekurangan</td>
+										<td id="total_laut">
+										@if($row->pengiriman_via=='laut')
+											{{$row->total_biaya - $row->total_bayar}}
+										@else
+										0		 
+										@endif	
 										</td>
 									</tr>
 								</tbody>
@@ -909,16 +1009,6 @@
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman laut" class="form-control" id="keterangan_laut">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_laut" type="button"><span class="ladda-label">Simpan & Selesai</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
@@ -1095,7 +1185,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Kota Asal</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="kota_asal_udara" @if($row->pengiriman_via=='udara')value="{{$row->kota_asal}}"
+								<input type="text" class="form-control" id="kota_asal_udara" @if($row->pengiriman_via=='udara')value="{{$row->kota_asal}}" @else value="{{Session::get('kota')}}"
 								@endif readonly>
 							</div>
 						</div>
@@ -1232,6 +1322,27 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Dibayar</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dibayar_udara" onkeypress="return isNumberKey(event)" @if($row->pengiriman_via=='udara')value="{{$row->total_bayar}}"
+								@else
+								value="0" 
+								@endif>
+							</div>
+						</div>
+						<input type="hidden" id="status_bayar_udara" 
+						@if($row->pengiriman_via=='udara')
+							@if($row->tgl_lunas=='')
+								value="belum_lunas"
+							@else
+								value="lunas"
+							@endif
+						@else
+							value="lunas"
+						@endif >
+					</div>
 						</div>
 						<div class="col-md-5 col-sm-5">
 							<table class="table table-bordered" id="estimasi">
@@ -1275,11 +1386,31 @@
 										@endif</td>
 									</tr>
 									<tr>
-										<td colspan="2" class="text-center">
-											<h3 id="total_udara">@if($row->pengiriman_via=='udara'){{$row->total_biaya}}
+										<td class="text-right"><h5>Subtotal</h5></td>
+										<td><h5 id="subtotal_udara">@if($row->pengiriman_via=='udara'){{$row->total_biaya}}
 										@else
-										0
-										@endif</h3>
+										0		 
+										@endif</h5></td>
+									</tr>
+									<tr>
+										<td class="text-right"><h5>Dibayar</h5></td>
+										<td><h5 id="b_dibayar_udara">
+										@if($row->pengiriman_via=='udara'){{$row->total_bayar}}
+										@else
+										0		 
+										@endif		
+										</h5>
+									</td>
+									</tr>
+									<tr>
+										<td class="text-right" id="ketuang_udara">Kembalian/Kekurangan</td>
+										<td id="total_udara">
+											@if($row->pengiriman_via=='udara')
+
+											{{$row->total_biaya - $row->total_bayar}}
+										@else
+										0		 
+										@endif	
 										</td>
 									</tr>
 								</tbody>
@@ -1287,16 +1418,6 @@
 						</div>
 					</div>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-md-12 col-sm-12">
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Keterangan</label>
-							<div class="input-group">-->
-								<input type="hidden" value="pengiriman udara" class="form-control" id="keterangan_udara">
-							<!--</div>
-						</div>
-					</div>
-					</div> -->
 							<small class="text-muted">
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan_udara"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>

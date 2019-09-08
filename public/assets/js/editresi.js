@@ -150,14 +150,35 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim_ck").val();
 			var b_packing = $("#biaya_packing_ck").val();
 			var b_asuransi = $("#biaya_asuransi_ck").val();
+			var dibayar = $("#dibayar_ck").val();
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#total_ck").html(rupiah(totalnya));
+			$("#subtotal_ck").html(rupiah(totalnya));
+
+			if(dibayar >= totalnya){
+				var totalakhir = parseInt(dibayar) - totalnya;
+				$('#status_bayar_ck').val('lunas');
+				$('#ketuang_ck').html('Kembalian');
+			}else{
+				var totalakhir = totalnya - parseInt(dibayar);
+				$('#status_bayar_ck').val('belum_lunas');
+				$('#ketuang_ck').html('Kekurangan');
+			}
+			$("#total_ck").html(rupiah(totalakhir));
 		}
 	//============================================ hitung total biaya
 		$("#biaya_asuransi_ck").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi_ck").val();
 			$("#b_asuransi_ck").html(rupiah(biaya_asu));
+			hitung_total_ck();	
+			}
+			
+		})
+	//============================================ hitung total biaya
+		$("#dibayar_ck").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar_ck").val();
+			$("#b_dibayar_ck").html(rupiah(biaya_bayar));
 			hitung_total_ck();	
 			}
 			
@@ -199,16 +220,12 @@ $(document).ready(function(){
 			var berat		= $("#berat_ck").val();
 			var kota_asal	= $("#kota_asal_ck").val();
 			var isi_kota_tujuan = $('#kota_tujuan_ck').val();
-			
 			var a_pengirim 	= $("#alamat_pengirim_ck").val();
 			var a_penerima	= $("#alamat_penerima_ck").val();
-
 			var n_pengirim 	= $("#n_pengirim_ck").val();
 			var t_pengirim	= $("#t_pengirim_ck").val();
-
 			var n_penerima	= $("#n_penerima_ck").val();
 			var t_penerima 	= $("#t_penerima_ck").val();
-
 			var biaya_kirim	= $("#biaya_kirim_ck").val();
 			var biaya_packing = $("#biaya_packing_ck").val();
 			var biaya_asu 	= $("#biaya_asuransi_ck").val();
@@ -217,7 +234,9 @@ $(document).ready(function(){
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_ck").val();
-			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || isi_kota_tujuan==null || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
+			var status_bayar = $('#status_bayar_ck').val();
+			var dibayar = $("#dibayar_ck").val();
+			if(dibayar==''||a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || isi_kota_tujuan==null || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var dats = $('#kota_tujuan_ck').select2('data');
@@ -250,7 +269,9 @@ $(document).ready(function(){
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -532,14 +553,35 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim_darat").val();
 			var b_packing = $("#biaya_packing_darat").val();
 			var b_asuransi = $("#biaya_asuransi_darat").val();
+			var dibayar = $("#dibayar_darat").val();
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#total_darat").html(rupiah(totalnya));
+			$("#subtotal_darat").html(rupiah(totalnya));
+
+			if(dibayar >= totalnya){
+				var totalakhir = parseInt(dibayar) - totalnya;
+				$('#status_bayar_darat').val('lunas');
+				$('#ketuang_darat').html('Kembalian');
+			}else{
+				var totalakhir = totalnya - parseInt(dibayar);
+				$('#status_bayar_darat').val('belum_lunas');
+				$('#ketuang_darat').html('Kekurangan');
+			}
+			$("#total_darat").html(rupiah(totalakhir));
 		}
 	//============================================ hitung total biaya
 		$("#biaya_asuransi_darat").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi_darat").val();
 			$("#b_asuransi_darat").html(rupiah(biaya_asu));
+			hitung_total();	
+			}
+			
+		})
+	//============================================ hitung total biaya
+		$("#dibayar_darat").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar_darat").val();
+			$("#b_dibayar_darat").html(rupiah(biaya_bayar));
 			hitung_total();	
 			}
 			
@@ -581,7 +623,6 @@ $(document).ready(function(){
 			var berat		= $("#berat_darat").val();
 			var kota_asal	= $("#kota_asal_darat").val();
 			var isi_kota_tujuan = $('#kota_tujuan_darat').val();
-			
 			var a_pengirim 	= $("#alamat_pengirim_darat").val();
 			var a_penerima	= $("#alamat_penerima_darat").val();
 			var n_pengirim 	= $("#n_pengirim_darat").val();
@@ -591,13 +632,14 @@ $(document).ready(function(){
 			var biaya_kirim	= $("#biaya_kirim_darat").val();
 			var biaya_packing = $("#biaya_packing_darat").val();
 			var biaya_asu 	= $("#biaya_asuransi_darat").val();
-			var keterangan 	= $.trim($("#keterangan_darat").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan_darat').val();
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_darat").val();
-			if(a_penerima=='' || a_pengirim=='' || nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+			var status_bayar = $('#status_bayar_darat').val();
+			var dibayar = $("#dibayar_darat").val();
+			if(dibayar=='' || a_penerima=='' || a_pengirim=='' || nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || isi_kota_tujuan==null || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var dats = $('#kota_tujuan_darat').select2('data');
@@ -625,13 +667,14 @@ $(document).ready(function(){
 					'biaya_kirim'	: biaya_kirim,
 					'biaya_packing'	: biaya_packing,
 					'biaya_asu' 	: biaya_asu,
-					'keterangan'	: keterangan,
                 	'total_biaya'	: total_biaya,
                 	'satuan'		: satuan,
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -869,14 +912,35 @@ $(document).ready(function(){
 			var b_kirim = $("#biaya_kirim_laut").val();
 			var b_packing = $("#biaya_packing_laut").val();
 			var b_asuransi = $("#biaya_asuransi_laut").val();
+			var dibayar = $("#dibayar_laut").val();
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#total_laut").html(rupiah(totalnya));
+			$("#subtotal_laut").html(rupiah(totalnya));
+
+			if(dibayar >= totalnya){
+				var totalakhir = parseInt(dibayar) - totalnya;
+				$('#status_bayar_laut').val('lunas');
+				$('#ketuang_laut').html('Kembalian');
+			}else{
+				var totalakhir = totalnya - parseInt(dibayar);
+				$('#status_bayar_laut').val('belum_lunas');
+				$('#ketuang_laut').html('Kekurangan');
+			}
+			$("#total_laut").html(rupiah(totalakhir));
 		}
 	//============================================ hitung total biaya
 		$("#biaya_asuransi_laut").keydown( function(e){
 			if(e.keyCode == 9 && !e.shiftKey){
 			var biaya_asu = $("#biaya_asuransi_laut").val();
 			$("#b_asuransi_laut").html(rupiah(biaya_asu));
+			hitung_total_laut();	
+			}
+			
+		})
+	//============================================ hitung total biaya
+		$("#dibayar_laut").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar_laut").val();
+			$("#b_dibayar_laut").html(rupiah(biaya_bayar));
 			hitung_total_laut();	
 			}
 			
@@ -931,13 +995,14 @@ $(document).ready(function(){
 			var biaya_kirim	= $("#biaya_kirim_laut").val();
 			var biaya_packing = $("#biaya_packing_laut").val();
 			var biaya_asu 	= $("#biaya_asuransi_laut").val();
-			var keterangan 	= $.trim($("#keterangan_laut").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
 			var satuan		= $('#satuan_laut').val();
 			var ppn 		= 0;
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var metode		= $("#metode_laut").val();
-			if(a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || isi_kota_tujuan==null || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
+			var status_bayar = $('#status_bayar_laut').val();
+			var dibayar = $("#dibayar_laut").val();
+			if(dibayar==''||a_pengirim==''||a_penerima==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || isi_kota_tujuan==null || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var dats = $('#kota_tujuan_laut').select2('data');
@@ -965,13 +1030,14 @@ $(document).ready(function(){
 					'biaya_kirim'	: biaya_kirim,
 					'biaya_packing'	: biaya_packing,
 					'biaya_asu' 	: biaya_asu,
-					'keterangan'	: keterangan,
                 	'total_biaya'	: total_biaya,
                 	'satuan'		: satuan,
                 	'metode'		: metode,
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -1377,8 +1443,20 @@ $(document).ready(function(){
 		var biaya_dokumen = parseInt($('#biaya_smu_udara').val());
 		var biaya_karantina = parseInt($('#biaya_karantina_udara').val());
 		var biaya_charge = parseInt($('#b_charge_udara').text().replace(/\./g,''));
+		var dibayar = $("#dibayar_udara").val();
 		var jumlah = biaya_kirim + biaya_charge + biaya_dokumen + biaya_karantina;
-		$('#total_udara').html(rupiah(jumlah));
+		$('#subtotal_udara').html(rupiah(jumlah));
+
+			if(parseInt(dibayar) >= parseInt(jumlah)){
+				var totalakhir = parseInt(dibayar) - jumlah;
+				$('#status_bayar_udara').val('lunas');
+				$('#ketuang_udara').html('Kembalian');
+			}else{
+				var totalakhir = jumlah - parseInt(dibayar);
+				$('#status_bayar_udara').val('belum_lunas');
+				$('#ketuang_udara').html('Kekurangan');
+			}
+			$("#total_udara").html(rupiah(totalakhir));
 	}
 
 	//==============================================
@@ -1402,6 +1480,15 @@ $(document).ready(function(){
 			var biaya_smu = $("#biaya_smu_udara").val();
 			$("#b_smu_udara").html(rupiah(biaya_smu));
 			hitung_total_udara();		
+			}
+			
+		})
+	//============================================ hitung total biaya
+		$("#dibayar_udara").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar_udara").val();
+			$("#b_dibayar_udara").html(rupiah(biaya_bayar));
+			hitung_total_udara();	
 			}
 			
 		})
@@ -1447,7 +1534,6 @@ $(document).ready(function(){
 			var a_penerima	= $("#alamat_penerima_udara").val();
 			var biaya_smu = $("#biaya_smu_udara").val();
 			var biaya_karantina = $("#biaya_karantina_udara").val();
-			var keterangan 	= $.trim($("#keterangan_udara").val());
 			
 			var satuan		= $('#satuan_udara').val();
 			var ppn 		= 0;
@@ -1455,7 +1541,9 @@ $(document).ready(function(){
 			var total_biaya = parseInt(change) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode_udara").val();
 			var nosmu 		= $('#nomer_smu_udara').val();
-			if(a_pengirim==''||a_penerima==''||nama_barang == '' || jumlah=='' || berat=='' || berat==0 || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
+			var status_bayar = $('#status_bayar_laut').val();
+			var dibayar = $("#dibayar_laut").val();
+			if(dibayar==''||a_pengirim==''||a_penerima==''||nama_barang == '' || jumlah=='' || berat=='' || berat==0 || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var l = Ladda.create(this);
@@ -1481,7 +1569,6 @@ $(document).ready(function(){
 					'biaya_kirim'	: biaya_kirim,
 					'biaya_smu'		: biaya_smu,
 					'biaya_karantina' : biaya_karantina,
-					'keterangan'	: keterangan,
                 	'total_biaya'	: total_biaya,
                 	'satuan'		: satuan,
                 	'metode'		: metode,
@@ -1489,7 +1576,9 @@ $(document).ready(function(){
                 	'nosmu'			: nosmu,
                 	'charge'		: change,
                 	'alamat_pengirim' : a_pengirim,
-                	'alamat_penerima' : a_penerima
+                	'alamat_penerima' : a_penerima,
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
