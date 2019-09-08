@@ -73,7 +73,7 @@
               <select id="kota_asal" class="select2" name="kota_asal">
                 <option ></option>
                 @foreach($asal as $row)
-                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->nama)?></option>
+                <option value="<?php echo strtoupper($row->id)?>"><?php echo strtoupper($row->kota)?></option>
                 @endforeach
               </select>
               
@@ -187,6 +187,9 @@
   <script type="text/javascript">
     $('#kota_asal').select2({
       placeholder: "Pilih kota asal"
+    });
+    $('#exampleSelect').select2({
+      // placeholder:"Pilih kota asal"
     });
   $('#kota_asal').on('select2:select',function(e){
       var id = $(this).val();
