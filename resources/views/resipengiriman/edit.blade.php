@@ -224,7 +224,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_ck" @if($row->pengiriman_via=='city kurier')value="{{$row->telp_pengirim}}"
 								@endif>
@@ -251,7 +251,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_ck" @if($row->pengiriman_via=='city kurier')value="{{$row->telp_penerima}}"
 								@endif>
@@ -506,7 +506,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_darat" @if($row->pengiriman_via=='darat')value="{{$row->telp_pengirim}}"
 								@endif>
@@ -533,7 +533,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_darat" @if($row->pengiriman_via=='darat')value="{{$row->telp_penerima}}"
 								@endif>
@@ -799,7 +799,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_laut"  @if($row->pengiriman_via=='laut')value="{{$row->telp_pengirim}}" @endif>
 							</div>
@@ -823,7 +823,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_laut" @if($row->pengiriman_via=='laut') value="{{$row->telp_penerima}}" @endif >
 							</div>
@@ -1152,7 +1152,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Pengirim</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Pengirim</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_pengirim_udara" @if($row->pengiriman_via=='udara')value="{{$row->telp_pengirim}}"
 								@endif>
@@ -1179,7 +1179,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Telfon Penerima</label>
+							<label class="form-label" for="exampleInputDisabled">Telp Penerima</label>
 							<div class="input-group">
 								<input type="text" onkeypress="return isNumberKey(event)" class="form-control" id="t_penerima_udara" @if($row->pengiriman_via=='udara')value="{{$row->telp_penerima}}"
 								@endif>

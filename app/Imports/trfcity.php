@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class TrfDaratImport implements ToCollection, WithHeadingRow{
+class trfcity implements ToCollection, WithHeadingRow{
    public function collection(Collection $rows){
         foreach ($rows as $row){
                  $data[] = [
@@ -16,7 +16,9 @@ class TrfDaratImport implements ToCollection, WithHeadingRow{
                     'tarif'=>$row['tarif'],
                     'berat_min' => $row['berat_minimal'],
                     'estimasi'=> $row['estimasi'],
-                    'id_cabang'=>$row['id_cabang']
+                    'id_cabang'=>$row['id_cabang'],
+                    'tarif_city'=>'Y',
+                    'company'=>$row['company']
                 ];
         }
          DB::table('tarif_darat')->insert($data);

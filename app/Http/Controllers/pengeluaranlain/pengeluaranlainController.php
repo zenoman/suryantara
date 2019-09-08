@@ -5,15 +5,17 @@ ini_set('max_execution_time', 180);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Session;
 class pengeluaranlainController extends Controller
 {
     public function index()
     {
+        $idc=Session::get('cabang');
         $data = DB::table('pengeluaran_lain')
         ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
         ->join('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-        ->where('tb_kategoriakutansi.aksi','!=','N')
+        // ->where('tb_kategoriakutansi.aksi','!=','N')        
+        ->where('id_cabang',$idc)
         ->orderby('id','desc')
         ->paginate(40);
 
@@ -23,7 +25,9 @@ class pengeluaranlainController extends Controller
     public function create()
     {
         $setting = DB::table('setting')->limit(1)->get();
-        $datkatbarakutansi = DB::table('tb_kategoriakutansi')->where('tb_kategoriakutansi.aksi','!=','N')->get();
+        $datkatbarakutansi = DB::table('tb_kategoriakutansi')
+        ->where('tb_kategoriakutansi.status','=','pengeluaran')
+        ->get();
         return view('pengeluaranlain/create',['kate'=>$datkatbarakutansi,'title'=>$setting]);
     }
 
@@ -37,6 +41,8 @@ class pengeluaranlainController extends Controller
             $namagambar=time().'-'.$replace_space;
             $destination=base_path('../public_html/img/nota');
             $request->file('gambar')->move($destination,$namagambar);
+            // Get cabang
+            $idc=Session::get('cabang');
 
             DB::table('pengeluaran_lain')
             ->insert([
@@ -46,7 +52,8 @@ class pengeluaranlainController extends Controller
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
                 'gambar'=>$namagambar,
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
 
         }else{
@@ -57,7 +64,8 @@ class pengeluaranlainController extends Controller
                 'keterangan'=>$request->keterangan,
                 'jumlah'=>$request->jumlah,
                 // 'tgl'=>date('Y-m-d'),
-                'tgl'=>$request->tgl
+                'tgl'=>$request->tgl,
+                'id_cabang'=>$idc
             ]);
         }
 

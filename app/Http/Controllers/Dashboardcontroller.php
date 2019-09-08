@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class Dashboardcontroller extends Controller {
-
+private $newdata="";
     public function index()
     {
-        //==========================
-        
         //==========================
         $pajakarmada = 
         DB::table('pajak_armada')
@@ -56,6 +54,7 @@ class Dashboardcontroller extends Controller {
 
         return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada,'jumlahtotalresi'=>$jumlahtotalresi]);
       }
+      
     function hitung_neraca(){
         // $omsetawal = $this->cari_omsetawal();
         $setting = DB::table('setting')
@@ -272,6 +271,7 @@ class Dashboardcontroller extends Controller {
         }
     }
     function hitung_pendapatan($bulan,$tahun){
+        
         $data = DB::table('pengeluaran_lain')
             ->select(DB::raw('pengeluaran_lain.*,tb_kategoriakutansi.nama'))
             ->select(DB::raw('SUM(pengeluaran_lain.jumlah) as toto'))

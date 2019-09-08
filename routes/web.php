@@ -30,7 +30,12 @@ Route::resource('mitra','mitra\mitracontroller');
 Route::post('/trfcity/hapuspilihan','trfcity\trf_city@haphapus');
 Route::get('/trfcity/hapussemua','trfcity\trf_city@hapusall');
 Route::get('/caritrfcity','trfcity\trf_city@caridata');
+Route::get('trfcity/importexcel','trfcity\trf_city@importexcel');
+Route::get('trfcity/downloadtemplate','trfcity\trf_city@downloadtemplate');
+Route::post('/trfcity/prosesimportexcel','trfcity\trf_city@prosesimportexcel');
+Route::get('trfcity/exporttarif','trfcity\trf_city@exporttarif');
 Route::resource('/trfcity','trfcity\trf_city');
+
 
 //=============================================cabang
 Route::resource('/cabang','cabang\cabangcontroller');
@@ -110,8 +115,11 @@ Route::get('/neraca','neraca\NeracaController@index');
 Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
 Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
 Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
-//================================================resi pengiriman
 
+//================================================resi pengiriman
+Route::post('updatepembayaran','resipengiriman\resipengirimanController@aksiupdatepembayaran');
+Route::get('carinoresibelumlunas','resipengiriman\resipengirimanController@carinoresibelumlunas');
+Route::get('updatepembayaranresi','resipengiriman\resipengirimanController@updatepembayaran');
 Route::get('/listpengirimanbatal','resipengiriman\resipengirimanController@listpengirimanbatal');
 Route::get('/batalpengiriman/{id}','resipengiriman\resipengirimanController@batalpengiriman');
 Route::post('/simpanubahlaut','resipengiriman\resipengirimanController@simpanubahlaut');
@@ -122,7 +130,6 @@ Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdatares
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
-Route::get('/uangkembali/{id}','resipengiriman\resipengirimanController@uangkembali');
 Route::get('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
 Route::get('/carilistresi/{id}','resipengiriman\resipengirimanController@carilistresi');
 
@@ -371,7 +378,9 @@ Route::get('/laporakundet','Laporakun\LaporakunDetController@pilihlapkun');
 Route::get('/tampillaporanakundet','Laporakun\LaporakunDetController@tampilakunlapor');
 
 Route::get('/printlapoakun/{kat}/{tgl}/{tgl0}','Laporakun\LaporakunController@cetaklapakun');
-Route::get('/printlapoakundet/{kate}/{tgl}/{tgl0}','Laporakun\LaporakunDetController@cetaklapakundet');
+Route::get('/printlapoakundet/{kate}/{kh}/{tgl}/{tgl0}','Laporakun\LaporakunDetController@cetaklapakundet');
+Route::get('pembukuan','pembukuan\PembukuanController@index');
+Route::get('pembukuan-transfer','pembukuan\PembukuanController@showtf');
 //===========================================================Laba Rugi
 Route::get('/labarugi','Labarugi\LabarugiController@pilihlapkun');
 Route::get('/tampillabarugi','Labarugi\LabarugiController@tampilakunlapor');

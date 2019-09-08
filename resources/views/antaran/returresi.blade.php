@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Retur Resi Manifes Antar</h2>
+							<h2>List Retur Resi Antaran</h2>
 						</div>
 					</div>
 				</div>

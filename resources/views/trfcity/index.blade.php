@@ -39,8 +39,8 @@
                     </div>
                     @endif 
 					<a href="{{url('trfcity/create')}}" class="btn btn-primary">Tambah Data</a>
-					<!-- <a href="{{url('trfdarat/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a> -->
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">Cari Data</button>
+					<a href="{{url('trfcity/importexcel')}}" class="btn btn-success">Export Import Excel</a>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

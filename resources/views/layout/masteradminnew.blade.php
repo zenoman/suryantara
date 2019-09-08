@@ -41,13 +41,13 @@
 			window.location.href='{{url("lockscreen")}}';
 			}
 
-		function resetTimer(){
-			clearTimeout(t);
-			t = setTimeout(logout,180000);
-			}
+		// function resetTimer(){
+		// 	clearTimeout(t);
+		// 	t = setTimeout(logout,180000);
+		// 	}
 
-		}
-		idlelogout();
+		// }
+		// idlelogout();
 	</script>
 
 </head>
@@ -105,20 +105,7 @@
 	                    <div class="site-header-collapsed-in">
 	                        <div class="dropdown dropdown-typical">
 	                        	@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-	                <div class="dropdown dropdown-typical">
-	                <a class="dropdown-toggle" id="dd-header-marketing" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                    <span class="font-icon font-icon-cogwheel"></span>
-	                    <span class="lbl">Akutansi</span>
-	                </a>
-	
-	                <div class="dropdown-menu" aria-labelledby="dd-header-marketing">
-	                    <a class="dropdown-item" href="{{url('/kat_akut')}}">kategori Akutansi</a>
-	                    <a class="dropdown-item" href="{{url('/nyusut')}}">Penyusutan</a>
-	                    <a class="dropdown-item" href="{{url('/laporakun')}}">Laporan</a>
-	                    <a class="dropdown-item" href="{{url('/laporakundet')}}">Detail Laporan</a>
-	                    <a class="dropdown-item" href="{{url('/labarugi')}}">Laba Rugi</a>
-	                    <a class="dropdown-item" href="{{url('/neraca')}}">Neraca</a>
-	                </div>
+	                <div class="dropdown dropdown-typical">	               
 	            </div>
 				@endif
 	                    </div>
@@ -184,7 +171,7 @@
 					<a class="dropdown-item" href="{{url('resicitykuriercompany')}}">
 									Company</a>
 				</div>
-				<a class="dropdown-item" href="{{url('/envoice')}}">Envoice City Kurier</a>
+				<a class="dropdown-item" href="{{url('/envoice')}}">Invoice City Kurier</a>
 				
 			</div>
 		</li>
@@ -201,9 +188,7 @@
 				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
 				<a class="dropdown-item" href="{{url('/buatsuratjalancabang')}}">Buat Manifest Cabang</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Buat Manifest Antar</a>
-				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Manifest Antar</a>
+				
 			</div>
 		</li>
 		@endif
@@ -212,6 +197,9 @@
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
 				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Antaran</a>
+				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
 				
 			</div>
 		</li>
@@ -219,9 +207,9 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Pengeluaran Harian</a>
-				<a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
-				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
+				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Input Pembukuan (Pajak,Pengeluaran,Modal dll)</a>
+				{{-- <a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
+				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a> --}}
 				<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
 				<div class="dropdown-divider"></div>
 			<a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Pemasukan</a>
@@ -233,6 +221,9 @@
 				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
 			</div><p></p>
 	       	</div>
+		</li> 
+		<li class="nav-item">
+		<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
 		</li>
 		@endif
 		

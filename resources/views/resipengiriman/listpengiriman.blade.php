@@ -36,15 +36,6 @@
                     @endif
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                      <i class="fa fa-search"></i> Cari Data</button>
-
-                     <!-- <a href="{{url('listpengiriman_smukosong')}}">
-                     <button class="btn btn-secondary">
-                     <i class="font-icon font-icon-eye"></i> Resi/Smu kosong </button>
-                     </a> -->
-                     <!-- <a href="{{url('listpengirimanbatal')}}">
-                     <button class="btn btn-danger">
-                     <i class="font-icon font-icon-list-square"></i> Resi Dibatalkan </button>
-                     </a> -->
                      <div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="font-icon font-icon-eye"></i>	Tampil Berdasarkan
@@ -56,6 +47,8 @@
 									
 								</div>
 							</div>
+							<a href="{{url('updatepembayaranresi')}}" class="btn btn-success">
+                     <i class="fa fa-money"></i> Update Pembayaran</a>
 
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -268,6 +261,12 @@
 										
 									</tr>
 									<tr>
+										
+										<td class="text-right"><b>Dibayar</b></td>
+										<td class="text-right"><b>Rp. {{number_format($row->total_bayar,0,',','.')}}</b></td>
+										
+									</tr>
+									<tr>
 										<td><h4>Total</h4></td>
 										<td class="text-right"><h4>
 											Rp. {{number_format($row->total_biaya,0,',','.')}}
@@ -312,27 +311,10 @@
 							</div>
 							<div class="modal-footer">
 								@if($row->duplikat=='N')
-								 @if(Session::get('level')!='cs')
-								@if($row->metode_bayar=='cash')
+								@if(Session::get('level')!='cs')
 										@if($row->status=='N')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='US')
-										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@elseif($row->status=='RS')
-										<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Lunas</a>
 										@endif
-								@else
-									@if($row->status=='N')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='US')
-									<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-									@elseif($row->status=='RS')
-									<a href="{{url('/uangkembali/'.$row->id)}}" class="btn btn-rounded btn-success" onclick="return confirm('Apakah Uang Telah Diterima ?')">Uang Dikembalikan</a>
-									@endif
-								@endif
-								@else
 								@endif
 								@endif
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>

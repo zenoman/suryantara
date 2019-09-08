@@ -27,7 +27,7 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-						{{$kat}} Tanggal {{$tgl}} Sampai {{$tgl0}}
+						@foreach($kat as $k) {{$k->nama}} @endforeach Tanggal {{$tgl}} Sampai {{$tgl0}}
 					</b>
 				</td>
 			</tr>

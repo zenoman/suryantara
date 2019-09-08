@@ -7,7 +7,53 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class resipengirimanController extends Controller
 {
-    
+    public function aksiupdatepembayaran(Request $request){
+        if($request->statuslunas=='lunas'){
+            $data=[
+            'tgl_lunas'=>date('Y-m-d'),
+            'total_bayar'=>$request->totalbiaya
+            ];    
+        }else{
+            $total = $request->totalbayar + $request->inputbayar;
+            $data=[
+            'total_bayar'=>$total
+            ];    
+        }
+        //dd($data);
+    DB::table('resi_pengiriman')
+    ->where('id',$request->idresi)
+    ->update($data);
+    return redirect('updatepembayaranresi');
+    }
+
+    //======================================================
+    public function carinoresibelumlunas(Request $request){
+        if($request->has('q')){
+            $cari = $request->q;
+            
+            $data = DB::table('resi_pengiriman')
+                    ->select('no_resi','id')
+                    ->where([
+                        ['no_resi','like','%'.$cari.'%'],
+                        ['total_biaya','!=',0],
+                        ['batal','=','N'],
+                        ['status_antar','=','N'],
+                        ['id_cabang','=',Session::get('cabang')],
+                    ])
+                    ->whereNull('kode_jalan')
+                    ->whereNull('kode_antar')
+                    ->whereNull('tgl_lunas')
+                    ->get();
+            
+            return response()->json($data);
+        }
+    }
+
+    //====================================================
+    public function updatepembayaran(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman.updatepembayaran',['webinfo'=>$webinfo]);
+    }
     //======================================================
     public function simpancity(Request $request){
        $simpan = DB::table('resi_pengiriman')
@@ -170,31 +216,11 @@ class resipengirimanController extends Controller
     $kategori = DB::table('kategori_barang')->get();
     return view('resipengiriman/resiudara',['webinfo'=>$webinfo,'kategori'=>$kategori]);
     }
-    //====================================================================
-    public function uangkembali($id){
-         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
-        foreach ($data as $row) {
-            if($row->status=='N'){
-                $status = "US";
-            }else{
-                $status = "Y";
-            }}
-        DB::table('resi_pengiriman')->where('id',$id)
-        ->update([
-        'status'=>$status,
-        'tgl_lunas'=>date('Y-m-d')
-        ]);
-        return back()->with('status','Status Berhasil Diubah');
-    }
+    
     //====================================================================
     public function resikembali($id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
-            if($row->status=='N'){
-                $status = "RS";
-            }else{
-                $status = "Y";
-            }
             $noresi=$row->no_resi;
             $statusp=$row->status_pengiriman;
 
@@ -220,7 +246,7 @@ class resipengirimanController extends Controller
         DB::table('resi_pengiriman')->where('id',$id)
         ->update([
         'status_antar'=>'Y',
-        'status'=>$status,
+        'status'=>'Y',
         'status_pengiriman'=>'paket telah diterima'
         ]);
         return back()->with('status','Status Berhasil Diubah');
@@ -370,286 +396,122 @@ class resipengirimanController extends Controller
     }
     //===================================================================
     public function tambahcity(Request $request){
-     $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0) {
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
-            
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
+
+        $data = [
+            'no_resi'           => $request->noresi,
+            'admin'             => $request->iduser,
+            'nama_barang'       => $request->nama_barang,
+            'pengiriman_via'    => 'city kurier',
+            'kota_asal'         => $request->kota_asal,
+            'kode_tujuan'       => $request->kota_tujuan,
+            'tgl'               => date('Y-m-d'),
+            'jumlah'            => $request->jumlah,
+            'berat'             => $request->berat,
+            'dimensi'           => $request->dimensi,
+            'ukuran_volume'     => $request->ukuran_volume,
+            'nama_pengirim'     => $request->n_pengirim,
+            'nama_penerima'     => $request->n_penerima,
+            'telp_pengirim'     => $request->t_pengirim,
+            'telp_penerima'     => $request->t_penerima,
+            'biaya_kirim'       => $request->biaya_kirim,
+            'biaya_packing'     => $request->biaya_packing,
+            'biaya_asuransi'    => $request->biaya_asu,
+            'total_biaya'       => $request->total_biaya,
+            'total_bayar'       => $totalbayar,
+            'satuan'            => $request->satuan,
+            'metode_bayar'      => $request->metode,
+            'biaya_ppn'         => $request->ppn,
+            'alamat_pengirim'   => $request->alamat_pengirim,
+            'alamat_penerima'   => $request->alamat_penerima,
+            'tgl_lunas'         => $tglbayar,
+            'id_cabang'         => Session::get('cabang'),
+            'status_pengiriman' => 'barang diterima KLC Cabang '.Session::get('kota')
+        ];
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+        ->count();
+        
+        if($jumlah > 0){
+            $simpan = DB::table('resi_pengiriman')
+            ->where('no_resi',$request->noresi)
+            ->update($data);
+        }else{
+            $simpan = DB::table('resi_pengiriman')
+            ->insert($data);
+        }
+
         DB::table('status_pengiriman')
         ->insert([
-            'kode'=>$request->noresi,
-            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'=>date('Y-m-d'),
-            'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
+            'kode'      =>$request->noresi,
+            'status'    =>'barang diterima KLC Cabang '.Session::get('kota'),
+            'tgl'       =>date('Y-m-d'),
+            'jam'       =>date('H:i:s'),
+            'lokasi'    =>Session::get('kota')
         ]);
         return response()->json($simpan);   
     }
     //===================================================================
     public function tambahcitycmp(Request $request){
-     $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0) {
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
-            
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'city kurier',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_company'=>'Y',
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
+
+        $data = [
+            'no_resi'           => $request->noresi,
+            'admin'             => $request->iduser,
+            'nama_barang'       => $request->nama_barang,
+            'pengiriman_via'    => 'city kurier',
+            'kota_asal'         => $request->kota_asal,
+            'kode_tujuan'       => $request->kota_tujuan,
+            'tgl'               => date('Y-m-d'),
+            'jumlah'            => $request->jumlah,
+            'berat'             => $request->berat,
+            'dimensi'           => $request->dimensi,
+            'ukuran_volume'     => $request->ukuran_volume,
+            'nama_pengirim'     => $request->n_pengirim,
+            'nama_penerima'     => $request->n_penerima,
+            'telp_pengirim'     => $request->t_pengirim,
+            'telp_penerima'     => $request->t_penerima,
+            'biaya_kirim'       => $request->biaya_kirim,
+            'biaya_packing'     => $request->biaya_packing,
+            'biaya_asuransi'    => $request->biaya_asu,
+            'total_biaya'       => $request->total_biaya,
+            'total_bayar'       => $totalbayar,
+            'satuan'            => $request->satuan,
+            'metode_bayar'      => $request->metode,
+            'biaya_ppn'         => $request->ppn,
+            'alamat_pengirim'   => $request->alamat_pengirim,
+            'alamat_penerima'   => $request->alamat_penerima,
+            'tgl_lunas'         => $tglbayar,
+            'id_cabang'         => Session::get('cabang'),
+            'status_pengiriman' => 'barang diterima KLC Cabang '.Session::get('kota')
+        ];
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+        ->count();
+        
+        if($jumlah > 0){
+            $simpan = DB::table('resi_pengiriman')
+            ->where('no_resi',$request->noresi)
+            ->update($data);
+        }else{
+            $simpan = DB::table('resi_pengiriman')
+            ->insert($data);
+        }
+        
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
@@ -663,138 +525,57 @@ class resipengirimanController extends Controller
     //===================================================================
     public function store(Request $request)
     {
-        $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0){
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'darat',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'darat',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
-            
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'darat',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'darat',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
+        $data = [
+            'no_resi'       => $request->noresi,
+            'admin'         => $request->iduser,
+            'nama_barang'   => $request->nama_barang,
+            'pengiriman_via'=> 'darat',
+            'kota_asal'     => $request->kota_asal,
+            'kode_tujuan'   => $request->kota_tujuan,
+            'tgl'           =>  date('Y-m-d'),
+            'jumlah'        => $request->jumlah,
+            'berat'         => $request->berat,
+            'dimensi'       => $request->dimensi,
+            'ukuran_volume' => $request->ukuran_volume,
+            'nama_pengirim' => $request->n_pengirim,
+            'nama_penerima' => $request->n_penerima,
+            'telp_pengirim' => $request->t_pengirim,
+            'telp_penerima' => $request->t_penerima,
+            'biaya_kirim'   => $request->biaya_kirim,
+            'biaya_packing' => $request->biaya_packing,
+            'biaya_asuransi'=> $request->biaya_asu,
+            'total_biaya'   => $request->total_biaya,
+            'total_bayar'   => $totalbayar,
+            'satuan'        => $request->satuan,
+            'metode_bayar'  => $request->metode,
+            'biaya_ppn'     => $request->ppn,
+            'alamat_pengirim'=>$request->alamat_pengirim,
+            'alamat_penerima'=>$request->alamat_penerima,
+            'tgl_lunas' => $tglbayar,
+            'id_cabang'=>Session::get('cabang'),
+            'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
+        ];
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+        ->count();
+        
+        if($jumlah > 0){
+            $simpan = DB::table('resi_pengiriman')
+            ->where('no_resi',$request->noresi)
+            ->update($data);
+        }else{
+            $simpan = DB::table('resi_pengiriman')
+            ->insert($data);
+        }
+
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
@@ -803,141 +584,64 @@ class resipengirimanController extends Controller
             'jam'=>date('H:i:s'),
             'lokasi'=>Session::get('kota')
         ]);
+
         return response()->json($simpan);
     }
     //===================================================================
     public function simpanlaut(Request $request)
     {
-    $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0) {
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'laut',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'laut',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'laut',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                 $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'      => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'laut',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_packing' => $request->biaya_packing,
-                    'biaya_asuransi'=> $request->biaya_asu,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
+        
+        $data = [
+            'no_resi'       => $request->noresi,
+            'admin'         => $request->iduser,
+            'nama_barang'   => $request->nama_barang,
+            'pengiriman_via'=> 'laut',
+            'kota_asal'     => $request->kota_asal,
+            'kode_tujuan'   => $request->kota_tujuan,
+            'tgl'           =>  date('Y-m-d'),
+            'jumlah'        => $request->jumlah,
+            'berat'         => $request->berat,
+            'dimensi'       => $request->dimensi,
+            'ukuran_volume' => $request->ukuran_volume,
+            'nama_pengirim' => $request->n_pengirim,
+            'nama_penerima' => $request->n_penerima,
+            'telp_pengirim' => $request->t_pengirim,
+            'telp_penerima' => $request->t_penerima,
+            'biaya_kirim'   => $request->biaya_kirim,
+            'biaya_packing' => $request->biaya_packing,
+            'biaya_asuransi'=> $request->biaya_asu,
+            'total_biaya'   => $request->total_biaya,
+            'total_bayar'   => $totalbayar,
+            'satuan'        => $request->satuan,
+            'metode_bayar'  => $request->metode,
+            'biaya_ppn'     => $request->ppn,
+            'alamat_pengirim'=>$request->alamat_pengirim,
+            'alamat_penerima'=>$request->alamat_penerima,
+            'tgl_lunas' => $tglbayar,
+            'id_cabang'=>Session::get('cabang'),
+            'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
+        ];
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+        ->count();
+
+        if ($jumlah > 0) {
+            $simpan = DB::table('resi_pengiriman')
+            ->where('no_resi',$request->noresi)
+            ->update($data);
+        }else{
+                $simpan = DB::table('resi_pengiriman')
+                ->insert($data);
+        }
+
         DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
@@ -951,145 +655,59 @@ class resipengirimanController extends Controller
     //===================================================================
      public function simpanudara(Request $request)
     {
-         $jumlah = DB::table('resi_pengiriman')->where('no_resi',$request->noresi)->count();
-        if ($jumlah > 0) {
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'         => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'udara',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_smu'     => $request->biaya_smu,
-                    'biaya_karantina' => $request->biaya_karantina,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'no_smu'        => $request->nosmu,
-                    'biaya_charge'  =>$request->charge,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-                $simpan = DB::table('resi_pengiriman')
-                ->where('no_resi',$request->noresi)
-                ->update([
-                    'admin'         => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'udara',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_smu'     => $request->biaya_smu,
-                    'biaya_karantina' => $request->biaya_karantina,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'no_smu'        => $request->nosmu,
-                    'biaya_charge'  =>$request->charge,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }
+        if($request->status_bayar == 'lunas'){
+            $tglbayar =date('Y-m-d');
+            $totalbayar = $request->total_biaya;
         }else{
-            if($request->status_bayar == 'lunas'){
-                $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'         => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'udara',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_smu'     => $request->biaya_smu,
-                    'biaya_karantina' => $request->biaya_karantina,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'no_smu'        => $request->nosmu,
-                    'biaya_charge'  =>$request->charge,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'tgl_lunas' => date('Y-m-d'),
-                    'status' => 'US',
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]);
-            }else{
-               $simpan = DB::table('resi_pengiriman')
-                ->insert([
-                    'no_resi'       => $request->noresi,
-                    'admin'         => $request->iduser,
-                    'nama_barang'   => $request->nama_barang,
-                    'pengiriman_via'=> 'udara',
-                    'kota_asal'     => $request->kota_asal,
-                    'kode_tujuan'   => $request->kota_tujuan,
-                    'tgl'           =>  date('Y-m-d'),
-                    'jumlah'        => $request->jumlah,
-                    'berat'         => $request->berat,
-                    'dimensi'       => $request->dimensi,
-                    'ukuran_volume' => $request->ukuran_volume,
-                    'nama_pengirim' => $request->n_pengirim,
-                    'nama_penerima' => $request->n_penerima,
-                    'telp_pengirim' => $request->t_pengirim,
-                    'telp_penerima' => $request->t_penerima,
-                    'biaya_kirim'   => $request->biaya_kirim,
-                    'biaya_smu'     => $request->biaya_smu,
-                    'biaya_karantina' => $request->biaya_karantina,
-                    'total_biaya'   => $request->total_biaya,
-                    'satuan'        => $request->satuan,
-                    'metode_bayar'  => $request->metode,
-                    'biaya_ppn'     => $request->ppn,
-                    'no_smu'        => $request->nosmu,
-                    'biaya_charge'  =>$request->charge,
-                    'alamat_pengirim'=>$request->alamat_pengirim,
-                    'alamat_penerima'=>$request->alamat_penerima,
-                    'id_cabang'=>Session::get('cabang'),
-                    'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
-                ]); 
-            }
+            $tglbayar =null;
+            $totalbayar = $request->dibayar;
         }
-         DB::table('status_pengiriman')
+        
+        $data = [
+            'no_resi'       => $request->noresi,
+            'admin'         => $request->iduser,
+            'nama_barang'   => $request->nama_barang,
+            'pengiriman_via'=> 'udara',
+            'kota_asal'     => $request->kota_asal,
+            'kode_tujuan'   => $request->kota_tujuan,
+            'tgl'           =>  date('Y-m-d'),
+            'jumlah'        => $request->jumlah,
+            'berat'         => $request->berat,
+            'dimensi'       => $request->dimensi,
+            'ukuran_volume' => $request->ukuran_volume,
+            'nama_pengirim' => $request->n_pengirim,
+            'nama_penerima' => $request->n_penerima,
+            'telp_pengirim' => $request->t_pengirim,
+            'telp_penerima' => $request->t_penerima,
+            'biaya_kirim'   => $request->biaya_kirim,
+            'biaya_packing' => $request->biaya_packing,
+            'biaya_asuransi'=> $request->biaya_asu,
+            'total_biaya'   => $request->total_biaya,
+            'total_bayar'   => $totalbayar,
+            'satuan'        => $request->satuan,
+            'metode_bayar'  => $request->metode,
+            'biaya_ppn'     => $request->ppn,
+            'alamat_pengirim'=>$request->alamat_pengirim,
+            'alamat_penerima'=>$request->alamat_penerima,
+            'tgl_lunas' => $tglbayar,
+            'id_cabang'=>Session::get('cabang'),
+            'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')
+        ];
+
+        $jumlah = DB::table('resi_pengiriman')
+        ->where('no_resi',$request->noresi)
+        ->count();
+        
+        if ($jumlah > 0) {
+            $simpan = DB::table('resi_pengiriman')
+            ->where('no_resi',$request->noresi)
+            ->update($data);
+        }else{
+            $simpan = DB::table('resi_pengiriman')
+            ->insert($data); 
+        }
+
+        DB::table('status_pengiriman')
         ->insert([
             'kode'=>$request->noresi,
             'status'=>'barang diterima KLC Cabang '.Session::get('kota'),

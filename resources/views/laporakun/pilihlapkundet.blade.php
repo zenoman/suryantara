@@ -93,8 +93,28 @@
                                         {{ $errors->first('kategori')}}
                                          </div>
                                        @endif
+						</div>						
+					</div>	
+					<div class="form-group row">
+						<label class="col-sm-1 form-control-label semibold">Kategori Khusus</label>
+						<div class="col-sm-11">
+							<p class="form-control-static">
+								<div class="radio">
+								<input checked="true" type="radio" id="radio-1" value="pajak" name="khusus">
+								<label for="radio-1">Pajak </label>
+								&nbsp;&nbsp; 
+								<input type="radio" name="khusus" id="radio-2" value="sj">
+								<label for="radio-2">Pengeluaran Vendor/ Surat Jalan </label>
+								&nbsp;&nbsp; 
+								<input type="radio" name="khusus" id="radio-3" value="sa">
+								<label for="radio-3">Surat Antar</label>
+								&nbsp;&nbsp; 
+								<input type="radio" name="khusus" id="radio-4" value="se">
+								<label for="radio-4">Surat Envoice </label>
+							</div>
+							</p>
 						</div>
-					</div>
+					</div>									
 						{{csrf_field()}}
 							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" onclick="return confirm('Tampilkan Laporan Detail Akutansi?')" value="Lanjut">

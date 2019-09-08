@@ -7,17 +7,6 @@ $(document).ready(function(){
 	$('#satuan').on('change',function(e){
 		satuan = this.value;
 	})
-	//=============================================ganti metode	
-	$('#metode').on('change',function(e){
-		var metode = this.value;
-		if(metode=='bt'){
-			$('#status_bayar').val('belum_lunas');
-			$('#status_bayar').prop('disabled','disabled');
-		}else{
-			$('#status_bayar').val('lunas');
-			$('#status_bayar').prop('disabled', false);
-		}
-	})
 	//=============================================cari kode
 		carikode();
 
@@ -186,12 +175,41 @@ $(document).ready(function(){
 			
 		})
 	//============================================ hitung total biaya
+		$("#dibayar").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar").val();
+			$("#b_dibayar").html(rupiah(biaya_bayar));
+			hitung_total();	
+			}
+			
+		})
+	//============================================ hitung total biaya
+		// function hitung_total(){
+		// 	var b_kirim = $("#biaya_kirim").val();
+		// 	var b_packing = $("#biaya_packing").val();
+		// 	var b_asuransi = $("#biaya_asuransi").val();
+		// 	var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
+		// 	$("#total").html(rupiah(totalnya));
+		// }
+		//============================================ hitung total biaya
 		function hitung_total(){
 			var b_kirim = $("#biaya_kirim").val();
 			var b_packing = $("#biaya_packing").val();
 			var b_asuransi = $("#biaya_asuransi").val();
+			var dibayar = $("#dibayar").val();
 			var totalnya = parseInt(b_kirim) + parseInt(b_packing) + parseInt(b_asuransi);
-			$("#total").html(rupiah(totalnya));
+			$("#subtotal").html(rupiah(totalnya));
+			
+			if(dibayar >= totalnya){
+				var totalakhir = parseInt(dibayar) - totalnya;
+				$('#status_bayar').val('lunas');
+				$('#ketuang').html('Kembalian');
+			}else{
+				var totalakhir = totalnya - parseInt(dibayar);
+				$('#status_bayar').val('belum_lunas');
+				$('#ketuang').html('Kekurangan');
+			}
+			$("#total").html(rupiah(totalakhir));
 		}
 	//============================================ bersih
 		function bersih(){
@@ -249,6 +267,7 @@ $(document).ready(function(){
 			var a_penerima	= $("#alamat_penerima").val();
 			var keterangan 	= $.trim($("#keterangan").val());
 			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;
+			var dibayar = $("#dibayar").val();
 			var total_biaya = parseInt(biaya_kirim) +  parseInt(biaya_packing) +  parseInt(biaya_asu);
 			var satuan		= $('#satuan').val();
 			if(a_penerima =='' || a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
@@ -367,10 +386,6 @@ $(document).ready(function(){
 			$("#cetak_penerima3").html($("#n_penerima").val());
 			$("#cetak_telp_penerima3").html($("#t_penerima").val());
 			$("#cetak_isi_paket3").html($("#nama_barang").val());
-			// $("#cetak_biaya_kirim3").html("Rp. "+rupiah($("#biaya_kirim").val()));
-			// $("#cetak_biaya_packing3").html("Rp. "+rupiah($("#biaya_packing").val()));
-			// $("#cetak_biaya_asu3").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			// $("#cetak_total3").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal3").html("Kediri, "+tanggal);
 			//==============================================================
 			$("#cetak_kota_asal4").html($("#kota_asal").val());
@@ -383,10 +398,6 @@ $(document).ready(function(){
 			$("#cetak_penerima4").html($("#n_penerima").val());
 			$("#cetak_telp_penerima4").html($("#t_penerima").val());
 			$("#cetak_isi_paket4").html($("#nama_barang").val());
-			// $("#cetak_biaya_kirim4").html("Rp. "+rupiah($("#biaya_kirim").val()));
-			// $("#cetak_biaya_packing4").html("Rp. "+rupiah($("#biaya_packing").val()));
-			// $("#cetak_biaya_asu4").html("Rp. "+rupiah($("#biaya_asuransi").val()));
-			// $("#cetak_total4").html("Rp. "+rupiah(totalnya));
 			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
 	//============================================ simpan transaksi
@@ -420,7 +431,8 @@ $(document).ready(function(){
 			var satuan		= $('#satuan').val();
 			var metode		= $("#metode").val();
 			var status_bayar = $('#status_bayar').val();
-			if(a_penerima=='' || a_pengirim=='' || iduser==''|| nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
+			var dibayar = $("#dibayar").val();
+			if(dibayar==''||a_penerima=='' || a_pengirim=='' || iduser==''|| nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    				
    			}else{
@@ -454,13 +466,12 @@ $(document).ready(function(){
                 	'ppn'			: ppn,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar'	: status_bayar
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
                 	cetakresi();
-                	// bersih();
-                	// carikode();
                 },
             }).always(
             function() {

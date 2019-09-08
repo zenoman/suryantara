@@ -10,9 +10,6 @@ class Trf_lautImport implements ToCollection, WithHeadingRow{
     public function collection(Collection $collec)
     {
         foreach ($collec as $row){
-        $kode=$row['kode_tujuan'];
-        $dtlam= DB::table('tarif_laut')->where('kode',$kode)->count();
-        if($dtlam == 0){
                     $data[] = [
                     'kode'=>$row['kode_tujuan'],
                     'tujuan'=>$row['tujuan'],
@@ -21,8 +18,6 @@ class Trf_lautImport implements ToCollection, WithHeadingRow{
                     'estimasi'=> $row['estimasi'],
                     'id_cabang'=>$row['id_cabang']
                     ];
-                   
-            }
         }
          DB::table('tarif_laut')->insert($data);
     }

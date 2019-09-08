@@ -298,9 +298,20 @@ $(document).ready(function(){
 		var biaya_kirim = parseInt($('#biaya_kirim').val());
 		var biaya_dokumen = parseInt($('#biaya_smu').val());
 		var biaya_karantina = parseInt($('#biaya_karantina').val());
+		var dibayar = $("#dibayar").val();
 		var biaya_charge = parseInt($('#b_charge').text().replace(/\./g,''));
 		var jumlah = biaya_kirim + biaya_dokumen + biaya_karantina + biaya_charge;
-		$('#total').html(rupiah(jumlah));
+		$("#subtotal").html(rupiah(jumlah));
+			if(dibayar >= jumlah){
+				var totalakhir = parseInt(dibayar) - jumlah;
+				$('#status_bayar').val('lunas');
+				$('#ketuang').html('Kembalian');
+			}else{
+				var totalakhir = jumlah - parseInt(dibayar);
+				$('#status_bayar').val('belum_lunas');
+				$('#ketuang').html('Kekurangan');
+			}
+		$("#total").html(rupiah(totalakhir));
 	}
 	//==============================================
 	function rupiah(bilangan){
@@ -337,6 +348,15 @@ $(document).ready(function(){
 			var biaya_smu = $("#biaya_smu").val();
 			$("#b_smu").html(rupiah(biaya_smu));
 			hitung_total();		
+			}
+			
+		})
+	//============================================ hitung total biaya
+		$("#dibayar").keydown( function(e){
+			if(e.keyCode == 9 && !e.shiftKey){
+			var biaya_bayar = $("#dibayar").val();
+			$("#b_dibayar").html(rupiah(biaya_bayar));
+			hitung_total();	
 			}
 			
 		})
@@ -552,7 +572,8 @@ $(document).ready(function(){
 			var a_pengirim 	= $("#alamat_pengirim").val();
 			var a_penerima	= $("#alamat_penerima").val();
 			var status_bayar = $('#status_bayar').val();
-			if(a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || jumlah=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
+			var dibayar = $("#dibayar").val();
+			if(dibayar=='' || a_penerima==''||a_pengirim==''||iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || jumlah=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
    				var l = Ladda.create(this);
@@ -587,7 +608,8 @@ $(document).ready(function(){
                 	'charge'		: change,
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
-                	'status_bayar'	: status_bayar
+                	'status_bayar'	: status_bayar,
+                	'dibayar'	: dibayar
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);

@@ -168,7 +168,7 @@ class suratjalanController extends Controller
     //========================================================
     public function hasilresi($id){
     	$data = DB::table('resi_pengiriman')
-                    ->select('nama_barang','no_resi','jumlah','berat','id','nama_pengirim','nama_penerima','kode_tujuan')
+                    ->select('nama_barang','no_resi','jumlah','berat','id','nama_pengirim','nama_penerima','kode_tujuan','total_biaya','total_bayar')
                     ->where('id',$id)
                     ->get();
             
