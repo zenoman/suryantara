@@ -177,6 +177,7 @@
 						<label class="form-label" for="exampleInputDisabled">Kota Tujuan</label>
 						<select class="select2" id="kota_tujuan"></select>
 						<input type="hidden" id="min_heavy" value="0">
+						<input type="hidden" id="airland">
 					</div>
 					<div class="col-md-3 col-sm-3">
 						<div class="form-group">
@@ -335,15 +336,10 @@
 						</div>
 					</div>
 					<hr>
-					<input type="hidden" value="pengiriman udara" class="form-control" id="keterangan">
 					{{csrf_field()}}
 							<small class="text-muted">
-								
-
 								<button class="btn btn-primary ladda-button" data-style="zoom-out" id="btnsimpan"><span class="ladda-label">Simpan & Cetak</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
 								</button>
-								
-								
 								<div class="pull-right">
 									<button class="btn btn-success" type="button" id="btnselesai"> Selesai</button>
 									<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

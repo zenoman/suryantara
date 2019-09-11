@@ -11,7 +11,7 @@ $(document).ready(function(){
 	}else{
 	var urlcity ='/carikotacitycmd';
 	}
-	var jumlahbarang =1;
+	var jumlahbarang =parseInt($('#jumlah_udara').val());
 	var totalberat=0;
 	var jumlahbaranghevy=0;
 	//======================================
@@ -1269,18 +1269,6 @@ $(document).ready(function(){
 	$('#kolomjumlah').on('click', '.removejumlah', function(e) {
     jumlahbarang -=1;
 	$('#jumlah_udara').val(jumlahbarang);
-	// var nomor = $(this).data("nomer");
-	// 	var volume = Number(document.getElementById('volume'+nomor).value);
-	// 	var berataktual = Number(document.getElementById('berat'+nomor).value);
-	// 	if(volume > berataktual){
-
-	// 		totalberat -= parseFloat(volume);
-			
-	// 	}else{
-	// 		totalberat -= parseFloat(berataktual);
-			
-	// 	}
-	// $('#totalberat').val(totalberat.toFixed());
 	hitungberat();
     e.preventDefault();
 	$(this).parent().remove();
@@ -1386,6 +1374,7 @@ $(document).ready(function(){
 				return {
 					results : $.map(data, function (item){
 							$('#min_heavy').val(item.minimal_heavy);
+							$('#maskapai').val(item.airlans);
 							var barangheavy = carihevy(item.minimal_heavy);
 							if(satuan_udara == 'kg'){
 								if(barangheavy > 0){
@@ -1505,23 +1494,28 @@ $(document).ready(function(){
 	$("#btnsimpan_udara").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+
 			var idresi		= $("#idresi").val();
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang_udara").val();
-			if ($('#jumlah_udara').val() > 1) {
-			var d_panjang	= "-";
-			var d_tinggi	= "-";
-			var d_lebar		= "-";
-			var volume		= "-";
-			var dimensi		= "-";
-			}else{
-			var d_panjang	= $("#d_panjang_udara1").val();
-			var d_tinggi	= $("#d_tinggi_udara1").val();
-			var d_lebar		= $("#d_lebar_udara1").val();
-			var volume		= $("#volume_udara1").val();
-			var dimensi		= d_panjang+" x "+d_lebar+" x "+d_tinggi;	
-			}
 			var jumlah		= $("#jumlah_udara").val();
+
+			var dimensi = '';
+			var subberat = '';
+			var volume = '';
+
+			for (var i = 1; i <= jumlah; i++){
+				var d_panjang	= $("#d_panjang_udara"+i).val();
+				var d_tinggi	= $("#d_tinggi_udara"+i).val();
+				var d_lebar		= $("#d_lebar_udara"+i).val();
+				var beranya = $('#berat_udara'+i).val();
+				var volum = $('#volume_udara'+i).val();
+
+				dimensi = dimensi+""+d_panjang+" x "+d_lebar+" x "+d_tinggi+",";
+				subberat = subberat+''+beranya+',';
+				volume = volume+''+volum+',';
+			}
+			
 			var berat		= $('#totalberat').val();
 			var kota_asal	= $("#kota_asal_udara").val();
 			var kota_tujuan = $('#kta_tujuan_udara').val();
@@ -1543,6 +1537,7 @@ $(document).ready(function(){
 			var nosmu 		= $('#nomer_smu_udara').val();
 			var status_bayar = $('#status_bayar_laut').val();
 			var dibayar = $("#dibayar_laut").val();
+			var maskapai = $('#maskapai').val();
 			if(dibayar==''||a_pengirim==''||a_penerima==''||nama_barang == '' || jumlah=='' || berat=='' || berat==0 || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{
@@ -1560,6 +1555,7 @@ $(document).ready(function(){
 					'ukuran_volume'	: volume,
 					'jumlah'		: jumlah,
 					'berat'			: berat,
+					'subberat'		: subberat,
 					'kota_asal'		: kota_asal,
 					'kota_tujuan' 	: kota_tujuan,
 					'n_pengirim' 	: n_pengirim,
@@ -1578,7 +1574,8 @@ $(document).ready(function(){
                 	'alamat_pengirim' : a_pengirim,
                 	'alamat_penerima' : a_penerima,
                 	'status_bayar'	: status_bayar,
-                	'dibayar'	: dibayar
+                	'dibayar'	: dibayar,
+                	'maskapai':maskapai
                 },
                 success:function(){
                     notie.alert(1, 'Data Disimpan', 2);
@@ -1632,7 +1629,7 @@ $(document).ready(function(){
         jumlahvolume +=parseInt($('#volume_udara'+i).val());
         jumlahkg +=parseInt($('#berat_udara'+i).val());
 		}
-
+		$('#ket_pti').html('&emsp;&emsp;Menerangkan bahwa kiriman yang diserahkan untuk diangkut oleh '+$('#maskapai').val());
 		$('#cetak_pti_penerima').html($("#n_penerima_udara").val());
 		$('#cetak_pti_alamatp').html($("#alamat_penerima_udara").val());
 		$('#cetak_smu_pti').html($('#nomer_smu_udara').val());

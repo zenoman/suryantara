@@ -150,13 +150,9 @@
 				<div class="card-block invoice">
 					<div class="row">
 						<div class="col-lg-6 company-info text-left">
-							<!-- ini -->
-
 							<h5 style="margin-bottom: 0.2rem;">Isi paket : {{$row->nama_barang}}</h5>
 							<p>No. SMU : {{$row->no_smu}}</p>
-
 							<p>Pengiriman Via : {{$row->pengiriman_via}}</p>
-
 							<div class="invoice-block">
 								<div>Pengirim : {{$row->nama_pengirim}}</div>
 								<div>No.Telpon : {{$row->telp_pengirim}}</div>
@@ -171,22 +167,19 @@
 							<br>
 							<div class="invoice-block">
 							<div>Tanggal : {{$row->tgl}}</div>
-								<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
-								<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
+							<div>Tujuan : {{$row->kota_asal}} - {{$row->kode_tujuan}}</div>
+							<div>Maskapai : {{$row->maskapai_udara}}</div>
+							<div>Metode Bayar : {{$row->metode_bayar}} @if($row->tgl_lunas==null) - <b>Belum Lunas</b> @else - <b>Lunas</b> @endif</div>
 							</div>
 							<div>
-                                @if($row->tgl_lunas!=null)
                                 Tanggal Pelunasan : {{$row->tgl_lunas}}
-                                @else
-                                Tanggal Pelunasan : -
-                                @endif  
                                 </div>
 							<br>
 						</div>
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
 								<h5>{{$row->no_resi}}</h5>
-								
+								@if($row->pengiriman_via!='udara')
 								<table class="pull-right table-sm">
 									<tr>
 										<td>Operator</td>
@@ -209,6 +202,36 @@
 										<td>{{$row->jumlah}} Koli</td>
 									</tr>
 								</table>
+								@else
+									@if($row->dimensi!='-')
+									<div>Operator : {{$row->admin}}</div>
+									<table class="pull-right table-sm">
+									
+									<tr>
+										<td>Dimensi</td>
+										<td>Volumetrik</td>
+										<td>Berat Aktual</td>
+									</tr>
+									<?php 
+									$datavolumetrik = explode(',',$row->ukuran_volume);
+									$datadimensi = explode(',', $row->dimensi);
+									$databerat = explode(',',$row->berat);
+									for ($nomor=0; $nomor < $row->jumlah ; $nomor++) { ?> 
+										<tr>
+											<td>{{$datadimensi[$nomor]}}</td>
+											<td>{{$datavolumetrik[$nomor]}}</td>
+											<td>{{$databerat[$nomor]}}</td>
+										</tr>
+									<?php } ?>
+									<tr>
+										<td colspan="3" class="text-center">Total : {{$row->total_berat_udara}} Kg</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-center">Jumlah : {{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								@endif
+								@endif
 								<br>
 								
 							</div>

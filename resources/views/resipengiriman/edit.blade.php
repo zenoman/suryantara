@@ -1058,9 +1058,9 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="col-md-4 col-sm-6">
-						@php
+
+					</div>
+					@php
 						if($row->pengiriman_via=='udara'){
 						$dimensi = $row->dimensi;
 							if($dimensi!='-'){
@@ -1069,23 +1069,43 @@
 						
 						}
 						@endphp
-						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
-							<div class="input-group">
-								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_panjang_udara1" @if($dimensi!='-')value="{{$dmn[0]}}" @else value="0"@endif>&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" onchange="hayy(1)" @if($dimensi!='-')value="{{$dmn[1]}}" @else value="0"@endif>&nbsp;
-								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara1" @if($dimensi!='-')value="{{$dmn[2]}}" @else value="0"@endif>
+					<div id="kolomjumlah">
 									
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6">
+								@if($row->pengiriman_via=='udara')
+								
+								<?php
+									$newnomor=1; 
+									$datavolumetrik = explode(',',$row->ukuran_volume);
+									$datadimensi = explode(',', $row->dimensi);
+									$databerat = explode(',',$row->berat);
+
+									for ($nomor=0; $nomor < $row->jumlah; $nomor++) {
+									
+									$dmn = preg_split('/ x /',$datadimensi[$nomor],-1,PREG_SPLIT_NO_EMPTY); ?>
+								@if($newnomor==1)
+								<div class="row" id="rowjumlah<?php echo $newnomor;?>">
+					
+									<div class="col-md-4 col-sm-6">
+								<div class="form-group">
+								<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
+								<div class="input-group">
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" onchange="hayy(<?php echo $newnomor;?>)" id="d_panjang_udara<?php echo $newnomor;?>" @if($dimensi!='-')value="{{$dmn[0]}}" @else value="0"@endif>&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara<?php echo $newnomor;?>" onchange="hayy(<?php echo $newnomor;?>)" @if($dimensi!='-')value="{{$dmn[1]}}" @else value="0"@endif>&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(<?php echo $newnomor;?>)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara<?php echo $newnomor;?>" @if($dimensi!='-')value="{{$dmn[2]}}" @else value="0"@endif>
+
+								</div>
+								</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="volume_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" @if($row->pengiriman_via=='udara')
+								<input type="text" class="form-control" id="volume_udara<?php echo $newnomor;?>" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" @if($row->pengiriman_via=='udara')
 									@if($row->ukuran_volume!='-')
-										value="{{$row->ukuran_volume}}"
+										value="{{$datavolumetrik[$nomor]}}"
 									@else
 									  value="0"
 									@endif
@@ -1099,9 +1119,58 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="berat_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()"  @if($row->pengiriman_via=='udara')
+								<input type="text" class="form-control" id="berat_udara<?php echo $newnomor;?>" onkeypress="return isNumberKey2(event)" onchange="hitungberat()"  @if($row->pengiriman_via=='udara')
 									@if($row->ukuran_volume!='-')
-										value="{{$row->berat}}"
+										value="{{$databerat[$nomor]}}"
+									@else
+									  value="0"
+									@endif
+								@endif>
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+						
+					</div></div>
+								@else
+								<div class="row" id="rowjumlah<?php echo $newnomor;?>">
+					
+									<div class="col-md-4 col-sm-6">
+								<div class="form-group">
+								<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
+								<div class="input-group">
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" onchange="hayy(<?php echo $newnomor;?>)" id="d_panjang_udara<?php echo $newnomor;?>" @if($dimensi!='-')value="{{$dmn[0]}}" @else value="0"@endif>&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara<?php echo $newnomor;?>" onchange="hayy(<?php echo $newnomor;?>)" @if($dimensi!='-')value="{{$dmn[1]}}" @else value="0"@endif>&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(<?php echo $newnomor;?>)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara<?php echo $newnomor;?>" @if($dimensi!='-')value="{{$dmn[2]}}" @else value="0"@endif>
+
+								</div>
+								</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_udara<?php echo $newnomor;?>" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" @if($row->pengiriman_via=='udara')
+									@if($row->ukuran_volume!='-')
+										value="{{$datavolumetrik[$nomor]}}"
+									@else
+									  value="0"
+									@endif
+								@endif>
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-3 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_udara<?php echo $newnomor;?>" onkeypress="return isNumberKey2(event)" onchange="hitungberat()"  @if($row->pengiriman_via=='udara')
+									@if($row->ukuran_volume!='-')
+										value="{{$databerat[$nomor]}}"
 									@else
 									  value="0"
 									@endif
@@ -1111,10 +1180,60 @@
 						</div>
 						
 					</div>
+					<div class="col-md-1 col-sm-1 removejumlah" data-nomer="<?php echo $newnomor;?>">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">&nbsp;</label>
+							<div class="input-group">
+								<button class="btn btn-danger btn-block" type="button">-</button>
+							</div>
 					</div>
-					<div id="kolomjumlah">
+					</div></div>
+								@endif
+								
+								<?php $newnomor = $newnomor + 1;
+								 } ?>
+								 @else
+								 <div class="row" id="rowjumlah1">
 					
-				</div>
+									<div class="col-md-4 col-sm-6">
+								<div class="form-group">
+								<label class="form-label" for="exampleInputDisabled">Dimensi Dalam Satuan <b>cm</b> (P, L, T)  </label>
+								<div class="input-group">
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" onchange="hayy(1)" id="d_panjang_udara1" value="0">&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" class="col-sm-4 col-md-4 form-control" id="d_lebar_udara1" onchange="hayy(1)" value="0">&nbsp;
+
+								<input type="text" onkeypress="return isNumberKey(event)" onchange="hayy(1)" class="col-sm-4 col-md-4 form-control" id="d_tinggi_udara1" value="0">
+
+								</div>
+								</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Volumetrik</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="volume_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" value="0">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">Berat Aktual</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="berat_udara1" onkeypress="return isNumberKey2(event)" onchange="hitungberat()" value="0">
+								<div class="input-group-addon">Kg</div>
+							</div>
+						</div>
+						
+					</div></div>
+								@endif
+							
+					
+				
+			</div>
 
 				<div class="row">
 					<div class="col-md-3 col-sm-3">
@@ -1163,7 +1282,7 @@
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Berat Total</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="totalberat" readonly @if($row->pengiriman_via=='udara')value="{{$row->berat}}" @else value="0"
+								<input type="text" class="form-control" id="totalberat" readonly @if($row->pengiriman_via=='udara')value="{{$row->total_berat_udara}}" @else value="0"
 								@endif>
 								<div class="input-group-addon">Kg</div>
 							</div>
@@ -1198,6 +1317,7 @@
 						@endif
 						</select>
 						<input type="hidden" id="kta_tujuan_udara" @if($row->pengiriman_via=='udara')value="{{$row->kode_tujuan}}"@endif>
+						<input type="hidden" id="maskapai" @if($row->pengiriman_via=='udara')value="{{$row->maskapai_udara}}"@endif>
 					</div>
 					<div class="col-md-3 col-sm-3">
 						<div class="form-group">

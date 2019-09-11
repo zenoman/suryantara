@@ -706,7 +706,9 @@ class resipengirimanController extends Controller
             'kode_tujuan'   => $request->kota_tujuan,
             'tgl'           =>  date('Y-m-d'),
             'jumlah'        => $request->jumlah,
-            'berat'         => $request->berat,
+            'total_berat_udara'  => $request->berat,
+            'berat'  => $request->subberat,
+            'maskapai_udara'    => $request->maskapai,
             'dimensi'       => $request->dimensi,
             'ukuran_volume' => $request->ukuran_volume,
             'nama_pengirim' => $request->n_pengirim,
@@ -850,7 +852,7 @@ class resipengirimanController extends Controller
         'tgl'           =>  date('Y-m-d'),
         'tgl_lunas'     => $tglbayar,
         'jumlah'        => $request->jumlah,
-        'berat'         => $request->berat,
+        'berat'         => $request->subberat,
         'dimensi'       => $request->dimensi,
         'ukuran_volume' => $request->ukuran_volume,
         'nama_pengirim' => $request->n_pengirim,
@@ -868,7 +870,9 @@ class resipengirimanController extends Controller
         'no_smu'        => $request->nosmu,
         'biaya_charge'  =>$request->charge,
         'alamat_pengirim'=>$request->alamat_pengirim,
-        'alamat_penerima'=>$request->alamat_penerima
+        'alamat_penerima'=>$request->alamat_penerima,
+        'maskapai_udara'=>$request->maskapai,
+        'total_berat_udara'=>$request->berat
        ]);
         return response()->json($simpan);
     }
