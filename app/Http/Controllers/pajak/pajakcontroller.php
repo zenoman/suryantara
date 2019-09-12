@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use Session;
 class pajakcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
   //   public function index(){
   //   	$data = DB::table('pajak')
   //   	->select(DB::raw('tahun'))

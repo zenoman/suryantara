@@ -11,6 +11,10 @@ use Session;
 use Illuminate\Support\Facades\File;
 class LaporakunController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function pilihlapkun()
     {

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 class Dashboardcontroller extends Controller {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $this->buatsession();
         $this->masukandata();
         //============================================
         $pajakarmada = 
@@ -173,4 +179,40 @@ class Dashboardcontroller extends Controller {
         }
         return $newdata;
         }
+
+    //================================================
+    function buatsession(){
+        if(!session::get('username')){
+            $dataadmin = 
+        DB::table('users')
+        ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek'))
+        ->leftjoin('cabang','cabang.id','=','users.id_cabang')
+        ->where([['users.username',Auth::user()->username],['users.password',Auth::user()->password]])
+        ->get();
+        foreach ($dataadmin as $dataadmin) {
+            $id = $dataadmin->id;
+            $level=$dataadmin->level;
+            $cabang=$dataadmin->id_cabang;
+            $kop=$dataadmin->kop;
+            $kota=$dataadmin->kota;
+            $koderesi=$dataadmin->koderesi;
+            $norek = $dataadmin->norek;
+        }
+
+        $data = DB::table('users')->where([['username',Auth::user()->username],['password',Auth::user()->password]])->count();
+        if($data>0){
+                Session::put('username',Auth::user()->username);
+                Session::put('id',$id);
+                Session::put('level',$level);
+                Session::put('login',TRUE);
+                Session::put('statuslogin','aktiv');
+                Session::put('cabang',$cabang);
+                Session::put('kop',$kop);
+                Session::put('kota',$kota);
+                Session::put('koderesi',$koderesi);
+                Session::put('norek',$norek);
+        }
+        }
+        
+    }        
 }

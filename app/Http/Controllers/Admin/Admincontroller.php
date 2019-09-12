@@ -6,78 +6,33 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\models\Adminmodel;
 use Illuminate\Support\Facades\Session;
 class Admincontroller extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $setting = DB::table('setting')->get();
-        $id=Session::get('id');
-        $lev='admin';
-        
-    		if(Session::get('level') == 'programer') {
-        		$datadmin = DB::table('admin')
-        		->select(DB::raw('admin.*,cabang.nama as namacabang'))
-        		->leftjoin('cabang','cabang.id','=','admin.id_cabang')
-        		->where('admin.id','!=',$id)
-        		->paginate(20);
-    		}else{
-        		$datadmin = DB::table('admin')
-        		->select(DB::raw('admin.*,cabang.nama as namacabang'))
-        		->leftjoin('cabang','cabang.id','=','admin.id_cabang')
-        		->where('admin.id','!=',$id)
-        		->where(function ($huft) use ($lev){$huft->where('admin.level','=',$lev);})
-        		->paginate(20);
-    		}
-        return view('admin/index',['admin'=>$datadmin,'title'=>$setting]);
-    }
-    //======================================================================
-     public function caridata(Request $request)
-    {
-        $setting = DB::table('setting')->get();
-        $id=Session::get('id');
-        $cari=$request->cari;
-    if(Session::get('level') == 'programer') {
-        //_______________________________________________
-        $datadmin = DB::table('admin')
-        ->select(DB::raw('admin.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
-        ->where('admin.id','!=',$id)
-        ->where(function ($huft) use ($cari){
-            $huft->where('admin.nama','like','%'.$cari.'%')
-            ->orwhere('admin.kode','like','%'.$cari.'%')
-            ->orwhere('admin.username','like','%'.$cari.'%')
-            ->orwhere('admin.email','like','%'.$cari.'%');
-        })
-        ->paginate(20);
-    }else{
-        //_______________________________________________
-        $level='admin';
-        $datadmin = DB::table('admin')
-        ->select(DB::raw('admin.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','admin.id_cabang')
-        ->where('admin.id','!=',$id)
-        ->where(function($huft) use ($cari){
-            $huft->where('admin.nama','like','%'.$cari.'%')
-            ->orwhere('admin.kode','like','%'.$cari.'%')
-            ->orwhere('admin.username','like','%'.$cari.'%')
-            ->orwhere('admin.email','like','%'.$cari.'%');
-        })->where(function($huft) use ($level){
-            $huft->where('admin.level','=',$level);
-        })
-        ->paginate(20);
-    }
-        return view('admin/pencarian', ['datadmin'=>$datadmin, 'cari'=>$cari,'title'=>$setting]);
+        $datadmin = DB::table('users')
+        		->select(DB::raw('users.*,cabang.nama as namacabang, roles.level as statusadmin'))
+        		->leftjoin('cabang','cabang.id','=','users.id_cabang')
+                ->leftjoin('roles','roles.id','=','users.level')
+        		->get();
+    	return view('admin/index',['users'=>$datadmin,'title'=>$setting]);
     }
 
     //======================================================================
     public function create(){
-    	$table="admin";
+        $table="users";
         $tut="kode";
     	$cabang = DB::table('cabang')->get();
        	$setting = DB::table('setting')->get();
-        $q=DB::table($table)->max($tut);
+        $role = DB::table('roles')->get();
+        $q=DB::table('users')->max('kode');
 
         	if(!$q){
             	$finalkode = "Admin-000001";
@@ -86,7 +41,7 @@ class Admincontroller extends Controller
 	            $nomer      = sprintf("%06s",$newkode [1]+1);
 	            $finalkode  = "Admin-".$nomer;
         	}
-        return view('admin/create',['title'=>$setting,'kode'=>$finalkode,'cabang'=>$cabang]);
+        return view('admin/create',['title'=>$setting,'role'=>$role,'kode'=>$finalkode,'cabang'=>$cabang]);
     }
     //======================================================================
     public function changepas($id){
@@ -96,66 +51,15 @@ class Admincontroller extends Controller
     }
     //======================================================================
     public function actionchangepas(Request $request, $id){
-        $rules = [
-                'konfirmasi_username'       =>  'required|min:5',
-                'konfirmasi_password'       =>  'required|min:5',
-                'konfirmasi_password_baru'  =>  'required|min:5'
-            ];
-        $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi',
-        'min'       => 'Maaf, data yang anda masukan terlalu sedikit'
-         ];
-        $this->validate($request,$rules,$customMessages);
-
-        if(Session::get('id') == $request->id && Session::get('level') != 'admin'){
-        //_____________________________________________________________
-        $newpass =md5($request->konfirmasi_password);
-        //dd($newpass);
-        if($request->password==$newpass){
-            if($request->konfirmasi_password_baru==$request->password_baru){
-                 Adminmodel::find($id)->update([
-            'password' =>md5($request->konfirmasi_password_baru)
-        ]);
-        return redirect('/dashboard')->with('status','Edit Password berhasil');
-            }else{
+        if($request->konfirmasi_password_baru==$request->password_baru){
+            Adminmodel::find($id)->update([
+                'password' =>Hash::make($request->konfirmasi_password_baru)
+            ]);
+        return redirect('/admin')->with('status','Edit Password berhasil');
+        }else{
              return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
             }
-        }else{
-        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
-        }
-    }else if(Session::get('id') != $request->id && Session::get('level') != 'admin'){
-        //_____________________________________________________________
-        $newpass =md5($request->konfirmasi_password);
-        //dd($newpass);
-        if($request->password==$newpass){
-            if($request->konfirmasi_password_baru==$request->password_baru){
-                 Adminmodel::find($id)->update([
-            'password' =>md5($request->konfirmasi_password_baru)
-        ]);
-        return redirect('admin')->with('status','Edit Password berhasil');
-            }else{
-             return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
-            }
-        }else{
-        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
-        }
-    }else{
-        //_____________________________________________________________
-        $newpass =md5($request->konfirmasi_password);
-        //dd($newpass);
-        if($request->password==$newpass){
-            if($request->konfirmasi_password_baru==$request->password_baru){
-                 Adminmodel::find($id)->update([
-            'password' =>md5($request->konfirmasi_password_baru)
-        ]);
-        return redirect('/dashboard')->with('status','Edit Password berhasil');
-            }else{
-             return redirect('admin/'.$id.'/changepas')->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
-            }
-        }else{
-        return redirect('admin/'.$id.'/changepas')->with('errorpass1','Maaf, Konfimasi Password Anda Salah');
-        }
-    }
+        
        
     }
     //===================================================================
@@ -176,9 +80,7 @@ class Admincontroller extends Controller
         'email'     => 'Maaf, data harus email'];
 
         $this->validate($request,$rules,$customMessages);
-        $table="admin";
-        $tut="kode";
-        $q=DB::table($table)->max($tut);
+        $q=DB::table('users')->max('kode');
         	if(!$q){
             	$finalkode = "Admin-000001";
         	}else{
@@ -187,15 +89,15 @@ class Admincontroller extends Controller
             	$finalkode  = "Admin-".$nomer;
         	}
         $kode=$request->kode;
-        $dtlam= DB::table('admin')->where('kode',$kode)->count();
+        $dtlam= DB::table('users')->where('kode',$kode)->count();
 			if($dtlam > 0){
     			return redirect('admin/create')
     			->with('status','Kode admin Yang anda masukan sudah ada!!');
 			}else{
-		        Adminmodel::create([
+		        DB::table('users')->insert([
 		            'kode'  => $finalkode,
 		            'username'  => $request->username,
-		            'password'  =>md5($request->password),
+		            'password'  =>Hash::make($request->password),
 		            'nama'  => $request->nama,
 		            'telp'  => $request->telp,
 		            'email'  => $request->email,
@@ -210,61 +112,15 @@ class Admincontroller extends Controller
     public function edit($id)
     {
         $admin = Adminmodel::find($id);
+        $role = DB::table('roles')->get();
         $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('admin/edit',['datadmin'=>$admin,'title'=>$setting,'cabang'=>$cabang]);
+        return view('admin/edit',['datadmin'=>$admin,'role'=>$role,'title'=>$setting,'cabang'=>$cabang]);
     }
     //======================================================================
     public function update(Request $request, $id)
     {
-        if(Session::get('id') == $request->id && Session::get('level') == 'admin'){
-            $rules = [
-            'username'  => 'required|min:5',
-            'nama'  => 'required',
-            'email'  => 'required|min:5|email',
-            'telp'  => 'required|min:5|numeric',
-            'alamat'  => 'required|min:5'];
-
-	        $customMessages = [
-	        'required'  => 'Maaf, :attribute harus di isi',
-	        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
-	        'numeric'   => 'Maaf, data harus angka',
-	        'email'     => 'Maaf, data harus email'];
-
-        	$this->validate($request,$rules,$customMessages);
-	        Adminmodel::find($id)->update([
-	            'nama'  => $request->nama,
-	            'username'  => $request->username,            
-	            'email'  => $request->email,
-	            'telp'  => $request->telp,
-	            'alamat'  => $request->alamat
-	            ]);
-        return redirect('/dashboard')->with('status','Edit Data Sukses');
-       } else if(Session::get('id') == $request->id && Session::get('level') == 'programer' || Session::get('level') == 'superadmin' ) {
-            $rules = [
-            'username'  => 'required|min:5',
-            'nama'  => 'required',
-            'email'  => 'required|min:5|email',
-            'telp'  => 'required|min:5|numeric',
-            'alamat'  => 'required|min:5'];
-	        $customMessages = [
-	        'required'  => 'Maaf, :attribute harus di isi',
-	        'min'       => 'Maaf, data yang anda masukan terlalu sedikit',
-	        'numeric'   => 'Maaf, data harus angka',
-	        'email'     => 'Maaf, data harus email'];
-
-        	$this->validate($request,$rules,$customMessages);
-	        Adminmodel::find($id)->update([
-	            'nama'  => $request->nama,
-	            'username'  => $request->username,            
-	            'email'  => $request->email,
-	            'telp'  => $request->telp,
-	            'alamat'  => $request->alamat,
-	            'level' =>  $request->level,
-	            'id_cabang'=>$request->cabang
-	            ]);
-        return redirect('/dashboard')->with('status','Edit Data Sukses');
-        }else{
+        
           $rules = [
             'username'  => 'required|min:5',
             'nama'  => 'required',
@@ -288,7 +144,6 @@ class Admincontroller extends Controller
             'id_cabang'=>$request->cabang
             ]);
         return redirect('admin')->with('status','Edit Data Sukses');
-        }
     }
     //======================================================================
     public function destroy(Request $request)

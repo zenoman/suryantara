@@ -8,6 +8,10 @@ use Validator;
 use Session;
 class PembukuanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     private $setting;   
     private $idc;
     function __construct(){            

@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Session;
 
 class katbarcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $setting = DB::table('setting')->get();

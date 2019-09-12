@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Response;
 
 class Vendorcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
     $vnd=DB::table('vendor')
         ->select(DB::raw('vendor.*,cabang.nama as namacabang'))

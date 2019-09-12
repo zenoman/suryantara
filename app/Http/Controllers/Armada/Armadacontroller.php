@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class Armadacontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function caripajakunit($id){
         $data = DB::table('pajak_armada')->where('id_armada',$id)->get();
 

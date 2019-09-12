@@ -12,6 +12,10 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 
 class Trf_daratcontroller extends Controller{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $tarif_darat=DB::table('tarif_darat')
         ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))

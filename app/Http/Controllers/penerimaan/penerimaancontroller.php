@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class penerimaancontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function paketditerima(Request $request){
        $dataresi = DB::table('resi_pengiriman')->where('id',$request->idresi)->get();
         foreach ($dataresi as $row){

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class suratjalanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function resisuratjalan(){
         $data = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))

@@ -11,6 +11,10 @@ use App\models\Laporakudetnmodel;
 // use Illuminate\Support\Facades\File;
 class LabarugiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function pilihllaba()
     {

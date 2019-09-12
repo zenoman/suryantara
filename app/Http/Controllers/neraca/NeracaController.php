@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Response;
 
 class NeracaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $bulan = DB::table('tb_neraca')
         ->groupby('tahun')

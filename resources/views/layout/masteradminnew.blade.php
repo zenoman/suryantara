@@ -1,14 +1,3 @@
-@if(!Session::get('username'))
-<script type="text/javascript">
-    window.location.href = '{{url("login")}}';
-</script>
-@else
-	@if(Session::get('statuslogin')!='aktiv')
-	<script type="text/javascript">
-    window.location.href = '{{url("lockscreen")}}';
-	</script>
-	@endif
-@endif
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -78,14 +67,20 @@
 	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-	                        	 <span class="dropdown-item text-center text-muted">{{Session::get('username')}}</span>
+	                        	 <span class="dropdown-item text-center text-muted">{{Auth::user()->nama}}</span>
 	                        	 <div class="dropdown-divider"></div>
 	                        	  <a class="dropdown-item" href="{{url('backup')}}"><span class="font-icon font-icon-download"></span>Back Up Data</a>
 	                        	  <a class="dropdown-item" href="{{url('setting')}}"><span class="font-icon font-icon-cogwheel"></span>Setting Web</a>
 	                        	<div class="dropdown-divider"></div>
 	                            <a class="dropdown-item" href="{{url('admin/'.Session::get('id').'/edit')}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
 
-	                            <a class="dropdown-item" href="{{url('/login/logout')}}"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+	                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
 	                        </div>
 	                    </div>
 	                </div><!--.site-header-shown-->
@@ -100,7 +95,6 @@
 		<li class="nav-item">
 			<a class="nav-link" href="{{url('dashboard')}}">Home</a>
 		</li>
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			<div class="dropdown-menu">
@@ -127,16 +121,11 @@
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
 				
-				@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin')
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
 
-				@endif
 			</div>
 		</li>
-		@endif
-		
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level') == 'cs')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
 			<div class="dropdown-menu">
@@ -156,13 +145,9 @@
 				
 			</div>
 		</li>
-		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='cs')
 		<li class="nav-item">
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
-		@endif
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin' || Session::get('level')=='operasional')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
@@ -172,7 +157,6 @@
 				
 			</div>
 		</li>
-		@endif
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
 			<div class="dropdown-menu">
@@ -185,7 +169,6 @@
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 			</div>
 		</li>
-		@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
 		{{--<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
 			<div class="dropdown-menu">
@@ -210,7 +193,6 @@
 		<li class="nav-item">
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
 		</li>
-		@endif
 		
 	</ul>
 

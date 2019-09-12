@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class transitcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
     	$webinfo = DB::table('setting')->limit(1)->get();

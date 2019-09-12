@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class envoicecontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function cetakulang($kode){
         $dataenvoice = DB::table('surat_envoice')->where('kode',$kode)->get();
         $dataresi = DB::table('resi_pengiriman')->where('kode_envoice',$kode)->get();

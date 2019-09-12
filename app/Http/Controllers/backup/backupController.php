@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\File;
 
 class backupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         if (Session::get('level') !='admin') {
             Session::put('backup_status','n');

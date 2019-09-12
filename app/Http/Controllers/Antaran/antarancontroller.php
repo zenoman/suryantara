@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Session;
 
 class antarancontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function updateinputpod(Request $request){
        if($request->statusresi=='sukses'){
             

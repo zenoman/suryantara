@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Response;
 
 
 class laporanController extends Controller{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function tampilpengeluaran(Request $request){
         $rules = [
             'habu' =>'required',

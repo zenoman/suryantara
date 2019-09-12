@@ -9,6 +9,10 @@ use App\Exports\cabangexport;
 
 class cabangcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function exsportdata(){
         return Excel::download(new cabangexport, 'Data cabang.xlsx');
     }

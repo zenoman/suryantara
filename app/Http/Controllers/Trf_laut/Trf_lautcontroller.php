@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Response;
 
 class trf_lautcontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
     $tarif_laut=DB::table('tarif_laut')

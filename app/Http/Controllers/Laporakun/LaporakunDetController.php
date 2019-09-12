@@ -12,7 +12,10 @@ use Session;
 use Illuminate\Support\Facades\File;
 class LaporakunDetController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function pilihlapkun()
     {       
         $kategori=DB::table('tb_kategoriakutansi')

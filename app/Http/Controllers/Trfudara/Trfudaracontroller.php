@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class Trfudaracontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $udara = DB::table('tarif_udara')

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Session;
 class modalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data = DB::table('pengeluaran_lain')

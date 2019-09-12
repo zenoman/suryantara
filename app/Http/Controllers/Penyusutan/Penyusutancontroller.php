@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Session;
 
 class Penyusutancontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         // $katbars = Kategoriakutansi::paginate(20);

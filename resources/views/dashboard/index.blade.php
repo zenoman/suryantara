@@ -23,16 +23,6 @@
 	       
 	
 	        <div class="row">
-			@if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
-	        	 @if (session('status'))
-	        	 <div class="col-xl-12 dahsboard-column">
-                    <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('status') }}
-                    </div>
-                </div>
-                    @endif
-                  @if(Session::get('level') == 'programer' || Session::get('level') == 'superadmin' || Session::get('level') == 'admin')
                  @if($jumlahtotalresi > 500)
                   <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-danger alert-dismissable">
@@ -41,9 +31,7 @@
                         Data resi sudah lebih dari 500 data segera lakukan <a href="{{url('/backup')}}">backup data</a>
                     </div>
                 </div>
-                 @endif
-                 @endif
-
+                @endif
                  @foreach($title as $row)
                  	@if($row->pengumuman!='')
 	                 <div class="col-xl-12 dahsboard-column">
@@ -201,12 +189,11 @@
 	                            @endforeach
 	                        </table>
 	                       
-	                    </div><!--.box-typical-body-->
-	                </section><!--.box-typical-dashboard-->
-	            </div><!--.col-->
-	        @endif
+	                    </div>
+	                </section>
+	            </div>
 	        </div>
-	    </div><!--.container-fluid-->
+	    </div>
 	</div>
 @endsection
 

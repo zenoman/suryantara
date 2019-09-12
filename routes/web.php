@@ -216,10 +216,11 @@ Route::get('/export_laporan_pengeluaran_vendor/{habu}/{bulanya}/{vendor}','lapor
 Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','laporan\laporanController@exsportlaporanpengluarangjkw');
 
 //===========================================
-Route::post('/login/bukakunci','Login\Logincontroller@bukakunci');
-Route::get('/lockscreen','Login\Logincontroller@lockscreen');
-Route::get('/login','Login\Logincontroller@index');
-Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
+// Route::post('/login/bukakunci','Login\Logincontroller@bukakunci');
+// Route::get('/lockscreen','Login\Logincontroller@lockscreen');
+// Route::get('/login','Login\Logincontroller@index');
+// Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
+//================================================
 Route::get('/','landing\landingcontroller@index');
 Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
 Route::get('/landdarat/cari','landingdarat\landingdaratcontroller@pencarian');
@@ -245,7 +246,7 @@ Route::put('/admin/{id}','Admin\Admincontroller@update');
 Route::post('/admin/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
 Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
-Route::get('admin/cari','Admin\Admincontroller@caridata');
+// Route::get('admin/cari','Admin\Admincontroller@caridata');
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');
@@ -416,3 +417,15 @@ Route::post('simpan-tf','pembukuan\PembukuanController@simpantf');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

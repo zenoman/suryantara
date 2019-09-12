@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Session;
 class pengeluaranlainController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $idc=Session::get('cabang');

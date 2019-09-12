@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Response;
 
 class omsetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
     	$data = DB::table('omset')
     	->orderby('tahun','desc')

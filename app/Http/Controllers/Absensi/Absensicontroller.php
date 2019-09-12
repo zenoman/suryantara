@@ -11,11 +11,14 @@ use App\Exports\AbsensiharianExport;
 use App\Exports\AbsensibulananExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\File;
 class Absensicontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {  
         $dattgl=date('Y-m-d');

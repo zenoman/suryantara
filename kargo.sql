@@ -44,39 +44,6 @@ INSERT INTO `absensi` (`id`, `id_karyawan`, `id_jabatan`, `tanggal`, `masuk`, `t
 	(5, 6, 24, '2019-09-07', 0, 1, 0, '-', '0', 2);
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 
--- Dumping structure for table kargo.admin
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(100) DEFAULT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `password` text DEFAULT NULL,
-  `nama` varchar(100) NOT NULL,
-  `telp` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `alamat` varchar(200) DEFAULT NULL,
-  `level` varchar(20) DEFAULT NULL,
-  `id_cabang` int(11) DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
--- Dumping data for table kargo.admin: ~8 rows (approximately)
-DELETE FROM `admin`;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `email`, `alamat`, `level`, `id_cabang`) VALUES
-	(6, 'Admin-000001', 'devasatrio', '74b213f68f648006a318f52713450f27', 'deva satrio', '085604556712', 'satriosuklun@gmail.com', 'gurah magersari', 'programer', 2),
-	(7, 'Admin-000002', 'harianti', '74b213f68f648006a318f52713450f27', 'harianto', '085604556712', 'harianto@gmail.com', 'magersari gurah depan pga', 'admin', 1),
-	(9, 'Admin-000003', 'abiihsan', '74b213f68f648006a318f52713450f27', 'abi ihsan fadli', '098765546', 'abi@gmail.com', 'gurah', 'programer', 1),
-	(10, 'Admin-000004', 'dinisumi', '74b213f68f648006a318f52713450f27', 'cs dini', '09128390128', 'dian@gmail.com', 'gurah', 'cs', 1),
-	(11, 'Admin-000005', 'atiqowner', '74b213f68f648006a318f52713450f27', 'pak atiq', '09328903289023', 'dianade@gmail.com', 'gurah', 'superadmin', 1),
-	(12, 'Admin-000006', 'hardian', '74b213f68f648006a318f52713450f27', 'hardian', '2398782397892', 'harianto@gmail.com', 'gurah', 'operasional', 1),
-	(13, 'Admin-000007', 'paijo', '827ccb0eea8a706c4c34a16891f84e7b', 'deni suherman', '0239482390', 'harianto@gmail.com', 'gurah kediri', 'admin_cabang', 1),
-	(14, 'Admin-000008', 'askdfjasdkf', '827ccb0eea8a706c4c34a16891f84e7b', 'mariana', '2390482390', 'admin@gmail.com', 'ksdfjk', 'operasional_cabang', 1),
-	(15, 'Admin-000009', 'damara', '74b213f68f648006a318f52713450f27', 'damara', '29304890', 'satriosuklun@gmail.com', 'gurah', 'programer', 1),
-	(16, 'Admin-000010', 'jianfitri', '74b213f68f648006a318f52713450f27', 'jian fitri', '0293482390', 'satriosuklun@gmail.com', 'gurah', 'programer', 4),
-	(17, 'Admin-000011', 'niamtamami', '74b213f68f648006a318f52713450f27', 'niam tamami', '02984902389', 'satriosuklun@gmail.com', 'gurah', 'HRD', 1);
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-
 -- Dumping structure for table kargo.armada
 DROP TABLE IF EXISTS `armada`;
 CREATE TABLE IF NOT EXISTS `armada` (
@@ -441,10 +408,31 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
 DELETE FROM `resi_pengiriman`;
 /*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
 INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_antar`, `kode_envoice`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `tgl_lunas`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `nama_penerima_barang`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `total_bayar`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`, `status_antar`, `id_cabang`, `katakun`, `status_pengiriman`, `status_company`, `duplikat`, `total_berat_udara`, `maskapai_udara`) VALUES
-	(37, 'SBY100919-06-000005', NULL, NULL, NULL, NULL, 'devasatrio', 'sepatu', 'udara', 'SURABAYA', 'maluku', '2019-09-10', NULL, NULL, 1, '2,', '30 x 20 x 20,', '2,', 'adsklf', 'sakldfj', NULL, '0923849', '9089', 'jklsadj saf', 'jksaldj', 175000, NULL, NULL, 0, 0, 0, 0, 0, 182000, 10000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', 7, 'garuda'),
-	(38, 'SBY100919-06-000006', 'asjdfl', NULL, NULL, NULL, 'devasatrio', 'sepatu', 'udara', 'SURABAYA', 'maluku', '2019-09-11', NULL, '2019-09-11', 2, '1,2,', '10 x 10 x 10,20 x 20 x 20,', '1,1,', 'hari', 'mala', NULL, '02938490', '09238490', 'gurah', 'kediri', 100000, NULL, NULL, 0, 5000, 3000, 0, 0, 108000, 108000, 0, NULL, 'N', 'kg', 'bt', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', 3, 'garuda'),
-	(39, 'SBY110919-06-000001', NULL, NULL, NULL, NULL, 'devasatrio', 'sabun mandi', 'darat', 'SURABAYA', 'gurah', '2019-09-11', NULL, '2019-09-11', 1, '2', '30 x 20 x 20', '3', 'laksdfj', 'klasdf', NULL, '09238490', '0293849', 'jksdjf', 'jaskldfj', 9000, 2000, 1000, 0, 0, 0, 0, 0, 12000, 12000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', NULL, NULL);
+	(37, 'SBY100919-06-000005', NULL, NULL, NULL, NULL, 'satriosuklun', 'sepatu', 'udara', 'SURABAYA', 'maluku', '2019-09-10', NULL, NULL, 1, '2,', '30 x 20 x 20,', '2,', 'adsklf', 'sakldfj', NULL, '0923849', '9089', 'jklsadj saf', 'jksaldj', 175000, NULL, NULL, 0, 0, 0, 0, 0, 182000, 10000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', 7, 'garuda'),
+	(38, 'SBY100919-06-000006', 'asjdfl', NULL, NULL, NULL, 'satriosuklun', 'sepatu', 'udara', 'SURABAYA', 'maluku', '2019-09-11', NULL, '2019-09-11', 2, '1,2,', '10 x 10 x 10,20 x 20 x 20,', '1,1,', 'hari', 'mala', NULL, '02938490', '09238490', 'gurah', 'kediri', 100000, NULL, NULL, 0, 5000, 3000, 0, 0, 108000, 108000, 0, NULL, 'N', 'kg', 'bt', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', 3, 'garuda'),
+	(39, 'SBY110919-06-000001', NULL, NULL, NULL, NULL, 'satriosuklun', 'sabun mandi', 'darat', 'SURABAYA', 'gurah', '2019-09-11', NULL, '2019-09-11', 1, '2', '30 x 20 x 20', '3', 'laksdfj', 'klasdf', NULL, '09238490', '0293849', 'jksdjf', 'jaskldfj', 9000, 2000, 1000, 0, 0, 0, 0, 0, 12000, 12000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'barang diterima KLC Cabang SURABAYA', 'N', 'N', NULL, NULL);
 /*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
+
+-- Dumping structure for table kargo.roles
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `level` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kargo.roles: ~7 rows (approximately)
+DELETE FROM `roles`;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` (`id`, `level`) VALUES
+	(1, 'programmer'),
+	(2, 'admin'),
+	(3, 'super admin'),
+	(4, 'cs'),
+	(5, 'hrd'),
+	(6, 'branch manager'),
+	(7, 'oprasional');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
 DROP TABLE IF EXISTS `setting`;
@@ -489,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `status_pengiriman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kargo.status_pengiriman: ~30 rows (approximately)
+-- Dumping data for table kargo.status_pengiriman: ~29 rows (approximately)
 DELETE FROM `status_pengiriman`;
 /*!40000 ALTER TABLE `status_pengiriman` DISABLE KEYS */;
 INSERT INTO `status_pengiriman` (`id`, `kode`, `status`, `keterangan`, `tgl`, `jam`, `lokasi`) VALUES
@@ -607,8 +595,8 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
 DELETE FROM `surat_jalan`;
 /*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
 INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`, `cabang`, `katakun`, `id_cabang`, `id_cabang_tujuan`, `id_cabang_transit`, `status_transit`, `status_pengiriman`) VALUES
-	(1, 'devasatrio', 'SJSBY040919-06-000001', 'KLC Cabang Kediri', '2019-09-04', 'P', 7, 3, 288000, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
-	(2, 'devasatrio', 'SJSBY040919-06-000002', 'KLC Cabang Kediri', '2019-09-04', 'P', 7, 3, 148000, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
+	(1, 'satriosuklun', 'SJSBY040919-06-000001', 'KLC Cabang Kediri', '2019-09-04', 'P', 7, 3, 288000, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
+	(2, 'satriosuklun', 'SJSBY040919-06-000002', 'KLC Cabang Kediri', '2019-09-04', 'P', 7, 3, 148000, 0, NULL, 'magersari gurah kediri halo halo', 'Y', 14, 2, 1, NULL, 'N', 'Y'),
 	(3, 'damara', 'SJKDR060919-15-000001', 'PT Cahya gurah-2930849023', '2019-09-06', 'Y', 4, 1, 205000, 0, NULL, 'bringin bulurejo 001 kec.gurah kediri', 'N', 14, 1, NULL, NULL, 'N', 'N'),
 	(4, 'damara', 'SJKDR070919-15-000001', 'KLC cabang suryabaya', '2019-09-07', 'P', 7, 2, 80000, 0, NULL, 'aklsdfjkl', 'Y', 14, 1, 2, NULL, 'N', 'Y');
 /*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
@@ -747,6 +735,31 @@ INSERT INTO `tb_neraca` (`id`, `tahun`, `bulan`, `kategori`, `status`, `total`) 
 	(203, '2019', 8, 'Laba', 'K', 200000);
 /*!40000 ALTER TABLE `tb_neraca` ENABLE KEYS */;
 
+-- Dumping structure for table kargo.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(100) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `nama` varchar(100) NOT NULL,
+  `telp` varchar(45) NOT NULL,
+  `remember_token` varchar(50) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `alamat` varchar(200) DEFAULT NULL,
+  `level` varchar(20) DEFAULT NULL,
+  `id_cabang` int(11) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table kargo.users: ~1 rows (approximately)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `remember_token`, `email`, `alamat`, `level`, `id_cabang`) VALUES
+	(19, 'Admin-000001', 'satriosuklun', '$2y$10$Q.d6UaKmwOh4w.OEMPJlV.gVNK946edH55PicZFhysbu7154qWbVu', 'deifa satrio', '14045', 'GtVwaECzIqzejKCpZowysRxkbY6XrbnExKJsb10MYpoY2FPznR', 'satriosuklun@gmail.com', 'gurah kediri magersari', '2', 2),
+	(20, 'Admin-000002', 'devasatrio', '$2y$10$pEOVBaxYpBS.yRNueIxZi.JWYo0L1tYiEVfsv0T.f20JsxNTv2atC', 'damara', '928901', '', 'ridho.rezky.07@gmail.com', 'gurah', '1', 2);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
 -- Dumping structure for table kargo.vendor
 DROP TABLE IF EXISTS `vendor`;
 CREATE TABLE IF NOT EXISTS `vendor` (
@@ -774,7 +787,7 @@ INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`, `i
 DROP TRIGGER IF EXISTS `editadmin`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 DELIMITER //
-CREATE TRIGGER `editadmin` BEFORE UPDATE ON `admin` FOR EACH ROW BEGIN
+CREATE TRIGGER `editadmin` BEFORE UPDATE ON `users` FOR EACH ROW BEGIN
 update resi_pengiriman set admin=new.username where admin=old.username;
 update surat_jalan set admin=new.username where admin=old.username;
 END//

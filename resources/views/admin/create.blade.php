@@ -124,17 +124,9 @@
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Level admin</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="level" class="form-control">
-								@if(Session::get('level') == 'programer')
-								<option value="programer">Programer</option>
-								@endif
-								<option value="superadmin">Superadmin</option>
-								<option value="HRD">HRD</option>
-								<option value="cs">Costumer Service</option>
-								<option value="operasional_cabang">Operasional Cabang</option>
-								<option value="operasional">Operasional</option>
-								<option value="admin_cabang">Admin Cabang</option>
-								<option value="admin">Admin</option>
-								
+								@foreach($role as $rls)
+								<option value="{{$rls->id}}">{{$rls->level}}</option>
+								@endforeach
 							</select>
 						</div>
 					</div>
