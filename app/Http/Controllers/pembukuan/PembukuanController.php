@@ -58,16 +58,7 @@ class PembukuanController extends Controller
         $kat=DB::table('tb_kategoriakutansi')->where('kode','090')->get();
         return view('pembukuan.tf',['title'=> $this->setting,'inresi'=>$in,'peng'=>$peng,'inpen'=>$inlain,'tf'=>$tf,'kat'=>$kat,'gaj'=>$gaj,'ttf'=>$ttf]);
     }
-    function simpantf(Request $req){
-        // $req->validate([
-        //     'admin'=>'required',
-        //     'kokat'=>'required',
-        //     'tgl'=>'required',
-        //     'kat'=>'required',
-        //     'nominal'=>'required',            
-        //     'bukti'=>'required|image|mimes:jpg,jpeg,png|max:4096',
-        // ]);   
-        // dd($req->admin);     
+    function simpantf(Request $req){         
         
         if($req->hasFile('bukti')){
             $img=$req->file('bukti');
@@ -100,4 +91,5 @@ class PembukuanController extends Controller
         }
            
     }
+    
 }

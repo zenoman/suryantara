@@ -406,9 +406,24 @@ Route::put('/nyusut/{id}','Penyusutan\Penyusutancontroller@update');
 Route::post('/nyusut/delete','Penyusutan\Penyusutancontroller@destroy');
 // ==============================================================Transfer
 Route::post('simpan-tf','pembukuan\PembukuanController@simpantf');
-
-
-
+// ==============================================================Seting pajak
+Route::get('setting-pajak','SetPajak\setpajak@index');
+Route::post('simpan-setpajak','SetPajak\setpajak@simpanpajak');
+Route::post('simpan-setsaldo','SetPajak\setpajak@simpansaldo');
+Route::get('hapus-pajak/{id}','SetPajak\setpajak@hapuspajak');
+Route::post('update-setpajak','SetPajak\setpajak@updatepajak');
+Route::post('simpan-saldo','SetPajak\setpajak@simpansaldo');
+Route::post('update-saldo','SetPajak\setpajak@updatesaldo');
+Route::get('del-saldo/{id}','SetPajak\setpajak@delsaldo');
+// ===============================================================Rekap Laporan
+Route::get('rekap-laporan','Rekap\Rekap@index');
+Route::get('rekap-pajak','Rekap\Rekap@showpajak');
+Route::get('rekap-pengeluaran','Rekap\Rekap@showpengeluaran');
+Route::get('rekap-resi','Rekap\Rekap@showresi');
+Route::get('cetak-resimasuk/{kat}/{bul1}/{bul2}/{kate}','Rekap\Rekap@cetakresi');
+Route::get('cetak-pengeluaran/{kat}/{bul1}/{bul2}/{kate}','Rekap\Rekap@cetakpengeluaran');
+Route::get('rekap-gaji','Rekap\Rekap@rekapgaji');
+Route::get('cetak-gaji/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakgaji');
 
 
 

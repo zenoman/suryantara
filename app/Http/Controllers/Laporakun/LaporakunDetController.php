@@ -18,8 +18,9 @@ class LaporakunDetController extends Controller
     }
     public function pilihlapkun()
     {       
-        $kategori=DB::table('tb_kategoriakutansi')
-                ->get();
+      $kategori=DB::table('tb_kategoriakutansi')
+               ->where('status','pengeluaran')
+               ->get();
         $setting = DB::table('setting')->get(); 
         return view('laporakun/pilihlapkundet',['title'=>$setting,'kate'=>$kategori]);
     }
