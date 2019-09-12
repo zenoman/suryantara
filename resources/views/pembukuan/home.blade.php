@@ -73,7 +73,7 @@
                             <i class="font-icon font-icon-list-square "></i>
                         </div>
                         <div class="widget-simple-sm-bottom">
-                            <a href="{{url('pengeluaranlain')}}" class="btn btn-primary btn-block">Input Pembukuan</a>
+                            <a href="{{url('pengeluaranlain')}}" class="btn btn-primary btn-block">Input Pengeluaran Lain</a>
                         </div>
                     </section><!--.widget-simple-sm-->
                 </div>    
@@ -83,7 +83,7 @@
                             <i class="font-icon font-icon-bookmark"></i>
                         </div>
                         <div class="widget-simple-sm-bottom">
-                            <a href="{{url('/laporakun')}}" class="btn btn-primary btn-block">Laporan Pertanggal</a>
+                            <a href="{{url('/laporakun')}}" class="btn btn-primary btn-block">Laporan Pengeluaran Lain</a>
                         </div>
                     </section><!--.widget-simple-sm-->
                 </div>
