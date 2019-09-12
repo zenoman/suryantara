@@ -432,15 +432,3 @@ Route::get('cetak-gaji/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakgaji');
 
 
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

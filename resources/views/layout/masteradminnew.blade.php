@@ -194,6 +194,16 @@
 		<li class="nav-item">
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
 		</li>
+		<li class="nav-item">
+			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Cabang</a>
+				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Semua Cabang</a>
+			</div>
+		</li>		
 		@endif
 		<li class="nav-item">
 			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
