@@ -64,7 +64,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">username</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" placeholder="Masukkan Username Admin Minimal 5 Huruf"  name="username" required>
+							<p class="form-control-static"><input type="text" class="form-control" pattern="[a-zA-Z0-9]+" placeholder="Masukkan Username Admin Minimal 5 Huruf"  name="username" required autocomplete="new-username">
 							<span class="help-block">*Usernama Pengguna <b>harus</b> huruf dan angka</span>
 
 							@if($errors->has('username'))
@@ -78,7 +78,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Password</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password Admin Minimal 5 Huruf" name="password" required></p>
+							<p class="form-control-static"><input type="password" class="form-control" placeholder="Masukkan Password Admin Minimal 5 Huruf" name="password" required autocomplete="new-password"></p>
 							@if($errors->has('password'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('password')}}

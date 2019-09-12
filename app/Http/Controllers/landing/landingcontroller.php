@@ -13,14 +13,8 @@ use App\models\Daratanmodel;
 
 class landingcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     
-    public function index()
-    {
+    public function index(){
      $tarif_darat=Landingmodel::get();
      $lautan=DB::table('tarif_laut')->get();
      $desk=DB::table('setting')->get();

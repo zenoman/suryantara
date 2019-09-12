@@ -8,15 +8,13 @@ use Validator;
 use Session;
 class PembukuanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
     private $setting;   
     private $idc;
     function __construct(){            
         $this->setting = DB::table('setting')->limit(1)->get();
         $this->path = public_path('/tf');
+        $this->middleware('auth');
     }
 
      public function index(){         

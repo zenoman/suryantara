@@ -28,11 +28,11 @@ class cabangcontroller extends Controller
     //====================================================================
     public function create()
     {
-        if(Session::get('level') == 'programer'){
+        if(Session::get('level') == '1'){
              $setting = DB::table('setting')->get();
         return view('cabang/create',['title'=>$setting]);
         }else{
-        return redirect('dashboard');
+        return redirect('cabang');
         }
        
     }
@@ -75,7 +75,12 @@ class cabangcontroller extends Controller
     //====================================================================
     public function destroy($id)
     {
+        if(Session::get('level') == '1'){
         DB::table('cabang')->where('id',$id)->delete();
         return redirect('cabang')->with('status','Data berhasil dihapus');
+        }else{
+        return redirect('cabang');
+        }
+
     }
 }

@@ -21,7 +21,7 @@
     <div class="page-center">
         <div class="page-center-in">
             <div class="container-fluid">
-                <form class="sign-box" method="POST" action="{{ route('login') }}">
+                <form autocomplete="off" class="sign-box" method="POST" action="{{ route('login') }}">
                    @if($errors->any())
                     @foreach ($errors->all() as $error)
                       <div class="alert alert-danger alert-dismissable">
@@ -43,10 +43,10 @@
                     </div> 
                     <header class="sign-title">Sign In</header>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usename" name="username" required>
+                        <input type="text" class="form-control" placeholder="Usename" name="username" autocomplete="new-username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" id="pass" name="password" required>
+                        <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" id="pass" name="password" required>
                     </div>
                     <div class="checkbox">
                       <input type="checkbox" id="check-1" onclick="tampilsandi()">
