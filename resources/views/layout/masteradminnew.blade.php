@@ -27,7 +27,7 @@
 		window.onkeypress 	= resetTimer;
 
 		function logout() {
-			document.getElementById('logout-form').submit();
+			//document.getElementById('logout-form').submit();
 			}
 
 		function resetTimer(){
@@ -258,16 +258,23 @@
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
 		</li>
 		@endif
+
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item">
 			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
 		</li>
+		@endif
+
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Cabang</a>
 				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Semua Cabang</a>
 			</div>
-		</li>		
+		</li>
+		@endif
+
 	</ul>
 
 @yield('content')

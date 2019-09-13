@@ -150,7 +150,7 @@
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
 								<h5>{{$row->no_resi}}</h5>
-								
+								@if($row->pengiriman_via!='udara')
 								<table class="pull-right table-sm">
 									<tr>
 										<td>Operator</td>
@@ -173,6 +173,36 @@
 										<td>{{$row->jumlah}} Koli</td>
 									</tr>
 								</table>
+								@else
+									@if($row->dimensi!='-')
+									<div>Operator : {{$row->admin}}</div>
+									<table class="pull-right table-sm">
+									
+									<tr>
+										<td>Dimensi</td>
+										<td>Volumetrik</td>
+										<td>Berat Aktual</td>
+									</tr>
+									<?php 
+									$datavolumetrik = explode(',',$row->ukuran_volume);
+									$datadimensi = explode(',', $row->dimensi);
+									$databerat = explode(',',$row->berat);
+									for ($nomor=0; $nomor < $row->jumlah ; $nomor++) { ?> 
+										<tr>
+											<td>{{$datadimensi[$nomor]}}</td>
+											<td>{{$datavolumetrik[$nomor]}}</td>
+											<td>{{$databerat[$nomor]}}</td>
+										</tr>
+									<?php } ?>
+									<tr>
+										<td colspan="3" class="text-center">Total : {{$row->total_berat_udara}} Kg</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-center">Jumlah : {{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								@endif
+								@endif
 								<br>
 								
 							</div>
@@ -271,7 +301,7 @@
 							</div>
 							<div class="modal-footer">
 								@if($row->duplikat!='Y')
-								@if(Session::get('level')!='cs')
+								@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 										@if($row->status=='N')
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
 										@endif
@@ -328,8 +358,9 @@
                             </td>
                             <td class="text-center">
                             @if($row->duplikat!='Y')
-                           	@if(Session::get('level')!='cs')
-                            @if(Session::get('level')!='admin')
+                           	@if(Session::get('level') == '1' || Session::get('level') == '3' || 
+                           	Session::get('level') == '2' || 
+                           	Session::get('level') == '9')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
                             	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
@@ -337,9 +368,11 @@
                             	</a>
                                 {{csrf_field()}}
                                 <input type="hidden" name="aid" value="{{$row->id}}">
+                                @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
                                 <i class="fa fa-remove"></i>
                             	</button>
+                            	@endif
                             	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
@@ -352,9 +385,6 @@
                                 <i class="fa fa-ban"></i>
                             	</a>
                                 @endif
-                            @else
-                            -
-                            @endif
                              @else
                             -
                             @endif

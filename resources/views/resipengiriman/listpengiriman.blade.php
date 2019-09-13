@@ -47,9 +47,11 @@
 									
 								</div>
 							</div>
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 							<a href="{{url('updatepembayaranresi')}}" class="btn btn-success">
-                     <i class="fa fa-money"></i> Update Pembayaran</a>
-
+                     			<i class="fa fa-money"></i> Update Pembayaran
+                     		</a>
+                     		@endif
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -334,7 +336,7 @@
 							</div>
 							<div class="modal-footer">
 								@if($row->duplikat!='Y')
-								@if(Session::get('level')!='cs')
+								@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 										@if($row->status=='N')
 										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
 										@endif
@@ -390,18 +392,24 @@
                             </td>
                             <td class="text-center">
                             @if($row->duplikat!='Y')
-                            @if(Session::get('level')!='cs')	
-                            @if(Session::get('level')!='admin')
+                            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
                             	@if($row->kode_jalan=='')
                             	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
                             	
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i></button>
+	                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+	                                	<i class="fa fa-wrench"></i>
+	                            	</a>
+                            	
+                                	{{csrf_field()}}
+                                	
+                                	<input type="hidden" name="aid" value="{{$row->id}}">
+                                
+	                                @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+	                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+	                                	<i class="fa fa-remove"></i>
+	                            	</button>
+	                                @endif
+
                                 <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
                                 <i class="fa fa-ban"></i>
                             	</a>
@@ -415,10 +423,9 @@
                             	</a>
                                 @endif
                             @else
-                            -
-                            @endif
-                            @else
-                            -
+                            <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+                                <i class="fa fa-ban"></i>
+                            	</a>
                             @endif
                             @endif
                             </td>
