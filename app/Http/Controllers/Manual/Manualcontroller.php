@@ -159,7 +159,7 @@ class Manualcontroller extends Controller
         return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
     }
 
-    //==============================================================
+    //============================================================================
     public function ubah($id){
         $karyawan = DB::table('karyawan')->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -291,7 +291,8 @@ class Manualcontroller extends Controller
                 'kode_tujuan'   => $request->kota_tujuan,
                 'tgl'           =>  date('Y-m-d'),
                 'jumlah'        => $request->jumlah,
-                'berat'         => $request->berat,
+                'berat'         => $request->subberat,
+                'total_berat_udara' => $request->berat,
                 'dimensi'       => $request->dimensi,
                 'ukuran_volume' => $request->ukuran_volume,
                 'nama_pengirim' => $request->n_pengirim,
@@ -312,6 +313,7 @@ class Manualcontroller extends Controller
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => $tglbayar,
+                'maskapai_udara'=>$request->maskapai,
                 'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         
         DB::table('status_pengiriman')
@@ -324,6 +326,8 @@ class Manualcontroller extends Controller
         ]);
         return response()->json($simpan);
     }
+    
+    //============================================================================
     public function simpancity(Request $request){
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');

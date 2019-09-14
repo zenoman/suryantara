@@ -553,14 +553,6 @@ $(document).ready(function(){
 				subberat = subberat+''+beranya+',';
 				volume = volume+''+volum+',';
 			}
-			
-
-			// if (jumlahbarang >1) {
-			// var volume		="-";
-			// }else{
-			// var volume		= $("#volume1").val();	
-			// }
-			
 			var berat		= $("#totalberat").val();
 			var kota_asal	= $("#kota_asal").val();
 			var kota_tujuan = $("#cetak_kota_tujuan").html();

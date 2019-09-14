@@ -64,10 +64,10 @@
 	
 	                    <div class="dropdown user-menu">
 	                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">
+	                            <img src="{{asset('assets/img/avatar-2-64.png')}}" alt="">{{Auth::user()->username}}
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-	                        	 <span class="dropdown-item text-center text-muted">{{Auth::user()->nama}}</span>
+	                        	 <span class="dropdown-item text-center text-muted">{{Session::get('statusadmin')}}</span>
 	                        	 <div class="dropdown-divider"></div>
 	                        	 @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	                        	  <a class="dropdown-item" href="{{url('backup')}}"><span class="font-icon font-icon-download"></span>Back Up Data</a>
@@ -99,7 +99,11 @@
 			<a class="nav-link" href="{{url('dashboard')}}">Home</a>
 		</li>
 		<li class="nav-item dropdown">
-			@if(Session::get('level') == '1' || Session::get('level') == '3'|| Session::get('level') == '5')
+			@if(Session::get('level') == '1' 
+			|| Session::get('level') == '3'
+			|| Session::get('level') == '5'
+			|| Session::get('level') == '2'
+			|| Session::get('level') == '9')
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			@endif
 			<div class="dropdown-menu">
@@ -159,7 +163,9 @@
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
 				@endif
 
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
+				@endif
 			</div>
 		</li>
 		<li class="nav-item dropdown">

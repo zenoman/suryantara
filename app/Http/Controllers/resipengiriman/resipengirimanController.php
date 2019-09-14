@@ -11,6 +11,8 @@ class resipengirimanController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    //======================================================
     public function aksiupdatepembayaran(Request $request){
         if($request->statuslunas=='lunas'){
             $data=[

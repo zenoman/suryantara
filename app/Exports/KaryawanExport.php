@@ -20,8 +20,8 @@ class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize{
     public function headings(): array
     {
         return [
-            'Id',
-            'Id Karyawan',
+            'Id karyawan',
+            'kode Karyawan',
             'Nama Karyawan',
             'Telp',
             'Alamat',
