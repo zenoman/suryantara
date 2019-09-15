@@ -32,7 +32,7 @@ $(document).ready(function(){
             success:function (data){
 				return{
 					results : $.map(data, function (item){
-					cariitem(item.kode_antar,item.id,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
+					cariitem(item.pengiriman_via,item.total_berat_udara,item.kode_antar,item.id,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
 			},complete:function(){
@@ -42,13 +42,17 @@ $(document).ready(function(){
 	});
 
 	//===================================================
-	function cariitem(kodeantar,idresi,barang,jumlah,berat,pengirim,penerima,tujuan){
+	function cariitem(via,beratudara,kodeantar,idresi,barang,jumlah,berat,pengirim,penerima,tujuan){
         $('#penerima').val(penerima);
         $('#pengirim').val(pengirim);
 		$('#isipaket').val(barang);
         $('#tujuan').val(tujuan);
 		$('#jumlah').val(jumlah);
-		$('#berat').val(berat);
+		if(via=='udara'){
+            $('#berat').val(beratudara);
+        }else{
+            $('#berat').val(berat); 
+        }
 		$('#idresi').val(idresi);
 		$('#kodeantar').val(kodeantar);
 		$('#inputbayar').focus();

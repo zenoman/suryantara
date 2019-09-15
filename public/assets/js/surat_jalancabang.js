@@ -59,7 +59,7 @@ $(document).ready(function(){
                 success:function (data){
 				return {
 					results : $.map(data, function (item){
-					cariitem(item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
+					cariitem(item.pengiriman_via,item.total_berat_udara,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
 			},complete:function(){
@@ -98,13 +98,17 @@ $(document).ready(function(){
 			$('#penerima').focus();
 		});
 	//===================================================
-	function cariitem(barang,jumlah,berat,pengirim,penerima,tujuan){
+	function cariitem(via,beratudara,barang,jumlah,berat,pengirim,penerima,tujuan){
         $('#penerima').val(penerima);
         $('#pengirim').val(pengirim);
 		$('#isipaket').val(barang);
         $('#tujuan').val(tujuan);
 		$('#jumlah').val(jumlah);
-		$('#berat').val(berat);
+		if(via=='udara'){
+            $('#berat').val(beratudara);
+        }else{
+            $('#berat').val(berat); 
+        }
         $('#btntambah').focus();
 	}
 	//========================================================
@@ -163,6 +167,12 @@ $(document).ready(function(){
             var totalbt = 0;
             var no = 0;
             $.each(data,function(key, value){
+                var beratnya = '';
+                if(value.pengiriman_via=='udara'){
+                    beratnya = value.total_berat_udara;
+                }else{
+                    beratnya = value.berat 
+                }
                 no +=1;
                 rows = rows + '<tr>';
                 rows = rows + '<td class="text-center">' +value.no_resi+'</td>';
@@ -170,12 +180,12 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.nama_penerima+'</td>';
                 rows = rows + '<td>' +value.kode_tujuan+'</td>';
                 rows = rows + '<td class="text-center">' +value.jumlah+'</td>';
-                rows = rows + '<td class="text-center">' +value.berat+'</td>';
+                rows = rows + '<td class="text-center">' +beratnya+'</td>';
                 rows = rows + '<td>' +value.nama_barang+'</td>';
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
-                totalkg += Number(value.berat);
+                totalkg += Number(beratnya);
 
                 rows2 = rows2 + '<tr align="center">';
                 rows2 = rows2 + '<td>'+no+'</td>';
@@ -193,7 +203,7 @@ $(document).ready(function(){
                 rows2 = rows2 + '<td>'+value.nama_penerima+'</td>';
                 rows2 = rows2 + '<td>' +value.kode_tujuan+'</td>';
                 rows2 = rows2 + '<td>' +value.jumlah+'</td>';
-                rows2 = rows2 + '<td>' +value.berat+'</td>';
+                rows2 = rows2 + '<td>' +beratnya+'</td>';
                 rows2 = rows2 + '<td>' +value.nama_barang+'</td>';
                 if(value.metode_bayar=='cash'){
                         rows2 = rows2 + '<td>-</td>';
@@ -221,7 +231,7 @@ $(document).ready(function(){
                 rows3 = rows3 + '<td>'+value.nama_penerima+'</td>';
                 rows3 = rows3 + '<td>' +value.kode_tujuan+'</td>';
                 rows3 = rows3 + '<td>' +value.jumlah+'</td>';
-                rows3 = rows3 + '<td>' +value.berat+'</td>';
+                rows3 = rows3 + '<td>' +beratnya+'</td>';
                 rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
                 if(value.metode_bayar=='cash'){
                         rows3 = rows3 + '<td align="left">'+"Rp. "+rupiah(value.total_biaya)+'</td>';

@@ -41,6 +41,8 @@ class resipengirimanController extends Controller
                     ->where([
                         ['no_resi','like','%'.$cari.'%'],
                         ['id_cabang','=',Session::get('cabang')],
+                        ['total_biaya','!=','0'],
+                        ['duplikat','!=','Y']
                     ])
                     ->whereNull('tgl_lunas')
                     ->get();
