@@ -181,6 +181,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -203,6 +204,7 @@ class Manualcontroller extends Controller
                 'biaya_asuransi'=> $request->biaya_asu,
                 'total_biaya'   => $request->total_biaya,
                 'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,
@@ -231,6 +233,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -253,6 +256,7 @@ class Manualcontroller extends Controller
                     'biaya_asuransi'    => $request->biaya_asu,
                     'total_biaya'       => $request->total_biaya,
                     'total_bayar'       => $totalbayar,
+                    'kekurangan'    => $kekurangan,
                     'satuan'            => $request->satuan,
                     'metode_bayar'      => $request->metode,
                     'biaya_ppn'         => $request->ppn,
@@ -281,6 +285,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -303,7 +308,8 @@ class Manualcontroller extends Controller
                 'biaya_smu' => $request->biaya_smu,
                 'biaya_karantina' => $request->biaya_karantina,
                 'total_biaya'   => $request->total_biaya,
-                'total_bayar'       => $totalbayar,
+                'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,
@@ -336,6 +342,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -358,6 +365,7 @@ class Manualcontroller extends Controller
                 'biaya_asuransi'=> $request->biaya_asu,
                 'total_biaya'   => $request->total_biaya,
                 'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,

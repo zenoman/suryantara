@@ -185,7 +185,8 @@ class suratjalanController extends Controller
                         'total_bayar',
                         'kode_antar',
                         'pengiriman_via',
-                        'total_berat_udara')
+                        'total_berat_udara',
+                        'kekurangan')
                     ->where('id',$id)
                     ->get();
             
