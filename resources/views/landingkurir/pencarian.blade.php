@@ -101,7 +101,7 @@
     <div class="card-header bg-dark text-white">Informasi & Keterangan</div>
   <div class="card-body text-left">
      @foreach($des as $row)
-    {!!$row->desk_darat!!}
+    {!!$row->desk_city_kurir!!}
     @endforeach
   </div>
 </div>
