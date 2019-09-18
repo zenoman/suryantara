@@ -161,9 +161,12 @@
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
+<<<<<<< Updated upstream
 				@endif
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+=======
+>>>>>>> Stashed changes
 				<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
 				
 			</div>
@@ -233,8 +236,11 @@
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 			</div>
 		</li>		
+<<<<<<< Updated upstream
 		@endif
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
+=======
+>>>>>>> Stashed changes
 		<li class="nav-item">
 			<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
 		</li>
@@ -254,6 +260,7 @@
 				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Semua Cabang</a>
 			</div>
 		</li>		
+<<<<<<< Updated upstream
 		@endif
 
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
@@ -272,6 +279,9 @@
 		</li>
 		@endif
 
+=======
+		
+>>>>>>> Stashed changes
 	</ul>
 
 @yield('content')

@@ -17,6 +17,10 @@ class PembukuanController extends Controller
         $this->middleware('auth');
         if(!Session::get('nama')){
             return redirect()->action('Dashboardcontroller@index');
+<<<<<<< Updated upstream
+=======
+        }
+>>>>>>> Stashed changes
     }
 
      public function index(){    
