@@ -279,14 +279,10 @@ class Dashboardcontroller extends Controller {
     //================================================
     function buatsession(){
         if(!session::get('username')){
-<<<<<<< Updated upstream
             $dataadmin = 
         DB::table('users')
         ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek,roles.level as statusadmin'))
-=======
-        $dataadmin = DB::table('users')
-        ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek'))
->>>>>>> Stashed changes
+
         ->leftjoin('cabang','cabang.id','=','users.id_cabang')
         ->leftjoin('roles','roles.id','=','users.level')
         ->where([['users.username',Auth::user()->username],['users.password',Auth::user()->password]])

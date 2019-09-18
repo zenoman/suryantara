@@ -17,13 +17,9 @@ class PembukuanController extends Controller
         $this->middleware('auth');
         if(!Session::get('nama')){
             return redirect()->action('Dashboardcontroller@index');
-<<<<<<< Updated upstream
-=======
-        }
->>>>>>> Stashed changes
     }
-
-     public function index(){    
+    }
+      function index(){    
         $tglawal=date('Y-m-d',strtotime('first day of previous month'));
         $tglakhir=date('Y-m-d',strtotime('last day of previous month')); 
         $lastbul= date('n',strtotime('last day of previous month')); 
