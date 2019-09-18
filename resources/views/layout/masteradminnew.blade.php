@@ -161,14 +161,12 @@
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
-<<<<<<< Updated upstream
+
 				@endif
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-=======
->>>>>>> Stashed changes
 				<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
-				
+				@endif
 			</div>
 		</li>
 		<li class="nav-item dropdown">
@@ -237,11 +235,8 @@
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 			</div>
 		</li>		
-<<<<<<< Updated upstream
 		@endif
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
-=======
->>>>>>> Stashed changes
 		<li class="nav-item">
 			<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
 		</li>
@@ -250,18 +245,7 @@
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 		<li class="nav-item">
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
-		</li>
-		<li class="nav-item">
-			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
-		</li>
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Cabang</a>
-				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Semua Cabang</a>
-			</div>
-		</li>		
-<<<<<<< Updated upstream
+		</li>	
 		@endif
 
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
@@ -279,10 +263,6 @@
 			</div>
 		</li>
 		@endif
-
-=======
-		
->>>>>>> Stashed changes
 	</ul>
 
 @yield('content')

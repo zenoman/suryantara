@@ -33,9 +33,9 @@
 					</select>
 					<br><hr>
 					<label class="form-label" for="exampleInputDisabled">No Resi</label>
-					<select class="form-control" name="resinya" multiple>
+					<select class="form-control" name="resinya[]" multiple>
 						@foreach($resinnya as $resi)
-						<option value="{{$resi->id}}">
+						<option value="{{$resi->id}}-{{$resi->no_resi}}">
 							{{$resi->no_resi}}
 						</option>
 						@endforeach

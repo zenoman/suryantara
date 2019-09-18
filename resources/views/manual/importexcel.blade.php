@@ -19,7 +19,6 @@
 					<div class="tbl-row">
 						<div class="tbl-cell">
 							<h2>Export Import excel</h2>
-							<!-- <div class="subtitle">Welcome to Ultimate Dashboard</div> -->
 						</div>
 					</div>
 				</div>
@@ -53,7 +52,7 @@
 					<div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
 												<br>
 
-                                               <li>Download file template excel dan data karyawan pada tab <b>import Excel.</b>
+                                               <li>Download file <b>template excel</b>, <b>data karyawan</b> dan <b>data resi</b> pada tab <b>import Excel.</b>
                                                </li>
                                                <br>
                                                <li>
@@ -65,6 +64,9 @@
                                                <i>Contoh pengisian template resi manual</i><br>
                                                 <img src="{{url('img/import_export/manual_2.PNG')}}">
                                                 <br><br>
+                                               <div class="alert alert-danger">
+                                                <b>NB</b> : Pastikan Nomor Resi <b>sesuai</b> dengan data resi di file excel.
+                                               </div>
                                                <div class="alert alert-danger">
                                                 <b>NB</b> : Pastikan Untuk <b>tidak</b> menggunakan kode tujuan yang sudah ada. Kode tujuan yang sama <b>Otomatis tidak tersimpan</b>.
                                                </div>
@@ -80,6 +82,7 @@
 					<div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
 						<div class="panel-body" align="center">
 							<a href="{{url('Manual/downloadkaryawan')}}" class="btn btn-primary">Download Data Karyawan</a>
+							<a href="{{url('Manual/dowloadnomorresi')}}" class="btn btn-success">Download Data Resi</a>
                                     <a href="{{url('Manual/download')}}" class="btn btn-info">Download Template Excel</a>
 
                         </div>

@@ -340,6 +340,7 @@ Route::post('/karyawan/prosesimportexcel','Karyawan\Karyawancontroller@prosesimp
 Route::get('/karyawan/karyawanexport','Karyawan\Karyawancontroller@exsportexcel');
 Route::get('/karyawan/downlod','Karyawan\Karyawancontroller@downloadtemplatejbt');
 Route::get('/karyawan/download','Karyawan\Karyawancontroller@downloadtemplate');
+
 //==============================================================resi manual
 Route::post('/simpanmanualcity','Manual\Manualcontroller@simpancity');
 Route::post('/simpanmanualdarat','Manual\Manualcontroller@simpandarat');
@@ -358,6 +359,7 @@ Route::get('/Manual/importexcel','Manual\Manualcontroller@importexcel');
 Route::post('/Manual/prosesimportexcel','Manual\Manualcontroller@prosesimportexcel');
 Route::get('/Manual/download','Manual\Manualcontroller@downloadtemplate');
 Route::get('/Manual/downloadkaryawan','Manual\Manualcontroller@dowloadkaryawan');
+Route::get('/Manual/dowloadnomorresi','Manual\Manualcontroller@dowloadnomorresi');
 //==============================================================jabatan
 Route::get('/jabatan','Jabatan\Jabatancontroller@index');
 Route::post('/jabatan','Jabatan\Jabatancontroller@store');

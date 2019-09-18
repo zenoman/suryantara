@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Imports\ManualImport;
 use App\Exports\KaryawanExport;
+use App\Exports\resimentah;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 class Manualcontroller extends Controller
@@ -46,12 +47,17 @@ class Manualcontroller extends Controller
             $headers = array(
               'Content-Type: application/excel',
             );
-    return Response::download($file, 'template resi manual.xlsx', $headers);
+        return Response::download($file, 'template resi manual.xlsx', $headers);
     }
 
     //==============================================================
     public function dowloadkaryawan(){
         return Excel::download(new KaryawanExport, 'karyawan.xlsx');
+    }
+
+    //==============================================================
+    public function dowloadnomorresi(){
+        return Excel::download(new resimentah, 'Nomor_resi.xlsx');
     }
 
     //========================================================
@@ -74,32 +80,27 @@ class Manualcontroller extends Controller
     //==============================================================
     public function store(Request $request)
     {
-        dd($request);
-        $rules = ['kode'  =>'required'];
- 
-        $customMessages = [
-        'required'  => 'Maaf, :attribute harus di isi'];
-
-        $this->validate($request,$rules,$customMessages);
+        $data=$request->resinya;
         
-        $data=$request->kode;
         for ($i=0; $i < count($data) ; $i++){ 
             if($i == count($data)-1){
-                $final = $data[$i];
+                $kode = $data[$i];
             }else{
-                $final = $data[$i];
+                $kode = $data[$i];
             }
-        $caridata = DB::table('resi_pengiriman')->where('no_resi',$final)->count();
-        if ($caridata == 0) {
-        Manualmodel::create([
-            'pemegang' => $request->pemegang,
-            'no_resi'  => $final,
-            'metode_input'=>'manual',
-            'id_cabang'=>Session::get('cabang')
+            
+            $newkode = explode('-',$kode);
+            
+            $isinya[] =[
+                'pemegang' => $request->pemegang,
+                'no_resi'  => $newkode[1],
+                'metode_input'=>'manual',
+                'id_cabang'=>Session::get('cabang')
+            ];
 
-        ]);
+            DB::table('resi_mentah')->where('id',$newkode[0])->delete();
         }
-        }
+        DB::table('resi_pengiriman')->insert($isinya);
         return redirect('Manual')->with('status','Input Data Sukses');
     }
 
