@@ -162,8 +162,14 @@
                                                 </div> 
                                                 <div class="col-xl-12 dashboard-column">
                                                     <div class="form-group form-inline">
-                                                        <label for="" class="mr-2">Total Pemasukan Resi Lunas </label> 
+                                                        <label for="" class="mr-2">Total Debit </label> 
                                                         <label for="">Rp. {{number_format($in)}}</label>                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 dashboard-column">
+                                                    <div class="form-group form-inline">
+                                                        <label for="" class="mr-2">Total Kredit </label> 
+                                                        <label for="">Rp. {{number_format($kred)}}</label>                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12 dashboard-column">
@@ -202,12 +208,41 @@
                                     <div class="add-customers-screen-user">
                                         <i class="fa fa-car"></i>
                                     </div>
-                                    <a href="{{url('baya-kendaraan')}}" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</a>                                                                                   
+                                    {{-- <Button data-target="#kendaraan" data-toggle="modal" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</Button>    --}}
+                                    <a href="{{url('armada')}}" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</a>
                                 </div>
                             </div>
                         </div>                       
                     </div>
-                    
+                    {{-- Modal Kendaraan --}}
+                    {{-- <div class="modal fade in" id="kendaraan">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="modal-title">
+                                        List Armada
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Nomor</th>
+                                                <th>Armada</th>
+                                                <th>No Polisi</th>
+                                                <th>Nomor Rangka</th>
+                                                <th>Nomor Mesin</th>
+                                                <th>Warna</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
                     <div class="col-xl-3 dashboard-column">
                         <div class="card">
                             <div class="add-customers-screen tbl">
@@ -267,8 +302,9 @@
         // set otomatis nominal saldo yang dtransfer
         var batas={{$sal->saldo}};
         var tsal={{$in}};
-        var tf=tsal-batas;
-        var sis=tsal-tf;
+        var kred={{$kred}}
+        var tf=tsal-kred-batas;
+        var sis=tsal-tf-kred;
         if(tf<batas){
             $('#btntf').prop('disabled',true); 
         }else{
@@ -282,7 +318,7 @@
         // hitung nilai
         var nom=n;
         var sisa=tsal-nom;
-        $('#sisal').val(sisa);
+        $('#sisal').val(sis);
         if(sisa<batas){
             $('#btntf').prop('disabled',true);              
         }else{
