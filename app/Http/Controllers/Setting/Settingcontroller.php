@@ -86,7 +86,8 @@ class Settingcontroller extends Controller
                 'desk_udara'=>$request->desk_udara,
                 'desk_darat'=>$request->desk_darat,
                 'desk_laut'=>$request->desk_laut,
-                'pengumuman'=>$request->pengumuman
+                'pengumuman'=>$request->pengumuman,
+                'desk_city_kurir'=>$request->desk_city
             ]);
         }else if($request->hasFile('logo')){
             Settingmodel::find($id)->update([
@@ -99,7 +100,8 @@ class Settingcontroller extends Controller
                 'desk_udara'=>$request->desk_udara,
                 'desk_darat'=>$request->desk_darat,
                 'desk_laut'=>$request->desk_laut,
-                'pengumuman'=>$request->pengumuman]);
+                'pengumuman'=>$request->pengumuman,
+                'desk_city_kurir'=>$request->desk_city]);
         }else if($request->hasFile('icon','logo')){
             Settingmodel::find($id)->update([
                 'namaweb'=>$request->namaweb,
@@ -113,7 +115,8 @@ class Settingcontroller extends Controller
                 'desk_udara'=>$request->desk_udara,
                 'desk_darat'=>$request->desk_darat,
                 'desk_laut'=>$request->desk_laut,
-                'pengumuman'=>$request->pengumuman
+                'pengumuman'=>$request->pengumuman,
+                'desk_city_kurir'=>$request->desk_city
             ]);
         }else{
             Settingmodel::find($id)->update([
@@ -126,7 +129,8 @@ class Settingcontroller extends Controller
                 'desk_udara'=>$request->desk_udara,
                 'desk_darat'=>$request->desk_darat,
                 'desk_laut'=>$request->desk_laut,
-                'pengumuman'=>$request->pengumuman
+                'pengumuman'=>$request->pengumuman,
+                'desk_city_kurir'=>$request->desk_city
             ]);
         }
 

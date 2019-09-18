@@ -159,7 +159,7 @@ class Manualcontroller extends Controller
         return view('manual/edit',['title'=>$webinfo,'data'=>$data,'karyawan'=>$karyawan,'kategori'=>$kategori]);
     }
 
-    //==============================================================
+    //============================================================================
     public function ubah($id){
         $karyawan = DB::table('karyawan')->get();
         $webinfo = DB::table('setting')->limit(1)->get();
@@ -181,6 +181,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -203,6 +204,7 @@ class Manualcontroller extends Controller
                 'biaya_asuransi'=> $request->biaya_asu,
                 'total_biaya'   => $request->total_biaya,
                 'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,
@@ -231,6 +233,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -253,6 +256,7 @@ class Manualcontroller extends Controller
                     'biaya_asuransi'    => $request->biaya_asu,
                     'total_biaya'       => $request->total_biaya,
                     'total_bayar'       => $totalbayar,
+                    'kekurangan'    => $kekurangan,
                     'satuan'            => $request->satuan,
                     'metode_bayar'      => $request->metode,
                     'biaya_ppn'         => $request->ppn,
@@ -281,6 +285,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -291,7 +296,8 @@ class Manualcontroller extends Controller
                 'kode_tujuan'   => $request->kota_tujuan,
                 'tgl'           =>  date('Y-m-d'),
                 'jumlah'        => $request->jumlah,
-                'berat'         => $request->berat,
+                'berat'         => $request->subberat,
+                'total_berat_udara' => $request->berat,
                 'dimensi'       => $request->dimensi,
                 'ukuran_volume' => $request->ukuran_volume,
                 'nama_pengirim' => $request->n_pengirim,
@@ -302,7 +308,8 @@ class Manualcontroller extends Controller
                 'biaya_smu' => $request->biaya_smu,
                 'biaya_karantina' => $request->biaya_karantina,
                 'total_biaya'   => $request->total_biaya,
-                'total_bayar'       => $totalbayar,
+                'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,
@@ -312,6 +319,7 @@ class Manualcontroller extends Controller
                 'alamat_pengirim'=>$request->alamat_pengirim,
                 'alamat_penerima'=>$request->alamat_penerima,
                 'tgl_lunas' => $tglbayar,
+                'maskapai_udara'=>$request->maskapai,
                 'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota')]);
         
         DB::table('status_pengiriman')
@@ -324,6 +332,8 @@ class Manualcontroller extends Controller
         ]);
         return response()->json($simpan);
     }
+    
+    //============================================================================
     public function simpancity(Request $request){
         if($request->status_bayar == 'lunas'){
             $tglbayar =date('Y-m-d');
@@ -332,6 +342,7 @@ class Manualcontroller extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
             $simpan = DB::table('resi_pengiriman')
                 ->where('id',$request->idresi)
                 ->update([
@@ -354,6 +365,7 @@ class Manualcontroller extends Controller
                 'biaya_asuransi'=> $request->biaya_asu,
                 'total_biaya'   => $request->total_biaya,
                 'total_bayar'   => $totalbayar,
+                'kekurangan'    => $kekurangan,
                 'satuan'        => $request->satuan,
                 'metode_bayar'  => $request->metode,
                 'biaya_ppn'     => $request->ppn,

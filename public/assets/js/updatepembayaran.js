@@ -31,7 +31,7 @@ $(document).ready(function(){
                 success:function (data){
 				return {
 					results : $.map(data, function (item){
-					cariitem(item.id,item.total_biaya,item.total_bayar,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
+					cariitem(item.kekurangan,item.pengiriman_via,item.total_berat_udara,item.id,item.total_biaya,item.total_bayar,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
 			},complete:function(){
@@ -40,18 +40,22 @@ $(document).ready(function(){
             });
 		});
 	//===================================================
-	function cariitem(idresi,totalbiaya,totalbayar,barang,jumlah,berat,pengirim,penerima,tujuan){
+	function cariitem(kekurangan,via,beratudara,idresi,totalbiaya,totalbayar,barang,jumlah,berat,pengirim,penerima,tujuan){
         $('#penerima').val(penerima);
         $('#pengirim').val(pengirim);
 		$('#isipaket').val(barang);
         $('#tujuan').val(tujuan);
 		$('#jumlah').val(jumlah);
-		$('#berat').val(berat);
+		if(via=='udara'){
+            $('#berat').val(beratudara);
+        }else{
+            $('#berat').val(berat); 
+        }
 		$('#tampil_total_biaya').html("Rp. "+rupiah(totalbiaya));
 		$('#totalbiaya').val(totalbiaya);
 		$('#tampil_total_bayar').html("Rp. "+rupiah(totalbayar));
-		$('#tampil_total_kekurangan').html("Rp. "+rupiah(totalbiaya - totalbayar));
-		$('#totalkekurangan').val(totalbiaya - totalbayar);
+		$('#tampil_total_kekurangan').html("Rp. "+rupiah(kekurangan));
+		$('#totalkekurangan').val(kekurangan);
 		$('#totalbayar').val(totalbayar);
 		$('#idresi').val(idresi);
 		$('#inputbayar').focus();

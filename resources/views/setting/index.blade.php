@@ -111,6 +111,12 @@
               <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="info laut" name="desk_laut" id="desk_laut">{{$row->desk_laut}}</textarea></p>
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-sm-2 form-control-label semibold">Info City Kurir</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><textarea rows="4" class="form-control ckeditor" placeholder="info city kurir" name="desk_city" id="desk_city">{{$row->desk_city_kurir}}</textarea></p>
+            </div>
+          </div>
 					 					<div class="form-group row">
                               <label  class="col-sm-2 form-control-label semibold">Ganti Icon</label>
                               <div class="col-sm-10">
@@ -215,6 +221,25 @@
     <script>
     ClassicEditor
     .create( document.querySelector('#pengumuman'),{
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    }
+    )
+
+    .catch( error => {
+        console.log( error );
+    });
+
+    </script>
+     <script>
+    ClassicEditor
+    .create( document.querySelector('#desk_city'),{
         toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
         heading: {
             options: [

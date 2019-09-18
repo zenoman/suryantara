@@ -44,6 +44,7 @@
                 	@endif
                 @endforeach
 
+                @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
               	@if($jumlahpajakarmada > 0)
               	<div class="col-xl-12 dahsboard-column">
               		<section class="box-typical box-typical-dashboard panel panel-default scrollable">
@@ -80,8 +81,10 @@
 	                </section>
 				<br>
 			</div>
+			@endif
 			  	@endif
 
+			  	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 			  	@if($jmlkarya != $jmlabsen)
 	        	<div class="col-xl-12 dahsboard-column">
 	        		<section class="widget widget-simple-sm-fill green">
@@ -93,6 +96,9 @@
 					</section>
 	        	</div>
 	        	@endif
+	        	@endif
+
+	        	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	        	<div class="col-xl-4 dahsboard-column">
 	        		@foreach($uanghariini as $rows)
 					<section class="widget widget-simple-sm-fill">
@@ -121,16 +127,21 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
+	        	@endif
+	        	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
-            <header class="card-header">
-                Pengiriman Minggu Ini
-            </header>
-            <div class="card-block">
-                <div id="bar-chart"></div>
-            </div>
-        </section>
+		            <header class="card-header">
+		                Pengiriman Minggu Ini
+		            </header>
+		            <div class="card-block">
+		                <div id="bar-chart"></div>
+		            </div>
+		        </section>
     			</div>
+    			@endif
+
+    			@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
@@ -160,6 +171,9 @@
 	                    </div>
 	                </section>
 	            </div>
+	            @endif
+
+	            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	            <div class="col-xl-6 dahsboard-column">
 	                <section class="box-typical box-typical-dashboard panel panel-default scrollable">
 	                    <header class="box-typical-header panel-heading">
@@ -192,6 +206,7 @@
 	                    </div>
 	                </section>
 	            </div>
+	            @endif
 	        </div>
 	    </div>
 	</div>

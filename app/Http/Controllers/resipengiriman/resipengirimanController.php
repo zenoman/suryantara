@@ -11,16 +11,20 @@ class resipengirimanController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    //======================================================
     public function aksiupdatepembayaran(Request $request){
         if($request->statuslunas=='lunas'){
             $data=[
             'tgl_lunas'=>date('Y-m-d'),
-            'total_bayar'=>$request->totalbiaya
+            'total_bayar'=>$request->totalbiaya,
+            'kekurangan'=>0
             ];    
         }else{
             $total = $request->totalbayar + $request->inputbayar;
             $data=[
-            'total_bayar'=>$total
+            'total_bayar'=>$total,
+            'kekurangan'=>$request->totalkekurangan - $request->inputbayar
             ];    
         }
     DB::table('resi_pengiriman')
@@ -39,6 +43,8 @@ class resipengirimanController extends Controller
                     ->where([
                         ['no_resi','like','%'.$cari.'%'],
                         ['id_cabang','=',Session::get('cabang')],
+                        ['total_biaya','!=','0'],
+                        ['duplikat','!=','Y']
                     ])
                     ->whereNull('tgl_lunas')
                     ->get();
@@ -61,7 +67,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-
+        $kekurangan = $request->total_biaya - $totalbayar; 
        $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
        ->update([
@@ -85,6 +91,7 @@ class resipengirimanController extends Controller
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
         'total_bayar'   => $totalbayar,
+        'kekurangan'    => $kekurangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -440,7 +447,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-
+        $kekurangan = $request->total_biaya - $totalbayar; 
         $data = [
             'no_resi'           => $request->noresi,
             'admin'             => $request->iduser,
@@ -462,6 +469,7 @@ class resipengirimanController extends Controller
             'biaya_asuransi'    => $request->biaya_asu,
             'total_biaya'       => $request->total_biaya,
             'total_bayar'       => $totalbayar,
+            'kekurangan'        => $kekurangan,
             'satuan'            => $request->satuan,
             'metode_bayar'      => $request->metode,
             'biaya_ppn'         => $request->ppn,
@@ -504,7 +512,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-
+        $kekurangan = $request->total_biaya - $totalbayar; 
         $data = [
             'no_resi'           => $request->noresi,
             'admin'             => $request->iduser,
@@ -526,6 +534,7 @@ class resipengirimanController extends Controller
             'biaya_asuransi'    => $request->biaya_asu,
             'total_biaya'       => $request->total_biaya,
             'total_bayar'       => $totalbayar,
+            'kekurangan'        => $kekurangan,
             'satuan'            => $request->satuan,
             'metode_bayar'      => $request->metode,
             'biaya_ppn'         => $request->ppn,
@@ -570,6 +579,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
@@ -591,6 +601,7 @@ class resipengirimanController extends Controller
             'biaya_asuransi'=> $request->biaya_asu,
             'total_biaya'   => $request->total_biaya,
             'total_bayar'   => $totalbayar,
+            'kekurangan'    => $kekurangan,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
@@ -635,7 +646,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-        
+        $kekurangan = $request->total_biaya - $totalbayar;
         $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
@@ -657,6 +668,7 @@ class resipengirimanController extends Controller
             'biaya_asuransi'=> $request->biaya_asu,
             'total_biaya'   => $request->total_biaya,
             'total_bayar'   => $totalbayar,
+            'kekurangan'    => $kekurangan,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
@@ -700,7 +712,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
-        
+        $kekurangan = $request->total_biaya - $totalbayar;
         $data = [
             'no_resi'       => $request->noresi,
             'admin'         => $request->iduser,
@@ -720,10 +732,11 @@ class resipengirimanController extends Controller
             'telp_pengirim' => $request->t_pengirim,
             'telp_penerima' => $request->t_penerima,
             'biaya_kirim'   => $request->biaya_kirim,
-            'biaya_packing' => $request->biaya_packing,
-            'biaya_asuransi'=> $request->biaya_asu,
+            'biaya_smu' => $request->biaya_smu,
+            'biaya_karantina'=> $request->biaya_karantina,
             'total_biaya'   => $request->total_biaya,
             'total_bayar'   => $totalbayar,
+            'kekurangan'    => $kekurangan,
             'satuan'        => $request->satuan,
             'metode_bayar'  => $request->metode,
             'biaya_ppn'     => $request->ppn,
@@ -766,9 +779,10 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
-       ->update([
+        ->update([
         'admin'      => $request->iduser,
         'nama_barang'   => $request->nama_barang,
         'pengiriman_via'=> 'laut',
@@ -789,6 +803,7 @@ class resipengirimanController extends Controller
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
         'total_bayar'   => $totalbayar,
+        'kekurangan'    => $kekurangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -806,6 +821,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $simpan = DB::table('resi_pengiriman')
         ->where('id',$request->idresi)
        ->update([
@@ -829,6 +845,7 @@ class resipengirimanController extends Controller
         'biaya_asuransi'=> $request->biaya_asu,
         'total_biaya'   => $request->total_biaya,
         'total_bayar'   => $totalbayar,
+        'kekurangan'    => $kekurangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,
@@ -845,6 +862,7 @@ class resipengirimanController extends Controller
             $tglbayar =null;
             $totalbayar = $request->dibayar;
         }
+        $kekurangan = $request->total_biaya - $totalbayar;
         $simpan = DB::table('resi_pengiriman')
        ->where('id',$request->idresi)
        ->update([
@@ -868,6 +886,7 @@ class resipengirimanController extends Controller
         'biaya_karantina' => $request->biaya_karantina,
         'total_biaya'   => $request->total_biaya,
         'total_bayar'   => $totalbayar,
+        'kekurangan'    => $kekurangan,
         'satuan'        => $request->satuan,
         'metode_bayar'  => $request->metode,
         'biaya_ppn'     => $request->ppn,

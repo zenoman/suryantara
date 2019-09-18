@@ -185,8 +185,9 @@ class Dashboardcontroller extends Controller {
         if(!session::get('username')){
             $dataadmin = 
         DB::table('users')
-        ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek'))
+        ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek,roles.level as statusadmin'))
         ->leftjoin('cabang','cabang.id','=','users.id_cabang')
+        ->leftjoin('roles','roles.id','=','users.level')
         ->where([['users.username',Auth::user()->username],['users.password',Auth::user()->password]])
         ->get();
         foreach ($dataadmin as $dataadmin) {
@@ -197,6 +198,7 @@ class Dashboardcontroller extends Controller {
             $kota=$dataadmin->kota;
             $koderesi=$dataadmin->koderesi;
             $norek = $dataadmin->norek;
+            $statusadmin = $dataadmin->statusadmin;
         }
 
         $data = DB::table('users')->where([['username',Auth::user()->username],['password',Auth::user()->password]])->count();
@@ -204,6 +206,7 @@ class Dashboardcontroller extends Controller {
                 Session::put('username',Auth::user()->username);
                 Session::put('id',$id);
                 Session::put('level',$level);
+                Session::put('statusadmin',$statusadmin);
                 Session::put('login',TRUE);
                 Session::put('statuslogin','aktiv');
                 Session::put('cabang',$cabang);

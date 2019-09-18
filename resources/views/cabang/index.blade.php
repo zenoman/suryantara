@@ -30,7 +30,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-                    @if(Session::get('level') == 'programer')
+                    @if(Session::get('level') == '1')
 					<a href="{{url('cabang/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<br><br>
 					@endif
@@ -72,7 +72,7 @@
                                         	{{csrf_field()}}
                                         	
                                         	<input type="hidden" name="_method" value="delete">
-                                        	@if(Session::get('level') == 'programer')
+                                        	@if(Session::get('level') == '1')
                                 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                                 @endif
                     					</form>
