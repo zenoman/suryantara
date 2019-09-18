@@ -245,6 +245,7 @@
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 		<li class="nav-item">
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
+
 		</li>	
 		@endif
 
@@ -263,6 +264,7 @@
 			</div>
 		</li>
 		@endif
+
 	</ul>
 
 @yield('content')

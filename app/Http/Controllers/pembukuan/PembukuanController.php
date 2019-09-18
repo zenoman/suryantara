@@ -17,13 +17,9 @@ class PembukuanController extends Controller
         $this->middleware('auth');
         if(!Session::get('nama')){
             return redirect()->action('Dashboardcontroller@index');
-<<<<<<< Updated upstream
-=======
         }
->>>>>>> Stashed changes
     }
-
-     public function index(){    
+      function index(){    
         $tglawal=date('Y-m-d',strtotime('first day of previous month'));
         $tglakhir=date('Y-m-d',strtotime('last day of previous month')); 
         $lastbul= date('n',strtotime('last day of previous month')); 
@@ -32,25 +28,25 @@ class PembukuanController extends Controller
         $bsaldo=DB::table('set_saldo')
                 ->where('id_cabang',$idc)
                 ->first();
-        $in=DB::table('resi_pengiriman')
-        ->select(DB::raw('sum(resi_pengiriman.total_bayar) as totalres'))   
-        ->where('resi_pengiriman.duplikat','!=','Y')
-        ->where('transfer','N')
-        ->whereBetween('tgl',[$tglawal,$tglakhir])
-        ->whereNotNull('tgl_lunas')
+        $in=DB::table('neraca')
+        ->select(DB::raw('sum(debit) as totaldeb, sum(kredit) as totalkred'))   
+        ->where('bulan',$lastbul)
+        ->where('tahun',$latth)
         ->where('id_cabang',$idc)        
         ->first();
         $cab=DB::table('cabang')
             ->where('id','1')
             ->limit(1)
             ->get();
+        
         $cektgl=DB::table('transfer')                
                 ->where('id_cabang',$idc)
                 ->where('bulan',$lastbul)
                 ->where('tahun',$latth)
                 ->count();        
-        $totsal=$in->totalres;
-        return view('pembukuan.home',['title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl]);
+        $totsal=$in->totaldeb;
+        $tolkre=$in->totalkred;
+        return view('pembukuan.home',['title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl,'kred'=>$tolkre]);
     }
     function showtf(){
         // -set date
