@@ -1,5 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Input;
+
+Route::post('/distribusiresi/prosesimportexcel','distribusiresi\distribusiresicontroller@prosesimportexcel');
+Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@downloadtemplate');
+Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
+Route::resource('distribusiresi','distribusiresi\distribusiresicontroller');
+
 //================================================transit
 Route::get('selesaitransit/{kode}','transit\transitcontroller@selesaitransit');
 Route::post('simpantransit','transit\transitcontroller@store');
@@ -8,12 +14,14 @@ Route::get('carisuratjln/{id}','transit\transitcontroller@caridetailsj');
 Route::get('carisuratjln','transit\transitcontroller@carisuratjalan');
 Route::get('tambahtransit','transit\transitcontroller@create');
 Route::get('listtransit','transit\transitcontroller@index');
+
 //==============================================penerimaan
 Route::post('/paketditerima','penerimaan\penerimaancontroller@paketditerima');
 Route::get('/carinoresipenerimaan','penerimaan\penerimaancontroller@cariresi');
 Route::get('/inputpenerimaan','penerimaan\penerimaancontroller@inputpenerimaan');
 Route::get('listpenerimaan','penerimaan\penerimaancontroller@index');
 Route::get('terimasuratjalan/{kode}','penerimaan\penerimaancontroller@terima');
+
 //============================================ envoice
 Route::get('cetakulangenvoice/{kode}','envoice\envoicecontroller@cetakulang');
 Route::post('/hapuslistenv','envoice\envoicecontroller@delete');
@@ -28,8 +36,10 @@ Route::get('/carimitra','envoice\envoicecontroller@carimitra');
 Route::get('carikodeenvoice','envoice\envoicecontroller@carikode');
 Route::get('envoice','envoice\envoicecontroller@index');
 Route::get('envoice/tambah','envoice\envoicecontroller@create');
+
 //============================================mitra
 Route::resource('mitra','mitra\mitracontroller');
+
 //=============================================tarif_citykurier
 Route::post('/trfcity/hapuspilihan','trfcity\trf_city@haphapus');
 Route::get('/trfcity/hapussemua','trfcity\trf_city@hapusall');
@@ -39,7 +49,6 @@ Route::get('trfcity/downloadtemplate','trfcity\trf_city@downloadtemplate');
 Route::post('/trfcity/prosesimportexcel','trfcity\trf_city@prosesimportexcel');
 Route::get('trfcity/exporttarif','trfcity\trf_city@exporttarif');
 Route::resource('/trfcity','trfcity\trf_city');
-
 
 //=============================================cabang
 Route::resource('/cabang','cabang\cabangcontroller');
@@ -87,8 +96,10 @@ Route::get('/armada/create','Armada\Armadacontroller@create');
 Route::resource('/pajak','pajak\pajakcontroller');
 // Route::get('/pajak','pajak\pajakcontroller@tampil');
 // Route::get('/printpajak/{tahunya}','pajak\pajakcontroller@cetakpajak');
+
 //===============================================pengeluaran lain
 Route::resource('/pengeluaranlain','pengeluaranlain\pengeluaranlainController');
+
 //===============================================Modal Usaha
 Route::resource('/modal','modal\modalController');
 
@@ -111,12 +122,14 @@ Route::get('/exsportpendapatan/{bulan}/{tahun}','backup\backupController@exsport
 Route::get('/exsporgajikaryawan/{bulan}/{tahun}','backup\backupController@exsporgjkw');
 Route::get('/printgajikaryawan/{bulan}/{tahun}','backup\backupController@cetakgjkw');
 Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgjkw');
+
 //==============================================omset
 Route::get('/omset','omset\omsetController@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
 Route::get('/omset/export','omset\omsetController@export');
+
 //================================================neraca
 Route::get('/neraca','neraca\NeracaController@index'); 
 Route::get('/tampilneraca','neraca\NeracaController@tampilneraca');
