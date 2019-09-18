@@ -67,12 +67,14 @@ class Manualcontroller extends Controller
     {
         $setting = DB::table('setting')->get();
         $karyawan = DB::table('karyawan')->get();
-        return view('manual/create',['title'=>$setting,'karyawan'=>$karyawan]);
+        $resinya = DB::table('resi_mentah')->where('id_cabang',Session::get('cabang'))->get();
+        return view('manual/create',['resinnya'=>$resinya,'title'=>$setting,'karyawan'=>$karyawan]);
     }
 
     //==============================================================
     public function store(Request $request)
     {
+        dd($request);
         $rules = ['kode'  =>'required'];
  
         $customMessages = [
