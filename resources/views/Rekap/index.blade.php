@@ -208,7 +208,7 @@
                                 <div class="add-customers-screen-user">
                                     <i class="fa fa-car"></i>
                                 </div>
-                                <p>Rekap Pajak Kendaraan</p>                                                                                       
+                                <p>Rekap Pajak Kendaraan</p>                                                                                                                       
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,21 @@
                                 <div class="add-customers-screen-user">
                                     <i class="fa fa-paper-plane"></i>
                                 </div>
-                                <p>Rekap Transfer</p>                                                                                       
+                                <p>Rekap Transfer</p>    
+                                <form action="{{url('rekap-transfer')}}" method="GET" class="form">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <label for="">Dari</label>
+                                        <input type="text" name="tgl1" required readonly class="date form-control mr-sm-2" placeholder="Tanggal Pertama"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Ke</label>
+                                        <input type="text" name="tgl2" required readonly class="date form-control mr-sm-2" placeholder="Tanggal Kedua"> 
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <Button type="submit" class="btn btn-sm btn-block">Tampilkan</Button>
+                                    </div>
+                                </form>                                                                                    
                             </div>
                         </div>
                     </div>
@@ -244,7 +258,53 @@
                                 <div class="add-customers-screen-user">
                                     <i class="fa fa-balance-scale"></i>
                                 </div>
-                                <p>Neraca</p>                                                                                       
+                                <p>Neraca</p>  
+                                <form action="{{url('')}}" method="GET" class="form">
+                                        {{csrf_field()}}
+                                        <div class="form-group">
+                                            <label for="">Dari</label>
+                                            <select name="b1" class="select2" id="">
+                                                <option disabled hidden selected>Pilih</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Maret</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Juni</option>
+                                                <option value="7">Juli</option>
+                                                <option value="8">Agustus</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Desember</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Ke</label>
+                                            <select name="b2" class="select2" id="">
+                                                <option disabled hidden selected>Pilih</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Maret</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Juni</option>
+                                                <option value="7">Juli</option>
+                                                <option value="8">Agustus</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Desember</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Tahun</label>
+                                            <input type="number" required name="th" class="form-control" value="{{date('Y')}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <Button type="submit" class="btn btn-primary btn-sm btn-block">Tampilkan</Button>
+                                        </div>
+                                    </form>                                                                           
                             </div>
                         </div>
                     </div>

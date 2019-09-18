@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+
 class Dashboardcontroller extends Controller {
     public function __construct()
     {
@@ -14,6 +15,101 @@ class Dashboardcontroller extends Controller {
     {
         $this->buatsession();
         $this->masukandata();
+        $idc=Session::get('cabang');
+        $nam=Session::get('nama');
+        // ==========================================
+        // jumlah Penghasilan Resi penggiriman
+        $tglawal=date('Y-m-d',strtotime('first day of previous month'));
+        $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
+        $lasbul=date('n',strtotime('last day of previous month'));
+        $lastth=date('Y',strtotime('last day of previous month'));
+        $tot=DB::table('resi_pengiriman')
+            ->select(DB::raw('sum(total_biaya) as total'))
+            ->whereBetween('tgl',[$tglawal,$tglakhir])
+            ->where('duplikat','!=','Y')
+            ->where('id_cabang',$idc)
+            ->first(); 
+        $tresi=$tot->total;        
+        // ambil Persen pajak dari setting
+        $persen=DB::table('setting_pajak')
+                ->where('tempo','bulan')
+                ->first();
+        $pjsen=$persen->besaran;
+        // Cek Bulan sebelumnya
+        $ckbul=DB::table('pajak')
+            ->where('bulan',$lasbul)
+            ->where('tahun',$lastth)
+            ->where('id_cabang',$idc)
+            ->count();
+        // Cek bulan neraca
+        $cbln=DB::table('neraca')
+            ->where('bulan',$lasbul)
+            ->where('tahun',$lastth)
+            ->where('id_cabang',$idc)
+            ->count();
+        // total pemasukan resi lunas
+        $presi=DB::table('resi_pengiriman')
+            ->select(DB::raw('sum(total_bayar) as totresi'))    
+            ->whereBetween('tgl',[$tglawal,$tglakhir])
+            ->where('id_cabang',$idc)
+            ->whereNotNull('tgl_lunas')
+            ->where('duplikat','!=','Y')
+            ->first();        
+        $penresi=$presi->totresi;
+        // total pemasukan resi belum lunas
+        $pires=DB::table('resi_pengiriman')
+        ->select(DB::raw('sum(total_bayar) as totresi,sum(total_biaya) as totsemua'))    
+        ->whereBetween('tgl',[$tglawal,$tglakhir])
+        ->whereNull('tgl_lunas')
+        ->where('duplikat','!=','Y')
+        ->where('id_cabang',$idc)
+        ->first();   
+        $tpr=$pires->totresi;
+        $tps=$pires->totsemua;
+        $piuresi=$tps-$tpr;
+        // total pajak
+        $pajakbayar=$tresi*$pjsen/100;
+
+        //  pengeluaran harian
+        $pl=DB::table('pengeluaran_lain')
+            ->whereBetween('tgl',[$tglawal,$tglakhir])
+            ->select(DB::raw('sum(jumlah) as tpl'))
+            ->where('id_cabang',$idc)
+            ->first();
+        $tpl=$pl->tpl;
+        if($tpl==null){
+            $tpl=0;
+        }
+        // hitung Gaji karayawan
+        $gj=DB::table('gaji_karyawan')
+            ->select(DB::raw('sum(total) as totalgj'))
+            ->where('bulan',$lasbul)
+            ->where('tahun',$lastth)
+            ->where('id_cabang',$idc)
+            ->first();
+        $totalgj=$gj->totalgj;
+        
+        if($ckbul<=0){            
+            // simpan ke tabel pajak 
+            $inpjk=DB::insert('insert into pajak(bulan,tahun,nama_pajak,total,id_cabang) values(?,?,?,?,?)',[$lasbul,$lastth,'Pajak Pendapatan',$pajakbayar,$idc]);            
+        }
+        if($cbln<=0){
+            // Simpan Ke tabel neraca
+            // insert pajak
+            $ner=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pajak Pemasukan Resi',$pajakbayar,$nam,$idc]);
+            // simpan pemasukan resi lunas
+            $xresl=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pemasukan resi lunas',$penresi,$nam,$idc]);
+            // simpan resi belum lunas
+            $xresn=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pemasukan resi belum lunas',$tpr,$nam,$idc]);
+            // simpan piutang resi
+            $xpiures=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pemasukan Piutang resi ',$piuresi,$nam,$idc]);            
+            // simpan pengeluaran Harian
+            $inpl=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pengeluaran Harian',$tpl,$nam,$idc]);
+            // insert total gaji 
+            $gaj=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Gaji Karyawan',$totalgj,$nam,$idc]);
+            // backup resi pengiriman
+            
+        }
         //============================================
         $pajakarmada = 
         DB::table('pajak_armada')
@@ -183,9 +279,14 @@ class Dashboardcontroller extends Controller {
     //================================================
     function buatsession(){
         if(!session::get('username')){
+<<<<<<< Updated upstream
             $dataadmin = 
         DB::table('users')
         ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek,roles.level as statusadmin'))
+=======
+        $dataadmin = DB::table('users')
+        ->select(DB::raw('users.*,cabang.kop,cabang.kota,cabang.koderesi,cabang.norek'))
+>>>>>>> Stashed changes
         ->leftjoin('cabang','cabang.id','=','users.id_cabang')
         ->leftjoin('roles','roles.id','=','users.level')
         ->where([['users.username',Auth::user()->username],['users.password',Auth::user()->password]])
@@ -195,6 +296,7 @@ class Dashboardcontroller extends Controller {
             $level=$dataadmin->level;
             $cabang=$dataadmin->id_cabang;
             $kop=$dataadmin->kop;
+            $nama=$dataadmin->nama;
             $kota=$dataadmin->kota;
             $koderesi=$dataadmin->koderesi;
             $norek = $dataadmin->norek;
@@ -205,6 +307,7 @@ class Dashboardcontroller extends Controller {
         if($data>0){
                 Session::put('username',Auth::user()->username);
                 Session::put('id',$id);
+                Session::put('nama',$nama);
                 Session::put('level',$level);
                 Session::put('statusadmin',$statusadmin);
                 Session::put('login',TRUE);
@@ -215,7 +318,9 @@ class Dashboardcontroller extends Controller {
                 Session::put('koderesi',$koderesi);
                 Session::put('norek',$norek);
         }
-        }
+
+        
+        }        
         
     }        
 }

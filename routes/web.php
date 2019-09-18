@@ -437,23 +437,10 @@ Route::get('cetak-resimasuk/{kat}/{bul1}/{bul2}/{kate}','Rekap\Rekap@cetakresi')
 Route::get('cetak-pengeluaran/{kat}/{bul1}/{bul2}/{kate}','Rekap\Rekap@cetakpengeluaran');
 Route::get('rekap-gaji','Rekap\Rekap@rekapgaji');
 Route::get('cetak-gaji/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakgaji');
-
-
-
-
-
-
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('cetak-pajak/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakpajak');
+// ===============================================================
+Route::post('add-modal','pembukuan\PembukuanController@simpanmodal');
+// ===============================================================
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
