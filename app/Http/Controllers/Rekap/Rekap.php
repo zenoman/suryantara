@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Rekap;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Session;
 class Rekap extends Controller
 {
@@ -15,6 +16,7 @@ class Rekap extends Controller
         $this->setting = DB::table('setting')->limit(1)->get();
         $this->path = public_path('/tf');
         $idc=Session::get('cabang');
+        $this->middleware('auth');
     }
     function index(){
         $kategori=DB::table('tb_kategoriakutansi')
@@ -36,6 +38,13 @@ class Rekap extends Controller
             ->where('tahun',$th)
             ->get();        
         return view('Rekap.rekap_pajak',['lap'=>$lap,'bul1'=>$tg1,'bul2'=>$tg2,'th'=>$th,'title'=>$this->setting]);
+    }
+    function cetakpajak($tg1,$tg2,$th){
+        $lap=DB::table('pajak')
+        ->whereBetween('bulan',[$tg1,$tg2])
+        ->where('tahun',$th)
+        ->get();        
+        return view('Rekap.print_pajak',['lap'=>$lap,'bul1'=>$tg1,'bul2'=>$tg2,'th'=>$th,'title'=>$this->setting]);
     }
     function showpengeluaran(Request $request){
         $idc=Session::get('cabang');

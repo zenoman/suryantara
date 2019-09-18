@@ -165,7 +165,7 @@
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
-				@endif
+				
 			</div>
 		</li>
 		<li class="nav-item dropdown">
@@ -232,27 +232,8 @@
 				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 			</div>
-		</li>
+		</li>		
 		@endif
-
-		{{--<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pembukuan</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('pengeluaranlain')}}">Input Pembukuan (Pajak,Pengeluaran,Modal dll)</a>
-				{{-- <a class="dropdown-item" href="{{url('/modal')}}">Modal</a>
-				<a class="dropdown-item" href="{{url('pajak')}}">Pajak Perusahaan</a>
-				<a class="dropdown-item" href="{{url('/pilihabsensi')}}">Laporan Absensi</a>
-				<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="{{url('/laporanpemasukan')}}">Pemasukan</a>
-	        <span class="nav-link dropdown-toggle" data-toggle="dropdown">Pengeluaran</span>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/laporanpengeluarangjkw')}}">Gaji Karyawan</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaran')}}">Vendor</a>
-				<a class="dropdown-item" href="{{url('/laporanpengeluaranlainya')}}">Lainya</a>
-				<!-- <a class="dropdown-item" href="{{url('/pajak')}}">Pajak Perusahaan</a> -->
-			</div><p></p>
-	       	</div>
-		</li>--}}
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 		<li class="nav-item">
 			<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
@@ -279,8 +260,8 @@
 		<li class="nav-item">
 			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
 		</li>
-		@endif
 
+		@endif
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>
