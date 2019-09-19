@@ -23,12 +23,10 @@
             <div class="container-fluid">
                 <form autocomplete="off" class="sign-box" method="POST" action="{{ route('login') }}">
                    @if($errors->any())
-                    @foreach ($errors->all() as $error)
                       <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ $error }}
+                                Maaf, Username / Password Salah
                     </div>
-                    @endforeach
                   @endif
                    @if (session('status'))
                     <div class="alert alert-danger alert-dismissable">

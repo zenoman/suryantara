@@ -108,7 +108,7 @@
                             <td>{{$row->kode}}</td>
                             <td>{{$row->tujuan}}</td>
                             <td>    {{"Rp ". number_format($row->tarif,0,',','.')}}</td>
-                            <td>{{"Kg ".$row->berat_min}}</td>
+                            <td>{{$row->berat_min."Kg "}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
                             <td class="text-center">

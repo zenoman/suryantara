@@ -81,6 +81,7 @@ Route::get('/returresinya/{id}','Antaran\antarancontroller@returresinya');
 
 //=======================================================armada
 Route::get('/hapuspajakunit/{id}','Armada\Armadacontroller@hapuspajakunit');
+Route::get('/caripajakunit/{id}','Armada\Armadacontroller@caripajakunit');
 Route::post('/tambahpajakunit','Armada\Armadacontroller@tambahpajakunit');
 Route::post('/editpajakunit','Armada\Armadacontroller@editpajakunit');
 Route::post('/pajakarmada','Armada\Armadacontroller@aksibayarpajak');

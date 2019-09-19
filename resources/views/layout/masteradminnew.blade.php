@@ -86,9 +86,8 @@
                                     </form>
 	                        </div>
 	                    </div>
-	                </div><!--.site-header-shown-->
-	
-	                <div class="mobile-menu-right-overlay"></div>
+	                </div>
+					 <div class="mobile-menu-right-overlay"></div>
 	                
 	        </div>
 	    </div>

@@ -9,18 +9,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\models\Adminmodel;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 class Admincontroller extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+    //======================================================================
     public function index(){
         $setting = DB::table('setting')->get();
         $datadmin = DB::table('users')
         		->select(DB::raw('users.*,cabang.nama as namacabang, roles.level as statusadmin'))
         		->leftjoin('cabang','cabang.id','=','users.id_cabang')
                 ->leftjoin('roles','roles.id','=','users.level')
+                ->where('users.id','!=',Auth::user()->id)
         		->get();
     	return view('admin/index',['users'=>$datadmin,'title'=>$setting]);
     }
