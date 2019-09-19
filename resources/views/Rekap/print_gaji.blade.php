@@ -79,8 +79,12 @@
                             </tr>
                         @endforeach					
 						</tbody>
-					</table>					
-					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
+					</table>
+					<div class="row">
+							<div class="col col-xl-12 dashboard-col">
+								<h4 class="text-right"><b>Total Rp. <span id="toata"></span></b></h4>
+							</div> 
+					</div>
 					
 </body>
 

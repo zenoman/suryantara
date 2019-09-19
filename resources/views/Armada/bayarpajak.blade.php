@@ -42,6 +42,7 @@
 								value="{{Session::get('username')}}"
 								readonly 
 								>
+							<input type="hidden" name="idarm" value="{{$row->id}}" class="form-control">
 							</div>
 						</div>
 						<div class="col-sm-4">

@@ -45,10 +45,17 @@ class Armadacontroller extends Controller
     }
     //=============================================================
     public function aksibayarpajak(Request $request){
+        $idc=Session::get('cabang');
+        $bul=date('n');
+        $th=date('Y');
+        $admin=Session::get('nama');
+        $idarm=$request->idarm;
         $tk = date('Y-m-d', strtotime('-7 day', strtotime($request->tglkadaluarsa)));
+        // ==================================================================================
         if($request->hasFile('gambar')){
             $namagambar=$request->file('gambar')->
             getClientOriginalname();
+            $idarm=$request->idarm;
             $lower_file_name=strtolower($namagambar);
             $replace_space=str_replace(' ', '-', $lower_file_name);
             $namagambar=time().'-'.$replace_space;
@@ -56,15 +63,22 @@ class Armadacontroller extends Controller
             $destination=public_path().'/img/nota/';
             $request->file('gambar')->move($destination,$namagambar);
             
-            DB::table('pengeluaran_lain')
-            ->insert([
-                'admin'=>Session::get('username'),
-                'kategori'=>'004',
-                'keterangan'=>$request->keterangan,
-                'jumlah'=>$request->total,
-                'tgl'=>$request->tglbayar,
-                'gambar'=>$namagambar
-            ]);
+            // DB::table('pengeluaran_lain')
+            // ->insert([
+            //     'admin'=>Session::get('username'),
+            //     'kategori'=>'004',
+            //     'keterangan'=>$request->keterangan,
+            //     'jumlah'=>$request->total,
+            //     'tgl'=>$request->tglbayar,
+            //     'gambar'=>$namagambar
+            // ]);
+            // simpan ke pajak kendaraan 
+            
+            $data=[$idarm,$request->tglbayar,$bul,$th,$request->total,$namagambar,$request->keterangan,$admin,$idc];
+            $bpajak=DB::insert('insert into pajak_kendaraan(idarmada,tgl,bulan,tahun,nominal,bukti,keterangan,admin,id_cabang) values(?,?,?,?,?,?,?,?,?)',$data);
+            // simpan ke neraca
+            $nr=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$bul,$th,$request->keterangan,$request->total,$admin,$idc]);
+            // ========================================
             DB::table('pajak_armada')   
             ->where('id',$request->pajak)
             ->update([
@@ -74,14 +88,20 @@ class Armadacontroller extends Controller
             ]);
 
         }else{
-            DB::table('pengeluaran_lain')
-            ->insert([
-                'admin'=>Session::get('username'),
-                'kategori'=>'004',
-                'keterangan'=>$request->keterangan,
-                'jumlah'=>$request->total,
-                'tgl'=>$request->tglbayar
-            ]);
+            // DB::table('pengeluaran_lain')
+            // ->insert([
+            //     'admin'=>Session::get('username'),
+            //     'kategori'=>'004',
+            //     'keterangan'=>$request->keterangan,
+            //     'jumlah'=>$request->total,
+            //     'tgl'=>$request->tglbayar
+            // ]);
+            // ================================================
+            $data=[$idarm,$request->tglbayar,$bul,$th,$namagambar,$request->keterangan,$admin,$idc];
+            $bpajak=DB::insert('insert into pajak_kendaraan(idarmada,tgl,bulan,tahun,bukti,keterangan,admin,id_cabang) values(?,?,?,?,?,?,?,?)',$data);
+            // simpan ke neraca
+            $nr=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$bul,$th,$request->keterangan,$request->total,$admin,$idc]);
+            // ================================================
             DB::table('armada')
             ->where('id',$request->kodeunit)
             ->update([

@@ -48,7 +48,7 @@
                             </div>
                         </div>                    
                     </div>  
-                     <div class="col-xl-3 dahsboard-column">
+                     {{-- <div class="col-xl-3 dahsboard-column">
                         <div class="card">
                             <div class="add-customers-screen tbl">
                                 <div class="add-customers-screen-in">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>                            
-                    </div>                       
+                    </div>                        --}}
                     <div class="modal fade in" id="addmodal">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -305,6 +305,9 @@
         var kred={{$kred}}
         var tf=tsal-kred-batas;
         var sis=tsal-tf-kred;
+        if(tf<0){
+            tf=0;
+        }
         if(tf<batas){
             $('#btntf').prop('disabled',true); 
         }else{
@@ -316,8 +319,6 @@
         $(this).val(n.toLocaleString()); 
         
         // hitung nilai
-        var nom=n;
-        var sisa=tsal-nom;
         $('#sisal').val(sis);
         if(sisa<batas){
             $('#btntf').prop('disabled',true);              

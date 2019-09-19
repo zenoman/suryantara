@@ -23,6 +23,7 @@ class Dashboardcontroller extends Controller {
         $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
         $lasbul=date('n',strtotime('last day of previous month'));
         $lastth=date('Y',strtotime('last day of previous month'));
+        
         $tot=DB::table('resi_pengiriman')
             ->select(DB::raw('sum(total_biaya) as total'))
             ->whereBetween('tgl',[$tglawal,$tglakhir])

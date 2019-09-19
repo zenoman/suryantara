@@ -441,6 +441,12 @@ Route::get('cetak-pengeluaran/{kat}/{bul1}/{bul2}/{kate}','Rekap\Rekap@cetakpeng
 Route::get('rekap-gaji','Rekap\Rekap@rekapgaji');
 Route::get('cetak-gaji/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakgaji');
 Route::get('cetak-pajak/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakpajak');
+Route::get('rekap-kendaraan','Rekap\Rekap@rekappk');
+Route::get('cetak-kendaraan/{bl1}/{bl2}/{th}','Rekap\Rekap@printkendaraan');
+Route::get('rekap-transfer','Rekap\Rekap@rekaptrans');
+Route::get('cetak-transfer/{bl1}/{bl2}/{th}','Rekap\Rekap@cetaktrans');
+Route::get('rekap-neraca','Rekap\Rekap@rekapneraca');
+Route::get('cetak-neraca/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakneraca');
 // ===============================================================
 Route::post('add-modal','pembukuan\PembukuanController@simpanmodal');
 // ===============================================================

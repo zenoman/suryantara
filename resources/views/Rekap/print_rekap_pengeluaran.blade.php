@@ -72,7 +72,7 @@
                         @endforeach					
 						</tbody>
 					</table>					
-					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
+					<h4 class="text-right"><b>Total Rp. <span id="toata"></span></b></h4>
 					
 </body>
 

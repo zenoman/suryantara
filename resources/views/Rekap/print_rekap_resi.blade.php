@@ -3,6 +3,11 @@
 <head>
 	<title>Cetak {{$kat}} Akutansi Tanggal {{$bul1}} Sampai {{$bul2}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
+	<style>
+		@page{
+			size: landscape;
+		}
+	</style>
 </head>
 <body>
 <div>
@@ -54,8 +59,9 @@
                             <th>Kota Tujuan</th>
                             <th>Tanggal Kirim</th>
                             <th>Pengirim</th>
-                            <th>Total Biaya</th>
-                            <th>Pembayaran</th>
+							<th>Total Biaya</th>							
+							<th>Pembayaran</th>
+							<th>Total Kurang</th>
 						</tr>
 						</thead>						
 						<tbody>
@@ -75,12 +81,13 @@
                                 <td>{{$row->nama_pengirim}}</td>
                                 <td>Rp. {{number_format($row->total_biaya)}}</td>
                                 <td>Rp. {{number_format($row->total_bayar)}}</td>
+                                <td>Rp. {{number_format($row->kurang)}}</td>
                                 <td class="tdtot">{{$row->total_bayar}}</td>
                             </tr>
                         @endforeach					
 						</tbody>
 					</table>					
-					<h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
+					<h4 class="text-right"><b>Total Pembayaran Rp. <span id="toata"></span></b></h4>
 					
 </body>
 
@@ -103,7 +110,7 @@ $(document).ready(function(){
 		var table=document.getElementById('example'),sumval=0;
 		for(var i=1;i<table.rows.length;i++){
 			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[11].innerHTML);
+			sumval=sumval+parseInt(table.rows[i].cells[12].innerHTML);
 		}
 		$('#toata').html(numberWithCommas(sumval));
 </script>
