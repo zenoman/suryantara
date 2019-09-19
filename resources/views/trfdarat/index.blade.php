@@ -37,9 +37,15 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('statuserror') }}
                     </div>
-                    @endif 
+                    @endif
+                    
+                    @if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2')
 					<a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('trfdarat/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					@endif
+					
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -67,7 +73,7 @@
                             </div>
 
                     <br>
-<form action="{{url('/trfdarat/hapuspilihan')}}" method="post">
+					<form action="{{url('/trfdarat/hapuspilihan')}}" method="post">
                     <br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -79,8 +85,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -92,8 +102,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</tfoot> 
 						<tbody>
@@ -108,24 +122,30 @@
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
+                            @if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
                             <td class="text-center">
-							<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
-                                    
+								<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
-						
+							@endif
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
+					@if(Session::get('level') == '1' || 
+		            Session::get('level') == '3' || 
+		            Session::get('level') == '2')
 					<div class="text-right">
-&nbsp;&nbsp;
-<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger btn-sm">
-Kosongkan Data
-</a>	
-&nbsp;&nbsp;
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
+						&nbsp;&nbsp;
+						<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfdarat/hapussemua')}}" class="btn btn-danger btn-sm">
+						Kosongkan Data
+						</a>	
+						&nbsp;&nbsp;
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
 					</div>
+					@endif
 						{{csrf_field()}}
                         </form>
 			{{ $trf_drt->links() }}

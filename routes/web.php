@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Input;
 Route::post('/distribusiresi/prosesimportexcel','distribusiresi\distribusiresicontroller@prosesimportexcel');
 Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@downloadtemplate');
 Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
+
 Route::resource('distribusiresi','distribusiresi\distribusiresicontroller');
 
 //================================================transit
@@ -160,6 +161,7 @@ Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@cariha
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
+
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/carikotacity','resipengiriman\resipengirimanController@carikotacity');
@@ -171,7 +173,8 @@ Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@resid
 
 Route::get('/resicitykurier','resipengiriman\resipengirimanController@resicitykurier');
 Route::get('/resicitykuriercompany','resipengiriman\resipengirimanController@resicitykuriercmp');
-//resicitykurier
+
+//===============================================================resicitykurier
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');

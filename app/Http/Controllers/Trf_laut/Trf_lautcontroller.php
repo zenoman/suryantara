@@ -10,6 +10,7 @@ use App\Imports\Trf_lautImport;
 use App\Exports\Trf_lautExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class trf_lautcontroller extends Controller
 {
@@ -19,11 +20,22 @@ class trf_lautcontroller extends Controller
     }
     public function index()
     {
-    $tarif_laut=DB::table('tarif_laut')
-    ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
-    ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
-    ->orderby('tarif_laut.id','desc')
-    ->paginate(20);
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $tarif_laut=DB::table('tarif_laut')
+            ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
+            ->orderby('tarif_laut.id','desc')
+            ->paginate(20);
+        }else{
+            $tarif_laut=DB::table('tarif_laut')
+            ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
+            ->where('tarif_laut.id_cabang','=',Session::get('cabang'))
+            ->orderby('tarif_laut.id','desc')
+            ->paginate(20);
+        }
 
     $setting = DB::table('setting')->get();
     return view('trflaut/index',['trflaut'=>$tarif_laut,'title'=>$setting]);
@@ -59,13 +71,29 @@ class trf_lautcontroller extends Controller
 
     public  function caridata(Request $request){
         $cari=$request->cari;
-    	$trflaut= DB::table('tarif_laut')
-        ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
-        ->where('tarif_laut.tujuan','like','%'.$cari.'%')
-        ->orwhere('tarif_laut.kode','like','%'.$cari.'%')
-        ->orderby('tarif_laut.id','desc')
-        ->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $trflaut= DB::table('tarif_laut')
+            ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
+            ->where('tarif_laut.tujuan','like','%'.$cari.'%')
+            ->orwhere('tarif_laut.kode','like','%'.$cari.'%')
+            ->orderby('tarif_laut.id','desc')
+            ->get();
+        }else{
+             $trflaut= DB::table('tarif_laut')
+            ->select(DB::raw('tarif_laut.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_laut.id_cabang')
+            ->where([
+                ['tarif_laut.tujuan','like','%'.$cari.'%'],
+                ['tarif_laut.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['tarif_laut.kode','like','%'.$cari.'%'],
+                ['tarif_laut.id_cabang','=',Session::get('cabang')]])
+            ->orderby('tarif_laut.id','desc')
+            ->get();
+        }
         $setting = DB::table('setting')->get();
     	return view('trflaut/pencarian',['trflaut' => $trflaut,'cari'=>$cari,'title'=>$setting]);
     }

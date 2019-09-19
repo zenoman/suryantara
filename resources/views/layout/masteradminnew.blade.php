@@ -173,7 +173,9 @@
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
 			@endif
 			<div class="dropdown-menu">
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('distribusiresi')}}">Distribusi Resi Manual</a>
+				@endif
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
 				<a class="dropdown-item" href="{{url('Manual')}}">Input Manual</a>
 				@endif

@@ -353,6 +353,7 @@ $(document).ready(function(){
 		$("#btnsimpan").click(function(e){
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			
 			var no_resi		= noresi;
 			var iduser		= $("#iduser").val();
 			var nama_barang	= $("#nama_barang").val();
@@ -381,6 +382,7 @@ $(document).ready(function(){
 			var metode		= $("#metode").val();
 			var status_bayar = $('#status_bayar').val();
 			var dibayar = $("#dibayar").val();
+			
 			if(dibayar=='' || a_penerima==''|| a_pengirim =='' || iduser==''||nama_barang == '' || d_panjang =='' || d_lebar=='' || d_tinggi=='' || volume=='' || jumlah=='' || berat=='' || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_packing=='' || biaya_asu =='' || keterangan==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);
    			}else{

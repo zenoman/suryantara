@@ -40,8 +40,14 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
+
+                    @if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2')
 					<a href="{{url('trflaut/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('trflaut/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					@endif
+
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -82,8 +88,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -95,8 +105,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -111,24 +125,32 @@
                             <td>{{$row->berat_min."Kg "}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
+                            @if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2')
                             <td class="text-center">
                             	<a href="{{url('/trflaut/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>
 						
 					</table>
 						{{csrf_field()}}
+						@if(Session::get('level') == '1' || 
+	            		Session::get('level') == '3' || 
+	            		Session::get('level') == '2')
 						<div class="text-right">
-						&nbsp;&nbsp;
-						<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger btn-sm">
-						Kosongkan Data
-						</a>	
-						&nbsp;&nbsp;
-						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
+							&nbsp;&nbsp;
+							<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trflaut/hapussemua')}}" class="btn btn-danger btn-sm">
+							Kosongkan Data
+							</a>	
+							&nbsp;&nbsp;
+							<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
 						</div>
+						@endif
                         </form>
 					{{ $trflaut->links() }}
 				</div>

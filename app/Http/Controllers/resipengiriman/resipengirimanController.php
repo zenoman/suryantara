@@ -569,6 +569,7 @@ class resipengirimanController extends Controller
         ]);
         return response()->json($simpan);   
     }
+    
     //===================================================================
     public function store(Request $request)
     {

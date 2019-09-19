@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use App\Exports\trfcityexport;
 use App\Imports\trfcity;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 
 class trf_city extends Controller
 {
@@ -19,13 +20,25 @@ class trf_city extends Controller
     
     public function index()
     {
-        $tarif_darat=DB::table('tarif_darat')
-        ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
-        ->where('tarif_darat.tarif_city','=','Y')
-        ->orderby('tarif_darat.id','desc')
-        ->paginate(20);
-
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $tarif_darat=DB::table('tarif_darat')
+            ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
+            ->where('tarif_darat.tarif_city','=','Y')
+            ->orderby('tarif_darat.id','desc')
+            ->paginate(20);
+        }else{
+             $tarif_darat=DB::table('tarif_darat')
+            ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
+            ->where([
+                    ['tarif_darat.tarif_city','=','Y'],
+                    ['tarif_darat.id_cabang','=',Session::get('cabang')]])
+            ->orderby('tarif_darat.id','desc')
+            ->paginate(20);
+        }
         $setting = DB::table('setting')->get();
         return view('trfcity/index',['trf_drt'=>$tarif_darat,'title'=>$setting]);
     }
@@ -109,13 +122,31 @@ class trf_city extends Controller
     {
         $url = $request->fullurl();
         $cari=$request->cari;
-        $trf_drt = DB::table('tarif_darat')
-        ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
-        ->where([['tarif_darat.tujuan','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','Y']])
-        ->orwhere([['tarif_darat.kode','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','Y']])
-        ->orderby('tarif_darat.id','desc')
-        ->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+                $trf_drt = DB::table('tarif_darat')
+                ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
+                ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
+                ->where([['tarif_darat.tujuan','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','Y']])
+                ->orwhere([['tarif_darat.kode','like','%'.$cari.'%'],['tarif_darat.tarif_city','=','Y']])
+                ->orderby('tarif_darat.id','desc')
+                ->get();
+            }else{
+                $trf_drt = DB::table('tarif_darat')
+                ->select(DB::raw('tarif_darat.*,cabang.nama as namacabang'))
+                ->leftjoin('cabang','cabang.id','=','tarif_darat.id_cabang')
+                ->where([
+                    ['tarif_darat.tujuan','like','%'.$cari.'%'],
+                    ['tarif_darat.tarif_city','=','Y'],
+                    ['tarif_darat.id_cabang','=',Session::get('cabang')]])
+                ->orwhere([
+                    ['tarif_darat.kode','like','%'.$cari.'%'],
+                    ['tarif_darat.tarif_city','=','Y'],
+                    ['tarif_darat.id_cabang','=',Session::get('cabang')]])
+                ->orderby('tarif_darat.id','desc')
+                ->get();
+            }
         $setting = DB::table('setting')->get();
         return view('trfcity/pencarian', ['trf_drt'=>$trf_drt, 'cari'=>$cari,'title'=>$setting,'url'=>$url]);
     }
