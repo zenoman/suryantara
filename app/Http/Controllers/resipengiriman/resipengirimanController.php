@@ -114,10 +114,24 @@ class resipengirimanController extends Controller
     //=============================================================
     public function listpengirimanbatal(){
         $webinfo = DB::table('setting')->limit(1)->get();
-        $datakirim = DB::table('resi_pengiriman')
-        ->where([['batal','Y'],['id_cabang','=',Session::get('cabang')],['total_biaya','!=','0']])
-        ->orderby('id','desc')
-        ->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+            ['batal','Y'],
+            ['total_biaya','!=','0']])
+            ->orderby('id','desc')
+            ->get();   
+        }else{
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+            ['batal','Y'],
+            ['id_cabang','=',Session::get('cabang')],
+            ['total_biaya','!=','0']])
+            ->orderby('id','desc')
+            ->get();   
+        }
         return view('resipengiriman/pengirimanbatal',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     //==============================================================
@@ -191,7 +205,38 @@ class resipengirimanController extends Controller
     //====================================================================
     public function caridataresi(Request $request){
         $cari = $request->cari;
-        $datakirim = DB::table('resi_pengiriman')
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+                ['no_resi','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['tgl','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['pengiriman_via','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['kode_tujuan','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->orwhere([
+                ['admin','like','%'.$cari.'%'],
+                ['batal','=','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']])
+            ->get();
+        }else{
+            $datakirim = DB::table('resi_pengiriman')
             ->where([
                 ['no_resi','like','%'.$cari.'%'],
                 ['batal','=','N'],['id_cabang','=',Session::get('cabang')],
@@ -221,6 +266,7 @@ class resipengirimanController extends Controller
                 ['total_biaya','!=','0'],
                 ['duplikat','!=','Y']])
             ->get();
+        }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('resipengiriman/cari',['datakirim'=>$datakirim,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
@@ -312,30 +358,58 @@ class resipengirimanController extends Controller
     //===================================================================
     public function tampil(){
         $webinfo = DB::table('setting')->limit(1)->get();
-        $datakirim = DB::table('resi_pengiriman')
-        ->where([
+        
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+            ['batal','N'],
+            ['total_biaya','!=','0'],
+            ['duplikat','!=','Y']
+            ])
+            ->orderby('id','desc')
+            ->paginate(50);
+        }else{
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
             ['batal','N'],
             ['id_cabang','=',Session::get('cabang')],
             ['total_biaya','!=','0'],
             ['duplikat','!=','Y']
-        ])
-        ->orderby('id','desc')
-        ->paginate(50);
+            ])
+            ->orderby('id','desc')
+            ->paginate(50);
+        }
         return view('resipengiriman/listpengiriman',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     //===================================================================
     public function tampilsmukosong(){
         $webinfo = DB::table('setting')->limit(1)->get();
-        $datakirim = DB::table('resi_pengiriman')
-        ->where([
-            ['batal','N'],
-            ['id_cabang','=',Session::get('cabang')],
-            ['total_biaya','!=','0'],
-            ['duplikat','!=','Y']
-        ])
-        ->whereNull('no_smu')
-        ->orderby('id','desc')
-        ->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+                ['batal','N'],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']
+            ])
+            ->whereNull('no_smu')
+            ->orderby('id','desc')
+            ->get();
+        }else{
+            $datakirim = DB::table('resi_pengiriman')
+            ->where([
+                ['batal','N'],
+                ['id_cabang','=',Session::get('cabang')],
+                ['total_biaya','!=','0'],
+                ['duplikat','!=','Y']
+            ])
+            ->whereNull('no_smu')
+            ->orderby('id','desc')
+            ->get();
+        }
         return view('resipengiriman/listpengiriman_smukosong',['datakirim'=>$datakirim,'webinfo'=>$webinfo]);
     }
     //===================================================================

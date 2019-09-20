@@ -100,7 +100,7 @@
                             <td class="text-center">
 								<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
                     		</td>
-                            <td class="text-center"><input type="checkbox" name="id[]" value="{{$row->id}}">
+                            <td class="text-center"><input type="checkbox" name="pilihid[]" value="{{$row->id}}">
                             </td>
                             @endif
 						</tr>
@@ -111,7 +111,7 @@
 				    Session::get('level') == '3' || 
 				    Session::get('level') == '2')
 					<div class="text-right">
-						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
 					</div>
 					@endif
 						{{csrf_field()}}
@@ -133,7 +133,7 @@
         });
 		});
 	  function toggle(source) {
-	  checkboxes = document.getElementsByName('id[]');
+	  checkboxes = document.getElementsByName('pilihid[]');
 	  for(var i=0, n=checkboxes.length;i<n;i++) {
 	    checkboxes[i].checked = source.checked;
 	  }

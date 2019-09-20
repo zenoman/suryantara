@@ -148,7 +148,7 @@
 							Kosongkan Data
 							</a>	
 							&nbsp;&nbsp;
-							<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger btn-sm" value="hapus pilihan">
+							<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
 						</div>
 						@endif
                         </form>
