@@ -66,6 +66,12 @@ $(document).ready(function(){
             var totalbt = 0;
             var no = 0;
             $.each(data,function(key, value){
+                var beratnya='';
+                if(value.pengiriman_via=='udara'){
+                    beratnya=value.total_berat_udara;
+                }else{
+                    beratnya=value.berat;
+                }
                 no +=1;
                 rows = rows + '<tr>';
                 rows = rows + '<td class="text-center">' +value.no_resi+'</td>';
@@ -73,7 +79,7 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.nama_penerima+'</td>';
                 rows = rows + '<td>' +value.kode_tujuan+'</td>';
                 rows = rows + '<td class="text-center">' +value.jumlah+'</td>';
-                rows = rows + '<td class="text-center">' +value.berat+'</td>';
+                rows = rows + '<td class="text-center">' +beratnya+'</td>';
                 rows = rows + '<td>' +value.nama_barang+'</td>';
                 rows = rows + '</tr>';
 

@@ -57,6 +57,8 @@ class penerimaancontroller extends Controller
                     'status' => $row->status,
                     'id_cabang'=>Session::get('cabang'),
                     'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                    'maskapai_udara'=>$row->maskapai_udara,
+                    'total_berat_udara'=>$row->total_berat_udara,
                     'duplikat'=>'Y'
             ];
             $kodejalanya = $row->kode_jalan;
@@ -170,6 +172,8 @@ class penerimaancontroller extends Controller
                     'status' => $row->status,
                     'id_cabang'=>Session::get('cabang'),
                     'status_pengiriman'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                    'maskapai_udara'=>$row->maskapai_udara,
+                    'total_berat_udara'=>$row->total_berat_udara,
                     'duplikat'=>'Y'
             ];
         }

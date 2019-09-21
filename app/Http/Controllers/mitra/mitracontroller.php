@@ -5,6 +5,7 @@ namespace App\Http\Controllers\mitra;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class mitracontroller extends Controller
 {
@@ -14,11 +15,22 @@ class mitracontroller extends Controller
     }
     public function index()
     {
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2'){
           $vnd=DB::table('mitra')
             ->select(DB::raw('mitra.*,cabang.nama as namacabang'))
             ->leftjoin('cabang','cabang.id','=','mitra.id_cabang')
             ->orderby('mitra.id','desc')
             ->get();
+        }else{
+            $vnd=DB::table('mitra')
+            ->select(DB::raw('mitra.*,cabang.nama as namacabang'))
+            ->leftjoin('cabang','cabang.id','=','mitra.id_cabang')
+            ->where('id_cabang',Session::get('cabang'))
+            ->orderby('mitra.id','desc')
+            ->get();
+        }
         $setting = DB::table('setting')->get();
         return view('mitra/index',['mitra'=>$vnd,'title'=>$setting]);
         }

@@ -55,7 +55,7 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
-							@if(Session::get('level') != 'admin')
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="no-sort"><input type="checkbox" id="selectall"/></th>
 							@endif
 						</tr>
@@ -68,7 +68,7 @@
 							<th>Tanggal</th>
 							<th>Status</th>
 							<th>Aksi</th>
-							@if(Session::get('level') != 'admin')
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th>#</th>
 							@endif
 						</tr>
@@ -101,9 +101,15 @@
                             <td>
 
                             	@if($row->status=='Y')
+                            	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             	<a href="{{url('/bayarsuratjalan/'.$row->id)}}" class="btn btn-warning btn-sm">
                             	Bayar Sekarang
                             	</a>
+                            	@else
+                            	<button class="btn btn-primary btn-sm"
+									data-toggle="modal"
+									data-target=".bd-example-modal-lg{{$row->id}}" type="button">Lihat Detail</button>
+                            	@endif
                             	@else
                             	<button class="btn btn-primary btn-sm"
 									data-toggle="modal"
@@ -113,7 +119,7 @@
 
 						
                             </td>
-                            @if(Session::get('level') != 'admin')
+                            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             <td>
 								<input type="checkbox" name="delid[]" class="case" value="{{$row->id}}" />
 							</td>
@@ -123,7 +129,7 @@
 						</tbody>
 					</table>
 					<div class="pull-right">
-						@if(Session::get('level') != 'admin')
+						@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 						<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-warning">Hapus Data Terpilih
 					</button>
 					@endif
@@ -196,7 +202,11 @@
 										<td>{{$resi->no_resi}}</td>
 										<td>{{$resi->nama_barang}}</td>
 										<td>{{$resi->jumlah}} Koli</td>
+										@if($resi->pengiriman_via=='udara')
+										<td>{{$resi->total_berat_udara}} Kg</td>
+										@else
 										<td>{{$resi->berat}} Kg</td>
+										@endif
 										@if($resi->metode_bayar=='cash')
 										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										<td> </td>

@@ -198,7 +198,7 @@
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
 								<h5>{{$row->no_resi}}</h5>
-								
+								@if($row->pengiriman_via!='udara')
 								<table class="pull-right table-sm">
 									<tr>
 										<td>Operator</td>
@@ -221,6 +221,36 @@
 										<td>{{$row->jumlah}} Koli</td>
 									</tr>
 								</table>
+								@else
+									@if($row->dimensi!='-')
+									<div>Operator : {{$row->admin}}</div>
+									<table class="pull-right table-sm">
+									
+									<tr>
+										<td>Dimensi</td>
+										<td>Volumetrik</td>
+										<td>Berat Aktual</td>
+									</tr>
+									<?php 
+									$datavolumetrik = explode(',',$row->ukuran_volume);
+									$datadimensi = explode(',', $row->dimensi);
+									$databerat = explode(',',$row->berat);
+									for ($nomor=0; $nomor < $row->jumlah ; $nomor++) { ?> 
+										<tr>
+											<td>{{$datadimensi[$nomor]}}</td>
+											<td>{{$datavolumetrik[$nomor]}}</td>
+											<td>{{$databerat[$nomor]}}</td>
+										</tr>
+									<?php } ?>
+									<tr>
+										<td colspan="3" class="text-center">Total : {{$row->total_berat_udara}} Kg</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-center">Jumlah : {{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								@endif
+								@endif
 								<br>
 								
 							</div>
@@ -370,7 +400,7 @@
 						<div class="col-lg-6 clearfix invoice-info">
 							<div class="text-lg-right">
 								<h5>{{$row->no_resi}}</h5>
-								
+								@if($row->pengiriman_via!='udara')
 								<table class="pull-right table-sm">
 									<tr>
 										<td>Operator</td>
@@ -393,6 +423,36 @@
 										<td>{{$row->jumlah}} Koli</td>
 									</tr>
 								</table>
+								@else
+									@if($row->dimensi!='-')
+									<div>Operator : {{$row->admin}}</div>
+									<table class="pull-right table-sm">
+									
+									<tr>
+										<td>Dimensi</td>
+										<td>Volumetrik</td>
+										<td>Berat Aktual</td>
+									</tr>
+									<?php 
+									$datavolumetrik = explode(',',$row->ukuran_volume);
+									$datadimensi = explode(',', $row->dimensi);
+									$databerat = explode(',',$row->berat);
+									for ($nomor=0; $nomor < $row->jumlah ; $nomor++) { ?> 
+										<tr>
+											<td>{{$datadimensi[$nomor]}}</td>
+											<td>{{$datavolumetrik[$nomor]}}</td>
+											<td>{{$databerat[$nomor]}}</td>
+										</tr>
+									<?php } ?>
+									<tr>
+										<td colspan="3" class="text-center">Total : {{$row->total_berat_udara}} Kg</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-center">Jumlah : {{$row->jumlah}} Koli</td>
+									</tr>
+								</table>
+								@endif
+								@endif
 								<br>
 								
 							</div>
@@ -479,9 +539,13 @@
 					</div>
 				</div> 
                            	@else
+                           	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                            	<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#Modal{{$row->id}}">
                      					<i class="fa fa-money"></i>
                      				</button>
+                     				@else
+                     				-
+                     				@endif
                      				<div class="modal fade" id="Modal{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

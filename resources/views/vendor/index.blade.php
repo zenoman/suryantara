@@ -35,8 +35,10 @@
                                 {{ session('status') }}
                     </div>
                     @endif
+                    @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 					<a href="{{url('vendor/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('vendor/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					@endif
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,8 +76,9 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
-							
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -86,8 +89,9 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
-							
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -101,6 +105,7 @@
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>{{$row->namacabang}}</td>
+                            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             <td class="text-center">
 <form action="{{url('/vendor/delete')}}"  method="post">
 <a href="{{url('/vendor/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm">Edit</a>
@@ -109,6 +114,8 @@
                                         	<input type="hidden" name="aid" value="{{$row->id}}">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
+                    				</td>
+                    				@endif
 						</tr>
 						@endforeach
 						</tbody>

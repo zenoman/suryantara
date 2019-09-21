@@ -120,11 +120,11 @@
 				<div class="dropdown-divider"></div>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
 				<a class="dropdown-item" href="{{url('mitra')}}">Data Mitra</a>
 				<div class="dropdown-divider"></div>
 				@endif

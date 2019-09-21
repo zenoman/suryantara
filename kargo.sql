@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.4.6-MariaDB - mariadb.org binary distribution
+-- Server version:               10.3.16-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
 -- HeidiSQL Version:             10.2.0.5599
 -- --------------------------------------------------------
@@ -31,27 +31,12 @@ CREATE TABLE IF NOT EXISTS `absensi` (
   `uang_makan` varchar(40) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
-
--- Dumping structure for table kargo.admin
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(100) DEFAULT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `password` text DEFAULT NULL,
-  `nama` varchar(100) NOT NULL,
-  `telp` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `alamat` varchar(200) DEFAULT NULL,
-  `level` varchar(20) DEFAULT NULL,
-  `id_cabang` int(11) DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
+-- Dumping data for table kargo.absensi: ~0 rows (approximately)
+DELETE FROM `absensi`;
+/*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.armada
 DROP TABLE IF EXISTS `armada`;
@@ -64,9 +49,15 @@ CREATE TABLE IF NOT EXISTS `armada` (
   `warna` varchar(60) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.armada: ~2 rows (approximately)
+DELETE FROM `armada`;
+/*!40000 ALTER TABLE `armada` DISABLE KEYS */;
+INSERT INTO `armada` (`id`, `nama`, `nopol`, `nomor_rangka`, `nomor_mesin`, `warna`, `id_cabang`) VALUES
+	(1, 'Supra fit merah', '0293490', '9024902', '90489320', 'putih', 1),
+	(2, 'Gran Max', '23082', '90284902', '39048920', 'putih', 2);
+/*!40000 ALTER TABLE `armada` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.cabang
 DROP TABLE IF EXISTS `cabang`;
@@ -79,9 +70,16 @@ CREATE TABLE IF NOT EXISTS `cabang` (
   `koderesi` varchar(50) DEFAULT NULL,
   `norek` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.cabang: ~3 rows (approximately)
+DELETE FROM `cabang`;
+/*!40000 ALTER TABLE `cabang` DISABLE KEYS */;
+INSERT INTO `cabang` (`id`, `nama`, `alamat`, `kota`, `kop`, `koderesi`, `norek`) VALUES
+	(1, 'KLC Cabang Kediri', 'magersari gurah kediri halo halo', 'KEDIRI', NULL, 'KDR', NULL),
+	(2, 'KLC cabang suryabaya', 'aklsdfjkl', 'SURABAYA', 'kantor cabang : jln iwak enak no 2+2 konoha surabaya', 'SBY', 'Bank Mandiri 082098320 AN KLC SUB'),
+	(6, 'KLC Cabang Tulungagung', 'tulung agung', 'TULUNGAGUNG', 'ajsdklfj', 'TLG', '23309iwi');
+/*!40000 ALTER TABLE `cabang` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.gaji_karyawan
 DROP TABLE IF EXISTS `gaji_karyawan`;
@@ -98,9 +96,12 @@ CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
   `tahun` int(11) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.gaji_karyawan: ~0 rows (approximately)
+DELETE FROM `gaji_karyawan`;
+/*!40000 ALTER TABLE `gaji_karyawan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gaji_karyawan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.jabatan
 DROP TABLE IF EXISTS `jabatan`;
@@ -112,9 +113,21 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   `status` enum('1','0') DEFAULT '0',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.jabatan: ~8 rows (approximately)
+DELETE FROM `jabatan`;
+/*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
+INSERT INTO `jabatan` (`id`, `jabatan`, `gaji_pokok`, `uang_makan`, `status`, `id_cabang`) VALUES
+	(1, 'admin KDR', '2000000', '10000', '0', 1),
+	(2, 'admin SBY', '2500000', '10000', '0', 2),
+	(3, 'Branch Manager KDR', '3000000', '20000', '1', 1),
+	(4, 'Branch Manager SBY', '4000000', '25000', '1', 2),
+	(5, 'cs KDR', '1500000', '5000', '0', 1),
+	(6, 'cs SBY', '1800000', '7000', '0', 2),
+	(7, 'kurir KDR', '1200000', '10000', '0', 1),
+	(8, 'kurir SBY', '1800000', '10000', '0', 2);
+/*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.karyawan
 DROP TABLE IF EXISTS `karyawan`;
@@ -129,19 +142,33 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.karyawan: ~6 rows (approximately)
+DELETE FROM `karyawan`;
+/*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
+INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`, `id_cabang`) VALUES
+	(1, 'kar-0001', 'hargian', '23094829038', 'magersari surabaya', 2, 2),
+	(2, 'kar-0002', 'mega ari', '234829038490', 'gurah kediri', 1, 1),
+	(3, ' kar-0003', 'haris', '29048902', 'gurah kediri', 7, 1),
+	(5, ' kar-0005', 'jaenal', '23423', 'magersari surabaya', 8, 2),
+	(6, ' kar-0006', 'zakaria', '2345342', 'magersari surabaya', 8, 2);
+/*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.kategori_barang
 DROP TABLE IF EXISTS `kategori_barang`;
 CREATE TABLE IF NOT EXISTS `kategori_barang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cabang` int(11) DEFAULT 1,
   `spesial_cargo` varchar(40) DEFAULT NULL,
   `charge` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.kategori_barang: ~2 rows (approximately)
+DELETE FROM `kategori_barang`;
+/*!40000 ALTER TABLE `kategori_barang` DISABLE KEYS */;
+INSERT INTO `kategori_barang` (`id`, `spesial_cargo`, `charge`) VALUES
+	(1, 'tanaman beracun', '50'),
+	(2, 'senjata', '100');
+/*!40000 ALTER TABLE `kategori_barang` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.migrations
 DROP TABLE IF EXISTS `migrations`;
@@ -152,7 +179,14 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.migrations: ~2 rows (approximately)
+DELETE FROM `migrations`;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(4, '2014_10_12_000000_create_users_table', 1),
+	(5, '2014_10_12_100000_create_password_resets_table', 1),
+	(6, '2018_10_11_054351_create_pemesanans_table', 1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.mitra
 DROP TABLE IF EXISTS `mitra`;
@@ -163,9 +197,15 @@ CREATE TABLE IF NOT EXISTS `mitra` (
   `notelp` varchar(20) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.mitra: ~2 rows (approximately)
+DELETE FROM `mitra`;
+/*!40000 ALTER TABLE `mitra` DISABLE KEYS */;
+INSERT INTO `mitra` (`id`, `nama`, `alamat`, `notelp`, `id_cabang`) VALUES
+	(1, 'PT gurah menyala', 'gurah kediri', '20384920', 1),
+	(2, 'PT iwak enak', 'magersari surabaya', '20348290329', 2);
+/*!40000 ALTER TABLE `mitra` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.neraca
 DROP TABLE IF EXISTS `neraca`;
@@ -179,9 +219,31 @@ CREATE TABLE IF NOT EXISTS `neraca` (
   `admin` varchar(50) DEFAULT NULL,
   `id_cabang` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.neraca: ~18 rows (approximately)
+DELETE FROM `neraca`;
+/*!40000 ALTER TABLE `neraca` DISABLE KEYS */;
+INSERT INTO `neraca` (`id`, `bulan`, `tahun`, `keterangan`, `debit`, `kredit`, `admin`, `id_cabang`) VALUES
+	(1, '8', '2019', 'Pajak Pemasukan Resi', 0, 0, 'damara', '2'),
+	(2, '8', '2019', 'Pemasukan resi lunas', NULL, 0, 'damara', '2'),
+	(3, '8', '2019', 'Pemasukan resi belum lunas', NULL, 0, 'damara', '2'),
+	(4, '8', '2019', 'Pemasukan Piutang resi ', 0, 0, 'damara', '2'),
+	(5, '8', '2019', 'Pengeluaran Harian', 0, 0, 'damara', '2'),
+	(6, '8', '2019', 'Gaji Karyawan', 0, NULL, 'damara', '2'),
+	(7, '8', '2019', 'Pajak Pemasukan Resi', 0, 0, 'damara', '1'),
+	(8, '8', '2019', 'Pemasukan resi lunas', NULL, 0, 'damara', '1'),
+	(9, '8', '2019', 'Pemasukan resi belum lunas', NULL, 0, 'damara', '1'),
+	(10, '8', '2019', 'Pemasukan Piutang resi ', 0, 0, 'damara', '1'),
+	(11, '8', '2019', 'Pengeluaran Harian', 0, 0, 'damara', '1'),
+	(12, '8', '2019', 'Gaji Karyawan', 0, NULL, 'damara', '1'),
+	(13, '8', '2019', 'Pajak Pemasukan Resi', 0, 0, 'admin tulungagung', '6'),
+	(14, '8', '2019', 'Pemasukan resi lunas', NULL, 0, 'admin tulungagung', '6'),
+	(15, '8', '2019', 'Pemasukan resi belum lunas', NULL, 0, 'admin tulungagung', '6'),
+	(16, '8', '2019', 'Pemasukan Piutang resi ', 0, 0, 'admin tulungagung', '6'),
+	(17, '8', '2019', 'Pengeluaran Harian', 0, 0, 'admin tulungagung', '6'),
+	(18, '8', '2019', 'Gaji Karyawan', 0, NULL, 'admin tulungagung', '6');
+/*!40000 ALTER TABLE `neraca` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.omset
 DROP TABLE IF EXISTS `omset`;
@@ -197,9 +259,12 @@ CREATE TABLE IF NOT EXISTS `omset` (
   `laba` bigint(20) DEFAULT NULL,
   `omset_awal` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.omset: ~0 rows (approximately)
+DELETE FROM `omset`;
+/*!40000 ALTER TABLE `omset` DISABLE KEYS */;
+/*!40000 ALTER TABLE `omset` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.pajak
 DROP TABLE IF EXISTS `pajak`;
@@ -211,9 +276,16 @@ CREATE TABLE IF NOT EXISTS `pajak` (
   `total` int(11) DEFAULT NULL,
   `id_cabang` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.pajak: ~2 rows (approximately)
+DELETE FROM `pajak`;
+/*!40000 ALTER TABLE `pajak` DISABLE KEYS */;
+INSERT INTO `pajak` (`id`, `bulan`, `tahun`, `nama_pajak`, `total`, `id_cabang`) VALUES
+	(1, 8, '2019', 'Pajak Pendapatan', 0, '2'),
+	(2, 8, '2019', 'Pajak Pendapatan', 0, '1'),
+	(3, 8, '2019', 'Pajak Pendapatan', 0, '6');
+/*!40000 ALTER TABLE `pajak` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.pajak_armada
 DROP TABLE IF EXISTS `pajak_armada`;
@@ -225,9 +297,18 @@ CREATE TABLE IF NOT EXISTS `pajak_armada` (
   `tgl_kadaluarsa` date DEFAULT NULL,
   `tgl_peringatan` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.pajak_armada: ~4 rows (approximately)
+DELETE FROM `pajak_armada`;
+/*!40000 ALTER TABLE `pajak_armada` DISABLE KEYS */;
+INSERT INTO `pajak_armada` (`id`, `id_armada`, `nama_pajak`, `tgl_bayar`, `tgl_kadaluarsa`, `tgl_peringatan`) VALUES
+	(1, 1, 'pajak tahunan', NULL, NULL, NULL),
+	(2, 1, 'kir', NULL, NULL, NULL),
+	(3, 2, 'pajak tahunan', NULL, NULL, NULL),
+	(4, 3, 'kir', NULL, NULL, NULL),
+	(5, 4, 'pajak 5 tahun', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `pajak_armada` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.pajak_kendaraan
 DROP TABLE IF EXISTS `pajak_kendaraan`;
@@ -235,16 +316,20 @@ CREATE TABLE IF NOT EXISTS `pajak_kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idarmada` varchar(50) NOT NULL DEFAULT '0',
   `tgl` varchar(50) NOT NULL DEFAULT '0',
-  `tgl_ingat` varchar(50) NOT NULL DEFAULT '0',
-  `tgl_due` varchar(50) NOT NULL DEFAULT '0',
+  `bulan` varchar(50) NOT NULL DEFAULT '0',
+  `tahun` varchar(50) NOT NULL DEFAULT '0',
   `nominal` int(11) NOT NULL DEFAULT 0,
   `bukti` text NOT NULL DEFAULT '0',
   `keterangan` text NOT NULL DEFAULT '0',
-  `admin` text NOT NULL DEFAULT '0',
+  `admin` varchar(50) NOT NULL DEFAULT '0',
+  `id_cabang` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.pajak_kendaraan: ~0 rows (approximately)
+DELETE FROM `pajak_kendaraan`;
+/*!40000 ALTER TABLE `pajak_kendaraan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pajak_kendaraan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.pengeluaran_lain
 DROP TABLE IF EXISTS `pengeluaran_lain`;
@@ -258,9 +343,12 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   `tgl` date DEFAULT NULL,
   `gambar` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.pengeluaran_lain: ~0 rows (approximately)
+DELETE FROM `pengeluaran_lain`;
+/*!40000 ALTER TABLE `pengeluaran_lain` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pengeluaran_lain` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_mentah
 DROP TABLE IF EXISTS `resi_mentah`;
@@ -269,10 +357,20 @@ CREATE TABLE IF NOT EXISTS `resi_mentah` (
   `no_resi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT NULL,
   `pembuat` varchar(50) DEFAULT NULL,
+  `status` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.resi_mentah: ~5 rows (approximately)
+DELETE FROM `resi_mentah`;
+/*!40000 ALTER TABLE `resi_mentah` DISABLE KEYS */;
+INSERT INTO `resi_mentah` (`id`, `no_resi`, `id_cabang`, `pembuat`, `status`) VALUES
+	(9, 'resimanual002', 2, 'devasatrio', 'Y'),
+	(10, 'resimanual003', 2, 'devasatrio', 'Y'),
+	(11, 'resimanual004', 2, 'devasatrio', 'Y'),
+	(12, 'resimanual005', 2, 'devasatrio', 'Y'),
+	(13, 'resimanual006', 2, 'devasatrio', 'N');
+/*!40000 ALTER TABLE `resi_mentah` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.resi_pengiriman
 DROP TABLE IF EXISTS `resi_pengiriman`;
@@ -312,6 +410,7 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `biaya_cancel` int(11) DEFAULT 0,
   `total_biaya` int(11) DEFAULT 0,
   `total_bayar` int(11) DEFAULT 0,
+  `kekurangan` int(11) DEFAULT 0,
   `biaya_suratjalan` int(11) DEFAULT 0,
   `keterangan` text DEFAULT NULL,
   `status` enum('Y','N','RS') DEFAULT 'N',
@@ -328,11 +427,25 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `duplikat` enum('Y','N','S') DEFAULT 'N',
   `transfer` enum('Y','N') DEFAULT 'N',
   `total_berat_udara` int(11) DEFAULT NULL,
-  `maskapai_udara` int(11) DEFAULT NULL,
+  `maskapai_udara` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.resi_pengiriman: ~8 rows (approximately)
+DELETE FROM `resi_pengiriman`;
+/*!40000 ALTER TABLE `resi_pengiriman` DISABLE KEYS */;
+INSERT INTO `resi_pengiriman` (`id`, `no_resi`, `no_smu`, `kode_jalan`, `kode_antar`, `kode_envoice`, `admin`, `nama_barang`, `pengiriman_via`, `kota_asal`, `kode_tujuan`, `tgl`, `tgl_bayar`, `tgl_lunas`, `jumlah`, `berat`, `dimensi`, `ukuran_volume`, `nama_pengirim`, `nama_penerima`, `nama_penerima_barang`, `telp_pengirim`, `telp_penerima`, `alamat_pengirim`, `alamat_penerima`, `biaya_kirim`, `biaya_packing`, `biaya_asuransi`, `biaya_ppn`, `biaya_smu`, `biaya_karantina`, `biaya_charge`, `biaya_cancel`, `total_biaya`, `total_bayar`, `kekurangan`, `biaya_suratjalan`, `keterangan`, `status`, `satuan`, `metode_bayar`, `metode_input`, `pemegang`, `batal`, `status_antar`, `id_cabang`, `katakun`, `status_pengiriman`, `status_company`, `duplikat`, `transfer`, `total_berat_udara`, `maskapai_udara`) VALUES
+	(29, 'KDR190919-20-000001', NULL, 'SJKDR200919-20-000001', NULL, NULL, 'devasatrio', 'asdklfjaklf', 'darat', 'KEDIRI', 'malang', '2019-09-19', NULL, NULL, 1, '2', '20 x 30 x 20', '3', 'asdkfjklf', 'skladfjl', NULL, '92389', '93809', 'ksadjfkl', 'klsadjfkl', 60000, 3000, 2000, 0, 0, 0, 0, 0, 65000, 40000, 25000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'transit di KLC Cabang TULUNGAGUNG', 'N', 'N', 'N', NULL, NULL),
+	(30, 'SBY200919-29-000001', NULL, 'SJSBY210919-27-000001', NULL, NULL, 'cssby', 'sepatu', 'laut', 'SURABAYA', 'manado', '2019-09-20', NULL, '2019-09-21', 1, '5', '30 x 20 x 40', '6', 'kalsdfjkls', 'sakj', NULL, '902490', '209490', 'jaskljkslf', 'skalfjklsaf', 180000, 2000, 3000, 0, 0, 0, 0, 0, 185000, 185000, 0, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'handle by vendor', 'N', 'N', 'N', NULL, NULL),
+	(31, 'KDR200919-20-000001', NULL, 'SJKDR200919-20-000002', NULL, NULL, 'devasatrio', 'sepatu', 'laut', 'KEDIRI', 'ambon', '2019-09-20', NULL, NULL, 1, '3', '30 x 20 x 20', '3', 'askdfadsjf', 'jsakldfjkl', NULL, '902384920', '923890', 'jklsajfd asddfjkl', 'aksjfd asdfjsaklf', 75000, 2000, 3000, 0, 0, 0, 0, 0, 80000, 40000, 40000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'menuju kota tujuan', 'N', 'S', 'N', NULL, NULL),
+	(32, 'KDR200919-20-000002', NULL, 'SJKDR200919-20-000003', NULL, NULL, 'devasatrio', 'sempak bola', 'udara', 'KEDIRI', 'manado', '2019-09-20', NULL, NULL, 1, '2,', '30 x 20 x 30,', '3,', 'asdfkljsdf', 'jklasfj', NULL, '902338490', '92308490', 'jklsdf fjlkasf asdkjf', 'jklsadf lkasfjklsafj sfj', 150000, 0, 0, 0, 15000, 2000, 0, 0, 167000, 100000, 67000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'handle by vendor', 'N', 'N', 'N', 3, '0'),
+	(33, 'KDR200919-20-000003', NULL, 'SJKDR200919-20-000001', NULL, NULL, 'devasatrio', 'handuk', 'udara', 'KEDIRI', 'manado', '2019-09-20', NULL, NULL, 3, '2,5,1,', '30 x 20 x 10,30 x 30 x 30,20 x', '1,5,1,', 'aslkdfj', 'klsdfjk', NULL, '90283490', '92308490', 'jklsajdf', 'jsklafj', 400000, 0, 0, 0, 15000, 2000, 0, 0, 417000, 300000, 117000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'transit di KLC Cabang TULUNGAGUNG', 'N', 'N', 'N', 8, '0'),
+	(34, 'KDR200919-20-000004', NULL, 'SJKDR200919-20-000002', NULL, NULL, 'devasatrio', 'sepatu bola', 'udara', 'KEDIRI', 'manado', '2019-09-20', NULL, NULL, 2, '2,3,', '20 x 30 x 20,20 x 30 x 20,', '2,2,', 'asdf', 'skafdj', NULL, '230394890', '239048', 'skaldfj', 'jlkasdjf kasjfkl', 250000, 0, 0, 0, 15000, 2000, 0, 0, 267000, 200000, 67000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'menuju kota tujuan', 'N', 'S', 'N', 5, '0'),
+	(35, 'KDR200919-20-000001', NULL, NULL, 'SASBY200919-27-000001', NULL, 'devasatrio', 'sepatu', 'laut', 'KEDIRI', 'ambon', '2019-09-20', NULL, NULL, 1, '3', '30 x 20 x 20', '3', 'askdfadsjf', 'jsakldfjkl', NULL, '902384920', '923890', 'jklsajfd asddfjkl', 'aksjfd asdfjsaklf', 75000, 2000, 3000, 0, 0, 0, 0, 0, 80000, 0, 0, 0, 'rumah kosong', 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'KL', 2, 1, 'pengantaran gagal', 'N', 'Y', 'N', NULL, NULL),
+	(39, 'KDR200919-20-000004', NULL, NULL, 'SASBY200919-27-000001', NULL, 'devasatrio', 'sepatu bola', 'udara', 'KEDIRI', 'manado', '2019-09-20', NULL, NULL, 2, '2,3,', '20 x 30 x 20,20 x 30 x 20,', '2,2,', 'asdf', 'skafdj', 'harminal', '230394890', '239048', 'skaldfj', 'jlkasdjf kasjfkl', 250000, 0, 0, 0, 15000, 2000, 0, 0, 267000, 0, 0, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'Y', 2, 1, 'paket telah diterima', 'N', 'Y', 'N', 5, '0'),
+	(40, 'KDR210919-20-000001', NULL, NULL, NULL, NULL, 'devasatrio', 'spiker', 'udara', 'KEDIRI', 'manado', '2019-09-21', NULL, NULL, 2, '3,5,', '30 x 20 x 10,40 x 40 x 20,', '1,5,', 'asjdf', 'jkslfj', NULL, '90238490', '90238390', 'jksadjf', 'klsfd sdkfjklsdf klsdfjklsf', 400000, 0, 0, 0, 15000, 2000, 0, 0, 417000, 200000, 217000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 1, 1, 'barang diterima KLC Cabang KEDIRI', 'N', 'N', 'N', 8, 'batik air'),
+	(41, 'SBY210919-27-000001', NULL, 'SJSBY210919-27-000001', NULL, NULL, 'adminsby', 'sempak', 'udara', 'SURABAYA', 'kalimantan', '2019-09-21', NULL, NULL, 2, '3,2,', '30 x 20 x 20,20 x 20 x 20,', '2,1,', 'asdklfj', 'skaldfj', NULL, '09318490', '92390', 'jklsdf sakdjfklsdf', 'jklsadf', 250000, 0, 0, 0, 15000, 2000, 0, 0, 267000, 200000, 67000, 0, NULL, 'N', 'kg', 'cash', 'otomatis', NULL, 'N', 'N', 2, 1, 'handle by vendor', 'N', 'N', 'N', 5, 'garuda');
+/*!40000 ALTER TABLE `resi_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.roles
 DROP TABLE IF EXISTS `roles`;
@@ -340,9 +453,22 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.roles: ~9 rows (approximately)
+DELETE FROM `roles`;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` (`id`, `level`) VALUES
+	(1, 'programmer'),
+	(2, 'admin'),
+	(3, 'super admin'),
+	(4, 'cs'),
+	(5, 'hrd'),
+	(6, 'branch manager'),
+	(7, 'oprasional'),
+	(8, 'oprasional cabang'),
+	(9, 'admin cabang');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting
 DROP TABLE IF EXISTS `setting`;
@@ -367,7 +493,12 @@ CREATE TABLE IF NOT EXISTS `setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.setting: ~0 rows (approximately)
+DELETE FROM `setting`;
+/*!40000 ALTER TABLE `setting` DISABLE KEYS */;
+INSERT INTO `setting` (`id`, `namaweb`, `email`, `kontak`, `icon`, `logo`, `header`, `landing`, `sapaan`, `desk`, `alamat`, `pengumuman`, `desk_udara`, `desk_laut`, `desk_darat`, `status`, `bulan_sekarang`) VALUES
+	(1, 'Suryantara', 'abihsan@gmail.com', '082261110369', '1546485899-favicon.png', '1546486783-favicon.png', 'PT SURYANTARA CARGO', '1546074136-delivery.png', 'SELAMAT DATANG DI WEBSITE RESMI KAMI', 'PT SURYANTARA CARGO adalah jasa pengiriman barang yang telah terbukti kwalitas dan pelayanan nya', 'Jln PGA No.1 RW 01 RT 01 magersari gurah kediri', '<p>Dear client untuk saat ini data Cabang surabaya dapat di isi tapi untuk transaksi dsb harap sabar :-*</p>', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya udara</li></ul>', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya laut</li></ul>', '<ul><li><strong>Estimasi</strong> biaya akan kosong apa bila berat tidak memenuhi berat minimal pengiriman</li><li><strong>Estimasi</strong> biaya belum termasuk biaya tambahan</li><li>Biaya tambahan meliputi : ppn, biaya surat muatan udara(SMU), biaya Surcharge, biaya karantina.</li><li><strong>Surcharge</strong> adalah kategori barang tertentu yang mendapat tambahan biaya darat</li></ul>', 'Y', 9);
+/*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.setting_pajak
 DROP TABLE IF EXISTS `setting_pajak`;
@@ -379,7 +510,13 @@ CREATE TABLE IF NOT EXISTS `setting_pajak` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.setting_pajak: ~2 rows (approximately)
+DELETE FROM `setting_pajak`;
+/*!40000 ALTER TABLE `setting_pajak` DISABLE KEYS */;
+INSERT INTO `setting_pajak` (`id`, `pajak`, `besaran`, `tempo`) VALUES
+	(1, 'Pajak Omset', 10, 'tahun'),
+	(5, 'Pajak Penghasilan', 5, 'bulan');
+/*!40000 ALTER TABLE `setting_pajak` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.set_saldo
 DROP TABLE IF EXISTS `set_saldo`;
@@ -390,7 +527,13 @@ CREATE TABLE IF NOT EXISTS `set_saldo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.set_saldo: ~2 rows (approximately)
+DELETE FROM `set_saldo`;
+/*!40000 ALTER TABLE `set_saldo` DISABLE KEYS */;
+INSERT INTO `set_saldo` (`id`, `id_cabang`, `saldo`) VALUES
+	(2, '1', 1200000),
+	(3, '2', 200000);
+/*!40000 ALTER TABLE `set_saldo` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.status_pengiriman
 DROP TABLE IF EXISTS `status_pengiriman`;
@@ -403,9 +546,34 @@ CREATE TABLE IF NOT EXISTS `status_pengiriman` (
   `jam` time DEFAULT NULL,
   `lokasi` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.status_pengiriman: ~17 rows (approximately)
+DELETE FROM `status_pengiriman`;
+/*!40000 ALTER TABLE `status_pengiriman` DISABLE KEYS */;
+INSERT INTO `status_pengiriman` (`id`, `kode`, `status`, `keterangan`, `tgl`, `jam`, `lokasi`) VALUES
+	(96, 'KDR190919-20-000001', 'barang diterima KLC Cabang KEDIRI', NULL, '2019-09-19', '19:25:39', 'KEDIRI'),
+	(97, 'SBY200919-29-000001', 'barang diterima KLC Cabang SURABAYA', NULL, '2019-09-20', '09:13:53', 'SURABAYA'),
+	(98, 'KDR200919-20-000001', 'barang diterima KLC Cabang KEDIRI', NULL, '2019-09-20', '09:41:39', 'KEDIRI'),
+	(99, 'KDR200919-20-000002', 'barang diterima KLC Cabang KEDIRI', NULL, '2019-09-20', '16:12:26', 'KEDIRI'),
+	(100, 'KDR200919-20-000003', 'barang diterima KLC Cabang KEDIRI', NULL, '2019-09-20', '16:14:06', 'KEDIRI'),
+	(101, 'KDR190919-20-000001', 'handle by vendor', NULL, '2019-09-20', '16:18:10', 'KEDIRI'),
+	(102, 'KDR200919-20-000003', 'handle by vendor', NULL, '2019-09-20', '16:18:47', 'KEDIRI'),
+	(105, 'KDR200919-20-000001', 'menuju kota tujuan', NULL, '2019-09-20', '16:27:41', 'KEDIRI'),
+	(106, 'KDR200919-20-000002', 'handle by vendor', NULL, '2019-09-20', '16:30:13', 'KEDIRI'),
+	(107, 'KDR190919-20-000001', 'transit di KLC Cabang TULUNGAGUNG', NULL, '2019-09-20', '16:41:52', 'TULUNGAGUNG'),
+	(108, 'KDR200919-20-000003', 'transit di KLC Cabang TULUNGAGUNG', NULL, '2019-09-20', '16:41:52', 'TULUNGAGUNG'),
+	(109, 'KDR200919-20-000001', 'barang sampai di KLC Cabang SURABAYA', NULL, '2019-09-20', '16:48:32', 'SURABAYA'),
+	(114, 'KDR200919-20-000004', 'barang sampai di KLC Cabang SURABAYA', NULL, '2019-09-20', '17:51:12', 'SURABAYA'),
+	(115, 'KDR200919-20-000001', 'prosess pengantaran paket', NULL, '2019-09-20', '17:52:47', 'SURABAYA'),
+	(116, 'KDR200919-20-000004', 'prosess pengantaran paket', NULL, '2019-09-20', '17:52:55', 'SURABAYA'),
+	(117, 'KDR200919-20-000001', 'pengantaran gagal', 'rumah kosong', '2019-09-20', '17:56:20', 'SURABAYA'),
+	(118, 'KDR200919-20-000004', 'paket telah diterima', 'harminal', '2019-09-20', '17:57:09', 'SURABAYA'),
+	(119, 'KDR210919-20-000001', 'barang diterima KLC Cabang KEDIRI', NULL, '2019-09-21', '09:18:34', 'KEDIRI'),
+	(120, 'SBY210919-27-000001', 'barang diterima KLC Cabang SURABAYA', NULL, '2019-09-21', '13:01:58', 'SURABAYA'),
+	(121, 'SBY200919-29-000001', 'handle by vendor', NULL, '2019-09-21', '13:16:15', 'SURABAYA'),
+	(122, 'SBY210919-27-000001', 'handle by vendor', NULL, '2019-09-21', '13:16:28', 'SURABAYA');
+/*!40000 ALTER TABLE `status_pengiriman` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_antar
 DROP TABLE IF EXISTS `surat_antar`;
@@ -419,9 +587,14 @@ CREATE TABLE IF NOT EXISTS `surat_antar` (
   `status` enum('Y','N','S') DEFAULT 'N',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.surat_antar: ~0 rows (approximately)
+DELETE FROM `surat_antar`;
+/*!40000 ALTER TABLE `surat_antar` DISABLE KEYS */;
+INSERT INTO `surat_antar` (`id`, `id_karyawan`, `kode`, `tgl`, `pemegang`, `telp`, `status`, `id_cabang`) VALUES
+	(1, '1', 'SASBY200919-27-000001', '2019-09-20', 'hargian', '23094829038', 'S', 2);
+/*!40000 ALTER TABLE `surat_antar` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_envoice
 DROP TABLE IF EXISTS `surat_envoice`;
@@ -440,9 +613,12 @@ CREATE TABLE IF NOT EXISTS `surat_envoice` (
   `id_cabang` int(11) DEFAULT 1,
   `status` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.surat_envoice: ~0 rows (approximately)
+DELETE FROM `surat_envoice`;
+/*!40000 ALTER TABLE `surat_envoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `surat_envoice` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.surat_jalan
 DROP TABLE IF EXISTS `surat_jalan`;
@@ -467,9 +643,17 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `status_transit` enum('Y','N') DEFAULT 'N',
   `status_pengiriman` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.surat_jalan: ~3 rows (approximately)
+DELETE FROM `surat_jalan`;
+/*!40000 ALTER TABLE `surat_jalan` DISABLE KEYS */;
+INSERT INTO `surat_jalan` (`id`, `admin`, `kode`, `tujuan`, `tgl`, `status`, `totalkg`, `totalkoli`, `totalcash`, `totalbt`, `biaya`, `alamat_tujuan`, `cabang`, `katakun`, `id_cabang`, `id_cabang_tujuan`, `id_cabang_transit`, `status_transit`, `status_pengiriman`) VALUES
+	(1, 'devasatrio', 'SJKDR200919-20-000001', 'PT bringin maju-9203843290', '2019-09-20', 'Y', 10, 4, 482000, 0, NULL, 'gurah kediri', 'N', 14, 1, NULL, 6, 'Y', 'N'),
+	(2, 'devasatrio', 'SJKDR200919-20-000002', 'KLC cabang suryabaya', '2019-09-20', 'P', 8, 3, 347000, 0, NULL, 'aklsdfjkl', 'Y', 14, 1, 2, NULL, 'N', 'Y'),
+	(3, 'devasatrio', 'SJKDR200919-20-000003', 'pt gurah sejahtera-239483290', '2019-09-20', 'Y', 3, 1, 167000, 0, NULL, 'gurah kediri', 'N', 14, 1, NULL, NULL, 'N', 'N'),
+	(4, 'adminsby', 'SJSBY210919-27-000001', 'PT emoh rugi-234234', '2019-09-21', 'Y', 10, 3, 452000, 0, NULL, 'magersari surabaya', 'N', 14, 2, NULL, NULL, 'N', 'N');
+/*!40000 ALTER TABLE `surat_jalan` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_darat
 DROP TABLE IF EXISTS `tarif_darat`;
@@ -484,9 +668,20 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `tarif_city` enum('Y','N') DEFAULT 'N',
   `company` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.tarif_darat: ~7 rows (approximately)
+DELETE FROM `tarif_darat`;
+/*!40000 ALTER TABLE `tarif_darat` DISABLE KEYS */;
+INSERT INTO `tarif_darat` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`, `tarif_city`, `company`) VALUES
+	(2, 'PR', 'pare', 15000, 5, '1', 1, 'N', 'N'),
+	(3, 'TLG', 'tulungagung', 15000, 5, '1', 1, 'N', 'N'),
+	(4, 'BLT', 'blitar', 20000, 5, '1', 1, 'N', 'N'),
+	(6, 'BLT', 'blitar', 20000, 5, '1', 2, 'N', 'N'),
+	(7, 'cty001', 'ngancar', 10000, 10, '1', 1, 'Y', 'N'),
+	(9, 'cty003', 'banyuanyar', 10000, 2, '1', 1, 'Y', 'N'),
+	(13, 'ctycmp004', 'gayam', 5000, 2, '1', 1, 'Y', 'Y');
+/*!40000 ALTER TABLE `tarif_darat` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_laut
 DROP TABLE IF EXISTS `tarif_laut`;
@@ -499,9 +694,16 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.tarif_laut: ~3 rows (approximately)
+DELETE FROM `tarif_laut`;
+/*!40000 ALTER TABLE `tarif_laut` DISABLE KEYS */;
+INSERT INTO `tarif_laut` (`id`, `kode`, `tujuan`, `tarif`, `berat_min`, `estimasi`, `id_cabang`) VALUES
+	(1, 'MLK', 'maluku', 25000, 2, '1', 1),
+	(2, 'AMB', 'ambon', 25000, 2, '1', 1),
+	(7, 'MND', 'manado', 30000, 2, '1', 2);
+/*!40000 ALTER TABLE `tarif_laut` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tarif_udara
 DROP TABLE IF EXISTS `tarif_udara`;
@@ -516,9 +718,18 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `berat_minimal` int(11) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.tarif_udara: ~5 rows (approximately)
+DELETE FROM `tarif_udara`;
+/*!40000 ALTER TABLE `tarif_udara` DISABLE KEYS */;
+INSERT INTO `tarif_udara` (`id`, `kode`, `tujuan`, `airlans`, `perkg`, `minimal_heavy`, `biaya_dokumen`, `berat_minimal`, `id_cabang`) VALUES
+	(3, 'MND', 'manado', 'Lion', 50000, 20, 15000, 10, 1),
+	(4, 'MND', 'manado', 'batik air', 50000, 20, 15000, 10, 1),
+	(9, 'MND', 'manado', 'batik air', 50000, 20, 15000, 10, 2),
+	(10, 'KLM', 'kalimantan', 'Lion', 50000, 20, 15000, 10, 2),
+	(11, 'KLM', 'kalimantan', 'garuda', 50000, 20, 15000, 10, 2);
+/*!40000 ALTER TABLE `tarif_udara` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tb_kategoriakutansi
 DROP TABLE IF EXISTS `tb_kategoriakutansi`;
@@ -531,7 +742,23 @@ CREATE TABLE IF NOT EXISTS `tb_kategoriakutansi` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.tb_kategoriakutansi: ~14 rows (approximately)
+DELETE FROM `tb_kategoriakutansi`;
+/*!40000 ALTER TABLE `tb_kategoriakutansi` DISABLE KEYS */;
+INSERT INTO `tb_kategoriakutansi` (`id`, `kode`, `nama`, `status`, `aksi`) VALUES
+	(1, '001', 'Pemasukan Resi', 'pendapatan', 'N'),
+	(2, '002', 'Pengeluaran Vendor', 'pengeluaran', 'N'),
+	(3, '003', 'Hutang Usaha', 'pengeluaran', 'N'),
+	(5, '005', 'BBM', 'pengeluaran', 'Y'),
+	(6, '006', 'Service', 'pengeluaran', 'Y'),
+	(7, '007', 'Parkir', 'pengeluaran', 'Y'),
+	(8, '008', 'Tol', 'pengeluaran', 'Y'),
+	(9, '009', 'ATK', 'pengeluaran', 'Y'),
+	(10, '010', 'Listrik', 'pengeluaran', 'Y'),
+	(11, '011', 'Internet', 'pengeluaran', 'Y'),
+	(12, '012', 'Modal', 'pendapatan', 'N'),
+	(14, '260', 'Surat Jalan', 'pengeluaran', 'Y');
+/*!40000 ALTER TABLE `tb_kategoriakutansi` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.tb_neraca
 DROP TABLE IF EXISTS `tb_neraca`;
@@ -543,9 +770,12 @@ CREATE TABLE IF NOT EXISTS `tb_neraca` (
   `status` enum('D','K') NOT NULL,
   `total` bigint(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.tb_neraca: ~0 rows (approximately)
+DELETE FROM `tb_neraca`;
+/*!40000 ALTER TABLE `tb_neraca` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_neraca` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.transfer
 DROP TABLE IF EXISTS `transfer`;
@@ -559,9 +789,12 @@ CREATE TABLE IF NOT EXISTS `transfer` (
   `bukti` text NOT NULL DEFAULT '0',
   `admin` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.transfer: ~0 rows (approximately)
+DELETE FROM `transfer`;
+/*!40000 ALTER TABLE `transfer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transfer` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.users
 DROP TABLE IF EXISTS `users`;
@@ -578,9 +811,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   `level` varchar(20) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table kargo.users: ~13 rows (approximately)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `kode`, `username`, `password`, `nama`, `telp`, `remember_token`, `email`, `alamat`, `level`, `id_cabang`) VALUES
+	(19, 'Admin-000013', 'oprasionalkdr', '$2y$10$VoXBjFs17gnvwTlDmRPYDuWYLRRhmf43hEm/MqNba0XbacElVpEgO', 'oprasional cabang kdr', '29038902', '', 'satriosuklun@gmail.com', 'gurah kediri', '8', 1),
+	(20, 'Admin-000002', 'devasatrio', '$2y$10$hohuZPOG9mAmD9vcEC/3rupKt.3bsHWG0t.iKaHlNO7G1nRCqXWbW', 'deva satrio damara', '081220380607', '2wq2mkezxQvfo3cVTRyn4dbTCNd1AULgnUHbKmmQcgtqc9UpKA', 'damarasatrio@gmail.com', 'magersair gurah kediri', '1', 1),
+	(21, 'Admin-000003', 'owner', '$2y$10$FpEDAdK56kLoU12R1.CnfuGYo7x2K1ZK6cM5ETHYp1GcFOefKwo4K', 'owner', '20498290', 't9AcQsvijoyNgA8v0zNVcewVaProLjJ5bEnNRMCV0uUrBlvowg', 'satriosuklun@gmail.com', 'gurah kediri', '3', 1),
+	(22, 'Admin-000004', 'adminpusat', '$2y$10$QiRkVMZSjInbzvLk1p/QxOzGSn6iXYRWN0m982c.pCHA07OVlTrwm', 'admin pusat', '092384902890', '', 'satriosuklun@gmail.com', 'gurah', '2', 1),
+	(23, 'Admin-000005', 'hrdpusat', '$2y$10$qKClj6gSbbhy6c5ClHISreaTNmF7is2kHOZEWAeK8oToyEKls3Nme', 'hrd pusat', '029384902890', '', 'satriosuklun@gmail.com', 'gurah', '5', 1),
+	(24, 'Admin-000006', 'bmkdr', '$2y$10$ujThfDj1dsSQto7r4sNayO51eZYu.O9T9MWslWinCHd4mxxwsT6Qu', 'branch manager kdr', '29038490238490', '', 'satriosuklun@gmail.com', 'gurah kediri', '6', 1),
+	(25, 'Admin-000007', 'bmsby', '$2y$10$T2kpJqPs3.Fd1FE3y.LAnOUeVKSr.CCeGAOjIuylqtcayYdFOVi9S', 'branch manager sby', '234890238', '', 'satriosuklun@gmail.com', 'magersari surabaya', '6', 2),
+	(26, 'Admin-000008', 'adminkdr', '$2y$10$g/Mi7k9.0K/CWN3PnM5iB.lrbVygko2QOuslkLiuNiW3MuZeYi656', 'admin cabang kdr', '02938490', 'K5nyTZEfoEH0GhEzJ9b55vSZ6tzySKic53eOM5dCPOaj64RvWj', 'satriosuklun@gmail.com', 'gurah kediri', '9', 1),
+	(27, 'Admin-000009', 'adminsby', '$2y$10$lnLkC/Kmdv8OsxPNEKahxOT5w02gS2WWPNQV.4TVPkdUGAzez2Gp.', 'admin cabang sby', '203489032', 'ojxVW5fHzJjG1b1b3P8yrNIdfUYwnJWqlpla3v0o3PfrifOfWS', 'satriosuklun@gmail.com', 'magersari surabaya', '9', 2),
+	(28, 'Admin-000010', 'cskdr', '$2y$10$a2RlVyGmFTEweyhFDeymkOH3UFP8v/RFyDmk6NQZn/FOHSM3sGg7O', 'cs kediri', '203984902', '', 'satriosuklun@gmail.com', 'gurah kediri', '4', 1),
+	(29, 'Admin-000011', 'cssby', '$2y$10$XqdzKCjITu9ueIhNwt9G6eCOBwkWdW2ro/ze3G0u00Iw1gbG8nINe', 'cs surabaya', '2093489320', 'H1jqIVrU6alUPU2WhJsTg9Eer1zsVfOLRFF579gWVGMFhQHZt9', 'satriosuklun@gmail.com', 'magersari surabaya', '4', 2),
+	(30, 'Admin-000012', 'oprasionalpusat', '$2y$10$yt3mxWzFfmYAwHjgnJ92Je7eEr2TOWPZZHCZtkCeFpYRsFC.TcRT6', 'oprasional pusat', '20938490', '', 'satriosuklun@gmail.com', 'gurah kediri', '7', 1),
+	(32, 'Admin-000014', 'oprasionalsby', '$2y$10$vd1qF/ZhjzhgHB4qD0zHheLQ5su6okWJ/w/VMDoqy1bgLxLDGu6qS', 'oprasional cabang sby', '20938490', '', 'satriosuklun@gmail.com', 'magersari surabaya', '8', 2),
+	(33, 'Admin-000015', 'admintlg', '$2y$10$plr.dGxfhmAxQcO1R9XDReJmVVf6yVo9ozv/.kzmMtf8lpU2Qz222', 'admin tulungagung', '92038490', 'COTDJfqb28rvD65kgzAZ87LeX1ws2PJ76hQW4bCypGhmPwYyu0', 'satriosuklun@gmail.com', 'sukomoro tulungagung', '9', 6);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table kargo.vendor
 DROP TABLE IF EXISTS `vendor`;
@@ -593,20 +844,18 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   `cabang` enum('Y','N') DEFAULT 'N',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
-
--- Dumping structure for trigger kargo.editadmin
-DROP TRIGGER IF EXISTS `editadmin`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
-DELIMITER //
-CREATE TRIGGER `editadmin` BEFORE UPDATE ON `admin` FOR EACH ROW BEGIN
-update resi_pengiriman set admin=new.username where admin=old.username;
-update surat_jalan set admin=new.username where admin=old.username;
-END//
-DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
+-- Dumping data for table kargo.vendor: ~5 rows (approximately)
+DELETE FROM `vendor`;
+/*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
+INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`, `id_cabang`) VALUES
+	(1, 'vndkdr001', 'pt gurah sejahtera', '239483290', 'gurah kediri', 'N', 1),
+	(2, 'vndkdr002', 'PT bringin maju', '9203843290', 'gurah kediri', 'N', 1),
+	(3, 'vndsby001', 'CV baya gila', '23423', 'magersari surabaya', 'N', 2),
+	(4, 'vndsby002', 'PT emoh rugi', '234234', 'magersari surabaya', 'N', 2),
+	(5, 'vndsby003', 'PT cahaya surabaya', '23423', 'magersari surabaya', 'N', 2);
+/*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 
 -- Dumping structure for trigger kargo.editkaryawan
 DROP TRIGGER IF EXISTS `editkaryawan`;

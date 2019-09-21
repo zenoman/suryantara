@@ -139,17 +139,17 @@
             		Session::get('level') == '3' || 
             		Session::get('level') == '2') 
 					<div class="text-right">
-&nbsp;&nbsp;
-<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfcity/hapussemua')}}" class="btn btn-danger btn-sm">
-Kosongkan Data
-</a>	
-&nbsp;&nbsp;
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
+						&nbsp;&nbsp;
+						<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfcity/hapussemua')}}" class="btn btn-danger btn-sm">
+						Kosongkan Data
+						</a>	
+						&nbsp;&nbsp;
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
 					</div>
 					@endif
 						{{csrf_field()}}
                         </form>
-			{{ $trf_drt->links() }}
+					{{ $trf_drt->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->

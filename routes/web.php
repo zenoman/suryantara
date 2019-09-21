@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Input;
-
+Route::post('gantistatus','distribusiresi\distribusiresicontroller@gantistatus');
+Route::get('hapusresi/{id}','distribusiresi\distribusiresicontroller@destroy');
 Route::post('/distribusiresi/prosesimportexcel','distribusiresi\distribusiresicontroller@prosesimportexcel');
 Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@downloadtemplate');
 Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
