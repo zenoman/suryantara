@@ -39,11 +39,11 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif 
-
+                    @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
-                               
                     <br><br>
+                    @endif
                     <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>

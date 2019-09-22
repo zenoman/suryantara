@@ -134,7 +134,7 @@
                                         @endif
 						</div>
 					</div>
-					@if(Session::get('level') !='admin')
+					@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 					<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Level admin</label>
 						<div class="col-sm-10">

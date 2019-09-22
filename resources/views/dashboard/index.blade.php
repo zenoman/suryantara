@@ -84,7 +84,7 @@
 			@endif
 			  	@endif
 
-			  	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+			  	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2'|| Session::get('level') == '9'|| Session::get('level') == '6')
 			  	@if($jmlkarya != $jmlabsen)
 	        	<div class="col-xl-12 dahsboard-column">
 	        		<section class="widget widget-simple-sm-fill green">
