@@ -23,6 +23,14 @@
 	       
 	
 	        <div class="row">
+	        	 @if (session('status'))
+	        	 <div class="col-xl-12 dahsboard-column">
+                    <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('status') }}
+                    </div>
+                  </div>
+                 @endif
                  @if($jumlahtotalresi > 500)
                   <div class="col-xl-12 dahsboard-column">
                     <div class="alert alert-danger alert-dismissable">

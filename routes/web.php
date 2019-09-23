@@ -253,8 +253,13 @@ Route::get('/caritujuanudara/{id}','landingudara\landingudaracontroller@carituju
 Route::get('/landudara/cari','landingudara\landingudaracontroller@pencarian');
 Route::get('/landkurir' , 'landingkurir\landingkurircontroller@index');
 Route::get('/landkurir/cari','landingkurir\landingkurircontroller@pencarian');
-Route::get('/dashboard','Dashboardcontroller@index');
 
+//================================================dashboard
+Route::get('/dashboard','Dashboardcontroller@index');
+Route::get('/editprofile/{id}','Dashboardcontroller@editprofile');
+Route::get('/editprofile/{id}/editpassword','Dashboardcontroller@editpassword');
+Route::post('/editprofile/editdata','Dashboardcontroller@updateprofile');
+Route::post('editprofile/changepas','Dashboardcontroller@actionchangepas');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');
@@ -265,9 +270,11 @@ Route::post('/admin/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
 Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
 // Route::get('admin/cari','Admin\Admincontroller@caridata');
+
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');
+
 //============================================trf udara
 Route::get('/trfudara','Trfudara\Trfudaracontroller@index');
 Route::post('/trfudara','Trfudara\Trfudaracontroller@store');

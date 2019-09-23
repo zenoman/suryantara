@@ -15,7 +15,8 @@ class suratjalanController extends Controller
     public function resisuratjalan(){
         if( Session::get('level') == '1' || 
             Session::get('level') == '3' || 
-            Session::get('level') == '2'){
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $data = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
             ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
@@ -119,7 +120,8 @@ class suratjalanController extends Controller
         $webinfo = DB::table('setting')->limit(1)->get();
         if( Session::get('level') == '1' || 
             Session::get('level') == '3' || 
-            Session::get('level') == '2'){
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $listdata =
             DB::table('surat_jalan')
             ->where('status','!=','N')
@@ -372,7 +374,8 @@ class suratjalanController extends Controller
         $cari = $request->cari;
         if( Session::get('level') == '1' || 
             Session::get('level') == '3' || 
-            Session::get('level') == '2'){
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $listdata = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
             ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
@@ -420,7 +423,8 @@ class suratjalanController extends Controller
         $cari = $request->cari;
         if( Session::get('level') == '1' || 
             Session::get('level') == '3' || 
-            Session::get('level') == '2'){
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $listdata = DB::table('surat_jalan')
             ->where('kode','like','%'.$cari.'%')
             ->orwhere('tujuan','like','%'.$cari.'%')
