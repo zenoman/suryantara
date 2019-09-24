@@ -82,7 +82,7 @@
                 <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
                 <td class="text-center">{{$brt." Kg"}}</td>
                 <td class="text-center"><?php echo strtoupper($row->airlans)?></td>
-                <td class="text-center">{{"Rp ". number_format($row->perkg,0,',','.')}}</td>
+                <td class="text-center">{{"Rp ". number_format($row->perkg,0,',','.')}} / Kg</td>
                 <td>
                   @if($brt >= $row->berat_minimal)
                   @php
