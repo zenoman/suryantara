@@ -337,5 +337,44 @@ class Dashboardcontroller extends Controller {
         
         }        
         
-    }        
+    }   
+    // =================================================================================
+    public function editprofile($id){
+        $admin = DB::table('users')->where('id',$id)->get();
+        $setting = DB::table('setting')->get();
+        return view('dashboard.editprofile',['datadm'=>$admin,'title'=>$setting]);
+    }
+
+    //===========================================================================
+    public function updateprofile(Request $request){
+            DB::table('users')->where('id',$request->idadmin)->update([
+            'nama'  => $request->nama,
+            'username'  => $request->username,            
+            'email'  => $request->email,
+            'telp'  => $request->telp,
+            'alamat'  => $request->alamat
+            ]);
+        return redirect('dashboard')->with('status','Edit Profile Sukses');
+    }
+    
+    //===========================================================================
+    public function editpassword($id){
+        $admin = DB::table('users')->where('id',$id)->get();
+        $setting = DB::table('setting')->get();
+        return view('dashboard.changepas',['datadm'=>$admin,'title'=>$setting]);
+    }
+    
+    //======================================================================
+    public function actionchangepas(Request $request){
+        if($request->konfirmasi_password_baru==$request->password_baru){
+            DB::table('users')->where('id',$request->idnya)->update([
+                'password' =>Hash::make($request->konfirmasi_password_baru)
+            ]);
+            return redirect('dashboard')
+            ->with('status','Edit Password berhasil');
+        }else{
+             return redirect('admin/'.$request->idnya.'/changepas')
+             ->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
+        }
+    }             
 }
