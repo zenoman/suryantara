@@ -11,7 +11,13 @@ class resipengirimanController extends Controller
     {
         $this->middleware('auth');
     }
-    
+    //======================================================
+    public function lacakresi(Request $request){
+       $resi = $request->resi;
+       $webinfo = DB::table('setting')->limit(1)->get();
+       $data = DB::table('status_pengiriman')->where('kode','=',$resi)->get();
+       return view('resipengiriman.lacakresi',['data'=>$data,'webinfo'=>$webinfo,'resi'=>$resi]);
+    }
     //======================================================
     public function aksiupdatepembayaran(Request $request){
         if($request->statuslunas=='lunas'){
@@ -565,16 +571,17 @@ class resipengirimanController extends Controller
         }else{
             $simpan = DB::table('resi_pengiriman')
             ->insert($data);
+            DB::table('status_pengiriman')
+            ->insert([
+                'kode'      =>$request->noresi,
+                'status'    =>'barang diterima KLC Cabang '.Session::get('kota'),
+                'tgl'       =>date('Y-m-d'),
+                'jam'       =>date('H:i:s'),
+                'lokasi'    =>Session::get('kota')
+            ]);
         }
 
-        DB::table('status_pengiriman')
-        ->insert([
-            'kode'      =>$request->noresi,
-            'status'    =>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'       =>date('Y-m-d'),
-            'jam'       =>date('H:i:s'),
-            'lokasi'    =>Session::get('kota')
-        ]);
+        
         return response()->json($simpan);   
     }
     //===================================================================
@@ -631,16 +638,18 @@ class resipengirimanController extends Controller
         }else{
             $simpan = DB::table('resi_pengiriman')
             ->insert($data);
+
+            DB::table('status_pengiriman')
+            ->insert([
+                'kode'=>$request->noresi,
+                'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                'tgl'=>date('Y-m-d'),
+                'jam'=>date('H:i:s'),
+                'lokasi'=>Session::get('kota')
+            ]);
         }
         
-        DB::table('status_pengiriman')
-        ->insert([
-            'kode'=>$request->noresi,
-            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'=>date('Y-m-d'),
-            'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
-        ]);
+        
         return response()->json($simpan);   
     }
     
@@ -698,16 +707,18 @@ class resipengirimanController extends Controller
         }else{
             $simpan = DB::table('resi_pengiriman')
             ->insert($data);
+
+            DB::table('status_pengiriman')
+            ->insert([
+                'kode'=>$request->noresi,
+                'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                'tgl'=>date('Y-m-d'),
+                'jam'=>date('H:i:s'),
+                'lokasi'=>Session::get('kota')
+            ]);
         }
 
-        DB::table('status_pengiriman')
-        ->insert([
-            'kode'=>$request->noresi,
-            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'=>date('Y-m-d'),
-            'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
-        ]);
+        
 
         return response()->json($simpan);
     }
@@ -765,16 +776,17 @@ class resipengirimanController extends Controller
         }else{
                 $simpan = DB::table('resi_pengiriman')
                 ->insert($data);
+                DB::table('status_pengiriman')
+                ->insert([
+                    'kode'=>$request->noresi,
+                    'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                    'tgl'=>date('Y-m-d'),
+                    'jam'=>date('H:i:s'),
+                    'lokasi'=>Session::get('kota')
+                ]);
         }
 
-        DB::table('status_pengiriman')
-        ->insert([
-            'kode'=>$request->noresi,
-            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'=>date('Y-m-d'),
-            'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
-        ]);
+        
         return response()->json($simpan);
     }
     //===================================================================
@@ -832,17 +844,18 @@ class resipengirimanController extends Controller
             ->update($data);
         }else{
             $simpan = DB::table('resi_pengiriman')
-            ->insert($data); 
+            ->insert($data);
+            DB::table('status_pengiriman')
+            ->insert([
+                'kode'=>$request->noresi,
+                'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
+                'tgl'=>date('Y-m-d'),
+                'jam'=>date('H:i:s'),
+                'lokasi'=>Session::get('kota')
+            ]); 
         }
 
-        DB::table('status_pengiriman')
-        ->insert([
-            'kode'=>$request->noresi,
-            'status'=>'barang diterima KLC Cabang '.Session::get('kota'),
-            'tgl'=>date('Y-m-d'),
-            'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
-        ]);
+        
         return response()->json($simpan);
     }
     //===================================================================
