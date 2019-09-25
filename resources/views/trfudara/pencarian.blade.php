@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2 class = "page-header">Hasil Pencarian "{{$cari}}"</h2>
+							<h2>Data Tarif Udara</h2>
+							<p>Hasil Pencarian "{{$cari}}"</p>
 						</div>
 					</div>
 				</div>
@@ -100,13 +101,11 @@
 
 							
 					</table>
-<div class="text-right">
-	<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
-</div>
-
+						<div class="text-right">
+							<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
+						</div>
 						{{csrf_field()}}
-                        </form>
-					 
+                    </form>
 				</div>
 			</section>
 		</div><!--.container-fluid-->

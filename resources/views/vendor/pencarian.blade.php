@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2 class = "page-header">Hasil Pencarian "{{$cari}}"</h2>
+							<h2>Data Vendor</h2>
+							<p>Hasil Pencarian "{{$cari}}"</p>
 						</div>
 					</div>
 				</div>
@@ -40,7 +41,6 @@
 					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<b>List data vendor</b>
 						<thead>
 						<tr>
 							<th>No</th>
@@ -49,7 +49,9 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
+							 @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -60,7 +62,9 @@
 							<th>Telp</th>
 							<th>Alamat</th>
 							<th>Vendor Cabang</th>
+							 @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -74,6 +78,7 @@
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
                             <td>{{$row->namacabang}}</td>
+                             @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             <td class="text-center">
 <form action="{{url('/vendor/delete') }}"  method="post">
 <a href="{{url('/vendor/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
@@ -83,6 +88,7 @@
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
                             </td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>

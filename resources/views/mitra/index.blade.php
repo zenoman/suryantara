@@ -35,9 +35,11 @@
                                 {{ session('status') }}
                     </div>
                     @endif
+                    @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 					<a href="{{url('mitra/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
-					
-                    <br><br>
+					<br><br>
+					@endif
+                    
 					<table id="example" class="display table table-striped table-bordered" width="100%">
 						<thead>
 						<tr>
@@ -46,7 +48,9 @@
 							<th>Alamat</th>
 							<th>Telp</th>
 							<th>mitra Cabang</th>
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -56,7 +60,9 @@
 							<th>Alamat</th>
 							<th>Telp</th>
 							<th>mitra Cabang</th>
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="text-center">Aksi</th>
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -69,6 +75,7 @@
                             <td>{{$row->alamat}}</td>
                             <td>{{$row->notelp}}</td>
                             <td>{{$row->namacabang}}</td>
+                            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             <td class="text-center">
 <form action="{{url('/mitra/'.$row->id)}}" method="post">
 <a href="{{url('/mitra/'.$row->id.'/edit')}}" class="btn btn-warning btn-sm">Edit</a>
@@ -77,6 +84,8 @@
                                         	<input type="hidden" name="_method" value="delete">
 <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
                     					</form>
+                    			</td>
+                    		@endif
 						</tr>
 						@endforeach
 						</tbody>

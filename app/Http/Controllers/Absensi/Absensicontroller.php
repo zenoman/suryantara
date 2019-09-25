@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Absensimodel;
-
 use App\Exports\AbsensiharianExport;
 use App\Exports\AbsensibulananExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
-
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+
 class Absensicontroller extends Controller
 {
     public function __construct()

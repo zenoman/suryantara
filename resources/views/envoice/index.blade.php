@@ -81,7 +81,7 @@
 							<th>Tanggal</th>
 							<th>Pembuat</th>
 							<th class="text-center">Aksi</th>
-							@if(Session::get('level') != 'admin')
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th class="no-sort"><input type="checkbox" id="selectall"/></th>
 							@endif
 						</tr>
@@ -94,7 +94,7 @@
 							<th>Tanggal</th>
 							<th>Pembuat</th>
 							<th class="text-center">Aksi</th>
-							@if(Session::get('level') != 'admin')
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 							<th>#</th>
 							@endif
 						</tr>
@@ -123,7 +123,7 @@
 									data-target=".bd-example-modal-lg{{$row->id}}" type="button"><i class="fa fa-eye"></i></button>
 								<a href="{{url('cetakulangenvoice/'.$row->kode)}}" class="btn btn-success btn-sm" target="blank()"><i class="fa fa-print"></i></a>
                             </td>
-                            @if(Session::get('level') != 'admin')
+                            @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
                             <td>
 								<input type="checkbox" name="delid[]" class="case" value="{{$row->id}}" />
 							</td>
@@ -133,7 +133,7 @@
 						</tbody>
 					</table>
 					<div class="pull-right">
-						@if(Session::get('level') != 'admin')
+						@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 						<button type="submit" onclick="return confirm('Hapus Data Yang Dipilih ?')" class="btn btn-warning">Hapus Data Terpilih
 					</button>
 					@endif

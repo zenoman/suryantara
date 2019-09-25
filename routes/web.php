@@ -1,9 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Input;
-
+Route::post('gantistatus','distribusiresi\distribusiresicontroller@gantistatus');
+Route::get('hapusresi/{id}','distribusiresi\distribusiresicontroller@destroy');
 Route::post('/distribusiresi/prosesimportexcel','distribusiresi\distribusiresicontroller@prosesimportexcel');
 Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@downloadtemplate');
 Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
+
 Route::resource('distribusiresi','distribusiresi\distribusiresicontroller');
 
 //================================================transit
@@ -160,6 +162,7 @@ Route::get('/carihasillaut/{id}','resipengiriman\resipengirimanController@cariha
 Route::get('/carihasilkota/{id}','resipengiriman\resipengirimanController@carihasilkota');
 Route::get('/listpengiriman','resipengiriman\resipengirimanController@tampil');
 Route::get('/carikode','resipengiriman\resipengirimanController@carikode');
+
 Route::resource('/residarat','resipengiriman\resipengirimanController');
 Route::get('/carikota','resipengiriman\resipengirimanController@carikota');
 Route::get('/carikotacity','resipengiriman\resipengirimanController@carikotacity');
@@ -171,7 +174,8 @@ Route::get('/resipengirimandarat','resipengiriman\resipengirimanController@resid
 
 Route::get('/resicitykurier','resipengiriman\resipengirimanController@resicitykurier');
 Route::get('/resicitykuriercompany','resipengiriman\resipengirimanController@resicitykuriercmp');
-//resicitykurier
+
+//===============================================================resicitykurier
 Route::post('/simpanlaut','resipengiriman\resipengirimanController@simpanlaut');
 Route::post('/simpanudara','resipengiriman\resipengirimanController@simpanudara');
 Route::get('/resipengirimanlaut','resipengiriman\resipengirimanController@resilaut');
@@ -249,8 +253,13 @@ Route::get('/caritujuanudara/{id}','landingudara\landingudaracontroller@carituju
 Route::get('/landudara/cari','landingudara\landingudaracontroller@pencarian');
 Route::get('/landkurir' , 'landingkurir\landingkurircontroller@index');
 Route::get('/landkurir/cari','landingkurir\landingkurircontroller@pencarian');
-Route::get('/dashboard','Dashboardcontroller@index');
 
+//================================================dashboard
+Route::get('/dashboard','Dashboardcontroller@index');
+Route::get('/editprofile/{id}','Dashboardcontroller@editprofile');
+Route::get('/editprofile/{id}/editpassword','Dashboardcontroller@editpassword');
+Route::post('/editprofile/editdata','Dashboardcontroller@updateprofile');
+Route::post('editprofile/changepas','Dashboardcontroller@actionchangepas');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');
@@ -261,9 +270,11 @@ Route::post('/admin/delete','Admin\Admincontroller@destroy');
 Route::get('/admin/{id}/changepas','Admin\Admincontroller@changepas');
 Route::put('/admin/{id}/changepas','Admin\Admincontroller@actionchangepas');
 // Route::get('admin/cari','Admin\Admincontroller@caridata');
+
 //============================================setting
 Route::get('/setting','Setting\Settingcontroller@index');
 Route::put('/setting/{id}','Setting\Settingcontroller@update');
+
 //============================================trf udara
 Route::get('/trfudara','Trfudara\Trfudaracontroller@index');
 Route::post('/trfudara','Trfudara\Trfudaracontroller@store');

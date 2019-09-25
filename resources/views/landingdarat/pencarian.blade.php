@@ -70,8 +70,9 @@
             <tr>
               <th>No</th>
               <th>Kota Tujuan</th>
-              <th>Biaya Perkg</th>
               <th>Estimasi Biaya</th>
+              <th>Biaya Perkg</th>
+              <th>Berat Minimal</th>
             </tr>
             </thead>
             
@@ -82,13 +83,14 @@
               <tr>
                 <td class="text-center">{{$no}}</td>
                 <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
-                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}</td>
                 <td class="text-center">
                   @php
                   $estimasi = $brt*$row->tarif;
                   @endphp
                   {{"Rp ". number_format($estimasi,0,',','.')}}
                 </td>
+                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." / Kg"}}</td>
+                <td class="text-center">{{$row->berat_min}} Kg</td>
               </tr>
               @endforeach
             </tbody>

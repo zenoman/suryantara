@@ -105,7 +105,12 @@ function del(no) {
 					<br><br>
 					<div id="dynamicInput"></div>
 					<button type="button" onClick="addInput('dynamicInput');" class="btn btn-warning btn-sm"><i class="fa fa-plus"> Masukan Kode</i></button>
-					<br>
+					<br><br>
+					<label class="form-label" for="exampleInputDisabled">Status</label>
+					<select class="form-control" name="status">
+							<option value="N">Tidak Aktiv</option>
+							<option value="Y">Aktiv</option>
+					</select>
 					<hr></hr>
 					{{csrf_field()}}
 					<input type="hidden" name="pembuat" value="{{Session::get('username')}}">

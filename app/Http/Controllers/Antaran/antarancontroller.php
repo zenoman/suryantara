@@ -369,14 +369,25 @@ class antarancontroller extends Controller
     	DB::table('setting')
     	->limit(1)
     	->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+             $listdata =
+            DB::table('surat_antar')
+            ->where('status','!=','N')
+            ->orderby('id','desc')
+            ->paginate(30); 
+        }else{
+            $listdata =
+            DB::table('surat_antar')
+            ->where([
+                ['status','!=','N'],
+                ['id_cabang','=',Session::get('cabang')]])
+            ->orderby('id','desc')
+            ->paginate(30);  
+        }
         
-        $listdata =
-        DB::table('surat_antar')
-        ->where([
-            ['status','!=','N'],
-            ['id_cabang','=',Session::get('cabang')]])
-        ->orderby('id','desc')
-        ->paginate(30);
         
         return view('antaran/index',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
@@ -419,13 +430,25 @@ class antarancontroller extends Controller
     	DB::table('setting')
     	->limit(1)
     	->get();
-
-    	$data = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
-        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
-    	->where([['kode_antar','!=',null],['status_antar','!=','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-    	->orderby('id','desc')
-    	->paginate(30);
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+            ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+            ->where([['kode_antar','!=',null],['status_antar','!=','N']])
+            ->orderby('id','desc')
+            ->paginate(30);
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+            ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+            ->where([['kode_antar','!=',null],['status_antar','!=','N'],['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orderby('id','desc')
+            ->paginate(30);  
+        }
+    	
 
     	return view('antaran/resiantar',['data'=>$data,'webinfo'=>$webinfo]);
     }
@@ -517,7 +540,17 @@ class antarancontroller extends Controller
     //=======================================================================
     public function carisuratantar(Request $request){
         $cari = $request->cari;
-        $listdata = DB::table('surat_antar')
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $listdata = DB::table('surat_antar')
+            ->where('kode','like','%'.$cari.'%')
+            ->orwhere('pemegang','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->get();
+        }else{
+            $listdata = DB::table('surat_antar')
             ->where([['kode','like','%'.$cari.'%'],
                         ['id_cabang','=',Session::get('cabang')]])
             ->orwhere([['pemegang','like','%'.$cari.'%'],
@@ -525,6 +558,8 @@ class antarancontroller extends Controller
             ->orwhere([['tgl','like','%'.$cari.'%'],
                         ['id_cabang','=',Session::get('cabang')]])
             ->get();
+        }
+        
          
         $webinfo = DB::table('setting')->limit(1)->get();
 
@@ -539,39 +574,75 @@ class antarancontroller extends Controller
         ->limit(1)
         ->get();
 
-        $data = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
-        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
-        ->where([
-            ['kode_antar','!=',null],
-            ['status_antar','!=','N'],
-            ['status_antar','!=','G'],
-            ['resi_pengiriman.tgl','like','%'.$cari.'%'],
-            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
-        ])
-        ->orwhere([
-            ['kode_antar','!=',null],
-            ['status_antar','!=','N'],
-            ['status_antar','!=','G'],
-            ['no_resi','like','%'.$cari.'%'],
-            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
-        ])
-        ->orwhere([
-            ['kode_antar','!=',null],
-            ['status_antar','!=','N'],
-            ['status_antar','!=','G'],
-            ['surat_antar.pemegang','like','%'.$cari.'%'],
-            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
-        ])
-        ->orwhere([
-            ['kode_antar','!=',null],
-            ['status_antar','!=','N'],
-            ['status_antar','!=','G'],
-            ['kode_antar','like','%'.$cari.'%'],
-            ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
-        ])
-        ->orderby('id','desc')
-        ->get();
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+            ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+            ->where([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['resi_pengiriman.tgl','like','%'.$cari.'%']
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['no_resi','like','%'.$cari.'%']
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['surat_antar.pemegang','like','%'.$cari.'%']
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['kode_antar','like','%'.$cari.'%']
+            ])
+            ->orderby('id','desc')
+            ->get();
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+            ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+            ->where([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['resi_pengiriman.tgl','like','%'.$cari.'%'],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['no_resi','like','%'.$cari.'%'],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['surat_antar.pemegang','like','%'.$cari.'%'],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
+            ])
+            ->orwhere([
+                ['kode_antar','!=',null],
+                ['status_antar','!=','N'],
+                ['status_antar','!=','G'],
+                ['kode_antar','like','%'.$cari.'%'],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]
+            ])
+            ->orderby('id','desc')
+            ->get();
+        }
+        
 
         return view('antaran/cariresi',['data'=>$data,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
@@ -616,14 +687,26 @@ class antarancontroller extends Controller
         DB::table('setting')
         ->limit(1)
         ->get();
-
-        $data = DB::table('resi_pengiriman')
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $data = DB::table('resi_pengiriman')
+        ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
+        ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
+        ->where([['kode_antar','!=',null],['status_antar','=','G']])
+        ->orderby('id','desc')
+        ->get();
+        }else{
+          $data = DB::table('resi_pengiriman')
         ->select(DB::raw('resi_pengiriman.*, surat_antar.pemegang,surat_antar.telp,surat_antar.kode'))
         ->leftjoin('surat_antar','resi_pengiriman.kode_antar','=','surat_antar.kode')
         ->where([['kode_antar','!=',null],['status_antar','=','G'],
         ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
         ->orderby('id','desc')
-        ->get();
+        ->get();  
+        }
+        
 
         return view('antaran/returresi',['data'=>$data,'webinfo'=>$webinfo]);
     }

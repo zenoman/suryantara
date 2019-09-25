@@ -75,7 +75,7 @@
 	                        	  <div class="dropdown-divider"></div>
 	                        	  @endif
 	                        	
-	                            <a class="dropdown-item" href="{{url('admin/'.Session::get('id').'/edit')}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
+	                            <a class="dropdown-item" href="{{url('editprofile/'.Session::get('id'))}}"><span class="font-icon font-icon-user"></span>Edit Profile</a>
 
 	                            <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -102,7 +102,8 @@
 			|| Session::get('level') == '3'
 			|| Session::get('level') == '5'
 			|| Session::get('level') == '2'
-			|| Session::get('level') == '9')
+			|| Session::get('level') == '9'
+			|| Session::get('level') == '6')
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			@endif
 			<div class="dropdown-menu">
@@ -120,16 +121,16 @@
 				<div class="dropdown-divider"></div>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('mitra')}}">Data Mitra</a>
 				<div class="dropdown-divider"></div>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('trfdarat')}}">Tarif Darat</a>
 				@endif
 
@@ -169,31 +170,33 @@
 			</div>
 		</li>
 		<li class="nav-item dropdown">
-			@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+			@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Resi Pengiriman</a>
 			@endif
 			<div class="dropdown-menu">
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('distribusiresi')}}">Distribusi Resi Manual</a>
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+				@endif
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('Manual')}}">Input Manual</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('/resipengirimandarat')}}">Pengiriman Darat</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('/resipengirimanlaut')}}">Pengiriman Laut</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('/resipengirimanudara')}}">Pengiriman Udara</a>
 				<div class="dropdown-divider"></div>
 				@endif
 
 
 				
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '4' || Session::get('level') == '6')
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">City Kurier</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="{{url('resicitykurier')}}">
@@ -205,12 +208,12 @@
 				
 			</div>
 		</li>
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7'|| Session::get('level') == '4' || Session::get('level') == '8')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7'|| Session::get('level') == '4' || Session::get('level') == '8' || Session::get('level') == '6')
 		<li class="nav-item">
 			<a class="nav-link " href="{{url('listpengiriman')}}">List Pengiriman</a>
 		</li>
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7' || Session::get('level') == '8')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7' || Session::get('level') == '8' || Session::get('level') == '6'|| Session::get('level') == '6')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
@@ -221,7 +224,7 @@
 			</div>
 		</li>
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7' || Session::get('level') == '8')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '7' || Session::get('level') == '8' || Session::get('level') == '6')
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
 			<div class="dropdown-menu">
@@ -235,20 +238,20 @@
 			</div>
 		</li>		
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9' || Session::get('level') == '6' || Session::get('level') == '5')
 		<li class="nav-item">
 			<a href="{{url('pembukuan')}}" class="nav-link">Pembukuan</a>
 		</li>
 		@endif
 
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9' || Session::get('level') == '6')
 		<li class="nav-item">
 			<a href="{{url('/envoice')}}" class="nav-link">Invoice</a>
 
 		</li>	
 		@endif
 
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '6' || Session::get('level') == '9')
 		<li class="nav-item">
 			<a href="{{url('rekap-laporan')}}" class="nav-link">Rekap Laporan</a>
 		</li>

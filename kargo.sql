@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.4.6-MariaDB - mariadb.org binary distribution
+-- Server version:               10.3.16-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
 -- HeidiSQL Version:             10.2.0.5599
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `absensi` (
   `uang_makan` varchar(40) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.absensi: ~5 rows (approximately)
 DELETE FROM `absensi`;
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `armada` (
   `warna` varchar(60) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.armada: ~3 rows (approximately)
 DELETE FROM `armada`;
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `cabang` (
   `koderesi` varchar(50) DEFAULT NULL,
   `norek` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.cabang: ~3 rows (approximately)
 DELETE FROM `cabang`;
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `gaji_karyawan` (
   `tahun` int(11) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.gaji_karyawan: ~6 rows (approximately)
 DELETE FROM `gaji_karyawan`;
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   `status` enum('1','0') DEFAULT '0',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.jabatan: ~5 rows (approximately)
 DELETE FROM `jabatan`;
@@ -201,7 +201,6 @@ INSERT INTO `karyawan` (`id`, `kode`, `nama`, `telp`, `alamat`, `id_jabatan`, `i
 DROP TABLE IF EXISTS `kategori_barang`;
 CREATE TABLE IF NOT EXISTS `kategori_barang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cabang` int(11) DEFAULT 1,
   `spesial_cargo` varchar(40) DEFAULT NULL,
   `charge` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -243,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `mitra` (
   `notelp` varchar(20) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.mitra: ~2 rows (approximately)
 DELETE FROM `mitra`;
@@ -298,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `omset` (
   `laba` bigint(20) DEFAULT NULL,
   `omset_awal` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.omset: ~0 rows (approximately)
 DELETE FROM `omset`;
@@ -317,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `pajak` (
   `total` int(11) DEFAULT NULL,
   `id_cabang` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.pajak: ~8 rows (approximately)
 DELETE FROM `pajak`;
@@ -343,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `pajak_armada` (
   `tgl_kadaluarsa` date DEFAULT NULL,
   `tgl_peringatan` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.pajak_armada: ~8 rows (approximately)
 DELETE FROM `pajak_armada`;
@@ -396,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_lain` (
   `tgl` date DEFAULT NULL,
   `gambar` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.pengeluaran_lain: ~22 rows (approximately)
 DELETE FROM `pengeluaran_lain`;
@@ -433,8 +432,9 @@ CREATE TABLE IF NOT EXISTS `resi_mentah` (
   `no_resi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT NULL,
   `pembuat` varchar(50) DEFAULT NULL,
+  `status` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.resi_mentah: ~8 rows (approximately)
 DELETE FROM `resi_mentah`;
@@ -505,9 +505,9 @@ CREATE TABLE IF NOT EXISTS `resi_pengiriman` (
   `duplikat` enum('Y','N','S') DEFAULT 'N',
   `transfer` enum('Y','N') DEFAULT 'N',
   `total_berat_udara` int(11) DEFAULT NULL,
-  `maskapai_udara` int(11) DEFAULT NULL,
+  `maskapai_udara` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.resi_pengiriman: ~24 rows (approximately)
 DELETE FROM `resi_pengiriman`;
@@ -545,7 +545,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.roles: ~7 rows (approximately)
 DELETE FROM `roles`;
@@ -636,7 +636,7 @@ CREATE TABLE IF NOT EXISTS `status_pengiriman` (
   `jam` time DEFAULT NULL,
   `lokasi` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.status_pengiriman: ~75 rows (approximately)
 DELETE FROM `status_pengiriman`;
@@ -731,7 +731,7 @@ CREATE TABLE IF NOT EXISTS `surat_antar` (
   `status` enum('Y','N','S') DEFAULT 'N',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.surat_antar: ~3 rows (approximately)
 DELETE FROM `surat_antar`;
@@ -759,7 +759,7 @@ CREATE TABLE IF NOT EXISTS `surat_envoice` (
   `id_cabang` int(11) DEFAULT 1,
   `status` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.surat_envoice: ~2 rows (approximately)
 DELETE FROM `surat_envoice`;
@@ -792,7 +792,7 @@ CREATE TABLE IF NOT EXISTS `surat_jalan` (
   `status_transit` enum('Y','N') DEFAULT 'N',
   `status_pengiriman` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.surat_jalan: ~3 rows (approximately)
 DELETE FROM `surat_jalan`;
@@ -816,7 +816,7 @@ CREATE TABLE IF NOT EXISTS `tarif_darat` (
   `tarif_city` enum('Y','N') DEFAULT 'N',
   `company` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_darat: ~10 rows (approximately)
 DELETE FROM `tarif_darat`;
@@ -845,7 +845,7 @@ CREATE TABLE IF NOT EXISTS `tarif_laut` (
   `estimasi` varchar(100) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_laut: ~0 rows (approximately)
 DELETE FROM `tarif_laut`;
@@ -867,7 +867,7 @@ CREATE TABLE IF NOT EXISTS `tarif_udara` (
   `berat_minimal` int(11) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.tarif_udara: ~2 rows (approximately)
 DELETE FROM `tarif_udara`;
@@ -918,7 +918,7 @@ CREATE TABLE IF NOT EXISTS `tb_neraca` (
   `status` enum('D','K') NOT NULL,
   `total` bigint(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.tb_neraca: ~9 rows (approximately)
 DELETE FROM `tb_neraca`;
@@ -947,7 +947,7 @@ CREATE TABLE IF NOT EXISTS `transfer` (
   `bukti` text NOT NULL DEFAULT '0',
   `admin` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kargo.transfer: ~0 rows (approximately)
 DELETE FROM `transfer`;
@@ -971,7 +971,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `level` varchar(20) DEFAULT NULL,
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.users: ~2 rows (approximately)
 DELETE FROM `users`;
@@ -992,7 +992,7 @@ CREATE TABLE IF NOT EXISTS `vendor` (
   `cabang` enum('Y','N') DEFAULT 'N',
   `id_cabang` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table kargo.vendor: ~4 rows (approximately)
 DELETE FROM `vendor`;
@@ -1003,17 +1003,6 @@ INSERT INTO `vendor` (`id`, `idvendor`, `vendor`, `telp`, `alamat`, `cabang`, `i
 	(13, 'VNDSBY003', 'CV cahaya baya', '0239482390', 'desa konoha gakure surabaya', 'N', 2),
 	(14, 'VNDKDR001', 'PT Cahya gurah', '2930849023', 'bringin bulurejo 001 kec.gurah kediri', 'N', 1);
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
-
--- Dumping structure for trigger kargo.editadmin
-DROP TRIGGER IF EXISTS `editadmin`;
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
-DELIMITER //
-CREATE TRIGGER `editadmin` BEFORE UPDATE ON `admin` FOR EACH ROW BEGIN
-update resi_pengiriman set admin=new.username where admin=old.username;
-update surat_jalan set admin=new.username where admin=old.username;
-END//
-DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 -- Dumping structure for trigger kargo.editkaryawan
 DROP TRIGGER IF EXISTS `editkaryawan`;

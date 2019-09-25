@@ -41,19 +41,7 @@
         @foreach($des as $row)
     <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
     @endforeach
-       <!--  <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a onclick="window.history.go(-2);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
-              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
-            </li>
-            
-          </ul>
-        </div> -->
+      
       </div>
     </nav>
 <br>
@@ -69,8 +57,9 @@
             <tr>
               <th>No</th>
               <th>Kota Tujuan</th>
-              <th>Biaya Perkg</th>
               <th>Estimasi Biaya</th>
+              <th>Biaya Perkg</th>
+              <th>Berat Minimal</th>
             </tr>
             </thead>
             
@@ -81,14 +70,17 @@
               <tr>
                 <td class="text-center">{{$no}}</td>
                 <td class="text-center"><?php echo strtoupper($row->tujuan)?></td>
-                <td class="text-center">{{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}</td>
                 <td class="text-center">
-
                   @php
                   $estimasi = $brt*$row->tarif;
                   @endphp
                   {{"Rp ". number_format($estimasi,0,',','.')}}
-  
+                </td>
+                <td class="text-center">
+                  {{"Rp ". number_format($row->tarif,0,',','.')." /Kg"}}
+                </td>
+                <td class="text-center">
+                  {{$row->berat_min}} Kg
                 </td>
               </tr>
               @endforeach

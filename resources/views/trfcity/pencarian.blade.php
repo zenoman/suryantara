@@ -22,7 +22,8 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2 class = "page-header">Hasil Pencarian "{{$cari}}"</h2>
+							<h2>Data Tarif City Kurier</h2>
+							<p>Hasil Pencarian "{{$cari}}"</p>
 						</div>
 					</div>
 				</div>
@@ -44,9 +45,8 @@
                     <button onclick="history.go(-1)" class="btn btn-danger">Kembali</button>
 					
                     <br><br>
-                    <!-- <form action="hapusdata" method="post"> -->
+                    <form method="post" action="{{url('/trfdarat/hapuspilihan')}}">
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-						<a>List Data Tarif Darat</a>
 						<thead>
 						<tr>
 							<th>No</th>
@@ -56,8 +56,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
-							<th>Aksi</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2') 
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -69,8 +73,12 @@
 							<th>Berat Minimal</th>
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
-							<th>Aksi</th>
+							@if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2') 
+							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</tfoot>
 						<tbody>
@@ -85,19 +93,27 @@
                             <td>{{"Kg ".$row->berat_min}}</td>
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
-                            <td>
-							<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
-                    			</td>
-                            <form method="post" action="{{url('/trfdarat/hapuspilihan')}}">
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="id[]" value="{{$row->id}}" ></td>
+                            @if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2') 
+                            <td class="text-center">
+								<a href="{{url('/trfdarat/'.$row->id.'/edit')}}" class="btn btn-rimary btn-sm">Edit</a>
+                    		</td>
+                            <td class="text-center">
+                            	<input type="checkbox" name="pilihid[]" value="{{$row->id}}" >
+                            </td>
+                            @endif
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
+					@if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2') 
 					<div class="text-right">
-
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-danger" value="hapus pilihan">
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
 					</div>
+					@endif
 						{{csrf_field()}}
                         </form>
 				
@@ -117,7 +133,7 @@
         });
 		});
 	  function toggle(source) {
-	  checkboxes = document.getElementsByName('id[]');
+	  checkboxes = document.getElementsByName('pilihid[]');
 	  for(var i=0, n=checkboxes.length;i<n;i++) {
 	    checkboxes[i].checked = source.checked;
 	  }

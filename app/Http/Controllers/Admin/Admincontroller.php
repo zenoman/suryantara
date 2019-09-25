@@ -47,12 +47,14 @@ class Admincontroller extends Controller
         	}
         return view('admin/create',['title'=>$setting,'role'=>$role,'kode'=>$finalkode,'cabang'=>$cabang]);
     }
+
     //======================================================================
     public function changepas($id){
         $admin = Adminmodel::find($id);
         $setting = DB::table('setting')->get();
         return view('admin/changepas',['datadmin'=>$admin,'title'=>$setting]);
     }
+    
     //======================================================================
     public function actionchangepas(Request $request, $id){
         if($request->konfirmasi_password_baru==$request->password_baru){
@@ -124,8 +126,7 @@ class Admincontroller extends Controller
     //======================================================================
     public function update(Request $request, $id)
     {
-        
-          $rules = [
+        $rules = [
             'username'  => 'required|min:5',
             'nama'  => 'required',
             'email'  => 'required|min:5|email',

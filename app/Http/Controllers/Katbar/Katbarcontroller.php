@@ -19,25 +19,21 @@ class katbarcontroller extends Controller
     {
         $setting = DB::table('setting')->get();
         $datkatbar = DB::table('kategori_barang')
-        ->select(DB::raw('kategori_barang.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','kategori_barang.id_cabang')
         ->orderby('kategori_barang.id','desc')
         ->get();
         return view('katbar/index',['katbar'=>$datkatbar,'title'=>$setting]);
     }
     
     public function create(){
-        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('katbar/create',['cabang'=>$cabang,'title'=>$setting]);
+        return view('katbar/create',['title'=>$setting]);
     }
 
     public function store(Request $request)
     {
         Katbarmodel::create([
             'spesial_cargo' => $request->spesial_cargo,
-            'charge'  => $request->charge,
-            'id_cabang'=>$request->cabang
+            'charge'  => $request->charge
 
         ]);
         return redirect('kat_bar')->with('status','Input Data Sukses');
@@ -46,9 +42,8 @@ class katbarcontroller extends Controller
     public function edit($id)
     {
         $jab = Katbarmodel::find($id);
-        $cabang = DB::table('cabang')->get();
         $setting = DB::table('setting')->get();
-        return view('katbar/edit',['cabang'=>$cabang,'katbar'=>$jab,'title'=>$setting]);
+        return view('katbar/edit',['katbar'=>$jab,'title'=>$setting]);
 
     }
     //=======================================================
@@ -66,19 +61,13 @@ class katbarcontroller extends Controller
         $this->validate($request,$rules,$customMessages);
         Katbarmodel::find($id)->update([
             'spesial_cargo'  => $request->spesial_cargo,
-            'charge'  => $request->charge,
-            'id_cabang'=>$request->cabang
+            'charge'  => $request->charge
             ]);
         return redirect('/kat_bar')->with('status','Edit Data Sukses');
  
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //===========================================================================
     public function destroy(Request $request)
     {
         $id = $request->aid;

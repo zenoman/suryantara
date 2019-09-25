@@ -72,7 +72,7 @@
 	<br>
 	<table width="100%;">
 		<tr align="center">
-			<td width="30%">
+			<td width="30%" align="center">
 				{{Session::get('norek')}}
 			</td>
 			<td width="40%">

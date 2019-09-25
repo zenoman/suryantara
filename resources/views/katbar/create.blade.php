@@ -40,22 +40,8 @@
 						</fieldset>
 					</div>
 				</div>
-				<div class="form-group row">
-						
-						<div class="col-sm-12">
-							<label class="form-control-label  semibold">Tarif Cabang</label>
-							<select id="exampleSelect" name="cabang" class="form-control">
-								@foreach($cabang as $row)
-								<option value="{{$row->id}}">{{$row->nama}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-
-
-
-					{{csrf_field()}}
-							<small class="text-muted">
+				{{csrf_field()}}
+							<small class="text-muted text-right">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>
 							</small>

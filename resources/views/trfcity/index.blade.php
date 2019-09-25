@@ -37,11 +37,15 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('statuserror') }}
                     </div>
-                    @endif 
-					<a href="{{url('trfcity/create')}}" class="btn btn-primary">Tambah Data</a>
+                    @endif
+                    @if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2') 
+						<a href="{{url('trfcity/create')}}" class="btn btn-primary">Tambah Data</a>
+						<a href="{{url('trfcity/importexcel')}}" class="btn btn-success">Export Import Excel</a>
+					@endif
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">Cari Data</button>
-					<a href="{{url('trfcity/importexcel')}}" class="btn btn-success">Export Import Excel</a>
-                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -66,7 +70,7 @@
                             </div>
 
                     <br>
-<form action="{{url('/trfcity/hapuspilihan')}}" method="post">
+					<form action="{{url('/trfcity/hapuspilihan')}}" method="post">
                     <br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -79,8 +83,12 @@
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
 							<th>Status Tarif</th>
+							 @if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2') 
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</thead>
 						<tfoot>
@@ -93,8 +101,12 @@
 							<th>Estimasi</th>
 							<th>Tarif Cabang</th>
 							<th>Status Tarif</th>
+							 @if(Session::get('level') == '1' || 
+            				Session::get('level') == '3' || 
+            				Session::get('level') == '2') 
 							<th class="text-center">Aksi</th>
 							<th  class="text-center"><input type="checkbox" onclick="toggle(this)"/></th>
+							@endif
 						</tr>
 						</tfoot> 
 						<tbody>
@@ -110,27 +122,34 @@
                             <td>{{$row->estimasi." Hari"}}</td>
                             <td>{{$row->namacabang}}</td>
                             <td>@if($row->company=='Y') Company @else Personal @endif</td>
+                             @if(Session::get('level') == '1' || 
+		            		Session::get('level') == '3' || 
+		            		Session::get('level') == '2') 
                             <td class="text-center">
 							<a href="{{url('/trfcity/'.$row->id.'/edit')}}" class="btn btn-success btn-sm">Edit</a>
                                     
                             </td>
                             <td align="center">&nbsp;&nbsp;&nbsp;<input name="pilihid[]" type="checkbox"  id="checkbox[]" value="{{$row->id}}"  ></td>
-						
+							@endif
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
+					 @if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2') 
 					<div class="text-right">
-&nbsp;&nbsp;
-<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfcity/hapussemua')}}" class="btn btn-danger btn-sm">
-Kosongkan Data
-</a>	
-&nbsp;&nbsp;
-<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
+						&nbsp;&nbsp;
+						<a onclick="return confirm(' Kosongkan data?')" href="{{url('/trfcity/hapussemua')}}" class="btn btn-danger btn-sm">
+						Kosongkan Data
+						</a>	
+						&nbsp;&nbsp;
+						<input onclick="return confirm('Hapus Data Terpilih ?')" type="submit" name="submit" class="btn btn-warning btn-sm" value="hapus pilihan">
 					</div>
+					@endif
 						{{csrf_field()}}
                         </form>
-			{{ $trf_drt->links() }}
+					{{ $trf_drt->links() }}
 				</div>
 			</section>
 		</div><!--.container-fluid-->

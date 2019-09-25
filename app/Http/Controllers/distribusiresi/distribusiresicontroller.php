@@ -16,6 +16,7 @@ class distribusiresicontroller extends Controller
         $data = DB::table('resi_mentah')
         ->select(DB::raw('resi_mentah.*,cabang.nama'))
         ->leftjoin('cabang','cabang.id','=','resi_mentah.id_cabang')
+        ->orderby('resi_mentah.id','desc')
         ->get();
         $setting = DB::table('setting')->get();
         return view('distribusiresi.index',['data'=>$data,'title'=>$setting]);
@@ -61,7 +62,8 @@ class distribusiresicontroller extends Controller
             ->insert([
             'pembuat' => $request->pembuat,
             'no_resi'  => $final,
-            'id_cabang'=>$request->cabang
+            'id_cabang'=>$request->cabang,
+            'status'=>$request->status
             ]);
         }
         return redirect('distribusiresi')->with('status','Data Berhasil Disimpan');
@@ -87,9 +89,27 @@ class distribusiresicontroller extends Controller
     }
 
     //===============================================================================
-    public function update(Request $request, $id)
+    public function gantistatus(Request $request)
     {
-        //
+        if(!$request->pilihid){
+            return back()->with('statuserror','Tidak ada data yang dipilih');
+        }else{
+            if($request->status=='hapus'){
+                foreach ($request->pilihid as $id){ 
+                    DB::table('resi_mentah')->where('id',$id)->delete();
+                }
+            }else{
+                foreach ($request->pilihid as $id){ 
+                    DB::table('resi_mentah')
+                    ->where('id',$id)
+                    ->update([
+                        'status'=>'Y'
+                    ]);
+                }
+            }
+            return redirect('distribusiresi')->with('status','Data Berhasil Diubah');
+            
+        }
     }
 
     //===============================================================================

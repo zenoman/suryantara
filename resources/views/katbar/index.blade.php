@@ -44,7 +44,6 @@
 							<th>No</th>
 							<th>Kategori barang</th>
 							<th>Charge</th>
-							<th>kategori cabang</th>
 							<th class="text-center">Aksi</th>
 						</tr>
 						</thead>
@@ -53,7 +52,6 @@
 							<th>No</th>
 							<th>Kategori barang</th>
 							<th>Charge</th>
-							<th>kategori cabang</th>
 							<th class="text-center">Aksi</th>
 						</tr>
 						</tfoot>
@@ -65,7 +63,6 @@
                             <td>{{$no}}</td>
                             <td>{{$row->spesial_cargo}}</td>
                             <td>{{$row->charge."%"}}</td>
-                            <td>{{$row->namacabang}}</td>
                             <td class="text-center">
                               <form action="{{ url('/kat_bar/delete')}}"  method="post">                            	
                             	<a href="{{ url('/kat_bar/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">

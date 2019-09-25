@@ -13,7 +13,7 @@ class resimentah implements FromCollection, WithHeadings, ShouldAutoSize
     public function collection(){
         return DB::table('resi_mentah')
         ->select('no_resi')
-        ->where('id_cabang',Session::get('cabang'))
+        ->where([['id_cabang',Session::get('cabang')],['status','Y']])
         ->get();
     }
     

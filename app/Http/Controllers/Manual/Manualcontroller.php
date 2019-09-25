@@ -73,7 +73,9 @@ class Manualcontroller extends Controller
     {
         $setting = DB::table('setting')->get();
         $karyawan = DB::table('karyawan')->get();
-        $resinya = DB::table('resi_mentah')->where('id_cabang',Session::get('cabang'))->get();
+        $resinya = DB::table('resi_mentah')
+        ->where([['id_cabang',Session::get('cabang')],['status','Y']])
+        ->get();
         return view('manual/create',['resinnya'=>$resinya,'title'=>$setting,'karyawan'=>$karyawan]);
     }
 

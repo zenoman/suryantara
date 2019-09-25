@@ -34,10 +34,16 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
+                    @elseif(session('statuserror'))
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ session('statuserror') }}
+                    </div>
                     @endif
 					<a href="{{url('distribusiresi/create')}}" class="btn btn-primary">Tambah Data</a>
 					<a href="{{url('distribusiresi/exsportexcel')}}" class="btn btn-success"><i class="fa fa-file-excel"></i> Import Excel</a>
                     <br><br>
+                    <form action="{{url('gantistatus')}}" method="post">
 					<table id="example" class="display table table-striped table-bordered" width="100%">
 						<thead>
 						<tr>
@@ -45,7 +51,11 @@
 							<th class="text-center">No Resi</th>
 							<th class="text-center">Cabang</th>
 							<th class="text-center">Pembuat</th>
+							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
+							<th class="text-center">
+								<input type="checkbox" onclick="toggle(this)"/>
+							</th>
 						</tr>
 						</thead>
 						<tfoot>
@@ -54,7 +64,9 @@
 							<th class="text-center">No Resi</th>
 							<th class="text-center">Cabang</th>
 							<th class="text-center">Pembuat</th>
+							<th class="text-center">Status</th>
 							<th class="text-center">Aksi</th>
+							<th class="text-center">#</th>
 						</tr>
 						</tfoot>
 						<tbody>
@@ -67,17 +79,39 @@
                             <td class="text-center">{{$row->nama}}</td>
                             <td class="text-center">{{$row->pembuat}}</td>
                             <td class="text-center">
-								<form action="{{url('/distribusiresi/'.$row->id)}}" method="post">
-									
- 									{{csrf_field()}}
-                                    <input type="hidden" name="_method" value="delete">
-									<button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</button>
-                    			</form>
+                            	@if($row->status=='N')
+                            		<span class="label label-warning">Tidak Aktiv</span>
+                            	@else
+                            		<span class="label label-success">Aktiv</span>
+                            	@endif
+                            </td>
+                            <td class="text-center">
+								<a href="{{url('hapusresi/'.$row->id)}}" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">Hapus</a>
+                    		</td>
+                    		<td class="text-center">
+                    			<input name="pilihid[]" type="checkbox" id="checkbox[]" value="{{$row->id}}">
                     		</td>
 						</tr>
 						@endforeach
 						</tbody>
 					</table>
+					<div class="row">
+						<div class="col-md-9 col-sm-9"></div>
+						<div class="col-md-3 col-sm-3">
+							<label>Data Terpilih</label>
+							<div class="input-group">
+								<select name="status" id="" class="form-control">
+									<option value="hapus">Hapus</option>
+									<option value="aktiv">Aktivkan</option>
+								</select>
+								{{csrf_field()}}
+								<button type="submit" class="input-group-addon btn btn-succes">Simpan</button>
+							</div>
+						</div>
+						
+					</div>
+					
+                   </form>
 				</div>
 			</section>
 		</div>
@@ -93,5 +127,11 @@
             "paging":true
         });
 		});
+	  function toggle(source) {
+	  checkboxes = document.getElementsByName('pilihid[]');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+	    checkboxes[i].checked = source.checked;
+	  }
+	  }
 	</script>
 	@endsection

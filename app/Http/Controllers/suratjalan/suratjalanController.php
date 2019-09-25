@@ -13,13 +13,26 @@ class suratjalanController extends Controller
         $this->middleware('auth');
     }
     public function resisuratjalan(){
-        $data = DB::table('resi_pengiriman')
-        ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
-        ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
-        ->where([['resi_pengiriman.kode_jalan','!=',null],
-                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-        ->orderby('resi_pengiriman.id','desc')
-        ->paginate(30);
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where('resi_pengiriman.kode_jalan','!=',null)
+            ->orderby('resi_pengiriman.id','desc')
+            ->paginate(30);
+        }else{
+            $data = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([
+                ['resi_pengiriman.kode_jalan','!=',null],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orderby('resi_pengiriman.id','desc')
+            ->paginate(30);
+        }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/resi',['data'=>$data,'webinfo'=>$webinfo]);
     }
@@ -105,11 +118,23 @@ class suratjalanController extends Controller
     //=========================================================================
     public function listsuratjalan(){
         $webinfo = DB::table('setting')->limit(1)->get();
-        $listdata =
-        DB::table('surat_jalan')
-        ->where([['status','!=','N'],['id_cabang','=',Session::get('cabang')]])
-        ->orderby('id','desc')
-        ->paginate(40);
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
+            $listdata =
+            DB::table('surat_jalan')
+            ->where('status','!=','N')
+            ->orderby('id','desc')
+            ->paginate(40);
+        }else{
+            $listdata =
+            DB::table('surat_jalan')
+            ->where([['status','!=','N'],['id_cabang','=',Session::get('cabang')]])
+            ->orderby('id','desc')
+            ->paginate(40);  
+        }
+        
         return view('suratjalan/listjalan',['data'=>$listdata,'webinfo'=>$webinfo]);
     }
 
@@ -347,19 +372,48 @@ class suratjalanController extends Controller
     //=========================================================================
     public function cariresidata(Request $request){
         $cari = $request->cari;
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $listdata = DB::table('resi_pengiriman')
             ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
             ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
-            ->where([['resi_pengiriman.no_resi','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
-                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['resi_pengiriman.no_smu','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
-                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
-                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['resi_pengiriman.tgl','like','%'.$cari.'%'],['resi_pengiriman.kode_jalan','!=',NULL],
-                        ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
-            ->get();
-         
+            ->where([
+                ['resi_pengiriman.no_resi','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([
+                ['resi_pengiriman.no_smu','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([
+                ['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->orwhere([
+                ['resi_pengiriman.tgl','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL]])
+            ->get(); 
+        }else{
+           $listdata = DB::table('resi_pengiriman')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.cabang'))
+            ->leftjoin('surat_jalan','surat_jalan.kode','=','resi_pengiriman.kode_jalan')
+            ->where([
+                ['resi_pengiriman.no_resi','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['resi_pengiriman.no_smu','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['resi_pengiriman.kode_jalan','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['resi_pengiriman.tgl','like','%'.$cari.'%'],
+                ['resi_pengiriman.kode_jalan','!=',NULL],
+                ['resi_pengiriman.id_cabang','=',Session::get('cabang')]])
+            ->get(); 
+        }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/cariresi',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
@@ -367,15 +421,28 @@ class suratjalanController extends Controller
     //=========================================================================
     public function caridata(Request $request){      
         $cari = $request->cari;
+        if( Session::get('level') == '1' || 
+            Session::get('level') == '3' || 
+            Session::get('level') == '2' || 
+            Session::get('level') == '5'){
             $listdata = DB::table('surat_jalan')
-            ->where([['kode','like','%'.$cari.'%'],
-                        ['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['tujuan','like','%'.$cari.'%'],
-                        ['id_cabang','=',Session::get('cabang')]])
-            ->orwhere([['tgl','like','%'.$cari.'%'],
-                        ['id_cabang','=',Session::get('cabang')]])
-            ->get();
-         
+            ->where('kode','like','%'.$cari.'%')
+            ->orwhere('tujuan','like','%'.$cari.'%')
+            ->orwhere('tgl','like','%'.$cari.'%')
+            ->get();  
+        }else{
+          $listdata = DB::table('surat_jalan')
+            ->where([
+                ['kode','like','%'.$cari.'%'],
+                ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['tujuan','like','%'.$cari.'%'],
+                ['id_cabang','=',Session::get('cabang')]])
+            ->orwhere([
+                ['tgl','like','%'.$cari.'%'],
+                ['id_cabang','=',Session::get('cabang')]])
+            ->get();  
+        }
         $webinfo = DB::table('setting')->limit(1)->get();
         return view('suratjalan/cari',['data'=>$listdata,'webinfo'=>$webinfo,'cari'=>$cari]);
     }
