@@ -60,10 +60,10 @@
                         </div>                        
                         <br>              
                         <div class="col col-xl-12 dashboard-col">           
-                        <button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+                        <button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right mr-2">
                             Kembali
                         </button>
-                        <a href="{{url('cetak-pengeluaran').'/'.$kate.'/'.$bul1.'/'.$bul2.'/'.$kat}}" class="btn btn-primary pull-right">Print</a>
+                        <a href="{{url('cetak-pengeluaran').'/'.$kate.'/'.$bul1.'/'.$bul2.'/'.$kat}}" class="btn mr-2 btn-primary pull-right">Print</a>
                         </div>
                         </div>
                     </div>

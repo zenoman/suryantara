@@ -99,27 +99,44 @@ class Rekap extends Controller
             $kate="semua";
             $lap=DB::table('resi_pengiriman')
                 ->whereBetween('tgl',[$tgl1,$tgl2])
-                ->where('duplikat','!=','N')                
+                ->where('duplikat','!=','Y')                
                 ->get();
-            return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+            $tot=DB::table('resi_pengiriman')
+            ->select(DB::raw(' sum(total_biaya) as tbiaya, sum(total_bayar) as tbayar,sum(total_biaya-total_bayar) as tkurang'))
+            ->whereBetween('tgl',[$tgl1,$tgl2])
+            ->where('duplikat','!=','Y')            
+            ->first();
+            return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tbiaya'=>$tot->tbiaya,'tbayar'=>$tot->tbayar,'tkur'=>$tot->tkurang]);
         }elseif($kat=='lunas'){
             $kat="Resi Lunas";
             $kate="lunas";
             $lap=DB::table('resi_pengiriman')
             ->whereBetween('tgl',[$tgl1,$tgl2])
-            ->where('duplikat','!=','N')  
+            ->where('duplikat','!=','Y')  
             ->whereNotNull('tgl_lunas')              
             ->get();
-        return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+            $tot=DB::table('resi_pengiriman')
+            ->select(DB::raw(' sum(total_biaya) as tbiaya, sum(total_bayar) as tbayar,sum(total_biaya-total_bayar) as tkurang'))
+            ->whereBetween('tgl',[$tgl1,$tgl2])
+            ->where('duplikat','!=','Y')  
+            ->whereNotNull('tgl_lunas')              
+            ->first();
+            return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tbiaya'=>$tot->tbiaya,'tbayar'=>$tot->tbayar,'tkur'=>$tot->tkurang]);
         }elseif($kat=='belum'){
             $kate="belum";
             $kat="Resi Belum Lunas";
             $lap=DB::table('resi_pengiriman')
             ->whereBetween('tgl',[$tgl1,$tgl2])
-            ->where('duplikat','!=','N')  
+            ->where('duplikat','!=','Y')  
             ->whereNull('tgl_lunas')              
             ->get();
-        return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+            $tot=DB::table('resi_pengiriman')
+            ->select(DB::raw(' sum(total_biaya) as tbiaya, sum(total_bayar) as tbayar,sum(total_biaya-total_bayar) as tkurang'))
+            ->whereBetween('tgl',[$tgl1,$tgl2])
+            ->where('duplikat','!=','Y')  
+            ->whereNull('tgl_lunas')              
+            ->first();
+            return view('Rekap.rekap_resi',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tbiaya'=>$tot->tbiaya,'tbayar'=>$tot->tbayar,'tkur'=>$tot->tkurang]);
         }
     }
     function cetakresi($kate,$bul1,$bul2,$kat){
@@ -203,22 +220,127 @@ class Rekap extends Controller
             ->where('id_cabang',$idc)
             ->get();
         return view('Rekap.print_gaji',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting]);
-    }
-    function bayarpajak(Request $request){
+    }   
+    function rekappk(Request $request){
+        $idc=Session::get('cabang');
         $request->validate([
-            'bul'=>'required',
+            'b1'=>'required',
+            'b2'=>'required',
             'th'=>'required',
-            'ket'=>'required',
-            'tot'=>'required',
-        ]);
-        $bul=$request->bul;
+            ]);
+        $b1=$request->b1;
+        $b2=$request->b2;
         $th=$request->th;
-        $ket=$request->ket;
-        $tot=$request->total;
-        $data=[$bul,$th,$ket,$tot];
-        $in=DB::insert('insert into pajak(bulan,tahun,nama_pajak,total) values(?,?,?,?)',$data);
-        if($in){
-
-        }
+        $lap=DB::table('pajak_kendaraan')
+            ->leftjoin('cabang','cabang.id','=','pajak_kendaraan.id_cabang')
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->get();
+        $t=DB::table('pajak_kendaraan')
+            ->select(DB::raw('sum(nominal) as tot'))
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->first();
+        
+        // dd($lap);
+        return view('Rekap.rekap_kendaraan',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
+    }
+    function printkendaraan($b1,$b2,$th){
+        $idc=Session::get('cabang');
+        $lap=DB::table('pajak_kendaraan')
+        ->leftjoin('cabang','cabang.id','=','pajak_kendaraan.id_cabang')
+        ->whereBetween('bulan',[$b1,$b2])
+        ->where('tahun',$th)
+        ->where('id_cabang',$idc)
+        ->get();
+    $t=DB::table('pajak_kendaraan')
+        ->select(DB::raw('sum(nominal) as tot'))
+        ->whereBetween('bulan',[$b1,$b2])
+        ->where('tahun',$th)
+        ->where('id_cabang',$idc)
+        ->first();
+        return view('Rekap.print_kendaraan',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
+    }
+    function rekaptrans(Request $request){
+        $idc=Session::get('cabang');
+        $request->validate([
+            'b1'=>'required',
+            'b2'=>'required',
+            'th'=>'required',
+            ]);
+        $b1=$request->b1;
+        $b2=$request->b2;
+        $th=$request->th;
+        $lap=DB::table('transfer')
+            ->leftjoin('cabang','cabang.id','=','transfer.id_cabang')
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->get();
+        $t=DB::table('transfer')
+            ->select(DB::raw('sum(nominal) as tot'))
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->first();
+        return view('Rekap.rekap_transfer',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
+    }
+    function cetaktrans($b1,$b2,$th){
+        $idc=Session::get('cabang');
+        $lap=DB::table('transfer')
+            ->leftjoin('cabang','cabang.id','=','transfer.id_cabang')
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->get();
+        $t=DB::table('transfer')
+            ->select(DB::raw('sum(nominal) as tot'))
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->first();
+        return view('Rekap.print_trans',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
+    }
+    function rekapneraca(Request $request){
+        $idc=Session::get('cabang');
+        $request->validate([
+            'b1'=>'required',
+            'b2'=>'required',
+            'th'=>'required',
+            ]);
+        $b1=$request->b1;
+        $b2=$request->b2;
+        $th=$request->th;
+        $lap=DB::table('neraca')
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->get();
+        $t=DB::table('neraca')
+            ->select(DB::raw('sum(debit) as totdeb, sum(kredit) as totkred'))
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->first();
+        return view('Rekap.rekap_neraca',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
+    }
+    function cetakneraca($b1,$b2,$th){
+        $idc=Session::get('cabang');
+        $lap=DB::table('neraca')
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->get();
+        $t=DB::table('neraca')
+            ->select(DB::raw('sum(debit) as totdeb, sum(kredit) as totkred'))
+            ->whereBetween('bulan',[$b1,$b2])
+            ->where('tahun',$th)
+            ->where('id_cabang',$idc)
+            ->first();
+        return view('Rekap.print_neraca',['lap'=>$lap,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'title'=>$this->setting,'total'=>$t]);
     }
 }

@@ -258,12 +258,8 @@
 
 		@endif
 		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Cabang</a>
-				<a class="dropdown-item" href="{{url('')}}" class="nav-link">Omset Semua Cabang</a>
-			</div>
+		<li class="nav-item">
+			<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>			
 		</li>
 		@endif
 

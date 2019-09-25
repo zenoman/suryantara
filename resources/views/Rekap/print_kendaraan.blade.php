@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cetak Rekap Pajak Bulan {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}</title>
+    <title>Cetak Rekap Pajak Kendaraan Bulan {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 </head>
 <body>
@@ -28,7 +28,7 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-					    Rekap Pembayaran Pajak Tanggal {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}
+                        Rekap Pajak Kendaraan Tanggal {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}
 					</b>
 				</td>
 			</tr>
@@ -46,52 +46,44 @@
 						<thead>
 						<tr>
                             <th>No</th>
-                            <th>Bulan</th>                                
+                            <th>Admin</th>
+                            <th>Cabang</th>
+                            <th>Bulan</th>
+                            <th>Tanggal</th>
                             <th>Tahun</th>
                             <th>Keterangan</th>
-                            <th>Total</th>
+                            <th>Nominal</th>
 						</tr>
 						</thead>						
 						<tbody>
-                            <?php $nomer = 1;?>
-                            @foreach($lap as $row)
+                            <?php $no = 1;?>
+                            @foreach($lap as $item)
                             <tr>
-                                <td>{{$nomer++}}</td>
-                                <td>{{$row->bulan}}</td>                                
-                                <td>{{$row->tahun}}</td>                               
-                                <td>
-                                    {{$row->nama_pajak}}
-                                </td>
-                                <td>{{number_format($row->total)}}</td>
-                                <td class="tdtot">{{$row->total}}</td>
+                                <td>{{$no++}}</td>
+                                <td>{{$item->admin}}</td>                                    
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->bulan}}</td>
+                                <td>{{$item->tgl}}</td>
+                                <td>{{$item->tahun}}</td>
+                                <td>{{$item->keterangan}}</td>
+                                <td>Rp. {{number_format($item->nominal)}}</td>
                             </tr>
-                        @endforeach					
+                        @endforeach	
+                        <tr>
+                            <td colspan="7" align="right"> <b>Total</b></td>
+                            <td><b>Rp {{number_format($total->tot)}}</b></td>
+                        </tr>				
 						</tbody>
-					</table>					
-					<h4 class="text-right"><b>Total Rp. <span id="toata"></span></b></h4>
-					
+					</table>
 </body>
 
 <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
 <script>	
-$(document).ready(function(){
-	$('.tdtot').hide();
+$(document).ready(function(){	
         window.print();
-        })
+        });
         window.onafterprint = function() {
             history.go(-1);
         };
-	// Count Total
-	
-		// Call Sum
-		function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-		var table=document.getElementById('example'),sumval=0;
-		for(var i=1;i<table.rows.length;i++){
-			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-		}
-		$('#toata').html(numberWithCommas(sumval));
 </script>
 </html>

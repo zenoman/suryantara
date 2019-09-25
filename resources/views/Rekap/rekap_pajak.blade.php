@@ -55,10 +55,10 @@
                                 <h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
                             </div>                        
                         <div class="col col-xl-12 dashboard-col">           
-                        <button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right">
+                        <button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right mr-2">
                             Kembali
                         </button>
-                        <a href="{{url('cetak-pajak').'/'.$bul1.'/'.$bul2.'/'.$th}}" class="btn btn-primary pull-right">Print</a>
+                        <a href="{{url('cetak-pajak').'/'.$bul1.'/'.$bul2.'/'.$th}}" class="btn btn-primary pull-right mr-2">Print</a>
                         </div>
                         </div>
                     </div>

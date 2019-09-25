@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\models\Absensimodel;
+use Session;
 use App\Exports\AbsensiharianExport;
 use App\Exports\AbsensibulananExport;
 use Maatwebsite\Excel\Facades\Excel;

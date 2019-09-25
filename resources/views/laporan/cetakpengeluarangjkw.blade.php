@@ -37,6 +37,7 @@
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
 							<th>Tambahan</th>
+							<th>Hutang/Bon</th>
 							<th>Total</th>
 						</tr>
 						</thead>
@@ -51,17 +52,25 @@
                             <td>{{$row->nama_karyawan}}</td>
                             <td>{{$row->jabatan}}</td>
 							<td>{{"Rp ".number_format($row->gaji_pokok,0,',','.')}}</td>
-							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
-							
+							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>							
 							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
+							<td>{{"Rp ".number_format($row->bon,0,',','.')}}</td>
 							<td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
-						@endforeach
-						
+						@endforeach						
 						</tbody>
 					</table>
 					@foreach($total as $ttl)
 					<p>Total : <b>{{"Rp. ".number_format($ttl->totalnya,0,',','.')}}</b></p>
 					@endforeach
 </body>
+<script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
+<script>
+	 $(document).ready(function(){	
+        window.print();
+        })
+        window.onafterprint = function() {
+            history.go(-1);
+        };
+</script>
 </html>

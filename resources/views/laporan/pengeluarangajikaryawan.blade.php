@@ -42,6 +42,7 @@
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
 							<th>Tambahan</th>
+							<th>Hutang/ Bon</th>
 							<th>Total</th>
 						</tr>
 						</thead>
@@ -58,6 +59,7 @@
 							<td>{{"Rp ".number_format($row->uang_makan,0,',','.')}}</td>
 							
 							<td>{{"Rp ".number_format($row->gaji_tambahan,0,',','.')}}</td>
+							<td>{{"Rp ".number_format($row->bon,0,',','.')}}</td>
 							<td>{{"Rp ".number_format($row->total,0,',','.')}}</td>
                         </tr>
 						@endforeach
@@ -71,6 +73,7 @@
 							<th>Gaji Pokok</th>
 							<th>Uang Makan</th>
 							<th>Tambahan</th>
+							<th>Hutang/Bon</th>
 							<th>Total</th>
 						</tr>
 						</tfoot>
@@ -95,13 +98,13 @@
 						
 						@endif
 							&nbsp;&nbsp;
-							<a href="{{url('/printlaporangpengeluaranjkw/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-primary">
+							<a href="{{url('/printlaporangpengeluaranjkw/'.$tglnya.'/'.$kodejabatan.'')}}"  class="btn btn-primary">
 								<i class="fa fa-print"></i>
 								Cetak Data
 							</a>	
 							@foreach($title as $ss)
 							@if($ss->status = 'Y')
-							<a href="{{url('/printslipgajikaryawan/'.$tglnya.'/'.$kodejabatan.'')}}" target="_blank()" class="btn btn-info">
+							<a href="{{url('/printslipgajikaryawan/'.$tglnya.'/'.$kodejabatan.'')}}"  class="btn btn-info">
 								<i class="font-icon font-icon-player-subtitres"></i>
 								Slip Gaji
 							</a>
