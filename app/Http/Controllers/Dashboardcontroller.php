@@ -92,7 +92,14 @@ class Dashboardcontroller extends Controller {
             ->where('id_cabang',$idc)
             ->first();
         $totalgj=$gj->totalgj;
-        
+        // hitung total pengeluaran vendor
+        $tv=DB::table('surat_jalan')
+            ->whereBetween('tgl',[$tglawal,$tglakhir])
+            ->whereNotNull('biaya')
+            ->select(DB::raw('sum(biaya) as vendorbiaya'))
+            ->first();
+        $totv=$tv->vendorbiaya;    
+        // dd($totv);
         if($ckbul<=0){            
             // simpan ke tabel pajak 
             $inpjk=DB::insert('insert into pajak(bulan,tahun,nama_pajak,total,id_cabang) values(?,?,?,?,?)',[$lasbul,$lastth,'Pajak Pendapatan',$pajakbayar,$idc]);            
@@ -111,6 +118,8 @@ class Dashboardcontroller extends Controller {
             $inpl=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pengeluaran Harian',$tpl,$nam,$idc]);
             // insert total gaji 
             $gaj=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Gaji Karyawan',$totalgj,$nam,$idc]);
+            // input pengeluaran surat jalan
+            DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Hutang Vendor',$totv,$nam,$idc]);
             // backup resi pengiriman
             
         }
@@ -185,8 +194,15 @@ class Dashboardcontroller extends Controller {
         foreach ($setting as $st){
             $bulan = $st->bulan_sekarang;
         }
-
-        if($bulan != date('m')){
+        //  Cek Bulan Gaji Karyawan Terakhir
+        $idc=Session::get('cabang');
+        $bul=DB::table('gaji_karyawan')
+            ->where('id_cabang',$idc)
+            ->where('tahun',date('Y'))
+            ->orderBy('id','DESC')
+            ->first();
+        $ckbl=$bul->bulan;        
+        if($bulan != $ckbl){
             $tahun = date('Y');
             if(date('m')==1){
                 $pemasukan = $this->cari_pemasukan($bulan,date('Y'),"ny");
@@ -242,7 +258,8 @@ class Dashboardcontroller extends Controller {
                     'gaji_tambahan'=>$gajitambahan,
                     'total'=>$totalgaji,
                     'bulan'=>$bulan,
-                    'tahun'=>$tahun
+                    'tahun'=>$tahun,
+                    'id_cabang'=>Session::get('cabang'),
                 ]);    
             }else{
                 $totalgaji = $row->gaji_pokok + $row->uang_makan;
@@ -255,7 +272,8 @@ class Dashboardcontroller extends Controller {
                     'uang_makan'=>$uang_makan,
                     'total'=>$totalgaji,
                     'bulan'=>$bulan,
-                    'tahun'=>$tahun
+                    'tahun'=>$tahun,
+                    'id_cabang'=>Session::get('cabang'),
                 ]);
             }
         }

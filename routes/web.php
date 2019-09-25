@@ -458,6 +458,9 @@ Route::get('rekap-transfer','Rekap\Rekap@rekaptrans');
 Route::get('cetak-transfer/{bl1}/{bl2}/{th}','Rekap\Rekap@cetaktrans');
 Route::get('rekap-neraca','Rekap\Rekap@rekapneraca');
 Route::get('cetak-neraca/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakneraca');
+// -------------------------------------------------------------------------- Bon karyawan
+Route::get('ambil-bon/{id}','Pembukuan\PembukuanController@ambilbon');
+Route::post('simpan-bon','Pembukuan\PembukuanController@simpanbon');
 // ===============================================================
 Route::post('add-modal','pembukuan\PembukuanController@simpanmodal');
 // ===============================================================

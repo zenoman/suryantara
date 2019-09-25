@@ -43,10 +43,14 @@ class PembukuanController extends Controller
                 ->where('id_cabang',$idc)
                 ->where('bulan',$lastbul)
                 ->where('tahun',$latth)
-                ->count();        
+                ->count();    
+        // Ambil Karyawan
+        $kar=DB::table('karyawan')
+            ->where('id_cabang',$idc)
+            ->get();
         $totsal=$in->totaldeb;
         $tolkre=$in->totalkred;
-        return view('pembukuan.home',['title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl,'kred'=>$tolkre]);
+        return view('pembukuan.home',['kar'=>$kar,'title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl,'kred'=>$tolkre]);
     }
     function showtf(){
         // -set date
@@ -140,5 +144,33 @@ class PembukuanController extends Controller
             return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Gagal Disimpan");
         }
     }
-    
+    function ambilbon($id){
+        $d=DB::table('karyawan')
+            ->leftjoin('kas_bon','kas_bon.idkaryawan','=','karyawan.kode')
+            ->where('karyawan.kode',$id)
+            ->orderBy('kas_bon.id','DESC')
+            ->get();
+        return response()->json($d);
+    }
+    function simpanbon(Request $request){
+        $idc=Session::get('cabang');
+        $tgl=date('Y-m-d');
+        $bul=date('n');
+        $th=date('Y');
+        $request->validate([
+            'nbon'=>'required',
+            'kar'=>'required',
+        ]);
+        $nama=Session::get('nama');
+        $nbon=str_replace(',','',$request->nbon);
+        $kar=$request->kar;
+        $sim=DB::insert('insert into kas_bon(tgl,idkaryawan,bon,bayar,admin) values(?,?,?,?,?)',[$tgl,$kar,$nbon,'0',$nama]);
+        if($sim){
+            // update bon gaji_karyawan
+             DB::update('update gaji_karyawan set bon=?, total=(total-bon) where kode_karyawan=? and  bulan=? and  tahun=? and id_cabang=?',[$nbon,$kar,$bul,$th,$idc]);
+            return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Berhasil Disimpan");
+        }else{
+            return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Gagal Disimpan");
+        }
+    }
 }
