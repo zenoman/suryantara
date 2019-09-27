@@ -16,7 +16,7 @@
                     <div class="tbl">
                         <div class="tbl-row">
                             <div class="tbl-cell">
-                                <h2>Rekap {{' '.$kat.' Bulan - '.$bul1.' - '.$bul2 }}</h2>
+                                <h2>Rekap Surat Jalan {{' Tanggal - '.$bul1.' - '.$bul2 }}</h2>
                             </div>
                         </div>
                     </div>
@@ -27,48 +27,32 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>No Resi</th>                                
+                                <th>No Resi</th>
+                                <th>Tanggal</th>
                                 <th>Admin</th>
-                                <th>Barang</th>
-                                <th>Via</th>
-                                <th>Kota Asal</th>
-                                <th>Kota Tujuan</th>
-                                <th>Tanggal Kirim</th>
-                                <th>Pengirim</th>
-                                <th>Total Biaya</th>
-                                <th>Pembayaran</th>
-                                <th>Kurang</th>
-                                <th>Cabang</th>
+                                <th>Vendor</th>
+                                <th>Tujuan</th>
+                                <th>Biaya</th>
                             </tr>
                             </thead>                            
                             <tbody>
                             <?php $nomer = 1;?>
-                                @foreach($lap as $row)
+                                @foreach($data as $row)
                             <tr>
                                 <td>{{$nomer++}}</td>
-                                <td>{{$row->no_resi}}</td>                                
-                                <td>{{$row->admin}}</td>    
-                                <td>{{$row->nama_barang}}</td>                           
+                                <td>{{$row->kode}}</td>                                
+                                <td>{{$row->tgl}}</td>    
+                                <td>{{$row->admin}}</td>                           
                                 <td>
-                                    {{$row->pengiriman_via}}
+                                    {{$row->tujuan}}
                                 </td>
-                                <td>{{$row->kota_asal}}</td>
-                                <td>{{$row->kode_tujuan}}</td>
-                                <td>{{$row->tgl}}</td>
-                                <td>{{$row->nama_pengirim}}</td>
-                                <td>Rp. {{number_format($row->total_biaya)}}</td>
-                                <td>Rp. {{number_format($row->total_bayar)}}</td>
-                                <td>Rp. {{number_format($row->total_biaya-$row->total_bayar)}}</td>
-                                <td>{{$row->nama}}</td>
-                               
+                                <td>{{$row->alamat_tujuan}}</td>
+                                <td>Rp. {{number_format($row->biaya)}}</td>
                             </tr>
                             @endforeach
                             <tr>
-                                <td colspan="9" align="right"><b>Total</b></td>
-                                <td ><b>Rp. {{number_format($tbiaya)}}</b></td>
-                                <td ><b>Rp. {{number_format($tbayar)}}</b></td>
-                                <td ><b>Rp. {{number_format($tkur)}}</b></td>
-                                <td ></td>
+                                <td colspan="6" align="right"><b>Total</b></td>
+                                <td ><b>Rp. {{number_format($total->tbiaya)}}</b></td>
                             </tr>
                             </tbody>
                         </table>        
@@ -76,7 +60,10 @@
                         <div class="row">                       
                             <div class="col col-xl-12 dashborad-col">
                                 <button type="button" onclick="window.history.go(-1);" class="btn btn-danger pull-right mr-2">Kembali</button>
-                                <a href="{{url('cetak-resimasuk').'/'.$kate.'/'.$bul1.'/'.$bul2.'/'.$kat}}" class="btn mr-2 btn-primary pull-right">Print</a>
+                                @php
+                                    $k=str_replace(' ','_',$kate);
+                                @endphp
+                                <a href="{{url('print-srj').'/'.$k.'/'.$bul1.'/'.$bul2}}" class="btn mr-2 btn-primary pull-right">Print</a>
                             </div>
                         </div>            
                         

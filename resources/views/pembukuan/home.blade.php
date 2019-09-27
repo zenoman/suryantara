@@ -20,14 +20,14 @@
     <div class="page-content">
         <div class="container-fluid">
                 <div class="section-header">
-                        <div class="tbl">
-                            <div class="tbl-row">
-                                <div class="tbl-cell">
-                                    <h3>Halaman Pembukuan</h3>
-                                </div>
+                    <div class="tbl">
+                        <div class="tbl-row">
+                            <div class="tbl-cell">
+                                <h3>Halaman Pembukuan</h3>
                             </div>
                         </div>
                     </div>
+                </div>
                     @if (Session('msg'))
                         <div class="alert alert-primary alert-dismissible" role="alert">
                         <p align="center">{{Session('msg')}}</p> 
@@ -128,7 +128,7 @@
                                                                 <input type="text" class="form-control" name="admin" readonly value="{{Session::get('username')}}" >
                                                             </div>
                                                         </div>                                                    
-                                                        <div class="col-xl-6 dashboard-column">
+                                                        <div class="col-xl-12 dashboard-column">
                                                             <div class="form-group">
                                                                 <label for="">Cabang Tujuan</label>
                                                                 <select name="idc" class="form-control" aria-readonly="true" id="">
@@ -137,20 +137,25 @@
                                                                     @endforeach                                                            
                                                                 </select>
                                                             </div>
-                                                        </div>                                                                                            
-                                                        <div class="col-xl-6 dashboard-column">
-                                                            <div class="form-group">
-                                                                <label for="">Nominal yang Harus Di transfer</label>
-                                                                <input type="text" readonly required id="nm" class="form-control nominal" name="nominal" placeholder="Masukan Jumlah Transfer" >                                                        
+                                                        </div>       
+                                                        <div class="col-xl-12 dashboard-col">
+                                                            <div class="form-group text-center">
+                                                                <img id="imgv" src="{{asset('img/img-trans.jpg')}}" class="img-thumbnail" width="300px" height="200px" alt="" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-6 dashboard-column">
+                                                        <div class="col-xl-12 dashboard-column">
                                                             <div class="form-group">
                                                                 <label for="">Bukti Transfer</label>
-                                                                <input type="file" required class="form-control" name="bukti" placeholder="Masukan Jumlah Transfer" >
+                                                                <input type="file" id="imgtf" required class="form-control" name="bukti" placeholder="Masukan Jumlah Transfer" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-6 dashboard-column">
+                                                        <div class="col-xl-12 dashboard-column">
+                                                            <div class="form-group">
+                                                                <label for="">Nominal yang Di transfer</label>
+                                                                <input type="text"  required id="nm" class="form-control nominal" name="nominal" placeholder="Masukan Jumlah Transfer" >                                                        
+                                                            </div>
+                                                        </div>
+                                                        {{-- <div class="col-xl-6 dashboard-column">
                                                             <div class="form-group">
                                                                 <label for="">Sisa Saldo</label>
                                                                 <input type="text" id="sisal" class="form-control" name="sisal" readonly value="0">
@@ -174,7 +179,7 @@
                                                                 <label for="" class="mr-2">Total Kredit </label> 
                                                                 <label for="">Rp. {{number_format($kred)}}</label>                                                        
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-xl-12 dashboard-column">
                                                             <p id="msg"></p>
                                                         </div>
@@ -182,7 +187,9 @@
                                                             <div class="form-group">
                                                                 <br>
                                                                 <Button data-dismiss="modal" class="btn btn-danger-outline btn-sm   pull-right mr-2">Tutup</Button>
-                                                                <Button type="submit" id="btntf" class="btn btn-primary-outline btn-sm pull-right mr-2">Transfer</Button>
+                                                                @if (Session::get('cabang')!='1')
+                                                                    <Button type="submit" id="btntf" class="btn btn-primary-outline btn-sm pull-right mr-2">Transfer</Button>
+                                                                @endif                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -366,51 +373,50 @@
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script> 
     <script>
-        // Cek Bila Sudah Transfer
-        var cbul={{$cekbul}};
-        if(cbul>0){
-            $('#btntf').prop('disabled',true); 
-            $('#msg').html('Transfer Sudah Dilakukan !')
-        }
-        // set otomatis nominal saldo yang dtransfer
-        var batas={{$sal->saldo}};
-        var tsal={{$in}};
-        var kred={{$kred}}
-        var tf=tsal-kred-batas;
-        var sis=tsal-tf-kred;
-        var batasbon=0;
-        if(tf<0){
-            tf=0;
-        }
-        if(tf<batas){
-            $('#btntf').prop('disabled',true); 
-        }else{
-            $('#sisal').val(sis);
-        }
+        // // Cek Bila Sudah Transfer
+        // var cbul={{$cekbul}};
+        // if(cbul>0){
+        //     $('#btntf').prop('disabled',true); 
+        //     $('#msg').html('Transfer Sudah Dilakukan !')
+        // }
+        // // set otomatis nominal saldo yang dtransfer
+        // var batas={{$sal->saldo}};
+        // var tsal={{$in}};
+        // var kred={{$kred}}
+        // var tf=tsal-kred-batas;
+        // var sis=tsal-tf-kred;
+        // var batasbon=0;
+        // if(tf<0){
+        //     tf=0;
+        // }
+        // if(tf<batas){
+        //     $('#btntf').prop('disabled',true); 
+        // }else{
+        //     $('#sisal').val(sis);
+        // }
 
         $('.nominal').on('keyup', function(){
         var n = parseInt($(this).val().replace(/\D/g,''),10);
-        $(this).val(n.toLocaleString()); 
-        
-        // hitung nilai
-        $('#sisal').val(sis);
-        if(sisa<batas){
-            $('#btntf').prop('disabled',true);              
-        }else{
-            $('#btntf').prop('disabled',false);
-        }
+        $(this).val(n.toLocaleString());
         }); 
+        
+        // // hitung nilai
+        // $('#sisal').val(sis);
+        // if(sisa<batas){
+        //     $('#btntf').prop('disabled',true);              
+        // }else{
+        //     $('#btntf').prop('disabled',false);
+        // }
+        // }); 
         // format number
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
        
-        $('#nm').val(numberWithCommas(tf));
+        // $('#nm').val(numberWithCommas(tf));
         // Pilih Bon
         $('#pilkar').on('select2:select',function(e){
             var kode=$(this).val();
-            
-
             $.ajax({
                 type:'GET',
                 url:'ambil-bon/'+kode,
@@ -443,6 +449,19 @@
                 $('.ingat').html('');
             }
             
+        });
+        // read image
+        function simage(input){
+            if(input.files && input.files[0]){
+                var reader=new FileReader();
+                reader.onload=function(e){
+                    $('#imgv').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#imgtf').change(function(){
+            simage(this);
         });
     </script>
 @endsection

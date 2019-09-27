@@ -3,6 +3,11 @@
 <head>
     <title>Cetak Rekap Pajak Bulan {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
+	<style>
+		@page{
+			size:landscape;
+		}
+	</style>
 </head>
 <body>
 <div>
@@ -50,6 +55,7 @@
                             <th>Tahun</th>
                             <th>Keterangan</th>
                             <th>Total</th>
+                            <th>Cabang</th>
 						</tr>
 						</thead>						
 						<tbody>
@@ -64,6 +70,7 @@
                                 </td>
                                 <td>{{number_format($row->total)}}</td>
                                 <td class="tdtot">{{$row->total}}</td>
+                                <td>{{$row->nama}}</td>
                             </tr>
                         @endforeach					
 						</tbody>

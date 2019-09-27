@@ -459,11 +459,16 @@ Route::get('rekap-transfer','Rekap\Rekap@rekaptrans');
 Route::get('cetak-transfer/{bl1}/{bl2}/{th}','Rekap\Rekap@cetaktrans');
 Route::get('rekap-neraca','Rekap\Rekap@rekapneraca');
 Route::get('cetak-neraca/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakneraca');
+Route::get('rekap-suratjalan','Rekap\Rekap@rekapsrj');
+Route::get('print-srj/{kt}/{b1}/{b2}','Rekap\Rekap@printsrj');
 // -------------------------------------------------------------------------- Bon karyawan
 Route::get('ambil-bon/{id}','Pembukuan\PembukuanController@ambilbon');
 Route::post('simpan-bon','Pembukuan\PembukuanController@simpanbon');
 // ===============================================================
 Route::post('add-modal','pembukuan\PembukuanController@simpanmodal');
+Route::get('laba-rugi','pembukuan\PembukuanController@labarugi');
+Route::get('search-laba','pembukuan\PembukuanController@carilaba');
+Route::get('cetak-labarugi/{b1}/{b2}/{th}','pembukuan\PembukuanController@cetaklb');
 // ===============================================================
 Auth::routes();
 
