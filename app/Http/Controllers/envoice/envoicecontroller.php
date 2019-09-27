@@ -19,6 +19,7 @@ class envoicecontroller extends Controller
 
         return view('envoice.cetakulang',['dataenvoice'=>$dataenvoice,'dataresi'=>$dataresi]);
     }
+    //=======================================================================
     public function delete(Request $request){
         $delid = $request->delid;
         if(!$delid){
@@ -35,6 +36,7 @@ class envoicecontroller extends Controller
         return back()->with('status','Data Berhasil Dihapus');  
         }
     }
+    //=======================================================================
     public function cari(Request $request){
         $cari = $request->cari;
             $listdata = DB::table('surat_envoice')

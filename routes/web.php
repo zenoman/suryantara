@@ -140,6 +140,7 @@ Route::get('/tampilneracathn','neraca\NeracaController@tampilneracathn');
 Route::get('/printneraca/{tgl}','neraca\NeracaController@cetakneraca');
 
 //================================================resi pengiriman
+Route::get('resipengiriman/lacakresi','resipengiriman\resipengirimanController@lacakresi');
 Route::post('updatepembayaran','resipengiriman\resipengirimanController@aksiupdatepembayaran');
 Route::get('carinoresibelumlunas','resipengiriman\resipengirimanController@carinoresibelumlunas');
 Route::get('updatepembayaranresi','resipengiriman\resipengirimanController@updatepembayaran');

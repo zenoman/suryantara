@@ -185,7 +185,7 @@ $(document).ready(function(){
                 rows3 = rows3 + '<td>' +value.berat+'</td>';
                 rows3 = rows3 + '<td>'+"Rp. "+rupiah(value.total_biaya)+'</td>';
                 
-                totalcash += value.total_biaya;
+                totalcash += Number(value.total_biaya);
                 rows3 = rows3 + '</tr>';
                 jumlahbarang+=1;
             });
