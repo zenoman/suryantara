@@ -88,14 +88,11 @@ class distribusiresicontroller extends Controller
                 }
             }else{
                 foreach ($request->pilihid as $id){ 
-                 
-                    
                     DB::table('resi_mentah')
                     ->where('id',$id)
                     ->update([
                         'status'=>'Y'
                     ]);
-                    
                 }
             }
             return redirect('distribusiresi')->with('status','Data Berhasil Diubah');
