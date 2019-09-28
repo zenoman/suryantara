@@ -37,7 +37,7 @@ class distribusiresicontroller extends Controller
             $headers = array(
               'Content-Type: application/excel',
             );
-    return Response::download($file, 'template distribusi resi.xlsx', $headers);
+        return Response::download($file, 'template distribusi resi.xlsx', $headers);
     }
     
     //==============================================================================
@@ -77,34 +77,25 @@ class distribusiresicontroller extends Controller
     }
 
     //===============================================================================
-    public function show($id)
-    {
-        //
-    }
-
-    //===============================================================================
-    public function edit($id)
-    {
-        //
-    }
-
-    //===============================================================================
     public function gantistatus(Request $request)
     {
         if(!$request->pilihid){
             return back()->with('statuserror','Tidak ada data yang dipilih');
         }else{
             if($request->status=='hapus'){
-                foreach ($request->pilihid as $id){ 
+                foreach ($request->pilihid as $id){
                     DB::table('resi_mentah')->where('id',$id)->delete();
                 }
             }else{
                 foreach ($request->pilihid as $id){ 
+                 
+                    
                     DB::table('resi_mentah')
                     ->where('id',$id)
                     ->update([
                         'status'=>'Y'
                     ]);
+                    
                 }
             }
             return redirect('distribusiresi')->with('status','Data Berhasil Diubah');

@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class distribusiresiImport implements ToCollection, WithHeadingRow{
    
     public function collection(Collection $rows){
+        $kodenya = '';
         foreach ($rows as $row){
         $data[] = [ 
             'no_resi'=>$row['no_resi'],
