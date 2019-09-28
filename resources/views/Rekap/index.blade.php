@@ -322,9 +322,33 @@
                         <div class="add-customers-screen tbl">
                             <div class="add-customers-screen-in">
                                 <div class="add-customers-screen-user">
-                                    <i class="fa fa-star-half"></i>
+                                    <i class="fa fa-circle-o-notch"></i>
                                 </div>
-                                <p>Penyusutan</p>                                                                                       
+                                <p>Rekap Surat Jalan</p>
+                                <form action="{{url('rekap-suratjalan')}}" method="GET" class="form">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <label for="">Dari</label>
+                                        <input type="text" name="tgl1" required readonly class="date form-control mr-sm-2" placeholder="Tanggal Pertama"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Ke</label>
+                                        <input type="text" name="tgl2" required readonly class="date form-control mr-sm-2" placeholder="Tanggal Kedua"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Pilihan Vendor</label>
+                                        <select required name="kat" id="" class="select2">
+                                            <option selected disabled hidden> List Vendor</option>
+                                            <option value="semua">Semua Vendor</option>
+                                            @foreach ($vn as $item)
+                                            <option value="{{$item->vendor.'-'.$item->telp}}">{{$item->vendor}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <Button type="submit" class="btn btn-sm btn-block">Tampilkan</Button>
+                                    </div>
+                                </form>   
                             </div>
                         </div>
                     </div>

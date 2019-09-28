@@ -5,15 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class Dashboardcontroller extends Controller {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-    // =================================================================================
     public function index()
     {
         $this->buatsession();
@@ -73,7 +70,14 @@ class Dashboardcontroller extends Controller {
         $piuresi=$tps-$tpr;
         // total pajak
         $pajakbayar=$tresi*$pjsen/100;
-
+        //  Pajak Kendaraan
+        $tpk=DB::table('pajak_kendaraan')
+            ->select(DB::raw('sum(nominal) as tpk'))
+            ->where('id_cabang',$idc)
+            ->where('bulan',$lasbul)
+            ->where('tahun',$lastth)
+            ->first();
+        $totpk=$tpk->tpk;
         //  pengeluaran harian
         $pl=DB::table('pengeluaran_lain')
             ->whereBetween('tgl',[$tglawal,$tglakhir])
@@ -120,7 +124,10 @@ class Dashboardcontroller extends Controller {
             $gaj=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Gaji Karyawan',$totalgj,$nam,$idc]);
             // input pengeluaran surat jalan
             DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Hutang Vendor',$totv,$nam,$idc]);
-            // backup resi pengiriman
+            // pengeluaran pajak kendaraan
+            DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pajak Kendaraan',$totpk,$nam,$idc]);
+            // update status tiap bulan
+            DB::update("update resi_pengiriman set transfer='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");
             
         }
         //============================================
@@ -340,9 +347,7 @@ class Dashboardcontroller extends Controller {
         
         }        
         
-    }
-
-
+    }   
     // =================================================================================
     public function editprofile($id){
         $admin = DB::table('users')->where('id',$id)->get();
@@ -381,5 +386,5 @@ class Dashboardcontroller extends Controller {
              return redirect('admin/'.$request->idnya.'/changepas')
              ->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
         }
-    }        
+    }             
 }

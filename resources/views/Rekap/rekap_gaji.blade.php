@@ -31,9 +31,11 @@
                                 <th>Gaji Pokok</th>
                                 <th>Uang Makan</th>
                                 <th>Bonus</th>
+                                <th>Bon</th>
                                 <th>Bulan</th>
                                 <th>Tahun</th>
                                 <th>Total</th>
+                                <th>Cabang</th>
                             </tr>
                             </thead>                            
                             <tbody>
@@ -53,10 +55,16 @@
                                 @else
                                 <td>Rp. {{number_format($row->gaji_tambahan)}}</td>    
                                 @endif    
+                                @if ($row->bon==null)
+                                <td>-</td>
+                                @else
+                                <td>Rp. {{number_format($row->bon)}}</td>    
+                                @endif    
                                 <td>{{$row->bulan}}</td>
                                 <td>{{$row->tahun}}</td>
                                 <td>Rp. {{number_format($row->total)}}</td>
                                 <td class="tdtot">{{$row->total}}</td>
+                                <td>{{$row->nama}}</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -92,7 +100,7 @@
             var table=document.getElementById('example'),sumval=0;
             for(var i=1;i<table.rows.length;i++){
                 // sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-                sumval=sumval+parseInt(table.rows[i].cells[8].innerHTML);
+                sumval=sumval+parseInt(table.rows[i].cells[9].innerHTML);
             }
             $('#toata').html(numberWithCommas(sumval));
     </script>

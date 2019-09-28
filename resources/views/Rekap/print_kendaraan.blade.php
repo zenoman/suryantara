@@ -3,6 +3,11 @@
 <head>
     <title>Cetak Rekap Pajak Kendaraan Bulan {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
+	<style>
+		@page{
+			size:landscape;
+		}
+	</style>
 </head>
 <body>
 <div>

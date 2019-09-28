@@ -112,10 +112,10 @@ class PembukuanController extends Controller
                 // simpan ke transfer
                 $tf=DB::insert('insert into transfer(bulan,tahun,id_cabang,cabang_tujuan,nominal,bukti,admin) values(?,?,?,?,?,?,?)',[$lasbul,$lastth,$idc,$idp,$nom,$nama,$adm]);
                 // Simpan Transfer Ke neraca
-                $si=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Transfer Ke Pusat',$nom,$adm,$idc]);
-                $is=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$skbul,$skth,'Saldo Awal Bulan',$sisa,$adm,$idc]);
-                $kis=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Piutang Saldo',$sisa,$adm,$idc]);
-                if($si){
+                // $si=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Transfer Ke Pusat',$nom,$adm,$idc]);
+                // $is=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$skbul,$skth,'Saldo Awal Bulan',$sisa,$adm,$idc]);
+                // $kis=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Piutang Saldo',$sisa,$adm,$idc]);
+                if($tf){
                     return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Berhasil Disimpan");
                 }else{
                     return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Gagal Disimpan");
@@ -172,5 +172,128 @@ class PembukuanController extends Controller
         }else{
             return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Gagal Disimpan");
         }
+    }
+    // laba rugi
+    function labarugi(){
+        // pengeluaran harian        
+        // pengeluaran pajak
+        // pengeluaran gaji
+        // pengeluaran suratjalan
+        // pengeluaran pajak kendaraan
+        // pemasukan resi lunas
+        // pemasukan resi belum lunas
+        // pemasukan piutang resi
+        $idc=Session::get('cabang');
+        $lastbul= date('n',strtotime('last day of previous month')); 
+        $b1=date('n',strtotime('last day of previous month'));
+        $b2=$b1; 
+        $latth=date('Y',strtotime('last day of previous month')); 
+        $th=date('Y');
+        if($idc=='1'){
+        $data=DB::table('neraca')   
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+            ->where('bulan',$lastbul)            
+            ->get();
+        $tot=DB::table('neraca')            
+            ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit'))
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+            ->where('bulan',$lastbul)
+            ->first();
+        $setting=DB::table('setting')
+                ->get();
+        }else{
+        $data=DB::table('neraca')   
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+            ->where('bulan',$lastbul)            
+            ->where('id_cabang',$idc)
+            ->get();
+        $tot=DB::table('neraca')            
+            ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit'))
+            ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+            ->where('bulan',$lastbul)
+            ->where('id_cabang',$idc)
+            ->first();
+        $setting=DB::table('setting')
+                ->get();
+        }
+        return view('pembukuan.labarugi',['data'=>$data,'title'=>$setting,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'tot'=>$tot]);
+    }
+    function carilaba(Request $request){
+        $idc=Session::get('cabang');
+        $request->validate([
+            'b1'=>'required',
+            'b2'=>'required',
+            'th'=>'required',
+            ]);
+        $b1=$request->b1;
+        $b2=$request->b2;
+        $th=$request->th;
+        if($idc=='1'){
+            $data=DB::table('neraca')            
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)            
+                ->get();
+            $tot=DB::table('neraca')            
+                ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit, neraca.*'))
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)            
+                ->first();
+            $setting=DB::table('setting')
+                ->get();
+        }else{
+            $data=DB::table('neraca')            
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th) 
+                ->where('id_cabang',$idc)           
+                ->get();
+            $tot=DB::table('neraca')            
+                ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit, neraca.*'))
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)     
+                ->where('id_cabang',$idc)       
+                ->first();
+            $setting=DB::table('setting')
+                ->get();
+        }
+        return view('pembukuan.labarugi',['data'=>$data,'title'=>$setting,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'tot'=>$tot]);
+    }
+    function cetaklb($b1,$b2,$th){
+        $idc=Session::get('cabang');
+        if($idc=='1'){
+            $data=DB::table('neraca')            
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)            
+                ->get();
+            $tot=DB::table('neraca')            
+                ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit, neraca.*'))
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)            
+                ->first();
+            $setting=DB::table('setting')
+                ->get();
+        }else{
+            $data=DB::table('neraca')            
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)        
+                ->where('id_cabang',$idc)       
+                ->get();
+            $tot=DB::table('neraca')            
+                ->select(DB::raw('sum(debit) as tdebit, sum(kredit) as tkredit, neraca.*'))
+                ->leftjoin('cabang','cabang.id','=','neraca.id_cabang')         
+                ->whereBetween('bulan',[$b1,$b2])
+                ->where('tahun',$th)        
+                ->where('id_cabang',$idc)       
+                ->first();
+            $setting=DB::table('setting')
+                ->get();
+        }
+        return view('pembukuan.cetaklabarugi',['data'=>$data,'title'=>$setting,'bul1'=>$b1,'bul2'=>$b2,'th'=>$th,'tot'=>$tot]);
     }
 }

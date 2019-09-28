@@ -3,6 +3,11 @@
 <head>
 	<title>Cetak {{$kate}} Akutansi Tanggal {{$bul1}} Sampai {{$bul2}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
+	<style>
+		@page{
+			size:landscape;
+		}
+	</style>
 </head>
 <body>
 <div>
