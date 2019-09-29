@@ -18,12 +18,23 @@ class PembukuanController extends Controller
         if(!Session::get('nama')){
             return redirect()->action('Dashboardcontroller@index');
         }
+
     }
       function index(){    
         $tglawal=date('Y-m-d',strtotime('first day of previous month'));
         $tglakhir=date('Y-m-d',strtotime('last day of previous month')); 
         $lastbul= date('n',strtotime('last day of previous month')); 
         $latth=date('Y',strtotime('last day of previous month')); 
+        $dnow=date('n');
+        // update Bon Setiap Akhir Bulan
+        $dt=DB::table('kas_bon')
+            ->where('valid','N')
+            ->first();
+        $cekbl=substr($dt->tgl,6,1);
+        if($cekbl!==$dnow){
+            DB::update("update kas_bon set valid='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");
+        }        
+        // 
         $idc=Session::get('cabang');
         $bsaldo=DB::table('set_saldo')
                 ->where('id_cabang',$idc)
@@ -148,6 +159,7 @@ class PembukuanController extends Controller
         $d=DB::table('karyawan')
             ->leftjoin('kas_bon','kas_bon.idkaryawan','=','karyawan.kode')
             ->where('karyawan.kode',$id)
+            ->where('kas_bon.valid','N')
             ->orderBy('kas_bon.id','DESC')
             ->get();
         return response()->json($d);
@@ -164,6 +176,7 @@ class PembukuanController extends Controller
         $nama=Session::get('nama');
         $nbon=str_replace(',','',$request->nbon);
         $kar=$request->kar;
+
         $sim=DB::insert('insert into kas_bon(tgl,idkaryawan,bon,bayar,admin) values(?,?,?,?,?)',[$tgl,$kar,$nbon,'0',$nama]);
         if($sim){
             // update bon gaji_karyawan
