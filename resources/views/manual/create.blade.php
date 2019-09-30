@@ -52,6 +52,5 @@
         @endsection
 		@section('js')
 		<script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script>
-	<script src="{{asset('assets/class.php')}}"></script>
-
+		<script src="{{asset('assets/class.php')}}"></script>
 	@endsection

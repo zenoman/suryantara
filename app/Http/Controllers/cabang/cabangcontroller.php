@@ -46,10 +46,12 @@ class cabangcontroller extends Controller
             'kota'=>$request->kota,
             'kop'=>$request->kop,
             'koderesi'=>$request->koderesi,
-            'norek'=>$request->norek
+            'norek'=>$request->norek,
+            'ket_transfer'=>$request->ket_transfer
         ]);
         return redirect('cabang')->with('status','Data berhasil disimpan');
     }
+    
     //====================================================================
     public function show($id)
     {
@@ -57,6 +59,7 @@ class cabangcontroller extends Controller
         $data = DB::table('cabang')->where('id',$id)->get();
         return view('cabang/edit',['title'=>$setting,'data'=>$data]);
     }
+
     //====================================================================
     public function update(Request $request, $id)
     {
@@ -68,7 +71,8 @@ class cabangcontroller extends Controller
             'kota'=>$request->kota,
             'kop'=>$request->kop,
             'koderesi'=>$request->koderesi,
-            'norek'=>$request->norek
+            'norek'=>$request->norek,
+            'ket_transfer'=>$request->ket_transfer
         ]);
         return redirect('cabang')->with('status','Data berhasil diubah');
     }

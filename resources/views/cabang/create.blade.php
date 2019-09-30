@@ -87,6 +87,14 @@
 								<p>	
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Ket. Transfer</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">
+								<textarea name="ket_transfer" id="norek" class="form-control"></textarea>
+								<p>	
+						</div>
+					</div>
 
 {{csrf_field()}}
 							<small class="text-muted text-right">

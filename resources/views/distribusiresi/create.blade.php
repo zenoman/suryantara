@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/select2.min.css')}}">
 @endsection
 @section('content')
-<!--  -->
 <script language="Javascript" type="text/javascript">
 //fungsi remove html
 //====================================================
@@ -33,8 +32,7 @@ function addInput(divName){
 
  if (counter == limit)  {
     alert("Limit hanya 15 inputan");
- }
- else {
+ }else{
     var newdiv = document.createElement('div');
     newdiv.innerHTML =' <div id="input'+counter+'" class="">'+
 				'<div class="row">'+
@@ -58,6 +56,7 @@ function addInput(divName){
     counter++;
  }
 }
+
 //fungsi hapus input
 function del(no) {
   document.getElementById('input'+no).remove();
@@ -66,7 +65,7 @@ function del(no) {
     var id = document.getElementById('input'+i);
     if (id === null){
 
-    } else {
+    }else{
 
     }
   }
