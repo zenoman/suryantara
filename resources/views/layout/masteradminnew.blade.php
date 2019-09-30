@@ -257,11 +257,11 @@
 		</li>
 
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+		{{-- @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item">
 			<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>			
 		</li>
-		@endif
+		@endif --}}
 
 	</ul>
 

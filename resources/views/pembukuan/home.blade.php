@@ -300,11 +300,11 @@
                                             </div>                                            
                                             <div class="form-group form-inline">
                                                 <label class="mr-2" for="">Batas Kasbon </label>
-                                                <label for="" id="batas">Loading......</label>
+                                                <label for="" id="batas">Rp. 0</label>
                                             </div>                                            
                                             <div class="form-group form-inline">
                                                 <label class="mr-2" for="">Tunggakan Bon </label>
-                                                <label for="" id="bon" >Loading......</label>
+                                                <label for="" id="bon" >Rp. x</label>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Masukan Kasbon</label>
@@ -373,41 +373,16 @@
 <script src="{{asset('assets/js/lib/notie/notie.js')}}"></script>
 <script src="{{asset('assets/js/lib/select2/select2.full.min.js')}}"></script> 
     <script>
-        // // Cek Bila Sudah Transfer
-        // var cbul={{$cekbul}};
-        // if(cbul>0){
-        //     $('#btntf').prop('disabled',true); 
-        //     $('#msg').html('Transfer Sudah Dilakukan !')
-        // }
-        // // set otomatis nominal saldo yang dtransfer
-        // var batas={{$sal->saldo}};
-        // var tsal={{$in}};
-        // var kred={{$kred}}
-        // var tf=tsal-kred-batas;
-        // var sis=tsal-tf-kred;
-        // var batasbon=0;
-        // if(tf<0){
-        //     tf=0;
-        // }
-        // if(tf<batas){
-        //     $('#btntf').prop('disabled',true); 
-        // }else{
-        //     $('#sisal').val(sis);
-        // }
-
+       
+        var batasbon=0;
+        var tgk=0;
+       
         $('.nominal').on('keyup', function(){
         var n = parseInt($(this).val().replace(/\D/g,''),10);
         $(this).val(n.toLocaleString());
         }); 
         
-        // // hitung nilai
-        // $('#sisal').val(sis);
-        // if(sisa<batas){
-        //     $('#btntf').prop('disabled',true);              
-        // }else{
-        //     $('#btntf').prop('disabled',false);
-        // }
-        // }); 
+       
         // format number
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -422,18 +397,27 @@
                 url:'ambil-bon/'+kode,
                 success:function(response){
                     $.each(response,function(key,value){
-                        $('#batas').html("Rp. "+numberWithCommas(value.batas_bon));
-                        if(value.bon==null){
-                            batasbon=value.batas_bon;
-                            $('#bon').html("Rp. "+0);
-                        }else if(value.bon==0){                            
-                            batasbon=value.batas_bon;
-                            $('#bon').html("Rp. "+numberWithCommas(value.bon));
-                        }else{
-                            $('#bon').html("Rp. "+numberWithCommas(value.bon));
-                            $('#savebon').prop('disabled',true);
-                        }
+                        $('#batas').html("Rp. "+numberWithCommas(value.batas_bon));  
+                        batasbon=value.batas_bon;
                     });
+                }
+            });
+            $.ajax({
+                type:'GET',
+                url:'ambil-tunggak/'+kode,
+                success:function(response){
+                    $.each(response.data,function(key,value){       
+                            $('#bon').html("Rp. "+numberWithCommas(value.bon));                                                                                                            
+                            tgk=value.bon;
+                    }); 
+                    $.each(response,function(k,v){                        
+                        if(response.cn==0){
+                            $('#bon').html("Rp. 0");                                   
+                        }else{
+                            $('#savebon').prop('disabled',true);
+                            $('.ingat').html('<div class="alert alert-info">Anda Masih Memiliki Tunggakan</div>');
+                        }
+                    });                  
                 }
             });
         });
@@ -448,7 +432,11 @@
                 $('#savebon').prop('disabled',false);
                 $('.ingat').html('');
             }
-            
+            // cek tunggakan
+            if(tgk>0){
+                $('#savebon').prop('disabled',true);
+                $('.ingat').html('<div class="alert alert-info">Anda Masih Memiliki Tunggakan</div>');
+            }
         });
         // read image
         function simage(input){

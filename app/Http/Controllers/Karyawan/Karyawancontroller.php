@@ -97,7 +97,8 @@ class Karyawancontroller extends Controller
                     'nama'  => 'required',
                     'jabatan'=>'required',
                     'telp'  => 'required|numeric',
-                    'alamat'  => 'required|min:3'
+                    'alamat'  => 'required|min:3',
+                    'Bon'=>'required',
                     ];
 
     $customMessages = [
@@ -114,7 +115,8 @@ class Karyawancontroller extends Controller
             'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat,
-            'id_cabang'=>$request->cabang
+            'id_cabang'=>$request->cabang,
+            'batas_bon'=>$request->Bon,
 
         ]);
         
@@ -143,6 +145,7 @@ class Karyawancontroller extends Controller
                     'nama'  => 'required',
                     'telp'  => 'required|min:5|numeric',
                     'alamat'  => 'required|min:5',
+                    'Bon'=>'required',
             ];
         $customMessages = [
         'required'  => 'Maaf, :attribute harus di isi',
@@ -158,7 +161,8 @@ class Karyawancontroller extends Controller
             'id_jabatan' =>$request->jabatan,
             'telp'  => $request->telp,
             'alamat'  => $request->alamat,
-            'id_cabang' =>$request->cabang
+            'id_cabang' =>$request->cabang,
+            'batas_bon'=>$request->Bon,
             ]);
         DB::table('gaji_karyawan')
             ->where('id',$id)

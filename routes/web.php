@@ -463,6 +463,7 @@ Route::get('rekap-suratjalan','Rekap\Rekap@rekapsrj');
 Route::get('print-srj/{kt}/{b1}/{b2}','Rekap\Rekap@printsrj');
 // -------------------------------------------------------------------------- Bon karyawan
 Route::get('ambil-bon/{id}','Pembukuan\PembukuanController@ambilbon');
+Route::get('ambil-tunggak/{id}','Pembukuan\PembukuanController@ambiltunggak');
 Route::post('simpan-bon','Pembukuan\PembukuanController@simpanbon');
 // ===============================================================
 Route::post('add-modal','pembukuan\PembukuanController@simpanmodal');

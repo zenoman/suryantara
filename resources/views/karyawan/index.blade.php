@@ -75,6 +75,7 @@
 							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Batas Hutang</th>
 							<th>Penempatan</th>
 							<th class="text-center">Aksi</th>
 						</tr>
@@ -87,6 +88,7 @@
 							<th>Jabatan</th>
 							<th>Telp</th>
 							<th>Alamat</th>
+							<th>Batas Hutang</th>
 							<th>Penempatan</th>
 							<th class="text-center">Aksi</th>
 						</tr>
@@ -102,6 +104,7 @@
                             <td>{{$row->jabatan}}</td>
                             <td>{{$row->telp}}</td>
                             <td>{{$row->alamat}}</td>
+                            <td>Rp. {{number_format($row->batas_bon,0,',','.')}}</td>
                             <td>{{$row->namacabang}}</td>
                             <td class="text-center">
                               <form action="{{ url('/karyawan/delete')}}"  method="post">                            	
