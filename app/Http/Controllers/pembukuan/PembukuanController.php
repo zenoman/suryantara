@@ -59,6 +59,7 @@ class PembukuanController extends Controller
         $kar=DB::table('karyawan')
             ->where('id_cabang',$idc)
             ->get();
+
         $totsal=$in->totaldeb;
         $tolkre=$in->totalkred;
         return view('pembukuan.home',['kar'=>$kar,'title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl,'kred'=>$tolkre]);
@@ -155,14 +156,26 @@ class PembukuanController extends Controller
             return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Gagal Disimpan");
         }
     }
-    function ambilbon($id){
+    function ambilbon($id){        
         $d=DB::table('karyawan')
-            ->leftjoin('kas_bon','kas_bon.idkaryawan','=','karyawan.kode')
+            // ->select(DB::raw('karyawan.*,as_bon'))
+            // ->leftjoin('kas_bon','kas_bon.idkaryawan','=','karyawan.kode')
             ->where('karyawan.kode',$id)
-            ->where('kas_bon.valid','N')
-            ->orderBy('kas_bon.id','DESC')
+            // ->where('kas_bon.valid','N')
             ->get();
         return response()->json($d);
+    }
+    function ambiltunggak($id){
+        $bn=DB::table('kas_bon')
+            ->where('idkaryawan',$id)
+            ->where('kas_bon.valid','N')
+            ->get();
+        $cn=DB::table('kas_bon')
+            ->where('idkaryawan',$id)
+            ->where('kas_bon.valid','N')
+            ->count();        
+        return response()->json(['data'=>$bn,'cn'=>$cn]);
+              
     }
     function simpanbon(Request $request){
         $idc=Session::get('cabang');

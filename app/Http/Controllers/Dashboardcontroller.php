@@ -194,6 +194,7 @@ class Dashboardcontroller extends Controller {
 
       //===============================================================
       function masukandata(){
+        $lasbul=date('n',strtotime('last day of previous month'));
         $setting = DB::table('setting')
         ->limit(1)
         ->get();
@@ -208,7 +209,12 @@ class Dashboardcontroller extends Controller {
             ->where('tahun',date('Y'))
             ->orderBy('id','DESC')
             ->first();
-        $ckbl=$bul->bulan;        
+        if(empty($bul->bulan)){
+            $ckbl=$lasbul;        
+        }else{
+            $ckbl=$bul->bulan;        
+        }
+        
         if($bulan != $ckbl){
             $tahun = date('Y');
             if(date('m')==1){
