@@ -1535,8 +1535,8 @@ $(document).ready(function(){
 			var total_biaya = parseInt(change) + parseInt(biaya_kirim) +  parseInt(biaya_smu) +  parseInt(biaya_karantina);
 			var metode		= $("#metode_udara").val();
 			var nosmu 		= $('#nomer_smu_udara').val();
-			var status_bayar = $('#status_bayar_laut').val();
-			var dibayar = $("#dibayar_laut").val();
+			var status_bayar = $('#status_bayar_udara').val();
+			var dibayar = $("#dibayar_udara").val();
 			var maskapai = $('#maskapai').val();
 			if(dibayar==''||a_pengirim==''||a_penerima==''||nama_barang == '' || jumlah=='' || berat=='' || berat==0 || kota_asal=='' || kota_tujuan=='' || n_pengirim=='' || t_pengirim=='' || n_penerima=='' || t_penerima=='' || biaya_kirim==0 || biaya_smu=='' || biaya_karantina ==''){
 				notie.alert(3, 'Maaf Data Tidak Boleh Ada Yang Kosong', 2);

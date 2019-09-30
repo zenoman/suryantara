@@ -1452,7 +1452,7 @@
 								@endif>
 							</div>
 						</div>
-						<input type="hidden" id="status_bayar_udara" 
+						<input type="text" id="status_bayar_udara" 
 						@if($row->pengiriman_via=='udara')
 							@if($row->tgl_lunas=='')
 								value="belum_lunas"
