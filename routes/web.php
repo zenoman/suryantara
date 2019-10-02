@@ -7,7 +7,11 @@ Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@do
 Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
 
 Route::resource('distribusiresi','distribusiresi\distribusiresicontroller');
-
+// ===============================================Data Aset
+Route::get('aset','Aset\Aset@index');
+Route::post('simpan-aset','Aset\Aset@simpanaset');
+Route::get('hapus-aset/{id}','Aset\Aset@hapusaset');
+Route::post('update-aset','Aset\Aset@updateaset');
 //================================================transit
 Route::get('selesaitransit/{kode}','transit\transitcontroller@selesaitransit');
 Route::post('simpantransit','transit\transitcontroller@store');
@@ -462,6 +466,8 @@ Route::get('rekap-neraca','Rekap\Rekap@rekapneraca');
 Route::get('cetak-neraca/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakneraca');
 Route::get('rekap-suratjalan','Rekap\Rekap@rekapsrj');
 Route::get('print-srj/{kt}/{b1}/{b2}','Rekap\Rekap@printsrj');
+Route::get('rekap-penyusutan','Rekap\Rekap@rekapnyusut');
+Route::get('print-susut/{k}','Rekap\Rekap@printsusut');
 // -------------------------------------------------------------------------- Bon karyawan
 Route::get('ambil-bon/{id}','Pembukuan\PembukuanController@ambilbon');
 Route::get('ambil-tunggak/{id}','Pembukuan\PembukuanController@ambiltunggak');

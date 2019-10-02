@@ -23,7 +23,7 @@
                 </header>
                 <section class="card">
                     <div class="card-block">                       
-                        <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="example" class="display table-responsive table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>No</th>

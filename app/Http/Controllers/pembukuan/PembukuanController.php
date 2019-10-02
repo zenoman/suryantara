@@ -30,7 +30,12 @@ class PembukuanController extends Controller
         $dt=DB::table('kas_bon')
             ->where('valid','N')
             ->first();
-        $cekbl=substr($dt->tgl,6,1);
+        if(empty($dt)){   
+            $cekbl=$lastbul;
+        }else{
+            $cekbl=substr($dt->tgl,6,1);
+        }
+        
         if($cekbl!==$dnow){
             DB::update("update kas_bon set valid='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");
         }        
