@@ -96,10 +96,15 @@
 	<br>
 	<table width="100%;">
 		<tr align="center">
-			<td width="30%">
-				{{Session::get('norek')}}
+			<td width="25%" align="center" style="border-style: solid;">
+				Pembayaran Via Transfer Ke : <hr>
+				{!!Session::get('norek')!!}
 			</td>
-			<td width="40%">
+			<td width="25%" align="center" style="border-style: solid;">
+				Bukti Pembayaran Dapat Dikirim Melalui : <hr>
+				{!!Session::get('ket_transfer')!!}
+			</td>
+			<td width="20%">
 				
 			</td>
 			<td width="30%">

@@ -22,7 +22,7 @@
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell">
-							<h2>List Invoice City kurier</h2>
+							<h2>List Invoice</h2>
 						</div>
 					</div>
 				</div>
@@ -158,7 +158,7 @@
 								<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
 									<i class="font-icon-close-2"></i>
 								</button>
-								<h4 class="modal-title" id="myModalLabel">Detail Surat Jalan</h4>
+								<h4 class="modal-title" id="myModalLabel">Detail Invoice</h4>
 							</div>
 				<div class="modal-body">
 					<div class="row">
@@ -207,7 +207,13 @@
 										<td>{{$resi->no_resi}}</td>
 										<td>{{$resi->nama_barang}}</td>
 										<td>{{$resi->jumlah}} Koli</td>
-										<td>{{$resi->berat}} Kg</td>
+										@if($resi->pengiriman_via=='udara')
+											<td>{{$resi->total_berat_udara}} Kg</td>
+										@else
+											<td>{{$resi->berat}} Kg</td>
+										@endif
+										
+
 										@if($resi->metode_bayar=='cash')
 										<td>Rp. {{number_format($resi->total_biaya,0,',','.')}}</td>
 										<td> </td>
