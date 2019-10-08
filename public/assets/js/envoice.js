@@ -28,7 +28,7 @@ $(document).ready(function(){
 	});
     //=============================================cari vendor
         $('#carivendor').select2({
-        placeholder: 'Cari vendor',
+        placeholder: 'Cari Mitra',
         ajax:{
             url:'/carimitra',
             dataType:'json',
@@ -58,7 +58,7 @@ $(document).ready(function(){
                 success:function (data){
 				return {
 					results : $.map(data, function (item){
-					cariitem(item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
+					cariitem(item.total_berat_udara,item.pengiriman_via,item.nama_barang,item.jumlah,item.berat,item.nama_pengirim,item.nama_penerima,item.kode_tujuan);
 					})
 				}
 			},complete:function(){
@@ -76,6 +76,7 @@ $(document).ready(function(){
                 success:function (data){
                 return {
                     results : $.map(data, function (item){
+                        $('#tujuanmitra').val(item.nama);
                         $('#telpvendor').val(item.notelp);
                         $('#alamatvendor').val(item.alamat);
                         $('#cabang').val('Y');
@@ -94,14 +95,25 @@ $(document).ready(function(){
 			$('#penerima').focus();
 		});
 	//===================================================
-	function cariitem(barang,jumlah,berat,pengirim,penerima,tujuan){
-        $('#penerima').val(penerima);
+	function cariitem(beratudara,via,barang,jumlah,berat,pengirim,penerima,tujuan){
+        if(via == 'udara'){
+            $('#penerima').val(penerima);
         $('#pengirim').val(pengirim);
-		$('#isipaket').val(barang);
+        $('#isipaket').val(barang);
         $('#tujuan').val(tujuan);
-		$('#jumlah').val(jumlah);
-		$('#berat').val(berat);
+        $('#jumlah').val(jumlah);
+        $('#berat').val(beratudara);
         $('#btntambah').focus();
+        }else{
+            $('#penerima').val(penerima);
+        $('#pengirim').val(pengirim);
+        $('#isipaket').val(barang);
+        $('#tujuan').val(tujuan);
+        $('#jumlah').val(jumlah);
+        $('#berat').val(berat);
+        $('#btntambah').focus();
+        }
+        
 	}
 	//========================================================
 	function carikode(){
@@ -158,6 +170,12 @@ $(document).ready(function(){
             var totalbt = 0;
             var no = 0;
             $.each(data,function(key, value){
+                var beratnya = 0;
+                if(value.pengiriman_via=='udara'){
+                    beratnya = value.total_berat_udara;
+                }else{
+                    beratnya = value.berat;
+                }
                 no +=1;
                 rows = rows + '<tr>';
                 rows = rows + '<td class="text-center">' +value.no_resi+'</td>';
@@ -165,12 +183,12 @@ $(document).ready(function(){
                 rows = rows + '<td>' +value.nama_penerima+'</td>';
                 rows = rows + '<td>' +value.kode_tujuan+'</td>';
                 rows = rows + '<td class="text-center">' +value.jumlah+'</td>';
-                rows = rows + '<td class="text-center">' +value.berat+'</td>';
+                rows = rows + '<td class="text-center">' +beratnya+'</td>';
                 rows = rows + '<td>' +value.nama_barang+'</td>';
                 rows = rows + '<td><button type="button" class="btn btn-warning" onclick="halo('+value.id+')"><i class="fa fa-trash"></i></button></td>';
                 rows = rows + '</tr>';
                 totaljumlah += value.jumlah;
-                totalkg += Number(value.berat);
+                totalkg += Number(beratnya);
                 
                 //=======================================
                 rows3 = rows3 + '<tr align="center">';
@@ -182,7 +200,7 @@ $(document).ready(function(){
                 rows3 = rows3 + '<td>' +value.kode_tujuan+'</td>';
                 rows3 = rows3 + '<td>' +value.nama_barang+'</td>';
                 rows3 = rows3 + '<td>' +value.jumlah+'</td>';
-                rows3 = rows3 + '<td>' +value.berat+'</td>';
+                rows3 = rows3 + '<td>' +beratnya+'</td>';
                 rows3 = rows3 + '<td>'+"Rp. "+rupiah(value.total_biaya)+'</td>';
                 
                 totalcash += Number(value.total_biaya);
@@ -329,13 +347,13 @@ $(document).ready(function(){
     if(foo=='bar'){
      var isgood = confirm('Apakah Anda Yakin Data Sudah Benar ?');
      if(isgood == true){
-        if($('#telpvendor').val()=='' || jumlahbarang==0){
+        if($('#alamatvendor').val() =='' || $('#tujuanmitra').val() =='' || $('#telpvendor').val()=='' || jumlahbarang==0){
                 notie.alert(3, 'Maaf, Data Harus Lengkap', 2);
             }else{
                 var noresi = $("#noresi").html();
                 var dats = $('#carivendor').select2('data');
 
-                var tujuan = dats[0].text+"-"+$("#telpvendor").val();
+                var tujuan = $('#tujuanmitra').val()+"-"+$("#telpvendor").val();
                 var alamat = $("#alamatvendor").val();
                 var totalkg = $('#totalkg').html();
                 var totalkoli = $('#totaljumlah').html();

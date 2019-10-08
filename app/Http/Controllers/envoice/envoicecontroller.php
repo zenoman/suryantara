@@ -133,9 +133,7 @@ class envoicecontroller extends Controller
                         ['no_resi','like','%'.$cari.'%'],
                         ['total_biaya','!=',0],
                         ['batal','=','N'],
-                        ['id_cabang','=',Session::get('cabang')],
-                        ['pengiriman_via','=','city kurier'],
-                        ['status_company','=','Y']
+                        ['id_cabang','=',Session::get('cabang')]
                     ])
                     ->whereNull('kode_envoice')
                     ->get();

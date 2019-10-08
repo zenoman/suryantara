@@ -246,6 +246,8 @@ Route::get('/export_laporan_pengeluaran_gaji_karyawan/{bulanya}/{jabatan}','lapo
 // Route::get('/refreshcaptcha','Login\Logincontroller@refreshCaptcha');
 //================================================
 Route::get('/','landing\landingcontroller@index');
+Route::get('/tracking','tracking\trackingcontroller@index');
+Route::get('/tracking/cari','tracking\trackingcontroller@pencarian');
 Route::get('/landdarat','landingdarat\landingdaratcontroller@index');
 Route::get('/landdarat/cari','landingdarat\landingdaratcontroller@pencarian');
 Route::get('/landlaut','landinglaut\landinglautcontroller@index');

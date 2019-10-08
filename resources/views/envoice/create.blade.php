@@ -42,17 +42,25 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">No.telp</label>
+							<label class="form-label" for="exampleInputDisabled">Tujuan</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="telpvendor" readonly>
+								<input type="text" class="form-control" id="tujuanmitra">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12 col-sm-12">
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<label class="form-label" for="exampleInputDisabled">No.telp</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="telpvendor">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
 							<label class="form-label" for="exampleInputDisabled">Alamat</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="alamatvendor" readonly>
+								<input type="text" class="form-control" id="alamatvendor">
 							</div>
 						</div>
 					</div>
