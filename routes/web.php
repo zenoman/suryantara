@@ -395,17 +395,17 @@ Route::get('/kat_bar/{id}/edit','Katbar\Katbarcontroller@edit');
 Route::put('/kat_bar/{id}','Katbar\Katbarcontroller@update');
 Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
 //=======================================================Absensi
-Route::get('/absen','Absensi\AbsensiController@index');
-Route::post('/tamabsen','Absensi\AbsensiController@tambahdataabsen');
-Route::post('/tamabsensel','Absensi\AbsensiController@tambahabsenselesai');
-Route::get('/pilihabsensi','Absensi\AbsensiController@pilihabsensi');
-Route::get('/tampilabsensiharian','Absensi\AbsensiController@tampilabsenharian');
-Route::get('/tampilabsensibulanan','Absensi\AbsensiController@tampilabsenbulanan');
+Route::get('/absen','Absensi\Absensicontroller@index');
+Route::post('/tamabsen','Absensi\Absensicontroller@tambahdataabsen');
+Route::post('/tamabsensel','Absensi\Absensicontroller@tambahabsenselesai');
+Route::get('/pilihabsensi','Absensi\Absensicontroller@pilihabsensi');
+Route::get('/tampilabsensiharian','Absensi\Absensicontroller@tampilabsenharian');
+Route::get('/tampilabsensibulanan','Absensi\Absensicontroller@tampilabsenbulanan');
 //---------------------------------------------------export absensi
-Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensiharian');
-Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
-Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
-Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');
+Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\Absensicontroller@exsportabsensiharian');
+Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\Absensicontroller@cetakabsensihrian');
+Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\Absensicontroller@exsportabsensibulanan');
+Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\Absensicontroller@cetakabsensibulanan');
 //==============================================================Kategori akutansi
 Route::get('/kat_akut','Kategoriakutansi\Kategoriakutansicontroller@index');
 Route::get('/kat_akut/create','Kategoriakutansi\Kategoriakutansicontroller@create');
