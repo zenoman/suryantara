@@ -131,7 +131,7 @@ Route::get('/printgajikaryawan/{bulan}/{tahun}','backup\backupController@cetakgj
 Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgjkw');
 
 //==============================================omset
-Route::get('/omset','omset\omsetController@index');
+Route::get('/omset','omset\Omset@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset

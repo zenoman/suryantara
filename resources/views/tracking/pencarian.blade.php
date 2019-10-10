@@ -153,7 +153,7 @@ ul.timeline > li:before {
           <p class="float-left"><?php echo strtoupper($row->lokasi)?></p>
           <p class="float-right"><?php echo ($row->tgl)?></p>
           <br><br>
-          <p align="justify"><?php echo ($row->keterangan)?></p>
+          <p align="justify">{{$row->status.' '.$row->keterangan}}</p>
         </li>
         @endforeach
       </ul>

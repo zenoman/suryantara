@@ -22,6 +22,7 @@ class trackingcontroller extends Controller
     public function pencarian(Request $request)
     {
         $resi = $request->resi;
+        // dd($resi);
         $cek=DB::table('status_pengiriman')->where('kode','like','%'.$resi)->count('kode');
 
         if($cek>0){
@@ -29,17 +30,16 @@ class trackingcontroller extends Controller
             ->where('kode','like','%'.$resi)->get();
             $desk = DB::table('setting')->get();
             $kode = DB::table('status_pengiriman')->where('kode','like','%'.$resi)->groupBy('kode')->get();
-    
-     return view('tracking/pencarian',['trak'=>$trak ,'des'=>$desk , 'kk'=>$kode]);
 
         }
         else{
             $trak = DB::table('status_pengiriman')
             ->where('kode','like','%'.$resi)->get();
             $desk = DB::table('setting')->get();
-    
-     return view('tracking/pencarian',['trak'=>$trak ,'des'=>$desk]);
+            $kode = DB::table('status_pengiriman')->where('kode','like','%'.$resi)->groupBy('kode')->get();
+        
         }
+        return view('tracking.pencarian',['trak'=>$trak ,'des'=>$desk , 'kk'=>$kode]);
     }
 
 }
