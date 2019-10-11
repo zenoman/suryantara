@@ -12,6 +12,12 @@ class resipengirimanController extends Controller
         $this->middleware('auth');
     }
     //======================================================
+    public function tampillacakresi(){
+        $webinfo = DB::table('setting')->limit(1)->get();
+        return view('resipengiriman.tampillacakresi',['webinfo'=>$webinfo]);
+    }
+
+    //======================================================
     public function lacakresi(Request $request){
        $resi = $request->resi;
        $webinfo = DB::table('setting')->limit(1)->get();

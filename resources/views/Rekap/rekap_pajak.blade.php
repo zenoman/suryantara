@@ -31,6 +31,7 @@
                                 <th>Tahun</th>
                                 <th>Keterangan</th>
                                 <th>Total</th>
+                                <th>Cabang</th>
                             </tr>
                             </thead>                            
                             <tbody>
@@ -43,8 +44,9 @@
                                 <td>
                                     {{$row->nama_pajak}}
                                 </td>
-                                <td>{{number_format($row->total)}}</td>
+                                <td>Rp. {{number_format($row->total)}}</td>
                                 <td class="tdtot">{{$row->total}}</td>
+                                <td>{{$row->nama}}</td>
                             </tr>
                             @endforeach
                             </tbody>

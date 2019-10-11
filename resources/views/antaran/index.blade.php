@@ -214,20 +214,16 @@
 										<td>{{$resi->jumlah}} Koli</td>
 										<td>{{$resi->berat}} Kg</td>
 										<td>
-											@if($resi->status_pengiriman=='menuju alamat tujuan')
-                            					<span class="label label-primary">
+											@if($resi->status_pengiriman=='paket telah diterima')
+                            					<span class="label label-success">
                             					{{$resi->status_pengiriman}}
                             					</span>
-                            				@elseif($resi->status_pengiriman=='pengantaran ulang')
+                            				@elseif($resi->status_pengiriman=='pengantaran gagal')
                             					<span class="label label-warning">
                             					{{$resi->status_pengiriman}}
                             					</span>
-                            				@elseif($resi->status_pengiriman=='dikembalikan ke pengirim')
-                            					<span class="label label-danger">
-                            					{{$resi->status_pengiriman}}
-                            					</span>
                             				@else
-                            				<span class="label label-success">
+                            				<span class="label label-primary">
                             					{{$resi->status_pengiriman}}
                             					</span>
                             				@endif

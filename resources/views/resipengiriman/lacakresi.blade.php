@@ -13,12 +13,15 @@
 			<section class="box-typical">
 				<header class="box-typical-header">
 					<div class="tbl-row">
+						<div class="tbl-cell tbl-cell-action-bordered">
+							<button onclick="history.go(-1)" type="button" class="action-btn btn-danger">
+								<i class="font-icon font-icon-arrow-left"></i>
+							</button>
+						</div>
 						<div class="tbl-cell tbl-cell-title">
 							<h3>Hasil Tracking Resi "<b>{{$resi}}</b>"</h3>
 						</div>
-						<div class="tbl-cell tbl-cell-action-bordered">
-							<button type="button" class="action-btn"><i class="font-icon font-icon-trash"></i></button>
-						</div>
+						
 					</div>
 				</header>
 				<div class="box-typical-body">

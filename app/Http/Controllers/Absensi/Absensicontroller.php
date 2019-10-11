@@ -12,7 +12,6 @@ use App\Exports\AbsensibulananExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
 
 class Absensicontroller extends Controller
 {

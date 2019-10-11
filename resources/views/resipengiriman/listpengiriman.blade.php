@@ -52,32 +52,7 @@
                      			<i class="fa fa-money"></i> Update Pembayaran
                      		</a>
                      		@endif
-                     		<button class="btn btn-warning" data-toggle="modal" data-target="#lacakresi">
-                     			<i class="font-icon font-icon-pin-2"></i> Lacak Resi
-                     		</button>
-                     		<div class="modal fade" id="lacakresi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Lacak Resi</h4>
-                                        </div>
-                                        
-
-                                        <div class="modal-body">
-                                           <form method="get" action="{{url('resipengiriman/lacakresi')}}">
-                                            <div class="form-group">
-                                                <input type="text" name="resi" class="form-control" placeholder="cari berdasarkan Nomor Resi" autocomplete="new-resi" required>
-                                            </div>
-                                           {{csrf_field()}}
-                                            <input type="submit" class="btn btn-info" value="Submit">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            
-                                            </form>
-                                        </div>
-                                 
-                                    </div>
-                                </div>
-                            </div> 
+                     		
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

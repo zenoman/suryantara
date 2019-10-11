@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cetak Rekap Neraca  Bulan {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}</title>
+	<title>Cetak Surat Jalan {{$kate}} Tanggal {{$bul1}} Sampai {{$bul2}}</title>
 	<link rel="stylesheet" href="{{asset('assets/css/lib/bootstrap/bootstrap.min.css')}}">	
 	<style>
 		@page{
-			size:landscape;
+			size: landscape;
 		}
 	</style>
 </head>
@@ -33,7 +33,7 @@
 			<tr>
 				<td colspan="2" align="center">
 					<b>
-                        Rekap Neraca Tanggal {{$bul1}} Sampai {{$bul2}} Tahun {{$th}}
+					    Rekap Surat Jalan {{$kate}} Tanggal {{$bul1}} Sampai {{$bul2}}
 					</b>
 				</td>
 			</tr>
@@ -50,46 +50,48 @@
 		<table border="1" id="example"  class="display table table-striped table-bordered" cellspacing="0">
 						<thead>
 						<tr>
-                            <th>No</th>
+							<th>No</th>
+                            <th>No Resi</th>
+                            <th>Tanggal</th>
                             <th>Admin</th>
-                            <th>Cabang</th>
-                            <th>Bulan</th>
-                            <th>Tahun</th>
-                            <th>Keterangan</th>
-                            <th>Debit</th>
-                            <th>Kredit</th>
+                            <th>Vendor</th>
+                            <th>Tujuan</th>
+                            <th>Biaya</th>
 						</tr>
 						</thead>						
 						<tbody>
-                            <?php $no = 1;?>
-                            @foreach($lap as $item)
+                            <?php $nomer = 1;?>
+                            @foreach($data as $row)
                             <tr>
-                                <td>{{$no++}}</td>                                   
-                                <td>{{$item->admin}}</td>                                    
-                                <td>{{$item->nama}}</td>
-                                <td>{{$item->bulan}}</td>
-                                <td>{{$item->tahun}}</td>
-                                <td>{{$item->keterangan}}</td>
-                                <td>Rp. {{number_format($item->debit)}}</td>
-                                <td>Rp. {{number_format($item->kredit)}}</td>
+                                <td>{{$nomer++}}</td>
+                                <td>{{$row->kode}}</td>                                
+                                <td>{{$row->tgl}}</td>    
+                                <td>{{$row->admin}}</td>                           
+                                <td>
+                                    {{$row->tujuan}}
+                                </td>
+                                <td>{{$row->alamat_tujuan}}</td>
+                                <td>Rp. {{number_format($row->biaya)}}</td>
                             </tr>
-                        @endforeach	
-                        <tr>
-                            <td colspan="6" align="right"> <b>Total</b></td>
-                            <td><b>Rp {{number_format($total->totdeb)}}</b></td>
-                            <td><b>Rp {{number_format($total->totkred)}}</b></td>
+						@endforeach	
+						<tr>
+                            <td colspan="6" align="right"><b>Total</b></td>
+                            <td ><b>Rp. {{number_format($total->tbiaya)}}</b></td>
                         </tr>				
 						</tbody>
-					</table>
+					</table>					
+					
 </body>
 
 <script src="{{asset('assets/js/lib/jquery/jquery-3.2.1.min.js')}}"></script>
 <script>	
-$(document).ready(function(){	
+$(document).ready(function(){
+	$('.tdtot').hide();
         window.print();
-        });
+        })
         window.onafterprint = function() {
             history.go(-1);
         };
+	// Count Total	
 </script>
 </html>

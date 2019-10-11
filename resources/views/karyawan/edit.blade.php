@@ -90,6 +90,12 @@
 						</div>
 					</div>
 					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Batas Bon/Hutang</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" value="{{$ro->batas_bon}}" placeholder="Batas Bon" name="Bon">
+						</div>
+					</div>
+					<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label  semibold">Penempatan</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="cabang" class="form-control">

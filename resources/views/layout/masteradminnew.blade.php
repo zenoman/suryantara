@@ -228,13 +228,15 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Penerimaan</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('inputpenerimaan')}}">Inbon</a>
+				<a class="dropdown-item" href="{{url('inputpenerimaan')}}">Inbound</a>
 				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
 				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Antaran</a>
 				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('resipengiriman/tampillacakresi')}}">Lacak Resi</a>
 			</div>
 		</li>		
 		@endif
@@ -257,11 +259,11 @@
 		</li>
 
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+		{{-- @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item">
 			<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>			
 		</li>
-		@endif
+		@endif --}}
 
 	</ul>
 

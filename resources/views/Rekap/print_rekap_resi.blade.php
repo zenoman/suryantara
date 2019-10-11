@@ -62,6 +62,7 @@
 							<th>Total Biaya</th>							
 							<th>Pembayaran</th>
 							<th>Total Kurang</th>
+							<th>Cabang</th>
 						</tr>
 						</thead>						
 						<tbody>
@@ -81,13 +82,20 @@
                                 <td>{{$row->nama_pengirim}}</td>
                                 <td>Rp. {{number_format($row->total_biaya)}}</td>
                                 <td>Rp. {{number_format($row->total_bayar)}}</td>
-                                <td>Rp. {{number_format($row->kurang)}}</td>
+                                <td>Rp. {{number_format($row->kekurangan)}}</td>
                                 <td class="tdtot">{{$row->total_bayar}}</td>
+                                <td>{{$row->nama}}</td>
                             </tr>
-                        @endforeach					
+						@endforeach	
+						<tr>
+							<td colspan="9" align="right"><b>Total</b></td>
+							<td ><b>Rp. {{number_format($tbiaya->tbiaya)}}</b></td>
+							<td ><b>Rp. {{number_format($tbiaya->tbayar)}}</b></td>
+							<td ><b>Rp. {{number_format($tbiaya->tkurang)}}</b></td>
+							<td ></td>
+						</tr>				
 						</tbody>
 					</table>					
-					<h4 class="text-right"><b>Total Pembayaran Rp. <span id="toata"></span></b></h4>
 					
 </body>
 
@@ -100,18 +108,6 @@ $(document).ready(function(){
         window.onafterprint = function() {
             history.go(-1);
         };
-	// Count Total
-	
-		// Call Sum
-		function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-
-		var table=document.getElementById('example'),sumval=0;
-		for(var i=1;i<table.rows.length;i++){
-			// sumval=sumval+parseInt(table.rows[i].cells[5].innerHTML);
-			sumval=sumval+parseInt(table.rows[i].cells[12].innerHTML);
-		}
-		$('#toata').html(numberWithCommas(sumval));
+	// Count Total	
 </script>
 </html>

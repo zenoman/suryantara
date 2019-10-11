@@ -36,8 +36,7 @@
                                 {{ session('status') }}
                     </div>
                     @endif
-				<form action="{{ url('karyawan') }}" role="form" method="POST">
-					
+				<form action="{{ url('karyawan') }}" role="form" method="POST">					
 					<div class="form-group row">
 						<label class="col-sm-2 form-control-label semibold">Id Karyawan</label>
 						<div class="col-sm-10">
@@ -122,6 +121,12 @@
                                         {{ $errors->first('alamat')}}
                                          </div>
                                        @endif
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label semibold">Batas Bon/Hutang</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  placeholder="Batas Bon" name="Bon">
 						</div>
 					</div>
 					<div class="form-group row">
