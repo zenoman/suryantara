@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -75,19 +74,6 @@ ul.timeline > li:before {
         @foreach($des as $row)
     <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
     @endforeach
-        <!-- <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a onclick="window.history.go(-2);" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >
-              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
-            </li>
-            
-          </ul>
-        </div> -->
       </div>
     </nav>
 <br>
@@ -96,50 +82,6 @@ ul.timeline > li:before {
         
     <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
     <br>
-      <!-- <div class="container">
-        <div class="card-block">
-          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead class="thead-dark text-secondary text-center" >
-              <tr>
-                <th>No</th>
-                <th>Kota Tujuan</th>
-                <th>Estimasi Biaya</th>
-                <th>Biaya Perkg</th>
-                <th>Berat Minimal</th>
-              </tr>
-            </thead>
-            
-            <tbody>
-            <?php $i = 1;?>
-              @foreach($trak as $row)
-              <?php $no = $i++;?>
-              <tr>
-                <td class="text-center">{{$no}}</td>
-                <td class="text-center"><?php echo strtoupper($row->kode)?></td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-          <p></p>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card">
-            <div class="card-header bg-dark text-white">Informasi & Keterangan
-            </div>
-          <div class="card-body text-left">
-            @foreach($des as $row)
-            {!!$row->desk_laut!!}
-            @endforeach
-          </div>
-            </div>
-          </div>
-        </div>
-      <p><br></p>
-        <div class="text-right">
-          <a onclick="window.history.go(-1);" class="btn btn-danger text-white">Kembali</a>
-        </div>
-      </div> -->
     <div class="container mt-2 mb-5">
   <div class="row">
     <div class="col-md-6 offset-md-3">

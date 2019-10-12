@@ -42,12 +42,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('tracking')}}">
-              Cek Resi</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#biaya">
               Cek Biaya</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#cekresi">
+              Cek Resi</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hub">Lokasi Kami</a>
@@ -113,6 +113,17 @@
       </div>
     </section>
  <!--hubungi kami-->
+ <section class="masthead bg-primary text-white text-center mb-0" id="cekresi">
+      
+      <div class="container">
+        
+        <h1 class="text-uppercase mb-0">Cek Resi</h1>
+        <hr class="star-light">         
+        <a class="btn btn-xl btn-outline-light" href="{{url('/tracking')}}">
+          Klik Disini Untuk Cek Resi
+        </a>     
+      </div>
+    </section>
     <section class="portfolio" id="hub">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">Lokasi Kami</h2>
@@ -125,9 +136,9 @@
     </section>
   
   <!--tentang kami-->
+    @foreach($des as $row) 
     <section class="masthead bg-primary text-white text-center mb-0" id="tentang">
-      @foreach($des as $row) 
-      <div class="container">
+    <div class="container">
         <h1 class="text-uppercase mb-0">Tentang Kami</h1>
         <hr class="star-light">         
         <h4>{{$row->desk}}</h4>       
