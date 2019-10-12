@@ -6,6 +6,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Illuminate\Support\Facades\Session;
 class TrfudaraExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
@@ -13,7 +14,10 @@ class TrfudaraExport implements FromCollection, WithHeadings, ShouldAutoSize
     */
     public function collection()
     {
-    	return DB::table('tarif_udara')->select('kode','tujuan','airlans','perkg','berat_minimal','minimal_heavy','biaya_dokumen','id_cabang')->get();;
+        return DB::table('tarif_udara')
+        ->select('kode','tujuan','airlans','perkg','berat_minimal','minimal_heavy','biaya_dokumen','id_cabang')
+        ->where('id_cabang',Session::get('cabang'))
+        ->get();
         //
     }
     public function headings(): array
