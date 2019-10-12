@@ -26,14 +26,14 @@ class AbsensiharianExport implements FromCollection,WithHeadings, ShouldAutoSize
             ->join('jabatan','jabatan.id','=','absensi.id_jabatan')
             ->join('karyawan','karyawan.id','=','absensi.id_karyawan')
             ->where([['absensi.tanggal','=',$this->tgl],['absensi.id_jabatan','=',$this->jbt]])
-            ->get();;
+            ->get();
         }else{
             return DB::table('absensi')
             ->select(DB::raw('karyawan.kode,karyawan.nama,jabatan.jabatan,absensi.tanggal,absensi.masuk,absensi.tidak_masuk,absensi.izin,absensi.keterangan_izin'))
             ->join('jabatan','jabatan.id','=','absensi.id_jabatan')
             ->join('karyawan','karyawan.id','=','absensi.id_karyawan')
             ->where([['absensi.tanggal','=',$this->tgl]])
-            ->get();;
+            ->get();
         }
     }
         public function headings(): array

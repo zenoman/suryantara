@@ -149,19 +149,86 @@
                                                                 <input type="file" id="imgtf" required class="form-control" name="bukti" placeholder="Masukan Jumlah Transfer" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-12 dashboard-column">
+                                                        @php
+                                                        $idc=Session::get('cabang');
+                                                        $tglawal=date('Y-m-01');
+                                                        $tglakhir=date('Y-m-t');
+                                                        // dd($tglakhir);
+                                                        $rlunas=DB::table('resi_pengiriman')
+                                                        ->select(DB::raw('sum(total_bayar) as totresi'))  
+                                                        ->whereBetween('tgl',[$tglawal,$tglakhir])
+                                                        ->whereNotNull('tgl_lunas')
+                                                        ->where('duplikat','!=','Y')
+                                                        ->where('id_cabang',$idc)
+                                                        ->first();
+                                                        $penresi=$rlunas->totresi;
+                                                        $pires=DB::table('resi_pengiriman')
+                                                        ->select(DB::raw('sum(total_bayar) as totresi,sum(total_biaya) as totsemua'))   
+                                                        ->whereBetween('tgl',[$tglawal,$tglakhir])
+                                                        ->whereNull('tgl_lunas')
+                                                        ->where('duplikat','!=','Y')
+                                                        ->where('id_cabang',$idc)
+                                                        ->first();
+                                                        $tpr=$pires->totresi;
+                                                        $tps=$pires->totsemua;
+                                                        $piuresi=$tps-$tpr;		
+                                                        $sj=DB::table('surat_jalan')
+                                                        ->select(DB::raw('sum(biaya) as tbiaya'))
+                                                        ->where('cabang','N')
+                                                        ->where('id_cabang',$idc)
+									                        	->whereBetween('tgl',[$tglawal,$tglakhir])
+									                        	->first();							
+									                        $pum=Db::table('pengeluaran_lain')
+                                                            ->where('id_cabang',$idc)
+									                        	->select(DB::raw('sum(jumlah) as tpng'))
+									                        	->whereBetween('tgl',[$tglawal,$tglakhir])
+									                        	->first();							
+                                                                $tottf=DB::table('transfer')
+												            	->select(DB::raw('sum(nominal) as ttf'))
+												            	->whereBetween('tgl',[$tglawal,$tglakhir])
+												            	->where('id_cabang',$idc)
+                                                                ->first();
+                                                                $tot=$penresi+$tpr-$sj->tbiaya-$pum->tpng;
+                                                                $hut=$tot-$tottf->ttf;
+                                                            
+                                                                @endphp
+                                                        <div class="col-xl-6 dashboard-column">
+                                                            <div class="form-group">
+                                                                <label for="">Total pemasukan</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">Rp.</div>
+                                                                    <input type="text" id="ms" value="{{number_format($tot)}}" class="form-control" name="sisal" readonly value="0">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 dashboard-column">
+                                                            <div class="form-group">
+                                                                <label for="">Total Yang Ditransfer</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">Rp.</div>
+                                                                    <input type="text" id="ttf" value="{{number_format($tottf->ttf)}}" class="form-control" name="sisal" readonly value="0">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 dashboard-column">
+                                                            <div class="form-group">
+                                                                <label for="">Sisa Saldo </label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">Rp.</div>
+                                                                    <input type="text" id="sisal" value="{{number_format($hut)}}" class="form-control" name="sisal" readonly value="0">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 dashboard-column">
                                                             <div class="form-group">
                                                                 <label for="">Nominal yang Di transfer</label>
-                                                                <input type="text"  required id="nm" class="form-control nominal" name="nominal" placeholder="Masukan Jumlah Transfer" >                                                        
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">Rp. </div>
+                                                                    <input type="text"  required id="nm" class="form-control nominal" name="nominal" placeholder="Jumlah Transfer" >                                                        
+                                                                </div>                                                                
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="col-xl-6 dashboard-column">
-                                                            <div class="form-group">
-                                                                <label for="">Sisa Saldo</label>
-                                                                <input type="text" id="sisal" class="form-control" name="sisal" readonly value="0">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-12 dashboard-column">
+                                                        {{-- <div class="col-xl-12 dashboard-column">
                                                             <div class="form-group form-inline">
                                                                 <label for="" class="mr-2">Batas Sisa Saldo </label> 
                                                                 <label for="">Rp. {{number_format($sal->saldo)}}</label>
@@ -222,36 +289,7 @@
                                         </div>
                                     </div>
                                 </div>                       
-                            </div>
-                                {{-- Modal Kendaraan --}}
-                                {{-- <div class="modal fade in" id="kendaraan">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="modal-title">
-                                                    List Armada
-                                                </div>
-                                            </div>
-                                            <div class="modal-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Nomor</th>
-                                                            <th>Armada</th>
-                                                            <th>No Polisi</th>
-                                                            <th>Nomor Rangka</th>
-                                                            <th>Nomor Mesin</th>
-                                                            <th>Warna</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                            </div>                                
                                 <div class="col-xl-4 dahsboard-column">
                                     <div class="card">
                                         <div class="add-customers-screen tbl">
@@ -377,10 +415,10 @@
         var batasbon=0;
         var tgk=0;
        
-        $('.nominal').on('keyup', function(){
-        var n = parseInt($(this).val().replace(/\D/g,''),10);
-        $(this).val(n.toLocaleString());
-        }); 
+        // $('.nominal').on('keyup', function(){
+        // var n = parseInt($(this).val().replace(/\D/g,''),10);
+        // $(this).val(n.toLocaleString());
+        // }); 
         
        
         // format number
@@ -433,10 +471,34 @@
                 $('.ingat').html('');
             }
             // cek tunggakan
-            if(tgk>0){
-                $('#savebon').prop('disabled',true);
+            if(tgk>0){                
                 $('.ingat').html('<div class="alert alert-info">Anda Masih Memiliki Tunggakan</div>');
             }
+        });
+        // check sisa saldo dan tranfer
+        $('#nm').on('keyup',function(){
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            $(this).val(n.toLocaleString());
+            var nom=n;
+            var sisa={{$hut}};
+            var total=sisa-nom;
+            //  Check sisa jika sudah min atau 0
+            if(sisa<=0){
+                $('#btntf').prop('disabled',true);
+                $('#msg').html('<div class="alert alert-info">Saldo Tidak Mencukupi</div>');
+            }else{
+                $('#btntf').prop('disabled',false);
+                $('#msg').html('');
+            }
+            if(total<=0){
+                $('#btntf').prop('disabled',true);
+                $('#msg').html('<div class="alert alert-info">Saldo Tidak Mencukupi</div>');
+            }else{
+                $('#btntf').prop('disabled',false);
+                $('#msg').html('');
+            }
+
+            
         });
         // read image
         function simage(input){

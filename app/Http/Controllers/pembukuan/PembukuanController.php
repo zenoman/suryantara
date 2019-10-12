@@ -30,7 +30,12 @@ class PembukuanController extends Controller
         $dt=DB::table('kas_bon')
             ->where('valid','N')
             ->first();
-        $cekbl=substr($dt->tgl,6,1);
+        if(empty($dt)){   
+            $cekbl=$lastbul;
+        }else{
+            $cekbl=substr($dt->tgl,6,1);
+        }
+        
         if($cekbl!==$dnow){
             DB::update("update kas_bon set valid='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");
         }        
@@ -117,16 +122,30 @@ class PembukuanController extends Controller
             $idp=$req->idc;            
             $idc=Session::get('cabang');
             $ung=$req->nominal;
-            $nom=str_replace(',','',$req->nominal);
+            $nom=str_replace(',','',$req->nominal);            
             $sal=$req->sal;
-            $sisa=$req->sisal;
+            $ss=str_replace(',','',$req->sisal);
+            $sisa=$ss-$nom;
+            $tglf=date('Y-m-d');
             // dd($idp);
                 // simpan ke transfer
-                $tf=DB::insert('insert into transfer(bulan,tahun,id_cabang,cabang_tujuan,nominal,bukti,admin) values(?,?,?,?,?,?,?)',[$lasbul,$lastth,$idc,$idp,$nom,$nama,$adm]);
+                $tf=DB::insert('insert into transfer(bulan,tahun,tgl,id_cabang,cabang_tujuan,nominal,saldo,bukti,admin) values(?,?,?,?,?,?,?,?,?)',[$skbul,$skth,$tglf,$idc,$idp,$nom,$sisa,$nama,$adm]);
                 // Simpan Transfer Ke neraca
-                // $si=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Transfer Ke Pusat',$nom,$adm,$idc]);
+                // cek bulan dan id cabang untuk transfer
+                $jtf=DB::table('neraca')
+                    ->where([
+                        'id_cabang'=>$idc,
+                        'bulan'=>$skbul,
+                        'tahun'=>$skth,
+                    ])->count();
+                if($jtf>0){
+                    $si=DB::update('update neraca set keterangan=?,kredit=?,admin=? where id_cabang=? and bulan=? and tahun=?) values(?,?,?,?,?,?)',['Sisa Saldo',$sisa,$adm,$idc,$skbul,$skth]);
+                }else{
+                    $si=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$skbul,$skth,'Transfer Ke Pusat',$sisa,$adm,$idc]);
+                }           
                 // $is=DB::insert('insert into neraca(bulan,tahun,keterangan,debit,admin,id_cabang) values(?,?,?,?,?,?)',[$skbul,$skth,'Saldo Awal Bulan',$sisa,$adm,$idc]);
                 // $kis=DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Piutang Saldo',$sisa,$adm,$idc]);
+
                 if($tf){
                     return redirect()->action('pembukuan\PembukuanController@index')->with("msg","Data Berhasil Disimpan");
                 }else{

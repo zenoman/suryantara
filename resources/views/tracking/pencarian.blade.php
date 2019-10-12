@@ -86,18 +86,38 @@ ul.timeline > li:before {
   <div class="row">
     <div class="col-md-6 offset-md-3">
      <!--  <h4>Latest News</h4> -->
+    
       @foreach($kk as $row2)
+      @if($cek > 0)
       <h4>NO. RESI : <?php echo strtoupper ($row2->kode)?></h4>
+      @else
+        <h1> </h1>
+      @endif
       @endforeach
+
+      @if($cek > 0)
       <ul class="timeline">
        @foreach($trak as $row) 
         <li>
-          <p class="float-left"><?php echo strtoupper($row->lokasi)?></p>
+          <!-- <a><?php echo strtoupper($row->lokasi)?></a>
+          <a class="float-right"><?php echo ($row->tgl)?></a>
+          <p><?php echo ($row->keterangan)?></p> -->
+          <p class="float-left"><?php echo strtoupper($row->lokasi)?>
+          </p>
           <p class="float-right"><?php echo ($row->tgl)?></p>
           <br><br>
+
+          <p align="justify" style="color: grey;"><?php echo ($row->status)?></p>
+        
           <p align="justify"><?php echo ($row->keterangan)?></p>
+
+          <p align="justify">{{$row->status.' '.$row->keterangan}}</p>
+
         </li>
         @endforeach
+        @else
+          <h4 style="font-family: courier new; font-style:italic;">"OOPS , Maaf nomer resi anda cari tidak ada , Harap periksa kembali nomer resi anda"</h4>
+        @endif
       </ul>
       
     </div>

@@ -24,6 +24,8 @@ class Rekap extends Controller
         $kategori=DB::table('tb_kategoriakutansi')
                 ->where('status','pengeluaran')
                 ->get();
+        $aset=DB::table('aset')
+            ->get();
         if($idc=='1'){
             $vn=DB::table('vendor')
             ->get();
@@ -32,7 +34,7 @@ class Rekap extends Controller
             ->where('id_cabang',$idc)
             ->get();
         }        
-        return view('Rekap/index',['title'=>$this->setting,'kat'=>$kategori,'vn'=>$vn]);
+        return view('Rekap/index',['title'=>$this->setting,'kat'=>$kategori,'vn'=>$vn,'aset'=>$aset]);
     }
     function showpajak(Request $request){
         $idc=Session::get('cabang');
@@ -809,4 +811,30 @@ class Rekap extends Controller
             }
             return view('Rekap.print_srj',['data'=>$data,'bul1'=>$b1,'bul2'=>$b2,'kate'=>$kat,'title'=>$this->setting,'total'=>$t]);
     }    
+    function rekapnyusut(Request $request){
+        $request->validate([
+            'aset'=>'required',
+        ]);
+        $aset=$request->aset;
+        if($aset=='semua'){            
+            $data=DB::table('aset')
+                ->get();
+        }else{
+            $data=DB::table('aset')
+                ->where('id',$aset)
+                ->get();
+        }
+        return view('Rekap.rekap_susut',['data'=>$data,'title'=>$this->setting,'aset'=>$aset]);
+    }    
+    function printsusut($aset){
+        if($aset=='semua'){            
+            $data=DB::table('aset')
+                ->get();
+        }else{
+            $data=DB::table('aset')
+                ->where('id',$aset)
+                ->get();
+        }
+        return view('Rekap.print_susut',['data'=>$data,'title'=>$this->setting,'aset'=>$aset]);
+    }
 }

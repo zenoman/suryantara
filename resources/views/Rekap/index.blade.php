@@ -411,6 +411,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6 col-md-4 col-xl-3">
+                        <div class="card">
+                            <div class="add-customers-screen tbl">
+                                <div class="add-customers-screen-in">
+                                    <div class="add-customers-screen-user">
+                                        <i class="fa fa-compress"></i>
+                                    </div>
+                                    <p>Penyusutan Aset</p>  
+                                    <form action="{{url('rekap-penyusutan')}}" method="GET" class="form">
+                                            {{csrf_field()}}
+                                            <div class="form-group">
+                                                <label for="">Pilih Aset</label>
+                                                <select name="aset" class="select2" id="">
+                                                    <option disabled hidden selected>Pilih</option>                                                    
+                                                    <option value="semua">Pilih Semua</option>                                                    
+                                                    @foreach ($aset as $as)
+                                                        <option value="{{$as->id}}">{{$as->nama}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>                                                                                       
+                                            <div class="form-group">
+                                                <Button type="submit" class="btn btn-primary btn-sm btn-block">Tampilkan</Button>
+                                            </div>
+                                        </form>                                                                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>    

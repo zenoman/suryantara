@@ -51,6 +51,7 @@
     <br>
     <br>
         <form method="get" action="{{url('tracking/cari')}}">
+          {{ csrf_field() }}
         <div class="row" align="center">
           <div class="col-sm-4 col-sm-offset-1" align="center">
             <div class="form-group">

@@ -1474,7 +1474,9 @@
 								<tbody>
 									<tr>
 										<td>Biaya Kirim</td>
-										<td id="b_kirim_udara">@if($row->pengiriman_via=='udara'){{number_format($row->biaya_kirim,0,',','.')}}
+										<td id="b_kirim_udara">
+										@if($row->pengiriman_via=='udara')
+										{{number_format($row->biaya_kirim,0,',','.')}}
 										@else
 										0
 										@endif
