@@ -1,42 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
       <style type="text/css"> 
-ul.timeline {
-    list-style-type: none;
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
     position: relative;
 }
-ul.timeline:before {
-    content: ' ';
-    background: orange;
-    display: inline-block;
-    position: absolute;
-    left: 29px;
-    width: 2px;
-    height: 100%;
-    z-index: 400;
+
+    .timeline:before {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 3px;
+        background-color: #eeeeee;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+
+    .timeline > li {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li > .timeline-panel {
+            width: 46%;
+            float: left;
+            border: 1px solid #d4d4d4;
+            border-radius: 2px;
+            padding: 20px;
+            position: relative;
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        }
+
+            .timeline > li > .timeline-panel:before {
+                position: absolute;
+                top: 26px;
+                right: -15px;
+                display: inline-block;
+                border-top: 15px solid transparent;
+                border-left: 15px solid #ccc;
+                border-right: 0 solid #ccc;
+                border-bottom: 15px solid transparent;
+                content: " ";
+            }
+
+            .timeline > li > .timeline-panel:after {
+                position: absolute;
+                top: 27px;
+                right: -14px;
+                display: inline-block;
+                border-top: 14px solid transparent;
+                border-left: 14px solid #fff;
+                border-right: 0 solid #fff;
+                border-bottom: 14px solid transparent;
+                content: " ";
+            }
+
+        .timeline > li > .timeline-badge {
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 1.4em;
+            text-align: center;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            margin-left: -25px;
+            background-color: #999999;
+            z-index: 100;
+            border-top-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel {
+            float: right;
+        }
+
+            .timeline > li.timeline-inverted > .timeline-panel:before {
+                border-left-width: 0;
+                border-right-width: 15px;
+                left: -15px;
+                right: auto;
+            }
+
+            .timeline > li.timeline-inverted > .timeline-panel:after {
+                border-left-width: 0;
+                border-right-width: 14px;
+                left: -14px;
+                right: auto;
+            }
+
+.timeline-badge.primary {
+    background-color: #2e6da4 !important;
 }
-ul.timeline > li {
-    margin: 20px 0;
-    padding-left: 20px;
+
+.timeline-badge.success {
+    background-color: #3f903f !important;
 }
-ul.timeline > li:before {
-    content: ' ';
-    background: grey;
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    border: 3px solid #22c0e8;
-    left: 20px;
-    width: 20px;
-    height: 20px;
-    z-index: 400;
+
+.timeline-badge.warning {
+    background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+    background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+    background-color: #5bc0de !important;
+}
+
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+}
+
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+}
+
+    .timeline-body > p + p {
+        margin-top: 5px;
+    }
+
+@media (max-width: 767px) {
+    ul.timeline:before {
+        left: 40px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        width: calc(100% - 90px);
+        width: -moz-calc(100% - 90px);
+        width: -webkit-calc(100% - 90px);
+    }
+
+    ul.timeline > li > .timeline-badge {
+        left: 15px;
+        margin-left: 0;
+        top: 16px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        float: right;
+    }
+
+        ul.timeline > li > .timeline-panel:before {
+            border-left-width: 0;
+            border-right-width: 15px;
+            left: -15px;
+            right: auto;
+        }
+
+        ul.timeline > li > .timeline-panel:after {
+            border-left-width: 0;
+            border-right-width: 14px;
+            left: -14px;
+            right: auto;
+        }
 }
 </style>
 
@@ -59,8 +211,6 @@ ul.timeline > li:before {
     <!-- Custom styles for this template -->
     <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     
-    <link rel="stylesheet" href="{{asset('assets/css/lib/datatables-net/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/separate/vendor/datatables-net.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
 
   </head>
@@ -70,56 +220,62 @@ ul.timeline > li:before {
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-
         @foreach($des as $row)
-    <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}</a>
-    @endforeach
+        <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">{{$row->header}}
+        </a>
+        @endforeach
       </div>
     </nav>
 <br>
 <br> 
   <section class="text-center mb-0">
-        
+     @if($status =="ada")    
     <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
+    <h4>Resi : {{$kk}}</h4>
+    @else
+    <h1 class="text-uppercase text-center mb-0">Oops, Resi tidak ditemukan</h1>
+    <h4>Resi : {{$kk}}</h4>
+    @endif
     <br>
     <div class="container mt-2 mb-5">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-     <!--  <h4>Latest News</h4> -->
-    
-      @foreach($kk as $row2)
-      @if($cek > 0)
-      <h4>NO. RESI : <?php echo strtoupper ($row2->kode)?></h4>
-      @else
-        <h1> </h1>
-      @endif
-      @endforeach
-
-      @if($cek > 0)
+    <div class="col-md-12 offset-md-12">
+      @if($status =="ada")
       <ul class="timeline">
-       @foreach($trak as $row) 
-        <li>
-          <!-- <a><?php echo strtoupper($row->lokasi)?></a>
-          <a class="float-right"><?php echo ($row->tgl)?></a>
-          <p><?php echo ($row->keterangan)?></p> -->
-          <p class="float-left"><?php echo strtoupper($row->lokasi)?>
-          </p>
-          <p class="float-right"><?php echo ($row->tgl)?></p>
-          <br><br>
-
-          <p align="justify" style="color: grey;"><?php echo ($row->status)?></p>
-        
-          <p align="justify"><?php echo ($row->keterangan)?></p>
-
-          <p align="justify">{{$row->status.' '.$row->keterangan}}</p>
-
-        </li>
-        @endforeach
+        <?php $i=1;?>
+        @foreach($trak as $row)
+        <li class="timeline-inverted">
+        @if($i%2==0)
         @else
-          <h4 style="font-family: courier new; font-style:italic;">"OOPS , Maaf nomer resi anda cari tidak ada , Harap periksa kembali nomer resi anda"</h4>
+         <li>
         @endif
-      </ul>
-      
+       
+        <div class="timeline-badge bg-primary">{{$i++}}</div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title"><?php echo strtoupper($row->lokasi)?></h4>
+              <p><small class="text-muted">
+                <i class="fa fa-clock-o"></i> {{$row->jam}} &nbsp;&nbsp;
+                <i class="fa fa-calendar"></i> {{$row->tgl}}</small>
+              </p>
+            </div>
+            <div class="timeline-body">
+              <p>{{ucwords($row->status)}}</p>
+              @if($row->keterangan!='')
+                <hr>
+                <p>Keterangan : {{ucwords($row->keterangan)}} </p>
+                @endif
+            </div>
+          </div>
+        </li>
+
+        @endforeach
+        </ul>
+        @else
+        <img src="{{asset('img/kosong.png')}}" alt="" style="width: 100%">
+         
+        @endif
+    
     </div>
   </div>
   <div>
@@ -192,9 +348,6 @@ ul.timeline > li:before {
     <script src="{{asset('asset_user/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
     <script src="{{asset('asset_user/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="{{asset('asset_user/js/jqBootstrapValidation.js')}}"></script>
-    <script src="{{asset('asset_user/js/contact_me.js')}}"></script>
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('asset_user/js/freelancer.js')}}"></script>
@@ -205,19 +358,6 @@ ul.timeline > li:before {
   <script src="{{asset('assets/js/lib/bootstrap/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins.js')}}"></script>
 
-  <script src="{{asset('assets/js/lib/datatables-net/datatables.min.js')}}"></script>
-  <script>
-    $(function() {
-
-      $('#example').DataTable({
-        responsive:true,
-        "paging" : false,
-        "searching" : false,
-        "bInfo": false
-      });
-    });
-
-  </script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>
 
