@@ -63,10 +63,6 @@
                             			<button class="btn btn-sm btn-success"
 										data-toggle="modal"
 										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
-                            		@elseif($row->no_smu == null)
-                            			<button class="btn btn-sm btn-primary"
-										data-toggle="modal"
-										data-target=".bd-example-modal-lg{{$row->id}}">{{$row->no_resi}}</button>
                             		@else
                             			<button class="btn btn-sm btn-primary"
 										data-toggle="modal"
