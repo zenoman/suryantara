@@ -312,7 +312,7 @@ class resipengirimanController extends Controller
     }
     
     //====================================================================
-    public function resikembali($id){
+    public function resikembali(Request $request,$id){
         $data=DB::table('resi_pengiriman')->where('id',$id)->get();
         foreach ($data as $row) {
             $noresi=$row->no_resi;
@@ -329,7 +329,8 @@ class resipengirimanController extends Controller
             'status'=>'paket telah diterima',
             'tgl'=>date('Y-m-d'),
             'jam'=>date('H:i:s'),
-            'lokasi'=>Session::get('kota')
+            'lokasi'=>Session::get('kota'),
+            'keterangan'=>$request->keterangan
             ]); 
         }
         }

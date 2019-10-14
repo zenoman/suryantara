@@ -159,7 +159,7 @@ Route::get('/editresi/{id}','resipengiriman\resipengirimanController@editdatares
 Route::get('/cariresipengiriman','resipengiriman\resipengirimanController@caridataresi');
 Route::post('/tambahsmu','resipengiriman\resipengirimanController@tambahnosmu');
 Route::get('/resipengirimanudara','resipengiriman\resipengirimanController@resiudara');
-Route::get('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
+Route::post('/resikembali/{id}','resipengiriman\resipengirimanController@resikembali');
 Route::get('/carilistresi/{id}','resipengiriman\resipengirimanController@carilistresi');
 
 Route::get('/cariresipengiriman_smukosong','resipengiriman\resipengirimanController@caridataresi_smukosong');

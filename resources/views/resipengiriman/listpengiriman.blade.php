@@ -30,8 +30,8 @@
 				<div class="card-block">
 					@if (session('status'))
                     <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                {{ session('status') }}
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       {{ session('status') }}
                     </div>
                     @endif
                      <button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
@@ -320,7 +320,7 @@
 						
 					</div>
 						<br>	
-							<div class="row text-left">
+							<div class="row">
 								@if($row->duplikat!='Y')
 								@if(Session::get('level') == '1' 
 								|| Session::get('level') == '3'
@@ -328,7 +328,8 @@
 								|| Session::get('level') == '2'
 								|| Session::get('level') == '9'
 								|| Session::get('level') == '6')
-								<form action="tambahsmu" method="post">
+								<div class="col-md-6">
+									<form action="tambahsmu" method="post">
 									<label>Ubah No.Resi/SMU</label>
 									<div class="input-group input-group-sm">
 										<input type="text" value="" name="nosmu" class="form-control" style="display: block;" required>
@@ -339,24 +340,27 @@
 										</span>
 									</div>
 								</form>
+								</div>
+								@if($row->status=='N')
+								<div class="col-md-6">
+								<form action="{{url('/resikembali/'.$row->id)}}" method="post">
+									<label>Resi Diterima (Masukan Keterangan)</label>
+									<div class="input-group input-group-sm">
+										<input type="text" name="keterangan" class="form-control" style="display: block;" required>
+										{{csrf_field()}}
+										<span class="input-group-btn">
+											<button class="btn btn-success" type="submit">Ubah</button>
+										</span>
+									</div>
+								</form>
+							</div>
+								@endif
 								@endif
 								@endif
 							</div>
 				</div>
 							</div>
 							<div class="modal-footer">
-								@if($row->duplikat!='Y')
-								@if(Session::get('level') == '1' 
-								|| Session::get('level') == '3'
-								|| Session::get('level') == '5'
-								|| Session::get('level') == '2'
-								|| Session::get('level') == '9'
-								|| Session::get('level') == '6')
-										@if($row->status=='N')
-										<a href="{{url('/resikembali/'.$row->id)}}" class="btn btn-rounded btn-primary" onclick="return confirm('Apakah Resi Telah Kembali ?')">Resi Dikembalikan</a>
-										@endif
-								@endif
-								@endif
 								<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
