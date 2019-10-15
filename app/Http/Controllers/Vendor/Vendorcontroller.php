@@ -20,22 +20,11 @@ class Vendorcontroller extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        if( Session::get('level') == '1' || 
-            Session::get('level') == '3' || 
-            Session::get('level') == '2'){
         $vnd=DB::table('vendor')
         ->select(DB::raw('vendor.*,cabang.nama as namacabang'))
         ->leftjoin('cabang','cabang.id','=','vendor.id_cabang')
         ->orderby('vendor.id','desc')
         ->get();
-        }else{
-        $vnd=DB::table('vendor')
-        ->select(DB::raw('vendor.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','vendor.id_cabang')
-        ->where('id_cabang',Session::get('cabang'))
-        ->orderby('vendor.id','desc')
-        ->get();
-        }
    
     $setting = DB::table('setting')->get();
     return view('vendor/index',['vendor'=>$vnd,'title'=>$setting]);
@@ -69,23 +58,12 @@ class Vendorcontroller extends Controller
      //=========================================================
     public function caridata(Request $request)
     {
-         if( Session::get('level') == '1' || 
-            Session::get('level') == '3' || 
-            Session::get('level') == '2'){
         $ven = DB::table('vendor')
         ->select(DB::raw('vendor.*,cabang.nama as namacabang'))
         ->leftjoin('cabang','cabang.id','=','vendor.id_cabang')
         ->where('vendor','like','%'.$request->cari.'%')
         ->orwhere('idvendor','like','%'.$request->cari.'%')
         ->get();
-        }else{
-        $ven = DB::table('vendor')
-        ->select(DB::raw('vendor.*,cabang.nama as namacabang'))
-        ->leftjoin('cabang','cabang.id','=','vendor.id_cabang')
-        ->where([['vendor','like','%'.$request->cari.'%'],['id_cabang','=',Session::get('cabang')]])
-        ->orwhere([['idvendor','like','%'.$request->cari.'%'],['id_cabang','=',Session::get('cabang')]])
-        ->get();    
-        }
         $setting = DB::table('setting')->get();
         return view('vendor/pencarian', ['vendor'=>$ven, 'cari'=>$request->cari,'title'=>$setting]);
     }

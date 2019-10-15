@@ -174,7 +174,7 @@ class suratjalanController extends Controller
             
             $data = DB::table('vendor')
                     ->select('vendor','id')
-                    ->where([['vendor','like','%'.$cari.'%'],['id_cabang','=',Session::get('cabang')]])
+                    ->where('vendor','like','%'.$cari.'%')
                     ->get();
             
             return response()->json($data);
