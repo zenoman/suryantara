@@ -96,66 +96,38 @@ ul.timeline > li:before {
         
     <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
     <br>
-      <!-- <div class="container">
-        <div class="card-block">
-          <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead class="thead-dark text-secondary text-center" >
-              <tr>
-                <th>No</th>
-                <th>Kota Tujuan</th>
-                <th>Estimasi Biaya</th>
-                <th>Biaya Perkg</th>
-                <th>Berat Minimal</th>
-              </tr>
-            </thead>
-            
-            <tbody>
-            <?php $i = 1;?>
-              @foreach($trak as $row)
-              <?php $no = $i++;?>
-              <tr>
-                <td class="text-center">{{$no}}</td>
-                <td class="text-center"><?php echo strtoupper($row->kode)?></td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-          <p></p>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card">
-            <div class="card-header bg-dark text-white">Informasi & Keterangan
-            </div>
-          <div class="card-body text-left">
-            @foreach($des as $row)
-            {!!$row->desk_laut!!}
-            @endforeach
-          </div>
-            </div>
-          </div>
-        </div>
-      <p><br></p>
-        <div class="text-right">
-          <a onclick="window.history.go(-1);" class="btn btn-danger text-white">Kembali</a>
-        </div>
-      </div> -->
-    <div class="container mt-2 mb-5">
+<div class="container mt-2 mb-5">
   <div class="row">
     <div class="col-md-6 offset-md-3">
      <!--  <h4>Latest News</h4> -->
+    
       @foreach($kk as $row2)
+      @if($cek > 0)
       <h4>NO. RESI : <?php echo strtoupper ($row2->kode)?></h4>
+      @else
+        <h1> </h1>
+      @endif
       @endforeach
+
+      @if($cek > 0)
       <ul class="timeline">
        @foreach($trak as $row) 
         <li>
-          <p class="float-left"><?php echo strtoupper($row->lokasi)?></p>
+          <!-- <a><?php echo strtoupper($row->lokasi)?></a>
+          <a class="float-right"><?php echo ($row->tgl)?></a>
+          <p><?php echo ($row->keterangan)?></p> -->
+          <p class="float-left"><?php echo strtoupper($row->lokasi)?>
+          </p>
           <p class="float-right"><?php echo ($row->tgl)?></p>
           <br><br>
+          <p align="justify" style="color: grey;"><?php echo ($row->status)?></p>
+        
           <p align="justify"><?php echo ($row->keterangan)?></p>
         </li>
         @endforeach
+        @else
+          <h4 style="font-family: courier new; font-style:italic;">"OOPS , Maaf nomer resi anda cari tidak ada , Harap periksa kembali nomer resi anda"</h4>
+        @endif
       </ul>
       
     </div>

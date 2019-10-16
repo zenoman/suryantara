@@ -22,24 +22,21 @@ class trackingcontroller extends Controller
     public function pencarian(Request $request)
     {
         $resi = $request->resi;
-        $cek=DB::table('status_pengiriman')->where('kode','like','%'.$resi)->count('kode');
+        $cek=DB::table('status_pengiriman')->where('kode','=',$resi)->count();
 
-        if($cek>0){
-            $trak = DB::table('status_pengiriman')
-            ->where('kode','like','%'.$resi)->get();
+        if($cek){
             $desk = DB::table('setting')->get();
-            $kode = DB::table('status_pengiriman')->where('kode','like','%'.$resi)->groupBy('kode')->get();
-    
-     return view('tracking/pencarian',['trak'=>$trak ,'des'=>$desk , 'kk'=>$kode]);
+            $trak = DB::table('status_pengiriman')->where('kode','=',$resi)->get(); 
+            $kode = DB::table('status_pengiriman')->where('kode','=',$resi)->groupBy('kode')->get();    
+        return view('tracking/pencarian',['trak'=>$trak ,'des'=>$desk , 'kk'=>$kode , 'cek'=>$cek]);
 
-        }
-        else{
-            $trak = DB::table('status_pengiriman')
-            ->where('kode','like','%'.$resi)->get();
+        }else{
+            $trak = DB::table('status_pengiriman')->where('kode','=',$resi)->get(); 
+            $kode = DB::table('status_pengiriman')->where('kode','=',$resi)->groupBy('kode')->get();
             $desk = DB::table('setting')->get();
-    
-     return view('tracking/pencarian',['trak'=>$trak ,'des'=>$desk]);
+            return view('tracking/pencarian',['des'=>$desk ,'kk'=>$kode ,'trak'=>$trak , 'cek'=>$cek]);
         }
+        
     }
 
 }
