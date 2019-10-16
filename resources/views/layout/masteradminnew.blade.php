@@ -68,7 +68,8 @@
 	                        </button>
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
 	                        	 <span class="dropdown-item text-center text-muted">{{Session::get('statusadmin')}}</span>
-	                        	 <div class="dropdown-divider"></div>
+								 <div class="dropdown-divider"></div>
+								 
 	                        	 @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	                        	  <a class="dropdown-item" href="{{url('backup')}}"><span class="font-icon font-icon-download"></span>Back Up Data</a>
 	                        	  <a class="dropdown-item" href="{{url('setting')}}"><span class="font-icon font-icon-cogwheel"></span>Setting Web</a>
@@ -106,15 +107,18 @@
 			|| Session::get('level') == '6')
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			@endif
-			<div class="dropdown-menu">
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '5')
-				<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
+			<div class="dropdown-menu">				
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
+				<a class="nav-link" data-target="#mklc" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master KLC</a>
 				@endif
+
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
 				
-				@if(Session::get('level') == '1' || Session::get('level') == '3'|| Session::get('level') == '5')
-				<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>
-				<div class="dropdown-divider"></div>
-				@endif
+					<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
+					<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>	
+					<a class="dropdown-item" href="{{url('aset')}}">Data Aset</a>	
+								
+				@endif				
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
@@ -259,11 +263,11 @@
 		</li>
 
 		@endif
-		{{-- @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 		<li class="nav-item">
-			<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Omset</a>			
+			<a class="nav-link "  href="{{url('omset')}}" >Omset</a>			
 		</li>
-		@endif --}}
+		@endif
 
 	</ul>
 

@@ -7,7 +7,11 @@ Route::get('distribusiresi/download','distribusiresi\distribusiresicontroller@do
 Route::get('distribusiresi/exsportexcel','distribusiresi\distribusiresicontroller@exportexcel');
 
 Route::resource('distribusiresi','distribusiresi\distribusiresicontroller');
-
+// ===============================================Data Aset
+Route::get('aset','Aset\Aset@index');
+Route::post('simpan-aset','Aset\Aset@simpanaset');
+Route::get('hapus-aset/{id}','Aset\Aset@hapusaset');
+Route::post('update-aset','Aset\Aset@updateaset');
 //================================================transit
 Route::get('selesaitransit/{kode}','transit\transitcontroller@selesaitransit');
 Route::post('simpantransit','transit\transitcontroller@store');
@@ -127,7 +131,7 @@ Route::get('/printgajikaryawan/{bulan}/{tahun}','backup\backupController@cetakgj
 Route::get('/hapusgajikaryawan/{bulan}/{tahun}','backup\backupController@hapusgjkw');
 
 //==============================================omset
-Route::get('/omset','omset\omsetController@index');
+Route::get('/omset','omset\Omset@index');
 Route::get('/printomset','omset\omsetController@cetakomset');
 Route::get('/printomset','omset\omsetController@cetakomset');
 //----------------------------export omset
@@ -391,17 +395,17 @@ Route::get('/kat_bar/{id}/edit','Katbar\Katbarcontroller@edit');
 Route::put('/kat_bar/{id}','Katbar\Katbarcontroller@update');
 Route::post('/kat_bar/delete','Katbar\Katbarcontroller@destroy');
 //=======================================================Absensi
-Route::get('/absen','Absensi\AbsensiController@index');
-Route::post('/tamabsen','Absensi\AbsensiController@tambahdataabsen');
-Route::post('/tamabsensel','Absensi\AbsensiController@tambahabsenselesai');
-Route::get('/pilihabsensi','Absensi\AbsensiController@pilihabsensi');
-Route::get('/tampilabsensiharian','Absensi\AbsensiController@tampilabsenharian');
-Route::get('/tampilabsensibulanan','Absensi\AbsensiController@tampilabsenbulanan');
+Route::get('/absen','Absensi\Absensicontroller@index');
+Route::post('/tamabsen','Absensi\Absensicontroller@tambahdataabsen');
+Route::post('/tamabsensel','Absensi\Absensicontroller@tambahabsenselesai');
+Route::get('/pilihabsensi','Absensi\Absensicontroller@pilihabsensi');
+Route::get('/tampilabsensiharian','Absensi\Absensicontroller@tampilabsenharian');
+Route::get('/tampilabsensibulanan','Absensi\Absensicontroller@tampilabsenbulanan');
 //---------------------------------------------------export absensi
-Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensiharian');
-Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensihrian');
-Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\AbsensiController@exsportabsensibulanan');
-Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\AbsensiController@cetakabsensibulanan');
+Route::get('/export_absensi_harian/{tanggal}/{jabatan}','Absensi\Absensicontroller@exsportabsensiharian');
+Route::get('/printabsensiharian/{tanggal}/{kodejabatan}','Absensi\Absensicontroller@cetakabsensihrian');
+Route::get('/export_absensi_bulanan/{tanggal}/{jabatan}','Absensi\Absensicontroller@exsportabsensibulanan');
+Route::get('/printabsensibulanan/{tanggal}/{kodejabatan}','Absensi\Absensicontroller@cetakabsensibulanan');
 //==============================================================Kategori akutansi
 Route::get('/kat_akut','Kategoriakutansi\Kategoriakutansicontroller@index');
 Route::get('/kat_akut/create','Kategoriakutansi\Kategoriakutansicontroller@create');
@@ -464,6 +468,8 @@ Route::get('rekap-neraca','Rekap\Rekap@rekapneraca');
 Route::get('cetak-neraca/{bl1}/{bl2}/{th}','Rekap\Rekap@cetakneraca');
 Route::get('rekap-suratjalan','Rekap\Rekap@rekapsrj');
 Route::get('print-srj/{kt}/{b1}/{b2}','Rekap\Rekap@printsrj');
+Route::get('rekap-penyusutan','Rekap\Rekap@rekapnyusut');
+Route::get('print-susut/{k}','Rekap\Rekap@printsusut');
 // -------------------------------------------------------------------------- Bon karyawan
 Route::get('ambil-bon/{id}','Pembukuan\PembukuanController@ambilbon');
 Route::get('ambil-tunggak/{id}','Pembukuan\PembukuanController@ambiltunggak');

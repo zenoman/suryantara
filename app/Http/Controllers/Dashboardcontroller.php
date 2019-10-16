@@ -104,6 +104,13 @@ class Dashboardcontroller extends Controller {
             ->first();
         $totv=$tv->vendorbiaya;    
         // dd($totv);
+        // Total Penyusutan Tiap Tahun
+        // $th_st=date('Y');
+        // $tsut=DB::table('hitung_susutan')
+        //     ->where('tahun',$th_st)
+        //     ->select(DB::raw('sum(b_susut) as tsut'))
+        //     ->first();
+        // dd($tsut->tsut);
         if($ckbul<=0){            
             // simpan ke tabel pajak 
             $inpjk=DB::insert('insert into pajak(bulan,tahun,nama_pajak,total,id_cabang) values(?,?,?,?,?)',[$lasbul,$lastth,'Pajak Pendapatan',$pajakbayar,$idc]);            
@@ -127,9 +134,11 @@ class Dashboardcontroller extends Controller {
             // pengeluaran pajak kendaraan
             DB::insert('insert into neraca(bulan,tahun,keterangan,kredit,admin,id_cabang) values(?,?,?,?,?,?)',[$lasbul,$lastth,'Pajak Kendaraan',$totpk,$nam,$idc]);
             // update status tiap bulan
-            DB::update("update resi_pengiriman set transfer='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");
-            
+            DB::update("update resi_pengiriman set transfer='Y' where tgl between '".$tglawal."' and '".$tglakhir."'");            
         }
+        // Cek Penyusutan Di NEraca
+
+
         //============================================
         $pajakarmada = 
         DB::table('pajak_armada')
