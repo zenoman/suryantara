@@ -47,7 +47,7 @@
 									
 								</div>
 							</div>
-							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9')
+							@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9' || Session::get('level') == '6')
 							<a href="{{url('updatepembayaranresi')}}" class="btn btn-success">
                      			<i class="fa fa-money"></i> Update Pembayaran
                      		</a>
