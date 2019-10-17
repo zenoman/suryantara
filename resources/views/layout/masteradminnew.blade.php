@@ -112,7 +112,7 @@
 				<a class="nav-link" data-target="#mklc" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master KLC</a>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
+				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				
 					<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
 					<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>	
@@ -221,7 +221,6 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manifest</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
 				<a class="dropdown-item" href="{{url('/buatsuratjalancabang')}}">Buat Manifest Cabang</a>
 				<a class="dropdown-item" href="{{url('/listsuratjalan')}}">Daftar Manifest</a>
 				
@@ -241,6 +240,8 @@
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('resipengiriman/tampillacakresi')}}">Lacak Resi</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
 			</div>
 		</li>		
 		@endif
