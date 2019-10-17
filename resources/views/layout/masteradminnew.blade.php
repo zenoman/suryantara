@@ -235,13 +235,14 @@
 				<a class="dropdown-item" href="{{url('listpenerimaan')}}">List Penerimaan</a>
 				<a class="dropdown-item" href="{{url('listtransit')}}">Transit</a>
 				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
+				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('/tambahantaran')}}">Antaran</a>
 				<a class="dropdown-item" href="{{url('/listantaran')}}">Daftar Antaran</a>
 				<a class="dropdown-item" href="{{url('/inputpod')}}">Input Paket POD</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="{{url('resipengiriman/tampillacakresi')}}">Lacak Resi</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="{{url('/buatsuratjalan')}}">Buat Manifest Vendor</a>
+				
 			</div>
 		</li>		
 		@endif
