@@ -305,10 +305,9 @@ $(document).ready(function(){
     window.halo=halo;
 //===========================
     function cetakresi(){
-        
-           var divToPrint=document.getElementById('hidden_div'); 
-        
-        
+        $("#cetak_tujuan").html(":&nbsp;"+$('#tujuanmitra').val()+"("+$('#telpvendor').val()+")");
+        $("#cetak_alamat").html(":&nbsp;"+$('#alamatvendor').val());
+        var divToPrint=document.getElementById('hidden_div'); 
         var newWin=window.open('','Print-Window');
         newWin.document.open();
         newWin.document.write('<html><body onload="window.print();window.close()">'+divToPrint.innerHTML+'</body></html>');

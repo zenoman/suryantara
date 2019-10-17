@@ -108,10 +108,6 @@
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			@endif
 			<div class="dropdown-menu">				
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
-				<a class="nav-link" data-target="#mklc" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master KLC</a>
-				@endif
-
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				
 					<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>

@@ -42,7 +42,7 @@
 					</div>
 					<div class="col-md-6 col-sm-6">
 						<div class="form-group">
-							<label class="form-label" for="exampleInputDisabled">Tujuan</label>
+							<label class="form-label" for="exampleInputDisabled">Tujuan/Nama Penerima</label>
 							<div class="input-group">
 								<input type="text" class="form-control" id="tujuanmitra">
 							</div>
