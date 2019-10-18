@@ -47,7 +47,7 @@
     <section class="text-center mb-0">  
 
     <div class="container">
-    <h1 class="text-uppercase text-center mb-0">Cek Nomer Resi</h1>
+    <h1 class="text-uppercase text-center mb-0">Cek Resi</h1>
     <br>
     <br>
         <form method="get" action="{{url('tracking/cari')}}">
@@ -59,7 +59,7 @@
           </div>
           <div class="col-sm-4 col-sm-offset-1" align="center">
             <div class="form-group">
-            <label>No. Resi<small> :</small></label>
+            <label>No Resi<small> :</small></label>
             
               <div class="input-group">
                 <input type="text" class="form-control" name="resi" placeholder="Masukkan nomer resi" required>
