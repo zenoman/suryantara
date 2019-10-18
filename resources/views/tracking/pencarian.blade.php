@@ -6,213 +6,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-      <style type="text/css"> 
-.timeline {
-    list-style: none;
-    padding: 20px 0 20px;
-    position: relative;
-}
-
-    .timeline:before {
-        top: 0;
-        bottom: 0;
-        position: absolute;
-        content: " ";
-        width: 3px;
-        background-color: #eeeeee;
-        left: 50%;
-        margin-left: -1.5px;
-    }
-
-    .timeline > li {
-        margin-bottom: 20px;
-        position: relative;
-    }
-
-        .timeline > li:before,
-        .timeline > li:after {
-            content: " ";
-            display: table;
-        }
-
-        .timeline > li:after {
-            clear: both;
-        }
-
-        .timeline > li:before,
-        .timeline > li:after {
-            content: " ";
-            display: table;
-        }
-
-        .timeline > li:after {
-            clear: both;
-        }
-
-        .timeline > li > .timeline-panel {
-            width: 46%;
-            float: left;
-            border: 1px solid #d4d4d4;
-            border-radius: 2px;
-            padding: 20px;
-            position: relative;
-            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-        }
-
-            .timeline > li > .timeline-panel:before {
-                position: absolute;
-                top: 26px;
-                right: -15px;
-                display: inline-block;
-                border-top: 15px solid transparent;
-                border-left: 15px solid #ccc;
-                border-right: 0 solid #ccc;
-                border-bottom: 15px solid transparent;
-                content: " ";
-            }
-
-            .timeline > li > .timeline-panel:after {
-                position: absolute;
-                top: 27px;
-                right: -14px;
-                display: inline-block;
-                border-top: 14px solid transparent;
-                border-left: 14px solid #fff;
-                border-right: 0 solid #fff;
-                border-bottom: 14px solid transparent;
-                content: " ";
-            }
-
-        .timeline > li > .timeline-badge {
-            color: #fff;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            font-size: 1.4em;
-            text-align: center;
-            position: absolute;
-            top: 16px;
-            left: 50%;
-            margin-left: -25px;
-            background-color: #999999;
-            z-index: 100;
-            border-top-right-radius: 50%;
-            border-top-left-radius: 50%;
-            border-bottom-right-radius: 50%;
-            border-bottom-left-radius: 50%;
-        }
-
-        .timeline > li.timeline-inverted > .timeline-panel {
-            float: right;
-        }
-
-            .timeline > li.timeline-inverted > .timeline-panel:before {
-                border-left-width: 0;
-                border-right-width: 15px;
-                left: -15px;
-                right: auto;
-            }
-
-            .timeline > li.timeline-inverted > .timeline-panel:after {
-                border-left-width: 0;
-                border-right-width: 14px;
-                left: -14px;
-                right: auto;
-            }
-
-.timeline-badge.primary {
-    background-color: #2e6da4 !important;
-}
-
-.timeline-badge.success {
-    background-color: #3f903f !important;
-}
-
-.timeline-badge.warning {
-    background-color: #f0ad4e !important;
-}
-
-.timeline-badge.danger {
-    background-color: #d9534f !important;
-}
-
-.timeline-badge.info {
-    background-color: #5bc0de !important;
-}
-
-.timeline-title {
-    margin-top: 0;
-    color: inherit;
-}
-
-.timeline-body > p,
-.timeline-body > ul {
-    margin-bottom: 0;
-}
-
-    .timeline-body > p + p {
-        margin-top: 5px;
-    }
-
-@media (max-width: 767px) {
-    ul.timeline:before {
-        left: 40px;
-    }
-
-    ul.timeline > li > .timeline-panel {
-        width: calc(100% - 90px);
-        width: -moz-calc(100% - 90px);
-        width: -webkit-calc(100% - 90px);
-    }
-
-    ul.timeline > li > .timeline-badge {
-        left: 15px;
-        margin-left: 0;
-        top: 16px;
-    }
-
-    ul.timeline > li > .timeline-panel {
-        float: right;
-    }
-
-        ul.timeline > li > .timeline-panel:before {
-            border-left-width: 0;
-            border-right-width: 15px;
-            left: -15px;
-            right: auto;
-        }
-
-        ul.timeline > li > .timeline-panel:after {
-            border-left-width: 0;
-            border-right-width: 14px;
-            left: -14px;
-            right: auto;
-        }
-}
-</style>
-
     @foreach($des as $row)
     <title>{{$row->namaweb}}</title>
     <link href="{{asset('img/setting/'.$row->icon)}}" rel="icon" type="image/png">
     @endforeach
 
-    <!-- Bootstrap core CSS -->
     <link href="{{asset('asset_user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
     <link href="{{asset('asset_user/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
-    <!--<link href="asset_user/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"> -->
-
-    <!-- Custom styles for this template -->
     <link href="{{asset('asset_user/css/freelancer.css')}}" rel="stylesheet">
     
     <link rel="stylesheet" href="{{asset('assets/css/lib/font-awesome/font-awesome.min.css')}}">
-
+    <link href="{{asset('asset_user/css/tracking.css')}}" rel="stylesheet" type="text/css">
   </head>
 
   <body id="page-top">
@@ -229,48 +35,61 @@
 <br>
 <br> 
   <section class="text-center mb-0">
-     @if($status =="ada")    
-    <h1 class="text-uppercase text-center mb-0">Hasil Pencarian</h1>
-    <h4>Resi : {{$kk}}</h4>
-    @else
-    <h1 class="text-uppercase text-center mb-0">Oops, Resi tidak ditemukan</h1>
-    <h4>Resi : {{$kk}}</h4>
-    @endif
-    <br>
+    
     <div class="container mt-2 mb-5">
+        <div>
+        @if($status =="ada")    
+    <h2 class="text-uppercase text-center mb-0">Hasil Pencarian</h2>
+    <h4>Resi : {{$kk}}</h4>
+    <br>
+    @else
+    <h1 class="text-uppercase text-center mb-0 text-danger">Oops!</h1>
+    <hr>
+    <h4>Resi "{{$kk}}" Tidak Ditemukan</h4>
+    @endif
+    </div>
   <div class="row">
     <div class="col-md-12 offset-md-12">
       @if($status =="ada")
-      <ul class="timeline">
+      <div class="timeline-centered text-left">
         <?php $i=1;?>
         @foreach($trak as $row)
-        <li class="timeline-inverted">
-        @if($i%2==0)
-        @else
-         <li>
-        @endif
-       
-        <div class="timeline-badge bg-primary">{{$i++}}</div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4 class="timeline-title"><?php echo strtoupper($row->lokasi)?></h4>
-              <p><small class="text-muted">
-                <i class="fa fa-clock-o"></i> {{$row->jam}} &nbsp;&nbsp;
-                <i class="fa fa-calendar"></i> {{$row->tgl}}</small>
-              </p>
-            </div>
-            <div class="timeline-body">
-              <p>{{ucwords($row->status)}}</p>
-              @if($row->keterangan!='')
+        <article class="timeline-entry">
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-secondary">
+                    {{$i++}}
+                </div>
+
+                <div class="timeline-label">
+                    <h2><a><i class="fa fa-map-marker"></i> <?php echo strtoupper($row->lokasi)?></a></h2>
+                    <blockquote>{{ucwords($row->status)}}</blockquote>
+                    @if($row->keterangan!='')
                 <hr>
                 <p>Keterangan : {{ucwords($row->keterangan)}} </p>
                 @endif
+                    <p><small class="text-muted">
+                        <i class="fa fa-clock-o"></i> {{$row->jam}} &nbsp;&nbsp;
+                        <i class="fa fa-calendar"></i> {{$row->tgl}}</small>
+                      </p>
+                </div>
             </div>
-          </div>
-        </li>
+
+        </article>
 
         @endforeach
-        </ul>
+        <article class="timeline-entry begin">
+
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-warning">
+                    <i class="fa fa-truck"></i>
+                </div>
+
+            </div>
+
+        </article>
+        </div>
         @else
         <img src="{{asset('img/kosong.png')}}" alt="" style="width: 100%">
          
