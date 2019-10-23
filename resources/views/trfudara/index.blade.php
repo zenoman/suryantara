@@ -40,8 +40,14 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif
+                    @if(Session::get('level') == '1' || 
+            		Session::get('level') == '3' || 
+            		Session::get('level') == '2')
 					<a href="{{url('trfudara/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('trfudara/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					@else
+					<a href="{{url('trfudara/exporttrfudara')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+					@endif
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">
                                         <i class="fa fa-search"></i> Cari Data</button>
                                 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

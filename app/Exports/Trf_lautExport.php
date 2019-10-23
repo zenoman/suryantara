@@ -13,10 +13,19 @@ class Trf_lautExport implements FromCollection, WithHeadings, ShouldAutoSize{
     */
     public function collection()
     {
+        if(Session::get('level') == '1' 
+            || Session::get('level') == '3'
+            || Session::get('level') == '2'){
+            return DB::table('tarif_laut')
+            ->select('kode','tujuan','tarif','berat_min','estimasi','id_cabang')
+            ->get();
+        }else{
             return DB::table('tarif_laut')
             ->select('kode','tujuan','tarif','berat_min','estimasi','id_cabang')
             ->where('id_cabang',Session::get('cabang'))
             ->get();
+        }
+            
     }
     public function headings(): array
     {

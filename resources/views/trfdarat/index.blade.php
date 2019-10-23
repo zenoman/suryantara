@@ -44,6 +44,8 @@
             		Session::get('level') == '2')
 					<a href="{{url('trfdarat/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('trfdarat/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Import Excel</a>
+					@else
+					<a href="{{url('trfdarat/exporttrfdarat')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export Excel</a>
 					@endif
 					
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">

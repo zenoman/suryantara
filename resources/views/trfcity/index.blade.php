@@ -43,6 +43,8 @@
             		Session::get('level') == '2') 
 						<a href="{{url('trfcity/create')}}" class="btn btn-primary">Tambah Data</a>
 						<a href="{{url('trfcity/importexcel')}}" class="btn btn-success">Export Import Excel</a>
+					@else
+						<a href="{{url('trfcity/exporttarif')}}" class="btn btn-success">Export Excel</a>
 					@endif
 					<button class="btn btn-info" data-toggle="modal" data-target="#searchModal">Cari Data</button>
 					 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
