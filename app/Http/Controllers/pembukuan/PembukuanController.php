@@ -64,7 +64,7 @@ class PembukuanController extends Controller
         $kar=DB::table('karyawan')
             ->where('id_cabang',$idc)
             ->get();
-
+        
         $totsal=$in->totaldeb;
         $tolkre=$in->totalkred;
         return view('pembukuan.home',['kar'=>$kar,'title'=> $this->setting,'sal'=>$bsaldo,'in'=>$totsal,'cab'=>$cab,'cekbul'=>$cektgl,'kred'=>$tolkre]);

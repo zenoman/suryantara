@@ -276,20 +276,22 @@
                                         </div>
                                     </div>
                                 </div>                                    
-                                </div>                    
-                            <div class="col-xl-4 dahsboard-column">
-                                <div class="card">
-                                    <div class="add-customers-screen tbl">
-                                        <div class="add-customers-screen-in">
-                                            <div class="add-customers-screen-user">
-                                                <i class="fa fa-car"></i>
+                                </div>    
+                            @if (Session::get('cabang')=='1')                                                            
+                                <div class="col-xl-4 dahsboard-column">
+                                    <div class="card">
+                                        <div class="add-customers-screen tbl">
+                                            <div class="add-customers-screen-in">
+                                                <div class="add-customers-screen-user">
+                                                    <i class="fa fa-car"></i>
+                                                </div>
+                                                {{-- <Button data-target="#kendaraan" data-toggle="modal" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</Button>    --}}
+                                                <a href="{{url('armada')}}" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</a>
                                             </div>
-                                            {{-- <Button data-target="#kendaraan" data-toggle="modal" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</Button>    --}}
-                                            <a href="{{url('armada')}}" class="btn btn-primary-outline btn-sm">Bayar Pajak Kendaraan</a>
                                         </div>
-                                    </div>
-                                </div>                       
-                            </div>                                
+                                    </div>                       
+                                </div>                                
+                            @endif
                                 <div class="col-xl-4 dahsboard-column">
                                     <div class="card">
                                         <div class="add-customers-screen tbl">

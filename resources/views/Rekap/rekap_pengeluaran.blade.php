@@ -56,7 +56,7 @@
                         <br>
                         <div class="row">
                         <div class="col col-xl-12 dashboard-col">
-                            <h4 class="pull-right"><b>Total Rp. <span id="toata"></span></b></h4>
+                            <h4 class="pull-right"><b>Total Rp. {{number_format($tp)}}</b></h4>
                         </div>                        
                         <br>              
                         <div class="col col-xl-12 dashboard-col">           

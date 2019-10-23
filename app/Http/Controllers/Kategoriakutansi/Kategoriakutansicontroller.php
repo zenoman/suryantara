@@ -36,7 +36,8 @@ class Kategoriakutansicontroller extends Controller
             'kode' => $request->kode,
             'nama'  => $request->nama,
             'status'  => $request->status,
-            'aksi'  =>'Y'
+            'aksi'  =>'Y',
+            'tempat'=>$request->aks
 
         ]);
         return redirect('kat_akut')->with('status','Input Data Sukses');
@@ -90,7 +91,8 @@ class Kategoriakutansicontroller extends Controller
         Kategoriakutansi::find($id)->update([
             'kode' => $request->kode,
             'nama'  => $request->nama,
-            'status'  => $request->status
+            'status'  => $request->status,
+            'tempat' =>$request->aks
             ]);
         return redirect('/kat_akut')->with('status','Edit Data Sukses');
  

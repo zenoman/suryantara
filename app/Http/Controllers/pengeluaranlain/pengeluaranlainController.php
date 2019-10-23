@@ -29,9 +29,16 @@ class pengeluaranlainController extends Controller
     public function create()
     {
         $setting = DB::table('setting')->limit(1)->get();
-        $datkatbarakutansi = DB::table('tb_kategoriakutansi')
-        ->where('tb_kategoriakutansi.status','=','pengeluaran')
-        ->get();
+        if(Session::get('cabang')=='1'){
+            $datkatbarakutansi = DB::table('tb_kategoriakutansi')
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            ->get();
+        }else{
+            $datkatbarakutansi = DB::table('tb_kategoriakutansi')
+            ->where('tb_kategoriakutansi.status','=','pengeluaran')
+            ->where('tempat','S')
+            ->get();
+        }
         return view('pengeluaranlain/create',['kate'=>$datkatbarakutansi,'title'=>$setting]);
     }
 
