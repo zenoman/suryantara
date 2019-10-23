@@ -87,8 +87,51 @@
                                     </form>
 	                        </div>
 	                    </div>
+	                    <button type="button" class="burger-right">
+	                        <i class="font-icon-menu-addl"></i>
+	                    </button>
 	                </div>
-					 <div class="mobile-menu-right-overlay"></div>
+					<div class="mobile-menu-right-overlay"></div>
+	                <div class="site-header-collapsed">
+	                    <div class="site-header-collapsed-in">
+	                        @if(Session::get('level') == '1' 
+							|| Session::get('level') == '3'
+							|| Session::get('level') == '2')
+	                        <div class="dropdown dropdown-typical">
+	                            <a class="dropdown-toggle" id="dd-header-social" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <span class="font-icon font-icon-doc"></span>
+	                                <span class="lbl">Master Data</span>
+	                            </a>
+	
+	                            <div class="dropdown-menu" aria-labelledby="dd-header-social">
+	                            	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+										<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
+										<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>	
+										<a class="dropdown-item" href="{{url('aset')}}">Data Aset</a>	
+													
+									@endif
+									@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+									<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
+									<div class="dropdown-divider"></div>
+									@endif
+									@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+									<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
+									<div class="dropdown-divider"></div>
+									@endif
+
+									@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+									<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
+
+									@endif
+
+									@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+									<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
+									@endif		
+	                            </div>
+	                        </div>
+	                        @endif
+	                    </div><!--.site-header-collapsed-in-->
+	                </div><!--.site-header-collapsed-->
 	                
 	        </div>
 	    </div>
@@ -108,18 +151,7 @@
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Master Data</a>
 			@endif
 			<div class="dropdown-menu">				
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 				
-					<a class="dropdown-item" href="{{url('jabatan')}}">Data Jabatan</a>
-					<a class="dropdown-item" href="{{url('karyawan')}}">Data Karyawan</a>	
-					<a class="dropdown-item" href="{{url('aset')}}">Data Aset</a>	
-								
-				@endif				
-
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-				<a class="dropdown-item" href="{{url('admin')}}">Data Admin</a>
-				<div class="dropdown-divider"></div>
-				@endif
 
 				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2' || Session::get('level') == '9'|| Session::get('level') == '6')
 				<a class="dropdown-item" href="{{url('vendor')}}">Data Vendor</a>
@@ -154,19 +186,7 @@
 				<div class="dropdown-divider"></div>
 				@endif
 
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-				<a class="dropdown-item" href="{{url('/armada')}}">Data Armada</a>
-				<div class="dropdown-divider"></div>
-				@endif
-
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-				<a class="dropdown-item" href="{{url('cabang')}}">Data Cabang</a>
-
-				@endif
-
-				@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
-				<a class="dropdown-item" href="{{url('setting-pajak')}}">Setting Pajak Dan Saldo Akhir</a>
-				@endif
+				
 			</div>
 		</li>
 		<li class="nav-item dropdown">
