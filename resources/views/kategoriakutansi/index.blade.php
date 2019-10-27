@@ -35,8 +35,10 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 {{ session('status') }}
                     </div>
-                    @endif
-					<a href="{{url('kat_akut/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+					@endif
+					@if (Session::get('cabang')=='1')
+						<a href="{{url('kat_akut/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
+					@endif					
                     <br><br>
 					<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
@@ -45,18 +47,12 @@
 							<th>Kode</th>
 							<th>Nama</th>
 							<th>Status</th>
-							<th>Aksi</th>
+							<th>Akses Kelola</th>
+							@if (Session::get('cabang')=='1')
+								<th>Aksi</th>	
+							@endif							
 						</tr>
-						</thead>
-						<tfoot>
-						<tr>
-							<th>No</th>
-							<th>Kode</th>
-							<th>Nama</th>
-							<th>Status</th>
-							<th>Aksi</th>
-						</tr>
-						</tfoot>
+						</thead>						
 						<tbody>
 						<?php $i = 1;?>
                             @foreach($kate as $row)
@@ -65,9 +61,17 @@
                             <td>{{$no}}</td>
                             <td>{{$row->kode}}</td>
                             <td>{{$row->nama}}</td>
-                            <td>{{$row->status}}</td>
+							<td>{{$row->status}}</td>
+							<td>
+								@if ($row->tempat=='P')
+									Pusat
+								@else
+									Semua
+								@endif
+							</td>
+							@if (Session::get('cabang')=='1')
                             <td>
-                            	@if($row->aksi == 'Y')
+                            @if($row->aksi == 'Y')
                               <form action="{{ url('/kat_akut/delete')}}"  method="post">                            	
                             	<a href="{{ url('/kat_akut/'.$row->id.'/edit') }}" class="btn btn-rimary btn-sm">
                                         <i class="fa fa-pencil"></i> Edit Data</a>
@@ -79,7 +83,10 @@
                     					</form>
                     			@else
                     			@endif
-                            </td>
+							</td>
+							@else							
+							@endif
+
 						</tr>
 						@endforeach
 						</tbody>

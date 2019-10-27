@@ -127,7 +127,6 @@ class laporanController extends Controller{
         ->groupby('bulan')
         ->groupby('tahun')
         ->get();
-
         $jabatan =  DB::table('karyawan')
                 ->select(DB::raw('karyawan.id_jabatan,jabatan.jabatan'))
                 ->leftjoin('jabatan', 'jabatan.id', '=', 'karyawan.id_jabatan')
@@ -287,7 +286,7 @@ class laporanController extends Controller{
         // $bulan = explode('-', $request->bulan);
         // $bln = $bulan[0];
         // $thn = $bulan[1];
-        dd($request->bulan);
+        
 
         if($kategori=='semua'){
             $data = DB::table('pengeluaran_lain')
@@ -340,46 +339,53 @@ class laporanController extends Controller{
         $namajabatan = $request->jabatan;
         $bulan = explode('-', $request->bulan);
         $bln = $bulan[0];
-        $thn = $bulan[1];
-        
+        $thn = $bulan[1];        
+        $idc=Session::get('cabang');
+         
         if($namajabatan=='semua'){
             $idjabatan = 'semua';
             $jabat = 'semua';
             $data = DB::table('gaji_karyawan')
-            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan,gaji_karyawan.id_cabang as idc'))
             ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
             ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->where('gaji_karyawan.id_cabang',$idc)
             ->paginate(40);
 
             $data2 = DB::table('gaji_karyawan')
-            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan,gaji_karyawan.id_cabang as idc'))
             ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
             ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->where('gaji_karyawan.id_cabang',$idc)
             ->get();
 
             $total = DB::table('gaji_karyawan')
             ->select(DB::raw('SUM(total) as totalnya'))
             ->where([['bulan','=',$bln],['tahun','=',$thn]])
+            ->where('id_cabang',$idc)
             ->get();
         }else{
         $jabatan = explode('-', $request->jabatan);
         $idjabatan = $jabatan[0];
         $jabat = $jabatan[1];
         $data = DB::table('gaji_karyawan')
-            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan,gaji_karyawan.id_cabang as idc'))
             ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
             ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->where('gaji_karyawan.id_cabang',$idc)
             ->paginate(40);
 
             $data2 = DB::table('gaji_karyawan')
-            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan'))
+            ->select(DB::raw('gaji_karyawan.*,jabatan.jabatan,gaji_karyawan.id_cabang as idc'))
             ->leftjoin('jabatan','jabatan.id','=','gaji_karyawan.id_jabatan')
             ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->where('gaji_karyawan.id_cabang',$idc)
             ->get();
 
             $total = DB::table('gaji_karyawan')
             ->select(DB::raw('SUM(total) as totalnya'))
             ->where([['bulan','=',$bln],['tahun','=',$thn],['id_jabatan','=',$idjabatan]])
+            ->where('id_cabang',$idc)
             ->get();
         }
         $webinfo = DB::table('setting')->limit(1)->get();

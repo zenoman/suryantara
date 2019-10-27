@@ -26,7 +26,7 @@
 						<label class="col-sm-2 form-control-label semibold">Kode Kategori</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<input type="text" class="form-control" placeholder="Masukkan Kode Karyawan" name="kode" required>
+								<input type="text" class="form-control" placeholder="Masukkan Kode Kategori" name="kode" required>
 								<p>
 									@if($errors->has('kode'))
                             	<div class="alert alert-danger">
@@ -54,6 +54,16 @@
 						</div>
 					</div>
 					<div class="form-group row">
+						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Kelola Akses</label>
+						<div class="col-sm-10">
+							<select id="exampleSelect" name="aks" class="form-control">
+								<option selected disabled hidden>Pilih Kelola</option>
+								<option value="P">Pusat</option>
+								<option value="S">Semua</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
 						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Status</label>
 						<div class="col-sm-10">
 							<select id="exampleSelect" name="status" class="form-control">
@@ -67,10 +77,10 @@
                                         {{ $errors->first('status')}}
                                          </div>
                                        @endif
-					</div>
+						</div>
 
 
-{{csrf_field()}}
+					{{csrf_field()}}
 							<small class="text-muted">
 								<input class="btn btn-primary" type="submit" name="submit" value="simpan">
 								<a onclick="window.history.go(-1);" class="btn btn-danger">Kembali</a>

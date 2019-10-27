@@ -281,12 +281,11 @@
 		</li>
 
 		@endif
-		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+		@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2'|| Session::get('level') == '6')
 		<li class="nav-item">
-			<a class="nav-link "  href="{{url('omset')}}" >Omset</a>			
+			<a class="nav-link "  href="{{url('omset')}}" >Omset</a>
 		</li>
 		@endif
-
 	</ul>
 
 @yield('content')

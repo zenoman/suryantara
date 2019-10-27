@@ -105,8 +105,14 @@ class Rekap extends Controller
                         ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
                         ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                         ->whereBetween('tgl',[$tgl1,$tgl2])
+                        ->orderBy('cabang.nama')
                         ->get();
-                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                    $tot=DB::table('pengeluaran_lain')
+                        ->select(DB::raw('sum(jumlah) as tp'))
+                        ->whereBetween('tgl',[$tgl1,$tgl2])
+                        ->first();
+                    $tp=$tot->tp;
+                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
                 }else{
                     $kate=$kat;
                     $lap=DB::table('pengeluaran_lain')
@@ -115,8 +121,15 @@ class Rekap extends Controller
                         ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                         ->whereBetween('tgl',[$tgl1,$tgl2])
                         ->where('kategori',$kat)
-                        ->get();                   
-                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                        ->orderBy('cabang.nama')
+                        ->get();
+                    $tot=DB::table('pengeluaran_lain')
+                        ->select(DB::raw('sum(jumlah) as tp'))
+                        ->whereBetween('tgl',[$tgl1,$tgl2])
+                        ->where('kategori',$kat)
+                        ->first();
+                    $tp=$tot->tp;
+                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
                 } 
             }else{
                 if($kat=="semua"){
@@ -127,8 +140,15 @@ class Rekap extends Controller
                         ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                         ->whereBetween('tgl',[$tgl1,$tgl2])
                         ->where('id_cabang',$idc)
+                        ->orderBy('cabang.nama')
                         ->get();
-                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                    $tot=DB::table('pengeluaran_lain')
+                        ->select(DB::raw('sum(jumlah) as tp'))
+                        ->whereBetween('tgl',[$tgl1,$tgl2])
+                        ->where('id_cabang',$idc)
+                        ->first();
+                    $tp=$tot->tp;
+                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
                 }else{
                     $kate=$kat;
                     $lap=DB::table('pengeluaran_lain')
@@ -137,9 +157,16 @@ class Rekap extends Controller
                         ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                         ->whereBetween('tgl',[$tgl1,$tgl2])
                         ->where('id_cabang',$idc)
+                        ->orderBy('cabang.nama')
+                        ->get();
+                    $tot=DB::table('pengeluaran_lain')
+                        ->select(DB::raw('sum(jumlah) as tp'))
+                        ->whereBetween('tgl',[$tgl1,$tgl2])
+                        ->where('id_cabang',$idc)
                         ->where('kategori',$kat)
-                        ->get();                   
-                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                        ->first();
+                    $tp=$tot->tp;
+                    return view('Rekap.rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
                 } 
             }
            
@@ -377,26 +404,38 @@ class Rekap extends Controller
             if($kat=="semua"){
                 $kate="semua pengeluaran";                
                 $lap=DB::table('pengeluaran_lain')
-                    ->leftjoin('cabang','cabang.id','=','pengeluaran_lain.id_cabang')
-                    ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-                    ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
-                    ->whereBetween('tgl',[$tgl1,$tgl2])
-                    ->get();
-                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                ->leftjoin('cabang','cabang.id','=','pengeluaran_lain.id_cabang')
+                ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
+                ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
+                ->whereBetween('tgl',[$tgl1,$tgl2])
+                ->orderBy('cabang.nama')
+                ->get();
+            $tot=DB::table('pengeluaran_lain')
+                ->select(DB::raw('sum(jumlah) as tp'))
+                ->whereBetween('tgl',[$tgl1,$tgl2])
+                ->first();
+            $tp=$tot->tp;
+            return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
             }else{
                 $k=DB::table('tb_kategoriakutansi')
                     ->where('kode',$kat)
-                    ->first();
-                    
+                    ->first();                    
                 $kate=$k->nama;
                 $lap=DB::table('pengeluaran_lain')
-                    ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
-                    ->leftjoin('cabang','cabang.id','=','pengeluaran_lain.id_cabang')                
+                    ->leftjoin('cabang','cabang.id','=','pengeluaran_lain.id_cabang')
+                    ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')                    
                     ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                     ->whereBetween('tgl',[$tgl1,$tgl2])
                     ->where('kategori',$kat)
-                    ->get();                   
-                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                    ->orderBy('cabang.nama')
+                    ->get();
+                $tot=DB::table('pengeluaran_lain')
+                    ->select(DB::raw('sum(jumlah) as tp'))
+                    ->whereBetween('tgl',[$tgl1,$tgl2])
+                    ->where('kategori',$kat)
+                    ->first();
+                $tp=$tot->tp;                  
+                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
             }
         }else{
             if($kat=="semua"){
@@ -407,13 +446,19 @@ class Rekap extends Controller
                     ->select(DB::raw('pengeluaran_lain.*,cabang.nama,tb_kategoriakutansi.nama as kategori'))
                     ->whereBetween('tgl',[$tgl1,$tgl2])
                     ->where('id_cabang',$idc)
+                    ->orderBy('cabang.nama')
                     ->get();
-                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                $tot=DB::table('pengeluaran_lain')
+                    ->select(DB::raw('sum(jumlah) as tp'))
+                    ->whereBetween('tgl',[$tgl1,$tgl2])                    
+                    ->where('id_cabang',$idc)
+                    ->first();
+                $tp=$tot->tp;                  
+                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
             }else{
                 $k=DB::table('tb_kategoriakutansi')
                     ->where('kode',$kat)
-                    ->first();
-                    
+                    ->first();                    
                 $kate=$k->nama;
                 $lap=DB::table('pengeluaran_lain')
                     ->leftjoin('tb_kategoriakutansi','tb_kategoriakutansi.kode','=','pengeluaran_lain.kategori')
@@ -422,8 +467,15 @@ class Rekap extends Controller
                     ->whereBetween('tgl',[$tgl1,$tgl2])
                     ->where('id_cabang',$idc)
                     ->where('kategori',$kat)
-                    ->get();                   
-                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting]);
+                    ->orderBy('cabang.nama')
+                    ->get();
+                $tot=DB::table('pengeluaran_lain')
+                    ->select(DB::raw('sum(jumlah) as tp'))
+                    ->whereBetween('tgl',[$tgl1,$tgl2])
+                    ->where('kategori',$kat)
+                    ->first();
+                $tp=$tot->tp;                  
+                return view('Rekap.print_rekap_pengeluaran',['kate'=>$kate,'kat'=>$kat,'lap'=>$lap,'bul1'=>$tgl1,'bul2'=>$tgl2,'title'=>$this->setting,'tp'=>$tp]);
             }
         }
         

@@ -36,7 +36,7 @@
 						<label class="col-sm-2 form-control-label semibold">Kode Kategori</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								<input type="text" class="form-control" id="exampleInput" placeholder="Masukan Nama Kategori Barang" name="kode" value="{{$kataku->kode}}"><p>
+								<input type="text" class="form-control" id="exampleInput" placeholder="Masukan Kode Kategori Barang" name="kode" value="{{$kataku->kode}}"><p>
 			@if($errors->has('kode'))
                                         <div class="alert alert-danger">
                                         {{ $errors->first('kode')}}
@@ -57,21 +57,36 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Status</label>
+						<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Kelola Akses</label>
 						<div class="col-sm-10">
-							<select id="exampleSelect" name="status" class="form-control">
-								@if($kataku->status=='pemasukan')
-	<option value="{{$kataku->status}}" @if($kataku->status=='pemasukan')selected @endif>Pendatan</option>
+							<select id="exampleSelect" name="aks" class="form-control">								
+								@if ($kataku->tempat=="P")
+									<option value="{{$kataku->tempat}}">Pusat</option>
 								@else
-	<option value="{{$kataku->status}}" @if($kataku->status=='pengeluaran')selected @endif>Pengeluaran</option>
+									<option value="{{$kataku->tempat}}">Semua</option>
 								@endif
-								@if($kataku->status=='pemasukan')
-	<option value="Pengeluaran">Pengeluaran</option>
-								@else
-	<option value="pendapatan">Pendatan</option>
-								@endif
+								
+								<option value="P">Pusat</option>
+								<option value="S">Semua</option>
 							</select>
 						</div>
+					</div>
+					<div class="form-group row">
+					<label for="exampleSelect" class="col-sm-2 form-control-label semibold">Status</label>
+					<div class="col-sm-10">
+						<select id="exampleSelect" name="status" class="form-control">
+							@if($kataku->status=='pemasukan')
+								<option value="{{$kataku->status}}" @if($kataku->status=='pemasukan')selected @endif>Pendatan</option>
+							@else
+								<option value="{{$kataku->status}}" @if($kataku->status=='pengeluaran')selected @endif>Pengeluaran</option>
+							@endif
+							@if($kataku->status=='pemasukan')
+								<option value="Pengeluaran">Pengeluaran</option>
+							@else
+								<option value="pendapatan">Pendatan</option>
+							@endif
+						</select>
+					</div>
 						@if($errors->has('status'))
                                        <div class="alert alert-danger">
                                         {{ $errors->first('status')}}
