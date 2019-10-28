@@ -268,6 +268,7 @@ Route::get('/editprofile/{id}','Dashboardcontroller@editprofile');
 Route::get('/editprofile/{id}/editpassword','Dashboardcontroller@editpassword');
 Route::post('/editprofile/editdata','Dashboardcontroller@updateprofile');
 Route::post('editprofile/changepas','Dashboardcontroller@actionchangepas');
+Route::get('bayar-bt/{id}','Dashboardcontroller@upbt');
 //===========================================admin
 Route::get('/admin','Admin\Admincontroller@index');
 Route::post('/admin','Admin\Admincontroller@store');

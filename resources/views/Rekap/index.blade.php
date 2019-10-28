@@ -14,6 +14,7 @@
     <div class="page-content">
         <div class="container-fluid">                              
             <div class="row">
+                @if (Session::get('cabang')=='1')                                    
                 <div class="col-sm-6 col-md-4 col-xl-3">
                         <div class="card">
                             <div class="add-customers-screen tbl">
@@ -72,6 +73,7 @@
                             </div>
                         </div>
                 </div>
+                @endif
                 <div class="col-sm-6 col-md-4 col-xl-3">
                         <div class="card">
                             <div class="add-customers-screen tbl">
@@ -201,6 +203,7 @@
                         </div>
                     </div>
                 </div>
+                @if (Session::get('cabang')=='1')                                    
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card">
                         <div class="add-customers-screen tbl">
@@ -259,6 +262,7 @@
                         </div>
                     </div>
                 </div>
+                @endif                
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card">
                         <div class="add-customers-screen tbl">
@@ -353,6 +357,7 @@
                         </div>
                     </div>
                 </div>
+                @if (Session::get('cabang')=='1')                                    
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card">
                         <div class="add-customers-screen tbl">
@@ -410,7 +415,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                               
                 <div class="col-sm-6 col-md-4 col-xl-3">
                         <div class="card">
                             <div class="add-customers-screen tbl">
@@ -439,7 +444,8 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
+                @endif 
         </div>
     </div>    
 @endsection

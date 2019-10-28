@@ -199,7 +199,30 @@ class Dashboardcontroller extends Controller {
         //============================================
         $setting = DB::table('setting')->get();
 
-        return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada,'jumlahtotalresi'=>$jumlahtotalresi]);
+        // =========================================== Cari BT
+        $bt=DB::table('resi_pengiriman')
+            ->leftjoin('surat_jalan','resi_pengiriman.id_cabang','=','surat_jalan.id_cabang')
+            ->leftjoin('cabang','surat_jalan.id_cabang_tujuan','=','cabang.id')
+            ->select(DB::raw('resi_pengiriman.*,surat_jalan.*,cabang.nama,count(kode) as hit'))
+            ->where([
+                'metode_bayar'=>'bt',                
+                'surat_jalan.id_cabang'=>$idc,
+                'tf'=>'N',
+                ])
+            ->where('totalbt','!=','0')        
+            ->get();
+            
+        $btb=DB::table('surat_jalan')
+            ->leftjoin('cabang','surat_jalan.id_cabang','=','cabang.id')
+            ->select(DB::raw('surat_jalan.*,cabang.nama,count(kode) as hit'))            
+            ->where([              
+                'surat_jalan.id_cabang_tujuan'=>$idc,
+                'tf'=>'N',
+                ])            
+            ->where('totalbt','!=','0')            
+            ->get();
+        
+        return view('dashboard/index',['jmlkarya'=>$datakaryawan,'jmlabsen'=>$dataabsensi,'title'=>$setting,'resi'=>$resi,'listsj'=>$listsj,'uanghariini'=>$uanghariini,'jumlahresi'=>$jumlahresi,'jumlahsj'=>$jumlahsj,'pajakarmada'=>$pajakarmada,'jumlahpajakarmada'=>$jumlahpajakarmada,'jumlahtotalresi'=>$jumlahtotalresi,'bt'=>$bt,'btb'=>$btb]);
       }
 
       //===============================================================
@@ -405,4 +428,12 @@ class Dashboardcontroller extends Controller {
              ->with('errorpass2','Maaf, Konfimasi Password Baru Anda Salah');
         }
     }             
+    function upbt($id){
+        $up=DB::update("update surat_jalan set tf='Y' where kode=?",[$id]);
+        if($up){
+            return redirect('dashboard')->with('status','Berhasil Konfirmasi Terbayar');
+        }else{
+
+        }
+    }
 }

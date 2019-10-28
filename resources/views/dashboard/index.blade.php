@@ -19,8 +19,7 @@
 
 @section('content')
 <div class="page-content"  id="halinput">
-	    <div class="container-fluid">
-	       
+	    <div class="container-fluid">       
 	
 	        <div class="row">
 	        	 @if (session('status'))
@@ -118,7 +117,8 @@
 								</div>
 					</section>
 					@endforeach
-	        	</div>
+				</div>
+				
 	        	<div class="col-xl-4 dahsboard-column">
 	        		<section class="widget widget-simple-sm-fill orange">
 								<div class="widget-simple-sm-icon">
@@ -135,7 +135,91 @@
 								<div class="widget-simple-sm-fill-caption">Surat Jalan Menunggu : {{$jumlahsj}}</div>
 					</section>
 	        	</div>
-	        	@endif
+				@endif
+				<div class="col-xl-12 dashboard-column">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">
+								List Setoran BT Antar Cabang
+							</div>
+							<div class="card-body">
+								<table class="table table-responsive table-stripped table-bordered">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Cabang</th>
+											<th>Resi</th>
+											<th>Resi Jalan</th>
+											<th>Nominal BT</th>
+											<th> Aksi </th>											
+										</tr>
+									</thead>
+									<tbody>
+										@php
+											$no=1;
+										@endphp
+										@foreach ($bt as $ibt)
+											@if ($ibt->hit>0)
+											<tr>												
+												<td>{{$no++}}</td>
+												<td>{{$ibt->nama}}</td>
+												<td>{{$ibt->no_resi}}</td>
+												<td>{{$ibt->kode}}</td>
+												<td>Rp. {{number_format($ibt->totalbt)}}</td>
+												@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2'|| Session::get('level') == '7')
+												<td>
+													<a href="{{url('bayar-bt').'/'.$ibt->kode}}" class="btn btn-outline-primary"> <i class="fa fa-eye-open"></i> Konfirmasi Uang Cabang</a>
+												</td>
+												@else
+													<td>No Akses</td>
+												@endif
+											</tr>
+											@else												
+											<tr>
+												<td align="center" colspan="6">Tidak Ada Data</td>
+											</tr>										
+											@endif											
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+							<div class="card-header">
+								<div class="card-title">List Tanggungan Biaya BT</div>
+							</div>
+							<div class="card-body">
+								<table class="table table-bordered table-responsive">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Cabang</th>
+											<th>Resi Jalan</th>
+											<th>Nominal BT</th>																					
+										</tr>
+									</thead>
+									<tbody>
+										@php
+											$nom=1;
+										@endphp
+										@foreach ($btb as $ibtb)											
+											@if ($ibtb->hit>0)											
+											<tr>
+												<td>{{$nom++}}</td>
+												<td>{{$ibtb->nama}} </td>
+												<td>{{$ibtb->kode}}</td>
+												<td>Rp. {{number_format($ibtb->totalbt)}}</td>
+											</tr>
+											@else
+											<tr>
+												<td align="center" colspan="5">Tidak ada Data</td>
+											</tr>
+											@endif											
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 	        	@if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
 	        	<div class="col-xl-12 dahsboard-column">
 	        	<section class="card">
@@ -214,7 +298,7 @@
 	                    </div>
 	                </section>
 	            </div>
-	            @endif
+				@endif				
 	        </div>
 	    </div>
 	</div>

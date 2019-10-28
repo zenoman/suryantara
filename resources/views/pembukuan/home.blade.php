@@ -363,48 +363,50 @@
                             </div>
                         </div>
                         <div class="col-xl-3 dashboard-column">
-                            <div class="card">
-                                <div class="add-customers-screen tbl">
-                                    <div class="add-customers-screen-in">
-                                        <div class="add-customers-screen-user">
-                                            <i class="fa fa-percent"></i>
+                            <div class="col-xl-12 dashboard-column">
+                                <div class="card">
+                                    <div class="add-customers-screen tbl">
+                                        <div class="add-customers-screen-in">
+                                            <div class="add-customers-screen-user">
+                                                <i class="fa fa-percent"></i>
+                                            </div>
+                                            <p>Pembayaran Pajak </p>
+                                            <?php 
+                                            // get tgl pertama bulan sebelumnya
+                                            $tglawal=date('Y-m-d',strtotime('first day of previous month'));
+                                            $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
+                                            echo "".$tglawal." sampai ";
+                                            echo $tglakhir."<br>";
+                                            // Akumulasi
+                                            $tglawal=date('Y-m-d',strtotime('first day of previous month'));
+                                            $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
+                                            $lasbul=date('n',strtotime('last day of previous month'));
+                                            $lastth=date('Y',strtotime('last day of previous month'));
+                                            $tot=DB::table('resi_pengiriman')
+                                                ->select(DB::raw('sum(total_biaya) as total'))
+                                                ->whereBetween('tgl',[$tglawal,$tglakhir])
+                                                ->where('duplikat','!=','Y')
+                                                ->first(); 
+                                            $tresi=$tot->total;        
+                                            // ambil Persen pajak dari setting
+                                            $persen=DB::table('setting_pajak')
+                                                    ->where('tempo','bulan')
+                                                    ->first();
+                                            $pjsen=$persen->besaran;
+                                            $pajak=$tresi*$pjsen/100;
+                                            ?> 
+                                            <ul>
+                                                <li>Penghasilan Resi: Rp. <b>{{number_format($tresi) }}</b></li>
+                                                <li>Besaran Pajak: <b>{{$pjsen}} %</b></li>
+                                                <li>Pajak Terbayar: Rp.<b> {{number_format($pajak)}}</b></li>
+                                            </ul>                                     
+                                            <br>
+                                            <div class="label label-light label-primary">Pembayaran Pajak Secara otomatis</div>           
                                         </div>
-                                        <p>Pembayaran Pajak </p>
-                                        <?php 
-                                        // get tgl pertama bulan sebelumnya
-                                        $tglawal=date('Y-m-d',strtotime('first day of previous month'));
-                                        $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
-                                        echo "".$tglawal." sampai ";
-                                        echo $tglakhir."<br>";
-                                        // Akumulasi
-                                        $tglawal=date('Y-m-d',strtotime('first day of previous month'));
-                                        $tglakhir=date('Y-m-d',strtotime('last day of previous month'));
-                                        $lasbul=date('n',strtotime('last day of previous month'));
-                                        $lastth=date('Y',strtotime('last day of previous month'));
-                                        $tot=DB::table('resi_pengiriman')
-                                            ->select(DB::raw('sum(total_biaya) as total'))
-                                            ->whereBetween('tgl',[$tglawal,$tglakhir])
-                                            ->where('duplikat','!=','Y')
-                                            ->first(); 
-                                        $tresi=$tot->total;        
-                                        // ambil Persen pajak dari setting
-                                        $persen=DB::table('setting_pajak')
-                                                ->where('tempo','bulan')
-                                                ->first();
-                                        $pjsen=$persen->besaran;
-                                        $pajak=$tresi*$pjsen/100;
-                                        ?> 
-                                        <ul>
-                                            <li>Penghasilan Resi: Rp. <b>{{number_format($tresi) }}</b></li>
-                                            <li>Besaran Pajak: <b>{{$pjsen}} %</b></li>
-                                            <li>Pajak Terbayar: Rp.<b> {{number_format($pajak)}}</b></li>
-                                        </ul>                                     
-                                        <br>
-                                        <div class="label label-light label-primary">Pembayaran Pajak Secara otomatis</div>           
                                     </div>
                                 </div>
-                            </div>
-                        </div>  
+                            </div>                            
+                        </div>                          
                 </div>                
         </div>
     </div>

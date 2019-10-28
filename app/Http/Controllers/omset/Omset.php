@@ -17,8 +17,15 @@ class Omset extends Controller
         
     }
     function index(){
-        $cab=DB::table('cabang')
-            ->get();        
+        if(Session::get('cabang')=='1'){
+            $cab=DB::table('cabang')
+                ->get();        
+        }else{
+            $cab=DB::table('cabang')
+                ->where('id',Session::get('cabang'))
+                ->get();        
+        }
         return view('omset.index',['cab'=>$cab,'title'=>$this->setting]);
+
     }
 }
