@@ -39,7 +39,12 @@
                                 {{ session('statuserror') }}
                     </div>
                     @endif 
-                    @if(Session::get('level') == '1' || Session::get('level') == '3' || Session::get('level') == '2')
+                    @if(
+                    Session::get('level') == '1' || 
+                    Session::get('level') == '3' || 
+                    Session::get('level') == '2' ||
+                    Session::get('level') == '6' ||
+                    Session::get('level') == '9' )
 					<a href="{{url('Manual/create')}}" class="btn btn-primary"><i class="fa fa-pencil"></i> Tambah Data</a>
 					<a href="{{url('Manual/importexcel')}}" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import Excel</a>
                     <br><br>
