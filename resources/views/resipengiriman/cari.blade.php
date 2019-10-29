@@ -49,8 +49,12 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							@if(Session::get('level') == '1' || Session::get('level') == '3' || 
-                           	Session::get('level') == '2')
+							@if(
+							Session::get('level') == '1' || 
+							Session::get('level') == '3' || 
+							Session::get('level') == '2' || 
+							Session::get('level') == '9' || 
+							Session::get('level') == '6')
 							<td>Aksi</td>
 							@endif
 						</tr>
@@ -365,35 +369,54 @@
                             @endif
 	                            
                             </td>
-                            @if(Session::get('level') == '1' || Session::get('level') == '3' || 
-                           	Session::get('level') == '2')
+                            @if(
+							Session::get('level') == '1' || 
+							Session::get('level') == '3' || 
+							Session::get('level') == '2' || 
+							Session::get('level') == '9' || 
+							Session::get('level') == '6')
                             <td class="text-center">
                             @if($row->duplikat!='Y')
-                           	
-                            	@if($row->kode_jalan=='')
-                            	<form action="{{ url('/Manual/delete')}}" method="post">
-                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                                {{csrf_field()}}
-                                <input type="hidden" name="aid" value="{{$row->id}}">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
-                                <i class="fa fa-remove"></i>
-                            	</button>
-                            	<a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                </form>
-                                @else
-                                 <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-wrench"></i>
-                            	</a>
-                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
-                                <i class="fa fa-ban"></i>
-                            	</a>
-                                @endif
+
+                            	@if(Session::get('level') == '1' || 
+							 		Session::get('level') == '3' || 
+							 		Session::get('level') == '2' )
+                            		@if($row->status!='Y')
+                            			@if($row->kode_jalan=='')
+			                            	<form action="{{ url('/Manual/delete')}}" method="post">
+			                            		{{csrf_field()}}
+			                                	<input type="hidden" name="aid" value="{{$row->id}}">
+				                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+				                                	<i class="fa fa-wrench"></i>
+				                            	</a>
+				                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+				                                	<i class="fa fa-remove"></i>
+				                            	</button>
+				                               
+
+			                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+			                                <i class="fa fa-ban"></i>
+			                            	</a>
+			                                </form>
+                                		@endif
+                                	@endif
+                                @elseif(Session::get('level') == '6' ||
+							 			Session::get('level') == '9')
+									@if($row->status!='Y')
+									@if($row->kode_jalan=='')
+		                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
+			                                <i class="fa fa-wrench"></i>
+			                            </a>
+			                               
+
+		                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
+		                                <i class="fa fa-ban"></i>
+		                            	</a>
+                                	@endif
+								@endif
+							@endif
                             @endif
-                        
+                           
                             </td>
                                 @endif
 						</tr>
@@ -411,8 +434,12 @@
 							<th>Pengirim</th>
 							<th>Admin</th>
 							<th>Status</th>
-							@if(Session::get('level') == '1' || Session::get('level') == '3' || 
-                           	Session::get('level') == '2')
+							@if(
+							Session::get('level') == '1' || 
+							Session::get('level') == '3' || 
+							Session::get('level') == '2' || 
+							Session::get('level') == '9' || 
+							Session::get('level') == '6')
 							<td>Aksi</td>
 							@endif
 						</tr>
