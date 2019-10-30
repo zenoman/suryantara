@@ -419,13 +419,10 @@
 							 Session::get('level') == '9' )
                             <td class="text-center">
                             @if($row->duplikat!='Y')
-
-                            	@if(Session::get('level') == '1' || 
+								@if(Session::get('level') == '1' || 
 							 		Session::get('level') == '3' || 
 							 		Session::get('level') == '2' )
-                            		@if($row->status!='Y')
-                            			@if($row->kode_jalan=='')
-			                            	<form action="{{ url('/Manual/delete')}}" method="post">
+			                            <form action="{{ url('/Manual/delete')}}" method="post">
 			                            		{{csrf_field()}}
 			                                	<input type="hidden" name="aid" value="{{$row->id}}">
 				                                <a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">
@@ -439,11 +436,10 @@
 			                                <a href="{{url('/batalpengiriman/'.$row->id)}}" onclick="return confirm('Batalkan Pengiriman ?')" class="btn btn-primary btn-sm">
 			                                <i class="fa fa-ban"></i>
 			                            	</a>
-			                                </form>
-                                		@endif
-                                	@endif
-                                @elseif(Session::get('level') == '6' ||
-							 			Session::get('level') == '9')
+			                            </form>
+                                @elseif(
+                                Session::get('level') == '6' ||
+							 	Session::get('level') == '9')
 									@if($row->status!='Y')
 									@if($row->kode_jalan=='')
 		                            	<a href="{{url('/editresi/'.$row->id)}}" class="btn btn-warning btn-sm">

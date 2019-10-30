@@ -367,8 +367,6 @@
                             	@if(Session::get('level') == '1' || 
 							 		Session::get('level') == '3' || 
 							 		Session::get('level') == '2' )
-                            		@if($row->status!='Y')
-                            			@if($row->kode_jalan=='')
 			                            	<form action="{{ url('/Manual/delete')}}" method="post">
 			                            		{{csrf_field()}}
 			                                	<input type="hidden" name="aid" value="{{$row->id}}">
@@ -384,8 +382,6 @@
 			                                <i class="fa fa-ban"></i>
 			                            	</a>
 			                                </form>
-                                		@endif
-                                	@endif
                                 @elseif(Session::get('level') == '6' ||
 							 			Session::get('level') == '9')
 									@if($row->status!='Y')
