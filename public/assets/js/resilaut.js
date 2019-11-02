@@ -357,7 +357,6 @@ $(document).ready(function(){
 
 			var d = new Date();
 			var tanggal = d.getDate()+" - "+(d.getMonth()+1)+" - "+d.getFullYear();
-			$("#cetak_tanggal").html("Kediri, "+tanggal);
 			//========================================================
 			$("#cetak_kota_asal2").html($("#kota_asal").val());
 			
@@ -374,7 +373,6 @@ $(document).ready(function(){
 			$("#cetak_biaya_asu2").html("Rp. "+rupiah($("#biaya_asuransi").val()));
 			
 			$("#cetak_total2").html("Rp. "+rupiah(totalnya));
-			$("#cetak_tanggal2").html("Kediri, "+tanggal);
 			//==============================================================
 			$("#cetak_kota_asal3").html($("#kota_asal").val());
 			
@@ -386,7 +384,6 @@ $(document).ready(function(){
 			$("#cetak_penerima3").html($("#n_penerima").val());
 			$("#cetak_telp_penerima3").html($("#t_penerima").val());
 			$("#cetak_isi_paket3").html($("#nama_barang").val());
-			$("#cetak_tanggal3").html("Kediri, "+tanggal);
 			//==============================================================
 			$("#cetak_kota_asal4").html($("#kota_asal").val());
 			
@@ -398,7 +395,6 @@ $(document).ready(function(){
 			$("#cetak_penerima4").html($("#n_penerima").val());
 			$("#cetak_telp_penerima4").html($("#t_penerima").val());
 			$("#cetak_isi_paket4").html($("#nama_barang").val());
-			$("#cetak_tanggal4").html("Kediri, "+tanggal);
 		}
 	//============================================ simpan transaksi
 		$("#btnsimpan").click(function(e){

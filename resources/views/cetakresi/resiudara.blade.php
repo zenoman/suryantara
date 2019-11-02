@@ -202,7 +202,9 @@
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal">
+									{{Session::get('kota')}}, <?php echo date('d-m-Y');?>
+								</p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
@@ -431,7 +433,9 @@
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal2"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal2">
+									{{Session::get('kota')}}, <?php echo date('d-m-Y');?>
+								</p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
@@ -659,7 +663,9 @@
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal3"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal3">
+									{{Session::get('kota')}}, <?php echo date('d-m-Y');?>
+								</p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
@@ -881,7 +887,9 @@
 							</p>
 							</td>
 							<td style="border-left: 1px solid black; width: 30%;">
-								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal4"></p>
+								<p style="margin-left: 1%; font-size: 10;" id="cetak_tanggal4">
+									{{Session::get('kota')}}, <?php echo date('d-m-Y');?>
+								</p>
 									<br>
 									<p align="center" style="font-size: 9">Tanda Tangan Petugas</p>
 							
