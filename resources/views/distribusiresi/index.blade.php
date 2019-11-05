@@ -124,7 +124,11 @@
 		$(function() {
 			$('#example').DataTable({
             responsive: true,
-            "paging":true
+            "paging":true,
+            "columnDefs": [ {
+          "targets": 6,
+          "orderable": false,
+    		} ]
         });
 		});
 	  function toggle(source) {
