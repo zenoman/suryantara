@@ -125,8 +125,7 @@ $(document).ready(function(){
 							'</div>'+
 						'</div>'+
 					'</div><br>'+
-					'</div>'
-					);
+					'</div>');
 	});
 	//=============================================hapus jumlah
 	$('#kolomjumlah').on('click', '.removejumlah', function(e) {
