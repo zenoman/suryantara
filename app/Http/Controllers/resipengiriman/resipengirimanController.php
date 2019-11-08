@@ -299,17 +299,12 @@ class resipengirimanController extends Controller
     public function tambahnosmu(Request $request){
         $data = DB::table('resi_pengiriman')->where('id',$request->kode)->get();
         foreach ($data as $row) {
-           DB::table('resi_pengiriman')
-        ->where('kode',$row->no_resi)
+        DB::table('resi_pengiriman')
+        ->where('no_resi',$row->no_resi)
         ->update([
             'no_smu'=>$request->nosmu
         ]);
         }
-        DB::table('resi_pengiriman')
-        ->where('id',$request->kode)
-        ->update([
-            'no_smu'=>$request->nosmu
-        ]);
         return back()->with('status','No SMU Di Simpan');
     }
     //===================================================================
