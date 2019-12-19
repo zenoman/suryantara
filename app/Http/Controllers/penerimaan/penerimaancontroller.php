@@ -104,7 +104,7 @@ class penerimaancontroller extends Controller
                     ->where([
                         ['resi_pengiriman.no_resi','like','%'.$cari.'%'],
                         ['resi_pengiriman.batal','=','N'],
-                        ['resi_pengiriman.duplikat','=','N'],
+                        ['resi_pengiriman.duplikat','!=','Y'],
                         ['surat_jalan.id_cabang_tujuan','=',Session::get('cabang')]
                     ])
                     ->get();
